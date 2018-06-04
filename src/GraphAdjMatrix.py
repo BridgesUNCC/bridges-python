@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 from Element import *
 import traceback
 ## package: bridges.base
@@ -60,7 +59,7 @@ class GraphAdjMatrix():
     ##
     # 	Constructor
     #
-    def __init__(self, size):
+    def __init__(self, size = None):
         self.vertices = dict()
         self.matrix = dict()
         self.edge_data = dict()
@@ -94,8 +93,9 @@ class GraphAdjMatrix():
         self.matrix[k] =  dict()
         #  fill up this vertex's row and column elements
         for element in self.vertices.items():
-            (self.matrix.get(element[0]))[element[1].get_key()] = 0 #  row
-            (self.matrix.get(element[1].get_key()))[element[0]] =  0 #  col
+            print(element)
+            (self.matrix.get(element[0]))[element[1]] = 0 #  row
+            (self.matrix.get(element[1].get_label()))[element[0]] =  0 #  col
 
     ##
     #	Adds a new edge to the graph, adds it to the index corresponding to
@@ -107,7 +107,7 @@ class GraphAdjMatrix():
     #	@param dest - destination  vertex of edge
     #
     #
-    def addEdge(self, src, dest, weight = None):
+    def add_edge(self, src, dest, weight = None):
         #  check to see if the two vertices exist, else
         #  throw an exception
         try:
@@ -180,13 +180,13 @@ class GraphAdjMatrix():
     ##
     # 	Get the JSON representation of the the data structure
     #
-    def get_data_structure_sepresentation(self):
+    def get_data_structure_representation(self):
         #  map to reorder the nodes for building JSON
         node_map = dict()
         #  get teh list nodes
         nodes = []
 
-        for key, value in vertices.items():
+        for key, value in self.vertices.items():
             nodes.append(value)
 
         #  remap  map these nodes to  0...MaxNodes-1
@@ -201,17 +201,21 @@ class GraphAdjMatrix():
 
         #  remove the last comma
         if len(nodes) != 0:
-            len(nodes_JSON[:-1])
+            nodes_JSON = nodes_JSON[:-1]
         #  build the links JSON - traverse the adj. lists
 
         links_JSON = str()
-        for key, value in matrix.items():
-            for nkey, nvalue in value.items():
-                if nvalue > 0:
-                    links_JSON+=(src_vert.get_link_representation(src_vert.get_link_visualizer(dest_vert), str(src_indx), str(dest_indx))).append(self.COMMA)
-
+        for el_src in self.matrix.items():
+            src_vert = self.vertices.get(el_src[0])
+            src_indx = node_map.get(src_vert)
+            for el_dest in el_src[1].items():
+                dest_vert = self.vertices.get(el_dest[0])
+                if el_dest[1] > 0:
+                    dest_indx = node_map.get(dest_vert)
+                    links_JSON+=(src_vert.get_link_representation(src_vert.get_link_visualizer(dest_vert), str(src_indx), str(dest_indx)))
+                    links_JSON+=self.COMMA
         #  remove the last comma
         if len(links_JSON) > 0:
-            len(links_JSON[:-1])
+            links_JSON = links_JSON[:-1]
         json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX + nodes_JSON.__str__() + self.CLOSE_BOX + self.COMMA + self.QUOTE + "links" + self.QUOTE + self.COLON + self.OPEN_BOX + links_JSON.__str__() + self.CLOSE_BOX + self.CLOSE_CURLY
         return json_str

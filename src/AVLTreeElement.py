@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-# package: bridges.base
-
+import BSTElement
 ##
 #  @brief This class extends the BSTElement class by adding a height and balance factor
 #	fields that are useful in AVL trees.
@@ -32,6 +30,7 @@
 #
 #
 class AVLTreeElement(BSTElement):
+
     height = int()
     bal_factor = int()
 
@@ -40,25 +39,15 @@ class AVLTreeElement(BSTElement):
     #  Construct an AVLTreeElement with default values
     #
     #
-    @overloaded
-    def __init__(self):
-        super(AVLTreeElement, self).__init__()
+    def __init__(self, k, e):
+        if k is not None:
+            self.set_key(k)
+        if e is not None:
+            super(AVLTreeElement, self).__init__(e)
+        else:
+            super(AVLTreeElement, self).__init__()
         self.height = balFactor = 0
 
-    ##
-    #
-    #  Construct an AVLTreeElement holding a key value  "k" and an object "e"
-    #
-    #  @param k the search key
-    #  @param e the appl specific object that Element is holding
-    #
-    #
-    @__init__.register(object, K, E)
-    def __init___0(self, k, e):
-        """ generated source for method __init___0 """
-        super(AVLTreeElement, self).__init__(e)
-        setKey(k)
-        self.height = balFactor = 0
 
     ##
     #	This method gets the data structure type
@@ -66,7 +55,7 @@ class AVLTreeElement(BSTElement):
     #	@return  The date structure type as a string
     #
     #
-    def get_data_struct_type(self):
+    def get_data_structure_type(self):
         return "AVLTree"
 
     ##
@@ -101,7 +90,7 @@ class AVLTreeElement(BSTElement):
     #
     #  @param   balance factor  bf
     #
-    def set_balanceFactor(self, bf):
+    def set_balance_factor(self, bf):
         self.bal_factor = bf
 
     ##
@@ -112,7 +101,7 @@ class AVLTreeElement(BSTElement):
     #
     #
     def get_left(self):
-        return AVLTreeElement(super(AVLTreeElement, self).getLeft())
+        return super(AVLTreeElement, self).get_left()
 
     ##
     #
@@ -121,6 +110,5 @@ class AVLTreeElement(BSTElement):
     # @return the right child of this node
     #
     #
-    def getRight(self):
-        """ generated source for method getRight """
-        return AVLTreeElement(super(AVLTreeElement, self).getRight())
+    def get_Right(self):
+        return super(AVLTreeElement, self).getRight()
