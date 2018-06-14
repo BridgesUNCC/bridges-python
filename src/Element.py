@@ -89,6 +89,9 @@ class Element(object):
             self.set_value(val)
         if label is not None:
             self.set_label(label)
+        if val is not None and label is not None:
+            self.set_label(label)
+            self.set_value(val)
         if original is not None:
             self.identifier = str(self.ids)
             self.ids = Element.ids
@@ -96,7 +99,7 @@ class Element(object):
             self.visualizer = ElementVisualizer(original.get_visualizer())
             self.lvisualizer = dict()
             self.set_value(original.get_value())
-        else:
+        if val is None and label is None and original is None:
             self.identifier = str(self.ids)
             self.label = "Default"
             self.set_visualizer(ElementVisualizer())

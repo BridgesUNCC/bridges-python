@@ -38,16 +38,16 @@ class SLelement(Element):
     # and sets the next pointer to null
     #
     #
-    def __init__(self, e = None, next = None):
-        if e is not None:
-            super(SLelement, self).__init__(e)
+    def __init__(self, e = None, label = None):
+        if e is not None and label is not None:
+            super(SLelement, self).__init__(e, label)
         else:
             print("init")
             super(SLelement, self).__init__()
-        if next is not None:
-            self.set_next(next)
-        else:
-            self.next = None
+        # if next is not None:
+        #     self.set_next(next)
+        # else:
+        #     self.next = None
 
     ##
     #
