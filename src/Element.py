@@ -47,8 +47,8 @@ class Element(object):
     ids = 0
     label = str()
     identifier = str()
-    visualizer = ElementVisualizer()
-    print(visualizer)
+    # visualizer = ElementVisualizer()
+    # print(visualizer)
     lvisualizer = dict()
     value = object()
 
@@ -84,6 +84,7 @@ class Element(object):
     #
     def __init__(self, val=None, label=None, original=None):
         Element.ids += 1
+        self.visualizer = ElementVisualizer()
         # super(Element.Element, self).__init__()
         if val is not None:
             self.set_value(val)

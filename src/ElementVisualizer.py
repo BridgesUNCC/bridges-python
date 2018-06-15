@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-""" generated source for module ElementVisualizer """
-## package: edu.uncc.cs.bridgesV2.base
 from decimal import Decimal
 from Element import *
 from Color import *
@@ -14,35 +12,44 @@ from Color import *
 # Element getVisualizer() method, and then call the setVisualizer() method on
 # the Element after changes have been made.
 #
-class ElementVisualizer(object):
+class ElementVisualizer():
     #  Visualization properties for this Node.
+
+    shape = "circle"
+    key = ""
+    locationX = float("inf")
+    locationY = float("inf")
+    size = 10.0
+    opacity = 1.0
+
+
     prop = dict()
-    color = Color()
+    color = Color(None, 70, 130, 180, 1.0)
+
+    prop["color"] = "[70, 130, 180, 1.0]"
+    prop["opacity"] = "1.0"
+    prop["size"] = "10.0"
+    prop["shape"] = "circle"
+    prop["key"] = ""
+    prop["locationX"] = str(locationX)
+    prop["locationY"] = str(locationY)
 
     ##
     # Construct an ElementVisualizer with the default visualization settings.
     # The default settings are color = green, opacity = 1.0, size = 10.0, shape
     # = circle.
     #
-    def __init__(self, a_color = "green", a_shape = "circle", size = 10.0, opacity = 1.0, v = None):
-        # super(ElementVisualizer.ElementVisualizer, self).__init__()
-        # if not v:
-        #     self.__init__(v.get_color(), v.get_shape(), v.get_opacity(), v.get_size())
-        # elif not a_color:
-        #     self.set_color(a_color)
-        # elif not a_shape:
-        #     self.set_shape(a_shape)
-        # elif not size:
-        #     self.set_size(size)
-        # elif not opacity:
-        #     self.set_opacity(opacity)
-        # else:
-            self.color = Color()
-            self.prop = dict()
+    def __init__(self, a_color = "green", a_shape = "circle", size = 10.0, opacity = 1.0):
+        if a_color is not "green":
             self.set_color(a_color)
+        if a_shape is not "circle":
             self.set_shape(a_shape)
-            self.set_size(size)
+        if size is not 10.0:
+            self.set_size(10.0)
+        if opacity is not 1.0:
             self.set_opacity(opacity)
+        else:
+            self.color = Color(None, 70, 130, 180, 1.0)
 
 
     ##
@@ -52,8 +59,7 @@ class ElementVisualizer(object):
     #            the pixel size of the Element in the Bridges Visualization
     #
     def set_size(self, size):
-        #Validation.validateSize(size)
-        self.prop["size"] = Decimal(size)
+        self.prop["size"] = str(size)
 
     ##
     # Get the size of the Element in the Bridges Visualiation
@@ -77,162 +83,160 @@ class ElementVisualizer(object):
         blue = int()
         alpha = float()
 
-        self.color.set_color(col_name = col_name)
+        if col_name is not None:
+            if col_name == "red":
+                self.red = 255
+                self.green = 0
+                self.blue = 0
+                self.alpha = 1.0
 
-        # if col_name is not None:
-        #     if col_name == "red":
-        #         self.red = 255
-        #         self.green = 0
-        #         self.blue = 0
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "green":
-        #         self.red = 0
-        #         self.green = 255
-        #         self.blue = 0
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "blue":
-        #         self.red = 0
-        #         self.green = 0
-        #         self.blue = 255
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "yellow":
-        #         self.red = 255
-        #         self.green = 255
-        #         self.blue = 0
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "cyan":
-        #         self.red = 0
-        #         self.green = 255
-        #         self.blue = 255
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "magenta":
-        #         self.red = 255
-        #         self.green = 0
-        #         self.blue = 255
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "white":
-        #         self.red = 255
-        #         self.green = 255
-        #         self.blue = 255
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "black":
-        #         self.red = 0
-        #         self.green = 0
-        #         self.blue = 0
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "orange":
-        #         self.red = 255
-        #         self.green = 155
-        #         self.blue = 0
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "turquoise":
-        #         self.red = 173
-        #         self.green = 234
-        #         self.blue = 234
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "maroon":
-        #         self.red = 176
-        #         self.green = 48
-        #         self.blue = 96
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "aquamarine":
-        #         self.red = 127
-        #         self.green = 255
-        #         self.blue = 212
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "azure":
-        #         self.red = 240
-        #         self.green = 255
-        #         self.blue = 255
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "beige":
-        #         self.red = 245
-        #         self.green = 245
-        #         self.blue = 220
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "brown":
-        #         self.red = 166
-        #         self.green = 42
-        #         self.blue = 42
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "tan":
-        #         self.red = 210
-        #         self.green = 180
-        #         self.blue = 140
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "olive":
-        #         self.red = 128
-        #         self.green = 128
-        #         self.blue = 0
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "chartreuse":
-        #         self.red = 127
-        #         self.green = 255
-        #         self.blue = 0
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "khaki":
-        #         self.red = 240
-        #         self.green = 230
-        #         self.blue = 140
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "bisque":
-        #         self.red = 255
-        #         self.green = 228
-        #         self.blue = 196
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "coral":
-        #         self.red = 255
-        #         self.green = 127
-        #         self.blue = 0
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "pink":
-        #         self.red = 255
-        #         self.green = 192
-        #         self.blue = 203
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "lavender":
-        #         self.red = 230
-        #         self.green = 230
-        #         self.blue = 250
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "purple":
-        #         self.red = 160
-        #         self.green = 32
-        #         self.blue = 240
-        #         self.alpha = 1.0
-        #         return
-        #     elif col_name == "gold":
-        #         self.red = 255
-        #         self.green = 215
-        #         self.blue = 0
-        #         self.alpha = 1.0
-        #         return
-        # #Validation.validateColor(aColor)
+            elif col_name == "green":
+                self.red = 0
+                self.green = 255
+                self.blue = 0
+                self.alpha = 1.0
+
+            elif col_name == "blue":
+                self.red = 0
+                self.green = 0
+                self.blue = 255
+                self.alpha = 1.0
+
+            elif col_name == "yellow":
+                self.red = 255
+                self.green = 255
+                self.blue = 0
+                self.alpha = 1.0
+
+            elif col_name == "cyan":
+                self.red = 0
+                self.green = 255
+                self.blue = 255
+                self.alpha = 1.0
+
+            elif col_name == "magenta":
+                self.red = 255
+                self.green = 0
+                self.blue = 255
+                self.alpha = 1.0
+
+            elif col_name == "white":
+                self.red = 255
+                self.green = 255
+                self.blue = 255
+                self.alpha = 1.0
+
+            elif col_name == "black":
+                self.red = 0
+                self.green = 0
+                self.blue = 0
+                self.alpha = 1.0
+
+            elif col_name == "orange":
+                self.red = 255
+                self.green = 155
+                self.blue = 0
+                self.alpha = 1.0
+
+            elif col_name == "turquoise":
+                self.red = 173
+                self.green = 234
+                self.blue = 234
+                self.alpha = 1.0
+
+            elif col_name == "maroon":
+                self.red = 176
+                self.green = 48
+                self.blue = 96
+                self.alpha = 1.0
+
+            elif col_name == "aquamarine":
+                self.red = 127
+                self.green = 255
+                self.blue = 212
+                self.alpha = 1.0
+
+            elif col_name == "azure":
+                self.red = 240
+                self.green = 255
+                self.blue = 255
+                self.alpha = 1.0
+
+            elif col_name == "beige":
+                self.red = 245
+                self.green = 245
+                self.blue = 220
+                self.alpha = 1.0
+
+            elif col_name == "brown":
+                self.red = 166
+                self.green = 42
+                self.blue = 42
+                self.alpha = 1.0
+
+            elif col_name == "tan":
+                self.red = 210
+                self.green = 180
+                self.blue = 140
+                self.alpha = 1.0
+
+            elif col_name == "olive":
+                self.red = 128
+                self.green = 128
+                self.blue = 0
+                self.alpha = 1.0
+
+            elif col_name == "chartreuse":
+                self.red = 127
+                self.green = 255
+                self.blue = 0
+                self.alpha = 1.0
+
+            elif col_name == "khaki":
+                self.red = 240
+                self.green = 230
+                self.blue = 140
+                self.alpha = 1.0
+
+            elif col_name == "bisque":
+                self.red = 255
+                self.green = 228
+                self.blue = 196
+                self.alpha = 1.0
+
+            elif col_name == "coral":
+                self.red = 255
+                self.green = 127
+                self.blue = 0
+                self.alpha = 1.0
+
+            elif col_name == "pink":
+                self.red = 255
+                self.green = 192
+                self.blue = 203
+                self.alpha = 1.0
+
+            elif col_name == "lavender":
+                self.red = 230
+                self.green = 230
+                self.blue = 250
+                self.alpha = 1.0
+
+            elif col_name == "purple":
+                self.red = 160
+                self.green = 32
+                self.blue = 240
+                self.alpha = 1.0
+
+            elif col_name == "gold":
+                self.red = 255
+                self.green = 215
+                self.blue = 0
+                self.alpha = 1.0
+
         self.prop["color"] = a_color
-        # self.color = Color(red, green, blue, alpha)
+
+        self.color = Color(None, self.red, self.green, self.blue, self.alpha)
     ##
     # Get the color of the Element in the Bridges Visualization
     #  @return the string reprsenting the color of the Element in the Bridges Visualization

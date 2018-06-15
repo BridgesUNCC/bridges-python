@@ -18,7 +18,7 @@
 #	@date 7/14/16
 #
 #
-class Color(object):
+class Color():
     red = 70
     green = 130
     blue = 180
@@ -34,8 +34,8 @@ class Color(object):
     # @param r, g, b, a  - checked to be in the range 0-255
     #
     #
-    def __init___(self, r=70, g=130, b=180, a=1.0):
-        self.set_color(r, g, b, a)
+    def __init__(self, col_name, r, g, b, a):
+        self.set_color(col_name, r, g, b, a)
 
 
     ##

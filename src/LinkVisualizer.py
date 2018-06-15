@@ -54,7 +54,7 @@ class LinkVisualizer(object):
     CLOSE_BOX = "]"
 
     #  link color
-    color = Color.Color()
+    color = Color.Color(None, 70, 130, 180, 1.0)
 
     #  link thickness
     thickness = float()
@@ -64,7 +64,7 @@ class LinkVisualizer(object):
 
     def __init__(self):
         # super(LinkVisualizer.LinkVisualizer, self).__init__()
-        self.set_color (70, 130, 180, 1.0)
+        self.set_color (None, 70, 130, 180, 1.0)
         self.set_thickness(1.0)
         self.set_weight(1.0)
 
@@ -118,7 +118,7 @@ class LinkVisualizer(object):
     #  	"pink", "lavender", "purple", "gold"
     #
     #
-    def set_color(self, r=None, g=None, b=None, a=None, col_name = None ):
+    def set_color(self, col_name = None, r=None, g=None, b=None, a=None):
         if col_name is not None:
             col = col_name.lower()
             #  validates and returns a 4 component RGBA val
