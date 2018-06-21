@@ -39,7 +39,7 @@ class BinTreeElement(TreeElement):
     #	pointers set to null.
     #
     #
-    def __init__(self, left=None, right=None, label=None, e=None):
+    def __init__(self, label=None, e=None, left=None, right=None ):
         # if e is not None and left is not None and right is not None and label is not None:
         #     super(BinTreeElement, self).__init__(label, e)
         #     super(BinTreeElement, self).add_child(left)
@@ -48,10 +48,10 @@ class BinTreeElement(TreeElement):
         #     super(BinTreeElement, self).__init__(e)
         #     super(BinTreeElement, self).add_child(left)
         #     super(BinTreeElement, self).add_child(right)
-        # elif e and label:
-        #     super(BinTreeElement, self).__init__()
-        #     super(BinTreeElement, self).add_child(left)
-        #     super(BinTreeElement, self).add_child(right)
+        if e is not None and label is not None:
+             super(BinTreeElement, self).__init__(e, label)
+             # super(BinTreeElement, self).add_child(None)
+             # super(BinTreeElement, self).add_child(None)
         # elif e is not None and label is not None:
         #     super(BinTreeElement, self).__init__(label, e)
         #     super(BinTreeElement, self).add_child(None)
@@ -61,15 +61,15 @@ class BinTreeElement(TreeElement):
         #     super(BinTreeElement, self).add_child(None)
         #     super(BinTreeElement, self).add_child(None)
         if left is not None:
-            super(BinTreeElement, self).__init__()
+            # super(BinTreeElement, self).__init__()
             super(BinTreeElement, self).add_child(left)
             super(BinTreeElement, self).add_child(None)
         if right is not None:
-            super(BinTreeElement, self).__init__()
+            # super(BinTreeElement, self).__init__()
             super(BinTreeElement, self).add_child(None)
             super(BinTreeElement, self).add_child(right)
         else:
-            super(BinTreeElement, self).__init__()
+            # super(BinTreeElement, self).__init__()
             super(BinTreeElement, self).add_child(None)
             super(BinTreeElement, self).add_child(None)
 

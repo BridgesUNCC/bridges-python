@@ -1,4 +1,4 @@
-import BinTreeElement
+from BinTreeElement import *
 #
 #  *  @brief The BSTElement class is the building block for creating binary search trees.
 #  *
@@ -40,7 +40,11 @@ class BSTElement(BinTreeElement):
     # 	 *	right pointers set to null.
     # 	 *
     #
-    def __init__(self, left = None, right = None):
+    def __init__(self, key = None, e = None, left = None, right = None):
+        if key is not None:
+            self.set_key(key)
+        if e is not None:
+            super(BSTElement, self).__init__(key, e)
         if left is not None and right is not None:
             super(BSTElement, self).__init__(left, right)
         elif left is not None and right is None:

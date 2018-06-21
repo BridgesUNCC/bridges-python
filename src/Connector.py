@@ -33,7 +33,7 @@ class Connector:
         return self.server_url
 
     def post(self, url, data):
-        r = requests.post(self.prepare(url), headers={u'content-type': u'application/json'}, data=data)
+        r = requests.post(self.prepare(url), headers={u'content-type': u'application/json'}, data=data.encode('utf-8'))
         print(r.status_code, r.reason)
 
     def prepare(self, url):

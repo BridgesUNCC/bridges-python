@@ -1,24 +1,20 @@
-import Bridges
-from SLelement import *
 from data_src_dependent import DataSource
+from SLelement import *
+import Bridges
 
-class EarthquakeDriver:
+class GutenbergBookDrive:
 
-    bridges = Bridges.Bridges(10, "1343747370122", "test")
+    bridges = Bridges.Bridges(13, "1343747370122", "test")
 
-    ami = DataSource.getEarthquakeUSGSData(1000)
+    ami = DataSource.getGutenBergBookData()
 
     head = None
-
 
     for im in ami:
         # print(im.get_Actor())
         newone = SLelement(im, im.getTitle())
         newone.set_next(head)
-        if float(im.getMagnitude()) > 3.0:
-            newone.get_visualizer().set_color("green")
         head = newone
-
 
     # print(head.get_data_structure_representation())
 

@@ -42,7 +42,7 @@ class SLelement(Element):
         if e is not None and label is not None:
             super(SLelement, self).__init__(e, label)
         else:
-            print("init")
+            # print("init")
             super(SLelement, self).__init__()
         # if next is not None:
         #     self.set_next(next)

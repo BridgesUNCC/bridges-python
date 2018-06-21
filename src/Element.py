@@ -106,7 +106,7 @@ class Element(object):
             self.set_visualizer(ElementVisualizer())
             self.ids = Element.ids
             self.lvisualizer = dict()
-            print(str(self.__dict__))
+            # print(str(self.__dict__))
 
     ##
     # this method returns the element's unique identifier
