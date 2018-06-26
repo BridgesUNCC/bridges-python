@@ -82,15 +82,23 @@ class Element(object):
     # sets a unique identifier for the current Element
     # normally used from subclasses
     #
-    def __init__(self, val=None, label=None, original=None):
+    def __init__(self, label = None, val=None, original=None):
         Element.ids += 1
         self.visualizer = ElementVisualizer()
         # super(Element.Element, self).__init__()
-        if val is not None:
+        if val is not None and label is None and original is None:
             self.set_value(val)
-        if label is not None:
-            self.set_label(label)
+            self.identifier = str(self.ids)
+            self.label = "Default"
+            self.set_visualizer(ElementVisualizer())
+            self.ids = Element.ids
+            self.lvisualizer = dict()
         if val is not None and label is not None:
+            self.identifier = str(self.ids)
+            self.label = "Default"
+            self.set_visualizer(ElementVisualizer())
+            self.ids = Element.ids
+            self.lvisualizer = dict()
             self.set_label(label)
             self.set_value(val)
         if original is not None:

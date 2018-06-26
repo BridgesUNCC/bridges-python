@@ -53,7 +53,7 @@ class Array(object):
             self.set_num_dimensions(num_dims)
         if dims is not None:
             self.set_dimensions(dims)
-        else:
+        elif num_dims is None and dims is None:
             self.array_data = None
             self.num_dims = 1
             self.dims[0] = dims[1] = dims[2] = self.size = 0

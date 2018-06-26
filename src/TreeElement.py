@@ -45,27 +45,28 @@ class TreeElement(Element):
 
     ##	Constructs an empty TreeElement with first two children
     #	set to null.
-    def __init__(self, left=None, right=None, label=None, e=None):
-        super(TreeElement, self).__init__()
-        self.children = []
-        if left is not None:
+    def __init__(self, label=None, e=None, left=None, right=None):
+        if label is None and e is None and left is None and right is None:
+            super(TreeElement, self).__init__()
+            self.children = []
+        elif e is not None and left is not None and right is not None:
+            super(TreeElement, self).__init__(val = e)
+            self.children = []
             self.children.append(left)
-        if right is not None:
             self.children.append(right)
-        # if e is not None and left is not None and right is not None:
-        #     super(TreeElement, self).__init__(e)
-        #     self.children.append(left)
-        #     self.children.append(right)
-        # elif label is not None and e is not None:
-        #     super(TreeElement, self).__init__(e, label)
-        #     self.children = []
-        # elif left is not None and right is not None:
-        #     super(TreeElement, self).__init__()
-        #     self.children.append(left)
-        #     self.children.append(right)
-        # elif e is not None:
-        #     super(TreeElement, self).__init__(e)
-        #     self.children = []
+        elif e is None and left is not None and right is not None:
+            super(TreeElement, self).__init__()
+            self.children = []
+            self.children.append(left)
+            self.children.append(right)
+        elif label is not None and e is not None and left is None and right is None:
+            super(TreeElement, self).__init__(label = label, val = e)
+            self.children = []
+        elif e is not None and label is None and left is None and right is None:
+            super(TreeElement, self).__init__(val = e)
+            self.children = []
+
+
 
     ##
     # 	This method gets the data structure type

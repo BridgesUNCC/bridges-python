@@ -40,38 +40,29 @@ class BinTreeElement(TreeElement):
     #
     #
     def __init__(self, label=None, e=None, left=None, right=None ):
-        # if e is not None and left is not None and right is not None and label is not None:
-        #     super(BinTreeElement, self).__init__(label, e)
-        #     super(BinTreeElement, self).add_child(left)
-        #     super(BinTreeElement, self).add_child(right)
-        # elif e is not None and left is not None and right is not None:
-        #     super(BinTreeElement, self).__init__(e)
-        #     super(BinTreeElement, self).add_child(left)
-        #     super(BinTreeElement, self).add_child(right)
-        if e is not None and label is not None:
-             super(BinTreeElement, self).__init__(e, label)
-             # super(BinTreeElement, self).add_child(None)
-             # super(BinTreeElement, self).add_child(None)
-        # elif e is not None and label is not None:
-        #     super(BinTreeElement, self).__init__(label, e)
-        #     super(BinTreeElement, self).add_child(None)
-        #     super(BinTreeElement, self).add_child(None)
-        # elif e is not None:
-        #     super(BinTreeElement, self).__init__(e)
-        #     super(BinTreeElement, self).add_child(None)
-        #     super(BinTreeElement, self).add_child(None)
-        if left is not None:
-            # super(BinTreeElement, self).__init__()
+        if label is None and e is None and left is None and right is None:
+            super(BinTreeElement, self).__init__()
             super(BinTreeElement, self).add_child(left)
-            super(BinTreeElement, self).add_child(None)
-        if right is not None:
-            # super(BinTreeElement, self).__init__()
-            super(BinTreeElement, self).add_child(None)
             super(BinTreeElement, self).add_child(right)
-        else:
-            # super(BinTreeElement, self).__init__()
+        elif e is not None and left is not None and right is not None:
+            super(BinTreeElement, self).__init__(e = e)
+            super(BinTreeElement, self).add_child(left)
+            super(BinTreeElement, self).add_child(right)
+        elif e is None and left is not None and right is not None:
+            super(BinTreeElement, self).__init__()
             super(BinTreeElement, self).add_child(None)
             super(BinTreeElement, self).add_child(None)
+        elif e is not None and label is not None and left is None and right is None:
+            super(BinTreeElement, self).__init__(label = label, e = e)
+            super(BinTreeElement, self).add_child(None)
+            super(BinTreeElement, self).add_child(None)
+        elif e is not None and label is None and left is None and right is None:
+            super(BinTreeElement, self).__init__(e=e)
+            super(BinTreeElement, self).add_child(None)
+            super(BinTreeElement, self).add_child(None)
+
+
+
 
     ##
     #
