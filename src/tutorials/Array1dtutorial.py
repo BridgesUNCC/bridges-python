@@ -7,14 +7,14 @@ class Array1d():
 
     bridges = Bridges(23, "1343747370122", "test")
 
-    dim = [10,1,1]
+    arraySize = 10
 
-    arr = Array(1, dim)
+    arr = Array(num_elements = arraySize)
 
     for i in range(arr.get_size()):
-        arr.set_value(i, el = Element(str(i), i))
+        arr.get_element(indx = i).set_label(i*i)
 
-    arr.get
+    arr.get_element(0).get_visualizer().set_color("red")
 
     bridges.set_data_structure(arr)
     bridges.visualize()

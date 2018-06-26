@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # package: bridges.base
+from Element import *
 
 ##
 # @brief This class can be used to create arrays of type Element<E>.
@@ -47,16 +48,32 @@ class Array(object):
     ##
     # Construct a default array object
     #
-    def __init__(self, num_dims = None, dims = None):
-        super(Array, self).__init__()
-        if num_dims is not None:
-            self.set_num_dimensions(num_dims)
-        if dims is not None:
-            self.set_dimensions(dims)
-        elif num_dims is None and dims is None:
-            self.array_data = None
+    def __init__(self, num_dims = None, dims = None, num_elements = None, x_dim = None, y_dim = None, z_dim = None):
+        if num_dims is None and dims is None and num_elements is None and x_dim is None and y_dim is None and z_dim is None:
+            self.array_data = []
             self.num_dims = 1
-            self.dims[0] = dims[1] = dims[2] = self.size = 0
+            self.dims[0] = self.dims[1] = self.dims[2] = self.size = 0
+        elif num_dims is not None and dims is not None:
+            self.set_num_dimensions(num_dims)
+            self.set_dimensions(dims)
+        elif num_elements is not None:
+            self.set_num_dimensions(1)
+            self.dims[0] = num_elements
+            self.dims[1] = self.dims[2] = 1
+            self.set_dimensions(self.dims)
+        elif x_dim is not None and y_dim is not None and z_dim is not None:
+            self.set_num_dimensions(3)
+            self.dims[0] = x_dim
+            self.dims[1] = y_dim
+            self.dims[2] = z_dim
+            self.set_dimensions(self.dims)
+        elif x_dim is not None and y_dim is not None and z_dim is None:
+            self.set_num_dimensions(2)
+            self.dims[0] = x_dim
+            self.dims[1] = y_dim
+            self.dims[2] = 1
+            self.set_dimensions(self.dims)
+
 
 
     ##
@@ -110,9 +127,11 @@ class Array(object):
             raise ValueError("Invalid dimension value, must be  positive")
         self.size = sz
         #  allocate space for the array
-        self.array_data = [None]*self.size
+        print(self.size)
         k = 0
         while k < self.size:
+            self.array_data.append(Element())
+            print(k)
             k += 1
 
     ##
@@ -134,6 +153,23 @@ class Array(object):
     #
     def get_size(self):
         return self.size
+
+    def get_element(self, indx = None, x= None, y = None, z= None):
+        if indx is not None:
+            return self.array_data[indx]
+        elif x is not None and y is not None and z is None:
+            return self.array_data[y*self.dims[1]+ x]
+        elif x is not None and y is not None and z is not None:
+            return self.array_data[z*self.dims[0]*self.dims[1] + y*self.dims[0] + x]
+
+    def set_element(self, indx = None, el = None, x = None, y = None, z = None):
+        if indx is not None and el is not None:
+            self.array_data[indx] = el
+        elif el is not None and x is not None and y is not None and z is not None:
+            self.array_data[z * self.dims[0] * self.dims[1] + y * self.dims[0] + x] = el
+        elif el is not None and x is not None and y is not None and z is None:
+            self.array_data[y * self.dims[0] + x] = el
+
 
     ##
     #
