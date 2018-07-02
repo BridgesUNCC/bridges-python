@@ -54,7 +54,7 @@ class LinkVisualizer(object):
     CLOSE_BOX = "]"
 
     #  link color
-    color = Color.Color(None, 70, 130, 180, 1.0)
+    # color = Color.Color(None, 70, 130, 180, 1.0)
 
     #  link thickness
     thickness = float()
@@ -64,7 +64,8 @@ class LinkVisualizer(object):
 
     def __init__(self):
         # super(LinkVisualizer.LinkVisualizer, self).__init__()
-        self.set_color (None, 70, 130, 180, 1.0)
+        self.color = Color.Color(None, 70, 130, 180, 1.0)
+        self.set_color(None, 70, 130, 180, 1.0)
         self.set_thickness(1.0)
         self.set_weight(1.0)
 
@@ -127,110 +128,111 @@ class LinkVisualizer(object):
             blue = int()
             alpha = 1.0
             if col_name == "red":
-                red = 255
-                green = 0
-                blue = 0
+                self.red = 255
+                self.green = 0
+                self.blue = 0
             elif col_name == "green":
-                red = 0
-                green = 255
-                blue = 0
+                self.red = 0
+                self.green = 255
+                self.blue = 0
             elif col_name == "blue":
-                red = 0
-                green = 0
-                blue = 255
+                self.red = 0
+                self.green = 0
+                self.blue = 255
             elif col_name == "yellow":
-                red = 255
-                green = 255
-                blue = 0
+                self.red = 255
+                self.green = 255
+                self.blue = 0
             elif col_name == "cyan":
-                red = 0
-                green = 255
-                blue = 255
+                self.red = 0
+                self.green = 255
+                self.blue = 255
             elif col_name == "magenta":
-                red = 255
-                green = 0
-                blue = 255
+                self.red = 255
+                self.green = 0
+                self.blue = 255
             elif col_name == "white":
-                red = 255
-                green = 255
-                blue = 255
+                self.red = 255
+                self.green = 255
+                self.blue = 255
             elif col_name == "black":
-                red = 0
-                green = 0
-                blue = 0
+                self.red = 0
+                self.green = 0
+                self.blue = 0
             elif col_name == "orange":
-                red = 255
-                green = 155
-                blue = 0
+                self.red = 255
+                self.green = 155
+                self.blue = 0
             elif col_name == "turquoise":
-                red = 173
-                green = 234
-                blue = 234
+                self.red = 173
+                self.green = 234
+                self.blue = 234
             elif col_name == "maroon":
-                red = 176
-                green = 48
-                blue = 96
+                self.red = 176
+                self.green = 48
+                self.blue = 96
             elif col_name == "aquamarine":
-                red = 127
-                green = 255
-                blue = 212
+                self.red = 127
+                self.green = 255
+                self.blue = 212
             elif col_name == "azure":
-                red = 240
-                green = 255
-                blue = 255
+                self.red = 240
+                self.green = 255
+                self.blue = 255
             elif col_name == "beige":
-                red = 245
-                green = 245
-                blue = 220
+                self.red = 245
+                self.green = 245
+                self.blue = 220
             elif col_name == "brown":
-                red = 166
-                green = 42
-                blue = 42
+                self.red = 166
+                self.green = 42
+                self.blue = 42
             elif col_name == "tan":
-                red = 210
-                green = 180
-                blue = 140
+                self.red = 210
+                self.green = 180
+                self.blue = 140
             elif col_name == "olive":
-                red = 128
-                green = 128
-                blue = 0
+                self.red = 128
+                self.green = 128
+                self.blue = 0
             elif col_name == "chartreuse":
-                red = 127
-                green = 255
-                blue = 0
+                self.red = 127
+                self.green = 255
+                self.blue = 0
             elif col_name == "khaki":
-                red = 240
-                green = 230
-                blue = 140
+                self.red = 240
+                self.green = 230
+                self.blue = 140
             elif col_name == "bisque":
-                red = 255
-                green = 228
-                blue = 196
+                self.red = 255
+                self.green = 228
+                self.blue = 196
             elif col_name == "coral":
-                red = 255
-                green = 127
-                blue = 0
+                self.red = 255
+                self.green = 127
+                self.blue = 0
             elif col_name == "pink":
-                red = 255
-                green = 192
-                blue = 203
+                self.red = 255
+                self.green = 192
+                self.blue = 203
             elif col_name == "lavender":
-                red = 230
-                green = 230
-                blue = 250
+                self.red = 230
+                self.green = 230
+                self.blue = 250
             elif col_name == "purple":
-                red = 160
-                green = 32
-                blue = 240
+                self.red = 160
+                self.green = 32
+                self.blue = 240
             elif col_name == "gold":
-                red = 255
-                green = 215
-                blue = 0
+                self.red = 255
+                self.green = 215
+                self.blue = 0
             else:
                 raise ValueError("Invalid color " + "'" + col_name + "'" + "." + " Only named primaries supported now. \n")
-            self.color.set_red(red)
-            self.color.set_blue(blue)
-            self.color.set_green(green)
+            # self.color.set_red(self.red)
+            # self.color.set_blue(self.blue)
+            # self.color.set_green(self.green)
+            self.color.set_color(None, self.red, self.blue, self.green, 1.0)
         else:
             self.color.set_red(r)
             self.color.set_blue(b)

@@ -39,7 +39,22 @@ class CircSLelement(SLelement):
     # 	and sets its next pointer to itself
     #
     #
-    def __init__(self, next = None, e = None, label = None):
+    def __init__(self, e = None, label = None, next = None):
+        if e is not None and label is not None and next is None:
+            super(CircSLelement, self).__init__(e = e, label = label)
+            self.set_next(self)
+        elif e is not None and label is None and next is not None:
+            super(CircSLelement, self).__init__(e = e, next = next)
+        elif e is None and label is None and next is not None:
+            super(CircSLelement, self).__init__(next = next)
+        else:
+            super(CircSLelement, self).__init__()
+            self.set_next(self)
+
+
+
+
+
         if next is not None:
             super(CircSLelement, self).__init__(None, next)
         if e is not None:

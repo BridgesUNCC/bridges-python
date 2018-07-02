@@ -36,13 +36,16 @@ class DLelement(SLelement):
     ##
     #	Constructs an empty DLelement with next and prev pointers set to null.
     #
-    def __init__(self, next = None, prev = None, e = None):
+    def __init__(self, e = None, label = None, next = None, prev = None):
         if next is not None:
             SLelement.set_next(self, next)
         if prev is not None:
             self.set_prev(prev)
-        if e is not None:
-            super(DLelement, self).__init__(e)
+        if e is not None and label is not None:
+            super(DLelement, self).__init__(e = e, label = label)
+            self.prev = None
+        elif e is not None and label is None:
+            super(DLelement, self).__init__(e = e)
         else:
             self.prev = None
             super(DLelement, self).__init__()

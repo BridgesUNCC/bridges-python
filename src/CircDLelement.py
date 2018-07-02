@@ -44,13 +44,21 @@ class CircDLelement(DLelement):
     #	to itself
     #
     #
-    def __init__(self, e = None, next = None, prev = None):
-        if e is not None:
+    def __init__(self, e = None, label = None, next = None, prev = None):
+        if e is not None and label is not None:
+            super(CircDLelement, self).__init__(e = e, label = label)
+            self.set_next(self)
+            self.set_prev(self)
+        elif e is not None and next is not None and prev is not None:
+            super(CircDLelement, self).__init__(e = e, next = next, prev = prev)
+        elif e is None and next is not None and prev is not None:
             super(CircDLelement, self).__init__()
+            self.set_next(next)
+            self.set_prev(prev)
         else:
             super(CircDLelement, self).__init__()
-        self.next = next
-        self.prev = prev
+            self.next = self
+            self.prev = self
 
 
     ##

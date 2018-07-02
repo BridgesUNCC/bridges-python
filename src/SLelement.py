@@ -29,7 +29,6 @@ from Element import *
 #	\sa Example Tutorial at <br> http://bridgesuncc.github.io/Hello_World_Tutorials/SLL.html
 #
 class SLelement(Element):
-    next = object()
 
     # the link to the next element
 
@@ -38,16 +37,19 @@ class SLelement(Element):
     # and sets the next pointer to null
     #
     #
-    def __init__(self, e = None, label = None):
+    def __init__(self, e = None, label = None, next = None):
         if e is not None and label is not None:
-            super(SLelement, self).__init__(e, label)
-        else:
-            # print("init")
-            super(SLelement, self).__init__()
-        # if next is not None:
-        #     self.set_next(next)
-        # else:
-        #     self.next = None
+            super(SLelement, self).__init__(val = e, label = label)
+            self.next = None
+        if e is not None and label is None and next is not None:
+            super(SLelement, self).__init__(val = e)
+            self.set_next(next)
+        if e is not None and label is None and next is None:
+            super(SLelement, self).__init__(val = e)
+            self.next = None
+        if e is None and label is None and next is not None:
+            self.set_next(next)
+
 
     ##
     #
@@ -68,6 +70,8 @@ class SLelement(Element):
     def get_next(self):
         return self.next
 
+    def get_value(self):
+        return super(SLelement, self).get_value()
     ##
     # Sets the element to point to the next SLelement
     #
