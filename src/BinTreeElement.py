@@ -48,10 +48,6 @@ class BinTreeElement(TreeElement):
             super(BinTreeElement, self).__init__(e = e)
             super(BinTreeElement, self).add_child(left)
             super(BinTreeElement, self).add_child(right)
-        elif e is None and left is not None and right is not None:
-            super(BinTreeElement, self).__init__()
-            super(BinTreeElement, self).add_child(None)
-            super(BinTreeElement, self).add_child(None)
         elif e is not None and label is not None and left is None and right is None:
             super(BinTreeElement, self).__init__(label = label, e = e)
             super(BinTreeElement, self).add_child(None)

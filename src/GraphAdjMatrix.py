@@ -86,16 +86,15 @@ class GraphAdjMatrix():
     def add_vertex(self, k, e):
         #  note: it is the user's responsibility to  check
         #  for duplicate vertices
-        self.vertices[k] = Element(e)
+        self.vertices[k] = Element(val = e)
         self.vertices.get(k).set_label(str(k))
 
         #  create a hashmap for this vertex
         self.matrix[k] =  dict()
         #  fill up this vertex's row and column elements
-        for element in self.vertices.items():
-            print(element)
-            (self.matrix.get(element[0]))[element[1]] = 0 #  row
-            (self.matrix.get(element[1].get_label()))[element[0]] =  0 #  col
+        for k, element in self.vertices.items():
+            (self.matrix.get(k))[element.get_label()] = 0 #  row
+            (self.matrix.get(element.get_label()))[k] =  0 #  col
 
     ##
     #	Adds a new edge to the graph, adds it to the index corresponding to
@@ -137,8 +136,11 @@ class GraphAdjMatrix():
     #
     #	@return - the graph's adjacency matrix
     #
-    def get_adjacency_matrix(self):
-        return self.matrix
+    def get_adjacency_matrix(self, key = None):
+        if key is None:
+            return self.matrix
+        else:
+            return self.matrix.get(key)
 
     ##
     #

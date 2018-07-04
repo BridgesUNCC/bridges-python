@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#!/usr/bin/env python
 ## package: bridges.base
 from Element import *
 from SLelement import *
@@ -111,9 +112,9 @@ class GraphAdjList():
         except Exception as e:
             traceback.print_tb(e.__traceback__)
         if weight is not None:
-            self.adj_list[src] = SLelement(Edge(weight, dest), self.adj_list.get(src))
+            self.adj_list[src] = SLelement(Edge(weight, dest), next = self.adj_list.get(src))
         else:
-            self.adj_list[src] = SLelement(Edge(1, dest), self.adj_list.get(src))
+            self.adj_list[src] = SLelement(Edge(1, dest), next = self.adj_list.get(src))
 
     ##
     #	This method returns the graph nodes
@@ -221,7 +222,6 @@ class GraphAdjList():
                 src_indx = node_map.get(src_vert)
                 #  get the destination vertex index for the JSON (int)
                 edge = list.get_value()
-                print(edge)
                 dest_vert = self.vertices.get(edge.get_vertex())
                 dest_indx = node_map.get(dest_vert)
                 #  get link representation

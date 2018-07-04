@@ -86,7 +86,7 @@ class SLelement(Element):
     # @see java.lang.Object#toString()
     #
     def __str__(self):
-        return "SLelement [next=" + self.next + ", getNext()=" + self.get_next() + ", getIdentifier()=" + self.get_identifier() + ", getVisualizer()=" + self.get_visualizer() + ", getClassName()=" + self.get_class_name() + ", getElementRepresentation()=" + self.get_element_representation() + ", getLabel()=" + self.get_label() + ", getValue()=" + self.get_value() + ", toString()=" + super(SLelement, self).__str__() + ", getClass()=" + self.get_class() + ", hashCode()=" + self.hash_code() + "]"
+        return "SLelement [next=" + self.next + ", getNext()=" + self.get_next() + ", getIdentifier()=" + self.get_identifier() + ", getVisualizer()=" + self.get_visualizer() + ", getClassName()=" + self.get_class_name() + ", getElementRepresentation()=" + self.get_element_representation() + ", getLabel()=" + self.get_label() + ", getValue()=" + self.get_value() + ", toString()=" + super(SLelement, self).__str__() + ", getClass()=" + self.getClass() + ", hashCode()=" + self.hashCode() + "]"
 
     ##
     #	Get the JSON representation of the the data structure

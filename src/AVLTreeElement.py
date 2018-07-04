@@ -1,4 +1,4 @@
-import BSTElement
+from BSTElement import *
 ##
 #  @brief This class extends the BSTElement class by adding a height and balance factor
 #	fields that are useful in AVL trees.
@@ -39,11 +39,11 @@ class AVLTreeElement(BSTElement):
     #  Construct an AVLTreeElement with default values
     #
     #
-    def __init__(self, k, e):
+    def __init__(self, k = None, e = None):
         if k is not None:
-            self.set_key(k)
+            super(AVLTreeElement, self).set_key(k)
         if e is not None:
-            super(AVLTreeElement, self).__init__(e)
+            super(AVLTreeElement, self).__init__(key = k,e = e)
         else:
             super(AVLTreeElement, self).__init__()
         self.height = balFactor = 0
@@ -111,4 +111,4 @@ class AVLTreeElement(BSTElement):
     #
     #
     def get_Right(self):
-        return super(AVLTreeElement, self).getRight()
+        return super(AVLTreeElement, self).get_right()

@@ -31,7 +31,7 @@ import LinkVisualizer
 
 class TreeElement(Element):
     ##  holds all children of the node
-
+    children = []
 
     QUOTE = "\""
     COMMA = ","
@@ -48,6 +48,9 @@ class TreeElement(Element):
     def __init__(self, label=None, e=None, left=None, right=None):
         if label is None and e is None and left is None and right is None:
             super(TreeElement, self).__init__()
+            self.children = []
+        if e is not None and label is None and left is None and right is None:
+            super(TreeElement, self).__init__(val = e)
             self.children = []
         elif e is not None and left is not None and right is not None:
             super(TreeElement, self).__init__(val = e)
@@ -73,7 +76,7 @@ class TreeElement(Element):
     #
     # 	@return  The date structure type as a string
     #
-    def get_data_struct_type(self):
+    def get_data_structure_type(self):
         return "Tree"
 
     ##

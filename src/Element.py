@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-""" generated source for module Element """
 ## package: bridges.base
 from ElementVisualizer import ElementVisualizer
 from Color import *
@@ -228,7 +227,7 @@ class Element(object):
 
     def arrange_label(self, label, word_number):
         my_pattern = re.compile(self.DIVIDE_KEY)
-        match = my_pattern.findall(str(label))
+        # match = my_pattern.findall(str(label))
         # if not len(match) == 0:
         return label
         # else:

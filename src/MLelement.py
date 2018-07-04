@@ -44,8 +44,10 @@ class MLelement(SLelement):
     #
     def __init__(self, label = None, e = None, next = None, sublist = None):
         if label and e is not None:
-            super(MLelement, self).__init__(e)
+            super(MLelement, self).__init__(e = e, label = label)
             self.sub_list = None
+        if e is not None and label is None:
+            super(MLelement, self).__init__(e = e, label = "")
         if next and sublist is not None:
             super(MLelement, self).__init__()
             self.set_next(next)
@@ -53,7 +55,7 @@ class MLelement(SLelement):
             if sublist is not None:
                 self.tag = True
                 self.set_link_visualizer(sublist)
-        else:
+        if label is None and e is None and next is None and sublist is None:
             super(MLelement, self).__init__()
             self.sub_list = None
 
