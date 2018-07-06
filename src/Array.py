@@ -127,11 +127,9 @@ class Array(object):
             raise ValueError("Invalid dimension value, must be  positive")
         self.size = sz
         #  allocate space for the array
-        print(self.size)
         k = 0
         while k < self.size:
             self.array_data.append(Element())
-            print(k)
             k += 1
 
     ##
