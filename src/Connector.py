@@ -41,6 +41,5 @@ class Connector:
         out = self.server_url
         out += url
         out += "?apikey=" + self.key + "&username=" + self.username
-        print(out)
         return out
 
