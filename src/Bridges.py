@@ -8,7 +8,7 @@ class Bridges:
     ds_handle = object()
     title = str()
     description = str()
-    coord_system_type = "Cartesian"
+    coord_system_type = "cartesian"
     map_overlay = False
     username = ""
     assignment = int()
@@ -25,7 +25,7 @@ class Bridges:
     OPEN_BOX = "["
     CLOSE_BOX = "]"
 
-    def __init__(self, assignment, appl_id, username):
+    def __init__(self, assignment, username, appl_id):
 
 
         self.assignment_part = 0
@@ -33,7 +33,7 @@ class Bridges:
         self.description = str()
         self.set_assignment(assignment)
         self.key = appl_id
-        self.connector = Connector.Connector(appl_id)
+        self.connector = Connector.Connector(appl_id, username)
         self.username = username
 
     def set_data_structure(self, ds):

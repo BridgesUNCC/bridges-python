@@ -6,17 +6,18 @@ import json
 
 
 class Connector:
-    #server_url = "http://bridges-clone.herokuapp.com"
-    server_url = "http://localhost:3000"
+    server_url = "http://bridges-cs.herokuapp.com"
     server_type = "application"
     # server_url = "http://bridges-cs.herokuapp.com"
     key = ""
+    username =""
 
     pattern_found = 0
     debug = False
 
-    def __init__(self, key):
+    def __init__(self, key, username):
         self.key = key
+        self.username = username
 
 
     def set_server(self, server):
@@ -39,6 +40,7 @@ class Connector:
     def prepare(self, url):
         out = self.server_url
         out += url
-        out += "?apikey=" + self.key
+        out += "?apikey=" + self.key + "&username=" + self.username
+        print(out)
         return out
 
