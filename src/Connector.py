@@ -15,9 +15,10 @@ class Connector:
     pattern_found = 0
     debug = False
 
-    def __init__(self, key, username):
+    def __init__(self, key, username, assignment):
         self.key = key
         self.username = username
+        self.assignment = assignment
 
 
     def set_server(self, server):
@@ -35,7 +36,13 @@ class Connector:
 
     def post(self, url, data):
         r = requests.post(self.prepare(url), headers={u'content-type': u'application/json'}, data=data.encode('utf-8'))
-        print(r.status_code, r.reason)
+        if r.status_code != 200:
+            print(r.status_code, r.reason)
+            print(r.text)
+        else:
+            print("\nSuccess! Check your visualization at\n\n" + 
+            "\t http:bridges-cs.herokuapp.com/assignments/" + 
+            str(self.assignment) + "/" + self.username +"\n\n")
 
     def prepare(self, url):
         out = self.server_url

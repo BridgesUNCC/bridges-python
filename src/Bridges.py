@@ -33,7 +33,7 @@ class Bridges:
         self.description = str()
         self.set_assignment(assignment)
         self.key = appl_id
-        self.connector = Connector.Connector(appl_id, username)
+        self.connector = Connector.Connector(appl_id, username, assignment)
         self.username = username
 
     def set_data_structure(self, ds):
@@ -58,15 +58,6 @@ class Bridges:
         ds_json += nodes_links_str
 
         self.connector.post("/assignments/" + self.get_assignment(), ds_json)
-
-#
-# Need to do error checking using error code received from server!
-#
-# the following string will print regardless now - Need to fix!
-
-        print ("Check your visualization at \n\n" + 
-              "http://bridges-cs.herokuapp.com/assignments/" + str(self.assignment)
-               + "/" + self.username + "\n\n")
 
     def set_assignment(self, assignment):
         if (assignment < 0):
