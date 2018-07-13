@@ -68,3 +68,10 @@ class Bridges:
 
     def get_assignment(self):
         return str(self.assignment) + "." + str(self.assignment_part)
+
+    def setTitle(self, titl):
+        self.title = titl; 
+
+    def setDescription(self, descr):
+        self.title = descr; 
+
