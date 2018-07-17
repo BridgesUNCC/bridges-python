@@ -5,10 +5,10 @@ import traceback
 
 
 class Connector:
-    # server_url = "http://bridges-cs.herokuapp.com"
+    server_url = "http://bridges-cs.herokuapp.com"
     server_type = "application"
     # server_url = "http://bridges-cs.herokuapp.com"
-    server_url = "http://localhost:3000"
+    # server_url = "http://localhost:3000"
 
     key = ""
     username =""
