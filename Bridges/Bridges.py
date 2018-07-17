@@ -83,7 +83,6 @@ class Bridges:
     def get_assignment(self):
         return str(self.assignment) + "." + str(self.assignment_part)
 
-<<<<<<< HEAD:Bridges/Bridges.py
     def setTitle(self, title):
         if len(title) > self._MaxTitleSize:
             print(
@@ -91,11 +90,12 @@ class Bridges:
             self.title = title[:self._MaxTitleSize]
         else:
             self.title = title
-=======
-    def setTitle(self, titl):
-        self.title = titl; 
 
-    def setDescription(self, descr):
-        self.title = descr; 
 
->>>>>>> a2021e69f8d3c710f3a94e4d636af03a7216add6:src/Bridges.py
+    def setDescription(self, description):
+        if len(description) > self._MaxTitleSize:
+            print("Visualization Description restricted to " + str(self._MaxTitleSize) + " Truncating description..")
+            self.description = description[0:self._MaxTitleSize]
+        else:
+            self.description = description
+

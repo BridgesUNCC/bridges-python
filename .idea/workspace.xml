@@ -2,42 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8ad2ff0-c0cd-464b-8923-3834d8d0d9e8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/.idea/misc.xml" afterPath="$PROJECT_DIR$/Bridges/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/modules.xml" afterPath="$PROJECT_DIR$/Bridges/.idea/modules.xml" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/src.iml" afterPath="$PROJECT_DIR$/Bridges/.idea/src.iml" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/workspace.xml" afterPath="$PROJECT_DIR$/Bridges/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/AVLTreeElement.py" afterPath="$PROJECT_DIR$/Bridges/AVLTreeElement.py" />
-      <change beforePath="$PROJECT_DIR$/src/Array.py" afterPath="$PROJECT_DIR$/Bridges/Array.py" />
-      <change beforePath="$PROJECT_DIR$/src/BSTElement.py" afterPath="$PROJECT_DIR$/Bridges/BSTElement.py" />
-      <change beforePath="$PROJECT_DIR$/src/BinTreeElement.py" afterPath="$PROJECT_DIR$/Bridges/BinTreeElement.py" />
-      <change beforePath="$PROJECT_DIR$/src/Bridges.py" afterPath="$PROJECT_DIR$/Bridges/Bridges.py" />
-      <change beforePath="$PROJECT_DIR$/src/CircDLelement.py" afterPath="$PROJECT_DIR$/Bridges/CircDLelement.py" />
-      <change beforePath="$PROJECT_DIR$/src/CircSLelement.py" afterPath="$PROJECT_DIR$/Bridges/CircSLelement.py" />
-      <change beforePath="$PROJECT_DIR$/src/Color.py" afterPath="$PROJECT_DIR$/Bridges/Color.py" />
-      <change beforePath="$PROJECT_DIR$/src/Connector.py" afterPath="$PROJECT_DIR$/Bridges/Connector.py" />
-      <change beforePath="$PROJECT_DIR$/src/DLelement.py" afterPath="$PROJECT_DIR$/Bridges/DLelement.py" />
-      <change beforePath="$PROJECT_DIR$/src/Edge.py" afterPath="$PROJECT_DIR$/Bridges/Edge.py" />
-      <change beforePath="$PROJECT_DIR$/src/Element.py" afterPath="$PROJECT_DIR$/Bridges/Element.py" />
-      <change beforePath="$PROJECT_DIR$/src/ElementVisualizer.py" afterPath="$PROJECT_DIR$/Bridges/ElementVisualizer.py" />
-      <change beforePath="$PROJECT_DIR$/src/GraphAdjList.py" afterPath="$PROJECT_DIR$/Bridges/GraphAdjList.py" />
-      <change beforePath="$PROJECT_DIR$/src/GraphAdjMatrix.py" afterPath="$PROJECT_DIR$/Bridges/GraphAdjMatrix.py" />
-      <change beforePath="$PROJECT_DIR$/src/Grid.py" afterPath="$PROJECT_DIR$/Bridges/Grid.py" />
-      <change beforePath="$PROJECT_DIR$/src/LinkVisualizer.py" afterPath="$PROJECT_DIR$/Bridges/LinkVisualizer.py" />
-      <change beforePath="$PROJECT_DIR$/src/MLelement.py" afterPath="$PROJECT_DIR$/Bridges/MLelement.py" />
-      <change beforePath="$PROJECT_DIR$/src/SLelement.py" afterPath="$PROJECT_DIR$/Bridges/SLelement.py" />
-      <change beforePath="$PROJECT_DIR$/src/Student.py" afterPath="$PROJECT_DIR$/Bridges/Student.py" />
-      <change beforePath="$PROJECT_DIR$/src/TreeElement.py" afterPath="$PROJECT_DIR$/Bridges/TreeElement.py" />
-      <change beforePath="$PROJECT_DIR$/src/data_src_dependent/ActorMovieIMDB.py" afterPath="$PROJECT_DIR$/Bridges/data_src_dependent/ActorMovieIMDB.py" />
-      <change beforePath="$PROJECT_DIR$/src/data_src_dependent/Book.py" afterPath="$PROJECT_DIR$/Bridges/data_src_dependent/Book.py" />
-      <change beforePath="$PROJECT_DIR$/src/data_src_dependent/CancerIncidence.py" afterPath="$PROJECT_DIR$/Bridges/data_src_dependent/CancerIncidence.py" />
-      <change beforePath="$PROJECT_DIR$/src/data_src_dependent/DataSource.py" afterPath="$PROJECT_DIR$/Bridges/data_src_dependent/DataSource.py" />
-      <change beforePath="$PROJECT_DIR$/src/data_src_dependent/EarthquakeUSGS.py" afterPath="$PROJECT_DIR$/Bridges/data_src_dependent/EarthquakeUSGS.py" />
-      <change beforePath="$PROJECT_DIR$/src/data_src_dependent/Game.py" afterPath="$PROJECT_DIR$/Bridges/data_src_dependent/Game.py" />
-      <change beforePath="$PROJECT_DIR$/src/data_src_dependent/GutenbergBook.py" afterPath="$PROJECT_DIR$/Bridges/data_src_dependent/GutenbergBook.py" />
-      <change beforePath="$PROJECT_DIR$/src/data_src_dependent/Shakespeare.py" afterPath="$PROJECT_DIR$/Bridges/data_src_dependent/Shakespeare.py" />
-      <change beforePath="$PROJECT_DIR$/src/data_src_dependent/Song.py" afterPath="$PROJECT_DIR$/Bridges/data_src_dependent/Song.py" />
-      <change beforePath="$PROJECT_DIR$/src/temp.py" afterPath="$PROJECT_DIR$/Bridges/temp.py" />
-      <change beforePath="$PROJECT_DIR$/src/temp.py.html" afterPath="$PROJECT_DIR$/Bridges/temp.py.html" />
+      <change beforePath="$PROJECT_DIR$/Bridges/Bridges.py" afterPath="$PROJECT_DIR$/Bridges/Bridges.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,7 +12,20 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="Bridges.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Bridges/Bridges.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1710">
+              <caret line="95" column="39" lean-forward="false" selection-start-line="95" selection-start-column="39" selection-end-line="95" selection-end-column="39" />
+              <folding>
+                <element signature="e#0#33#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -77,7 +55,6 @@
         <option value="$PROJECT_DIR$/Bridges/Array.py" />
         <option value="$PROJECT_DIR$/Bridges/AVLTreeElement.py" />
         <option value="$PROJECT_DIR$/Bridges/BinTreeElement.py" />
-        <option value="$PROJECT_DIR$/Bridges/Bridges.py" />
         <option value="$PROJECT_DIR$/Bridges/BSTElement.py" />
         <option value="$PROJECT_DIR$/Bridges/CircDLelement.py" />
         <option value="$PROJECT_DIR$/Bridges/CircSLelement.py" />
@@ -92,11 +69,12 @@
         <option value="$PROJECT_DIR$/Bridges/SLelement.py" />
         <option value="$PROJECT_DIR$/Bridges/TreeElement.py" />
         <option value="$PROJECT_DIR$/Bridges/Grid.py" />
+        <option value="$PROJECT_DIR$/Bridges/Bridges.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="1065" />
+    <option name="x" value="77" />
     <option name="y" value="24" />
     <option name="width" value="1242" />
     <option name="height" value="1416" />
@@ -180,9 +158,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1065" y="24" width="1242" height="1416" extended-state="4" />
+    <frame x="77" y="24" width="1242" height="1416" extended-state="4" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959743" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959743" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -243,14 +222,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Bridges/BSTElement.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Bridges/CircDLelement.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -288,16 +259,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Bridges/Element.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-          <folding>
-            <element signature="e#47#86#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -417,19 +378,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Bridges/Bridges.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Bridges/Connector.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bridges/BSTElement.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-307">
+          <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bridges/Element.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding>
+            <element signature="e#47#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bridges/Bridges.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1710">
+          <caret line="95" column="39" lean-forward="false" selection-start-line="95" selection-start-column="39" selection-end-line="95" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
