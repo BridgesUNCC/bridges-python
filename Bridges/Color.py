@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 #import bridges.validation.InvalidValueException
+import base64
+
 
 ##
 #	@brief This class is used to represent colors in BRIDGES.
@@ -32,8 +34,11 @@ class Color():
     # @param r, g, b, a  - checked to be in the range 0-255
     #
     #
-    def __init__(self, col_name, r, g, b, a):
-        self.set_color(col_name, r, g, b, a)
+    def __init__(self, col_name = None, r = None, g = None, b = None, a = None):
+        if col_name is not None:
+            self.set_color(col_name)
+        else:
+            self.set_color(r = r, g = g, b = b, a = a)
 
 
     ##
@@ -43,7 +48,7 @@ class Color():
     #	@param r, g, b, a  - checked to be in the range 0-255
     #
     #
-    def set_color(self, col_name, r= None, g = None, b = None, a = None):
+    def set_color(self, col_name = None, r= None, g = None, b = None, a = None):
         #  check color component ranges
         if col_name is not None:
             if col_name == "red":
@@ -296,3 +301,29 @@ class Color():
     #
     def get_alpha(self):
         return self.alpha
+
+    ##
+    # gets a Byte representation of a color
+    #
+    # @return - returns the RGBA color as a byte array
+    #
+    def getByteRepresentation(self):
+        r = self.red
+        g = self.green
+        b = self.blue
+        a = round(255 * self.alpha)
+
+        # rd = r.to_bytes(10, byteorder='little')
+        # gn = g.to_bytes(10, byteorder='little')
+        # bl = b.to_bytes(10, byteorder='little')
+        # al = a.to_bytes(10, byteorder='little')
+
+
+        bytebuffer = []
+        bytebuffer.append(r)
+        bytebuffer.append(g)
+        bytebuffer.append(b)
+        bytebuffer.append(a)
+
+        return bytebuffer
+
