@@ -68,7 +68,6 @@ class Bridges:
         else:
             ds_json += nodes_links_str
 
-        print(ds_json)
 
         self.connector.post("/assignments/" + self.get_assignment(), ds_json)
 
