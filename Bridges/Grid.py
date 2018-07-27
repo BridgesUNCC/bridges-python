@@ -1,7 +1,7 @@
-#
-#  * @brief This is a class in BRIDGES for representing an (n x n) grid.
-#  * @author David Burlinson
-#  * @param
+##
+#  @brief This is a class in BRIDGES for representing an (n x n) grid.
+#  @author David Burlinson
+#  @param
 import traceback
 
 class Grid:
@@ -12,9 +12,11 @@ class Grid:
     def get_data_structure_type(self):
         return "Grid"
 
-    #
-    # 	 * Grid constructors
-    #    *
+    ##
+    # Grid constructors
+    # @param size - size of the grid as array
+    # @param rows - number of rows in grid
+    # @param cols - number of columns in grid
     #
     def __init__(self, size = None, rows = None, cols = None):
         if size is not None:
@@ -35,12 +37,13 @@ class Grid:
                 for j in range(size[1]):
                     self.grid[i].append(None)
 
-
+    ##
     #  set up inner lists (columns)
     #  initialize values in inner lists
     def get_dimensions(self):
         return [self.gridSize[0], self.gridSize[1]]
 
+    ##
     #  get the (row, col) element in the grid
     def get(self, row, col):
         try:
@@ -49,6 +52,7 @@ class Grid:
             traceback.print_tb(e.__traceback__)
             return None
 
+    ##
     #  set the (row, col) element in the grid
     def set(self, row, col, val):
         self.grid[int(row)][int(col)] = val

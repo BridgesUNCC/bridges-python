@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-## package: bridges.base
 from Bridges.Element import *
 from Bridges.LinkVisualizer import *
  ## @brief This class extends Element to represent general trees with
@@ -24,10 +23,6 @@ from Bridges.LinkVisualizer import *
  #
  # 	@author Matthew McQuaigue
  #
- # 	@date  12/16/17
- #
- #  @param <E> The generic parameter object that is part of this element, representing
- #          application specific data.
 
 class TreeElement(Element):
     ##  holds all children of the node
@@ -43,8 +38,14 @@ class TreeElement(Element):
     OPEN_BOX = "["
     CLOSE_BOX = "]"
 
-    ##	Constructs an empty TreeElement with first two children
-    #	set to null.
+    ##
+    # Constructs an TreeElement
+    # set to null.
+    # @param e the generic object that TreeElement will hold
+    # @param label the label of TreeElement that shows up on the Bridges
+    # @param left the TreeElement to be assigned to the child 0
+    # @param right the TreeElement to be assigned to the child 1
+    #
     def __init__(self, label=None, e=None, left=None, right=None):
         if label is None and e is None and left is None and right is None:
             super(TreeElement, self).__init__()

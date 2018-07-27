@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-## package: bridges.base
 from Bridges.ElementVisualizer import *
 from Bridges.Color import *
 from Bridges.LinkVisualizer import *
@@ -23,12 +22,6 @@ import re
 #	manipulate their visual attributes.
 #
 # @author Mihai Mehedint, Kalpathi Subramanian
-#
-# @param generic <E>  Elements are defined with an application specific  generic
-#	parameter, that is defined by the user. These can be any legal Java type
-#	and manipulated using setValue()/getValue() methods.
-#	For more information on Java generics, see
-#	for example, https://docs.oracle.com/javase/tutorial/java/generics/types.html
 #
 #
 class Element(object):
@@ -80,6 +73,8 @@ class Element(object):
     # creates an ElementVisualizer object
     # sets a unique identifier for the current Element
     # normally used from subclasses
+    # @param val generic parameter value used to construct Element
+    # @param label the string that is visible on the Bridges Visualization
     #
     def __init__(self, label = None, val=None, original=None):
         Element.ids += 1
@@ -188,7 +183,6 @@ class Element(object):
     #         else:
     #     except Exception as e:
     #         e.print_stack_trace()
-
     def get_class_name(self):
         return self.value.__class__.__name__
 
@@ -219,12 +213,42 @@ class Element(object):
     def get_link_representation(self, lv, src, dest):
         return self.OPEN_CURLY + lv.get_link_properties() + self.COMMA + self.QUOTE + "source" + self.QUOTE + self.COLON + src + self.COMMA + self.QUOTE + "target" + self.QUOTE + self.COLON + dest + self.CLOSE_CURLY
 
+    ##
+	#  This method returns the existing value of the label fields
+	#
+	#  @return the label of the Element; the label is typically displayed on BRIDGES
+	#  			visualizations.
+	#
     def get_label(self):
         return self.label
 
+    ##
+	#  This method sets the label
+	#
+	#  @param label the label to set
+	#
     def set_label(self, label):
         self.label = self.arrange_label(label, self.word_number)
 
+    ##
+	#  This method formats the label string using a predefine pattern (DIVIDE_KEY) and
+	#  replaces the pattern with the string characters hold by the INSERT_STRING global
+	#  variable
+	#
+	#  @param label  the input label string
+	#
+	#  @param wordNumber in very long strings in the case where the whitespace
+	#  \\s is chosen as a key the wordNumber can be set
+	#  to replace the whitespace with a newline character \\n at a given number of
+	#  words (every second or third word)
+	#  The default value is 0. In most situations we want to replace all patterns found.
+	#  for more complex patterns the key must be changed like so "((John) (.+?))"
+	#  returns "John firstWordAfterJohn": John writes, John doe, John eats etc.
+	#  (\\w) matches any word (\\s) one white space (\\s*) zero or more white spaces,
+	#  (\\s+) one or more
+	#
+	#  @return  the formatted label
+	#
     def arrange_label(self, label, word_number):
         my_pattern = re.compile(self.DIVIDE_KEY)
         # match = my_pattern.findall(str(label))
@@ -245,9 +269,19 @@ class Element(object):
             # else:
             #     return label = str.__str__()
 
+    ##
+	#  This method returns the generic parameter value held in the element.
+	#
+	#  @return the value
+	#
     def get_value(self):
         return self.value
 
+    ##
+	#  This method sets the generic parameter value for  this element.
+	#
+	#  @param value the value to set
+	#
     def set_value(self, value):
         # self.validateVal(value)
         self.value = value

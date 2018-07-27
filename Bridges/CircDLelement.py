@@ -29,19 +29,17 @@ from Bridges.DLelement import *
 #
 #	@date   7/17/16, 1/16/17
 #
-#  @param <E>  the generic parameter object that contains application specific data,
-#		defined by the user when instantiating this object.
-#
-#	\sa Example Tutorial at <br>
-#		http://bridgesuncc.github.io/Hello_World_Tutorials/CDLL.html
-#
 #
 class CircDLelement(DLelement):
+
     ##
     #
     #	Constructs an empty CircDLelement with next and prev pointers set
     #	to itself
-    #
+    # @param label the label for this CircDLelement
+    # @param e the genereic object that this CircDLelement is holding
+    # @param next the DLelement that should be assigned to the next pointer
+    # @param prev the DLelement that should be assigned to the prev pointer
     #
     def __init__(self, e = None, label = None, next = None, prev = None):
         if e is not None and label is not None:

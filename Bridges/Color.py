@@ -32,7 +32,7 @@ class Color():
     # Constructor, given r, g, b, a components
     #
     # @param r, g, b, a  - checked to be in the range 0-255
-    #
+    # @param col_name - the name of a color for an element as string
     #
     def __init__(self, col_name = None, r = None, g = None, b = None, a = None):
         if col_name is not None:
@@ -46,7 +46,7 @@ class Color():
     # 	sets color to the given r, g, b, a components
     #
     #	@param r, g, b, a  - checked to be in the range 0-255
-    #
+    #   @param col_name - name of color as string
     #
     def set_color(self, col_name = None, r= None, g = None, b = None, a = None):
         #  check color component ranges
@@ -326,4 +326,3 @@ class Color():
         bytebuffer.append(a)
 
         return bytebuffer
-

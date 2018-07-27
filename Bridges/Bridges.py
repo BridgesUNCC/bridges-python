@@ -1,5 +1,33 @@
 from Bridges.Connector import *
 
+##
+# 	@brief The Bridges class is the main class that provides interfaces to datasets,
+#	maintains user and assignment information, and connects to the Bridges server.
+#
+#  	The Bridges class is responsible  for initializing the Bridges system, specifying
+#  	parameters (user id, assignment id, title, description, data structure
+# 	type, etc) for the student assignment, generating the data structure representation
+# 	and transmission to the Bridges server. In addition, it provides interfaces to
+# 	a number of real-world datasets, that makes it easy to access the data for use
+#  	algorithms/data structure assignments. <br>
+#
+#   <b>Datasets.</b> The datasets that are currently supported through the BRIDGES API
+# 	include USGS Earthquake Data, IMDB Actor/Movie Data (2 versions), Gutenberg Book
+# 	Collection Meta Data, a Video Game Dataset and Shakespeare Dataset. More information
+# 	is found in the respective methods (below) and at <p>
+# 	http://bridgesuncc.github.io/datasets.html <p>
+#
+# 	A typical Bridges program includes creating the Bridges object, followed by creation
+#   of the data structure by the user, assigning visual attributes to elements of the
+# 	data structure, followed by specification of teh data structure type  and the
+# 	call to visualize the data structure (Bridges::setDataStructure() and visualize()
+# 	methods).
+#
+#  	@author Sean Gallagher, Kalpathi Subramanaian, Mihai Mehedint, David Burlinson.
+#
+#
+
+
 
 
 class Bridges:
@@ -25,9 +53,13 @@ class Bridges:
     OPEN_BOX = "["
     CLOSE_BOX = "]"
 
+    ##
+    # Initialize Bridges (Constructor)
+    # @param assignment this is the assignmen id (integer)
+    # @param appl_id    this is the appl authentication key(from the Bridges account)
+    # @param username   this is the username (from the Bridges account)
+    #
     def __init__(self, assignment, username, appl_id):
-
-
         self.assignment_part = 0
         self.title = str()
         self.description = str()
@@ -36,6 +68,17 @@ class Bridges:
         self.connector = Connector(appl_id, username, assignment)
         self.username = username
 
+    ##
+	#
+	#  	This method sets  the handle to the current data structure; this can
+	# 	be an array, the head of a linked list, root of a tree structure, a graph
+	# 	Arrays of upto 3 dimensions are suppported. It can be any of the data
+	# 	structures supported by BRIDGES. Polymorphism and type casting is used
+	# 	to determine the actual data structure and extract its representtion.
+	#
+	#  @param ds   The data structure to set (any of the subclasses of DataStruct)
+	#
+	#
     def set_data_structure(self, ds):
         try:
             self.ds_handle = ds
@@ -47,6 +90,11 @@ class Bridges:
         json_flag = flag
 
 
+    ##
+	#
+	#  This method generates the representation of the current data structure (JSON)
+	#  and sends that to the Bridges server for generating a visualization.
+	#
     def visualize(self):
         nodes_links = []
         nodes_links_str = ""
@@ -68,9 +116,14 @@ class Bridges:
         else:
             ds_json += nodes_links_str
 
-
         self.connector.post("/assignments/" + self.get_assignment(), ds_json)
 
+    ##
+	# 	set the assignment id
+	#
+	#  @param assignment number
+	#
+	#
     def set_assignment(self, assignment):
         if (assignment < 0):
             ValueError("Assignment value must be >= 0")
@@ -78,9 +131,20 @@ class Bridges:
             self.assignment_part = 0
         self.assignment = assignment
 
+    ##
+	# 	Get the assignment id
+	#
+	#   @return assignment as a string
+	#
+	#
     def get_assignment(self):
         return str(self.assignment) + "." + str(self.assignment_part)
 
+    ##
+	#
+	#  @param title title used in the visualization;
+	#
+	#
     def setTitle(self, title):
         if len(title) > self._MaxTitleSize:
             print(
@@ -89,11 +153,14 @@ class Bridges:
         else:
             self.title = title
 
-
+     ##
+	 #
+	 #  @param descr description to annotate the visualization;
+	 #
+	 #
     def setDescription(self, description):
         if len(description) > self._MaxTitleSize:
             print("Visualization Description restricted to " + str(self._MaxTitleSize) + " Truncating description..")
             self.description = description[0:self._MaxTitleSize]
         else:
             self.description = description
-

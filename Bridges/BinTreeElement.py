@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# package: bridges.base
 from Bridges.TreeElement import *
 ##
 # 	@brief This class is extended from the TreeElement class  and can be used to create
@@ -16,15 +15,9 @@ from Bridges.TreeElement import *
 #  another element, appropriate for setting link attributes, for instance, between
 #  the current element and its left or  right child
 #
-# @param E he generic parameter object that is part of this element, representing
-#		application specific data.
-#
 # @author Kalpathi Subramanian, Mihai Mehedint
 #
-# @date 6/22/16, 1/7/17, 5/17/17
 #
-# \sa Example Tutorial at <br>
-#			http://bridgesuncc.github.io/Hello_World_Tutorials/BTree.html
 #
 class BinTreeElement(TreeElement):
     left = object()
@@ -35,9 +28,11 @@ class BinTreeElement(TreeElement):
 
     ##
     #
-    # 	Constructs an empty Binary Tree Element with right and left
-    #	pointers set to null.
-    #
+    # 	Constructs an empty Binary Tree Element
+    # @param e the generic object that TreeElement will hold
+    # @param label the label of TreeElement that shows up on the Bridges visualization
+    # @param left the TreeElement to be assigned to the left pointer of this TreeElement
+    # @param right the TreeElement to be assigned to the right pointer of this TreeElement
     #
     def __init__(self, label=None, e=None, left=None, right=None ):
         if label is None and e is None and left is None and right is None:

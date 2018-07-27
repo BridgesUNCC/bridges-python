@@ -9,6 +9,19 @@ from Bridges.data_src_dependent import CancerIncidence
 from Bridges.data_src_dependent import Song
 
 
+
+##
+#
+# Get meta data of the IGN games collection.
+#
+# This function retrieves  and formats the data into a list of
+# Game objects
+#
+# @throws Exception if the request fails
+#
+# @return a list of Game objects,
+#
+#
 def getGameData():
 
     wrapper = []
@@ -33,6 +46,17 @@ def getGameData():
     return wrapper
 
 
+##
+# Get ActorMovie IMDB Data
+# retrieved, formatted into a list of ActorMovieIMDB objects
+#
+# @param number the number of actor/movie pairs, but currently unused,
+# 	returns all records.
+# @throws Exception if the request fails
+#
+# @return a list of ActorMovieIMDB objects, but only actor and
+# movie fields in this version
+#
 def getActorMovieIMDBData(number = 0):
 
     wrapper = []
@@ -53,6 +77,17 @@ def getActorMovieIMDBData(number = 0):
 
     return wrapper
 
+##
+# Get USGS earthquake data
+# USGS Tweet data (https://earthquake.usgs.gov/earthquakes/map/)
+# retrieved, formatted into a list of EarthquakeUSGS objects
+#
+# @param number the number of earthquake records retrieved,
+# 	limited to 5000
+# @throws Exception if the request fails
+#
+# @return a list of earthquake records
+#
 def getEarthquakeUSGSData(number = 0):
 
     wrapper = []
@@ -77,7 +112,25 @@ def getEarthquakeUSGSData(number = 0):
             wrapper.append(EarthquakeUSGS.EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
     return wrapper
 
-
+##
+#
+# Get data of Shakespeare works (plays, poems)
+#
+# This function retrieves  and formats the data into a
+#   a list of Shakespeare objects.
+#
+# Valid endpoints: 'poems','plays', <title>
+# Valid queryParams: format{simple}
+#
+# @throws Exception if the request fails
+#
+# @param endpoint  can be either "plays" or "poems". If this is
+# 		 		specified, then only these types of works are retrieved.
+# @param textOnly  if this is set, then only the text is retrieved.
+#
+# @return an array of Shakespeare objects
+#
+#
 def getShakespeareData(endpoint = "", textonly = False):
     wrapper = []
     url = "http://bridgesdata.herokuapp.com/api/shakespeare/"
@@ -97,6 +150,18 @@ def getShakespeareData(endpoint = "", textonly = False):
         wrapper.append(Shakespeare.Shakespeare(V["title"], V["type"], V["text"]))
     return wrapper
 
+
+##
+#
+# Get meta data of the Gutenberg book collection (1000 books)
+# 		This function retrieves,  and formats the data into a list of
+# GutenbergBook objects
+#
+# @throws Exception if the request fails
+#
+# @return a list of GutenbergBook objects,
+#
+#
 def getGutenBergBookData(num = 0):
     wrapper = []
     url = "http://bridgesdata.herokuapp.com/api/books"
@@ -139,6 +204,11 @@ def getGutenBergBookData(num = 0):
     return wrapper
 
 
+##
+# Retrieves the CDC dataset into a vector of records
+# See CancerIncidence class for more information
+#
+#
 def getCancerIncidentData(num = 0):
 
     wrapper = []
@@ -182,6 +252,22 @@ def getCancerIncidentData(num = 0):
     return wrapper
 
 
+##
+#
+# Get data of a particular songs (including lyrics) using the Genius API
+# (https://docs.genius.com/), given the song title and artist name.
+# Valid endpoints:  http://bridgesdata.herokuapp.com/api/songs/find/
+# Valid queryParams: song title, artist name
+#
+# This function retrieves  and formats the data into a
+# Song object. The song if not cached in the local DB is queried
+# and added to the DB
+#
+# @throws Exception if the request fails
+#
+# @return a Song object,
+#
+#
 def getSong(songTitle, artistName = None):
     wrapper = []
     url = "http://bridgesdata.herokuapp.com/api/songs/find/"
@@ -221,7 +307,21 @@ def getSong(songTitle, artistName = None):
 
     return Song.Song(artist, song, album, lyrics, release_date)
 
-
+##
+#
+# Get data of the songs (including lyrics) using the Genius API
+# https://docs.genius.com/
+# Valid endpoints:  https://bridgesdata.herokuapp.com/api/songs/
+#
+# This function retrieves  and formats the data into a list of
+# Song objects. This version of the API retrieves all the cached
+# songs in the local DB.
+#
+# @throws Exception if the request fails
+#
+# @return a list of Song objects,
+#
+# 
 def getSongData():
     all_songs = []
     url = "http://bridgesdata.herokuapp.com/api/songs/"
@@ -265,9 +365,3 @@ def getSongData():
 
 class DataSource:
     pass
-
-
-
-
-
-

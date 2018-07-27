@@ -2,6 +2,12 @@ from Bridges.Color import *
 from Bridges.Grid import *
 import base64
 
+##
+#  @brief This is a class in BRIDGES for representing an (n x n) grid.
+#  @author David Burlinson
+#
+#
+
 class ColorGrid(Grid):
     QUOTE = "\""
     COMMA = ","
@@ -18,6 +24,13 @@ class ColorGrid(Grid):
     def get_data_structure_type(self):
         return "ColorGrid"
 
+    #
+    #  Grid constructor with size arguments
+    #
+    #  @param rows - int representing the number of rows of the grid
+    #  @param cols - int representing the number of columns of the grid
+    #  @param color - Color object
+    #
     def __init__(self, rows = None, cols = None, color = None):
         if rows is None and cols is None and color is None:
             self.__init__(10, 10, self.baseColor)
@@ -30,14 +43,27 @@ class ColorGrid(Grid):
 
             self.initializeGrid()
 
+   ##
+   #  Populate the grid with the base color
+   #
+   #
     def initializeGrid(self):
         for i in range(self.gridSize[0]):
             for j in range(self.gridSize[1]):
                 self.set(i, j, self.baseColor)
 
+    ##
+    # set the (row, col) element in the ColorGrid
+    #
     def set(self, row, col, color):
         super(ColorGrid, self).set(row, col, color)
 
+    ##
+    #  
+    #   get the JSON representation of the color grid
+    #
+    #   @return the JSON representation of the color grid
+    #
     def get_data_structure_representation(self):
         imageBytes = bytearray()
         for i in range(self.gridSize[0]):
@@ -55,4 +81,3 @@ class ColorGrid(Grid):
         json_str += self.QUOTE + "dimensions" + self.QUOTE + self.COLON + self.OPEN_BOX + str(self.gridSize[0]) + "," + str(self.gridSize[1]) + self.CLOSE_BOX + self.CLOSE_CURLY
 
         return json_str
-

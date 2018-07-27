@@ -39,6 +39,12 @@ class ElementVisualizer():
     # The default settings are color = green, opacity = 1.0, size = 10.0, shape
     # = circle.
     #
+    # @param a_color the string that represents one of the Bridges colors.
+    # @param a_shape the string that represents one of the Bridges shapes
+    # @param size the value that represents the size in pixels of the Bridges Element
+    # @param opacity a double between 0 and 1 representing how transparent the node
+	#             should be on the Bridges Visualization. 0 for invisible, 1 for
+	#             fully visible, 0-1 for varying transparency.
     def __init__(self, a_color = "green", a_shape = "circle", size = 10.0, opacity = 1.0):
         if a_color is not "green":
             self.set_color(a_color)
@@ -55,8 +61,7 @@ class ElementVisualizer():
     ##
     # Set the size of the Element in the Bridge Visualization in pixels
     #
-    # @param size
-    #            the pixel size of the Element in the Bridges Visualization
+    # @param size the pixel size of the Element in the Bridges Visualization
     #
     def set_size(self, size):
         self.prop["size"] = str(size)

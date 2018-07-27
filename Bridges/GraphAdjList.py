@@ -29,11 +29,7 @@ import sys
 #
 #	@author Kalpathi Subramanian
 #
-#	@date 6/29/15, 5/18/17
 #
-#	@param <E> application/user defined type used as part of vertices and edges
-#	@param <K> orderable key (string, int, etc) that is used to index into vertex
-#		structure, for fast access
 #
 #	\sa Example tutorial at <p>
 #		http://bridgesuncc.github.io/Hello_World_Tutorials/Graph.html

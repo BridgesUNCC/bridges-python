@@ -1,6 +1,5 @@
 from Bridges.Element import *
 import traceback
-## package: bridges.base
 ##
 #
 #  @brief The GraphAdjMatrix class can be used to represent adjacency matrix based
@@ -26,11 +25,6 @@ import traceback
 #
 #  @author Kalpathi Subramanian, Mihai Mehedint
 #
-#  @date 7/12/15, 5/18/17
-#
-#  @param <E> application/user defined type used as part of vertices and edges
-#  @param <K> orderable key (string, int, etc) that is used to index into vertex
-#      structure, for fast access
 #
 #  \sa Example tutorial at <p>
 #      ?? TO DO

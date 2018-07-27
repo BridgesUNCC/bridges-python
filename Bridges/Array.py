@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# package: bridges.base
 from Bridges.Element import *
 
 ##
@@ -15,13 +14,6 @@ from Bridges.Element import *
 #	Arrays are internally represented as 1D arrays; currently 1D, 2D  and
 #	3D arrays are supported.
 #
-# @param <E> The generic parameter object that is part of this element, representing
-#          application specific data.
-#
-#  \sa Example Tutorial at <br>
-#		http://bridgesuncc.github.io/Hello_World_Tutorials/ARRAY1D.html (1D Array)<br>
-#		http://bridgesuncc.github.io/Hello_World_Tutorials/ARRAY2D.html (2D Array)<br>
-#		http://bridgesuncc.github.io/Hello_World_Tutorials/ARRAY3D.html (3D Array)
 #
 #
 class Array(object):
@@ -43,7 +35,13 @@ class Array(object):
 
 
     ##
-    # Construct a default array object
+    # Construct an array object
+    # @param num_dims number of dimensions of the array
+    # @param dims size of each dimension
+    # @param num_elements in the array
+    # @param x_dim number of elements along dimension 1
+    # @param y_dim number of elements along dimension 1
+    # @param z_dim number of elements along dimension 1
     #
     def __init__(self, num_dims = None, dims = None, num_elements = None, x_dim = None, y_dim = None, z_dim = None):
         if num_dims is None and dims is None and num_elements is None and x_dim is None and y_dim is None and z_dim is None:
@@ -158,6 +156,12 @@ class Array(object):
         elif x is not None and y is not None and z is not None:
             return self.array_data[z*self.dims[0]*self.dims[1] + y*self.dims[0] + x]
 
+    ##
+    # @param x  column index into the array
+    # @param y  row index into the array
+    # @param z  depth index into the array
+    # @param el  element object to be assigned at 'indx'
+	#
     def set_element(self, indx = None, el = None, x = None, y = None, z = None):
         if indx is not None and el is not None:
             self.array_data[indx] = el

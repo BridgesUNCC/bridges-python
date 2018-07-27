@@ -27,17 +27,15 @@ from Bridges.SLelement import *
 #
 #	@date 6/22/16, 1/7/17, 5/17/17
 #
-#	@param <E>  the generic parameter that is defined by the application
-#
-#	\sa Example Tutorial at <br>
-#			http://bridgesuncc.github.io/Hello_World_Tutorials/CSLL.html
 #
 class CircSLelement(SLelement):
     ##
     #
     # 	This constructor creates an CircSLelement object
     # 	and sets its next pointer to itself
-    #
+    # @param label the label of CircSLelement
+    # @param e the generic object that this CircSLelement will hold
+    # @param next the CircSLelement that should be assigned to the next pointer
     #
     def __init__(self, e = None, label = None, next = None):
         if e is not None and label is not None and next is None:
@@ -47,18 +45,6 @@ class CircSLelement(SLelement):
             super(CircSLelement, self).__init__(e = e, next = next)
         elif e is None and label is None and next is not None:
             super(CircSLelement, self).__init__(next = next)
-        else:
-            super(CircSLelement, self).__init__()
-            self.set_next(self)
-
-
-
-
-
-        if next is not None:
-            super(CircSLelement, self).__init__(None, next)
-        if e is not None:
-            super(CircSLelement, self).__init__(e)
         else:
             super(CircSLelement, self).__init__()
             self.set_next(self)
