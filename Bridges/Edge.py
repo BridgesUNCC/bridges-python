@@ -10,8 +10,6 @@ from Bridges.Element import *
 #
 # @author K.R. Subramanian
 #
-# @param generic parameter <K>  usually an Element<E> type used to hold the
-# terminating vertex
 #
 class Edge:
     weight = int()
@@ -23,7 +21,8 @@ class Edge:
     ##
     #
     # Constructors
-    #
+    # @param wt integer, representing  edge weight
+    # @param v the terminating vertex of the edge
     #
     def __init__(self, wt=None, v=None):
         if not wt:

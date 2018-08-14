@@ -16,17 +16,11 @@ from Bridges.BSTElement import *
 #	linked to another element, appropriate for setting link attributes, for instance,
 #	between *  the current element and its left or right child
 #
-#  @param E he generic parameter object that is part of this element, representing
-#      application specific data.
-#  @param K is the search key parameter in the AVL tree node; K must be orderable, such
-#      as integer, float, string, etc., on which relational operators work.
 #
 #  @author Kalpathi Subramanian, Mihai Mehedint
 #
 #  @date 6/22/16, 1/7/17, 5/17/17
 #
-#  \sa Example tutorial using AVLTreeElement at <br>
-#      http://bridgesuncc.github.io/Hello_World_Tutorials/AVL.html
 #
 #
 class AVLTreeElement(BSTElement):
@@ -36,8 +30,9 @@ class AVLTreeElement(BSTElement):
 
     ##
     #
-    #  Construct an AVLTreeElement with default values
-    #
+    # Construct an AVLTreeElement
+    # @param k the search key
+    # @param e the appl specific object that Element is holding
     #
     def __init__(self, k = None, e = None):
         if k is not None:

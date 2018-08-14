@@ -31,7 +31,6 @@ from Bridges.Color import *
 #
 #  @author Mihai Mehedint, Kalpathi Subramanian
 #
-#  @date 6/22/16, 1/16/17, 5/17/17
 #
 #  \sa Example Tutorial at <br>
 #  http://bridgesuncc.github.io/Hello_World_Tutorials/SLL.html

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from Bridges.Element import *
 
-
 ##
 # 	@brief This class can be used to instantiate Singly Linked Elements.
 # 	This class extends Element and takes a generic parameter <E>
@@ -34,8 +33,10 @@ class SLelement(Element):
     ##
     # This constructor creates an SLelement object
     # and sets the next pointer to null
-    #
-    #
+    # @param label the label of SLelement that shows up on the Bridges visualization
+    # @param e the generic object that this SLelement will hold
+    # @param next the element that should be assigned to the next pointer
+    # 
     def __init__(self, e = None, label = None, next = None):
         if e is not None and label is not None:
             super(SLelement, self).__init__(val = e, label = label)

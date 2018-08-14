@@ -22,10 +22,6 @@ from Bridges.SLelement import *
 #
 # @author , Kalpathi Subramanian
 #
-# @date 5/24/17
-#
-# @param <E> The generic parameter object that is part of this element, representing
-#			either application specific data, or a pointer to a sublist.
 #
 #	\sa Example Tutorial at <br> ??
 #
@@ -39,7 +35,10 @@ class MLelement(SLelement):
     #
     # This constructor creates an SLelement object
     # and sets the next pointer to null
-    #
+    # @param label the label of SLelement that shows up on the Bridges visualization
+    # @param e the generic object that this SLelement will hold
+    # @param next the element that should be assigned to the next pointer
+    # @param sublist the MLelement that is the beginning of a sublist
     #
     def __init__(self, label = None, e = None, next = None, sublist = None):
         if label and e is not None:
@@ -74,18 +73,46 @@ class MLelement(SLelement):
         self.get_visualizer().set_color("red")
         self.get_visualizer().set_shape("square")
 
+    ##
+	#  Gets the sublist at this node, if it exists
+	#
+	#  @return  the sublist head element, if it exists
+	#
     def get_sub_list(self):
         return self.sub_list
 
+    ##
+	#  This method gets the data structure type
+	#
+	#  @return  The date structure type as a string
+	#
+	#
     def get_data_structure_type(self):
         return "MultiList"
 
+    ##
+	#  Retrieves the element following this element
+	#
+	#  @return MLelement<E> assigned to next
+	#
+	#
     def get_next(self):
         return self.next
 
+    ##
+	#
+	#  Sets the tag of the element.
+	#
+	#  @param boolean t
+	#
     def set_tag(self, t):
         self.tag = t
 
+    ##
+	#  Gets the tag of the element.
+	#
+	#  @return tag of the element
+	#
     def get_tag(self):
         return self.tag
 
@@ -125,9 +152,15 @@ class MLelement(SLelement):
         json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX + nodes_JSON.__str__() + self.CLOSE_BOX + self.COMMA + self.QUOTE + "links" + self.QUOTE + self.COLON + self.OPEN_BOX + links_JSON.__str__() + self.CLOSE_BOX + self.CLOSE_CURLY
         return json_str
 
+    ##
+	#  Get the elements of the list
+	#
+	#  @param nodes  a vector of the ndoes in the list
+	#
     def get_list_elements(self, nodes):
         self.get_list_elements_R(self, nodes)
 
+    
     def get_list_elements_R(self, list, nodes):
         el = list
         while el is not None:

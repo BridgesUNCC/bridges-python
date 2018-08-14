@@ -7,7 +7,6 @@ from Bridges.SLelement import *
 #
 # 	@author Mihai Mehedint, Kalpathi Subramanian
 #
-#	@date 6/22/16, 1/7/17, 5/17/17
 #
 # 	@brief This class is used to create doubly linked element objects.
 #
@@ -24,17 +23,16 @@ from Bridges.SLelement import *
 #	another element, appropriate for setting link attributes, such as in linked lists,
 #	between the current element and its next or previous nodes.
 #
-#	@param <E> The generic parameter object that is part of this element, representing
-#          application specific data.
-#
-#	\sa Example Tutorial at <br>
-#		http://bridgesuncc.github.io/Hello_World_Tutorials/DLL.html
 #
 class DLelement(SLelement):
     prev = object()
 
     ##
-    #	Constructs an empty DLelement with next and prev pointers set to null.
+    #	Constructs an empty DLelement.
+    # @param e the genereic object that this DLelement is holding
+	# @param next the DLelement that should be assigned to the next pointer
+	# @param prev the DLelement that should be assigned to the prev pointer
+    # @param label the label for this DLelement
     #
     def __init__(self, e = None, label = None, next = None, prev = None):
         if next is not None:
