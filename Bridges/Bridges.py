@@ -117,7 +117,6 @@ class Bridges:
         else:
             ds_json += nodes_links_str
 
-<<<<<<< HEAD
         response.append(self.connector.post("/assignments/" + self.get_assignment(), ds_json))
 
         if (len(response) > 0):
@@ -125,9 +124,9 @@ class Bridges:
                 "\nCheck Your Visualization at the following link:\n\n" + self.connector.get_server_url() + "/assignments/" + str(self.assignment) + "/" + self.username + "\n\n")
 
             self.assignment_part = self.assignment_part + 1
-=======
+
         self.connector.post("/assignments/" + self.get_assignment(), ds_json)
->>>>>>> 250a335c46cff52f99a493b67c082cb981f965fa
+
 
     ##
 	# 	set the assignment id
