@@ -125,7 +125,7 @@ class Bridges:
 
             self.assignment_part = self.assignment_part + 1
 
-        self.connector.post("/assignments/" + self.get_assignment(), ds_json)
+        # self.connector.post("/assignments/" + self.get_assignment(), ds_json)
 
 
     ##
