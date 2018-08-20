@@ -46,10 +46,7 @@ class Connector:
         if r.status_code != 200:
             print(r.status_code, r.reason)
             print(r.text)
-        else:
-            print("\nSuccess! Check your visualization at\n\n" + 
-            "\t http:bridges-cs.herokuapp.com/assignments/" + 
-            str(self.assignment) + "/" + self.username +"\n\n")
+        return r.status_code
 
     def prepare(self, url):
         out = self.server_url

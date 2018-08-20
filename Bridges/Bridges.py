@@ -98,7 +98,7 @@ class Bridges:
     def visualize(self):
         nodes_links = []
         nodes_links_str = ""
-        response = []
+        response = ""
 
         if (self.vis_type == "Tree" or self.vis_type == "BinaryTree" or self.vis_type == "SinglyLinkedList", self.vis_type == "DoublyLinkedList", self.vis_type == "MultiList", self.vis_type == "CircularSinglyLinkedList", self.vis_type == "CircularDoublyLinkedList", self.vis_type == "Array", self.vis_type == "GraphAdjacencyList", self.vis_type == "ColorGrid"):
             nodes_links_str = self.ds_handle.get_data_structure_representation()
@@ -117,9 +117,9 @@ class Bridges:
         else:
             ds_json += nodes_links_str
 
-        response.append(self.connector.post("/assignments/" + self.get_assignment(), ds_json))
+        response = self.connector.post("/assignments/" + self.get_assignment(), ds_json)
 
-        if (len(response) > 0):
+        if (response == 200):
             print(
                 "\nCheck Your Visualization at the following link:\n\n" + self.connector.get_server_url() + "/assignments/" + str(self.assignment) + "/" + self.username + "\n\n")
 
@@ -148,7 +148,10 @@ class Bridges:
 	#
 	#
     def get_assignment(self):
-        return str(self.assignment) + "." + str(self.assignment_part)
+        if (self.assignment_part < 10):
+            return str(self.assignment) + ".0" + str(self.assignment_part)
+        else:
+            return str(self.assignment) + "." + str(self.assignment_part)
 
     ##
 	#
