@@ -32,13 +32,13 @@ import traceback
 #
 class GraphAdjMatrix():
     #graph vertices list
-    vertices = dict()
+    # vertices = dict()
 
     #holds the adjacency list of edges
-    matrix = dict()
+    # matrix = dict()
 
     #holds edge information for graph edges
-    edge_data = dict()
+    # edge_data = dict()
 
     QUOTE = "\""
     COMMA = ","

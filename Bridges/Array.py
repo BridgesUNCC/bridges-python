@@ -16,7 +16,7 @@ from Bridges.Element import *
 #
 #
 #
-class Array(object):
+class Array():
     QUOTE = "\""
     COMMA = ","
     COLON = ":"
@@ -30,7 +30,7 @@ class Array(object):
     #  only 2D and 3D arrays supported
     dims = [1, 1, 1]
 
-    array_data=[]
+    # array_data=[]
 
 
 
@@ -49,20 +49,24 @@ class Array(object):
             self.num_dims = 1
             self.dims[0] = self.dims[1] = self.dims[2] = self.size = 0
         elif num_dims is not None and dims is not None:
+            self.array_data = []
             self.set_num_dimensions(num_dims)
             self.set_dimensions(dims)
         elif num_elements is not None:
+            self.array_data = []
             self.set_num_dimensions(1)
             self.dims[0] = num_elements
             self.dims[1] = self.dims[2] = 1
             self.set_dimensions(self.dims)
         elif x_dim is not None and y_dim is not None and z_dim is not None:
+            self.array_data = []
             self.set_num_dimensions(3)
             self.dims[0] = x_dim
             self.dims[1] = y_dim
             self.dims[2] = z_dim
             self.set_dimensions(self.dims)
         elif x_dim is not None and y_dim is not None and z_dim is None:
+            self.array_data = []
             self.set_num_dimensions(2)
             self.dims[0] = x_dim
             self.dims[1] = y_dim
