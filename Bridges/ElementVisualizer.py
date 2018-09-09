@@ -39,12 +39,6 @@ class ElementVisualizer():
     # The default settings are color = green, opacity = 1.0, size = 10.0, shape
     # = circle.
     #
-    # @param a_color the string that represents one of the Bridges colors.
-    # @param a_shape the string that represents one of the Bridges shapes
-    # @param size the value that represents the size in pixels of the Bridges Element
-    # @param opacity a double between 0 and 1 representing how transparent the node
-	#             should be on the Bridges Visualization. 0 for invisible, 1 for
-	#             fully visible, 0-1 for varying transparency.
     def __init__(self, a_color = "green", a_shape = "circle", size = 10.0, opacity = 1.0):
         if a_color is not "green":
             self.set_color(a_color)
@@ -61,10 +55,12 @@ class ElementVisualizer():
     ##
     # Set the size of the Element in the Bridge Visualization in pixels
     #
-    # @param size the pixel size of the Element in the Bridges Visualization
+    # @param size
+    #            the pixel size of the Element in the Bridges Visualization
     #
     def set_size(self, size):
         self.prop["size"] = str(size)
+        self.size = size
 
     ##
     # Get the size of the Element in the Bridges Visualiation
@@ -72,7 +68,7 @@ class ElementVisualizer():
     # @return the size in pixels of the Element in the Bridges Visualization
     #
     def get_size(self):
-        return Decimal(self.prop["size"])
+        return self.size
 
     ##
     #  Set the color of the Element in the Bridges Visualization to "aColor".
@@ -254,7 +250,7 @@ class ElementVisualizer():
     # @return the string that represents the Element's shape in the Bridges Visualization.
     #
     def get_shape(self):
-        return self.prop["shape"]
+        return self.shape
 
     ##
     # Sets the shape of the Element in the Bridges Visualization
@@ -266,6 +262,7 @@ class ElementVisualizer():
         a_shape = a_shape.lower()
         #Validation.validateShape(a_shape)
         self.prop["shape"] = a_shape
+        self.shape = a_shape
 
     ##
     # Sets the opacity of the Element in the Bridges Visualization
@@ -278,17 +275,15 @@ class ElementVisualizer():
     def set_opacity(self, opacity):
         #Validation.validateOpacity(opacity)
         self.prop["opacity"] = Decimal(opacity)
+        self.color.set_alpha(opacity)
+        self.opacity = opacity
 
     ##
     #  Get the opacity of the Element in the Bridges Visualization
     # @return the opacity value
     #
     def get_opacity(self):
-        prop = self.prop["opacity"]
-        if prop:
-            return Decimal(self.prop["opacity"])
-        else:
-            return 1.0
+        return self.color.get_alpha()
 
     ##
     # The randomColor method selects a random color from the available list of
