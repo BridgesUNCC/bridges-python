@@ -41,6 +41,9 @@ class Bridges:
     assignment = int()
     assignment_part = int()
     _MaxTitleSize = 50
+    json_flag = False
+
+    projection_options = {"cartesian", "albersusa", "equirectangular"}
 
 
     QUOTE = "\""
@@ -67,6 +70,7 @@ class Bridges:
         self.key = appl_id
         self.connector = Connector(appl_id, username, assignment)
         self.username = username
+        self.coord_system_type = "cartesian"
 
     ##
 	#
@@ -87,7 +91,7 @@ class Bridges:
             print("Exception Thrown: Data structure passed to BRIDGES is null!\n")
 
     def set_visualize_JSON(self, flag):
-        json_flag = flag
+        self.json_flag = flag
 
 
     ##
@@ -119,6 +123,9 @@ class Bridges:
         else:
             ds_json += nodes_links_str
 
+        if(self.json_flag):
+            print(ds_json)
+
         response = self.connector.post("/assignments/" + self.get_assignment(), ds_json)
 
         if (response == 200):
@@ -127,9 +134,6 @@ class Bridges:
 
             self.assignment_part = self.assignment_part + 1
 
-
-
-        # self.connector.post("/assignments/" + self.get_assignment(), ds_json)
 
 
     ##
@@ -181,3 +185,15 @@ class Bridges:
             self.description = description[0:self._MaxTitleSize]
         else:
             self.description = description
+
+    def set_map_overlay(self, flag):
+        self.map_overlay = flag
+
+    def set_coord_system_type(self, coord):
+        if(coord in self.projection_options):
+            self.coord_system_type = coord
+        else:
+            print("Unrecognized coordinate system \'" + coord + "\', defaulting to cartesian. Options:")
+            self.coord_system_type = "cartesian"
+
+

@@ -3,7 +3,7 @@ from Bridges.ElementVisualizer import *
 from Bridges.Color import *
 from Bridges.LinkVisualizer import *
 import re
-
+from decimal import Decimal
 ##
 # @brief This is the main superclass in BRIDGES for  deriving a number of
 # 	objects used  in building arrays, lists, trees and graph data structures.
@@ -198,9 +198,9 @@ class Element(object):
 
     def get_element_representation(self):
         json_str = self.OPEN_CURLY + self.QUOTE + "name" + self.QUOTE + self.COLON + self.QUOTE + str(self.label) + self.QUOTE + self.COMMA + self.QUOTE + "shape" + self.QUOTE + self.COLON + self.QUOTE + self.visualizer.get_shape() + self.QUOTE + self.COMMA + self.QUOTE + "size" + self.QUOTE + self.COLON + str(self.visualizer.get_size()) + self.COMMA + self.QUOTE + "color" + self.QUOTE + self.COLON + self.OPEN_BOX + str(self.visualizer.get_color().get_red()) + self.COMMA + str(self.visualizer.get_color().get_green()) + self.COMMA + str(self.visualizer.get_color().get_blue()) + self.COMMA + str(self.visualizer.get_color().get_alpha()) + self.CLOSE_BOX
-        # loc_flag = not ((self.visualizer.getLocationX() == Double.POSITIVE_INFINITY) or (self.visualizer.getLocationY() == Double.POSITIVE_INFINITY))
-        # if loc_flag:
-        #     json_str += self.COMMA + self.QUOTE + "location" + self.QUOTE + self.COLON + self.OPEN_BOX + str(self.visualizer.get_locationX()) + self.COMMA + str(self.visualizer.get_locationY()) + self.CLOSE_BOX
+        loc_flag = not ((self.visualizer.get_locationX() == Decimal('Infinity')) or (self.visualizer.get_locationY() == Decimal('Infinity')))
+        if loc_flag:
+             json_str += self.COMMA + self.QUOTE + "location" + self.QUOTE + self.COLON + self.OPEN_BOX + str(self.visualizer.get_locationX()) + self.COMMA + str(self.visualizer.get_locationY()) + self.CLOSE_BOX
         # if self.get_data_struct_type() == "BinarySearchTree":
         #     bst = BSTElement(self)
         #     json_str += self.COMMA + self.QUOTE + "key" + self.QUOTE + self.COLON + self.QUOTE + bst.getKey().__str__() + self.QUOTE + self.COMMA

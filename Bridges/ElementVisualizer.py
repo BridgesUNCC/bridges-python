@@ -2,6 +2,7 @@
 from decimal import Decimal
 from Bridges.Element import *
 from Bridges.Color import *
+from decimal import Decimal
 
 ##
 # This class is used to store the visualization elements on the for the Bridges
@@ -17,8 +18,8 @@ class ElementVisualizer():
 
     shape = "circle"
     key = ""
-    locationX = float("inf")
-    locationY = float("inf")
+    locationX = Decimal("Infinity")
+    locationY = Decimal("Infinity")
     size = 10.0
     opacity = 1.0
 
@@ -294,3 +295,13 @@ class ElementVisualizer():
     # def random_color(self):
     #     a = Validation.COLOR_NAMES.toArray()
     #     return self.setColor(a[Random().nextInt(a.length)].__str__())
+
+    def set_location(self, x, y):
+        self.locationX = x
+        self.locationY = y
+
+    def get_locationX(self):
+        return self.locationX
+
+    def get_locationY(self):
+        return self.locationY
