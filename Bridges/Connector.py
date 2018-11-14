@@ -23,7 +23,7 @@ class Connector:
 
 
     def set_server(self, server):
-        self.set_server_url(self.server_url)
+        self.set_server_url(server)
 
 
     def set_server_url(self, server_url):
