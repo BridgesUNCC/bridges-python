@@ -80,7 +80,7 @@ class Element(object):
         Element.ids += 1
         self.visualizer = ElementVisualizer()
         self.lvisualizer = dict()
-        # super(Element.Element, self).__init__()
+
         if val is not None and label is None and original is None:
             self.set_value(val)
             self.identifier = str(Element.ids)
@@ -109,7 +109,7 @@ class Element(object):
             self.set_visualizer(ElementVisualizer())
             self.ids = Element.ids
             self.lvisualizer = dict()
-            # print(str(self.__dict__))
+
 
     ##
     # this method returns the element's unique identifier

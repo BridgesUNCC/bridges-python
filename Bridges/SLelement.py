@@ -49,6 +49,9 @@ class SLelement(Element):
             self.next = None
         if e is None and label is None and next is not None:
             self.set_next(next)
+        else:
+            super(SLelement, self).__init__()
+            self.next = next
 
 
     ##
