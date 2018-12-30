@@ -5,10 +5,10 @@ import traceback
 
 
 class Connector:
-    server_url = "http://bridges-cs.herokuapp.com"
+    server_url_live = "http://bridges-cs.herokuapp.com"
     server_type = "application"
-    # server_url = "http://bridges-cs.herokuapp.com"
-    # server_url = "http://localhost:3000"
+    server_url_clone = "http://bridges-clone.herokuapp.com"
+    server_url_local = "http://bridges-clone.herokuapp.com"
 
     key = ""
     username =""
@@ -20,6 +20,7 @@ class Connector:
         self.key = key
         self.username = username
         self.assignment = assignment
+        self.server_url = "http://bridges-cs.herokuapp.com"
 
 
     def set_server(self, server):
@@ -27,10 +28,13 @@ class Connector:
 
 
     def set_server_url(self, server_url):
-        while (server_url.endswith("/")):
-            server_url = server_url[0:len(server_url) - 1]
-        if (len(server_url) > 0):
-            self.server_url = server_url
+        switcher = {
+            "live": "http://bridges-cs.herokuapp.com",
+            "clone": "http://bridges-clone.herokuapp.com",
+            "local": "http://bridges-clone.herokuapp.com"
+        }
+        self.server_url = switcher.get(server_url, ValueError("Use: live, clone, local to determine url"))
+
 
     def get_server_url(self):
         return self.server_url
