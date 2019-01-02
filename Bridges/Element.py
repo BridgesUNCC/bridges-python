@@ -186,15 +186,6 @@ class Element(object):
     def get_class_name(self):
         return self.value.__class__.__name__
 
-    # def compare_to(self, e1):
-    #     if e1 == None:
-    #         raise NullPointerException("The object you are comparing to is null.")
-    #     return self.get_label().compareTo(e1.getLabel())
-
-    # def equals(self, e1):
-    #     if e1 == None:
-    #         raise NullPointerException("The object you are comparing to is null.")
-    #     return self.get_label() == e1.getLabel() and self.get_identifier() == e1.get_identifier() and self.get_value() == e1.get_value() and self.getVisualizer() == e1.getVisualizer()
 
     def get_element_representation(self):
         json_str = self.OPEN_CURLY + self.QUOTE + "name" + self.QUOTE + self.COLON + self.QUOTE + str(self.label) + self.QUOTE + self.COMMA + self.QUOTE + "shape" + self.QUOTE + self.COLON + self.QUOTE + self.visualizer.get_shape() + self.QUOTE + self.COMMA + self.QUOTE + "size" + self.QUOTE + self.COLON + str(self.visualizer.get_size()) + self.COMMA + self.QUOTE + "color" + self.QUOTE + self.COLON + self.OPEN_BOX + str(self.visualizer.get_color().get_red()) + self.COMMA + str(self.visualizer.get_color().get_green()) + self.COMMA + str(self.visualizer.get_color().get_blue()) + self.COMMA + str(self.visualizer.get_color().get_alpha()) + self.CLOSE_BOX
