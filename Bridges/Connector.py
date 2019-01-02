@@ -16,13 +16,21 @@ class Connector:
     pattern_found = 0
     debug = False
 
+    ##
+    # Connector object constructor
+    # @param key is the user_key
+    # @param username is students username
+    # @param assignment is the assignment number for the assignment
     def __init__(self, key, username, assignment):
         self.key = key
         self.username = username
         self.assignment = assignment
         self.server_url = "http://bridges-cs.herokuapp.com"
 
-
+    ##
+    # Set the server based on a keyword for url
+    # @param server is one of the three string keywords('live', 'clone', 'local')
+    # that is passed to change the server that the bridges visualization will be sent to
     def set_server(self, server):
         self.set_server_url(server)
 
