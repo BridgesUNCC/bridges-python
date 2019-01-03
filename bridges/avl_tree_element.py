@@ -105,5 +105,5 @@ class AVLTreeElement(BSTElement):
     # @return the right child of this node
     #
     #
-    def get_Right(self):
+    def get_right(self):
         return super(AVLTreeElement, self).get_right()

@@ -34,7 +34,7 @@ class ActorMovieIMDB():
 	#  	 @return actor name (string)
 	#
 	#
-    def get_Actor(self):
+    def get_actor(self):
         return self.actor
 
     ##
@@ -44,7 +44,7 @@ class ActorMovieIMDB():
 	#  	 @param actor name (string)
 	#
 	#
-    def set_Actor(self, a):
+    def set_actor(self, a):
         self.actor = a
 
     ##
@@ -54,7 +54,7 @@ class ActorMovieIMDB():
 	#  	 @return movie name (string)
 	#
 	#
-    def get_Movie(self):
+    def get_movie(self):
         return self.movie
 
     ##

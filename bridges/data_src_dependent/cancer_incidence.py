@@ -21,78 +21,92 @@ class CancerIncidence:
         self.crudeRateci.append(0.0)
         self.crudeRateci.append(0.0)
 
-    def getAgeAdjustedRate(self):
+    def get_age_adjusted_rate(self):
         return self.ageAdjustedRate
-    def setAgeAdjustedRate(self, arr):
+
+    def set_age_adjusted_rate(self, arr):
         self.ageAdjustedRate = arr
 
-    def getAgeAdjustedCI_Lower(self):
+    def get_age_adjusted_ci_lower(self):
         return self.ageAdjustedRateci[0]
-    def setAgeAdjustedCI_Lower(self, ci_l):
+
+    def set_age_adjusted_ci_lower(self, ci_l):
         self.ageAdjustedRateci[0] = ci_l
 
-    def getAgeAdjustedCI_Upper(self):
+    def get_age_adjusted_ci_upper(self):
         return self.ageAdjustedRateci[1]
-    def setAgeAdjustedCI_Upper(self, ci_u):
+
+    def set_age_adjusted_ci_upper(self, ci_u):
         self.ageAdjustedRateci[1] = ci_u
 
-    def getCrudeRate(self):
+    def get_crude_rate(self):
         return self.crudeRate
-    def setCrudeRate(self, cr):
+
+    def set_crude_rate(self, cr):
         self.crudeRate = cr
 
-    def getCrudeRate_CI_Lower(self):
+    def get_crude_rate_ci_lower(self):
         return self.crudeRateci[0]
-    def setCrudeRate_CI_lower(self, cr_l):
+
+    def set_crude_rate_ci_lower(self, cr_l):
         self.crudeRateci[0] = cr_l
 
-    def getCrudeRate_CI_Upper(self):
+    def get_crude_rate_ci_upper(self):
         return self.crudeRateci[1]
 
-    def setCrudeRate_CI_Upper(self, cr_l):
+    def set_crude_rate_ci_upper(self, cr_l):
         self.crudeRateci[1] = cr_l
 
-    def getYear(self):
+    def get_year(self):
         return self.year
-    def setYear(self, year):
+
+    def set_year(self, year):
         self.year = year
 
-    def getGender(self):
+    def get_gender(self):
         return self.gender
-    def setGender(self, gender):
+
+    def set_gender(self, gender):
         self.gender = gender
 
-    def getRace(self):
+    def get_race(self):
         return self.race
-    def setRace(self, race):
+
+    def set_race(self, race):
         self.race = race
 
-    def getEventType(self):
+    def get_event_type(self):
         return self.event_type
-    def setEventType(self, et):
+
+    def set_event_type(self, et):
         self.event_type = et
 
-    def getPopulation(self):
+    def get_population(self):
         return self.population
-    def setPopulation(self, pop):
+
+    def set_population(self, pop):
         self.population = pop
 
-    def getAffectedArea(self):
+    def get_affected_area(self):
         return self.affected_area
-    def setAffectedArea(self, area):
+
+    def set_affected_area(self, area):
         self.affected_area = area
 
-    def getCount(self):
+    def get_count(self):
         return self.count
-    def setCount(self,count):
+
+    def set_count(self,count):
         self.count = count
 
-    def getLocationX(self):
+    def get_location_x(self):
         return self.loc[0]
-    def setLocationX(self, x):
+
+    def set_location_x(self, x):
         self.loc[0] = x
 
-    def getLocationY(self):
+    def get_location_y(self):
         return self.loc[1]
-    def setLocationY(self, y):
+
+    def set_location_y(self, y):
         self.loc[1] = y

@@ -1,15 +1,12 @@
 
 class Song:
 
-    def __init__(self, artist = None, song = None, album = None, lyrics = None, release_date = None):
-        if artist and song and album and lyrics and release_date is not None:
-            self.artist = artist
-            self.song = song
-            self.lyrics = lyrics
-            self.album = album
-            self.release_date = release_date
-        else:
-            self.artist = self.song = self.lyrics = self.album = self.release_date = ""
+    def __init__(self, artist: str = "", song: str = "", album: str = "", lyrics: str = "", release_date: str = ""):
+        self.artist = artist
+        self.song = song
+        self.lyrics = lyrics
+        self.album = album
+        self.release_date = release_date
 
     def get_artist(self):
         return self.artist
