@@ -407,7 +407,7 @@ def get_color_grid_from_assignment(server: str, user: str, assignment: int, suba
         dim_x = data.dimensions[0]
         dim_y = data.dimensions[1]
 
-        if len(data.nodes)!= 1:
+        if len(data.nodes) != 1:
             raise RuntimeError("Malformed ColorGrid JSON: nodes are malformed")
 
         try:

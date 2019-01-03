@@ -148,6 +148,7 @@ class ColorGrid(Grid):
                     #     imageBytes.append(int.from_bytes(color[k], 'little'))
         byte_buff = self.getRLE()
         encoding = "RLE"
+        print(len(byte_buff))
 
         if len(byte_buff) > self.gridSize[0] * self.gridSize[1] * 4:
             encoding = "RAW"

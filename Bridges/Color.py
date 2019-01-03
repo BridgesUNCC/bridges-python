@@ -326,3 +326,12 @@ class Color():
         bytebuffer.append(a)
 
         return bytebuffer
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+
+        return (self.red == other.red and
+                self.green == other.green and
+                self.blue == other.blue and
+                self.alpha == other.alpha)
