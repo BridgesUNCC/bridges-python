@@ -2,12 +2,12 @@ from Bridges.Color import *
 from Bridges.Grid import *
 import base64
 
+
 ##
 #  @brief This is a class in BRIDGES for representing an (n x n) grid.
 #  @author David Burlinson
 #
 #
-
 class ColorGrid(Grid):
     QUOTE = "\""
     COMMA = ","
@@ -19,7 +19,7 @@ class ColorGrid(Grid):
     OPEN_BOX = "["
     CLOSE_BOX = "]"
 
-    baseColor = Color(r = 0,g = 0,b = 0,a = 1.0)
+    baseColor = Color(r=0, g=0, b=0, a=1.0)
 
     def get_data_structure_type(self):
         return "ColorGrid"
@@ -42,13 +42,13 @@ class ColorGrid(Grid):
         self.baseColor = color
         self.gridSize = [rows, cols]
 
-        self.initializeGrid()
+        self.initialize_grid()
 
    ##
    #  Populate the grid with the base color
    #
    #
-    def initializeGrid(self):
+    def initialize_grid(self):
         for i in range(self.gridSize[0]):
             for j in range(self.gridSize[1]):
                 self.set(i, j, self.baseColor)
@@ -62,15 +62,15 @@ class ColorGrid(Grid):
     ##
     # get the Run Length Encoding of ColorGrid
     #
-    def getRLE(self):
+    def get_rle(self):
 
-        imgBytes = bytearray()
+        img_bytes = bytearray()
         count = 0
-        totalCount = 0
+        total_count = 0
         pos = 0
         last = self.grid[0][0]
 
-        while (pos < self.gridSize[0] * self.gridSize[1]):
+        while pos < self.gridSize[0] * self.gridSize[1]:
             posY = pos / self.gridSize[1]
             posX = pos % self.gridSize[1]
             current = self.grid[int(posY)][int(posX)]
@@ -82,39 +82,38 @@ class ColorGrid(Grid):
                 if last == current:
                     count += 1
                 else:
-                    totalCount += count
-                    imgBytes.append(count-1)
+                    total_count += count
+                    img_bytes.append(count-1)
                     last = last.getByteRepresentation()
 
                     for k in range(len(last)):
-                        imgBytes.append(last[k])
+                        img_bytes.append(last[k])
 
                     count = 1
                     last = current
             if count == 256:
-                totalCount += count
-                imgBytes.append(count-1)
+                total_count += count
+                img_bytes.append(count-1)
                 last = last.getByteRepresentation()
                 for k in range(len(last)):
-                    imgBytes.append(last[k])
+                    img_bytes.append(last[k])
                 count = 0
             pos += 1
-        totalCount += count
-        imgBytes.append(count-1)
+        total_count += count
+        img_bytes.append(count-1)
         last = last.getByteRepresentation()
         for k in range(len(last)):
-            imgBytes.append(last[k])
+            img_bytes.append(last[k])
 
-        if(totalCount != self.gridSize[0] * self.gridSize[1]):
-            print("Something broke in getRLE cinstruction")
+        if total_count != self.gridSize[0] * self.gridSize[1]:
+            print("Something broke in getRLE construction")
 
-
-        return imgBytes
+        return img_bytes
 
     ##
     # get raw encoding of ColorGrid
-    def getRAW(self):
-        imgBytes = bytearray()
+    def get_raw(self):
+        img_bytes = bytearray()
         for i in range(self.gridSize[0]):
             if self.grid[i] is not None:
                 for j in range(self.gridSize[1]):
@@ -122,12 +121,8 @@ class ColorGrid(Grid):
                         color = self.grid[i][j]
                         color = color.getByteRepresentation()
                         for k in range(len(color)):
-                            imgBytes.append(color[k])
-        return imgBytes
-
-
-
-
+                            img_bytes.append(color[k])
+        return img_bytes
 
     ##
     #  
@@ -146,13 +141,13 @@ class ColorGrid(Grid):
         #                 imageBytes.append(color[k])
                     # for k in range(len(color)):
                     #     imageBytes.append(int.from_bytes(color[k], 'little'))
-        byte_buff = self.getRLE()
+        byte_buff = self.get_rle()
         encoding = "RLE"
         print(len(byte_buff))
 
         if len(byte_buff) > self.gridSize[0] * self.gridSize[1] * 4:
             encoding = "RAW"
-            byte_buff = self.getRAW()
+            byte_buff = self.get_raw()
             print("RAW ran")
         else:
             print("RLE ran")
