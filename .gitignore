@@ -1,5 +1,6 @@
 .idea/
 __pycache__/
+*.py[cod]
 
 # Distribution / packaging
 .Python

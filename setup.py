@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="bridges_uncc",
+    name="bridges",
     version="2.3.1",
     author="BRIDGES",
     author_email="bridges.uncc@gmail.com",
