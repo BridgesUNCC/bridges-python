@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # package: bridges.base
-from Bridges.SLelement import *
+from bridges.sl_element import *
 
 
 ##

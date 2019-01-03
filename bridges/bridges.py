@@ -1,13 +1,13 @@
-from Bridges.Connector import *
-from Bridges import ColorGrid
+from bridges.connector import *
+from bridges import ColorGrid
 ##
-# 	@brief The Bridges class is the main class that provides interfaces to datasets,
-#	maintains user and assignment information, and connects to the Bridges server.
+# 	@brief The bridges class is the main class that provides interfaces to datasets,
+#	maintains user and assignment information, and connects to the bridges server.
 #
-#  	The Bridges class is responsible  for initializing the Bridges system, specifying
+#  	The bridges class is responsible  for initializing the bridges system, specifying
 #  	parameters (user id, assignment id, title, description, data structure
 # 	type, etc) for the student assignment, generating the data structure representation
-# 	and transmission to the Bridges server. In addition, it provides interfaces to
+# 	and transmission to the bridges server. In addition, it provides interfaces to
 # 	a number of real-world datasets, that makes it easy to access the data for use
 #  	algorithms/data structure assignments. <br>
 #
@@ -17,10 +17,10 @@ from Bridges import ColorGrid
 # 	is found in the respective methods (below) and at <p>
 # 	http://bridgesuncc.github.io/datasets.html <p>
 #
-# 	A typical Bridges program includes creating the Bridges object, followed by creation
+# 	A typical bridges program includes creating the bridges object, followed by creation
 #   of the data structure by the user, assigning visual attributes to elements of the
 # 	data structure, followed by specification of teh data structure type  and the
-# 	call to visualize the data structure (Bridges::setDataStructure() and visualize()
+# 	call to visualize the data structure (bridges::setDataStructure() and visualize()
 # 	methods).
 #
 #  	@author Sean Gallagher, Kalpathi Subramanaian, Mihai Mehedint, David Burlinson.
@@ -54,10 +54,10 @@ class Bridges:
     CLOSE_BOX = "]"
 
     ##
-    # Initialize Bridges (Constructor)
+    # Initialize bridges (Constructor)
     # @param assignment this is the assignmen id (integer)
-    # @param appl_id    this is the appl authentication key(from the Bridges account)
-    # @param username   this is the username (from the Bridges account)
+    # @param appl_id    this is the appl authentication key(from the bridges account)
+    # @param username   this is the username (from the bridges account)
     #
     def __init__(self, assignment, username, appl_id):
         self.assignment_part = 0
@@ -93,7 +93,7 @@ class Bridges:
     ##
     #
     #  This method generates the representation of the current data structure (JSON)
-    #  and sends that to the Bridges server for generating a visualization.
+    #  and sends that to the bridges server for generating a visualization.
     #
     def visualize(self):
         nodes_links = []
@@ -192,14 +192,14 @@ class Bridges:
 
     def get_color_grid_from_assignment(self, user: str, assignment: int, subassignment: int = 0) -> ColorGrid:
         """
-        Reconstruct a ColorGrid from an existing ColorGrid on the Bridges server
+        Reconstruct a ColorGrid from an existing ColorGrid on the bridges server
 
         :param str user: the name of the user who uploaded the assignment
         :param int assignment: the ID of the assignment to get
         :param int subassignment: the ID of the subassignment to get (default 0)
         :return: ColorGrid: the ColorGrid stored in the bridges server
         """
-        from Bridges.data_src_dependent.DataSource import get_color_grid_from_assignment
+        from bridges.data_src_dependent.data_source import get_color_grid_from_assignment
         return get_color_grid_from_assignment(self.connector.server_url, user, assignment, subassignment)
 
 

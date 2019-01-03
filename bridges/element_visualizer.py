@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 from decimal import Decimal
-from Bridges.Element import *
-from Bridges.Color import *
+from bridges.element import *
+from bridges.color import *
 from decimal import Decimal
 
 ##
-# This class is used to store the visualization elements on the for the Bridges
+# This class is used to store the visualization elements on the for the bridges
 # Visualiztion, including the color, shape, opacity, and size of the node.
 # <p>
 # Objects of this class are stored as properties of all Element subclasses.
@@ -57,23 +57,23 @@ class ElementVisualizer():
     # Set the size of the Element in the Bridge Visualization in pixels
     #
     # @param size
-    #            the pixel size of the Element in the Bridges Visualization
+    #            the pixel size of the Element in the bridges Visualization
     #
     def set_size(self, size):
         self.prop["size"] = str(size)
         self.size = size
 
     ##
-    # Get the size of the Element in the Bridges Visualiation
+    # Get the size of the Element in the bridges Visualiation
     #
-    # @return the size in pixels of the Element in the Bridges Visualization
+    # @return the size in pixels of the Element in the bridges Visualization
     #
     def get_size(self):
         return self.size
 
     ##
-    #  Set the color of the Element in the Bridges Visualization to "aColor".
-    #  @param aColor the string reprsenting the color of the Element in the Bridges Visualization
+    #  Set the color of the Element in the bridges Visualization to "aColor".
+    #  @param aColor the string reprsenting the color of the Element in the bridges Visualization
     #
     def set_color(self, col_name):
 
@@ -240,23 +240,23 @@ class ElementVisualizer():
 
         self.color = Color(None, self.red, self.green, self.blue, self.alpha)
     ##
-    # Get the color of the Element in the Bridges Visualization
-    #  @return the string reprsenting the color of the Element in the Bridges Visualization
+    # Get the color of the Element in the bridges Visualization
+    #  @return the string reprsenting the color of the Element in the bridges Visualization
     #
     def get_color(self):
         return self.color
 
     ##
-    # Get the shape of the Element in the Bridges Visualization.
-    # @return the string that represents the Element's shape in the Bridges Visualization.
+    # Get the shape of the Element in the bridges Visualization.
+    # @return the string that represents the Element's shape in the bridges Visualization.
     #
     def get_shape(self):
         return self.shape
 
     ##
-    # Sets the shape of the Element in the Bridges Visualization
+    # Sets the shape of the Element in the bridges Visualization
     #
-    # @param aShape the string representing the shape of the Element in the Bridges Visualization
+    # @param aShape the string representing the shape of the Element in the bridges Visualization
     #
     def set_shape(self, a_shape):
         #  this.aShape = aShape;
@@ -266,10 +266,10 @@ class ElementVisualizer():
         self.shape = a_shape
 
     ##
-    # Sets the opacity of the Element in the Bridges Visualization
+    # Sets the opacity of the Element in the bridges Visualization
     #
     # @param opacity a double between 0 and 1 representing how transparent the node
-    #            should be on the Bridges Visualization. 0 for invisible, 1 for
+    #            should be on the bridges Visualization. 0 for invisible, 1 for
     #            fully visible, a decimal between 0 and 1 for varying
     #            transparency.
     #
@@ -280,7 +280,7 @@ class ElementVisualizer():
         self.opacity = opacity
 
     ##
-    #  Get the opacity of the Element in the Bridges Visualization
+    #  Get the opacity of the Element in the bridges Visualization
     # @return the opacity value
     #
     def get_opacity(self):

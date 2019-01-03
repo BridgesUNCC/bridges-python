@@ -1,14 +1,14 @@
 import json
 import requests
-from Bridges.data_src_dependent import EarthquakeUSGS
-from Bridges.data_src_dependent import ActorMovieIMDB
-from Bridges.data_src_dependent import Game
-from Bridges.data_src_dependent import Shakespeare
-from Bridges.data_src_dependent import GutenbergBook
-from Bridges.data_src_dependent import CancerIncidence
-from Bridges.data_src_dependent import Song
-from Bridges.ColorGrid import ColorGrid
-from Bridges.Color import Color
+from bridges.data_src_dependent import earthquake_usgs
+from bridges.data_src_dependent import actor_movie_imdb
+from bridges.data_src_dependent import game
+from bridges.data_src_dependent import shakespeare
+from bridges.data_src_dependent import gutenberg_book
+from bridges.data_src_dependent import cancer_incidence
+from bridges.data_src_dependent import song
+from bridges.color_grid import ColorGrid
+from bridges.color import Color
 
 
 ##
@@ -43,7 +43,7 @@ def getGameData():
         genre = []
         for j in range(len(G)):
             genre.append(str(G[j]))
-        wrapper.append(Game.Game(V["game"], V["platform"], V["rating"], genre))
+        wrapper.append(game.Game(V["game"], V["platform"], V["rating"], genre))
     return wrapper
 
 
@@ -74,7 +74,7 @@ def getActorMovieIMDBData(number = 0):
 
     for i in range(len(D)):
         V = D[i]
-        wrapper.append(ActorMovieIMDB.ActorMovieIMDB(V["actor"], V["movie"]))
+        wrapper.append(actor_movie_imdb.ActorMovieIMDB(V["actor"], V["movie"]))
 
     return wrapper
 
@@ -102,7 +102,7 @@ def getEarthquakeUSGSData(number = 0):
         for i in range(len(r)):
             V = r[i]["properties"]
             G = r[i]["geometry"]["coordinates"]
-            wrapper.append(EarthquakeUSGS.EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
+            wrapper.append(earthquake_usgs.EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
     else:
         r = requests.get(url=latest_url, params=str(PARAMS))
         data = r.json()
@@ -110,7 +110,7 @@ def getEarthquakeUSGSData(number = 0):
         for i in range(len(D)):
             V = D[i]["properties"]
             G = D[i]["geometry"]["coordinates"]
-            wrapper.append(EarthquakeUSGS.EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
+            wrapper.append(earthquake_usgs.EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
     return wrapper
 
 ##
@@ -148,7 +148,7 @@ def getShakespeareData(endpoint = "", textonly = False):
     D = r["data"]
     for i in range(len(D)):
         V = D[i]
-        wrapper.append(Shakespeare.Shakespeare(V["title"], V["type"], V["text"]))
+        wrapper.append(shakespeare.Shakespeare(V["title"], V["type"], V["text"]))
     return wrapper
 
 
@@ -198,9 +198,9 @@ def getGutenBergBookData(num = 0):
             subject.append(str(S[j]))
 
         M = V["metrics"]
-        wrapper.append(GutenbergBook.GutenbergBook(A["name"], A["birth"], A["death"], V["title"],
-                                                   lang, genre, subject, M["characters"], M["words"],
-                                                   M["sentences"], M["difficultWords"], V["url"], V["downloads"]))
+        wrapper.append(gutenberg_book.GutenbergBook(A["name"], A["birth"], A["death"], V["title"],
+                                                    lang, genre, subject, M["characters"], M["words"],
+                                                    M["sentences"], M["difficultWords"], V["url"], V["downloads"]))
 
     return wrapper
 
@@ -226,7 +226,7 @@ def getCancerIncidentData(num = 0):
 
     # c = CancerIncidence.CancerIncidence()
     for i in range(len(D)):
-        c = CancerIncidence.CancerIncidence()
+        c = cancer_incidence.CancerIncidence()
         v = D[i]
         age = v["Age"]
         c.setAgeAdjustedRate(age["Age Adjusted Rate"])
@@ -306,7 +306,7 @@ def getSong(songTitle, artistName = None):
     else:
         release_date = ""
 
-    return Song.Song(artist, song, album, lyrics, release_date)
+    return song.Song(artist, song, album, lyrics, release_date)
 
 
 ##
@@ -362,15 +362,15 @@ def getSongData():
         else:
             release_date = ""
 
-        all_songs.append(Song.Song(artist, song, album, lyrics, release_date))
+        all_songs.append(song.Song(artist, song, album, lyrics, release_date))
     return all_songs
 
 
 def get_color_grid_from_assignment(server: str, user: str, assignment: int, subassignment: int = 0) -> ColorGrid:
     """
-    Reconstruct a ColorGrid from an existing ColorGrid on the Bridges server
+    Reconstruct a ColorGrid from an existing ColorGrid on the bridges server
 
-    :param str server: internal server url of Bridges object
+    :param str server: internal server url of bridges object
     :param str user: the name of the user who uploaded the assignment
     :param int assignment: the ID of the assignment to get
     :param int subassignment: the ID of the subassignment to get (default 0)
@@ -470,11 +470,11 @@ def get_assignment(server: str, user: str, assignment: int, subassignment: int =
     """
     This function obtains the JSON representation of a particular assignment as a string
 
-    :param str server: internal server url of Bridges object
+    :param str server: internal server url of bridges object
     :param str user: the name of the user who uploaded the assignment
     :param int assignment: the ID of the assignment to get
     :param int subassignment: the ID of the subassignment to get (default 0)
-    :return str that is the JSON representation of the subassignment as stored by the Bridges server
+    :return str that is the JSON representation of the subassignment as stored by the bridges server
     """
     subassignment_fixed = f"0{subassignment}" if subassignment < 10 else subassignment
     url = f"{server}/assignmentJSON/{assignment}.{subassignment_fixed}/{user}"

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-from Bridges.Element import *
-from Bridges.SLelement import *
-from Bridges.Edge import *
+from bridges.element import *
+from bridges.sl_element import *
+from bridges.edge import *
 import traceback
 import sys
 ##

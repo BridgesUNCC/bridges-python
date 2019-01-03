@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 ## package: bridges.base
-from Bridges.Color import *
+from bridges.color import *
 # from Element import Element
 
 ##
 #  @brief This class maintains the visual attributes of links that join
-#  Bridges elements.
+#  bridges elements.
 #
 #  Visual properties include color, thickness, and opacity.
 #  Objects of this class are stored as part of the Element class.
 #  Generally, a user will manipulate the LinkVisualizer returned from the
-#  Element's getLinkVisualizer(Element it) method (which it is the Bridges element
+#  Element's getLinkVisualizer(Element it) method (which it is the bridges element
 #	this element is linked to), and then set attributes using its methods. Links are
 #  utilized in all types of linked lists, tree and graph structures.
 #
@@ -80,9 +80,9 @@ class LinkVisualizer(object):
         self.thickness = th
 
     ##
-    # Get the thickness of the link in the Bridges Visualiation
+    # Get the thickness of the link in the bridges Visualiation
     #
-    # @return the size in pixels of the Element in the Bridges Visualization
+    # @return the size in pixels of the Element in the bridges Visualization
     #
     def get_thickness(self):
         return self.thickness
@@ -108,10 +108,10 @@ class LinkVisualizer(object):
 
     ##
     #
-    #	Set the color of the link in the Bridges Visualization to "aColor".
+    #	Set the color of the link in the bridges Visualization to "aColor".
     #
     # 	@param col_name the string reprsenting the color of the Element in
-    #		the Bridges Visualization; supported named colors are
+    #		the bridges Visualization; supported named colors are
     #  	"red", "green", "blue", "yellow", "cyan", "magenta", "white", "black",
     #  	"orange", "turquoise", "maroon", "aquamarine", "azure", "beige",
     #  	"brown", "tan", "olive", "chartreuse", "khaki", "bisque", "coral",
@@ -240,7 +240,7 @@ class LinkVisualizer(object):
 
     ##
     #
-    #	Get the color of the link in the Bridges Visualization
+    #	Get the color of the link in the bridges Visualization
     #
     #	@return the Color object representing the color of the link
     #
@@ -249,11 +249,11 @@ class LinkVisualizer(object):
         return self.color
 
     ##
-    # Sets the opacity of the link in the Bridges Visualization
+    # Sets the opacity of the link in the bridges Visualization
     #
     # @param opacity a float between 0 and 1 representing how transparent
     #	the node
-    #            should be on the Bridges Visualization. 0 for invisible, 1 for
+    #            should be on the bridges Visualization. 0 for invisible, 1 for
     #            fully visible, a decimal between 0 and 1 for varying
     #            transparency.
     #
@@ -262,7 +262,7 @@ class LinkVisualizer(object):
 
     ##
     #
-    # 	Get the opacity of the link in the Bridges Visualization
+    # 	Get the opacity of the link in the bridges Visualization
     #
     # 	@return the opacity value (in the range 0.0-1.0
     #

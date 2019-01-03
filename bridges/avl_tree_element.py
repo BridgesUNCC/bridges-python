@@ -1,4 +1,4 @@
-from Bridges.BSTElement import *
+from bridges.bst_element import *
 ##
 #  @brief This class extends the BSTElement class by adding a height and balance factor
 #	fields that are useful in AVL trees.

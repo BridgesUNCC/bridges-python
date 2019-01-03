@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-from Bridges.Element import *
-from Bridges.LinkVisualizer import *
+from bridges.element import *
+from bridges.link_visualizer import *
  ## @brief This class extends Element to represent general trees with
  #	arbitrary number of children.
  #
@@ -42,7 +42,7 @@ class TreeElement(Element):
     # Constructs an TreeElement
     # set to null.
     # @param e the generic object that TreeElement will hold
-    # @param label the label of TreeElement that shows up on the Bridges
+    # @param label the label of TreeElement that shows up on the bridges
     # @param left the TreeElement to be assigned to the child 0
     # @param right the TreeElement to be assigned to the child 1
     #

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-from Bridges.ElementVisualizer import *
-from Bridges.Color import *
-from Bridges.LinkVisualizer import *
+from bridges.element_visualizer import *
+from bridges.color import *
+from bridges.link_visualizer import *
 import re
 from decimal import Decimal
 ##
@@ -74,7 +74,7 @@ class Element(object):
     # sets a unique identifier for the current Element
     # normally used from subclasses
     # @param val generic parameter value used to construct Element
-    # @param label the string that is visible on the Bridges Visualization
+    # @param label the string that is visible on the bridges Visualization
     #
     def __init__(self, label = None, val=None, original=None):
         Element.ids += 1

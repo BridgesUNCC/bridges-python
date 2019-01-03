@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from Bridges.TreeElement import *
+from bridges.tree_element import *
 ##
 # 	@brief This class is extended from the TreeElement class  and can be used to create
 #	binary tree element objects.
@@ -30,7 +30,7 @@ class BinTreeElement(TreeElement):
     #
     # 	Constructs an empty Binary Tree Element
     # @param e the generic object that TreeElement will hold
-    # @param label the label of TreeElement that shows up on the Bridges visualization
+    # @param label the label of TreeElement that shows up on the bridges visualization
     # @param left the TreeElement to be assigned to the left pointer of this TreeElement
     # @param right the TreeElement to be assigned to the right pointer of this TreeElement
     #

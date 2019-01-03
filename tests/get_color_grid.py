@@ -1,4 +1,4 @@
-from Bridges import *
+from bridges import *
 import os
 user = os.environ.get("BRIDGES_USER_NAME")
 key = os.environ.get("BRIDGES_API_KEY")

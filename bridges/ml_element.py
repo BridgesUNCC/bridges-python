@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from Bridges.SLelement import *
+from bridges.sl_element import *
 
 ##
 # 	@brief This class can be used to instantiate Multi-list Elements.
@@ -35,7 +35,7 @@ class MLelement(SLelement):
     #
     # This constructor creates an SLelement object
     # and sets the next pointer to null
-    # @param label the label of SLelement that shows up on the Bridges visualization
+    # @param label the label of SLelement that shows up on the bridges visualization
     # @param e the generic object that this SLelement will hold
     # @param next the element that should be assigned to the next pointer
     # @param sublist the MLelement that is the beginning of a sublist

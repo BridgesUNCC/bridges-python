@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from Bridges.DLelement import *
+from bridges.dl_element import *
 ##
 #  @brief This class can be used to instantiate Circular Doubly Linked
 #  List Elements.

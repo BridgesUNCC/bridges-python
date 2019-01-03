@@ -1,4 +1,4 @@
-from Bridges.BSTElement import *
+from bridges.bst_element import *
 ##
  #  @brief The This class can be used to create K-d Tree  elements, derived
  #  from BSTElement. K-D trees can be thought of as the spatial equivalent

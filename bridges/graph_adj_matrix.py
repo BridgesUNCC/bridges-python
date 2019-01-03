@@ -1,4 +1,4 @@
-from Bridges.Element import *
+from bridges.element import *
 import traceback
 ##
 #

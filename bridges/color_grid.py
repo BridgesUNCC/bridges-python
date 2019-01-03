@@ -1,5 +1,5 @@
-from Bridges.Color import *
-from Bridges.Grid import *
+from bridges.color import *
+from bridges.grid import *
 import base64
 
 

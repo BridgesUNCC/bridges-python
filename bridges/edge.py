@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-from Bridges.Element import *
+from bridges.element import *
 ##
 # @brief This class is used to represent the edges in a graph and will
 # 	appear as links in the BRIDGES graph visualization.
 # This object is used in graphs and graph algorithms such as DFS, BFS and shortest
 # path algorithms that need to visit graph edges. The adjacency list
 # representation uses them as the generic paramter, as SLelement<Edge>
-# Bridges represents Edges as links between pairs of elements
+# bridges represents Edges as links between pairs of elements
 #
 # @author K.R. Subramanian
 #

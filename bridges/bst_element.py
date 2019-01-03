@@ -1,4 +1,4 @@
-from Bridges.BinTreeElement import *
+from bridges.bin_tree_element import *
 ##
 #    @brief The BSTElement class is the building block for creating binary search trees.
 #

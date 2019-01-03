@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from Bridges.Element import *
+from bridges.element import *
 
 ##
 # @brief This class can be used to create arrays of type Element<E>.
@@ -209,9 +209,9 @@ class Array():
 
 
     ##
-    # Generating the JSON string for a Bridges array object (Array<E>[])
+    # Generating the JSON string for a bridges array object (Array<E>[])
     #
-    # @param Bridges Array object
+    # @param bridges Array object
     #
     # @return JSON string
     #
