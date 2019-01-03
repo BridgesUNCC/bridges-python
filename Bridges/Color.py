@@ -34,7 +34,7 @@ class Color():
     # @param r, g, b, a  - checked to be in the range 0-255
     # @param col_name - the name of a color for an element as string
     #
-    def __init__(self, col_name = None, r = None, g = None, b = None, a = None):
+    def __init__(self, r: int = red, g: int = green, b: int = blue, a: float = alpha, col_name: str = None):
         if col_name is not None:
             self.set_color(col_name)
         else:
@@ -48,7 +48,7 @@ class Color():
     #	@param r, g, b, a  - checked to be in the range 0-255
     #   @param col_name - name of color as string
     #
-    def set_color(self, col_name = None, r= None, g = None, b = None, a = None):
+    def set_color(self, r: int = red, g: int = green, b: int =  blue, a: float = 0.0, col_name: str = None):
         #  check color component ranges
         if col_name is not None:
             if col_name == "red":

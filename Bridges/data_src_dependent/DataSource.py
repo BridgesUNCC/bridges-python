@@ -7,7 +7,8 @@ from Bridges.data_src_dependent import Shakespeare
 from Bridges.data_src_dependent import GutenbergBook
 from Bridges.data_src_dependent import CancerIncidence
 from Bridges.data_src_dependent import Song
-from Bridges import ColorGrid
+from Bridges.ColorGrid import ColorGrid
+from Bridges.Color import Color
 
 
 ##
@@ -366,6 +367,15 @@ def getSongData():
 
 
 def get_color_grid_from_assignment(server: str, user: str, assignment: int, subassignment: int = 0) -> ColorGrid:
+    """
+    Reconstruct a ColorGrid from an existing ColorGrid on the Bridges server
+
+    :param str server: internal server url of Bridges object
+    :param str user: the name of the user who uploaded the assignment
+    :param int assignment: the ID of the assignment to get
+    :param int subassignment: the ID of the subassignment to get (default 0)
+    :return: ColorGrid: the ColorGrid stored in the bridges server
+    """
     response = get_assignment(server, user, assignment, subassignment)
 
     try:
@@ -374,30 +384,101 @@ def get_color_grid_from_assignment(server: str, user: str, assignment: int, suba
         # Python 2.x fallback
         from argparse import Namespace
 
-    assignment_wrapper = json.loads(response, object_hook=lambda d: Namespace(**d))
+    assignment_object = json.loads(response, object_hook=lambda d: Namespace(**d))
     try:
-        assignment_object = assignment_wrapper.assignmentJSON
+        if assignment_object.assignment_type != "ColorGrid":
+            raise RuntimeError("Malformed ColorGrid JSON: not a ColorGrid")
+
+        data_list = assignment_object.data
+        if len(data_list) is not 1:
+            raise RuntimeError("Malformed JSON: data is malformed")
+        data = data_list[0]
+        try:
+            encoding = data.encoding
+        except AttributeError:
+            # Handle case for ColorGrid generated before encoding field was added
+            encoding = "RAW"
+
+        if encoding != "RLE" and encoding != "RAW":
+            raise RuntimeError("Malformed ColorGrid JSON: encoding not supported: " + encoding)
+
+        if len(data.dimensions) != 2:
+            raise RuntimeError("Malformed ColorGrid JSON: dimensions are malformed")
+        dim_x = data.dimensions[0]
+        dim_y = data.dimensions[1]
+
+        if len(data.nodes)!= 1:
+            raise RuntimeError("Malformed ColorGrid JSON: nodes are malformed")
+
+        try:
+            node_string = str(data.nodes[0])
+        except (TypeError, ValueError):
+            raise RuntimeError("Malformed ColorGrid JSON: node is not a String")
+
+        import base64
+        decoded_bytes = bytearray(base64.b64decode(node_string))
+        print(decoded_bytes)
+        decoded = [int(x) for x in decoded_bytes]
+        print(decoded)
     except AttributeError:
         raise RuntimeError("Malformed JSON: Unable to Parse")
 
-    if len(assignment_object.data) is not 1:
-        raise RuntimeError("Malformed JSON: data is malformed")
+    color_grid = ColorGrid(dim_x, dim_y)
 
-    data = assignment_object.data[0]
-    print(data)
-    if data.visual is not "ColorGrid":
-        raise RuntimeError("Malformed ColorGrid JSON: not a ColorGrid")
+    if encoding == "RAW":
+        if len(decoded) != dim_x * dim_y * 4:
+            raise RuntimeError("Malformed ColorGrid JSON: nodes is not the size we expect for RAW encoding")
 
+        base = 0
+        for x in range(0, dim_x):
+            for y in range(0, dim_y):
+                color = Color(decoded[base],
+                              decoded[base + 1],
+                              decoded[base + 2],
+                              (decoded[base + 3]/255.0)
+                              )
+                color_grid.set(x, y, color)
+                base = base + 4
+
+    elif encoding == "RLE":
+        if len(decoded) % 5:
+            raise RuntimeError("Malformed ColorGrid JSON: RLE nodes are not a multiple of 5")
+        current_in_decoded = 0
+        current_in_cg = 0
+        while current_in_decoded != len(decoded):
+            for i in range(0, 4):
+                print(decoded[current_in_decoded + i])
+            repeat = decoded[current_in_decoded]
+
+            color = Color(decoded[current_in_decoded + 1],
+                          decoded[current_in_decoded + 2],
+                          decoded[current_in_decoded + 3],
+                          (decoded[current_in_decoded + 4] / 255.0)
+                          )
+            current_in_decoded = current_in_decoded + 5
+
+            while repeat is not 0:
+                pos_x: int = int(current_in_cg / dim_y)
+                pos_y: int = current_in_cg % dim_y
+                if pos_x >= dim_x or pos_y >= dim_y:
+                    raise RuntimeError("Malformed ColorGrid JSON: Too much data in nodes")
+
+                color_grid.set(pos_x, pos_y, color)
+                current_in_cg = current_in_cg + 1
+                repeat = repeat - 1
+
+    return color_grid
 
 
 def get_assignment(server: str, user: str, assignment: int, subassignment: int = 0) -> str:
     """
     This function obtains the JSON representation of a particular assignment as a string
 
-    @:return str that is the JSON representation of the subassignment as stored by the Bridges server
-    @:param str user: the name of the user who uploaded the assignment
-    @:param int assignment: the ID of the assignment to get
-    @:param int subassignment: the ID of the subassignment to get (default 0)
+    :param str server: internal server url of Bridges object
+    :param str user: the name of the user who uploaded the assignment
+    :param int assignment: the ID of the assignment to get
+    :param int subassignment: the ID of the subassignment to get (default 0)
+    :return str that is the JSON representation of the subassignment as stored by the Bridges server
     """
     subassignment_fixed = f"0{subassignment}" if subassignment < 10 else subassignment
     url = f"{server}/assignmentJSON/{assignment}.{subassignment_fixed}/{user}"

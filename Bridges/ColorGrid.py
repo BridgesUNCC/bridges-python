@@ -31,17 +31,18 @@ class ColorGrid(Grid):
     #  @param cols - int representing the number of columns of the grid
     #  @param color - Color object
     #
-    def __init__(self, rows = None, cols = None, color = None):
-        if rows is None and cols is None and color is None:
-            self.__init__(10, 10, self.baseColor)
-        elif rows is not None and cols is not None and color is None:
-            self.__init__(rows, cols, self.baseColor)
-        elif rows is not None and cols is not None and color is not None:
-            super(ColorGrid, self).__init__(rows = rows, cols = cols)
-            self.baseColor = color
-            self.gridSize = [rows, cols]
+    def __init__(self, rows: int = 10, cols: int = 10, color: Color = baseColor):
+        """
+        Grid constructor
+        :param int rows: number of rows in the grid
+        :param int cols: number of columns in the grid
+        :param Color color: base color of the each grid pixel
+        """
+        super(ColorGrid, self).__init__(rows=rows, cols=cols)
+        self.baseColor = color
+        self.gridSize = [rows, cols]
 
-            self.initializeGrid()
+        self.initializeGrid()
 
    ##
    #  Populate the grid with the base color

@@ -192,6 +192,14 @@ class Bridges:
             self.coord_system_type = "cartesian"
 
     def get_color_grid_from_assignment(self, user: str, assignment: int, subassignment: int = 0) -> ColorGrid:
-        get_color_grid_from_assignment(self.connector.server_url, user, assignment, subassignment)
+        """
+        Reconstruct a ColorGrid from an existing ColorGrid on the Bridges server
+
+        :param str user: the name of the user who uploaded the assignment
+        :param int assignment: the ID of the assignment to get
+        :param int subassignment: the ID of the subassignment to get (default 0)
+        :return: ColorGrid: the ColorGrid stored in the bridges server
+        """
+        return get_color_grid_from_assignment(self.connector.server_url, user, assignment, subassignment)
 
 
