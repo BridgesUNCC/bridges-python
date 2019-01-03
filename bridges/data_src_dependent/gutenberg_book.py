@@ -28,7 +28,7 @@ class GutenbergBook:
     def get_author_birth(self):
         return self.author_birth
 
-    def set_authro_birth(self, author_birth):
+    def set_author_birth(self, author_birth):
         self.author_birth = author_birth
 
     def get_author_death(self):
