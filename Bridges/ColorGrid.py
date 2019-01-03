@@ -62,6 +62,7 @@ class ColorGrid(Grid):
     # get the Run Length Encoding of ColorGrid
     #
     def getRLE(self):
+
         imgBytes = bytearray()
         count = 0
         totalCount = 0
@@ -71,7 +72,7 @@ class ColorGrid(Grid):
         while (pos < self.gridSize[0] * self.gridSize[1]):
             posY = pos / self.gridSize[1]
             posX = pos % self.gridSize[1]
-            current = self.grid[posY][posX]
+            current = self.grid[int(posY)][int(posX)]
 
             if count == 0:
                 count = 1
@@ -82,24 +83,30 @@ class ColorGrid(Grid):
                 else:
                     totalCount += count
                     imgBytes.append(count-1)
-                    imgBytes.append(last.getByteRepresentation())
+                    last = last.getByteRepresentation()
+
+                    for k in range(len(last)):
+                        imgBytes.append(last[k])
+
                     count = 1
                     last = current
             if count == 256:
                 totalCount += count
                 imgBytes.append(count-1)
-                imgBytes.append(last.getByteRepresentation())
+                last = last.getByteRepresentation()
+                for k in range(len(last)):
+                    imgBytes.append(last[k])
                 count = 0
             pos += 1
         totalCount += count
         imgBytes.append(count-1)
-        imgBytes.append(last.getByteRepresentation())
+        last = last.getByteRepresentation()
+        for k in range(len(last)):
+            imgBytes.append(last[k])
 
         if(totalCount != self.gridSize[0] * self.gridSize[1]):
             print("Something broke in getRLE cinstruction")
 
-        #flip the array to reset position to 0
-        imgBytes.reverse()
 
         return imgBytes
 
@@ -112,7 +119,9 @@ class ColorGrid(Grid):
                 for j in range(self.gridSize[1]):
                     if self.grid[i][j] is not None:
                         color = self.grid[i][j]
-                        imgBytes.append(color.getByteRepresentation())
+                        color = color.getByteRepresentation()
+                        for k in range(len(color)):
+                            imgBytes.append(color[k])
         return imgBytes
 
 
@@ -142,10 +151,13 @@ class ColorGrid(Grid):
         if len(byte_buff) > self.gridSize[0] * self.gridSize[1] * 4:
             encoding = "RAW"
             byte_buff = self.getRAW()
+            print("RAW ran")
+        else:
+            print("RLE ran")
 
 
         # json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX + self.QUOTE + base64.b64encode((imageBytes)).decode() + self.QUOTE + self.CLOSE_BOX + self.COMMA
-        json_str = self.QUOTE + "encoding" + self.QUOTE + self.COLON + self.QUOTE + encoding + self.QUOTE + self.COMMA + self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX  + self.QUOTE + base64.b64encode(byte_buff) + self.QUOTE + self.CLOSE_BOX + self.COMMA
+        json_str = self.QUOTE + "encoding" + self.QUOTE + self.COLON + self.QUOTE + encoding + self.QUOTE + self.COMMA + self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX  + self.QUOTE + base64.b64encode(bytes(byte_buff)).decode() + self.QUOTE + self.CLOSE_BOX + self.COMMA
 
         json_str += self.QUOTE + "dimensions" + self.QUOTE + self.COLON + self.OPEN_BOX + str(self.gridSize[0]) + "," + str(self.gridSize[1]) + self.CLOSE_BOX + self.CLOSE_CURLY
 

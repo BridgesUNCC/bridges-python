@@ -8,7 +8,7 @@ class Connector:
     server_url_live = "http://bridges-cs.herokuapp.com"
     server_type = "application"
     server_url_clone = "http://bridges-clone.herokuapp.com"
-    server_url_local = "http://bridges-clone.herokuapp.com"
+    server_url_local = "http://127.0.0.1:3000"
 
     key = ""
     username =""
@@ -39,7 +39,7 @@ class Connector:
         switcher = {
             "live": "http://bridges-cs.herokuapp.com",
             "clone": "http://bridges-clone.herokuapp.com",
-            "local": "http://bridges-clone.herokuapp.com"
+            "local": "http://127.0.0.1:3000"
         }
         self.server_url = switcher.get(server_url, ValueError("Use: live, clone, local to determine url"))
 

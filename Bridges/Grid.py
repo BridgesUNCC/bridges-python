@@ -7,7 +7,7 @@ import traceback
 class Grid:
     grid = []
     gridSize = [10, 10]
-    maxGridSize = [480, 640]
+    maxGridSize = [1080, 1920]
 
     def get_data_structure_type(self):
         return "Grid"
@@ -21,7 +21,7 @@ class Grid:
     def __init__(self, size = None, rows = None, cols = None):
         if size is not None:
             if ((size[0] <= 0 or size[0] > self.maxGridSize[0]) or (size[1] <= 0 or size[1] > self.maxGridSize[1])):
-                raise ValueError("Invalid size: [" + str(size[0] + "," + str(size[1]) + "] .. please use values between (0 and " + str(self.maxGridSize[0]) + "] for rows and values between (0 and " + str(self.maxGridSize[1]) + "] for columns"))
+                raise ValueError("Invalid size: [" + str(str(size[0]) + "," + str(size[1]) + "] .. please use values between (0 and " + str(self.maxGridSize[0]) + "] for rows and values between (0 and " + str(self.maxGridSize[1]) + "] for columns"))
             self.grid = []
             for i in range(size[0]):
                 self.grid.append([])
@@ -30,7 +30,7 @@ class Grid:
         if rows is not None and cols is not None:
             size = [rows, cols]
             if ((size[0] <= 0 or size[0] > self.maxGridSize[0]) or (size[1] <= 0 or size[1] > self.maxGridSize[1])):
-                raise ValueError("Invalid size: [" + str(size[0] + "," + str(size[1]) + "] .. please use values between (0 and " + str(self.maxGridSize[0]) + "] for rows and values between (0 and " + str(self.maxGridSize[1]) + "] for columns"))
+                raise ValueError("Invalid size: [" + str(str(size[0]) + "," + str(size[1]) + "] .. please use values between (0 and " + str(self.maxGridSize[0]) + "] for rows and values between (0 and " + str(self.maxGridSize[1]) + "] for columns"))
             self.grid = []
             for i in range(size[0]):
                 self.grid.append([])
