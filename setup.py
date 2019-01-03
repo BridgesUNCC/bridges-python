@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="bridges_uncc",
-    version="2.4.0",
+    version="2.3.1",
     author="BRIDGES",
     author_email="bridges.uncc@gmail.com",
     description="Bridging Real-world Infrastructure Designed to Goal-align, Engage, and Stimulate, an NFS TUES",
@@ -13,6 +13,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/krs-world/bridges-python",
     packages=setuptools.find_packages(),
+    install_requires=[
+        'requests',
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
