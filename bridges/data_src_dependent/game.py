@@ -1,15 +1,11 @@
 
 class Game:
 
-    def __init__(self, title= None, platform = None, rating = None, genre = None):
-        if title is not None and platform is not None and rating is not None and genre is not None:
+    def __init__(self, title: str = "", platform: str = "", rating: float = 0.0, genre: str = ""):
             self.title = title
             self.platform = platform
             self.rating = rating
             self.genre = genre
-        else:
-            self.title = self.platform = ""
-            self.rating = 0.0
 
     def get_title(self):
         return self.title

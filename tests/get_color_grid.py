@@ -5,7 +5,7 @@ key = os.environ.get("BRIDGES_API_KEY")
 bridges = Bridges(3100 , user, key)
 bridges.connector.set_server("clone")
 
-grid = bridges.get_color_grid_from_assignment("bridges_testing", 3013)
+grid = bridges.get_color_grid_from_assignment(user, 101)
 bridges.set_data_structure(grid)
 bridges.visualize()
 

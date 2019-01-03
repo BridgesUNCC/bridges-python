@@ -2,67 +2,74 @@
 
 class GutenbergBook:
 
-    def __init__(self, authorName = None, authorBirth = None, authorDeath = None, title = None, lang = None, genre = None,
-                 subject = None, numChars = None, numWords = None, numSentences = None, numDifficultWords = None, url = None, downloads = None):
-        if authorName and authorBirth and authorDeath and title and lang and genre and subject and numChars \
-                and numWords and numSentences and numDifficultWords and url and downloads is not None:
-            self.authorName = authorName
-            self.authorBirth = authorBirth
-            self.authorDeath = authorDeath
+    def __init__(self, author_name: str = "", author_birth: int = 0, author_death: int = 0, title: str = "",
+                 lang: str = "", genre: str = "", subject: str = "", num_chars: int = 0, num_words: int = 0,
+                 num_sentences: int = 0, num_difficult_words: int = 0, url: str = "", downloads: int = 0):
+            self.author_name = author_name
+            self.author_birth = author_birth
+            self.author_death = author_death
             self.title = title
             self.lang = lang
             self.genre = genre
             self.subject = subject
-            self.numChars = numChars
-            self.numWords = numWords
-            self.numSentences = numSentences
-            self.numDifficultWords = numDifficultWords
-        else:
-            self.authorName = self.title = self.url = ""
-            self.authorBirth = self.authorDeath = self.numChars = self.numWords = self.numSentences = self.numDifficultWords = 0
+            self.num_chars = num_chars
+            self.num_words = num_words
+            self.num_sentences = num_sentences
+            self.num_difficult_words = num_difficult_words
+            self.url = url
+            self.downloads = downloads
 
-    def getAuthorName(self):
-        return self.authorName
-    def setAuthorName(self, authorName):
-        self.authorName = authorName
+    def get_author_name(self):
+        return self.author_name
 
-    def getAuthorBirth(self):
-        return self.authorBirth
-    def setAuthroBirth(self, authorBirth):
-        self.authorBirth = authorBirth
+    def set_author_name(self, author_name):
+        self.author_name = author_name
 
-    def getAuthorDeath(self):
-        return self.authorDeath
-    def setAuthorDeath(self, authorDeath):
-        self.authorDeath = authorDeath
+    def get_author_birth(self):
+        return self.author_birth
 
-    def getTitle(self):
+    def set_author_birth(self, author_birth):
+        self.author_birth = author_birth
+
+    def get_author_death(self):
+        return self.author_death
+
+    def set_author_death(self, author_death):
+        self.authorDeath = author_death
+
+    def get_title(self):
         return self.title
-    def setTitle(self, title):
+
+    def set_title(self, title):
         self.title = title
 
-    def getGenre(self):
+    def get_genre(self):
         return self.genre
-    def setGenre(self, genre):
+
+    def set_genre(self, genre):
         self.genre = genre
 
-    def getSubject(self):
+    def get_subject(self):
         return self.subject
-    def setSubject(self, subject):
+
+    def set_subject(self, subject):
         self.subject = subject
 
-    def getNumWords(self):
-        return self.numWords
-    def setNumWords(self, numWords):
-        self.numWords = numWords
+    def get_num_words(self):
+        return self.num_words
 
-    def getNumSentences(self):
+    def set_num_words(self, num_words):
+        self.num_words = num_words
+
+    def get_num_sentences(self):
         return self.numSentences
-    def setNumeSentences(self, numSentences):
-        self.numSentences = numSentences
 
-    def getNumDifficultWords(self):
-        return self.numDifficultWords
-    def setNumDifficultWords(self, numDifficultWords):
-        self.numDifficultWords = numDifficultWords
+    def set_num_sentences(self, num_sentences):
+        self.num_sentences = num_sentences
+
+    def get_num_difficult_words(self):
+        return self.num_difficult_words
+
+    def set_num_difficult_words(self,_num_difficult_words):
+        self.num_difficult_words_=_num_difficult_words
 

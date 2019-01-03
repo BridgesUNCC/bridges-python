@@ -16,75 +16,75 @@ class Book:
         self.numSentences = numSentences
         self.numDifficultWords = numDifficultWords
 
-    def getAuthorName(self):
+    def get_author_name(self):
         return self.authorName
 
-    def setAuthorName(self, authorName):
-        self.authorName = authorName
+    def set_author_name(self, author_name):
+        self.authorName = author_name
 
-    def getAuthorBirth(self):
+    def get_author_birth(self):
         return self.authorBirth
 
-    def setAuthorBirth(self, authorBirth):
-        self.authorBirth = authorBirth
+    def set_author_birth(self, author_birth):
+        self.authorBirth = author_birth
 
-    def getAuthorDeath(self):
+    def get_author_death(self):
         return self.authorDeath
 
-    def setAuthorDeath(self,authorDeath):
-        self.authorDeath = authorDeath
+    def set_author_death(self,author_death):
+        self.authorDeath = author_death
 
-    def getTitle(self):
+    def get_title(self):
         return self.title
 
-    def setTitle(self,title):
+    def set_title(self,title):
         self.title = title
 
-    def getLang(self):
+    def get_lang(self):
         return self.lang
 
-    def setLang(self, lang):
+    def set_lang(self, lang):
         self.lang = lang
 
-    def getGenre(self):
+    def get_genre(self):
         return self.genre
 
-    def setGenre(self, genre):
+    def set_genre(self, genre):
         self.genre = genre
 
-    def getSubject(self):
+    def get_subject(self):
         return self.subject
 
-    def setSubject(self, subject):
+    def set_subject(self, subject):
         self.subject = subject
 
-    def getURL(self):
+    def get_url(self):
         return self.url
 
-    def setURL(self,url):
+    def set_url(self,url):
         self.url = url
 
-    def getNumChars(self):
+    def get_num_chars(self):
         return self.numChars
 
-    def setNumChars(self,numChars):
-        self.numChars = numChars
+    def set_num_chars(self,num_chars):
+        self.numChars = num_chars
 
-    def getNumWords(self):
+    def get_num_words(self):
         return self.numWords
 
-    def setNumWords(self,numWords):
-        self.numWords = numWords
+    def set_num_words(self,num_words):
+        self.numWords = num_words
 
-    def getNumSentences(self):
+    def get_num_sentences(self):
         return self.numSentences
 
-    def setNumSentences(self,numSentences):
-        self.numSentences = numSentences
+    def set_num_sentences(self,num_sentences):
+        self.numSentences = num_sentences
 
-    def getNumDifficultWords(self):
+    def get_num_difficult_words(self):
         return self.numDifficultWords
 
-    def setNumDifficultWords(self, numDifficultWords):
-        self.numDifficultWords = numDifficultWords
+    def set_num_difficult_words(self, num_difficult_words):
+        self.numDifficultWords = num_difficult_words
 

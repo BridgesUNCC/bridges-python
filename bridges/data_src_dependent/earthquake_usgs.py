@@ -55,70 +55,70 @@ class EarthquakeUSGS:
             self.time = ""
             self.year = self.month = self.day = self.hour = self.min = self.sec =0
 
-    def getTime(self):
+    def get_time(self):
         return self.time
 
-    def setTime(self, tm):
+    def set_time(self, tm):
         self.time = tm
 
-    def getYear(self):
+    def get_year(self):
         self.getDate()
         return self.year
 
-    def getMonth(self):
+    def get_month(self):
         self.getDate()
         return self.month
 
-    def getDay(self):
+    def get_day(self):
         self.getDate()
         return self.day
 
-    def getHour(self):
+    def get_hour(self):
         self.getDate()
         return self.hour
 
-    def getMinutes(self):
+    def get_minutes(self):
         self.getDate()
         return self.min
 
-    def getSeconds(self):
+    def get_seconds(self):
         self.getDate()
         return self.sec
 
-    def getLatit(self):
+    def get_latit(self):
         return self.latit
 
-    def setLatit(self, latit):
+    def set_latit(self, latit):
         self.latit = latit
 
-    def getLongit(self):
+    def get_longit(self):
         return self.longit
 
-    def setLongit(self, longit):
+    def set_longit(self, longit):
         self.longit = longit
 
-    def getLocation(self):
+    def get_location(self):
         return self.location
 
-    def setLocation(self, location):
+    def set_location(self, location):
         self.location = location
 
-    def getTitle(self):
+    def get_title(self):
         return self.title
 
-    def setTitle(self, title):
+    def set_title(self, title):
         self.title = title
 
-    def getUrl(self):
+    def get_url(self):
         return self.url
 
-    def setUrl(self, url):
+    def set_url(self, url):
         self.url = url
 
-    def getMagnitude(self):
+    def get_magnitude(self):
         return self.magnitude
 
-    def setMagnitude(self,magnitude):
+    def set_magnitude(self,magnitude):
         self.magnitude = magnitude
 
 

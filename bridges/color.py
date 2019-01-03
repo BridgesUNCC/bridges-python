@@ -307,7 +307,7 @@ class Color():
     #
     # @return - returns the RGBA color as a byte array
     #
-    def getByteRepresentation(self):
+    def get_byte_representation(self):
         r = self.red
         g = self.green
         b = self.blue
