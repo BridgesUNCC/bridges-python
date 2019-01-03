@@ -84,7 +84,7 @@ class ColorGrid(Grid):
                 else:
                     total_count += count
                     img_bytes.append(count-1)
-                    last = last.getByteRepresentation()
+                    last = last.get_byte_representation()
 
                     for k in range(len(last)):
                         img_bytes.append(last[k])
@@ -94,14 +94,14 @@ class ColorGrid(Grid):
             if count == 256:
                 total_count += count
                 img_bytes.append(count-1)
-                last = last.getByteRepresentation()
+                last = last.get_byte_representation()
                 for k in range(len(last)):
                     img_bytes.append(last[k])
                 count = 0
             pos += 1
         total_count += count
         img_bytes.append(count-1)
-        last = last.getByteRepresentation()
+        last = last.get_byte_representation()
         for k in range(len(last)):
             img_bytes.append(last[k])
 
@@ -119,7 +119,7 @@ class ColorGrid(Grid):
                 for j in range(self.gridSize[1]):
                     if self.grid[i][j] is not None:
                         color = self.grid[i][j]
-                        color = color.getByteRepresentation()
+                        color = color.get_byte_representation()
                         for k in range(len(color)):
                             img_bytes.append(color[k])
         return img_bytes
