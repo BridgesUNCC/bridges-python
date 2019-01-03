@@ -1,25 +1,25 @@
 
 class Shakespeare:
 
-    def __init__(self, title = None, type = None, text = None):
-        if title is not None and type is not None and text is not None:
-            self.title = title
-            self.type = type
-            self.text = text
-        else:
-            self.title = self.type = self.text = ""
+    def __init__(self, title: str = "", type: str = "", text: str = ""):
+        self.title = title
+        self.type = type
+        self.text = text
 
-    def getTitle(self):
+    def get_title(self):
         return self.title
-    def setTitle(self, title):
+
+    def set_title(self, title):
         self.title = title
 
-    def getType(self):
+    def get_type(self):
         return self.type
-    def setType(self,type):
+
+    def set_type(self,type):
         self.type = type
 
-    def getText(self):
+    def get_text(self):
         return self.text
-    def setText(self, text):
+
+    def set_text(self, text):
         self.text = text

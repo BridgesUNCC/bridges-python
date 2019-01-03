@@ -23,7 +23,7 @@ from bridges.color import Color
 # @return a list of Game objects,
 #
 #
-def getGameData():
+def get_game_data():
 
     wrapper = []
 
@@ -58,7 +58,7 @@ def getGameData():
 # @return a list of ActorMovieIMDB objects, but only actor and
 # movie fields in this version
 #
-def getActorMovieIMDBData(number = 0):
+def get_actor_movie_imdb_data(number = 0):
 
     wrapper = []
 
@@ -78,6 +78,7 @@ def getActorMovieIMDBData(number = 0):
 
     return wrapper
 
+
 ##
 # Get USGS earthquake data
 # USGS Tweet data (https://earthquake.usgs.gov/earthquakes/map/)
@@ -89,7 +90,7 @@ def getActorMovieIMDBData(number = 0):
 #
 # @return a list of earthquake records
 #
-def getEarthquakeUSGSData(number = 0):
+def get_earthquake_usgs_data(number = 0):
 
     wrapper = []
     url = "http://earthquakes-uncc.herokuapp.com/eq"
@@ -113,6 +114,7 @@ def getEarthquakeUSGSData(number = 0):
             wrapper.append(earthquake_usgs.EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
     return wrapper
 
+
 ##
 #
 # Get data of Shakespeare works (plays, poems)
@@ -132,7 +134,7 @@ def getEarthquakeUSGSData(number = 0):
 # @return an array of Shakespeare objects
 #
 #
-def getShakespeareData(endpoint = "", textonly = False):
+def get_shakespeare_data(endpoint = "", textonly = False):
     wrapper = []
     url = "http://bridgesdata.herokuapp.com/api/shakespeare/"
     PARAMS = {"Accept: application/json"}
@@ -163,7 +165,7 @@ def getShakespeareData(endpoint = "", textonly = False):
 # @return a list of GutenbergBook objects,
 #
 #
-def getGutenBergBookData(num = 0):
+def get_gutenberg_book_data(num = 0):
     wrapper = []
     url = "http://bridgesdata.herokuapp.com/api/books"
     PARAMS = {"Accept: application/json"}
@@ -210,7 +212,7 @@ def getGutenBergBookData(num = 0):
 # See CancerIncidence class for more information
 #
 #
-def getCancerIncidentData(num = 0):
+def get_cancer_incident_data(num = 0):
 
     wrapper = []
     url = "https://bridgesdata.herokuapp.com/api/cancer/withlocations"
@@ -269,7 +271,7 @@ def getCancerIncidentData(num = 0):
 # @return a Song object,
 #
 #
-def getSong(songTitle, artistName = None):
+def get_song(songTitle, artistName = None):
     wrapper = []
     url = "http://bridgesdata.herokuapp.com/api/songs/find/"
     PARAMS = {"Accept: application/json"}
@@ -324,7 +326,7 @@ def getSong(songTitle, artistName = None):
 # @return a list of Song objects,
 #
 # 
-def getSongData():
+def get_song_data():
     all_songs = []
     url = "http://bridgesdata.herokuapp.com/api/songs/"
     params = {"Accept: application/json"}
