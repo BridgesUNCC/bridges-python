@@ -1,5 +1,6 @@
 import time
 
+
 class EarthquakeUSGS:
 
     def getDate(self):

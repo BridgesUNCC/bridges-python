@@ -11,22 +11,26 @@ class Game:
             self.title = self.platform = ""
             self.rating = 0.0
 
-    def getTitle(self):
+    def get_title(self):
         return self.title
-    def setTitle(self, title):
+
+    def set_title(self, title):
         self.title = title
 
-    def getPlatform(self):
+    def get_platform(self):
         return self.platform
-    def setPlatform(self, platform):
+
+    def set_platform(self, platform):
         self.platform = platform
 
-    def getRating(self):
+    def get_rating(self):
         return self.rating
-    def setRating(self, rating):
+
+    def set_rating(self, rating):
         self.rating = rating
 
-    def getGenre(self):
+    def get_genre(self):
         return self.genre
-    def setGenre(self, genre):
+
+    def set_genre(self, genre):
         self.genre = genre

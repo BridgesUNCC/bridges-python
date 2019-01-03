@@ -11,27 +11,32 @@ class Song:
         else:
             self.artist = self.song = self.lyrics = self.album = self.release_date = ""
 
-    def getArtist(self):
+    def get_artist(self):
         return self.artist
-    def setArtist(self, artist):
+
+    def set_artist(self, artist):
         self.artist = artist
 
-    def getSongTitle(self):
+    def get_song_title(self):
         return self.song
-    def setSongTitle(self, song):
+
+    def set_song_title(self, song):
         self.song = song
 
-    def getAlbumTitle(self):
+    def get_album_title(self):
         return self.album
-    def setAlbumTitle(self, album):
+
+    def set_album_title(self, album):
         self.album = album
 
-    def getLyrics(self):
+    def get_lyrics(self):
         return self.lyrics
-    def setLyrics(self, lyrics):
+
+    def set_lyrics(self, lyrics):
         self.lyrics = lyrics
 
-    def getReleaseDate(self):
+    def get_release_date(self):
         return self.release_date
-    def setReleaseDate(self, date):
+
+    def set_release_date(self, date):
         self.release_date = date

@@ -65,3 +65,4 @@ class GutenbergBook:
         return self.numDifficultWords
     def setNumDifficultWords(self, numDifficultWords):
         self.numDifficultWords = numDifficultWords
+

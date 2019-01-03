@@ -7,7 +7,7 @@ from Bridges.data_src_dependent import Shakespeare
 from Bridges.data_src_dependent import GutenbergBook
 from Bridges.data_src_dependent import CancerIncidence
 from Bridges.data_src_dependent import Song
-
+from Bridges import ColorGrid
 
 
 ##
@@ -307,6 +307,7 @@ def getSong(songTitle, artistName = None):
 
     return Song.Song(artist, song, album, lyrics, release_date)
 
+
 ##
 #
 # Get data of the songs (including lyrics) using the Genius API
@@ -325,9 +326,9 @@ def getSong(songTitle, artistName = None):
 def getSongData():
     all_songs = []
     url = "http://bridgesdata.herokuapp.com/api/songs/"
-    PARAMS = {"Accept: application/json"}
+    params = {"Accept: application/json"}
 
-    r = requests.get(url = url, params = str(PARAMS))
+    r = requests.get(url=url, params=str(params))
     r = r.json()
 
     D = r["data"]
@@ -362,6 +363,52 @@ def getSongData():
 
         all_songs.append(Song.Song(artist, song, album, lyrics, release_date))
     return all_songs
+
+
+def get_color_grid_from_assignment(server: str, user: str, assignment: int, subassignment: int = 0) -> ColorGrid:
+    response = get_assignment(server, user, assignment, subassignment)
+
+    try:
+        from types import SimpleNamespace as Namespace
+    except ImportError:
+        # Python 2.x fallback
+        from argparse import Namespace
+
+    assignment_wrapper = json.loads(response, object_hook=lambda d: Namespace(**d))
+    try:
+        assignment_object = assignment_wrapper.assignmentJSON
+    except AttributeError:
+        raise RuntimeError("Malformed JSON: Unable to Parse")
+
+    if len(assignment_object.data) is not 1:
+        raise RuntimeError("Malformed JSON: data is malformed")
+
+    data = assignment_object.data[0]
+    print(data)
+    if data.visual is not "ColorGrid":
+        raise RuntimeError("Malformed ColorGrid JSON: not a ColorGrid")
+
+
+
+def get_assignment(server: str, user: str, assignment: int, subassignment: int = 0) -> str:
+    """
+    This function obtains the JSON representation of a particular assignment as a string
+
+    @:return str that is the JSON representation of the subassignment as stored by the Bridges server
+    @:param str user: the name of the user who uploaded the assignment
+    @:param int assignment: the ID of the assignment to get
+    @:param int subassignment: the ID of the subassignment to get (default 0)
+    """
+    subassignment_fixed = f"0{subassignment}" if subassignment < 10 else subassignment
+    url = f"{server}/assignmentJSON/{assignment}.{subassignment_fixed}/{user}"
+    params = "Accept: application/json"
+
+    request = requests.get(url, params)
+    if request.ok:
+        return request.content
+    else:
+        raise request.raise_for_status()
+
 
 class DataSource:
     pass
