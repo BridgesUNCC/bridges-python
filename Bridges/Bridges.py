@@ -1,6 +1,5 @@
 from Bridges.Connector import *
 from Bridges import ColorGrid
-from Bridges.data_src_dependent.DataSource import get_color_grid_from_assignment
 ##
 # 	@brief The Bridges class is the main class that provides interfaces to datasets,
 #	maintains user and assignment information, and connects to the Bridges server.
@@ -200,6 +199,7 @@ class Bridges:
         :param int subassignment: the ID of the subassignment to get (default 0)
         :return: ColorGrid: the ColorGrid stored in the bridges server
         """
+        from Bridges.data_src_dependent.DataSource import get_color_grid_from_assignment
         return get_color_grid_from_assignment(self.connector.server_url, user, assignment, subassignment)
 
 

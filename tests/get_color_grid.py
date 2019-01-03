@@ -1,7 +1,10 @@
 from Bridges import *
-
-bridges = Bridges(0, "", "")
+import os
+user = os.environ.get("BRIDGES_USER_NAME")
+key = os.environ.get("BRIDGES_API_KEY")
+bridges = Bridges(3100 , user, key)
 bridges.connector.set_server("clone")
 grid = bridges.get_color_grid_from_assignment("bridges_testing", 3013)
 
-print(grid.get_data_structure_representation())
+bridges.set_data_structure(grid)
+bridges.visualize()

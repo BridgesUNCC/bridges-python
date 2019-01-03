@@ -417,9 +417,7 @@ def get_color_grid_from_assignment(server: str, user: str, assignment: int, suba
 
         import base64
         decoded_bytes = bytearray(base64.b64decode(node_string))
-        print(decoded_bytes)
         decoded = [int(x) for x in decoded_bytes]
-        print(decoded)
     except AttributeError:
         raise RuntimeError("Malformed JSON: Unable to Parse")
 
@@ -446,8 +444,6 @@ def get_color_grid_from_assignment(server: str, user: str, assignment: int, suba
         current_in_decoded = 0
         current_in_cg = 0
         while current_in_decoded != len(decoded):
-            for i in range(0, 4):
-                print(decoded[current_in_decoded + i])
             repeat = decoded[current_in_decoded]
 
             color = Color(decoded[current_in_decoded + 1],
@@ -457,7 +453,7 @@ def get_color_grid_from_assignment(server: str, user: str, assignment: int, suba
                           )
             current_in_decoded = current_in_decoded + 5
 
-            while repeat is not 0:
+            while repeat >= 0:
                 pos_x: int = int(current_in_cg / dim_y)
                 pos_y: int = current_in_cg % dim_y
                 if pos_x >= dim_x or pos_y >= dim_y:
