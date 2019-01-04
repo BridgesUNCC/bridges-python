@@ -99,6 +99,9 @@ class Bridges:
     def visualize(self):
         nodes_links_str = ""
 
+        if (self.vis_type == "Tree" or self.vis_type == "BinaryTree" or self.vis_type == "SinglyLinkedList", self.vis_type == "DoublyLinkedList", self.vis_type == "MultiList", self.vis_type == "CircularSinglyLinkedList", self.vis_type == "CircularDoublyLinkedList", self.vis_type == "Array", self.vis_type == "GraphAdjacencyList", self.vis_type == "ColorGrid", self.vis_type == "KdTree"):
+            nodes_links_str = self.ds_handle.get_data_structure_representation()
+
         ds = {
             "visual": self.vis_type,
             "title": self.title,
@@ -117,7 +120,7 @@ class Bridges:
 
             ds_json += nodes_links_str
         else:
-            ds_json += self.ds_handle.get_data_structure_representation()
+            ds_json += nodes_links_str
 
         if self.json_flag:
             print(ds_json)
