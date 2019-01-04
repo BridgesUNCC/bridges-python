@@ -18,25 +18,75 @@ from bridges.bst_element import *
  # @date 12/26/18
  #
 
-class KdTreeElement(BSTElement):
+class KDTreeElement(BSTElement):
 
     ##
     # Constructs a KdTreeElement wit the provided value, label, key,
     # left and right KdTree elements. The defaults will be used if
     # not provided
     #
-    # @param k The key for the ordering
+    # @param key The key for the ordering
     # @param val The Data to hold
     # @param lab the label to show
-    # @param l The left KdTree Element
-    # @param r the right KdTree element
-    def __init__(self, k = None, dim = None, th = None, l = None, r = None, val = None, lab = None):
-        if k is not None:
-            super(BSTElement, self).__init__(e = val, left = l, right = r)
+    # @param left The left KdTree Element
+    # @param right the right KdTree element
+    #
+    def __init__(self, key = None, dim = None, th = None, left = None, right = None, val = None, lab = None):
+        if key is not None and dim is not None and th is not None and left is not None and right is not None and val is not None:
+            super(KDTreeElement, self).__init__(e = val, left = left, right = right)
             self.thickness = th
             self.dimension = dim
-            self.set_key(k)
-        else:
-            super(BSTElement, self).__init__()
+            self.set_key(key)
+        elif key is not None and val is not None and left is not None and right is not None:
+            super(KDTreeElement, self).__init__(e = val, left=left, right=right)
             self.thickness = 0.0
             self.dimension = 0
+            self.set_key(key)
+        elif val is not None and left is not None and right is not None:
+            super(KDTreeElement, self).__init__(e = val, left=left, right=right)
+            self.thickness = 0.0
+            self.dimension = 0
+        elif left is not None and right is not None:
+            super(KDTreeElement, self).__init__(left=left, right=right)
+        elif key is not None and dim is not None:
+            super(KDTreeElement, self).__init__()
+            self.dimension = dim
+            self.thickness = 0.0
+            self.set_key(key)
+        elif key is not None and val is not None:
+            super(KDTreeElement, self).__init__(e = val)
+            self.set_key(key)
+        elif key is not None and val is not None and lab is not None:
+            super(KDTreeElement, self).__init__(e = val, label = lab)
+            self.set_key(key)
+        elif lab is not None and val is not None:
+            super(KDTreeElement, self).__init__(e = val, label = lab)
+        elif val is not None:
+            super(KDTreeElement, self).__init__(e = val)
+        else:
+            super(KDTreeElement, self).__init__()
+            self.thickness = 0.0
+            self.dimension = 0
+
+
+    def get_data_structure_type(self):
+        return "KdTree"
+
+    def get_dimension(self):
+        return self.dimension
+
+    def set_dimension(self, dim):
+        self.dimension = dim
+
+    def get_thickness(self):
+        return self.thickness
+
+    def set_thickness(self, th):
+        self.thickness = th
+
+    def get_left(self):
+        return super(KDTreeElement, self).get_left()
+
+    def get_right(self):
+        return super(KDTreeElement, self).get_right()
+
