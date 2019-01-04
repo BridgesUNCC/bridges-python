@@ -5,6 +5,8 @@ from bridges.link_visualizer import *
 from bridges.kd_tree_element import *
 import re
 from decimal import Decimal
+
+
 ##
 # @brief This is the main superclass in BRIDGES for  deriving a number of
 # 	objects used  in building arrays, lists, trees and graph data structures.

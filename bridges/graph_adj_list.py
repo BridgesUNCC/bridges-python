@@ -4,6 +4,8 @@ from bridges.sl_element import *
 from bridges.edge import *
 import traceback
 import sys
+
+
 ##
 #
 #	@brief The GraphAdjList class can be used to represent adjacency list based

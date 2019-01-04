@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 from bridges.element import *
+
+
 ##
 # @brief This class is used to represent the edges in a graph and will
 # 	appear as links in the BRIDGES graph visualization.
@@ -11,7 +13,7 @@ from bridges.element import *
 # @author K.R. Subramanian
 #
 #
-class Edge:
+class Edge(object):
     weight = int()
     vertex = Element()
 

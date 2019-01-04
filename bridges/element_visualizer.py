@@ -13,7 +13,7 @@ from decimal import Decimal
 # Element getVisualizer() method, and then call the setVisualizer() method on
 # the Element after changes have been made.
 #
-class ElementVisualizer():
+class ElementVisualizer(object):
     #  Visualization properties for this Node.
 
     shape = "circle"
@@ -25,7 +25,7 @@ class ElementVisualizer():
 
 
     prop = dict()
-    color = Color(None, 70, 130, 180, 1.0)
+    color = Color(70, 130, 180, 1.0)
 
     prop["color"] = "[70, 130, 180, 1.0]"
     prop["opacity"] = "1.0"

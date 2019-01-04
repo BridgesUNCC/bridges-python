@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 from bridges.element import *
 from bridges.link_visualizer import *
+
+
  ## @brief This class extends Element to represent general trees with
  #	arbitrary number of children.
  #
@@ -23,9 +25,8 @@ from bridges.link_visualizer import *
  #
  # 	@author Matthew McQuaigue
  #
-
-class TreeElement(Element):
-    ##  holds all children of the node
+class TreeElement(object):
+    # holds all children of the node
     children = []
 
     QUOTE = "\""
