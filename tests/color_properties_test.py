@@ -21,3 +21,31 @@ print(other_color.rgba)
 
 other_color.set_color(0, 0, 0, 0)
 print(other_color.rgba)
+
+try:
+    my_color.rgba = 256, 0, 1, 1.0
+except ValueError:
+    try:
+        my_color.rgba = 0, 256, 0, 1.0
+    except ValueError:
+        try:
+            my_color.rgba = 0, 0, 256, 1.0
+        except ValueError:
+            try:
+                my_color.rgba = 0, 0, 0, 1.1
+            except ValueError:
+                print("Setter passed for overflow on RGBA")
+
+try:
+    my_color.rgba = -1, 0, 255, 0.0
+except ValueError:
+    try:
+        my_color.rgba = 0, -1, 0, 1.0
+    except ValueError:
+        try:
+            my_color.rgba = 0, 0, -1, 1.0
+        except ValueError:
+            try:
+                my_color.rgba = 0, 0, 0, -0.1
+            except ValueError:
+                print("Setter passed for underflow on RGBA")

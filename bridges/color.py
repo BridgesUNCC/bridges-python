@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 
-#import bridges.validation.InvalidValueException
-import base64
-
 
 ##
 #	@brief This class is used to represent colors in BRIDGES.
