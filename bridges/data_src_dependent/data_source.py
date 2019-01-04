@@ -478,8 +478,8 @@ def get_assignment(server: str, user: str, assignment: int, subassignment: int =
     :param int subassignment: the ID of the subassignment to get (default 0)
     :return str that is the JSON representation of the subassignment as stored by the bridges server
     """
-    subassignment_fixed = f"0{subassignment}" if subassignment < 10 else subassignment
-    url = f"{server}/assignmentJSON/{assignment}.{subassignment_fixed}/{user}"
+    subassignment_fixed = "0{}".format(subassignment) if subassignment < 10 else subassignment
+    url = "{}/assignmentJSON/{}.{}/{}".format(server, assignment, subassignment_fixed, user)
     params = "Accept: application/json"
 
     request = requests.get(url, params)
