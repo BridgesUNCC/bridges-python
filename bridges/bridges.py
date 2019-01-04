@@ -102,7 +102,7 @@ class Bridges:
         ds_array = None
         ds_json = ""
 
-        if (self.vis_type == "Tree" or self.vis_type == "BinaryTree" or self.vis_type == "SinglyLinkedList", self.vis_type == "DoublyLinkedList", self.vis_type == "MultiList", self.vis_type == "CircularSinglyLinkedList", self.vis_type == "CircularDoublyLinkedList", self.vis_type == "Array", self.vis_type == "GraphAdjacencyList", self.vis_type == "ColorGrid"):
+        if (self.vis_type == "Tree" or self.vis_type == "BinaryTree" or self.vis_type == "SinglyLinkedList", self.vis_type == "DoublyLinkedList", self.vis_type == "MultiList", self.vis_type == "CircularSinglyLinkedList", self.vis_type == "CircularDoublyLinkedList", self.vis_type == "Array", self.vis_type == "GraphAdjacencyList", self.vis_type == "ColorGrid", self.vis_type == "KdTree"):
             nodes_links_str = self.ds_handle.get_data_structure_representation()
 
         ds_json = self.OPEN_CURLY +	self.QUOTE + "visual" + self.QUOTE + self.COLON + self.QUOTE + self.vis_type + self.QUOTE + self.COMMA + self.QUOTE + "title" + self.QUOTE + self.COLON + self.QUOTE + self.title + self.QUOTE + self.COMMA + self.QUOTE + "description" + self.QUOTE + self.COLON + self.QUOTE + self.description + self.QUOTE + self.COMMA + self.QUOTE + "coord_system_type" + self.QUOTE + self.COLON + self.QUOTE + self.coord_system_type + self.QUOTE + self.COMMA + self.QUOTE + "map_overlay" + self.QUOTE + self.COLON + str(self.map_overlay).lower() + self.COMMA
