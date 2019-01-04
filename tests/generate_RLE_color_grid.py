@@ -5,8 +5,8 @@ key = os.environ.get("BRIDGES_API_KEY")
 bridges = Bridges(101, user, key)
 bridges.connector.set_server("clone")
 
-len_x = 200
-len_y = 200
+len_x = 256
+len_y = 256
 
 color_grid = ColorGrid(len_x, len_y)
 
@@ -15,5 +15,6 @@ for x in range(0, len_x):
         color = Color(x, x, x, 1.0)
         color_grid.set(x, y, color)
 
+bridges.set_title("\"test")
 bridges.set_data_structure(color_grid)
 bridges.visualize()

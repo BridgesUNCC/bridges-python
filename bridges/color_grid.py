@@ -99,9 +99,10 @@ class ColorGrid(Grid):
                     img_bytes.append(last[k])
                 count = 0
             pos += 1
-        total_count += count
-        img_bytes.append(count-1)
-        last = last.get_byte_representation()
+        if count != 0:
+            total_count += count
+            img_bytes.append(count-1)
+            last = last.get_byte_representation()
         for k in range(len(last)):
             img_bytes.append(last[k])
 

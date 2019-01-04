@@ -456,8 +456,8 @@ def get_color_grid_from_assignment(server: str, user: str, assignment: int, suba
             current_in_decoded = current_in_decoded + 5
 
             while repeat >= 0:
-                pos_x: int = int(current_in_cg / dim_y)
-                pos_y: int = current_in_cg % dim_y
+                pos_x = int(current_in_cg / dim_y)
+                pos_y = int(current_in_cg % dim_y)
                 if pos_x >= dim_x or pos_y >= dim_y:
                     raise RuntimeError("Malformed ColorGrid JSON: Too much data in nodes")
 

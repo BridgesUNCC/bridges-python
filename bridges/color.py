@@ -18,11 +18,97 @@ import base64
 #	@date 7/14/16
 #
 #
-class Color():
-    red = 70
-    green = 130
-    blue = 180
-    alpha = 1.0
+class Color(object):
+    @property
+    def red(self) -> int:
+        """
+        :return int: red component of color
+        Must be a value between 0-255 inclusive
+        """
+        return self._red
+
+    @red.setter
+    def red(self, value: int):
+        if value < 0 or value > 255:
+            raise ValueError("Value for RGB attributes should range from 0-255 inclusive")
+
+        self._red = value
+
+    @red.deleter
+    def red(self):
+        del self._red
+
+    @property
+    def green(self) -> int:
+        """
+        :return int: green component of color
+        Must be a value between 0-255 inclusive
+        """
+        return self._green
+
+    @green.setter
+    def green(self, value: int):
+        if value < 0 or value > 255:
+            raise ValueError("Value for RGB attributes should range from 0-255 inclusive")
+
+        self._green = value
+
+    @green.deleter
+    def green(self):
+        del self._green
+
+    @property
+    def blue(self) -> int:
+        """
+        :return int: blue component of color
+        Must be a value between 0-255 inclusive
+        """
+        return self._blue
+
+    @blue.setter
+    def blue(self, value: int):
+        if value < 0 or value > 255:
+            raise ValueError("Value for RGB attributes should range from 0-255 inclusive")
+
+        self._blue = value
+
+    @blue.deleter
+    def blue(self):
+        del self._blue
+
+    @property
+    def alpha(self) -> float:
+        """
+        :return float: alpha component of color
+        Must be a value between 0.0-1.0 inclusive
+        """
+        return self._alpha
+
+    @alpha.setter
+    def alpha(self, value: float):
+        if value < 0.0 or value > 1.0:
+            raise ValueError("Value for alpha should range from 0.0 - 1.0 inclusive")
+
+        self._alpha = value
+
+    @alpha.deleter
+    def alpha(self):
+        del self._alpha
+
+    @property
+    def rgba(self) -> (int, int, int, float):
+        return self.red, self.green, self.blue, self.alpha
+
+    @rgba.setter
+    def rgba(self, rgba: (int, int, int, float)):
+            self.red, self.blue, self.green, self.alpha = rgba
+
+    @rgba.deleter
+    def rgba(self):
+        del self.red
+        del self.blue
+        del self.green
+        del self.alpha
 
     #  alpha represents opacity from 0.0-1.0
     color_names = dict()
@@ -34,21 +120,39 @@ class Color():
     # @param r, g, b, a  - checked to be in the range 0-255
     # @param col_name - the name of a color for an element as string
     #
-    def __init__(self, r: int = red, g: int = green, b: int = blue, a: float = alpha, col_name: str = None):
+    def __init__(self, r=0, g=0, b=0, a: float = 0.0, col_name: str = None):
+        """
+
+        :param int r:
+        :param int g:
+        :param int b:
+        :param float a:
+        :param str col_name:
+        """
+        self._red = r
+        self._green = g
+        self._blue = b
+        self._alpha = a
+
         if col_name is not None:
-            self.set_color(col_name)
-        else:
-            self.set_color(r = r, g = g, b = b, a = a)
+            self.set_color(col_name=col_name)
 
-
-    ##
-    #
     # 	sets color to the given r, g, b, a components
     #
-    #	@param r, g, b, a  - checked to be in the range 0-255
+    #	@param r, g, b   - checked to be in the range 0-255
+    #   @param a - checked to be in range 0.0-1.0
     #   @param col_name - name of color as string
     #
-    def set_color(self, r: int = red, g: int = green, b: int =  blue, a: float = 0.0, col_name: str = None):
+    def set_color(self, r: int = 0, g: int = 0, b: int =  0, a: float = 0.0, col_name: str = None):
+        """
+
+        :param int r:
+        :param int g:
+        :param int b:
+        :param float a:
+        :param str col_name:
+        :return: None
+        """
         #  check color component ranges
         if col_name is not None:
             if col_name == "red":
@@ -201,14 +305,11 @@ class Color():
                 self.blue = 0
                 self.alpha = 1.0
                 return
-        elif (r >= 0 and r <= 255 and g >= 0 and g <= 255 and b >= 0 and b <= 255 and a >= 0.0 and a <= 1.0):
+        else:
             self.red = r
             self.green = g
             self.blue = b
             self.alpha = a
-            return
-
-        raise ValueError("Invalid color range (r,g,b must be 0-255, alpha in 0-1)\n")
 
     ##
     #

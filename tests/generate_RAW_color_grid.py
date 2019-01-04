@@ -5,8 +5,8 @@ key = os.environ.get("BRIDGES_API_KEY")
 bridges = Bridges(100, user, key)
 bridges.connector.set_server("clone")
 
-len_x = 200
-len_y = 200
+len_x = 256
+len_y = 256
 
 color_grid = ColorGrid(len_x, len_y)
 
