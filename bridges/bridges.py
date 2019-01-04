@@ -1,5 +1,6 @@
 from bridges.connector import *
 from bridges import ColorGrid
+import json
 ##
 # 	@brief The bridges class is the main class that provides interfaces to datasets,
 #	maintains user and assignment information, and connects to the bridges server.
@@ -96,17 +97,16 @@ class Bridges:
     #  and sends that to the bridges server for generating a visualization.
     #
     def visualize(self):
-        nodes_links = []
         nodes_links_str = ""
-        response = ""
-        ds_array = None
-        ds_json = ""
 
-        if (self.vis_type == "Tree" or self.vis_type == "BinaryTree" or self.vis_type == "SinglyLinkedList", self.vis_type == "DoublyLinkedList", self.vis_type == "MultiList", self.vis_type == "CircularSinglyLinkedList", self.vis_type == "CircularDoublyLinkedList", self.vis_type == "Array", self.vis_type == "GraphAdjacencyList", self.vis_type == "ColorGrid", self.vis_type == "KdTree"):
-            nodes_links_str = self.ds_handle.get_data_structure_representation()
-
-        ds_json = self.OPEN_CURLY +	self.QUOTE + "visual" + self.QUOTE + self.COLON + self.QUOTE + self.vis_type + self.QUOTE + self.COMMA + self.QUOTE + "title" + self.QUOTE + self.COLON + self.QUOTE + self.title + self.QUOTE + self.COMMA + self.QUOTE + "description" + self.QUOTE + self.COLON + self.QUOTE + self.description + self.QUOTE + self.COMMA + self.QUOTE + "coord_system_type" + self.QUOTE + self.COLON + self.QUOTE + self.coord_system_type + self.QUOTE + self.COMMA + self.QUOTE + "map_overlay" + self.QUOTE + self.COLON + str(self.map_overlay).lower() + self.COMMA
-        # ds_json += nodes_links_str
+        ds = {
+            "visual": self.vis_type,
+            "title": self.title,
+            "description": self.description,
+            "coord_system_type": self.coord_system_type,
+            "map_overlay": self.map_overlay,
+        }
+        ds_json = json.dumps(ds)[:-1] + ", "
 
         if self.vis_type == "Array":
             dims = [1,1,1]
@@ -117,7 +117,7 @@ class Bridges:
 
             ds_json += nodes_links_str
         else:
-            ds_json += nodes_links_str
+            ds_json += self.ds_handle.get_data_structure_representation()
 
         if self.json_flag:
             print(ds_json)

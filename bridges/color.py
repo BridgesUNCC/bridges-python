@@ -131,7 +131,8 @@ class Color(object):
 
     # 	sets color to the given r, g, b, a components
     #
-    #	@param r, g, b, a  - checked to be in the range 0-255
+    #	@param r, g, b   - checked to be in the range 0-255
+    #   @param a - checked to be in range 0.0-1.0
     #   @param col_name - name of color as string
     #
     def set_color(self, r: int = 0, g: int = 0, b: int =  0, a: float = 0.0, col_name: str = None):
@@ -287,14 +288,10 @@ class Color(object):
                 self.blue = 0
                 self.alpha = 1.0
                 return
-        elif (r >= 0 and r <= 255 and g >= 0 and g <= 255 and b >= 0 and b <= 255 and a >= 0.0 and a <= 1.0):
-            self.red = r
-            self.green = g
-            self.blue = b
-            self._alpha = a
-            return
-
-        raise ValueError("Invalid color range (r,g,b must be 0-255, alpha in 0-1)\n")
+        self.red = r
+        self.green = g
+        self.blue = b
+        self.alpha = a
 
     ##
     #

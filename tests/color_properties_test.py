@@ -13,4 +13,11 @@ other_color = Color()
 other_color.rgba = 100, 0, 20, 0
 print(my_color.rgba, other_color.rgba)
 
-print(Color.red.__doc__)
+other_color.set_red(255)
+other_color.set_green(255)
+other_color.set_blue(255)
+other_color.set_alpha(1.0)
+print(other_color.rgba)
+
+other_color.set_color(0, 0, 0, 0)
+print(other_color.rgba)
