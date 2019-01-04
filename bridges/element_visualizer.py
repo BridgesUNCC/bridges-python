@@ -50,7 +50,7 @@ class ElementVisualizer(object):
         if opacity is not 1.0:
             self.set_opacity(opacity)
         else:
-            self.color = Color(None, 70, 130, 180, 1.0)
+            self.color = Color(70, 130, 180, 1.0)
 
 
     ##
@@ -238,7 +238,7 @@ class ElementVisualizer(object):
 
         self.prop["color"] = a_color
 
-        self.color = Color(None, self.red, self.green, self.blue, self.alpha)
+        self.color = Color(self.red, self.green, self.blue, self.alpha)
     ##
     # Get the color of the Element in the bridges Visualization
     #  @return the string reprsenting the color of the Element in the bridges Visualization

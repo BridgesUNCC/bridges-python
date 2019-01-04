@@ -25,7 +25,7 @@ from bridges.link_visualizer import *
  #
  # 	@author Matthew McQuaigue
  #
-class TreeElement(object):
+class TreeElement(Element):
     # holds all children of the node
     children = []
 

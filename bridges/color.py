@@ -120,7 +120,15 @@ class Color(object):
     # @param r, g, b, a  - checked to be in the range 0-255
     # @param col_name - the name of a color for an element as string
     #
-    def __init__(self, r: int = 0, g: int = 0, b: int = 0, a: float = 0.0, col_name: str = None):
+    def __init__(self, r=0, g=0, b=0, a: float = 0.0, col_name: str = None):
+        """
+
+        :param int r:
+        :param int g:
+        :param int b:
+        :param float a:
+        :param str col_name:
+        """
         self._red = r
         self._green = g
         self._blue = b
@@ -136,6 +144,15 @@ class Color(object):
     #   @param col_name - name of color as string
     #
     def set_color(self, r: int = 0, g: int = 0, b: int =  0, a: float = 0.0, col_name: str = None):
+        """
+
+        :param int r:
+        :param int g:
+        :param int b:
+        :param float a:
+        :param str col_name:
+        :return: None
+        """
         #  check color component ranges
         if col_name is not None:
             if col_name == "red":
@@ -288,10 +305,11 @@ class Color(object):
                 self.blue = 0
                 self.alpha = 1.0
                 return
-        self.red = r
-        self.green = g
-        self.blue = b
-        self.alpha = a
+        else:
+            self.red = r
+            self.green = g
+            self.blue = b
+            self.alpha = a
 
     ##
     #
