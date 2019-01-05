@@ -76,6 +76,13 @@ class ElementVisualizer(object):
     #  @param aColor the string reprsenting the color of the Element in the bridges Visualization
     #
     def set_color(self, *args, **kwargs):
+        """
+        Usage: requires either 3 ints 0-255 for RGB and an optional float 0.0-1.0 for alpha or a str of a web color
+        can also key the RGBA values with r, g, b, a or red, green, blue, alpha respectively and col_name for the str
+        :param args: int, int, int optional float or str
+        :param kwargs: r/red: int, b/blue: int, g/green: int optional a/alpha: float or col_name: str
+        :return: None
+        """
         self.color.set_color(*args, **kwargs)
 
     ##
