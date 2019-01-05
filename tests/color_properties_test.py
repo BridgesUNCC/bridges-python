@@ -9,7 +9,7 @@ my_color.alpha = 1.0
 
 print(my_color.rgba)
 
-my_color.set_color(r=0, g=24, b=32, a=0)
+my_color.set_color(r=0, g=24.5, b=32, a=0)
 print(my_color.rgba)
 
 my_color = Color(red=0, green=0, blue=0, alpha=1.0)
@@ -17,6 +17,12 @@ print(my_color.rgba)
 
 named_color = Color(col_name="blue")
 print(named_color.rgba)
+
+my_color = Color(b=255)
+print(my_color.rgba)
+
+my_color = Color(blue=255)
+print(my_color.rgba)
 
 named_color = Color("red")
 print(named_color.rgba)

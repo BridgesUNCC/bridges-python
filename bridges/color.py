@@ -29,7 +29,7 @@ class Color(object):
         if value < 0 or value > 255:
             raise ValueError("Value for RGB attributes should range from 0-255 inclusive")
 
-        self._red = value
+        self._red = int(value)
 
     @red.deleter
     def red(self):
@@ -48,7 +48,7 @@ class Color(object):
         if value < 0 or value > 255:
             raise ValueError("Value for RGB attributes should range from 0-255 inclusive")
 
-        self._green = value
+        self._green = int(value)
 
     @green.deleter
     def green(self):
@@ -67,7 +67,7 @@ class Color(object):
         if value < 0 or value > 255:
             raise ValueError("Value for RGB attributes should range from 0-255 inclusive")
 
-        self._blue = value
+        self._blue = int(value)
 
     @blue.deleter
     def blue(self):
