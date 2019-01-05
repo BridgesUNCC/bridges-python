@@ -75,8 +75,8 @@ class ElementVisualizer(object):
     #  Set the color of the Element in the bridges Visualization to "aColor".
     #  @param aColor the string reprsenting the color of the Element in the bridges Visualization
     #
-    def set_color(self, col_name):
-        self.color.set_color(col_name)
+    def set_color(self, *args, **kwargs):
+        self.color.set_color(*args, **kwargs)
 
     ##
     # Get the color of the Element in the bridges Visualization
