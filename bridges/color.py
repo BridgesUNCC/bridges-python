@@ -26,10 +26,14 @@ class Color(object):
 
     @red.setter
     def red(self, value: int):
+        try:
+            value = int(value)
+        except ValueError:
+            raise ValueError("Value for RGB attributes must be to be casted to int")
         if value < 0 or value > 255:
             raise ValueError("Value for RGB attributes should range from 0-255 inclusive")
 
-        self._red = int(value)
+        self._red = value
 
     @red.deleter
     def red(self):
@@ -45,6 +49,10 @@ class Color(object):
 
     @green.setter
     def green(self, value: int):
+        try:
+            value = int(value)
+        except ValueError:
+            raise ValueError("Value for RGB attributes must be to be casted to int")
         if value < 0 or value > 255:
             raise ValueError("Value for RGB attributes should range from 0-255 inclusive")
 
@@ -64,6 +72,10 @@ class Color(object):
 
     @blue.setter
     def blue(self, value: int):
+        try:
+            value = int(value)
+        except ValueError:
+            raise ValueError("Value for RGB attributes must be to be casted to int")
         if value < 0 or value > 255:
             raise ValueError("Value for RGB attributes should range from 0-255 inclusive")
 
@@ -83,6 +95,10 @@ class Color(object):
 
     @alpha.setter
     def alpha(self, value: float):
+        try:
+            value = float(value)
+        except ValueError:
+            raise ValueError("Value for Alpha must be to be casted to float")
         if value < 0.0 or value > 1.0:
             raise ValueError("Value for alpha should range from 0.0 - 1.0 inclusive")
 

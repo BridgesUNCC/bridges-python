@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="bridges",
-    version="2.3.5",
+    version="2.4.5",
     author="BRIDGES",
     author_email="bridges.uncc@gmail.com",
     description="Bridging Real-world Infrastructure Designed to Goal-align, Engage, and Stimulate, an NFS TUES",

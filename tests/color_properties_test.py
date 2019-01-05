@@ -2,7 +2,7 @@ from bridges.color import Color
 
 my_color = Color()
 
-my_color.red = 10
+my_color.red = 10.5
 my_color.green = 100
 my_color.blue = 255
 my_color.alpha = 1.0
