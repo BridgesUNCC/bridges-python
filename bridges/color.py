@@ -29,7 +29,7 @@ class Color(object):
         try:
             value = int(value)
         except ValueError:
-            raise ValueError("Value for RGB attributes must be to be casted to int")
+            raise ValueError("Value for RGB attributes must be able to be casted to int")
         if value < 0 or value > 255:
             raise ValueError("Value for RGB attributes should range from 0-255 inclusive")
 
@@ -52,7 +52,7 @@ class Color(object):
         try:
             value = int(value)
         except ValueError:
-            raise ValueError("Value for RGB attributes must be to be casted to int")
+            raise ValueError("Value for RGB attributes must able be to be casted to int")
         if value < 0 or value > 255:
             raise ValueError("Value for RGB attributes should range from 0-255 inclusive")
 
@@ -75,7 +75,7 @@ class Color(object):
         try:
             value = int(value)
         except ValueError:
-            raise ValueError("Value for RGB attributes must be to be casted to int")
+            raise ValueError("Value for RGB attributes must able be to be casted to int")
         if value < 0 or value > 255:
             raise ValueError("Value for RGB attributes should range from 0-255 inclusive")
 
@@ -98,7 +98,7 @@ class Color(object):
         try:
             value = float(value)
         except ValueError:
-            raise ValueError("Value for Alpha must be to be casted to float")
+            raise ValueError("Value for Alpha must be able to be casted to float")
         if value < 0.0 or value > 1.0:
             raise ValueError("Value for alpha should range from 0.0 - 1.0 inclusive")
 
