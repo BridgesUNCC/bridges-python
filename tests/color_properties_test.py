@@ -9,6 +9,17 @@ my_color.alpha = 1.0
 
 print(my_color.rgba)
 
+named_color = Color(col_name="blue")
+print(named_color.rgba)
+
+named_color = Color("red")
+print(named_color.rgba)
+
+try:
+    named_color = Color("Not a Real Color")
+except ValueError:
+    print("Passed invalid color name test")
+
 other_color = Color()
 other_color.rgba = 100, 0, 20, 0
 print(my_color.rgba, other_color.rgba)
@@ -35,6 +46,8 @@ except ValueError:
                 my_color.rgba = 0, 0, 0, 1.1
             except ValueError:
                 print("Setter passed for overflow on RGBA")
+else:
+    print("Setter failed for overflow on RGBA")
 
 try:
     my_color.rgba = -1, 0, 255, 0.0
@@ -49,3 +62,5 @@ except ValueError:
                 my_color.rgba = 0, 0, 0, -0.1
             except ValueError:
                 print("Setter passed for underflow on RGBA")
+else:
+    print("Setter failed for underflow on RGBA")

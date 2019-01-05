@@ -64,7 +64,7 @@ class LinkVisualizer(object):
 
     def __init__(self):
         # super(LinkVisualizer.LinkVisualizer, self).__init__()
-        self.color = Color(70, 130, 180, 1.0, None)
+        self.color = Color(70, 130, 180, 1.0)
         self.set_color(70, 130, 180, 1.0)
         self.set_thickness(1.0)
         self.set_weight(1.0)
@@ -119,8 +119,8 @@ class LinkVisualizer(object):
     #  	"pink", "lavender", "purple", "gold"
     #
     #
-    def set_color(self, r: int = 0, g: int = 0, b: int = 0, a: float = 0.0, col_name: str = None):
-        self.color.set_color(r, g, b, a, col_name)
+    def set_color(self, *args, **kwargs):
+        self.color.set_color(*args, **kwargs)
 
     ##
     #
