@@ -16,6 +16,7 @@ setuptools.setup(
     python_requires='>3.5.2',
     install_requires=[
         'requests',
+        'webcolors',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
