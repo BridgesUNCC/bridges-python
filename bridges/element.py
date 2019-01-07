@@ -2,6 +2,7 @@
 from bridges.element_visualizer import *
 from bridges.color import *
 from bridges.link_visualizer import *
+from bridges.kd_tree_element import *
 import re
 from decimal import Decimal
 
