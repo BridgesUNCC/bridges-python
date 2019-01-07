@@ -83,6 +83,7 @@ class Symbol:
         return [0.0, 0.0, 0.0, 0.0]
 
     def get_json_representation(self):
+
         ds = {
             "fill": [self.fill_color.get_red(), self.fill_color.get_green(), self.fill_color.get_blue(), self.fill_color.get_alpha()],
             "opacity": self.opacity,
@@ -91,6 +92,5 @@ class Symbol:
             "stroke-dasharray": self.stroke_dash,
             "location": [self.location_x, self.location_y]
         }
-        ds_json = json.dumps(ds)
-        return ds_json
+        return ds
 

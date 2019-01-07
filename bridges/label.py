@@ -26,12 +26,16 @@ class Label(Symbol):
 
     def get_json_representation(self):
         ds_json = super(Label,self).get_json_representation()
-        ds = {
-            "name": super(Label,self).get_label(),
-            "shape": "text",
-            "font-size": self.font_size
-        }
-        ds = json.dumps(ds)
+        ds_json["name"] = super(Label,self).get_label()
+        ds_json["shape"] = "text"
+        ds_json["font-size"] = self.font_size
+        # ds = {
+        #     "name": super(Label,self).get_label(),
+        #     "shape": "text",
+        #     "font-size": self.font_size
+        # }
+        # ds = json.dumps(ds)[1:]
 
-        ds_json += ds
+        # ds_json += ds
+        # ds_json = json.dumps(ds_json)
         return ds_json

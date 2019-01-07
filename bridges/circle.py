@@ -33,22 +33,25 @@ class Circle(Symbol):
         dims = []
         location = self.get_location()
 
-        dims[0] = location[0] - self.radius
-        dims[1] = location[0] + self.radius
-        dims[2] = location[1] - self.radius
-        dims[3] = location[1] + self.radius
+        dims.append(location[0] - self.radius)
+        dims.append(location[0] + self.radius)
+        dims.append(location[1] - self.radius)
+        dims.append(location[1] + self.radius)
 
         return dims
 
     def get_json_representation(self):
 
         ds_json = super(Circle, self).get_json_representation()
-
-        ds = {
-            "name": self.get_label(),
-            "shape": self.get_name(),
-            "r": self.radius
-        }
-        ds = json.dumps(ds)
-        ds_json += ds
+        ds_json["name"] = self.get_label()
+        ds_json["shape"] = self.get_name()
+        ds_json["r"] = self.radius
+        # ds = {
+        #     "name": self.get_label(),
+        #     "shape": self.get_name(),
+        #     "r": self.radius
+        # }
+        # ds_json += json.dumps(ds)[1:]
+        # ds_json += ds
+        # ds_json = json.dumps(ds_json)
         return ds_json

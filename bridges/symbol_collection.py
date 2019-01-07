@@ -27,9 +27,11 @@ class SymbolCollection:
             self.domain = abs(dims[3])
 
     def get_data_structure_representation(self):
-        symbol_json = ''
+        symbol_json = []
+
         for key in self.symbols.keys():
             self.update_axis_domains(self.symbols[key])
-            symbol_json += self.symbols[key].get_json_representation()
+            symbol_json.append(self.symbols[key].get_json_representation())
 
-        return "\"""domainX\""":[" + str(-self.domain) + "," + str(self.domain) + "],\"""symbols\""":" + symbol_json + "}"
+        symbol_json = json.dumps(symbol_json)
+        return "\"""domainX\""":[" + str(-self.domain) + "," + str(self.domain) + "],\"""domainY\""":[" + str(-self.domain) + "," + str(self.domain) + "], " + "\"""Symbols\""":" + symbol_json + "}"
