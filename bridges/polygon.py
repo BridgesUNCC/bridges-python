@@ -53,13 +53,8 @@ class Polygon(Symbol):
     def get_json_representation(self):
 
         ds_json = super(Polygon, self).get_json_representation()
+        ds_json["name"] = self.get_label()
+        ds_json["shape"] = self.get_name()
+        ds_json["font-size"] = self.points
 
-        ds = {
-            "name": self.get_label(),
-            "shape": self.get_name(),
-            "points": self.points
-        }
-
-        ds = json.dumps(ds)
-        ds_json += ds
         return ds_json

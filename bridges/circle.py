@@ -46,12 +46,5 @@ class Circle(Symbol):
         ds_json["name"] = self.get_label()
         ds_json["shape"] = self.get_name()
         ds_json["r"] = self.radius
-        # ds = {
-        #     "name": self.get_label(),
-        #     "shape": self.get_name(),
-        #     "r": self.radius
-        # }
-        # ds_json += json.dumps(ds)[1:]
-        # ds_json += ds
-        # ds_json = json.dumps(ds_json)
+
         return ds_json
