@@ -9,6 +9,10 @@ class Color(object):
     with the alpha ranging from 0.0-1.0 inclusive.
 
     We use webcolors to handle color names passed to the constructor/set_color function.
+    https://webcolors.readthedocs.io/en/1.8.1/
+    All CSS3 color names should be valid:
+    https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
+    https://www.w3.org/TR/css-color-3/#svg-color
 
     Attributes:
         red (int): red component of color ranging from 0-255 inclusive (default 0)
