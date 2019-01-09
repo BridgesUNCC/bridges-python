@@ -90,7 +90,10 @@ class Symbol:
             "stroke": [self.stroke_color.get_red(), self.stroke_color.get_green(), self.stroke_color.get_blue(), self.stroke_color.get_alpha()],
             "stroke-width": self.stroke_width,
             "stroke-dasharray": self.stroke_dash,
-            "location": [self.location_x, self.location_y]
+            "location": {
+                "x": self.location_x,
+                "y": self.location_y
+            }
         }
         return ds
 

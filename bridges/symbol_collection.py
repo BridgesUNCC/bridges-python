@@ -34,4 +34,4 @@ class SymbolCollection:
             symbol_json.append(self.symbols[key].get_json_representation())
 
         symbol_json = json.dumps(symbol_json)
-        return "\"""domainX\""":[" + str(-self.domain) + "," + str(self.domain) + "],\"""domainY\""":[" + str(-self.domain) + "," + str(self.domain) + "], " + "\"""Symbols\""":" + symbol_json + "}"
+        return "\"""domainX\""":[" + str(-self.domain) + "," + str(self.domain) + "],\"""domainY\""":[" + str(-self.domain) + "," + str(self.domain) + "], " + "\"""symbols\""":" + symbol_json + "}"

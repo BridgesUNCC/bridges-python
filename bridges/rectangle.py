@@ -34,7 +34,7 @@ class Rectangle(Symbol):
         dims.append(location[0] - self.width/2)
         dims.append(location[0] - self.width/2)
         dims.append(location[1] - self.height/2)
-        dims.append(location[2] - self.height/2)
+        dims.append(location[1] - self.height/2)
 
         return dims
 

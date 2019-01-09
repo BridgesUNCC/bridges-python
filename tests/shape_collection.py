@@ -14,7 +14,7 @@ def main():
     bridges.json_flag = True
 
     sc = SymbolCollection()
-    s1 = Rectangle(-25.0, 0.0, 50, 50)
+    s1 = Rectangle(50, 50, -25.0, 0.0)
     s1.set_fill_color(Color("green"))
     sc.add_symbol(s1)
 

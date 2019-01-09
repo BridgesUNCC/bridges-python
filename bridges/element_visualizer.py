@@ -25,7 +25,6 @@ class ElementVisualizer(object):
 
 
     prop = dict()
-    color = Color(70, 130, 180, 1.0)
 
     prop["color"] = "[70, 130, 180, 1.0]"
     prop["opacity"] = "1.0"
@@ -43,14 +42,15 @@ class ElementVisualizer(object):
     def __init__(self, a_color = "green", a_shape = "circle", size = 10.0, opacity = 1.0):
         if a_color is not "green":
             self.set_color(a_color)
+        else:
+            self.color = Color(70, 130, 180, 1.0)
         if a_shape is not "circle":
             self.set_shape(a_shape)
         if size is not 10.0:
             self.set_size(10.0)
         if opacity is not 1.0:
             self.set_opacity(opacity)
-        else:
-            self.color = Color(70, 130, 180, 1.0)
+
 
 
     ##
