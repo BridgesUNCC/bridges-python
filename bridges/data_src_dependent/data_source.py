@@ -421,7 +421,7 @@ def get_color_grid_from_assignment(server: str, user: str, assignment: int, suba
         decoded_bytes = bytearray(base64.b64decode(node_string))
         decoded = [int(x) for x in decoded_bytes]
     except AttributeError:
-        raise RuntimeError("Malformed JSON: Unable to Parse")
+        raise RuntimeError("Malformed JSON: Unable to Parse. Does this assignment exist?")
 
     color_grid = ColorGrid(dim_x, dim_y)
 
