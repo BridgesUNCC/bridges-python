@@ -5,7 +5,7 @@ from bridges.sl_element import *
 class ListIMDB:
 
     #Init a Bridges connection with your credentials
-    bridges = Bridges(35, "test", "137842425086")
+    bridges = Bridges(35, "test", "211416381091")
 
     bridges.connector.set_server("local")
 
@@ -26,7 +26,7 @@ class ListIMDB:
         element = SLelement()
 
         #Set the element label equal to 'Actor = Movie' for each pair.(print it out for sanit Check)
-        element.set_label(myList[i].get_Actor() + " - " + myList[i].get_Movie())
+        element.set_label(myList[i].get_actor() + " - " + myList[i].get_movie())
         print(element.get_label())
 
         #add 'next' pointer where appropriate

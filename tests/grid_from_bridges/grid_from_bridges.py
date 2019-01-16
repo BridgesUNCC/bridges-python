@@ -4,7 +4,7 @@ from bridges.color import *
 
 def main():
     # Initialize BRIDGES with your credentials
-    bridges = Bridges(0, "test", "")
+    bridges = Bridges(0, "test", "211416381091")
 
     bridges.connector.set_server("local")
 
@@ -26,10 +26,13 @@ def main():
     cg = bridges.get_color_grid_from_assignment(bridges.get_username(), bridges.get_assignment_id(), 0)
 
     dims = cg.get_dimensions()
-    for k in range(dims[1] / 2 - 5, dims[1]/2+5):
-        for j in range(dims[0]/2-5, dims[0]/2 + 5):
+    for k in range(int(dims[1] / 2 - 5), int(dims[1]/2+5)):
+        for j in range(int(dims[0]/2-5), int(dims[0]/2 + 5)):
             cg.set(k,j,Color("red"))
 
     bridges.set_data_structure(cg)
     bridges.visualize()
+
+if __name__ == '__main__':
+    main()
 

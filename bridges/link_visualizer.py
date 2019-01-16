@@ -164,3 +164,10 @@ class LinkVisualizer(object):
     def get_link_properties(self):
         link_props = self.QUOTE + "color" + self.QUOTE + self.COLON + self.OPEN_BOX + str(self.get_color().get_red()) + self.COMMA + str(self.get_color().get_green()) + self.COMMA + str(self.get_color().get_blue()) + self.COMMA + str(self.get_color().get_alpha()) + self.CLOSE_BOX + self.COMMA + self.QUOTE + "thickness" + self.QUOTE + self.COLON + str(self.get_thickness()) + self.COMMA + self.QUOTE + "weight" + self.QUOTE + self.COLON + str(self.get_weight())
         return link_props
+
+    def get_label(self):
+        return self.label
+
+    def set_label(self, label):
+        self.label = label
+

@@ -6,9 +6,9 @@ from bridges.graph_adj_list import *
 def create_genre_vertices(g, genres):
     for k in range(len(genres)):
         g.add_vertex(genres[k], ActorMovieIMDB())
-        g.add_vertex(genres[k]).get_visualizer().set_color("red")
-        g.add_vertex(genres[k]).get_visualizer().set_opacity(0.5)
-        g.add_vertex(genres[k]).get_visualizer().set_size(50)
+        g.get_vertex(genres[k]).get_visualizer().set_color("red")
+        g.get_vertex(genres[k]).get_visualizer().set_opacity(0.5)
+        g.get_vertex(genres[k]).get_visualizer().set_size(50)
 
 def group_movies_by_actors(g, actor_movie_data):
     verts = g.get_vertices()
@@ -52,7 +52,7 @@ def group_movies_by_actors(g, actor_movie_data):
 
 def main():
     # Initialize BRIDGES with your credentials
-    bridges = Bridges(0, "test", "")
+    bridges = Bridges(0, "test", "211416381091")
 
     # set title for visualization
     bridges.set_title("Graph Example(IMDB Data): Movies Grouped by Genre")

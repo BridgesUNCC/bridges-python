@@ -80,7 +80,7 @@ def get_bacon_number(gr, src_actor, dest_actor, mark, dist, parent):
 def main():
 
     #Initialize BRIDGES with your credentials
-    bridges = Bridges(0, "test","")
+    bridges = Bridges(0, "test","211416381091")
 
     # set title for visualization
     bridges.set_title("Bacon Number: IMDB Actor-Movie Data")
@@ -97,8 +97,8 @@ def main():
     for k in range(len(actor_list)):
 
         #get the actor movie names
-        actor = actor_list[k].get_Actor()
-        movie = actor_list[k].get_Movie()
+        actor = actor_list[k].get_actor()
+        movie = actor_list[k].get_movie()
 
         # our graph needs to have a unique set of actors and movies
         # so create the actor and movie vertices only if they dont already

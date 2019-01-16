@@ -7,7 +7,6 @@ def split_lyrics(lyrics):
     lyrics.trim()
     lyrics_split = lyrics.split("\\s+")
 
-    for i in range(len(lyrics_split)):
 
 
 def main():

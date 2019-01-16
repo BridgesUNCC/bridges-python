@@ -1,5 +1,6 @@
 from bridges.bridges import *
 from bridges.data_src_dependent.data_source import *
+from bridges.data_src_dependent.earthquake_usgs import *
 from bridges.graph_adj_list import *
 import math
 
@@ -14,9 +15,12 @@ def calc_distance(la1, lo1, la2, lo2):
     distance = radius * c
     return distance
 
+def sorting(e):
+    return e.magnitude
+
 def main():
     # Initialize BRIDGES with your credentials
-    bridges = Bridges(0, "test", "")
+    bridges = Bridges(0, "test", "211416381091")
 
     # set title for visualization
     bridges.set_title("Bacon Number: IMDB Actor-Movie Data")
@@ -27,7 +31,7 @@ def main():
 
     eqlist = get_earthquake_usgs_data(5000)
 
-    eqlist.sort(eqlist.get_magnitude(), reverse=True)
+    eqlist.sort(key=sorting, reverse=True)
 
     for eq in eqlist:
         if len(graph.get_adjacency_list()) > 99:
@@ -72,7 +76,7 @@ def main():
 
             if distance < 500:
                 graph.add_edge(eq.get_title(), ua.get_title())
-                graph.get_link_visualizer(eq.get_title(), ua.get_title().set_label("%s.2f KM" % distance))
+                graph.get_link_visualizer(eq.get_title(), ua.get_title()).set_label("%s.2f KM" % distance)
 
     bridges.visualize()
 

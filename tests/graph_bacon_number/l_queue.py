@@ -3,12 +3,10 @@ from tests.graph_bacon_number.link import *
 class LQueue:
 
     def __init__(self, size = None):
-        self.init()
-
-    def init(self):
         self.front = Link(None)
         self.rear = Link(None)
         self.size = 0
+
 
     def clear(self):
         self.__init__()
@@ -19,18 +17,16 @@ class LQueue:
         self.size += 1
 
     def dequeue(self):
-        if self.size != 0:
-            print("queue is empty")
+        assert self.size != 0, "queue is empty"
         it = self.front.next().element()
-        self.front.setNext(self.front.next())
+        self.front.setNext(self.front.next().next())
         if self.front.next() is None:
             self.rear = self.front
-        self.size -= self.size
+        self.size -= 1
         return it
 
     def frontValue(self):
-        if self.size != 0:
-            print("queue is empty")
+        assert self.size != 0, "queue is empty"
         return self.front.next().element()
 
     def length(self):
