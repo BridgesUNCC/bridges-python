@@ -205,4 +205,10 @@ class Bridges:
         from bridges.data_src_dependent.data_source import get_color_grid_from_assignment
         return get_color_grid_from_assignment(self.connector.server_url, user, assignment, subassignment)
 
+    def get_username(self):
+        return self.username.join('+')
+
+    def get_assignment_id(self):
+        return self.assignment
+
 
