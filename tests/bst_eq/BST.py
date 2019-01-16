@@ -13,14 +13,14 @@ class BST:
         self.node_count = 0
 
     def insert(self, k, e):
-        self.root = self.insert_help(self.root, k ,e)
+        self.root = self.insert_help(self.root, k, e)
         self.node_count += 1
 
     def remove(self, k):
         temp = self.find_help(self.root, k)
         if temp is not None:
             self.root = self.remove_help(self.root, k)
-            self.node_count += 1
+            self.node_count -= 1
         return temp
 
     def find_help(self, rt, k):
@@ -37,19 +37,20 @@ class BST:
         if rt is None:
             n = BSTElement(k, e)
             eq = n.get_value()
-            n.set_label(eq.get_title() + "\n\n" + eq.get_time())
+            n.set_label(eq.get_title() + eq.get_time())
             return n
-        if rt.get_key() > 0:
+        if rt.get_key() > k:
             rt.set_left(self.insert_help(rt.get_left(), k, e))
         else:
             rt.set_right(self.insert_help(rt.get_right(), k, e))
+        return rt
 
     def remove_help(self, rt, k):
         if rt is None:
             return None
-        if rt.get_key() > 0:
+        if rt.get_key() > k:
             rt.set_left(self.remove_help(rt.get_left(), k))
-        elif rt.get_key() < 0:
+        elif rt.get_key() < k:
             rt.set_right(self.remove_help(rt.get_right(), k))
         else:
             if rt.get_left() is None:
@@ -59,7 +60,7 @@ class BST:
             else:
                 temp = self.get_min(rt.get_right())
                 rt.set_value(temp.get_value())
-                rt.set_label(str(temp.get_key()))
+                rt.set_label(temp.get_key())
                 rt.set_key(temp.get_key())
                 rt.set_right(self.delete_min(rt.get_right()))
         return rt
