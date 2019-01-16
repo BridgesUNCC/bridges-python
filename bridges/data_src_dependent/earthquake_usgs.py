@@ -5,8 +5,8 @@ class EarthquakeUSGS:
 
     def getDate(self):
 
-        s = self.getTime()
-        epoch_time = int(self.getTime())
+        s = self.get_time()
+        epoch_time = int(self.get_time())
         eq_time = epoch_time/1000
 
         eqt = time.gmtime(eq_time)
