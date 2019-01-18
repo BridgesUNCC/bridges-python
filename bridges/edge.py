@@ -15,7 +15,7 @@ from bridges.element import *
 #
 class Edge(object):
     weight = int()
-    vertex = Element()
+    # vertex = Element()
 
     #  refers to a terminating vertex
     edge_data = str()
@@ -27,7 +27,7 @@ class Edge(object):
     # @param v the terminating vertex of the edge
     #
     def __init__(self, wt=None, v=None):
-        if not wt:
+        if wt is not None:
             self.weight = wt
         else:
             self.weight = 0

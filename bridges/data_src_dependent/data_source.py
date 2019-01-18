@@ -7,6 +7,7 @@ from bridges.data_src_dependent import shakespeare
 from bridges.data_src_dependent import gutenberg_book
 from bridges.data_src_dependent import cancer_incidence
 from bridges.data_src_dependent import song
+from bridges.data_src_dependent.actor_movie_imdb import *
 from bridges.color_grid import ColorGrid
 from bridges.color import Color
 
@@ -43,8 +44,15 @@ def get_game_data():
         genre = []
         for j in range(len(G)):
             genre.append(str(G[j]))
-        wrapper.append(game.Game(V["game"], V["platform"], V["rating"], genre))
+        wrapper.append(game.Game(V["game"], V["platform"], V["rating"], str(genre)))
     return wrapper
+
+
+def parse_actor_movie_imdb(item):
+    am_pair = ActorMovieIMDB()
+    am_pair.set_actor(item["actor"])
+    am_pair.set_movie(item["movie"])
+    return am_pair
 
 
 ##
@@ -77,6 +85,36 @@ def get_actor_movie_imdb_data(number = 0):
         wrapper.append(actor_movie_imdb.ActorMovieIMDB(V["actor"], V["movie"]))
 
     return wrapper
+
+def get_actor_movie_imdb_data2():
+
+    url = "https://bridgesdata.herokuapp.com/api/imdb2"
+
+    r = requests.get(url = url)
+    status = r.status_code
+
+    data = r.json()
+    D = data["data"]
+    am_list = []
+
+    if status == 200:
+        for i in range(len(D)):
+            V = D[i]
+            am_pair = parse_actor_movie_imdb(V)
+            am_pair.set_rating(int(V['rating']))
+
+            genre = V['genres']
+            v = []
+            for k in range(len(genre)):
+                v.append(genre[k])
+            am_pair.set_genres(v)
+            am_list.append(am_pair)
+        return am_list
+    else:
+        r.raise_for_status()
+
+
+
 
 
 ##

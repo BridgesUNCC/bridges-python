@@ -85,7 +85,7 @@ class GraphAdjList():
     def add_vertex(self, k, e):
         #  note: it is the user's responsibility to  check
         #  for duplicate vertices
-        self.vertices[k] = Element(e)
+        self.vertices[k] = Element(val = e)
         self.vertices.get(k).set_label(str(k))
         self.adj_list[k] = None
 
@@ -108,9 +108,9 @@ class GraphAdjList():
         except Exception as e:
             traceback.print_tb(e.__traceback__)
         if weight is not None:
-            self.adj_list[src] = SLelement(Edge(weight, dest), next = self.adj_list.get(src))
+            self.adj_list[src] = SLelement(e=Edge(weight, dest), next = self.adj_list.get(src))
         else:
-            self.adj_list[src] = SLelement(Edge(1, dest), next = self.adj_list.get(src))
+            self.adj_list[src] = SLelement(e=Edge(1, dest), next = self.adj_list.get(src))
 
     ##
     #	This method returns the graph nodes

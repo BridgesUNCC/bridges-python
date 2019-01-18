@@ -16,7 +16,7 @@ def group_movies_by_actors(g, actor_movie_data):
         actor = actor_movie_data[k].get_actor()
         movie = actor_movie_data[k].get_movie()
         m_genre = actor_movie_data[k].get_genres()
-        rating = actor_movie_data[k].get_movie_rating()
+        rating = actor_movie_data[k].get_rating()
 
         if(actor not in g.get_vertices()):
             g.add_vertex(actor, actor_movie_data[k])
@@ -34,10 +34,9 @@ def group_movies_by_actors(g, actor_movie_data):
         for l in range(len(m_genre)):
             genre = m_genre[l]
             g.add_edge(movie, genre, 1)
-
-            rating = g.get_vertex(movie).get_value().get_movie_rating()
+            rating = g.get_vertex(movie).get_value().get_rating()
             label = g.get_vertex(movie).get_label() + "(" + str(rating) + ")"
-            g.get_vertex(movie).set_labe(label)
+            g.get_vertex(movie).set_label(label)
 
             if rating < 5.0:
                 g.get_vertex(movie).get_visualizer().set_color("blue")
@@ -61,18 +60,9 @@ def main():
 
     g = GraphAdjList()
 
-    actor_movie_data = get_actor_movie_imdb_data()
+    actor_movie_data = get_actor_movie_imdb_data2()
 
-    genres = ["Mystery", "Comedy",
-				"Documentary", "Drama", "Romance", "Crime", "Thriller",
-				"Biography", "Horror",
-				"News", "Action",
-				"Adventure", "Animation",
-				"Family", "Sci-Fi",
-				"Music", "Sport",
-				"Short", "Musical",
-				"History", "Talk-Show", "Reality-TV", "Game-Show", "Fantasy",
-				"War"]
+    genres = ["Mystery", "Comedy","Documentary", "Drama", "Romance", "Crime", "Thriller","Biography", "Horror","News", "Action","Adventure", "Animation","Family", "Sci-Fi","Music", "Sport","Short", "Musical","History", "Talk-Show", "Reality-TV", "Game-Show", "Fantasy","War"]
 
     create_genre_vertices(g, genres)
     group_movies_by_actors(g, actor_movie_data)
