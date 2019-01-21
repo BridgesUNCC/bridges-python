@@ -18,13 +18,12 @@ def get_bacon_number(gr, src_actor, dest_actor, mark, dist, parent):
     #BFS Traversal
     while lq.length() > 0: #non empty queue
 
-        vertex = str(lq.dequeue())
+        vertex = lq.dequeue()
 
         #get adjacencey list of vertex
         sl_list = gr.get_adjacency_list(vertex)
         sle = sl_list
         while(sle is not None):
-            sle = sle.get_next()
 
             #get destination vertex
             w = sle.get_value().get_vertex()
@@ -58,9 +57,9 @@ def get_bacon_number(gr, src_actor, dest_actor, mark, dist, parent):
                         #color the nodes in the path
                         #example gr.getVisualizer(key-val).setColor("red")
 
-                        gr.get_visualizer().set_color("red")
-                        gr.get_visualizer().set_size(50)
-                        gr.get_visualizer().set_opacity(1.0)
+                        gr.get_visualizer(p).set_color("red")
+                        gr.get_visualizer(p).set_size(50)
+                        gr.get_visualizer(p).set_opacity(1.0)
 
                         # next, color the link but check the parent is not "none", else you will
                         # get an exception
@@ -73,8 +72,7 @@ def get_bacon_number(gr, src_actor, dest_actor, mark, dist, parent):
                         p = par
 
                     return dist[dest_actor]
-
-
+            sle = sle.get_next()
 
 
 def main():
@@ -92,7 +90,6 @@ def main():
 
     actor_list = get_actor_movie_imdb_data(1814)
 
-    actor, movie = "", ""
 
     for k in range(len(actor_list)):
 
@@ -107,11 +104,11 @@ def main():
         vertices = gr.get_vertices()
 
         # add actor if does not exist
-        if(not(actor in vertices)):
+        if(actor not in vertices):
             gr.add_vertex(actor, actor)
 
         # add movie if does not exist
-        if(not(movie in vertices)):
+        if(movie not in vertices):
             gr.add_vertex(movie, movie)
 
         # create the edge -- assumes no duplicate edges

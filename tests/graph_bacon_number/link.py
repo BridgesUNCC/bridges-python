@@ -2,8 +2,7 @@
 class Link():
 
     def __init__(self, nextVal, it = None):
-        if( it is not None):
-            self.element = it
+        self.element = it
         self.next = nextVal
 
     def __call__(self):
