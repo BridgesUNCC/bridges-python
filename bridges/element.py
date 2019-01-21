@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 from bridges.element_visualizer import *
-# from bridges.kd_tree_element import *
 from bridges.color import *
 from bridges.link_visualizer import *
 import re
 from decimal import Decimal
+# from bridges.kd_tree_element import *
+
 
 
 ##
@@ -195,9 +196,10 @@ class Element(object):
         loc_flag = not ((self.visualizer.get_locationX() == Decimal('Infinity')) or (self.visualizer.get_locationY() == Decimal('Infinity')))
         if loc_flag:
              json_str += self.COMMA + self.QUOTE + "location" + self.QUOTE + self.COLON + self.OPEN_BOX + str(self.visualizer.get_locationX()) + self.COMMA + str(self.visualizer.get_locationY()) + self.CLOSE_BOX
-        if self.get_data_struct_type() == "KdTree":
-            kdt = KDTreeElement(self)
-            json_str += self.COMMA + self.QUOTE + "key" + self.QUOTE + self.COLON + self.QUOTE + str(kdt.get_key()) + self.QUOTE + self.COMMA + self.QUOTE + "dimension" + self.QUOTE + self.COLON + self.QUOTE + kdt.get_dimension() + self.QUOTE + self.COMMA + self.QUOTE + "thickness" + self.QUOTE + self.COLON + self.QUOTE + kdt.get_thickness() + self.QUOTE + self.COMMA
+        if self.get_data_structure_type() == "KdTree":
+            print("here")
+            kdt = self
+            json_str += self.COMMA + self.QUOTE + "key" + self.QUOTE + self.COLON + self.QUOTE + str(kdt.get_key()) + self.QUOTE + self.COMMA + self.QUOTE + "dimension" + self.QUOTE + self.COLON + self.QUOTE + str(kdt.get_dimension()) + self.QUOTE + self.COMMA + self.QUOTE + "thickness" + self.QUOTE + self.COLON + self.QUOTE + str(kdt.get_thickness()) + self.QUOTE + self.COMMA
         #if self.get_data_struct_type() == "BinarySearchTree":
         #     bst = BSTElement(self)
         #     json_str += self.COMMA + self.QUOTE + "key" + self.QUOTE + self.COLON + self.QUOTE + bst.getKey().__str__() + self.QUOTE + self.COMMA
