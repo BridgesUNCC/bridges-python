@@ -197,15 +197,14 @@ class Element(object):
         if loc_flag:
              json_str += self.COMMA + self.QUOTE + "location" + self.QUOTE + self.COLON + self.OPEN_BOX + str(self.visualizer.get_locationX()) + self.COMMA + str(self.visualizer.get_locationY()) + self.CLOSE_BOX
         if self.get_data_structure_type() == "KdTree":
-            print("here")
             kdt = self
             json_str += self.COMMA + self.QUOTE + "key" + self.QUOTE + self.COLON + self.QUOTE + str(kdt.get_key()) + self.QUOTE + self.COMMA + self.QUOTE + "dimension" + self.QUOTE + self.COLON + self.QUOTE + str(kdt.get_dimension()) + self.QUOTE + self.COMMA + self.QUOTE + "thickness" + self.QUOTE + self.COLON + self.QUOTE + str(kdt.get_thickness()) + self.QUOTE + self.COMMA
-        #if self.get_data_struct_type() == "BinarySearchTree":
-        #     bst = BSTElement(self)
-        #     json_str += self.COMMA + self.QUOTE + "key" + self.QUOTE + self.COLON + self.QUOTE + bst.getKey().__str__() + self.QUOTE + self.COMMA
-        # elif self.get_data_struct_type() == "AVLTree":
-        #     json_str += self.COMMA + self.QUOTE + "key" + self.QUOTE + self.COLON + self.QUOTE + avl.getKey().__str__() + self.QUOTE + self.COMMA + self.QUOTE + "height" + self.QUOTE + self.COLON + Integer.toString(avl.getHeight()) + self.COMMA + self.QUOTE + "balance_factor" + QUOTE + COLON + Integer.toString(avl.getBalanceFactor()) + COMMA
-        # else:
+        if self.get_data_structure_type() == "BinarySearchTree":
+            bst = self
+            json_str += self.COMMA + self.QUOTE + "key" + self.QUOTE + self.COLON + self.QUOTE + str(bst.get_key()) + self.QUOTE + self.COMMA
+        elif self.get_data_structure_type() == "AVLTree":
+            avl = self
+            json_str += self.COMMA + self.QUOTE + "key" + self.QUOTE + self.COLON + self.QUOTE + str(avl.get_key()) + self.QUOTE + self.COMMA + self.QUOTE + "height" + self.QUOTE + self.COLON + str(avl.get_height()) + self.COMMA + self.QUOTE + "balance_factor" + self.QUOTE + self.COLON + str(avl.get_balance_factor()) + self.COMMA
         else:
             json_str += self.CLOSE_CURLY
         return json_str
