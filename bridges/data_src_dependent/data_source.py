@@ -269,25 +269,25 @@ def get_cancer_incident_data(num = 0):
         c = cancer_incidence.CancerIncidence()
         v = D[i]
         age = v["Age"]
-        c.setAgeAdjustedRate(age["Age Adjusted Rate"])
-        c.setAgeAdjustedCI_Lower(age["Age Adjusted CI Lower"])
-        c.setAgeAdjustedCI_Upper(age["Age Adjusted CI Upper"])
-        c.setYear(v["Year"])
+        c.set_age_adjusted_rate(age["Age Adjusted Rate"])
+        c.set_age_adjusted_ci_lower(age["Age Adjusted CI Lower"])
+        c.set_age_adjusted_ci_upper(age["Age Adjusted CI Upper"])
+        c.set_year(v["Year"])
 
         data = v["Data"]
 
-        c.setCrudeRate(data["Crude Rate"])
-        c.setCrudeRate_CI_lower(data["Crude CI Lower"])
-        c.setCrudeRate_CI_Upper(data["Crude CI Upper"])
-        c.setRace(data["Race"])
-        c.setPopulation(data["Population"])
-        c.setEventType(data["Event Type"])
-        c.setAffectedArea(v["Area"])
+        c.set_crude_rate(data["Crude Rate"])
+        c.set_crude_rate_ci_lower(data["Crude CI Lower"])
+        c.set_crude_rate_ci_upper(data["Crude CI Upper"])
+        c.set_race(data["Race"])
+        c.set_population(data["Population"])
+        c.set_event_type(data["Event Type"])
+        c.set_affected_area(v["Area"])
 
         loc = v["loc"]
 
-        c.setLocationX(loc[0])
-        c.setLocationY(loc[1])
+        c.set_location_x(loc[0])
+        c.set_location_y(loc[1])
 
         wrapper.append(c)
     return wrapper
@@ -315,7 +315,7 @@ def get_song(songTitle, artistName = None):
     PARAMS = {"Accept: application/json"}
 
     if len(songTitle):
-        url += songTitle
+        url = url + songTitle
 
     if artistName is not None:
         if len(artistName):
@@ -324,15 +324,17 @@ def get_song(songTitle, artistName = None):
     url.replace(" ", "%20")
 
     r = requests.get(url = url, params = str(PARAMS))
+    if r.status_code is not 200:
+        raise ConnectionError("HTTP Request Failed. Error Code: " + r.status_code)
     r = r.json()
     if "artist" in r:
         artist = r["artist"]
     else:
         artist = ""
     if "song" in r:
-        song = r["song"]
+        songs = r["song"]
     else:
-        song = ""
+        songs = ""
     if "album" in r:
         album = r["album"]
     else:
@@ -346,7 +348,7 @@ def get_song(songTitle, artistName = None):
     else:
         release_date = ""
 
-    return song.Song(artist, song, album, lyrics, release_date)
+    return song.Song(artist, songs, album, lyrics, release_date)
 
 
 ##
