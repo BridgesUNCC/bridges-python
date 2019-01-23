@@ -1,4 +1,4 @@
-from bridges.bridges import *
+from bridges import *
 from bridges.kd_tree_element import *
 
 bridges = Bridges(0, "test", "211416381091")
