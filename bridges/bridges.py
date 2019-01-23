@@ -40,6 +40,7 @@ class Bridges:
     assignment = int()
     assignment_part = int()
     _MaxTitleSize = 50
+    _MaxDescSize = 250
     json_flag = False
 
     projection_options = {"cartesian", "albersusa", "equirectangular"}
@@ -177,9 +178,9 @@ class Bridges:
     #
     #
     def set_description(self, description):
-        if len(description) > self._MaxTitleSize:
-            print("Visualization Description restricted to " + str(self._MaxTitleSize) + " Truncating description..")
-            self.description = description[0:self._MaxTitleSize]
+        if len(description) > self._MaxDescSize:
+            print("Visualization Description restricted to " + str(self._MaxDescSize) + " Truncating description..")
+            self.description = description[0:self._MaxDescSize]
         else:
             self.description = description
 
