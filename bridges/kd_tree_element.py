@@ -70,7 +70,7 @@ class KDTreeElement(BSTElement):
 
 
     def get_data_structure_type(self):
-        return "KdTree"
+        return "KDTree"
 
     def get_dimension(self):
         return self.dimension
