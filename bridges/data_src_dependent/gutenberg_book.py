@@ -62,7 +62,7 @@ class GutenbergBook:
         self.num_words = num_words
 
     def get_num_sentences(self):
-        return self.numSentences
+        return self.num_sentences
 
     def set_num_sentences(self, num_sentences):
         self.num_sentences = num_sentences

@@ -228,7 +228,6 @@ def get_gutenberg_book_data(num = 0):
 
         G = V["genres"]
         genre = []
-
         for j in range(len(G)):
             genre.append(str(G[j]))
 
@@ -239,7 +238,7 @@ def get_gutenberg_book_data(num = 0):
 
         M = V["metrics"]
         wrapper.append(gutenberg_book.GutenbergBook(A["name"], A["birth"], A["death"], V["title"],
-                                                    lang, genre, subject, M["characters"], M["words"],
+                                                    str(lang), str(genre), str(subject), M["characters"], M["words"],
                                                     M["sentences"], M["difficultWords"], V["url"], V["downloads"]))
 
     return wrapper
