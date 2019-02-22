@@ -561,9 +561,11 @@ def get_osm_data(location: str) -> OsmData:
             dist = edge[2]
             edges.append(OsmEdge(vertex_map[id_from], vertex_map[id_to], dist))
 
-        print(vertices)
-        print(edges)
-
+        ret_osm = OsmData()
+        ret_osm.edges = edges
+        ret_osm.vertices = vertices
+        ret_osm.name = data.meta.name
+        return ret_osm
     except AttributeError:
         raise RuntimeError("Malformed JSON: Unable to parse")
 

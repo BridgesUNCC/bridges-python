@@ -1,7 +1,10 @@
 import math
+from bridges.graph_adj_list import *
 
 
 class OsmEdge:
+    """OSM edge, represents edge between OsmVertex points
+    """
     @property
     def source(self) -> int:
         """ID of source vertex
@@ -77,6 +80,8 @@ class OsmEdge:
 
 
 class OsmVertex:
+    """OSM vertex, represents vertex using open street map data
+    """
 
     @property
     def latitude(self) -> float:
@@ -141,11 +146,98 @@ class OsmVertex:
 
 
 class OsmData:
+    @property
+    def vertices(self):
+        """List of OsmVertex objects
+        :return List[OsmVertex]
+        """
+        return self._vertices
+
+    @vertices.setter
+    def vertices(self, vertices: list):
+        if not isinstance(vertices, list):
+            raise ValueError("vertices must be a list of OsmVertex objects")
+        if not isinstance(vertices[0], OsmVertex):
+            raise ValueError("vertices must be a list of OsmVertex objects")
+
+        lat_range = [math.inf, -math.inf]
+        lon_range = [math.inf, -math.inf]
+        cart_range_x = [math.inf, -math.inf]
+        cart_range_y = [math.inf, -math.inf]
+        for vertex in vertices:
+            lat = vertex.latitude
+            lon = vertex.longitude
+
+            if lat_range[0] > lat:
+                lat_range[0] = lat
+
+            if lat_range[1] < lat:
+                lat_range[1] = lat
+
+            if lon_range[0] > lon:
+                lon_range[0] = lon
+
+            if lon_range[1] < lon:
+                lon_range[1] = lon
+
+            if cart_range_x[0] > vertex.cartesian_coord[0]:
+                cart_range_x[0] = vertex.cartesian_coord[0]
+
+            if cart_range_x[1] < vertex.cartesian_coord[0]:
+                cart_range_x[1] = vertex.cartesian_coord[0]
+
+            if cart_range_y[0] > vertex.cartesian_coord[1]:
+                cart_range_y[0] = vertex.cartesian_coord[1]
+
+            if cart_range_y[1] < vertex.cartesian_coord[1]:
+                cart_range_y[1] = vertex.cartesian_coord[1]
+
+        self.latitude_range = lat_range
+        self.longitude_range = lon_range
+        self.cartesian_range_x = cart_range_x
+        self.cartesian_range_y = cart_range_y
+        self._vertices = vertices
+
+    @vertices.deleter
+    def vertices(self):
+        del self._vertices
+
+    @property
+    def edges(self):
+        """List of OsmEdge objects
+        :return: List[OsmEdge]
+        """
+        return self._edges
+
+    @edges.setter
+    def edges(self, edges: list):
+        if not isinstance(edges, list):
+            raise ValueError("edges must be a list of OsmVertex objects")
+        if not isinstance(edges[0], OsmEdge):
+            raise ValueError("edges must be a list of OsmEdge objects")
+        self._edges = edges
+
+    @edges.deleter
+    def edges(self):
+        del self._edges
+
+    def get_graph(self) -> GraphAdjList:
+        ret_graph = GraphAdjList()
+        for k, vertex in enumerate(self.vertices):
+            ret_graph.add_vertex(k, vertex)
+            ret_graph.get_vertex(k).get_visualizer().set_location(vertex.cartesian_coord[0], vertex.cartesian_coord[1])
+            ret_graph.get_vertex(k).get_visualizer().set_color("green")
+
+        for k, edge in enumerate(self.edges):
+            ret_graph.add_edge(edge.source, edge.destination, edge.distance)
+
+        return ret_graph
+
     def __init__(self):
         self._vertices = []
         self._edges = []
-        self._latitude_range = []
-        self._longitude_range = []
-        self._cartesian_range_x = []
-        self._cartesian_range_y = []
-
+        self.latitude_range = []
+        self.longitude_range = []
+        self.cartesian_range_x = []
+        self.cartesian_range_y = []
+        self.name = None

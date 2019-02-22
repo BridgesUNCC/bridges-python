@@ -55,6 +55,7 @@ class GraphAdjList():
     OPEN_BOX = "["
     CLOSE_BOX = "]"
 
+    LargeGraphVertSize = 1000;
     ##
     #
     # 	Constructor
@@ -70,6 +71,8 @@ class GraphAdjList():
     #
     #
     def get_data_structure_type(self):
+        if self.LargeGraphVertSize < len(self.vertices):
+            return "largegraph"
         return "GraphAdjacencyList"
 
     ##
