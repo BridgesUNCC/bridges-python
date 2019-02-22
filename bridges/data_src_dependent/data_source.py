@@ -7,6 +7,7 @@ from bridges.data_src_dependent import shakespeare
 from bridges.data_src_dependent import gutenberg_book
 from bridges.data_src_dependent import cancer_incidence
 from bridges.data_src_dependent import song
+from bridges.data_src_dependent.osm import *
 from bridges.data_src_dependent.actor_movie_imdb import *
 from bridges.color_grid import ColorGrid
 from bridges.color import Color
@@ -526,6 +527,45 @@ def get_assignment(server: str, user: str, assignment: int, subassignment: int =
         return request.content
     else:
         raise request.raise_for_status()
+
+
+def get_osm_data(location: str) -> OsmData:
+    url = "https://osm-api.herokuapp.com/name/" + location
+    params = "Accept: application/json"
+
+    request = requests.get(url, params)
+    if not request.ok:
+        raise request.raise_for_status()
+
+    content = request.content
+    try:
+        from types import SimpleNamespace as Namespace
+    except ImportError:
+        from argparse import Namespace
+
+    data = json.loads(content, object_hook=lambda d: Namespace(**d))
+    try:
+        if data.nodes is None or data.edges is None or data.meta is None:
+            raise RuntimeError("Malormed OSM JSON")
+
+        vertex_map = {}
+        vertices = []
+        for i, node in enumerate(data.nodes):
+            vertex_map[node[0]] = i
+            vertices.append(OsmVertex(node[1], node[2]))
+
+        edges = []
+        for edge in data.edges:
+            id_from = edge[0]
+            id_to = edge[1]
+            dist = edge[2]
+            edges.append(OsmEdge(vertex_map[id_from], vertex_map[id_to], dist))
+
+        print(vertices)
+        print(edges)
+
+    except AttributeError:
+        raise RuntimeError("Malformed JSON: Unable to parse")
 
 
 class DataSource:
