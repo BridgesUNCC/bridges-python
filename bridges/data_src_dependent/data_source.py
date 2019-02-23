@@ -545,8 +545,8 @@ def get_osm_data(location: str) -> OsmData:
 
     data = None
     for f in os.listdir("./bridges_data_cache"):
-        if f == location + ".json":
-            with open("./bridges_data_cache/{}.json".format(location), "r") as j:
+        if f == location.lower() + ".json":
+            with open("./bridges_data_cache/" + f, "r") as j:
                 data = json.load(j, object_hook=lambda d: Namespace(**d))
 
     if data is None:
@@ -556,12 +556,19 @@ def get_osm_data(location: str) -> OsmData:
         request = requests.get(url, params)
         if not request.ok:
             if request.status_code == 404:
-                raise RuntimeError("Location: {} is not supported".format(location))
+                url = "https://osm-api.herokuapp.com/name_list"
+                params = "Accept: application/json"
+                request = requests.get(url, params)
+                if not request.ok:
+                    raise request.raise_for_status()
+                data = json.loads(request.content)
+                valid_names = data['names']
+                raise RuntimeError("Location: {} is not supported,\n valid names: {}".format(location, valid_names))
             raise request.raise_for_status()
 
         content = request.content
         data = json.loads(content, object_hook=lambda d: Namespace(**d))
-        with open("./bridges_data_cache/{}.json".format(location), "w") as f:
+        with open("./bridges_data_cache/{}.json".format(location.lower()), "w") as f:
             # write to file in cache
             json.dump(json.loads(content), f)
 

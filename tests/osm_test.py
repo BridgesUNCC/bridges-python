@@ -6,7 +6,7 @@ key = os.environ.get("BRIDGES_API_KEY")
 bridges = Bridges(100, user, key)
 bridges.connector.set_server("clone")
 
-go = data_source.get_osm_data("uncc_campus")
+go = data_source.get_osm_data("uncc_campuS")
 
 print(go.name)
 print(go.longitude_range)
