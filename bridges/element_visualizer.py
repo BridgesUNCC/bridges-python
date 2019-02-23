@@ -4,6 +4,7 @@ from bridges.element import *
 from bridges.color import *
 from decimal import Decimal
 
+
 ##
 # This class is used to store the visualization elements on the for the bridges
 # Visualiztion, including the color, shape, opacity, and size of the node.
@@ -23,7 +24,6 @@ class ElementVisualizer(object):
     size = 10.0
     opacity = 1.0
 
-
     prop = dict()
 
     prop["color"] = "[70, 130, 180, 1.0]"
@@ -39,7 +39,7 @@ class ElementVisualizer(object):
     # The default settings are color = green, opacity = 1.0, size = 10.0, shape
     # = circle.
     #
-    def __init__(self, a_color = "green", a_shape = "circle", size = 10.0, opacity = 1.0):
+    def __init__(self, a_color="green", a_shape ="circle", size=10.0, opacity=1.0):
         if a_color is not "green":
             self.set_color(a_color)
         else:
@@ -50,8 +50,6 @@ class ElementVisualizer(object):
             self.set_size(10.0)
         if opacity is not 1.0:
             self.set_opacity(opacity)
-
-
 
     ##
     # Set the size of the Element in the Bridge Visualization in pixels
@@ -107,7 +105,6 @@ class ElementVisualizer(object):
     def set_shape(self, a_shape):
         #  this.aShape = aShape;
         a_shape = a_shape.lower()
-        #Validation.validateShape(a_shape)
         self.prop["shape"] = a_shape
         self.shape = a_shape
 
@@ -120,7 +117,6 @@ class ElementVisualizer(object):
     #            transparency.
     #
     def set_opacity(self, opacity):
-        #Validation.validateOpacity(opacity)
         self.prop["opacity"] = Decimal(opacity)
         self.color.set_alpha(opacity)
         self.opacity = opacity

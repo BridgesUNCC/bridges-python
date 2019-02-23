@@ -6,12 +6,23 @@ key = os.environ.get("BRIDGES_API_KEY")
 bridges = Bridges(100, user, key)
 bridges.connector.set_server("clone")
 
-go = data_source.get_osm_data("shrunk_uncc_campus")
+go = data_source.get_osm_data("uncc_campus")
 
 print(go.name)
 print(go.longitude_range)
-print()
+print(go.latitude_range)
+print(go.cartesian_range_x)
+print(go.cartesian_range_y)
+
+try:
+    go.edges = [1, 2, 3]
+except ValueError:
+    print("edge setter works")
+try:
+    go.vertices = [1, 2, 3]
+except ValueError:
+    print("vertex setter works")
+
 
 bridges.set_data_structure(go.get_graph())
 bridges.visualize()
-

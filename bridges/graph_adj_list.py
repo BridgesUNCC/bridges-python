@@ -4,7 +4,7 @@ from bridges.sl_element import *
 from bridges.edge import *
 import traceback
 import sys
-
+import json
 
 ##
 #
@@ -186,7 +186,11 @@ class GraphAdjList():
     ##
     #	Get the JSON representation of the the data structure
     #
-    def get_data_structure_representation(self):
+    def get_data_structure_representation(self) -> str:
+
+        # redirect for large graphs
+        if len(self.vertices) > self.LargeGraphVertSize:
+            return self._get_data_structure_large_graph()
 
         #  map to reorder the nodes for building JSON
         node_map = dict()
@@ -194,7 +198,7 @@ class GraphAdjList():
         #  get teh list nodes
         nodes = []
 
-        #get the objects and add them to the array
+        # get the objects and add them to the array
         for elements in self.vertices.items():
             nodes.append(elements[1])
 
@@ -205,8 +209,8 @@ class GraphAdjList():
         k = 0
         while k < len(nodes):
             node_map[nodes[k]] = k
-            nodes_JSON += (nodes[k].get_element_representation())#get the element object and represent it
-            nodes_JSON += (self.COMMA)
+            nodes_JSON += (nodes[k].get_element_representation())# get the element object and represent it
+            nodes_JSON += self.COMMA
             k += 1
         #  remove the last comma
         if len(nodes) != 0:
@@ -232,3 +236,36 @@ class GraphAdjList():
             links_JSON = links_JSON[:-1]
         json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX + nodes_JSON.__str__() + self.CLOSE_BOX + self.COMMA + self.QUOTE + "links" + self.QUOTE + self.COLON + self.OPEN_BOX + links_JSON.__str__() + self.CLOSE_BOX + self.CLOSE_CURLY
         return json_str
+
+    def _get_data_structure_large_graph(self) -> str:
+        nodes_data = []
+        node_map = {}
+        for i, (key, element) in enumerate(self.vertices.items()):
+            node_map[key] = i
+            vis = element.get_visualizer()
+            this_node_data = []
+            if vis.locationX != Decimal("Infinity") and vis.locationY != Decimal("Infinity"):
+                this_node_data.append([vis.locationX, vis.locationY])
+
+            color = vis.color
+            this_node_data.append([x for x in color.rgba])
+            nodes_data.append(this_node_data)
+
+        links_data = []
+        for key, element in self.vertices.items():
+            adj_ele = self.adj_list.get(key)
+            while adj_ele is not None:
+                src = node_map[key]
+                dest = node_map[adj_ele.get_value().get_vertex()]
+                color = element.get_link_visualizer(adj_ele.get_value().get_vertex()).color
+                links_data.append([src, dest, [x for x in color.rgba]])
+                adj_ele = adj_ele.next
+
+        wrapper = {
+            "nodes": nodes_data,
+            "links": links_data,
+        }
+        ret = json.dumps(wrapper)
+        ret = ret[1:]
+        return ret
+

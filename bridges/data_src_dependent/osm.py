@@ -146,51 +146,47 @@ class OsmVertex:
 
 
 class OsmData:
+    from typing import List
+    VertexList = List[OsmVertex]
+    EdgeList = List[OsmEdge]
+
     @property
-    def vertices(self):
+    def vertices(self) -> VertexList:
         """List of OsmVertex objects
         :return List[OsmVertex]
         """
         return self._vertices
 
     @vertices.setter
-    def vertices(self, vertices: list):
+    def vertices(self, vertices: VertexList):
         if not isinstance(vertices, list):
-            raise ValueError("vertices must be a list of OsmVertex objects")
-        if not isinstance(vertices[0], OsmVertex):
             raise ValueError("vertices must be a list of OsmVertex objects")
 
         lat_range = [math.inf, -math.inf]
         lon_range = [math.inf, -math.inf]
         cart_range_x = [math.inf, -math.inf]
         cart_range_y = [math.inf, -math.inf]
+        # find the ranges of lat/lon and cartesian coordinates from new vertices
         for vertex in vertices:
+            if not isinstance(vertex, OsmVertex):
+                raise ValueError("vertices must be a list of OsmVertex objects")
+
             lat = vertex.latitude
             lon = vertex.longitude
+            cart_x = vertex.cartesian_coord[0]
+            cart_y = vertex.cartesian_coord[1]
 
-            if lat_range[0] > lat:
-                lat_range[0] = lat
+            lat_range[0] = lat if lat_range[0] > lat else lat_range[0]
+            lat_range[1] = lat if lat_range[1] < lat else lat_range[1]
 
-            if lat_range[1] < lat:
-                lat_range[1] = lat
+            lon_range[0] = lon if lon_range[0] > lon else lon_range[0]
+            lon_range[1] = lon if lon_range[1] < lon else lon_range[1]
 
-            if lon_range[0] > lon:
-                lon_range[0] = lon
+            cart_range_x[0] = cart_x if cart_range_x[0] > cart_x else cart_range_x[0]
+            cart_range_x[1] = cart_x if cart_range_x[1] < cart_x else cart_range_x[1]
 
-            if lon_range[1] < lon:
-                lon_range[1] = lon
-
-            if cart_range_x[0] > vertex.cartesian_coord[0]:
-                cart_range_x[0] = vertex.cartesian_coord[0]
-
-            if cart_range_x[1] < vertex.cartesian_coord[0]:
-                cart_range_x[1] = vertex.cartesian_coord[0]
-
-            if cart_range_y[0] > vertex.cartesian_coord[1]:
-                cart_range_y[0] = vertex.cartesian_coord[1]
-
-            if cart_range_y[1] < vertex.cartesian_coord[1]:
-                cart_range_y[1] = vertex.cartesian_coord[1]
+            cart_range_y[0] = cart_y if cart_range_y[0] > cart_y else cart_range_y[0]
+            cart_range_y[1] = cart_y if cart_range_y[1] < cart_y else cart_range_y[1]
 
         self.latitude_range = lat_range
         self.longitude_range = lon_range
@@ -203,18 +199,19 @@ class OsmData:
         del self._vertices
 
     @property
-    def edges(self):
+    def edges(self) -> EdgeList:
         """List of OsmEdge objects
         :return: List[OsmEdge]
         """
         return self._edges
 
     @edges.setter
-    def edges(self, edges: list):
+    def edges(self, edges: EdgeList):
         if not isinstance(edges, list):
             raise ValueError("edges must be a list of OsmVertex objects")
-        if not isinstance(edges[0], OsmEdge):
-            raise ValueError("edges must be a list of OsmEdge objects")
+        for edge in edges:
+            if not isinstance(edge, OsmEdge):
+                raise ValueError("edges must be a list of OsmEdge objects")
         self._edges = edges
 
     @edges.deleter

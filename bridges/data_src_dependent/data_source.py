@@ -530,6 +530,10 @@ def get_assignment(server: str, user: str, assignment: int, subassignment: int =
 
 
 def get_osm_data(location: str) -> OsmData:
+    """Takes a location name as a string and returns an OsmData object
+    :param location: str, name of location
+    :return: OsmData:
+    """
     url = "https://osm-api.herokuapp.com/name/" + location
     params = "Accept: application/json"
 

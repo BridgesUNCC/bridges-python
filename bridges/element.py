@@ -127,7 +127,7 @@ class Element(object):
     #
     # @return the visualizer object
     #
-    def get_visualizer(self):
+    def get_visualizer(self) -> ElementVisualizer:
         return self.visualizer
 
     ##
