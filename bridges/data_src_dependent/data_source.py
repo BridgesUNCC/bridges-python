@@ -534,23 +534,40 @@ def get_osm_data(location: str) -> OsmData:
     :param location: str, name of location
     :return: OsmData:
     """
-    url = "https://osm-api.herokuapp.com/name/" + location
-    params = "Accept: application/json"
-
-    request = requests.get(url, params)
-    if not request.ok:
-        raise request.raise_for_status()
-
-    content = request.content
+    import os
     try:
         from types import SimpleNamespace as Namespace
     except ImportError:
         from argparse import Namespace
 
-    data = json.loads(content, object_hook=lambda d: Namespace(**d))
+    if not os.path.isdir("./bridges_data_cache"):
+        os.mkdir("./bridges_data_cache")
+
+    data = None
+    for f in os.listdir("./bridges_data_cache"):
+        if f == location + ".json":
+            with open("./bridges_data_cache/{}.json".format(location), "r") as j:
+                data = json.load(j, object_hook=lambda d: Namespace(**d))
+
+    if data is None:
+        url = "https://osm-api.herokuapp.com/name/" + location
+        params = "Accept: application/json"
+
+        request = requests.get(url, params)
+        if not request.ok:
+            if request.status_code == 404:
+                raise RuntimeError("Location: {} is not supported".format(location))
+            raise request.raise_for_status()
+
+        content = request.content
+        data = json.loads(content, object_hook=lambda d: Namespace(**d))
+        with open("./bridges_data_cache/{}.json".format(location), "w") as f:
+            # write to file in cache
+            json.dump(json.loads(content), f)
+
     try:
         if data.nodes is None or data.edges is None or data.meta is None:
-            raise RuntimeError("Malormed OSM JSON")
+            raise RuntimeError("Malformed OSM JSON")
 
         vertex_map = {}
         vertices = []
@@ -570,6 +587,7 @@ def get_osm_data(location: str) -> OsmData:
         ret_osm.vertices = vertices
         ret_osm.name = data.meta.name
         return ret_osm
+
     except AttributeError:
         raise RuntimeError("Malformed JSON: Unable to parse")
 

@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 export.sh
 
+bridges_data_cache/
+
 # Distribution / packaging
 .Python
 build/
