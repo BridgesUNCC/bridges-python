@@ -157,7 +157,7 @@ class Element(object):
         #  link visualizer
         try:
             if (type(el) != Element):
-                print("Wrong Type, Needs to be of type Element.")
+                raise ValueError("Wrong type, Needs to be Element.")
         except Exception as e:
             traceback.print_tb(e.__traceback__)
         if el in self.lvisualizer:
