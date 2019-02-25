@@ -154,6 +154,8 @@ class Element(object):
     def get_link_visualizer(self, el):
         #  if this is the first time, must create the
         #  link visualizer
+        if (type(el) != Element):
+            print("Wrong Type, Needs to be of type Element.")
         if el in self.lvisualizer:
             return self.lvisualizer[el]
         else:
