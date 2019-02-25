@@ -195,7 +195,7 @@ class GraphAdjList():
         #  map to reorder the nodes for building JSON
         node_map = dict()
 
-        #  get teh list nodes
+        #  get the list nodes
         nodes = []
 
         # get the objects and add them to the array

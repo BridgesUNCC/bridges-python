@@ -567,10 +567,10 @@ def get_osm_data(location: str) -> OsmData:
             raise request.raise_for_status()
 
         content = request.content
-        data = json.loads(content, object_hook=lambda d: Namespace(**d))
+        data = json.loads(content.decode('utf-8'), object_hook=lambda d: Namespace(**d))
         with open("./bridges_data_cache/{}.json".format(location.lower()), "w") as f:
             # write to file in cache
-            json.dump(json.loads(content), f)
+            json.dump(json.loads(content.decode('utf-8')), f)
 
     try:
         if data.nodes is None or data.edges is None or data.meta is None:
