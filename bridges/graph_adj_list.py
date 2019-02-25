@@ -257,7 +257,8 @@ class GraphAdjList():
             while adj_ele is not None:
                 src = node_map[key]
                 dest = node_map[adj_ele.get_value().get_vertex()]
-                color = element.get_link_visualizer(adj_ele.get_value().get_vertex()).color
+                color = element.get_link_visualizer(self.get_vertex(adj_ele.get_value().get_vertex())).color
+
                 links_data.append([src, dest, [x for x in color.rgba]])
                 adj_ele = adj_ele.next
 
