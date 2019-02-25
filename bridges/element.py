@@ -4,6 +4,7 @@ from bridges.color import *
 from bridges.link_visualizer import *
 import re
 from decimal import Decimal
+import traceback
 # from bridges.kd_tree_element import *
 
 
@@ -154,8 +155,11 @@ class Element(object):
     def get_link_visualizer(self, el):
         #  if this is the first time, must create the
         #  link visualizer
-        if (type(el) != Element):
-            print("Wrong Type, Needs to be of type Element.")
+        try:
+            if (type(el) != Element):
+                print("Wrong Type, Needs to be of type Element.")
+        except Exception as e:
+            traceback.print_tb(e.__traceback__)
         if el in self.lvisualizer:
             return self.lvisualizer[el]
         else:
