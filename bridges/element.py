@@ -5,6 +5,7 @@ from bridges.link_visualizer import *
 import re
 from decimal import Decimal
 import traceback
+import sys
 # from bridges.kd_tree_element import *
 
 
@@ -159,7 +160,8 @@ class Element(object):
             if (type(el) != Element):
                 raise ValueError("Wrong type, Needs to be Element.")
         except Exception as e:
-            traceback.print_exc()
+            tb = sys.exc_info()
+            traceback.print_tb(tb)
         if el in self.lvisualizer:
             return self.lvisualizer[el]
         else:
