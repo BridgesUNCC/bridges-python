@@ -159,7 +159,7 @@ class Element(object):
             if (type(el) != Element):
                 raise ValueError("Wrong type, Needs to be Element.")
         except Exception as e:
-            traceback.print_tb(e.__traceback__)
+            traceback.print_exc()
         if el in self.lvisualizer:
             return self.lvisualizer[el]
         else:
