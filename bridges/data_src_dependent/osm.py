@@ -65,6 +65,7 @@ class OsmEdge:
     def distance(self):
         del self._distance
 
+
     def __init__(self, source: int, destination: int, distance: float):
         """OsmEdge, represents edge between two OsmVertex points
         :param source: int, ID of source vertex
@@ -219,6 +220,15 @@ class OsmData:
         del self._edges
 
     def get_graph(self) -> GraphAdjList:
+        """Construct a graph out of the vertex and edge
+        data of the OSM object. The graph will associate the length
+        of the edge to the graph edge. No data is bound to the vertices
+
+        The vertices of the graph will be located at
+        the location where given in the data set
+        converted to cartesian coordinates
+        :return: GraphAdjList
+        """
         ret_graph = GraphAdjList()
         for k, vertex in enumerate(self.vertices):
             ret_graph.add_vertex(k, vertex)

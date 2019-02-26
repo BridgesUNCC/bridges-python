@@ -17,25 +17,15 @@ from bridges.element import *
 #	another element, appropriate for setting link attributes, for instance, between
 #	the current element and its next element.
 #
-# @author Mihai Mehedint, Kalpathi Subramanian
-#
-# @date 6/22/16, 1/7/17, 5/17/17
-#
-# @param <E> The generic parameter object that is part of this element, representing
-#			application specific data.
-#
-#	\sa Example Tutorial at <br> http://bridgesuncc.github.io/Hello_World_Tutorials/SLL.html
 #
 class SLelement(Element):
-
-    # the link to the next element
 
     ##
     # This constructor creates an SLelement object
     # and sets the next pointer to null
-    # @param label the label of SLelement that shows up on the bridges visualization
-    # @param e the generic object that this SLelement will hold
-    # @param next the element that should be assigned to the next pointer
+    # @param label - the label of SLelement that shows up on the bridges visualization
+    # @param e  - the generic object that this SLelement will hold
+    # @param next - the element that should be assigned to the next pointer
     # 
     def __init__(self, e = None, label = None, next = None):
         if e is not None and label is not None:
@@ -67,27 +57,28 @@ class SLelement(Element):
     ##
     # Retrieves the element following this element
     #
-    # @return SLelement<E> assigned to next
+    # @return - SLelement assigned to next
     #
     #
     def get_next(self):
         return self.next
 
+    ##
+    # Retrieves the value in the SLelement
+    # @return - SLElement value held
     def get_value(self):
         return super(SLelement, self).get_value()
     ##
     # Sets the element to point to the next SLelement
     #
-    # @param next SLelement<E> that should be assigned to the next pointer
+    # @param next - SLelement that should be assigned to the next pointer
     #
     def set_next(self, next):
         self.next = next
         if next is not None:
             self.set_link_visualizer(next)
 
-    #  (non-Javadoc)
-    # @see java.lang.Object#toString()
-    #
+
     def __str__(self):
         return "SLelement [next=" + self.next + ", getNext()=" + self.get_next() + ", getIdentifier()=" + self.get_identifier() + ", getVisualizer()=" + self.get_visualizer() + ", getClassName()=" + self.get_class_name() + ", getElementRepresentation()=" + self.get_element_representation() + ", getLabel()=" + self.get_label() + ", getValue()=" + self.get_value() + ", toString()=" + super(SLelement, self).__str__() + ", getClass()=" + self.getClass() + ", hashCode()=" + self.hashCode() + "]"
 

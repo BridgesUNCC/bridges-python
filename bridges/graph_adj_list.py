@@ -29,21 +29,8 @@ import json
 #	Convenience methods are provided to add vertices and edges to the graph as well as
 #	retrieve the adjacency list of a vertex, given its id.
 #
-#	@author Kalpathi Subramanian
-#
-#
-#
-#	\sa Example tutorial at <p>
-#		http://bridgesuncc.github.io/Hello_World_Tutorials/Graph.html
-#
 #
 class GraphAdjList():
-    #  keep track of the graph nodes; useful
-    #  to maintain their properties
-    # vertices = dict()
-
-    #  holds the adjacency list of edges
-    # adj_list = dict()
 
     QUOTE = "\""
     COMMA = ","
@@ -76,14 +63,12 @@ class GraphAdjList():
         return "GraphAdjacencyList"
 
     ##
-    # Adds a new vertex to the graph, initializes the  adjacency
+    # Adds a new vertex to the graph, initializes the adjacency
     # list; user is responsible for checking if the vertex already
-    # 	exists. This method will replace the value for this key
+    # exists. This method will replace the value for this key
     #
     #	@param k - vertex id
     #	@param E - vertex info, currently used as a label by default
-    #
-    #	@return none
     #
     def add_vertex(self, k, e):
         #  note: it is the user's responsibility to  check
@@ -118,7 +103,7 @@ class GraphAdjList():
     ##
     #	This method returns the graph nodes
     #
-    #	return -- vertices held in  in the hashmap
+    #	return - vertices held in  in the hashmap
     #
     #
     def get_vertices(self):
@@ -128,7 +113,8 @@ class GraphAdjList():
     #	This is a convenience method to retrieve a vertex given
     #	its key
     #
-    #	return -- graph vertex corresponding to its key
+    #   @param key - The key for the value in vertices dict
+    #	@return - graph vertex corresponding to its key
     #
     #
     def get_vertex(self, key):
@@ -137,6 +123,7 @@ class GraphAdjList():
     ##
     #	Gets the adjacency list (of type SLelement<Edge> )
     #
+    #   @param vertex - The vertex in adj_list
     #	@return - the graph's adjacency lists
     #
     #
@@ -152,6 +139,8 @@ class GraphAdjList():
     #	 the method assumes the vertex names point to existing vertices, else an exception
     #	 is thrown
     #
+    #   @param src - source vertex of edge
+    #   @param dest - destination vertex of edge
     #
     def get_link_visualizer(self, src, dest):
         #  get the source and destination vertex elements
@@ -171,6 +160,7 @@ class GraphAdjList():
     #	the method assumes the vertex name points to an existing vertice, else an
     #	exception is thrown
     #
+    #   @param vertex - The vertex for which visualizer is wanted
     #
     def get_visualizer(self, vertex):
         #  get the source and destination vertex elements

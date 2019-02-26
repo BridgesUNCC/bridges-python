@@ -55,7 +55,9 @@ class ColorGrid(Grid):
 
     ##
     # set the (row, col) element in the ColorGrid
-    #
+    # @param row - which row to access
+    # @param col - which col to access
+    # @param color - background color for the cell at row,col
     def set(self, row, col, color):
         super(ColorGrid, self).set(row, col, color)
 
