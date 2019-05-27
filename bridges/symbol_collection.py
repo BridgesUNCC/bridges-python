@@ -26,7 +26,7 @@ class SymbolCollection:
         if abs(dims[3]) > self.domain:
             self.domain = abs(dims[3])
 
-    def get_data_structure_representation(self):
+    def _get_data_structure_representation(self):
         symbol_json = []
 
         for key in self.symbols.keys():

@@ -215,7 +215,7 @@ class Array():
     #
     # @return JSON string
     #
-    def get_data_structure_representation(self):
+    def _get_data_structure_representation(self):
         nodes_JSON = str()
         links_JSON = str()
 
