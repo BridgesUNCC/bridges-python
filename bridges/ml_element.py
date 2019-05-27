@@ -116,7 +116,7 @@ class MLelement(SLelement):
     def get_tag(self):
         return self.tag
 
-    def get_data_structure_representation(self):
+    def _get_data_structure_representation(self):
         nodes = []
         nodes.clear()
         self.get_list_elements(nodes)

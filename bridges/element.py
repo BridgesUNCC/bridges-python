@@ -180,6 +180,41 @@ class Element(object):
     def remove_link_visualizer(self, el):
         self.lvisualizer.pop(el)
 
+    def set_size(self, sz):
+        self.visualizer.set_size(sz)
+
+    def get_size(self):
+        return self.visualizer.get_size()
+
+    def set_color(self, col):
+        self.visualizer.set_color(col)
+
+    def get_color(self):
+        self.visualizer.get_color()
+
+    def set_opacity(self, opacity):
+        self.visualizer.set_opacity(opacity)
+
+    def get_opacity(self):
+        return self.visualizer.get_opacity()
+
+    def set_shape(self, shape):
+        self.visualizer.set_shape(shape)
+
+    def get_shape(self):
+        return self.visualizer.get_shape()
+
+    def set_location(self, locX, locY):
+        self.visualizer.set_location(locX, locY)
+
+    def get_location(self):
+        self.visualizer.get_locationX()
+
+    def get_locationX(self):
+        return self.visualizer.get_locationX()
+
+    def get_locationY(self):
+        return self.visualizer.get_locationY()
     ##
     # Validates the Element's value when the Element is created
     # A non null value is expected

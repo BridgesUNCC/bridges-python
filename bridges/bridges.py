@@ -101,7 +101,7 @@ class Bridges:
         nodes_links_str = ""
 
         if (self.vis_type == "Tree" or self.vis_type == "BinaryTree" or self.vis_type == "SinglyLinkedList", self.vis_type == "DoublyLinkedList", self.vis_type == "MultiList", self.vis_type == "CircularSinglyLinkedList", self.vis_type == "CircularDoublyLinkedList", self.vis_type == "Array", self.vis_type == "GraphAdjacencyList", self.vis_type == "ColorGrid", self.vis_type == "KDTree", self.vis_type == "SymbolCollection"):
-            nodes_links_str = self.ds_handle.get_data_structure_representation()
+            nodes_links_str = self.ds_handle._get_data_structure_representation()
 
         ds = {
             "visual": self.vis_type,

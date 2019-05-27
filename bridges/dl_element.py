@@ -103,7 +103,7 @@ class DLelement(SLelement):
     ##
     #	Get the JSON representation of the the data structure
     #
-    def get_data_structure_representation(self):
+    def _get_data_structure_representation(self):
         #  map to reorder the nodes for building JSON
         node_map = dict()
         #  get teh list nodes

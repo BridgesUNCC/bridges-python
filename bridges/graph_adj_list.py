@@ -42,7 +42,7 @@ class GraphAdjList():
     OPEN_BOX = "["
     CLOSE_BOX = "]"
 
-    LargeGraphVertSize = 1000;
+    LargeGraphVertSize = 1000
     ##
     #
     # 	Constructor
@@ -87,7 +87,7 @@ class GraphAdjList():
     #	@param dest - destination  vertex of edge
     #
     #
-    def add_edge(self, src, dest, weight = None):
+    def add_edge(self, src, dest, data = None):
         #  check to see if the two vertices exist, else
         #  throw an exception
         try:
@@ -95,15 +95,50 @@ class GraphAdjList():
                 raise ValueError("Vertex " + src + " or " + dest + " does not exist! Add the vertex before creating the edge.")
         except Exception as e:
             traceback.print_tb(e.__traceback__)
-        if weight is not None:
-            self.adj_list[src] = SLelement(e=Edge(weight, dest), next = self.adj_list.get(src))
+        if data is not None:
+            self.adj_list[src] = SLelement(e=Edge(src, dest, data, None), next=self.adj_list.get(src))
         else:
-            self.adj_list[src] = SLelement(e=Edge(1, dest), next = self.adj_list.get(src))
+            self.adj_list[src] = SLelement(e = Edge(src, dest, None, None), next = self.adj_list.get(src))
+
+    def set_vertex_data(self, src, vertex_data):
+        try:
+            if(self.vertices[src] == None):
+                raise ValueError("Vertex " + src + " does not exist!")
+        except Exception as e:
+            traceback.print_tb(e.__traceback__)
+        self.vertices[src].set_value(vertex_data)
+
+    def get_vertex_data(self, src):
+        try:
+            if(self.vertices[src] == None):
+                raise ValueError("Vertex " + src + " does not exist!")
+        except Exception as e:
+            traceback.print_tb(e.__traceback__)
+        return self.vertices[src].get_value()
+
+    def set_edge_data(self, src, dest, edge_data):
+        try:
+            if(self.vertices[src] == None or self.vertices[dest] == None):
+                raise ValueError("Vertex " + src + " or " + dest + " does not exist!")
+        except Exception as e:
+            traceback.print_tb(e.__traceback__)
+        sle = self.adj_list[src]
+        while(sle is not None):
+            edge_dest = sle.get_value().tov()
+            if(edge_dest == dest):
+                if(edge_data is not None):
+                    sle.get_value().set_edge_data(edge_data)
+                    return
+                else:
+                    return sle.get_value().get_edge_data()
+            sle = sle.get_next()
+        if(sle == None):
+            raise ValueError("VEdge from " + src + " to " + dest + "does not exist!")
 
     ##
     #	This method returns the graph nodes
     #
-    #	return - vertices held in  in the hashmap
+    #	return - vertices held in the hashmap
     #
     #
     def get_vertices(self):
@@ -132,6 +167,25 @@ class GraphAdjList():
             return self.adj_list.get(vertex)
         else:
             return self.adj_list
+
+    def key_set(self):
+        return self.vertices.keys()
+
+    def value_set(self):
+        return self.vertices.values()
+
+    def out_going_edge_set_of(self, k):
+        return SLelement.list_helper(self.get_adjacency_list(k))
+
+    def get_edge_data(self,src, dest):
+        sle = self.adj_list[src]
+        while sle is not None:
+            ed = sle.get_value()
+            if(ed.get_vertex() == dest):
+                return ed.get_edge_data()
+            sle = sle.get_next()
+
+
 
     ##
     #
@@ -176,7 +230,7 @@ class GraphAdjList():
     ##
     #	Get the JSON representation of the the data structure
     #
-    def get_data_structure_representation(self) -> str:
+    def _get_data_structure_representation(self) -> str:
 
         # redirect for large graphs
         if len(self.vertices) > self.LargeGraphVertSize:
@@ -215,7 +269,7 @@ class GraphAdjList():
                 src_indx = node_map.get(src_vert)
                 #  get the destination vertex index for the JSON (int)
                 edge = list.get_value()
-                dest_vert = self.vertices.get(edge.get_vertex())
+                dest_vert = self.vertices.get(edge.tov())
                 dest_indx = node_map.get(dest_vert)
                 #  get link representation
                 links_JSON+=(list.get_link_representation(src_vert.get_link_visualizer(dest_vert), str(src_indx), str(dest_indx)))
@@ -246,8 +300,8 @@ class GraphAdjList():
             adj_ele = self.adj_list.get(key)
             while adj_ele is not None:
                 src = node_map[key]
-                dest = node_map[adj_ele.get_value().get_vertex()]
-                color = element.get_link_visualizer(self.get_vertex(adj_ele.get_value().get_vertex())).color
+                dest = node_map[adj_ele.get_value().tov()]
+                color = element.get_link_visualizer(self.get_vertex(adj_ele.get_value().tov())).color
 
                 links_data.append([src, dest, [x for x in color.rgba]])
                 adj_ele = adj_ele.next
@@ -259,4 +313,6 @@ class GraphAdjList():
         ret = json.dumps(wrapper)
         ret = ret[1:]
         return ret
+
+
 

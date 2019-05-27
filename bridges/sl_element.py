@@ -68,6 +68,12 @@ class SLelement(Element):
     # @return - SLElement value held
     def get_value(self):
         return super(SLelement, self).get_value()
+
+    ##
+    # Sets the value in the SLelement
+    # @return - SLelement value held
+    def set_value(self, val):
+        super(SLelement, self).set_value(val)
     ##
     # Sets the element to point to the next SLelement
     #
@@ -78,6 +84,14 @@ class SLelement(Element):
         if next is not None:
             self.set_link_visualizer(next)
 
+    def list_helper(start):
+        while start.get_next() != None:
+            yield start
+            start = start.get_next()
+
+
+
+
 
     def __str__(self):
         return "SLelement [next=" + self.next + ", getNext()=" + self.get_next() + ", getIdentifier()=" + self.get_identifier() + ", getVisualizer()=" + self.get_visualizer() + ", getClassName()=" + self.get_class_name() + ", getElementRepresentation()=" + self.get_element_representation() + ", getLabel()=" + self.get_label() + ", getValue()=" + self.get_value() + ", toString()=" + super(SLelement, self).__str__() + ", getClass()=" + self.getClass() + ", hashCode()=" + self.hashCode() + "]"
@@ -85,7 +99,7 @@ class SLelement(Element):
     ##
     #	Get the JSON representation of the the data structure
     #
-    def get_data_structure_representation(self):
+    def _get_data_structure_representation(self):
         #  map to reorder the nodes for building JSON
         node_map = dict()
         #  get teh list nodes
