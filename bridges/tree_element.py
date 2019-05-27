@@ -125,7 +125,7 @@ class TreeElement(Element):
     #
     # 	@return the JSON string
     #
-    def get_data_structure_representation(self):
+    def _get_data_structure_representation(self):
         json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_CURLY + self.pre_order(self) + self.CLOSE_CURLY + self.CLOSE_CURLY
         return json_str
 
