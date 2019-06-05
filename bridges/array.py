@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 from bridges.element import *
 
+"""
+the mod module
+"""
+
 ##
 # @brief This class can be used to create arrays of type Element<E>.
 #
@@ -30,10 +34,6 @@ class Array():
     #  only 2D and 3D arrays supported
     dims = [1, 1, 1]
 
-    # array_data=[]
-
-
-
     ##
     # Construct an array object
     # @param num_dims number of dimensions of the array
@@ -50,28 +50,55 @@ class Array():
             self.dims[0] = self.dims[1] = self.dims[2] = self.size = 0
         elif num_dims is not None and dims is not None:
             self.array_data = []
-            self.set_num_dimensions(num_dims)
+            self.num_dims = num_dims
             self.set_dimensions(dims)
         elif num_elements is not None:
             self.array_data = []
-            self.set_num_dimensions(1)
+            self.num_dims = 1
             self.dims[0] = num_elements
             self.dims[1] = self.dims[2] = 1
             self.set_dimensions(self.dims)
         elif x_dim is not None and y_dim is not None and z_dim is not None:
             self.array_data = []
-            self.set_num_dimensions(3)
+            self.num_dims = 3
             self.dims[0] = x_dim
             self.dims[1] = y_dim
             self.dims[2] = z_dim
             self.set_dimensions(self.dims)
         elif x_dim is not None and y_dim is not None and z_dim is None:
             self.array_data = []
-            self.set_num_dimensions(2)
+            self.num_dims = 2
             self.dims[0] = x_dim
             self.dims[1] = y_dim
             self.dims[2] = 1
             self.set_dimensions(self.dims)
+
+    ##
+    #
+    #	The number of dimensions of the array;
+    #   Can be set with an integer from 1->3
+    #
+    #	@return   number of dimensions
+    #
+    @property
+    def num_dims(self):
+        return self.num_dims
+
+    ##
+    #
+    #	Set the number of dimensions of the array;
+    #
+    #	@param nd  number of dimensions
+    #
+    @num_dims.setter
+    def num_dims(self, value: int):
+        if value > 3:
+            raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D arrays supported at this time")
+        self.num_dims = value
+
+    @num_dims.deleter
+    def num_dims(self):
+        del self.num_dims
 
 
 
@@ -86,29 +113,6 @@ class Array():
         else:
             raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D arrays supported at this time")
 
-    ##
-    #
-    #	Set the number of dimensions of the array;
-    #
-    #	@param nd  number of dimensions
-    #
-    def set_num_dimensions(self, nd):
-        if nd > 3:
-            raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D arrays supported at this time")
-        self.num_dims = nd
-
-    ##
-    #
-    #	Get the number of dimensions of the array;
-    #
-    #	@return   number of dimensions
-    #
-    def get_num_dimensions(self):
-        if self.num_dims > 3:
-            raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D  arrays supported at this time")
-        return self.num_dims
-
-    ##
     #
     #	Set the size of each dimensions; also allocates  array space
     #
