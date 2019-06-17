@@ -42,8 +42,6 @@ class Array():
             z_dim: number of elements on the z dimension (int)
         Returns:
             None
-        Examples:
-            example = Array(3, 3,
         """
         self.array_data = []
         self.num_dims = num_dims
@@ -66,7 +64,7 @@ class Array():
         """
         Getter for representing the number of dimensions in the array
         Returns:
-            An integer for dimensions
+            int
         """
         return self.num_dims
 

@@ -17,76 +17,98 @@ from bridges.bst_element import *
 #	between *  the current element and its left or right child
 #
 #
-#  @author Kalpathi Subramanian, Mihai Mehedint
+#  @author Kalpathi Subramanian, Mihai Mehedint, Matthew McQuaigue
 #
-#  @date 6/22/16, 1/7/17, 5/17/17
+#  @date 6/22/16, 1/7/17, 5/17/17, 6/09/19
 #
 #
 #
 class AVLTreeElement(BSTElement):
 
-    height = int()
-    bal_factor = int()
-
-    ##
-    #
-    # Construct an AVLTreeElement
-    # @param k the search key
-    # @param e the appl specific object that Element is holding
-    #
-    def __init__(self, k = None, e = None):
-        if k is not None:
-            super(AVLTreeElement, self).set_key(k)
-        if e is not None:
-            super(AVLTreeElement, self).__init__(key = k,e = e)
+    def __init__(self, **kwargs) -> None:
+        """
+        AVL Tree constructor
+        Args:
+            k: the search key
+            e : the the specific object that the element is holding
+        Returns:
+            None
+        """
+        if 'k' in kwargs and 'e' in kwargs:
+            super(AVLTreeElement, self).__init__(key = kwargs['k'], e = kwargs['e'])
+        elif 'k' in kwargs:
+            super(AVLTreeElement, self).set_key(kwargs['k'])
+        elif 'e' in kwargs:
+            super(AVLTreeElement, self).__init__(e = kwargs['e'])
         else:
             super(AVLTreeElement, self).__init__()
-        self.height = balFactor = 0
+        self.height = self.balFactor = 0
 
-
-    ##
-    #	This method gets the data structure type
-    #
-    #	@return  The date structure type as a string
-    #
-    #
-    def get_data_structure_type(self):
+    def _get_data_structure_type(self) -> str:
+        """
+        Get the data structure type
+        Returns:
+             str
+        """
         return "AVLTree"
 
-    ##
-    #	This method returns the height of the tree at this node
-    #
-    #	@return  height
-    #
-    #
-    def get_height(self):
+    @property
+    def height(self) -> int:
+        """
+        Getter for height of the avl tree at this node
+        Returns:
+            int
+        """
         return self.height
 
-    ##
-    #  This method sets the height of the tree at this node
-    #
-    #  @param   height h
-    #
-    #
-    def set_height(self, h):
-        self.height = h
+    @height.setter
+    def height(self, value: int) -> None:
+        """
+        Setter function for the height of the avl tree
+        Args:
+            value: An integer for the height at this node
+        Returns:
+            None
+        """
+        self.height = value
 
-    ##
-    #	This method returns the balance factor  of the tree at this node
-    #
-    #   @return  balance factor
-    #
-    #
-    def get_balance_factor(self):
+    @height.deleter
+    def height(self) -> None:
+        """
+        Deleter function for the height of the avl tree
+        Returns:
+             None
+        """
+        del self.height
+
+    @property
+    def bal_factor(self) -> int:
+        """
+        Getter for the balance factor  of the tree at this node
+        Returns:
+            int
+        """
         return self.bal_factor
 
-    ##
-    #	This method sets the balance factor of the tree at this node
-    #
-    #  @param   balance factor  bf
-    #
-    def set_balance_factor(self, bf):
-        self.bal_factor = bf
+    @bal_factor.setter
+    def bal_factor(self, value: int) -> None:
+        """
+        Setter for the balance factor of the tree at this node
+        Args:
+            value: An integer for the balance factor at this node
+        Returns:
+            None
+        """
+        self.bal_factor = value
+
+    @bal_factor.deleter
+    def bal_factor(self) -> None:
+        """
+        Deleter function for the balance factor at this node
+        Returns:
+             None
+        """
+        del self.bal_factor
 
     ##
     #
