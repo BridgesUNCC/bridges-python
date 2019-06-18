@@ -14,7 +14,7 @@ from bridges.bin_tree_element import *
 #    another element, appropriate for setting link attributes, for instance, between
 #    the current element and its left or right child
 #
-#  	@author Kalpathi Subramanian, Mihai Mehedint
+#  	@author Kalpathi Subramanian, Mihai Mehedint, Matthew McQuaigue
 #
 #  	@date 6/22/16, 1/7/17, 5/17/17
 #
@@ -23,70 +23,79 @@ from bridges.bin_tree_element import *
 #
 #
 class BSTElement(BinTreeElement):
-    key = object()
 
-    ##
-    #
-    #  Construct an empty BSTElement with no key assigned and left and
-    #  right pointers set to null.
-    #  @param key the key to be used in a binary search tree implementation
-	#  @param e the object this BSTElement is holding
-	#  @param left the BSTElement that should be assigned to the left pointer
-	#  @param right the BSTElement that should be assigned to the right pointer
-    #
-    def __init__(self, key = None, e = None, left = None, right = None, label = None):
-        if key is not None:
-            self.set_key(key)
-        if e is None and left is None and right is None:
-            super(BSTElement, self).__init__()
-        elif e is None and left is not None and right is not None:
-            super(BSTElement, self).__init__(left = left, right = right)
-        elif e is not None and label is not None:
-            super(BSTElement, self).__init__(label = label, e = e)
-        elif e is not None and left is None and right is None:
-            super(BSTElement, self).__init__(e = e)
-        elif e is not None and left is not None and right is not None:
-            super(BSTElement, self).__init__(e = e, left = left, right = right)
+    def __init__(self, **kwargs) -> None:
+        """
+        Constructor bst element
+        Kwargs:
+            key: The label for the tree element that shows in visualization
+            e: the generic object that the tree element will hold
+            left: the tree element assigned to child 0
+            right: the tree element assigned to child 1
+        Returns:
+            None
+        """
+        if 'e' in kwargs:
+            if 'left' in kwargs and 'right' in kwargs:
+                super(BinTreeElement, self).__init__(e=kwargs['e'], left = kwargs['left'], right = kwargs['right'])
+            else:
+                super(BinTreeElement, self).__init__(e = kwargs['e'])
+        else:
+            super(BinTreeElement, self).__init__()
+        if 'key' in kwargs:
+            self.key = kwargs['key']
 
-
-
-
-
-    ##
-    # 	This method gets the data structure type
-    #
-    # 	@return  The date structure type as a string
-    #
-    def get_data_structure_type(self):
+    def _get_data_structure_type(self) -> str:
+        """
+        Get the data structure representation
+        Returns:
+            str
+        """
         return "BinarySearchTree"
 
-
-    ##
-    # 	Return the key of the BSTElement
-    #
-    # 	@return the key of this BSTElement
-    #
-    def get_key(self):
+    @property
+    def key(self) -> str:
+        """
+        Getter for the bst element key
+        Returns:
+            str
+        """
         return self.key
 
-    ##
-    #
-    # 	Set the key of the BSTElement to key
-    #  	@param key the key to set
-    #
-    def set_key(self, key):
+    @key.setter
+    def key(self, key: str) -> None:
+        """
+        Setter for the bst element key
+        Args:
+            key: the key for the element
+        Returns:
+            None
+        """
         self.key = key
-        #  add this to the element's properties
 
-    ##
-    # Return the left child of the  BSTElement
-    # @return the left child of this BSTElement
-    def get_left(self):
-        return super(BSTElement, self).get_left()
+    @key.deleter
+    def key(self) -> None:
+        """
+        Deleter for the bst key
+        Returns:
+             None
+        """
+        del self.key
 
-    ##
-    # Return the right child of the BSTElement
-    # @return the right child of this BSTElement
-    def get_right(self):
-        return super(BSTElement, self).get_right()
+    @property
+    def left(self):
+        """
+        Getter for the left element in BST
+        :return:
+            Element
+        """
+        return super(BSTElement, self).left
 
+    @property
+    def right(self):
+        """
+        Getter for the right element in BST
+        :return:
+            Element
+        """
+        return super(BSTElement, self).right

@@ -56,7 +56,7 @@ class BinTreeElement(TreeElement):
         return "BinaryTree"
 
     @property
-    def left(self) -> TreeElement:
+    def left(self):
         """
         Getter for the left element for the binary tree
         Returns:
@@ -76,7 +76,7 @@ class BinTreeElement(TreeElement):
         super(BinTreeElement, self).set_child(0, left)
 
     @property
-    def right(self) -> TreeElement:
+    def right(self):
         """
         Getter for the right element for the binary tree
         Returns:

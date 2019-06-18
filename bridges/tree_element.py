@@ -87,7 +87,7 @@ class TreeElement(Element):
         """
         return len(self.children)
 
-    def set_child(self, index, child) -> None:
+    def set_child(self, index: int, child) -> None:
         """
         Adds a child to the node - will be added at the next open position
         Args:
@@ -103,7 +103,7 @@ class TreeElement(Element):
         else:
             raise ValueError("Index is higher than number of children")
 
-    def get_child(self, index) -> object:
+    def get_child(self, index: int):
         """
         Gets a child at particular index
         Args:
