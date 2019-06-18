@@ -110,6 +110,7 @@ class Array():
         Returns:
             None
         """
+        self.size = sz
 
     @size.deleter
     def size(self) -> None:

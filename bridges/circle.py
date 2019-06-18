@@ -87,10 +87,14 @@ class Circle(Symbol):
 
         return dims
 
-    def get_json_representation(self):
-
-        ds_json = super(Circle, self).get_json_representation()
-        ds_json["name"] = self.get_label()
+    def _get_json_representation(self) -> dict:
+        """
+        Get the json representation of the Circle object
+        Returns:
+            dict
+        """
+        ds_json = super(Circle, self)._get_json_representation()
+        ds_json["name"] = self.label
         ds_json["shape"] = self._get_name()
         ds_json["r"] = self.radius
 
