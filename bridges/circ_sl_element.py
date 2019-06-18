@@ -68,11 +68,3 @@ class CircSLelement(SLelement):
             Generic object
         """
         return self.next
-
-    #  (non-Javadoc)
-    #
-    # @see java.lang.Object#toString()
-    #
-    #
-    def __str__(self):
-        return "CircSLelement [next=" + self.next + ", getNext()=" + self.get_next() + ", getIdentifier()=" + self.get_identifier() + ", getVisualizer()=" + self.get_visualizer() + ", getClassName()=" + self.get_class_name() + ", getElementRepresentation()=" + self.get_element_representation() + ", getLabel()=" + self.get_label() + ", getValue()=" + self.get_value() + ", toString()=" + super(CircSLelement, self).__str__() + ", getClass()=" + self.get_class() + ", hashCode()=" + self.hash_code() + "]"
