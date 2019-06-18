@@ -100,7 +100,7 @@ class CircDLelement(DLelement):
         return self.prev
 
     @prev.setter
-    def prev(sel -> None:
+    def prev(self, prev) -> None:
         """
         Setter for the prev element of this CircDLelement
         Args:
@@ -108,3 +108,4 @@ class CircDLelement(DLelement):
         Returns:
             None
         """
+        self.prev = prev
