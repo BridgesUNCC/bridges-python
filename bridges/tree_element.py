@@ -26,8 +26,6 @@ from bridges.link_visualizer import *
  # 	@author Matthew McQuaigue
  #
 class TreeElement(Element):
-    # holds all children of the node
-    children = []
 
     QUOTE = "\""
     COMMA = ","
@@ -39,94 +37,94 @@ class TreeElement(Element):
     OPEN_BOX = "["
     CLOSE_BOX = "]"
 
-    ##
-    # Constructs an TreeElement
-    # set to null.
-    # @param e the generic object that TreeElement will hold
-    # @param label the label of TreeElement that shows up on the bridges
-    # @param left the TreeElement to be assigned to the child 0
-    # @param right the TreeElement to be assigned to the child 1
-    #
-    def __init__(self, label=None, e=None, left=None, right=None):
-        if label is None and e is None and left is None and right is None:
+    def __init__(self, **kwargs) -> None:
+        """
+        Constructor for Tree Element
+        Kwargs:
+            label: The label for the tree element that shows in visualization
+            e: the generic object that the tree element will hold
+            left: the tree element assigned to child 0
+            right: the tree element assigned to child 1
+        Returns:
+            None
+        """
+        self.children = []
+        if 'label' in kwargs and 'e' in kwargs:
+            super(TreeElement, self).__init__(label = kwargs['label'], val = kwargs['e'])
+        elif 'e' in kwargs:
+            super(TreeElement, self).__init__(val = kwargs['e'])
+        else:
             super(TreeElement, self).__init__()
-            self.children = []
-        if e is not None and label is None and left is None and right is None:
-            super(TreeElement, self).__init__(val = e)
-            self.children = []
-        elif e is not None and left is not None and right is not None:
-            super(TreeElement, self).__init__(val = e)
-            self.children = []
-            self.children.append(left)
-            self.children.append(right)
-        elif e is None and left is not None and right is not None:
-            super(TreeElement, self).__init__()
-            self.children = []
-            self.children.append(left)
-            self.children.append(right)
-        elif label is not None and e is not None and left is None and right is None:
-            super(TreeElement, self).__init__(label = label, val = e)
-            self.children = []
-        elif e is not None and label is None and left is None and right is None:
-            super(TreeElement, self).__init__(val = e)
-            self.children = []
+        if 'left' in kwargs:
+            self.children.append(kwargs['left'])
+        if 'right' in kwargs:
+            self.children.append(kwargs['right'])
 
 
-
-    ##
-    # 	This method gets the data structure type
-    #
-    # 	@return  The date structure type as a string
-    #
-    def get_data_structure_type(self):
+    def _get_data_structure_type(self) -> str:
+        """
+        Gets the data structure type
+        Returns:
+            str
+        """
         return "Tree"
 
-    ##
-    #   Adds a child to the node
-
-    def add_child(self, child):
+    def add_child(self, child) -> None:
+        """
+        Adds a child to this parent node
+        Args:
+            child: the child node to add
+        Returns:
+            None
+        """
         self.children.append(child)
 
-    ##
-    #
-    #  Returns the number of children at this node
-    #
-    #  @return  number of children
-
-    def get_number_of_children(self):
+    def get_number_of_children(self) -> int:
+        """
+        The number of children of this node
+        Returns:
+            int
+        """
         return len(self.children)
 
-    ##
-    # 	adds a child to the node - will be added at the next open position
-    #
-    #  @param  child to be added
-    #
-    #  @return none
-    def set_child(self, index, child):
+    def set_child(self, index, child) -> None:
+        """
+        Adds a child to the node - will be added at the next open position
+        Args:
+            index: index to add child
+            child: child to add to tree
+        Returns:
+            None
+        Raises:
+            value error
+        """
         if index < len(self.children):
             self.children[index] = child
+        else:
+            raise ValueError("Index is higher than number of children")
 
-    ##
-    # 	gets a child at a particular index
-    #
-    #  @param  index into the list of children
-    #
-    #  @return child to be returned
-    #
-    #
-    def get_child(self, index):
+    def get_child(self, index) -> object:
+        """
+        Gets a child at particular index
+        Args:
+            index: index to get child
+        Returns:
+            object
+        Raises:
+            value error
+        """
         if index < len(self.children):
             return self.children[index]
         else:
-            return None
+            raise ValueError("Index is higher than number of children")
 
-    ##
-    # 	Get  hierarchical JSON of the tree representation
-    #
-    # 	@return the JSON string
-    #
-    def _get_data_structure_representation(self):
-        json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_CURLY + self.pre_order(self) + self.CLOSE_CURLY + self.CLOSE_CURLY
+    def _get_data_structure_representation(self) -> str:
+        """
+        Get the hierarchical JSON of the tree representation
+        Returns:
+            str
+        """
+        json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_CURLY + self._pre_order(self) + self.CLOSE_CURLY + self.CLOSE_CURLY
         return json_str
 
     ##
@@ -134,7 +132,7 @@ class TreeElement(Element):
     # 	representation of the tree.
     #
     #
-    def pre_order(self, root):
+    def _pre_order(self, root):
         k=0
         json_str = ""
         children = ""
@@ -165,7 +163,7 @@ class TreeElement(Element):
                     else:
                         json_str += "linkProperties" + self.COLON + "{}" + self.COMMA
                     #  process its children
-                    json_str += self.pre_order(root.get_child(k))
+                    json_str += self._pre_order(root.get_child(k))
                     json_str += self.CLOSE_CURLY + self.COMMA
                 k += 1
             #  process its children

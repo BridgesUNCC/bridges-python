@@ -128,4 +128,4 @@ class AVLTreeElement(BSTElement):
     #
     #
     def get_right(self):
-        return super(AVLTreeElement, self).get_right()
+        return super(AVLTreeElement, self).right
