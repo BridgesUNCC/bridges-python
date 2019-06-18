@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# package: bridges.base
 from bridges.sl_element import *
 
 ##
@@ -23,50 +22,51 @@ from bridges.sl_element import *
 #	linked to another element, appropriate for setting link attributes, between
 #  an element and its next element.
 #
-#	@author Kalpathi Subramanian
+#	@author Kalpathi Subramanian, Matthew McQuaigue
 #
 #	@date 6/22/16, 1/7/17, 5/17/17
 #
 #
 class CircSLelement(SLelement):
-    ##
-    #
-    # 	This constructor creates an CircSLelement object
-    # 	and sets its next pointer to itself
-    # @param label the label of CircSLelement
-    # @param e the generic object that this CircSLelement will hold
-    # @param next the CircSLelement that should be assigned to the next pointer
-    #
-    def __init__(self, e = None, label = None, next = None):
-        if e is not None and label is not None and next is None:
-            super(CircSLelement, self).__init__(e = e, label = label)
-            self.set_next(self)
-        elif e is not None and label is None and next is not None:
-            super(CircSLelement, self).__init__(e = e, next = next)
-        elif e is None and label is None and next is not None:
-            super(CircSLelement, self).__init__(next = next)
+
+    def __init__(self, **kwargs) -> None:
+        """
+        The constructor for a Circular Singly Linked Element
+        Args:
+            e: the generic object that this CircSLelement will hold
+            label: The label of this CircSLelement
+            next: The CircSLelement that should be assigned to the next pointer
+        Returns:
+            None
+        """
+        if 'e' in kwargs:
+            if 'label' in kwargs:
+                if 'next' in kwargs:
+                    super(CircSLelement, self).__init__(e=kwargs['e'], label=kwargs['label'],
+                                                        next = kwargs['next'])
+                else:
+                    super(CircSLelement, self).__init__(e=kwargs['e'], label=kwargs['label'])
+            else:
+                super(CircSLelement, self).__init__(e=kwargs['e'])
         else:
             super(CircSLelement, self).__init__()
             self.set_next(self)
 
-    ##
-    #
-    #	This method gets the data structure type
-    #
-    #	@return  The date structure type as a string
-    #
-    #
-    def get_data_structure_type(self):
+    def _get_data_structure_type(self) -> str:
+        """
+        Gets the data structure type
+        Returns:
+            str
+        """
         return "CircularSinglyLinkedList"
 
-    ##
-    #
-    # Retrieves the next CircSLelement
-    #
-    # @return CircSLelement<E> assigned to next
-    #
-    #
-    def get_next(self):
+    @property
+    def next(self):
+        """
+        Getter for the next element of this CircSLelement
+        Returns:
+            Generic object
+        """
         return self.next
 
     #  (non-Javadoc)

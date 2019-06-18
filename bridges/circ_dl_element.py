@@ -45,8 +45,8 @@ class CircDLelement(DLelement):
         """
         if 'e' in kwargs:
             if 'next' in kwargs and 'prev' in kwargs:
-                self.set_next(next)
-                self.set_prev(prev)
+                self.set_next(kwargs['next'])
+                self.set_prev(kwargs['prev'])
                 if 'label' in kwargs:
                     super(CircDLelement, self).__init__(e=kwargs['e'], label=kwargs['label'],
                                                         next=kwargs['next'], prev=kwargs['prev'])
