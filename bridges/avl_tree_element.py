@@ -28,16 +28,16 @@ class AVLTreeElement(BSTElement):
     def __init__(self, **kwargs) -> None:
         """
         AVL Tree constructor
-        Args:
-            k: the search key
+        kwargs:
+            key: the search key
             e : the the specific object that the element is holding
         Returns:
             None
         """
-        if 'k' in kwargs and 'e' in kwargs:
-            super(AVLTreeElement, self).__init__(key = kwargs['k'], e = kwargs['e'])
-        elif 'k' in kwargs:
-            super(AVLTreeElement, self).set_key(kwargs['k'])
+        if 'key' in kwargs and 'e' in kwargs:
+            super(AVLTreeElement, self).__init__(key = kwargs['key'], e = kwargs['e'])
+        elif 'key' in kwargs:
+            super(AVLTreeElement, self).set_key(kwargs['key'])
         elif 'e' in kwargs:
             super(AVLTreeElement, self).__init__(e = kwargs['e'])
         else:
@@ -118,7 +118,7 @@ class AVLTreeElement(BSTElement):
     #
     #
     def get_left(self):
-        return super(AVLTreeElement, self).get_left()
+        return super(AVLTreeElement, self).left
 
     ##
     #
