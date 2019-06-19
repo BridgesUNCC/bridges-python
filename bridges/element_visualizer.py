@@ -17,7 +17,6 @@ from decimal import Decimal
 class ElementVisualizer(object):
     #  Visualization properties for this Node.
 
-    shape = "circle"
     key = ""
     locationX = Decimal("Infinity")
     locationY = Decimal("Infinity")
@@ -90,20 +89,12 @@ class ElementVisualizer(object):
     def get_color(self):
         return self.color
 
-    ##
-    # Get the shape of the Element in the bridges Visualization.
-    # @return the string that represents the Element's shape in the bridges Visualization.
-    #
-    def get_shape(self):
+    @property
+    def shape(self):
         return self.shape
 
-    ##
-    # Sets the shape of the Element in the bridges Visualization
-    #
-    # @param aShape the string representing the shape of the Element in the bridges Visualization
-    #
-    def set_shape(self, a_shape):
-        #  this.aShape = aShape;
+    @shape.setter
+    def shape(self, a_shape):
         a_shape = a_shape.lower()
         self.prop["shape"] = a_shape
         self.shape = a_shape
