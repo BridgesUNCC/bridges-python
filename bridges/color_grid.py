@@ -135,12 +135,6 @@ class ColorGrid(Grid):
                             img_bytes.append(color[k])
         return img_bytes
 
-    ##
-    #  
-    #   get the JSON representation of the color grid
-    #
-    #   @return the JSON representation of the color grid
-    #
     def _get_data_structure_representation(self) -> str:
         """
         Get the JSON representation of the color grid
