@@ -29,7 +29,7 @@ class ColorGrid(Grid):
         """
         return "ColorGrid"
 
-    def __init__(self, rows: int = 10, cols: int = 10, color: Color = baseColor):
+    def __init__(self, rows: int = 10, cols: int = 10, color: Color = baseColor) -> None:
         """
         Color Grid constructor
         Args:
@@ -42,31 +42,36 @@ class ColorGrid(Grid):
         super(ColorGrid, self).__init__(rows=rows, cols=cols)
         self.baseColor = color
         self.gridSize = [rows, cols]
-
         self.initialize_grid()
 
-   ##
-   #  Populate the grid with the base color
-   #
-   #
-    def initialize_grid(self):
+    def initialize_grid(self) -> None:
+        """
+        initialize the grid anf populate with base colors
+        Returns:
+            None
+        """
         for i in range(self.gridSize[0]):
             for j in range(self.gridSize[1]):
                 self.set(i, j, self.baseColor)
 
-    ##
-    # set the (row, col) element in the ColorGrid
-    # @param row - which row to access
-    # @param col - which col to access
-    # @param color - background color for the cell at row,col
-    def set(self, row, col, color):
+    def set(self, row: int, col: int, color: Color) -> None:
+        """
+        Set the (row, col) element in the color grid
+        Args:
+            row - which row to access
+            col - which col to access
+            color - background color for the cell at row,col
+        Returns:
+            None
+        """
         super(ColorGrid, self).set(row, col, color)
 
-    ##
-    # get the Run Length Encoding of ColorGrid
-    #
-    def get_rle(self):
-
+    def get_rle(self) -> bytearray:
+        """
+        Get the run length encoding of color grid
+        Returns:
+            bytearray
+        """
         img_bytes = bytearray()
         count = 0
         total_count = 0
@@ -113,9 +118,12 @@ class ColorGrid(Grid):
 
         return img_bytes
 
-    ##
-    # get raw encoding of ColorGrid
-    def get_raw(self):
+    def get_raw(self) -> bytearray:
+        """
+        Get raw encoding of color grid
+        Returns:
+            bytearray
+        """
         img_bytes = bytearray()
         for i in range(self.gridSize[0]):
             if self.grid[i] is not None:
@@ -133,17 +141,12 @@ class ColorGrid(Grid):
     #
     #   @return the JSON representation of the color grid
     #
-    def get_data_structure_representation(self):
-        # imageBytes = bytearray()
-        # for i in range(self.gridSize[0]):
-        #     if (self.grid[i] is not None):
-        #         for j in range(self.gridSize[1]):
-        #             color = self.grid[i][j]
-        #             color = color.getByteRepresentation()
-        #             for k in range(len(color)):
-        #                 imageBytes.append(color[k])
-                    # for k in range(len(color)):
-                    #     imageBytes.append(int.from_bytes(color[k], 'little'))
+    def _get_data_structure_representation(self) -> str:
+        """
+        Get the JSON representation of the color grid
+        Returns:
+            str
+        """
         byte_buff = self.get_rle()
         encoding = "RLE"
 
@@ -154,10 +157,7 @@ class ColorGrid(Grid):
         else:
             print("RLE ran")
 
-
-        # json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX + self.QUOTE + base64.b64encode((imageBytes)).decode() + self.QUOTE + self.CLOSE_BOX + self.COMMA
         json_str = self.QUOTE + "encoding" + self.QUOTE + self.COLON + self.QUOTE + encoding + self.QUOTE + self.COMMA + self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX  + self.QUOTE + base64.b64encode(bytes(byte_buff)).decode() + self.QUOTE + self.CLOSE_BOX + self.COMMA
-
         json_str += self.QUOTE + "dimensions" + self.QUOTE + self.COLON + self.OPEN_BOX + str(self.gridSize[0]) + "," + str(self.gridSize[1]) + self.CLOSE_BOX + self.CLOSE_CURLY
 
         return json_str
