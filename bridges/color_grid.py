@@ -21,22 +21,23 @@ class ColorGrid(Grid):
 
     baseColor = Color(r=0, g=0, b=0, a=1.0)
 
-    def get_data_structure_type(self):
+    def _get_data_structure_type(self) -> str:
+        """
+        Get the data structure type
+        Returns:
+            str
+        """
         return "ColorGrid"
 
-    #
-    #  Grid constructor with size arguments
-    #
-    #  @param rows - int representing the number of rows of the grid
-    #  @param cols - int representing the number of columns of the grid
-    #  @param color - Color object
-    #
     def __init__(self, rows: int = 10, cols: int = 10, color: Color = baseColor):
         """
-        Grid constructor
-        :param int rows: number of rows in the grid
-        :param int cols: number of columns in the grid
-        :param Color color: base color of the each grid pixel
+        Color Grid constructor
+        Args:
+            rows: number of rows in the grid
+            cols: number of columns in the grid
+            color: base color of the each grid pixel
+        Returns:
+            None
         """
         super(ColorGrid, self).__init__(rows=rows, cols=cols)
         self.baseColor = color

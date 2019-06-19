@@ -1,7 +1,7 @@
 ##
 #  @brief This is a class in BRIDGES for representing an (n x n) grid.
 #  @author David Burlinson
-#  @param
+#
 import traceback
 
 class Grid:
@@ -9,17 +9,27 @@ class Grid:
     gridSize = [10, 10]
     maxGridSize = [1080, 1920]
 
-    def get_data_structure_type(self):
+    def _get_data_structure_type(self) -> str:
+        """
+        Get the data structure type
+        Returns:
+            str
+        """
         return "Grid"
 
-    ##
-    # Grid constructors
-    # @param size - size of the grid as array
-    # @param rows - number of rows in grid
-    # @param cols - number of columns in grid
-    #
-    def __init__(self, size = None, rows = None, cols = None):
-        if size is not None:
+    def __init__(self, size = None, rows = None, cols = None) -> None:
+        """
+        grid constructor
+        Args:
+            size: size of the grid as array
+            rows: number of rows in grid
+            cols: number of the columns in grid
+        Returns:
+            None
+        Raises:
+            value error
+        """
+        if 'size' is not None:
             if ((size[0] <= 0 or size[0] > self.maxGridSize[0]) or (size[1] <= 0 or size[1] > self.maxGridSize[1])):
                 raise ValueError("Invalid size: [" + str(str(size[0]) + "," + str(size[1]) + "] .. please use values between (0 and " + str(self.maxGridSize[0]) + "] for rows and values between (0 and " + str(self.maxGridSize[1]) + "] for columns"))
             self.grid = []
@@ -37,22 +47,40 @@ class Grid:
                 for j in range(size[1]):
                     self.grid[i].append(None)
 
-    ##
-    #  set up inner lists (columns)
-    #  initialize values in inner lists
-    def get_dimensions(self):
+    @property
+    def dimensions(self) -> list:
+        """
+        Getter for the dimensions of the grid
+        Returns:
+            list
+        """
         return [self.gridSize[0], self.gridSize[1]]
 
-    ##
-    #  get the (row, col) element in the grid
-    def get(self, row, col):
+    def get(self, row: int, col: int):
+        """
+        Get the row,col element in the grid
+        Args:
+            row: row the element is in
+            col: col the element is in
+        Returns:
+            list, None
+        Raises
+            traceback exception
+        """
         try:
             return self.grid[row][col]
         except Exception as e:
             traceback.print_tb(e.__traceback__)
             return None
 
-    ##
-    #  set the (row, col) element in the grid
-    def set(self, row, col, val):
+    def set(self, row: int, col: int, val) -> None:
+        """
+        set the (row, col) element in the grid
+        Args:
+            row: row position
+            col: column position
+            val: value to be set in (row, col) position
+        Returns:
+            None
+        """
         self.grid[int(row)][int(col)] = val
