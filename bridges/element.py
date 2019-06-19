@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 from bridges.element_visualizer import *
-from bridges.color import *
 from bridges.link_visualizer import *
 import re
 from decimal import Decimal
@@ -30,7 +29,7 @@ import sys
 # @author Mihai Mehedint, Kalpathi Subramanian
 #
 #
-class Element(object):
+class Element():
 
     QUOTE = "\""
     COMMA = ","
@@ -43,12 +42,6 @@ class Element(object):
     CLOSE_BOX = "]"
 
     ids = 0
-    label = str()
-    identifier = str()
-    # visualizer = ElementVisualizer()
-    # print(visualizer)
-    # lvisualizer = dict()
-    value = object()
 
     #
     # 	this is the number of pattern matches where the new string
@@ -69,77 +62,69 @@ class Element(object):
     # 	one or more
     DIVIDE_KEY = "(\r?\n)|(\n)|(\f)|(\r)|(%n)"
 
-    # public String INSERT_STRING = "\\n";
-    # public String DIVIDE_KEY ="(\n)";
-    def get_data_structure_type(self):
+    def _get_data_structure_type(self) -> str:
+        """
+        Get the data structure representation
+        Returns:
+            str
+        """
         return "Element"
 
-    ##
-    # Element constructor
-    # creates an ElementVisualizer object
-    # sets a unique identifier for the current Element
-    # normally used from subclasses
-    # @param val generic parameter value used to construct Element
-    # @param label the string that is visible on the bridges Visualization
-    #
-    def __init__(self, label = None, val=None, original=None):
+    def __init__(self, **kwargs) -> None:
+        """
+        Element constructor
+        creates an Element Visualizer and unique identifier for the current element
+        kwargs:
+            label: the string that is visible on the bridges Visualization
+            val: generic parameter value used to construct Element
+            original: element object to copy
+        Returns:
+            None
+        """
         Element.ids += 1
-        self.visualizer = ElementVisualizer()
         self.lvisualizer = dict()
-
-        if val is not None and label is None and original is None:
-            self.set_value(val)
-            self.identifier = str(Element.ids)
-            self.label = "Default"
-            self.set_visualizer(ElementVisualizer())
-            self.ids = Element.ids
-            self.lvisualizer = dict()
-        if val is not None and label is not None:
-            self.identifier = str(Element.ids)
-            self.label = "Default"
-            self.set_visualizer(ElementVisualizer())
-            self.ids = Element.ids
-            self.lvisualizer = dict()
-            self.set_label(label)
-            self.set_value(val)
-        if original is not None:
-            self.identifier = str(Element.ids)
-            self.ids = Element.ids
-            self.label = str(original.get_label())
-            self.visualizer = ElementVisualizer(original.get_visualizer())
-            self.lvisualizer = dict()
-            self.set_value(original.get_value())
-        if val is None and label is None and original is None:
-            self.identifier = str(Element.ids)
-            self.label = "Default"
-            self.set_visualizer(ElementVisualizer())
-            self.ids = Element.ids
-            self.lvisualizer = dict()
+        self._ids = Element.ids
+        self.identifier = str(self._ids)
+        self.label = "Default"
+        self.visualizer = ElementVisualizer()
+        if 'val' in kwargs:
+            self.set_value(kwargs['val'])
+            if 'label' in kwargs:
+                self.label = kwargs['label']
+        elif 'original' in kwargs:
+            self.visualizer = ElementVisualizer(kwargs['original'].get_visualizer())
+            self.label = str(kwargs['original'].get_label())
+            self.set_value(kwargs['original'].get_value())
 
 
-    ##
-    # this method returns the element's unique identifier
-    # @return the string identifier
-    #
-    def get_identifier(self):
+    @property
+    def identifier(self) -> str:
+        """
+        Getter for the element identifier
+        Return:
+            str
+        """
         return self.identifier
 
-    ##
-    # Returns the Element's visualizer object
-    #
-    # @return the visualizer object
-    #
-    def get_visualizer(self) -> ElementVisualizer:
-        return self.visualizer
+    @identifier.setter
+    def identifier(self, id: int) -> None:
+        """
+        Setter for the element identifier
+        Args:
+            id: the identifier
+        Returns:
+            None
+        """
+        self.identifier = id
 
-    ##
-    # This method sets the visualizer object for the current
-    # element object
-    #
-    # @param visualizer the visualizer to set
-    #
-    def set_visualizer(self, visualizer):
-        self.visualizer = visualizer
+    @property
+    def visualizer(self):
+        return self. visualizer
+
+    @visualizer.setter
+    def visualizer(self, vis):
+        self.visualizer = vis
+
 
     ##
     # Returns the Element's link visualizer object
@@ -180,29 +165,37 @@ class Element(object):
     def remove_link_visualizer(self, el):
         self.lvisualizer.pop(el)
 
-    def set_size(self, sz):
-        self.visualizer.set_size(sz)
-
-    def get_size(self):
+    @property
+    def size(self):
         return self.visualizer.get_size()
 
-    def set_color(self, col):
+    @size.setter
+    def size(self, sz):
+        self.visualizer.set_size(sz)
+
+    @property
+    def color(self):
+        return self.visualizer.get_color()
+
+    @color.setter
+    def color(self, col):
         self.visualizer.set_color(col)
 
-    def get_color(self):
-        self.visualizer.get_color()
-
-    def set_opacity(self, opacity):
-        self.visualizer.set_opacity(opacity)
-
-    def get_opacity(self):
+    @property
+    def opacity(self):
         return self.visualizer.get_opacity()
 
-    def set_shape(self, shape):
-        self.visualizer.set_shape(shape)
+    @opacity.setter
+    def opacity(self, o):
+        self.visualizer.set_opacity(o)
 
-    def get_shape(self):
+    @property
+    def shape(self):
         return self.visualizer.get_shape()
+
+    @shape.setter
+    def shape(self, sh):
+        self.visualizer.set_shape(sh)
 
     def set_location(self, locX, locY):
         self.visualizer.set_location(locX, locY)
@@ -234,25 +227,33 @@ class Element(object):
         return self.value.__class__.__name__
 
 
-    def get_element_representation(self):
-        json_str = self.OPEN_CURLY + self.QUOTE + "name" + self.QUOTE + self.COLON + self.QUOTE + str(self.label) + self.QUOTE + self.COMMA + self.QUOTE + "shape" + self.QUOTE + self.COLON + self.QUOTE + self.visualizer.get_shape() + self.QUOTE + self.COMMA + self.QUOTE + "size" + self.QUOTE + self.COLON + str(self.visualizer.get_size()) + self.COMMA + self.QUOTE + "color" + self.QUOTE + self.COLON + self.OPEN_BOX + str(self.visualizer.get_color().get_red()) + self.COMMA + str(self.visualizer.get_color().get_green()) + self.COMMA + str(self.visualizer.get_color().get_blue()) + self.COMMA + str(self.visualizer.get_color().get_alpha()) + self.CLOSE_BOX
+    def _get_element_representation(self):
+        json_str = {
+            "name": str(self.label),
+            "shape": str(self.visualizer.get_shape()),
+            "size": str(self.visualizer.get_size()),
+            "color": [str(self.visualizer.get_color().get_red()), str(self.visualizer.get_color().get_green()),
+                      str(self.visualizer.get_color().get_blue()), str(self.visualizer.get_color().get_alpha())]
+        }
         loc_flag = not ((self.visualizer.get_locationX() == Decimal('Infinity')) or (self.visualizer.get_locationY() == Decimal('Infinity')))
         if loc_flag:
-             json_str += self.COMMA + self.QUOTE + "location" + self.QUOTE + self.COLON + self.OPEN_BOX + str(self.visualizer.get_locationX()) + self.COMMA + str(self.visualizer.get_locationY()) + self.CLOSE_BOX
-        if self.get_data_structure_type() == "KDTree":
+            json_str['location'] = [str(self.visualizer.get_locationX()), str(self.visualizer.get_locationY())]
+        if self._get_data_structure_type() == "KDTree":
             kdt = self
-            json_str += self.COMMA + self.QUOTE + "key" + self.QUOTE + self.COLON + self.QUOTE + str(kdt.get_key()) + self.QUOTE + self.COMMA + self.QUOTE + "dimension" + self.QUOTE + self.COLON + self.QUOTE + str(kdt.get_dimension()) + self.QUOTE + self.COMMA + self.QUOTE + "thickness" + self.QUOTE + self.COLON + self.QUOTE + str(kdt.get_thickness()) + self.QUOTE
-        if self.get_data_structure_type() == "BinarySearchTree":
+            json_str['key'] = str(kdt.get_key())
+            json_str['dimension'] = str(kdt.get_dimension())
+            json_str['thickness'] = str(kdt.get_thickness())
+        if self._get_data_structure_type() == "BinarySearchTree":
             bst = self
-            json_str += self.COMMA + self.QUOTE + "key" + self.QUOTE + self.COLON + self.QUOTE + str(bst.get_key()) + self.QUOTE + self.COMMA
-        elif self.get_data_structure_type() == "AVLTree":
+            json_str['key'] = str(bst.key)
+        if self._get_data_structure_type() == "AVLTree":
             avl = self
-            json_str += self.COMMA + self.QUOTE + "key" + self.QUOTE + self.COLON + self.QUOTE + str(avl.get_key()) + self.QUOTE + self.COMMA + self.QUOTE + "height" + self.QUOTE + self.COLON + str(avl.get_height()) + self.COMMA + self.QUOTE + "balance_factor" + self.QUOTE + self.COLON + str(avl.get_balance_factor()) + self.COMMA
-        else:
-            json_str += self.CLOSE_CURLY
+            json_str['key'] = str(avl.key)
+            json_str['height'] = str(avl.get_height())
+            json_str['balance_factor'] = str(avl.get_balance_factor())
         return json_str
 
-    def get_link_representation(self, lv, src, dest):
+    def _get_link_representation(self, lv, src, dest):
         return self.OPEN_CURLY + lv.get_link_properties() + self.COMMA + self.QUOTE + "source" + self.QUOTE + self.COLON + src + self.COMMA + self.QUOTE + "target" + self.QUOTE + self.COLON + dest + self.CLOSE_CURLY
 
     ##

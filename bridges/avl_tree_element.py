@@ -37,7 +37,7 @@ class AVLTreeElement(BSTElement):
         if 'key' in kwargs and 'e' in kwargs:
             super(AVLTreeElement, self).__init__(key = kwargs['key'], e = kwargs['e'])
         elif 'key' in kwargs:
-            super(AVLTreeElement, self).set_key(kwargs['key'])
+            super(AVLTreeElement, self).key = kwargs['key']
         elif 'e' in kwargs:
             super(AVLTreeElement, self).__init__(e = kwargs['e'])
         else:
@@ -51,6 +51,10 @@ class AVLTreeElement(BSTElement):
              str
         """
         return "AVLTree"
+
+    @property
+    def key(self):
+        return super(AVLTreeElement, self).key
 
     @property
     def height(self) -> int:
