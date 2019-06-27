@@ -17,19 +17,7 @@ from bridges.element import *
 #
 #
 class Array():
-    QUOTE = "\""
-    COMMA = ","
-    COLON = ":"
-    OPEN_CURLY = "{"
-    CLOSE_CURLY = "}"
-    OPEN_PAREN = "("
-    CLOSE_PAREN = ")"
-    OPEN_BOX = "["
-    CLOSE_BOX = "]"
-
-    dims = [1,1,1]
-
-
+    dims = [1,1,1] #used for setting size of array based on dimensions
     def __init__(self, num_dims, **kwargs):
         """
         Array constructor
@@ -43,30 +31,30 @@ class Array():
         Returns:
             None
         """
-        self.array_data = []
-        self.num_dims = num_dims
-        self.dims = [1, 1, 1]
+        self._array_data = []
+        self._num_dims = num_dims
+        self._dims = [1, 1, 1]
         if kwargs:
             if 'dims' in kwargs:
                 self._set_dimensions(kwargs['dims'])
-                self.dims = kwargs['dims']
+                self._dims = kwargs['dims']
             else:
-                self.dims[0] = self.dims[1] = self.dims [2] = self.size = 0
+                self._dims[0] = self._dims[1] = self._dims [2] = self._size = 0
             if 'x_dim' in kwargs and num_dims >= 1:
-                self.dims[0] = kwargs['x_dim']
+                self._dims[0] = kwargs['x_dim']
             if 'y_dim' in kwargs and num_dims >= 2:
-                self.dims[1] = kwargs['y_dim']
+                self._dims[1] = kwargs['y_dim']
             if 'z_dim' in kwargs and num_dims == 3:
-                self.dims[2] = kwargs['z_dim']
+                self._dims[2] = kwargs['z_dim']
 
     @property
     def num_dims(self) -> int:
         """
         Getter for representing the number of dimensions in the array
         Returns:
-            int
+            int: number of dimensions
         """
-        return self.num_dims
+        return self._num_dims
 
     @num_dims.setter
     def num_dims(self, value: int) -> None:
@@ -77,68 +65,50 @@ class Array():
         Returns:
             None
         Raises:
-            ValueError
+            ValueError: if dimension passed in is < 1 or > 3
         """
         if value > 3:
             raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D arrays supported at this time")
-        self.num_dims = value
-
-    @num_dims.deleter
-    def num_dims(self) -> None:
-        """
-        Deleter function for the number of dimensions in array
-        Returns:
-             None
-        """
-        del self.num_dims
+        self._num_dims = value
 
     @property
     def size(self) -> int:
         """
         Getter for representing the size of array
         Returns:
-            int
+            int: the size
         """
-        return self.size
+        return self._size
 
     @size.setter
-    def size(self, sz) -> None:
+    def size(self, sz: int) -> None:
         """
         Setter for representing the size of the array
         Args:
-            sz: The size to be set for array (int)
+            (int) sz: The size to be set for array
         Returns:
             None
         """
-        self.size = sz
-
-    @size.deleter
-    def size(self) -> None:
-        """
-        Deleter function for the size property
-        Returns:
-            None
-        """
-        del self.size
+        self._size = sz
 
     def _get_data_structure_type(self) -> str:
         """
         Gets the data structure type
         Raises:
-            ValueError
+            ValueError: if number of dimenstions is < 1 or > 3
         Returns:
-            str
+            str: type of data structure
         """
         if (self.num_dims >= 1) and (self.num_dims <= 3):
             return "Array"
         else:
             raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D arrays supported at this time")
 
-    def _set_dimensions(self, dim) -> None:
+    def _set_dimensions(self, dim: list) -> None:
         """
         Sets the size of each dimension and allocates array space
         Args:
-            dim: size of each dimension in array
+            (list) dim: size of each dimension in array
         Returns:
              None
         """
@@ -152,73 +122,67 @@ class Array():
         if sz < 0:
             raise ValueError("Invalid dimension value, must be  positive")
         self.size = sz
-        #  allocate space for the array
+        #  allocate space for the array with elements
         k = 0
         while k < self.size:
-            self.array_data.append(Element())
+            self._array_data.append(Element())
             k += 1
 
-
-
-    @property
-    def element(self, **kwargs) -> Element:
+    def get_element(self, **kwargs):
         """
         Getter function for an element in the array at given position
         Kwargs:
-            index: the index of array to get in array (int)
-            x: column index into array (int)
-            y: row index into array (int)
-            z: slice index into array (int)
+            (int) index: the index of array to get in array
+            (int) x: column index into array
+            (int) y: row index into array
+            (int) z: slice index into array
         Returns:
-            Element
+            Element: the element at position given
         """
         if 'index' in kwargs:
-            return self.array_data[kwargs['index']]
+            return self._array_data[kwargs['index']]
         if 'x' in kwargs and 'y' in kwargs:
             if 'z' in kwargs:
-                return self.array_data[kwargs['z']*self.dims[0]*self.dims[1] + kwargs['y']*self.dims[0] + kwargs['x']]
+                return self._array_data[
+                    kwargs['z'] * self._dims[0] * self._dims[1] + kwargs['y'] * self._dims[0] + kwargs['x']]
             else:
-                return self.array_data[kwargs['y']*self.dims[1]+ kwargs['x']]
+                return self._array_data[kwargs['y'] * self._dims[1] + kwargs['x']]
 
-    @element.setter
-    def element(self, el: Element, **kwargs) -> None:
+    def set_element(self, el: Element, **kwargs):
         """
         Setter function for an element in the array at given position
         Args:
-            el: element object to be assigned to index
+            (Element) el: element object to be assigned to index
         Kwargs:
-            index: the index of array to get in array (int)
-            x: column index into array (int)
-            y: row index into array (int)
-            z: slice index into array (int)
+            (int) index: the index of array to get in array
+            (int) x: column index into array
+            (int) y: row index into array
+            (int) z: slice index into array
         Returns:
             None
         """
         if 'index' in kwargs:
-            self.array_data[kwargs['index']] = el
+            self._array_data[kwargs['index']] = el
         if 'x' in kwargs and 'y' in kwargs:
             if 'z' in kwargs:
-                self.array_data[kwargs['z']*self.dims[0]*self.dims[1] + kwargs['y']*self.dims[0] + kwargs['x']] = el
+                self._array_data[kwargs['z']*self._dims[0]*self._dims[1] + kwargs['y']*self._dims[0] + kwargs['x']] = el
             else:
-                self.array_data[kwargs['y']*self.dims[1]+ kwargs['x']] = el
+                self._array_data[kwargs['y']*self._dims[1]+ kwargs['x']] = el
 
-
-    def _get_data_structure_representation(self) -> str:
+    def _get_data_structure_representation(self) -> dict:
         """
-        Generating the JSON string for a bridges array object (Array<E>[])
+        Generating the JSON string for a bridges array object
         Returns:
-            str
+            dict: the dict that will represent the json when dumped
         """
-        nodes_JSON = str()
-
+        nodes_json = dict()
+        #add json representation for each element to dict
         i = 0
         while i < self.size:
-            if self.array_data[i] is not None:
-                nodes_JSON += (self.array_data[i].get_element_representation() + ",")
+            if self._array_data[i] is not None:
+                nodes_json.update(self._array_data[i]._get_element_representation())
             i += 1
-        #  remove last comma
-        nodes_JSON = nodes_JSON[:-1]
-        json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX
-        json_str += nodes_JSON
-        json_str += self.CLOSE_BOX + self.CLOSE_CURLY
-        return json_str
+        json_dict = {
+            "nodes": [nodes_json]
+        }
+        return json_dict
