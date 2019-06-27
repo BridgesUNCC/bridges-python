@@ -42,18 +42,23 @@ class AVLTreeElement(BSTElement):
             super(AVLTreeElement, self).__init__(e = kwargs['e'])
         else:
             super(AVLTreeElement, self).__init__()
-        self.height = self.balFactor = 0
+        self._height = self._bal_factor = 0
 
     def _get_data_structure_type(self) -> str:
         """
         Get the data structure type
         Returns:
-             str
+             str: the type of data structure
         """
         return "AVLTree"
 
     @property
-    def key(self):
+    def key(self) -> str:
+        """
+        Getter for the search keys
+        Returns:
+            str: represeting the key
+        """
         return super(AVLTreeElement, self).key
 
     @property
@@ -61,75 +66,53 @@ class AVLTreeElement(BSTElement):
         """
         Getter for height of the avl tree at this node
         Returns:
-            int
+            int: the height of the tree
         """
-        return self.height
+        return self._height
 
     @height.setter
     def height(self, value: int) -> None:
         """
         Setter function for the height of the avl tree
         Args:
-            value: An integer for the height at this node
+            (int) value: An integer for the height at this node
         Returns:
             None
         """
-        self.height = value
-
-    @height.deleter
-    def height(self) -> None:
-        """
-        Deleter function for the height of the avl tree
-        Returns:
-             None
-        """
-        del self.height
+        self._height = value
 
     @property
-    def bal_factor(self) -> int:
+    def balance_factor(self) -> int:
         """
         Getter for the balance factor  of the tree at this node
         Returns:
-            int
+            int: representing the balance factor
         """
-        return self.bal_factor
+        return self._bal_factor
 
-    @bal_factor.setter
-    def bal_factor(self, value: int) -> None:
+    @balance_factor.setter
+    def balance_factor(self, value: int) -> None:
         """
         Setter for the balance factor of the tree at this node
         Args:
-            value: An integer for the balance factor at this node
+            (int) value: An integer for the balance factor at this node
         Returns:
             None
         """
-        self.bal_factor = value
+        self._bal_factor = value
 
-    @bal_factor.deleter
-    def bal_factor(self) -> None:
+    def left(self):
         """
-        Deleter function for the balance factor at this node
+        Getter for the left child of the avl tree
         Returns:
-             None
+            child
         """
-        del self.bal_factor
-
-    ##
-    #
-    # This method returns the left child of the tree node
-    #
-    # @return the left child of this node
-    #
-    #
-    def get_left(self):
         return super(AVLTreeElement, self).left
 
-    ##
-    #
-    #  This method returns the right child of tree node
-    #
-    # @return the right child of this node
-    #
-    #
-    def get_right(self):
+    def right(self):
+        """
+        Getter for the right child of the avl tree
+        Returns:
+            child
+        """
         return super(AVLTreeElement, self).right
