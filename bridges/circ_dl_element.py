@@ -45,8 +45,8 @@ class CircDLelement(DLelement):
         """
         if 'e' in kwargs:
             if 'next' in kwargs and 'prev' in kwargs:
-                self.set_next(kwargs['next'])
-                self.set_prev(kwargs['prev'])
+                self._next = kwargs['next']
+                self._prev = kwargs['prev']
                 if 'label' in kwargs:
                     super(CircDLelement, self).__init__(e=kwargs['e'], label=kwargs['label'],
                                                         next=kwargs['next'], prev=kwargs['prev'])
@@ -59,10 +59,10 @@ class CircDLelement(DLelement):
                 super(CircDLelement, self).__init__(e=kwargs['e'])
         else:
             super(CircDLelement, self).__init__()
-            self.next = self
-            self.prev = self
+            self._next = self
+            self._prev = self
 
-    def _get_data_structure_type(self) -> str:
+    def get_data_structure_type(self) -> str:
         """
         Gets the data structure type
         Returns:
@@ -75,37 +75,37 @@ class CircDLelement(DLelement):
         """
         Getter for the next element of this CircDLelement
         Returns:
-            CircDLelement
+            DLelement: assigned to next
         """
-        return self.next
+        return self._next
 
     @next.setter
     def next(self, next) -> None:
         """
         Setter for the next element for this CircDLelement
         Args:
-            next: the next element for this CircDLelement
+            (DLelement) next: the next element for this CircDLelement
         Returns:
             None
         """
-        self.next = next
+        self._next = next
 
     @property
     def prev(self):
         """
         Getter for the prev element of this CircDLelement
         Returns:
-            CircDLelement
+            DLelement: assigned to prev
         """
-        return self.prev
+        return self._prev
 
     @prev.setter
     def prev(self, prev) -> None:
         """
         Setter for the prev element of this CircDLelement
         Args:
-            prev: The prev element of this CricDLelement
+            (DLelement) prev: The prev element of this CricDLelement
         Returns:
             None
         """
-        self.prev = prev
+        self._prev = prev

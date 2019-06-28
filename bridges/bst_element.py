@@ -28,10 +28,10 @@ class BSTElement(BinTreeElement):
         """
         Constructor bst element
         Kwargs:
-            key: The label for the tree element that shows in visualization
-            e: the generic object that the tree element will hold
-            left: the tree element assigned to child 0
-            right: the tree element assigned to child 1
+            (str) key: The label for the tree element that shows in visualization
+            (generic) e: the generic object that the tree element will hold
+            (BinTreeElement) left: the tree element assigned to child 0
+            (BinTreeElement) right: the tree element assigned to child 1
         Returns:
             None
         """
@@ -43,9 +43,9 @@ class BSTElement(BinTreeElement):
         else:
             super(BinTreeElement, self).__init__()
         if 'key' in kwargs:
-            self.key = kwargs['key']
+            self._key = kwargs['key']
 
-    def _get_data_structure_type(self) -> str:
+    def get_data_structure_type(self) -> str:
         """
         Get the data structure representation
         Returns:
@@ -58,9 +58,9 @@ class BSTElement(BinTreeElement):
         """
         Getter for the bst element key
         Returns:
-            str
+            str: the key label
         """
-        return self.key
+        return self._key
 
     @key.setter
     def key(self, key: str) -> None:
@@ -71,23 +71,14 @@ class BSTElement(BinTreeElement):
         Returns:
             None
         """
-        self.key = key
-
-    @key.deleter
-    def key(self) -> None:
-        """
-        Deleter for the bst key
-        Returns:
-             None
-        """
-        del self.key
+        self._key = key
 
     @property
     def left(self):
         """
         Getter for the left element in BST
-        :return:
-            Element
+        Returns:
+            BinTreeElement
         """
         return super(BSTElement, self).left
 
@@ -95,7 +86,7 @@ class BSTElement(BinTreeElement):
     def right(self):
         """
         Getter for the right element in BST
-        :return:
-            Element
+        Returns:
+            BinTreeElement
         """
         return super(BSTElement, self).right

@@ -210,7 +210,7 @@ class Symbol:
         """
         return [0.0, 0.0, 0.0, 0.0]
 
-    def _get_json_representation(self) -> dict:
+    def get_json_representation(self) -> dict:
         """
         Get the json representation of the Symbol class
         Returns:

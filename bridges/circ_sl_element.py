@@ -56,7 +56,7 @@ class CircSLelement(SLelement):
         """
         Gets the data structure type
         Returns:
-            str
+            str: representing the data structure type
         """
         return "CircularSinglyLinkedList"
 
@@ -65,6 +65,6 @@ class CircSLelement(SLelement):
         """
         Getter for the next element of this CircSLelement
         Returns:
-            Generic object
+            SLelement: assigned to next
         """
         return self.next

@@ -7,29 +7,29 @@ class Circle(Symbol):
         """
         Constructor for a circle symbol
         Args:
-            locx: x location of the circle
-            locy: y location of the circle
-            r: radius of the circle
+            (int) locx: x location of the circle
+            (int) locy: y location of the circle
+            (float) r: radius of the circle
         Returns:
             None
         Raises:
-            value error
+            ValueError: if the radius is not a positive number
         """
         super(Circle, self).__init__()
         if 'locx' in kwargs and 'locy' in kwargs:
             self.set_location(kwargs['locx'], kwargs['locy'])
         if 'r' in kwargs:
-            if r < 0:
+            if kwargs['r'] < 0:
                 raise ValueError("Radius value needs to be positive")
             self.radius = kwargs['r']
         else:
             self.radius = 10
 
-    def _get_name(self) -> str:
+    def name(self) -> str:
         """
         Gets the name of the shape/symbol
         Returns:
-            str
+            str: representing the name
         """
         return "circle"
 
@@ -38,36 +38,36 @@ class Circle(Symbol):
         """
         Getter function for the radius of this circle
         Returns:
-            float
+            float: representing radius
         """
-        return self.radius
+        return self._radius
 
     @radius.setter
     def radius(self, r) -> None:
         """
         Setter for the radius of this circle
         Args:
-            r: radius to be set
+            (float) r: radius to be set
         Returns:
             None
         Raises:
-            value error
+            ValueError: if the radius is not a positive number
         """
         if r < 0:
             raise ValueError("Illegal value for radius. Must be positive")
-        self.radius = r
+        self._radius = r
 
     def set_circle(self, locx, locy, r) -> None:
         """
         Set the location and size of the circle
         Args:
-            locx: x location of the circle
-            locy: y location of the circle
-            r: radius of the circle
+            (int) locx: x location of the circle
+            (int) locy: y location of the circle
+            (float) r: radius of the circle
         Returns:
             None
         Raises:
-            value error
+            ValueError: if the radius is not a positive number
         """
         self.set_location(locx, locy)
         if r < 0:
@@ -76,7 +76,12 @@ class Circle(Symbol):
 
     ################################################
 
-    def get_dimensions(self):
+    def get_dimensions(self) -> list:
+        """
+        Getter for the dimensions for the circle
+        Returns:
+            list: the circle dimensions
+        """
         dims = []
         location = self.get_location()
 
@@ -87,15 +92,15 @@ class Circle(Symbol):
 
         return dims
 
-    def _get_json_representation(self) -> dict:
+    def get_json_representation(self) -> dict:
         """
         Get the json representation of the Circle object
         Returns:
-            dict
+            dict: representing the JSON before dumping
         """
-        ds_json = super(Circle, self)._get_json_representation()
+        ds_json = super(Circle, self).get_json_representation()
         ds_json["name"] = self.label
-        ds_json["shape"] = self._get_name()
+        ds_json["shape"] = self.name()
         ds_json["r"] = self.radius
 
         return ds_json
