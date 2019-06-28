@@ -18,7 +18,6 @@ from bridges.tree_element import *
 # @author Kalpathi Subramanian, Mihai Mehedint, Matthew McQuaigue
 #
 #
-#
 class BinTreeElement(TreeElement):
 
     def __init__(self, **kwargs) -> None:
@@ -47,11 +46,11 @@ class BinTreeElement(TreeElement):
             super(BinTreeElement, self).add_child(None)
 
 
-    def _get_data_structure_type(self) -> str:
+    def get_data_structure_type(self) -> str:
         """
         Get the data structure type
         Returns:
-            str
+            str: representing the data structure type
         """
         return "BinaryTree"
 
@@ -60,7 +59,7 @@ class BinTreeElement(TreeElement):
         """
         Getter for the left element for the binary tree
         Returns:
-            TreeElement
+            TreeElement: left child
         """
         return super(BinTreeElement, self).get_child(0)
 
@@ -80,7 +79,7 @@ class BinTreeElement(TreeElement):
         """
         Getter for the right element for the binary tree
         Returns:
-            TreeElement
+            TreeElement: the right child
         """
         return super(BinTreeElement, self).get_child(1)
 
