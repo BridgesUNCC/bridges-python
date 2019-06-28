@@ -106,7 +106,7 @@ class TreeElement(Element):
         else:
             raise ValueError("Index is higher than number of children")
 
-    def _get_data_structure_representation(self) -> dict:
+    def get_data_structure_representation(self) -> dict:
         """
         Get the hierarchical JSON of the tree representation
         Returns:

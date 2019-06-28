@@ -101,7 +101,7 @@ class Bridges:
         nodes_links_str = ""
 
         if (self.vis_type == "Tree" or self.vis_type == "BinaryTree" or self.vis_type == "SinglyLinkedList", self.vis_type == "DoublyLinkedList", self.vis_type == "MultiList", self.vis_type == "CircularSinglyLinkedList", self.vis_type == "CircularDoublyLinkedList", self.vis_type == "Array", self.vis_type == "GraphAdjacencyList", self.vis_type == "ColorGrid", self.vis_type == "KDTree", self.vis_type == "SymbolCollection"):
-            nodes_links_str = self.ds_handle._get_data_structure_representation()
+            nodes_links_str = self.ds_handle.get_data_structure_representation()
 
         ds = {
             "visual": self.vis_type,
@@ -115,17 +115,16 @@ class Bridges:
         if self.vis_type == "Array":
             dims = [1,1,1]
             ds_array = self.ds_handle
-            num_dims = ds_array.get_num_dimensions()
             ds_array.get_dimensions(dims)
-            ds_json += self.QUOTE + "dims" + self.QUOTE + self.COLON + self.OPEN_BOX + str(dims[0]) + self.COMMA + str(dims[1]) + self.COMMA + str(dims[2]) + self.CLOSE_BOX + self.COMMA
-
-            ds_json += nodes_links_str
+            ds["dims"] = [str(dims[0]), str(dims[1]), str(dims[2])]
+            ds.update(nodes_links_str)
         else:
-            ds_json += nodes_links_str
+            ds_json.update(nodes_links_str)
 
         if self.json_flag:
             print(ds_json)
 
+        ds_json = json.dumps(ds_json)
         response = self.connector.post("/assignments/" + self.get_assignment(), ds_json)
 
         if response == 200:
