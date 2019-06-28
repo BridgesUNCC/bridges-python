@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 from bridges.element import *
-from bridges.link_visualizer import *
-
 
  ## @brief This class extends Element to represent general trees with
  #	arbitrary number of children.
@@ -26,16 +24,6 @@ from bridges.link_visualizer import *
  # 	@author Matthew McQuaigue
  #
 class TreeElement(Element):
-
-    QUOTE = "\""
-    COMMA = ","
-    COLON = ":"
-    OPEN_CURLY = "{"
-    CLOSE_CURLY = "}"
-    OPEN_PAREN = "("
-    CLOSE_PAREN = ")"
-    OPEN_BOX = "["
-    CLOSE_BOX = "]"
 
     def __init__(self, **kwargs) -> None:
         """
@@ -65,7 +53,7 @@ class TreeElement(Element):
         """
         Gets the data structure type
         Returns:
-            str
+            str: representing the data structure type
         """
         return "Tree"
 
@@ -83,20 +71,20 @@ class TreeElement(Element):
         """
         The number of children of this node
         Returns:
-            int
+            int: representing sthe number of children
         """
         return len(self.children)
 
     def set_child(self, index: int, child) -> None:
         """
-        Adds a child to the node - will be added at the next open position
+        Adds a child to the node that will be added at the next open position
         Args:
             index: index to add child
             child: child to add to tree
         Returns:
             None
         Raises:
-            value error
+            ValueError: If the index is higher than the number of children
         """
         if index < len(self.children):
             self.children[index] = child
@@ -109,67 +97,69 @@ class TreeElement(Element):
         Args:
             index: index to get child
         Returns:
-            object
+            Generic: child
         Raises:
-            value error
+            ValueError: if the index is higher than the number of children
         """
         if index < len(self.children):
             return self.children[index]
         else:
             raise ValueError("Index is higher than number of children")
 
-    def _get_data_structure_representation(self) -> str:
+    def _get_data_structure_representation(self) -> dict:
         """
         Get the hierarchical JSON of the tree representation
         Returns:
-            str
+            dict: representing the data structures json to be dumped
         """
-        json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_CURLY + self._pre_order(self) + self.CLOSE_CURLY + self.CLOSE_CURLY
-        return json_str
+        json_dict = {
+            "nodes": self._pre_order(self)
+        }
+        return json_dict
 
     ##
     # 	Use a preorder traversal to directly extract a hierarchical JSON
     # 	representation of the tree.
     #
     #
-    def _pre_order(self, root):
+    def _pre_order(self, root) -> dict:
+        """
+        Use a preoreder traversal to directly extract a hierarchical
+        JSON representation of the tree
+        Args:
+            root: the root of the tree structure
+        Returns:
+            dict: representiting the json to be dumped
+        """
         k=0
-        json_str = ""
-        children = ""
-        link_props = ""
-        elem_rep = ""
+        json_str = dict()
         t_str = str()
-        num = root.get_number_of_children()
+
         if root is not None:
             #  first get the node representation
             elem_rep = root.get_element_representation()
-            #  remove surrounding curly braces
-            t_str = elem_rep[1: len(elem_rep) - 1]
-            json_str += t_str
             #  now get the children
             if root.get_number_of_children() > 0:
-                json_str += self.COMMA + self.QUOTE + "children" + self.QUOTE + self.COLON + self.OPEN_BOX
-
+                json_str["children"] = []
             while k < root.get_number_of_children():
-
                 if root.get_child(k) is None:
-                    json_str += self.OPEN_CURLY + self.QUOTE + "name" + self.QUOTE + self.COLON + self.QUOTE + "NULL" + self.QUOTE + self.CLOSE_CURLY + self.COMMA
+                    children_json = {
+                        "name": "NULL",
+                    }
+                    json_str["children"].append(children_json)
                 else:
-                    lv = LinkVisualizer()
                     lv = root.get_link_visualizer(root.get_child(k))
-                    json_str += self.OPEN_CURLY
+                    children_json = {}
                     if lv is not None:
-                        json_str += self.QUOTE + "linkProperties" + self.QUOTE + self.COLON + self.OPEN_CURLY + self.QUOTE + "color" + self.QUOTE + self.COLON + self.OPEN_BOX + str(lv.get_color().get_red()) + self.COMMA + str(lv.get_color().get_green()) + self.COMMA + str(lv.get_color().get_blue()) + self.COMMA + str(lv.get_color().get_alpha()) + self.CLOSE_BOX + self.COMMA + self.QUOTE + "thickness" + self.QUOTE + self.COLON + str(lv.get_thickness()) + self.CLOSE_CURLY + self.COMMA
+                        children_json["linkProperties"] = {
+                            "color": [str(lv.get_color().get_red()), str(lv.get_color().get_green()), str(lv.get_color().get_blue()), str(lv.get_color().get_alpha())],
+                            "thickness": str(lv.get_thickness())
+                        }
+                        json_str["children"].append(children_json)
                     else:
-                        json_str += "linkProperties" + self.COLON + "{}" + self.COMMA
+                        children_json["linkProperties"] = {}
+                        json_str["children"].append(children_json)
                     #  process its children
-                    json_str += self._pre_order(root.get_child(k))
-                    json_str += self.CLOSE_CURLY + self.COMMA
-                k += 1
-            #  process its children
-            #  remove last comma
-            if len(json_str) > 0:
-                json_str = json_str[0: len(json_str) - 1]
-            #  end of children
-            json_str += self.CLOSE_BOX
+                    json_str.update(self._pre_order(root.get_child(k)))
+            k += 1
         return json_str

@@ -121,7 +121,7 @@ class Element():
     def visualizer(self, vis: ElementVisualizer) -> None:
         self._visualizer = vis
 
-    def get_link_visualizer(self, el: Element) -> LinkVisualizer:
+    def get_link_visualizer(self, el) -> LinkVisualizer:
         """
         Get the link visualizer object that links this element to another element specified by the argument.
         Args:
@@ -202,7 +202,7 @@ class Element():
     def get_locationY(self):
         return self.visualizer.get_locationY()
 
-    def _get_element_representation(self):
+    def get_element_representation(self):
         json = {
             "name": str(self.label),
             "shape": str(self.visualizer.shape),
