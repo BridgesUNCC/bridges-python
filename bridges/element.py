@@ -51,11 +51,11 @@ class Element():
     # 	one or more
     DIVIDE_KEY = "(\r?\n)|(\n)|(\f)|(\r)|(%n)"
 
-    def _get_data_structure_type(self) -> str:
+    def get_data_structure_type(self) -> str:
         """
         Get the data structure representation
         Returns:
-            str
+            str: representing the data structure type
         """
         return "Element"
 
@@ -64,9 +64,9 @@ class Element():
         Element constructor
         creates an Element Visualizer and unique identifier for the current element
         kwargs:
-            label: the string that is visible on the bridges Visualization
-            val: generic parameter value used to construct Element
-            original: element object to copy
+            (str) label: the string that is visible on the bridges Visualization
+            (generic) val: value used to construct Element
+            (Element) original: element object to copy
         Returns:
             None
         """
@@ -86,11 +86,24 @@ class Element():
             self.value = kwargs['original'].value
 
     @property
-    def value(self):
+    def value(self) -> object:
+        """
+        Getter for the value this element will hold
+        Returns:
+            generic
+        """
         return self._value
 
     @value.setter
-    def value(self, val):
+    def value(self, val) -> None:
+        """
+        Setter for the value of an element
+        Args:
+            val: the value this element will hold
+        Returns:
+            None
+        """
+
         self._value = val
 
     @property
@@ -115,24 +128,36 @@ class Element():
 
     @property
     def visualizer(self) -> ElementVisualizer:
+        """
+        The element visualizer for this object
+        Returns:
+            ElementVisualizer
+        """
         return self._visualizer
 
     @visualizer.setter
     def visualizer(self, vis: ElementVisualizer) -> None:
+        """
+        Setter function for this elements visualizer
+        Args:
+            (ElementVisualizer) vis: the element visualizer
+        Returns:
+            None
+        """
         self._visualizer = vis
 
-    def get_link_visualizer(self, el) -> LinkVisualizer:
+    def get_link_visualizer(self, el: Element) -> LinkVisualizer:
         """
         Get the link visualizer object that links this element to another element specified by the argument.
         Args:
-            el: the element terminating the link
+            (Element) el: the element terminating the link
         Returns:
-            LinkVisualizer
+            LinkVisualizer: of this element
+        Raises:
+            ValueError: if an element is not passed in
         """
-        #  if this is the first time, must create the
-        #  link visualizer
         try:
-            if (type(el) != Element):
+            if type(el) != Element:
                 raise ValueError("Wrong type, Needs to be Element.")
         except Exception as e:
             #print stack if exception thrown
@@ -144,10 +169,24 @@ class Element():
             self._link_visualizer[el] = LinkVisualizer()
             return self._link_visualizer[el]
 
-    def set_link_visualizer(self, el):
+    def set_link_visualizer(self, el: Element) -> None:
+        """
+        Setter for the link visualizer of this element
+        Args:
+            (Element) el: the element that will have it link visualizer set
+        Returns:
+            None
+        """
         self._link_visualizer[el] = LinkVisualizer()
 
-    def remove_link_visualizer(self, el):
+    def remove_link_visualizer(self, el: Element) -> None:
+        """
+        Deleter function for the lik visualizer of this element
+        Args:
+            (Element) el: the element to have its link visualizer deleted
+        Returns:
+            None
+        """
         self._link_visualizer.pop(el)
 
     @property
