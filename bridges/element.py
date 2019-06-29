@@ -228,7 +228,7 @@ class Element():
             json['balance_factor'] = str(avl.get_balance_factor())
         return json
 
-    def _get_link_representation(self, lv, src, dest):
+    def get_link_representation(self, lv, src, dest):
         link_json = lv.get_link_properties()
         link_json["source"] = src
         link_json["target"] = dest
