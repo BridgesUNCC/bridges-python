@@ -14,7 +14,7 @@ from bridges.bst_element import *
  #  convenient to generate visual representation
  #  to allow for use in a binary search tree implementation.
  #
- # @author Kalpathi Subramanian
+ # @author Kalpathi Subramanian, Matthew McQuaigue
  # @date 12/26/18
  #
 
@@ -31,7 +31,22 @@ class KDTreeElement(BSTElement):
     # @param left The left KdTree Element
     # @param right the right KdTree element
     #
-    def __init__(self, key = None, dim = None, th = None, left = None, right = None, val = None, lab = None):
+    def __init__(self, **kwargs):
+        """
+        Constructor for a kdTreeElement with the provided value, label, key, left and right kdTree elements.
+        The defaults will be used if not provided
+        Args:
+            (object) key: The key for the ordering
+            val: the data this element will hold
+            (str) label: the label to show during visualization
+            left: the left kdTree element
+            right:  the right kdTree element
+        Returns:
+            None
+        """
+
+
+
         if key is not None and dim is not None and th is not None and left is not None and right is not None and val is not None:
             super(KDTreeElement, self).__init__(e = val, left = left, right = right)
             self.thickness = th
