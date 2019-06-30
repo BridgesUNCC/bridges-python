@@ -25,7 +25,7 @@ class Circle(Symbol):
         else:
             self.radius = 10
 
-    def name(self) -> str:
+    def get_name(self) -> str:
         """
         Gets the name of the shape/symbol
         Returns:
@@ -100,7 +100,7 @@ class Circle(Symbol):
         """
         ds_json = super(Circle, self).get_json_representation()
         ds_json["name"] = self.label
-        ds_json["shape"] = self.name()
+        ds_json["shape"] = self.get_name()
         ds_json["r"] = self.radius
 
         return ds_json
