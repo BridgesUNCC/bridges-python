@@ -3,8 +3,6 @@ from decimal import Decimal
 from bridges.element import *
 from bridges.color import *
 from decimal import Decimal
-
-
 ##
 # This class is used to store the visualization elements on the for the bridges
 # Visualiztion, including the color, shape, opacity, and size of the node.
@@ -17,38 +15,56 @@ from decimal import Decimal
 class ElementVisualizer(object):
     #  Visualization properties for this Node.
 
-    key = ""
-    locationX = Decimal("Infinity")
-    locationY = Decimal("Infinity")
-    size = 10.0
-    opacity = 1.0
-
-    prop = dict()
-
-    prop["color"] = "[70, 130, 180, 1.0]"
-    prop["opacity"] = "1.0"
-    prop["size"] = "10.0"
-    prop["shape"] = "circle"
-    prop["key"] = ""
-    prop["locationX"] = str(locationX)
-    prop["locationY"] = str(locationY)
-
     ##
     # Construct an ElementVisualizer with the default visualization settings.
     # The default settings are color = green, opacity = 1.0, size = 10.0, shape
     # = circle.
     #
-    def __init__(self, a_color="green", a_shape ="circle", size=10.0, opacity=1.0):
-        if a_color is not "green":
-            self.set_color(a_color)
+    def __init__(self, color="green", shape ="circle", size=10.0, opacity=1.0):
+        """
+        ElementVisualizer constuctor
+        kwargs:
+            (str) color: color for this element
+            (str) shape: the shape of the element
+            (float) size: the elements size
+            (float) opacity: the elements opacity
+        Returns:
+            None
+        """
+        self.prop = dict()
+        self.prop['color'] = ["70", "130", "180", "1.0"]
+        self.prop["opacity"] = "1.0"
+        self.prop["size"] = "10.0"
+        self.prop["shape"] = "circle"
+        self.prop["key"] = ""
+        self.prop["locationX"] = Decimal("Infinity")
+        self.prop["locationY"] = Decimal("Infinity")
+        if color is not "green":
+            self.color = color
+            self.prop['color'] = color
         else:
             self.color = Color(70, 130, 180, 1.0)
-        if a_shape is not "circle":
-            self.set_shape(a_shape)
+        if shape is not "circle":
+            self.shape = shape
         if size is not 10.0:
-            self.set_size(10.0)
+            self.size = size
         if opacity is not 1.0:
-            self.set_opacity(opacity)
+            self.opacity = opacity
+
+        ##
+        # Get the size of the Element in the bridges Visualiation
+        #
+        # @return the size in pixels of the Element in the bridges Visualization
+        #
+
+    @property
+    def size(self) -> float:
+        """
+        Getter for the elements size
+        Returns:
+            float: the size
+        """
+        return self._size
 
     ##
     # Set the size of the Element in the Bridge Visualization in pixels
@@ -56,17 +72,19 @@ class ElementVisualizer(object):
     # @param size
     #            the pixel size of the Element in the bridges Visualization
     #
-    def set_size(self, size):
+    @size.setter
+    def size(self, size) -> None:
+        """
+        Setter for the size of the element
+        Args:
+            (float) size: the elements desired size
+        Returns:
+            None
+        """
         self.prop["size"] = str(size)
-        self.size = size
+        self._size = size
 
-    ##
-    # Get the size of the Element in the bridges Visualiation
-    #
-    # @return the size in pixels of the Element in the bridges Visualization
-    #
-    def get_size(self):
-        return self.size
+
 
     ##
     #  Set the color of the Element in the bridges Visualization to "aColor".
@@ -130,6 +148,8 @@ class ElementVisualizer(object):
     #     return self.setColor(a[Random().nextInt(a.length)].__str__())
 
     def set_location(self, x, y):
+        self.prop['locationX'] = x
+        self.prop['locationy'] = y
         self.locationX = x
         self.locationY = y
 
