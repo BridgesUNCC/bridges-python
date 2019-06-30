@@ -123,7 +123,7 @@ class Rectangle(Symbol):
             dict: representing the json before dumped
         """
         ds_json = super(Rectangle, self).get_json_representation()
-        ds_json["name"] = self.label
+        ds_json["name"] = super(Rectangle, self).label
         ds_json["shape"] = self.get_name()
         ds_json["width"] = self.width
         ds_json['height'] = self.height

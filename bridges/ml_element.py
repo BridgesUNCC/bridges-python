@@ -20,10 +20,10 @@ from bridges.sl_element import *
 #  which connects the element to the following elements; a similar logic follows for
 #	sublists.
 #
-# @author , Kalpathi Subramanian
+# @author Kalpathi Subramanian, Matthew McQuaigue
 #
 #
-#	\sa Example Tutorial at <br> ??
+#
 #
 class MLelement(SLelement):
     sub_list = None
@@ -40,22 +40,32 @@ class MLelement(SLelement):
     # @param next the element that should be assigned to the next pointer
     # @param sublist the MLelement that is the beginning of a sublist
     #
-    def __init__(self, label = None, e = None, next = None, sublist = None):
-        if label and e is not None:
-            super(MLelement, self).__init__(e = e, label = label)
-            self.sub_list = None
-        if e is not None and label is None:
-            super(MLelement, self).__init__(e = e, label = "")
-        if next and sublist is not None:
+    def __init__(self, **kwargs, label = None, e = None, next = None, sublist = None) -> None:
+        """
+        Constructor for MLelement
+        Args:
+            (str) label: the label the SLelement will hold and show on bridges visualization
+            (object) e: the generic object/value that this SLelement will hold
+            (object) next: the next element that will be assigned to this SLelement next pointer
+            sublist: the MLelement that is the beginning of a sublist
+        Returns:
+            None
+        """
+        if 'e' in kwargs:
+            if 'label' in kwargs:
+                super(MLelement, self).__init__(e=kwargs['e'], label=kwargs['label'])
+            else:
+                super(MLelement, self).__init__(e=kwargs['e'])
+        else:
             super(MLelement, self).__init__()
-            self.set_next(next)
-            self.sub_list = sublist
-            if sublist is not None:
-                self.tag = True
-                self.set_link_visualizer(sublist)
-        if label is None and e is None and next is None and sublist is None:
-            super(MLelement, self).__init__()
-            self.sub_list = None
+        if 'next' in kwargs:
+            super(MLelement, self).next = kwargs['next']
+        if 'sublist' in kwargs:
+            self._sublist = kwargs['sublist']
+            self._tag = True
+            self.set_link_visualizer(sublist)
+        else:
+            self._sublist = None
 
     ##
     # Sets the start of a new sublist.
@@ -160,7 +170,7 @@ class MLelement(SLelement):
     def get_list_elements(self, nodes):
         self.get_list_elements_R(self, nodes)
 
-    
+
     def get_list_elements_R(self, list, nodes):
         el = list
         while el is not None:
