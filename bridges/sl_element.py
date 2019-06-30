@@ -144,7 +144,7 @@ class SLelement(Element):
         nodes.clear()
         while el is not None:
             nodes.append(el)
-            el = el.get_next()
+            el = el.next
             #  handle circular lists
             if el == self:
                 break
