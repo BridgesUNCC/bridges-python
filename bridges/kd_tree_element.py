@@ -20,17 +20,6 @@ from bridges.bst_element import *
 
 class KDTreeElement(BSTElement):
 
-    ##
-    # Constructs a KdTreeElement wit the provided value, label, key,
-    # left and right KdTree elements. The defaults will be used if
-    # not provided
-    #
-    # @param key The key for the ordering
-    # @param val The Data to hold
-    # @param lab the label to show
-    # @param left The left KdTree Element
-    # @param right the right KdTree element
-    #
     def __init__(self, **kwargs):
         """
         Constructor for a kdTreeElement with the provided value, label, key, left and right kdTree elements.
@@ -41,67 +30,84 @@ class KDTreeElement(BSTElement):
             (str) label: the label to show during visualization
             left: the left kdTree element
             right:  the right kdTree element
+            (float) th: thickness of KDTree partition lines
+            (int) dim: partition dimension
         Returns:
             None
         """
-
-
-
-        if key is not None and dim is not None and th is not None and left is not None and right is not None and val is not None:
-            super(KDTreeElement, self).__init__(e = val, left = left, right = right)
-            self.thickness = th
-            self.dimension = dim
-            self.set_key(key)
-        elif key is not None and val is not None and left is not None and right is not None:
-            super(KDTreeElement, self).__init__(e = val, left=left, right=right)
-            self.thickness = 0.0
-            self.dimension = 0
-            self.set_key(key)
-        elif val is not None and left is not None and right is not None:
-            super(KDTreeElement, self).__init__(e = val, left=left, right=right)
-            self.thickness = 0.0
-            self.dimension = 0
-        elif left is not None and right is not None:
-            super(KDTreeElement, self).__init__(left=left, right=right)
-        elif key is not None and dim is not None:
-            super(KDTreeElement, self).__init__()
-            self.dimension = dim
-            self.thickness = 0.0
-            self.set_key(key)
-        elif key is not None and val is not None:
-            super(KDTreeElement, self).__init__(e = val)
-            self.set_key(key)
-        elif key is not None and val is not None and lab is not None:
-            super(KDTreeElement, self).__init__(e = val, label = lab)
-            self.set_key(key)
-        elif lab is not None and val is not None:
-            super(KDTreeElement, self).__init__(e = val, label = lab)
-        elif val is not None:
-            super(KDTreeElement, self).__init__(e = val)
+        if 'val' in kwargs:
+            if 'label' in kwargs:
+                if 'left' and 'right' in kwargs:
+                    super(KDTreeElement, self).__init__(e = kwargs['val'], label = kwargs['label'],
+                                                        left = kwargs['left'], right = kwargs['right'])
+                else:
+                    super(KDTreeElement, self).__init__(e=kwargs['val'], label=kwargs['label'])
+            else:
+                super(KDTreeElement, self).__init__(e=kwargs['val'])
         else:
             super(KDTreeElement, self).__init__()
-            self.thickness = 0.0
-            self.dimension = 0
+        if 'key' in kwargs:
+            super(KDTreeElement, self).key = kwargs['key']
+        if 'th' in kwargs:
+            self._thickness = kwargs['th']
+        else:
+            self._thickness = 0.0
+        if 'dim' in kwargs['dim']:
+            self._dimension = 0
+        else:
+            self._dimension = 0
 
-
-    def get_data_structure_type(self):
+    def get_data_structure_type(self) -> str:
+        """
+        Getter for the data structure type
+        Returns:
+            str: of the the type
+        """
         return "KDTree"
 
-    def get_dimension(self):
-        return self.dimension
+    @property
+    def dimension(self) -> int:
+        """
+        Getter for the dimensions of the partition lines
+        Returns:
+            int: dimension
+        """
+        return self._dimension
 
-    def set_dimension(self, dim):
-        self.dimension = dim
+    @dimension.setter
+    def dimension(self, dim: int) -> None:
+        """
+        Setter for the dimensions of the partition lines
+        Args:
+            (int) dim: dimension value to set
+        Returns:
+            None
+        """
+        self._dimension = dim
 
-    def get_thickness(self):
-        return self.thickness
+    @property
+    def thickness(self) -> float:
+        """
+        Getter for the thickness to the KDTree partitions
+        Returns:
+            float: the thickness
+        """
+        return self._thickness
 
-    def set_thickness(self, th):
-        self.thickness = th
+    @thickness.setter
+    def thickness(self, th) -> None:
+        """
+        Setter for the thickness of the KDTree partitions
+        Args:
+            (float) th: thickness of partitions
+        Returns:
+            None
+        """
+        self._thickness = th
 
-    def get_left(self):
-        return super(KDTreeElement, self).get_left()
+    def left(self):
+        return super(KDTreeElement, self).left
 
-    def get_right(self):
-        return super(KDTreeElement, self).get_right()
+    def right(self):
+        return super(KDTreeElement, self).right
 
