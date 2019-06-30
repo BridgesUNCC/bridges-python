@@ -252,19 +252,19 @@ class Element():
         loc_flag = not ((self.visualizer.get_locationX() == Decimal('Infinity')) or (self.visualizer.get_locationY() == Decimal('Infinity')))
         if loc_flag:
             json['location'] = [str(self.visualizer.get_locationX()), str(self.visualizer.get_locationY())]
-        if self._get_data_structure_type() == "KDTree":
+        if self.get_data_structure_type() == "KDTree":
             kdt = self
-            json['key'] = str(kdt.get_key())
-            json['dimension'] = str(kdt.get_dimension())
-            json['thickness'] = str(kdt.get_thickness())
-        if self._get_data_structure_type() == "BinarySearchTree":
+            json['key'] = str(kdt.key)
+            json['dimension'] = str(kdt.dimension)
+            json['thickness'] = str(kdt.thickness)
+        if self.get_data_structure_type() == "BinarySearchTree":
             bst = self
             json['key'] = str(bst.key)
-        if self._get_data_structure_type() == "AVLTree":
+        if self.get_data_structure_type() == "AVLTree":
             avl = self
             json['key'] = str(avl.key)
-            json['height'] = str(avl.get_height())
-            json['balance_factor'] = str(avl.get_balance_factor())
+            json['height'] = str(avl.height)
+            json['balance_factor'] = str(avl.balance_factor)
         return json
 
     def get_link_representation(self, lv, src, dest):
