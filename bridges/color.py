@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+from typing import List
+
 import webcolors
 
 
@@ -66,10 +68,6 @@ class Color(object):
 
         self._red = value
 
-    @red.deleter
-    def red(self):
-        del self._red
-
     @property
     def green(self) -> int:
         """green component of color
@@ -88,10 +86,6 @@ class Color(object):
             raise ValueError("Value for RGB attributes should range from 0-255 inclusive")
 
         self._green = int(value)
-
-    @green.deleter
-    def green(self):
-        del self._green
 
     @property
     def blue(self) -> int:
@@ -112,10 +106,6 @@ class Color(object):
 
         self._blue = int(value)
 
-    @blue.deleter
-    def blue(self):
-        del self._blue
-
     @property
     def alpha(self) -> float:
         """alpha component of color
@@ -135,10 +125,6 @@ class Color(object):
 
         self._alpha = value
 
-    @alpha.deleter
-    def alpha(self):
-        del self._alpha
-
     @property
     def rgba(self) -> (int, int, int, float):
         """RGBA components as respective tuple
@@ -150,13 +136,6 @@ class Color(object):
     @rgba.setter
     def rgba(self, rgba: (int, int, int, float)):
             self.red, self.blue, self.green, self.alpha = rgba
-
-    @rgba.deleter
-    def rgba(self):
-        del self.red
-        del self.blue
-        del self.green
-        del self.alpha
 
     def __init__(self, *args, **kwargs):
         """ Constructor for a Color object
@@ -219,38 +198,6 @@ class Color(object):
                 self.set_color(web_color.red, web_color.green, web_color.blue)
             except ValueError:
                 raise ValueError(col_name + " is not a valid color name")
-
-    def set_red(self, r: int) -> None:
-        """:param int r: Must be a value between 0-255 inclusive"""
-        self.red = r
-
-    def get_red(self) -> int:
-        """:return int: red component of color"""
-        return self.red
-
-    def set_green(self, g: int) -> None:
-        """:param int g: Must be a value between 0-255 inclusive"""
-        self.green = g
-
-    def get_green(self) -> int:
-        """:return int: green component of color"""
-        return self.green
-
-    def set_blue(self, b: int) -> None:
-        """:param int b: Must be a value between 0-255 inclusive"""
-        self.blue = b
-
-    def get_blue(self) -> int:
-        """":return int: blue component of color"""
-        return self.blue
-
-    def set_alpha(self, a: float) -> None:
-        """:param float a: Must be a value between 0.0-1.0 inclusive"""
-        self.alpha = a
-
-    def get_alpha(self) -> float:
-        """:return float: alpha component of color"""
-        return self.alpha
 
     def get_byte_representation(self) -> list:
         """:return list(int):RGBA values as list of ints from 0-255"""

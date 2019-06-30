@@ -5,21 +5,15 @@ from bridges.color import *
 from decimal import Decimal
 ##
 # This class is used to store the visualization elements on the for the bridges
-# Visualiztion, including the color, shape, opacity, and size of the node.
+# Visualization, including the color, shape, opacity, and size of the node.
 # <p>
 # Objects of this class are stored as properties of all Element subclasses.
 # Generally, you will manipulating the ElementVisualizer returned from the
 # Element getVisualizer() method, and then call the setVisualizer() method on
 # the Element after changes have been made.
 #
-class ElementVisualizer(object):
-    #  Visualization properties for this Node.
+class ElementVisualizer():
 
-    ##
-    # Construct an ElementVisualizer with the default visualization settings.
-    # The default settings are color = green, opacity = 1.0, size = 10.0, shape
-    # = circle.
-    #
     def __init__(self, color="green", shape ="circle", size=10.0, opacity=1.0):
         """
         ElementVisualizer constuctor
@@ -51,12 +45,6 @@ class ElementVisualizer(object):
         if opacity is not 1.0:
             self.opacity = opacity
 
-        ##
-        # Get the size of the Element in the bridges Visualiation
-        #
-        # @return the size in pixels of the Element in the bridges Visualization
-        #
-
     @property
     def size(self) -> float:
         """
@@ -66,12 +54,6 @@ class ElementVisualizer(object):
         """
         return self._size
 
-    ##
-    # Set the size of the Element in the Bridge Visualization in pixels
-    #
-    # @param size
-    #            the pixel size of the Element in the bridges Visualization
-    #
     @size.setter
     def size(self, size) -> None:
         """
@@ -84,39 +66,161 @@ class ElementVisualizer(object):
         self.prop["size"] = str(size)
         self._size = size
 
-
-
-    ##
-    #  Set the color of the Element in the bridges Visualization to "aColor".
-    #  @param aColor the string reprsenting the color of the Element in the bridges Visualization
-    #
-    def set_color(self, *args, **kwargs):
+    @property
+    def color(self) -> Color:
         """
-        Usage: requires either 3 ints 0-255 for RGB and an optional float 0.0-1.0 for alpha or a str of a web color
-        can also key the RGBA values with r, g, b, a or red, green, blue, alpha respectively and col_name for the str
-        :param args: int, int, int optional float or str
-        :param kwargs: r/red: int, b/blue: int, g/green: int optional a/alpha: float or col_name: str
-        :return: None
+        Getter for the color of the element in the bridges visualization
+        Returns:
+            Color: Color object representing the color of the element
         """
-        self.color.set_color(*args, **kwargs)
+        return self._color
 
-    ##
-    # Get the color of the Element in the bridges Visualization
-    #  @return the string reprsenting the color of the Element in the bridges Visualization
-    #
-    def get_color(self):
-        return self.color
+    @color.setter
+    def color(self, *args) -> None:
+        """
+        Setter for the color of the element in the bridges visualization
+        Args:
+            (optional) list: requires either 3 ints 0-255 for RGB and an optional float 0.0-1.0 for alpha EX: color = [0, 255, 0, 1.0]
+            (optional) str: string representing the element color. from web colors: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
+        Returns:
+            None
+        """
+        if len(args) == 1 and type(args[0]) == str:
+            col = args[0].lower()
+            alpha = self.opacity
+            if col == "red":
+                red = 255
+                green = 0
+                blue = 0
+            elif col == "green":
+                red = 0
+                green = 255
+                blue = 0
+            elif col == "blue":
+                red = 0
+                green = 0
+                blue = 255
+            elif col == "yellow":
+                red = 255
+                green = 255
+                blue = 0
+            elif col == "cyan":
+                red = 0
+                green = 255
+                blue = 255
+            elif col == "magenta":
+                red = 255
+                green = 0
+                blue = 255
+            elif col == "white":
+                red = 0
+                green = 0
+                blue = 0
+            elif col == "black":
+                red = 255
+                green = 255
+                blue = 255
+            elif col == "orange":
+                red = 255
+                green = 155
+                blue = 0
+            elif col == "turqouise":
+                red = 173
+                green = 234
+                blue = 234
+            elif col == "maroon":
+                red = 176
+                green = 48
+                blue = 96
+            elif col == "aquamarine":
+                red = 127
+                green = 255
+                blue = 212
+            elif col == "azure":
+                red = 240
+                green = 255
+                blue = 2550
+            elif col == "beige":
+                red = 245
+                green = 245
+                blue = 220
+            elif col == "brown":
+                red = 166
+                green = 42
+                blue = 42
+            elif col == "tan":
+                red = 210
+                green = 180
+                blue = 140
+            elif col == "olive":
+                red = 128
+                green = 128
+                blue = 0
+            elif col == "khaki":
+                red = 240
+                green = 230
+                blue = 140
+            elif col == "bisque":
+                red = 255
+                green = 228
+                blue = 196
+            elif col == "coral":
+                red = 255
+                green = 127
+                blue = 0
+            elif col == "pink":
+                red = 255
+                green = 192
+                blue = 203
+            elif col == "lavender":
+                red = 230
+                green = 230
+                blue = 250
+            elif col == "purple":
+                red = 160
+                green = 32
+                blue = 240
+            elif col == "gold":
+                red = 255
+                green = 215
+                blue = 0
+            elif col == "chartreuse":
+                red = 127
+                green = 255
+                blue = 0
+            else:
+                raise ValueError("Invalid Color")
+            #assign the element visualizer a color object
+            self._color = Color(red, green, blue, alpha)
 
     @property
-    def shape(self):
-        return self.shape
+    def shape(self) -> str:
+        """
+        Getter for the shape of the element
+        Returns:
+            str: reperesenting the type of shape
+        """
+        return self._shape
 
     @shape.setter
     def shape(self, a_shape):
+        """
+        Setter for the shape of the element
+        Args:
+            (str) a_shape: the name of shape for element
+        """
         a_shape = a_shape.lower()
         self.prop["shape"] = a_shape
-        self.shape = a_shape
+        self._shape = a_shape
 
+    @property
+    def opacity(self) -> float:
+        """
+        Getter for the opacity of the element
+        Returns:
+            float: representing the opacity
+        """
+        return self.color.alpha
     ##
     # Sets the opacity of the Element in the bridges Visualization
     #
@@ -125,36 +229,45 @@ class ElementVisualizer(object):
     #            fully visible, a decimal between 0 and 1 for varying
     #            transparency.
     #
-    def set_opacity(self, opacity):
+    @opacity.setter
+    def opacity(self, opacity) -> None:
+        """
+        Setter for the opacity of the element
+        Args:
+            (float) opacity: the opacity to be applied
+        Returns:
+            None
+        """
         self.prop["opacity"] = Decimal(opacity)
-        self.color.set_alpha(opacity)
-        self.opacity = opacity
-
-    ##
-    #  Get the opacity of the Element in the bridges Visualization
-    # @return the opacity value
-    #
-    def get_opacity(self):
-        return self.color.get_alpha()
-
-    ##
-    # The randomColor method selects a random color from the available list of
-    # colors found in Validation.java and sets the color of the current element
-    #
-    # @return a color name as a string value
-    #
-    # def random_color(self):
-    #     a = Validation.COLOR_NAMES.toArray()
-    #     return self.setColor(a[Random().nextInt(a.length)].__str__())
+        self.color.alpha = opacity
+        self._opacity = opacity
 
     def set_location(self, x, y):
+        """
+        Setter for the location of the element
+        Args:
+            (int) x: x location
+            (int) y: y location
+        Returns:
+            None
+        """
         self.prop['locationX'] = x
         self.prop['locationy'] = y
-        self.locationX = x
-        self.locationY = y
+        self._locationX = x
+        self._locationY = y
 
-    def get_locationX(self):
-        return self.locationX
+    def get_locationX(self) -> int:
+        """
+        Getter for the X location of element
+        Returns:
+            int: as the x location
+        """
+        return self._locationX
 
-    def get_locationY(self):
-        return self.locationY
+    def get_locationY(self) -> int:
+        """
+        Getter for the y location of the element
+        Returns:
+            int: as the y position
+        """
+        return self._locationY
