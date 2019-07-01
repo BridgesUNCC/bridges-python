@@ -26,6 +26,12 @@ class ElementVisualizer():
             None
         """
         self.prop = dict()
+        self._color = Color(70, 130, 180, 1.0)
+        if color is not "green":
+            self.color = color
+        self._shape = shape
+        self._Size = size
+        self._opacity = opacity
         self.prop['color'] = ["70", "130", "180", "1.0"]
         self.prop["opacity"] = "1.0"
         self.prop["size"] = "10.0"
@@ -33,17 +39,7 @@ class ElementVisualizer():
         self.prop["key"] = ""
         self.prop["locationX"] = Decimal("Infinity")
         self.prop["locationY"] = Decimal("Infinity")
-        if color is not "green":
-            self.color = color
-            self.prop['color'] = color
-        else:
-            self.color = Color(70, 130, 180, 1.0)
-        if shape is not "circle":
-            self.shape = shape
-        if size is not 10.0:
-            self.size = size
-        if opacity is not 1.0:
-            self.opacity = opacity
+
 
     @property
     def size(self) -> float:
@@ -84,6 +80,8 @@ class ElementVisualizer():
             (optional) str: string representing the element color. from web colors: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
         Returns:
             None
+        Raises:
+            ValueError: if the color name provided is not available
         """
         if len(args) == 1 and type(args[0]) == str:
             col = args[0].lower()
@@ -192,6 +190,17 @@ class ElementVisualizer():
                 raise ValueError("Invalid Color")
             #assign the element visualizer a color object
             self._color = Color(red, green, blue, alpha)
+        elif type(args[0])== Color:
+            self._color = args[0]
+        elif len(args) == 3:
+            red = args[0]
+            green = args[1]
+            blue = args[2]
+            if len(args) == 4:
+                alpha = args[3]
+            else:
+                alpha = self.opacity
+            self._color = Color(red, green, blue, alpha)
 
     @property
     def shape(self) -> str:
@@ -221,14 +230,7 @@ class ElementVisualizer():
             float: representing the opacity
         """
         return self.color.alpha
-    ##
-    # Sets the opacity of the Element in the bridges Visualization
-    #
-    # @param opacity a double between 0 and 1 representing how transparent the node
-    #            should be on the bridges Visualization. 0 for invisible, 1 for
-    #            fully visible, a decimal between 0 and 1 for varying
-    #            transparency.
-    #
+
     @opacity.setter
     def opacity(self, opacity) -> None:
         """
