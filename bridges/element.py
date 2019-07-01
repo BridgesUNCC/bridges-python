@@ -169,7 +169,7 @@ class Element():
             self._link_visualizer[el] = LinkVisualizer()
             return self._link_visualizer[el]
 
-    def set_link_visualizer(self, el: Element) -> None:
+    def set_link_visualizer(self, el) -> None:
         """
         Setter for the link visualizer of this element
         Args:

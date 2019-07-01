@@ -7,7 +7,7 @@ class Symbol:
         """
         Constructor for a Symbol
         """
-        self.identifier = str(Symbol._ids)
+        self._identifier = str(Symbol._ids)
         self.label = ""
         self.fill_color = Color("blue")
         self.stroke_color = Color("white")

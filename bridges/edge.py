@@ -14,7 +14,7 @@ from bridges.link_visualizer import *
 #
 class Edge():
 
-    def __init__(self, v1, v2, data) -> None:
+    def __init__(self, v1, v2, data = None) -> None:
         """
         Constructor for a edge
         Args:
@@ -27,7 +27,7 @@ class Edge():
         self.from_vertex = v1
         self.to_vertex = v2
         self.edge_data = data
-        self.link_vis()
+        self.lvis = LinkVisualizer()
 
     @property
     def tov(self):
@@ -54,7 +54,7 @@ class Edge():
         Returns:
              float
         """
-        return self.lvis.get_thickness()
+        return self.lvis.thickness
 
     @thickness.setter
     def thickness(self, th: float) -> None:
@@ -65,7 +65,7 @@ class Edge():
         Returns:
             None
         """
-        self.lvis.set_thickness(th)
+        self.lvis.thickness = th
 
     @property
     def edge_data(self) -> str:
@@ -88,13 +88,10 @@ class Edge():
         self.edge_data = data
 
     def set_color(self, color):
-        self.lvis.set_color(color)
+        self.lvis.color = color
 
     def get_color(self):
-        return self.lvis.get_color()
-
-    def link_vis(self):
-        self.lvis = LinkVisualizer()
+        return self.lvis.color
 
     def get_edge(self):
         return self

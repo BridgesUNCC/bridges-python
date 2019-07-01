@@ -117,11 +117,6 @@ class TreeElement(Element):
         }
         return json_dict
 
-    ##
-    # 	Use a preorder traversal to directly extract a hierarchical JSON
-    # 	representation of the tree.
-    #
-    #
     def _pre_order(self, root) -> dict:
         """
         Use a preoreder traversal to directly extract a hierarchical

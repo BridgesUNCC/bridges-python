@@ -96,9 +96,9 @@ class GraphAdjList():
         except Exception as e:
             traceback.print_tb(e.__traceback__)
         if data is not None:
-            self.adj_list[src] = SLelement(e=Edge(src, dest, data, None), next=self.adj_list.get(src))
+            self.adj_list[src] = SLelement(e=Edge(src, dest, data), next=self.adj_list.get(src))
         else:
-            self.adj_list[src] = SLelement(e = Edge(src, dest, None, None), next = self.adj_list.get(src))
+            self.adj_list[src] = SLelement(e = Edge(src, dest), next = self.adj_list.get(src))
 
     def set_vertex_data(self, src, vertex_data):
         try:
@@ -230,7 +230,7 @@ class GraphAdjList():
     ##
     #	Get the JSON representation of the the data structure
     #
-    def _get_data_structure_representation(self) -> str:
+    def _get_data_structure_representation(self) -> dict:
 
         # redirect for large graphs
         if len(self.vertices) > self.LargeGraphVertSize:
@@ -248,19 +248,15 @@ class GraphAdjList():
 
         #  remap  map these nodes to  0...MaxNodes-1
         #  and build the nodes JSON
-        nodes_JSON = str()
+        nodes_JSON = []
 
         k = 0
         while k < len(nodes):
             node_map[nodes[k]] = k
-            nodes_JSON += (nodes[k].get_element_representation())# get the element object and represent it
-            nodes_JSON += self.COMMA
+            nodes_JSON.append(nodes[k].get_element_representation())
             k += 1
-        #  remove the last comma
-        if len(nodes) != 0:
-            nodes_JSON = nodes_JSON[:-1]
         #  build the links JSON - traverse the adj. lists
-        links_JSON = str()
+        links_JSON = []
         for a_list in self.adj_list.items():
             list = a_list[1]
             src_vert = self.vertices.get(a_list[0])
@@ -268,20 +264,19 @@ class GraphAdjList():
             while list is not None:
                 src_indx = node_map.get(src_vert)
                 #  get the destination vertex index for the JSON (int)
-                edge = list.get_value()
+                edge = list.value
                 dest_vert = self.vertices.get(edge.tov())
                 dest_indx = node_map.get(dest_vert)
                 #  get link representation
-                links_JSON+=(list.get_link_representation(src_vert.get_link_visualizer(dest_vert), str(src_indx), str(dest_indx)))
-                links_JSON+=(self.COMMA)
-                list = list.get_next()
-        #  remove the last comma
-        if len(links_JSON) > 0:
-            links_JSON = links_JSON[:-1]
-        json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX + nodes_JSON.__str__() + self.CLOSE_BOX + self.COMMA + self.QUOTE + "links" + self.QUOTE + self.COLON + self.OPEN_BOX + links_JSON.__str__() + self.CLOSE_BOX + self.CLOSE_CURLY
+                links_JSON.append((list.get_link_representation(src_vert.get_link_visualizer(dest_vert), str(src_indx), str(dest_indx))))
+                list = list.next
+        json_str = {
+            "nodes": nodes_JSON,
+            "links": links_JSON
+        }
         return json_str
 
-    def _get_data_structure_large_graph(self) -> str:
+    def _get_data_structure_large_graph(self) -> dict:
         nodes_data = []
         node_map = {}
         for i, (key, element) in enumerate(self.vertices.items()):
@@ -310,9 +305,8 @@ class GraphAdjList():
             "nodes": nodes_data,
             "links": links_data,
         }
-        ret = json.dumps(wrapper)
-        ret = ret[1:]
-        return ret
+
+        return wrapper
 
 
 

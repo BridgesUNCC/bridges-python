@@ -70,10 +70,10 @@ class SLelement(Element):
         """
         self._next = n
         if n is not None:
-            self.set_link_visualizer(next)
+            self.set_link_visualizer(n)
 
     @property
-    def value(self) -> Element:
+    def value(self):
         """
         Getter for the SLelement value to hold
         Returns:
