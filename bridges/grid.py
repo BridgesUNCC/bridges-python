@@ -9,7 +9,7 @@ class Grid:
     gridSize = [10, 10]
     maxGridSize = [1080, 1920]
 
-    def _get_data_structure_type(self) -> str:
+    def get_data_structure_type(self) -> str:
         """
         Get the data structure type
         Returns:
@@ -19,7 +19,7 @@ class Grid:
 
     def __init__(self, size = None, rows = None, cols = None) -> None:
         """
-        grid constructor
+        Grid constructor
         Args:
             size: size of the grid as array
             rows: number of rows in grid
@@ -29,8 +29,8 @@ class Grid:
         Raises:
             value error
         """
-        if 'size' is not None:
-            if ((size[0] <= 0 or size[0] > self.maxGridSize[0]) or (size[1] <= 0 or size[1] > self.maxGridSize[1])):
+        if size is not None:
+            if ((size[0] <= 0 or size[0] > Grid.maxGridSize[0]) or (size[1] <= 0 or size[1] > Grid.maxGridSize[1])):
                 raise ValueError("Invalid size: [" + str(str(size[0]) + "," + str(size[1]) + "] .. please use values between (0 and " + str(self.maxGridSize[0]) + "] for rows and values between (0 and " + str(self.maxGridSize[1]) + "] for columns"))
             self.grid = []
             for i in range(size[0]):

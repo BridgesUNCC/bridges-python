@@ -2,26 +2,16 @@ from bridges.color import *
 from bridges.grid import *
 import base64
 
-
 ##
 #  @brief This is a class in BRIDGES for representing an (n x n) grid.
-#  @author David Burlinson
+#  @author David Burlinson, Matthew McQuaigue
 #
 #
 class ColorGrid(Grid):
-    QUOTE = "\""
-    COMMA = ","
-    COLON = ":"
-    OPEN_CURLY = "{"
-    CLOSE_CURLY = "}"
-    OPEN_PAREN = "("
-    CLOSE_PAREN = ")"
-    OPEN_BOX = "["
-    CLOSE_BOX = "]"
 
     baseColor = Color(r=0, g=0, b=0, a=1.0)
 
-    def _get_data_structure_type(self) -> str:
+    def get_data_structure_type(self) -> str:
         """
         Get the data structure type
         Returns:
@@ -135,7 +125,7 @@ class ColorGrid(Grid):
                             img_bytes.append(color[k])
         return img_bytes
 
-    def _get_data_structure_representation(self) -> str:
+    def get_data_structure_representation(self) -> dict:
         """
         Get the JSON representation of the color grid
         Returns:
@@ -151,7 +141,10 @@ class ColorGrid(Grid):
         else:
             print("RLE ran")
 
-        json_str = self.QUOTE + "encoding" + self.QUOTE + self.COLON + self.QUOTE + encoding + self.QUOTE + self.COMMA + self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX  + self.QUOTE + base64.b64encode(bytes(byte_buff)).decode() + self.QUOTE + self.CLOSE_BOX + self.COMMA
-        json_str += self.QUOTE + "dimensions" + self.QUOTE + self.COLON + self.OPEN_BOX + str(self.gridSize[0]) + "," + str(self.gridSize[1]) + self.CLOSE_BOX + self.CLOSE_CURLY
+        json_dict = {
+            "encoding": encoding,
+            "nodes": [base64.b64encode(bytes(byte_buff)).decode()],
+            "dimensions": [self.gridSize[0], self.gridSize[1]]
+        }
 
-        return json_str
+        return json_dict

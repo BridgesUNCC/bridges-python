@@ -3,9 +3,9 @@ from bridges.color_grid import *
 from bridges.color import *
 
 def main():
-    # Initialize BRIDGES with your credentials
-    bridges = Bridges(0, "test", "211416381091")
-
+    # create the Bridges object, set credentials
+    bridges = Bridges(0, "testtest", "1243437903811")
+    bridges.set_visualize_JSON(True)
     bridges.connector.set_server("local")
 
     sizei = 25
@@ -25,7 +25,7 @@ def main():
 
     cg = bridges.get_color_grid_from_assignment(bridges.get_username(), bridges.get_assignment_id(), 0)
 
-    dims = cg.get_dimensions()
+    dims = cg.dimensions
     for k in range(int(dims[1] / 2 - 5), int(dims[1]/2+5)):
         for j in range(int(dims[0]/2-5), int(dims[0]/2 + 5)):
             cg.set(k,j,Color("red"))

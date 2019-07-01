@@ -135,7 +135,7 @@ class Bridges:
 
 
         ds_json = json.dumps(ds)
-        response = self.connector.post("/assignments/" + self._get_assignment(), ds_json)
+        response = self.connector.post("/assignments/" + self.get_assignment(), ds_json)
 
         if response == 200:
             print(
@@ -153,8 +153,8 @@ class Bridges:
         if assignment < 0:
             ValueError("Assignment value must be >= 0")
         elif self.assignment >= 0:
-            self.assignment_part = 0
-        self.assignment = assignment
+            self._assignment_part = 0
+        self._assignment = assignment
 
     ##
     # 	Get the assignment id
@@ -162,11 +162,11 @@ class Bridges:
     #   @return assignment as a string
     #
     #
-    def _get_assignment(self):
+    def get_assignment(self):
         if self.assignment_part < 10:
-            return str(self.assignment) + ".0" + str(self.assignment_part)
+            return str(self._assignment) + ".0" + str(self._assignment_part)
         else:
-            return str(self.assignment) + "." + str(self.assignment_part)
+            return str(self._assignment) + "." + str(self._assignment_part)
 
     ##
     #
@@ -216,9 +216,9 @@ class Bridges:
         return get_color_grid_from_assignment(self.connector.server_url, user, assignment, subassignment)
 
     def get_username(self):
-        return self.username.replace(" ", "+")
+        return self._username.replace(" ", "+")
 
     def get_assignment_id(self):
-        return self.assignment
+        return self._assignment
 
 
