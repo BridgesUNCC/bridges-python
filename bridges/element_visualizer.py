@@ -30,8 +30,10 @@ class ElementVisualizer():
         if color is not "green":
             self.color = color
         self._shape = shape
-        self._Size = size
+        self._size = size
         self._opacity = opacity
+        self._locationX = Decimal("Infinity")
+        self._locationY = Decimal("Infinity")
         self.prop['color'] = ["70", "130", "180", "1.0"]
         self.prop["opacity"] = "1.0"
         self.prop["size"] = "10.0"

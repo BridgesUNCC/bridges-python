@@ -146,7 +146,7 @@ class Element():
         """
         self._visualizer = vis
 
-    def get_link_visualizer(self, el: Element) -> LinkVisualizer:
+    def get_link_visualizer(self, el) -> LinkVisualizer:
         """
         Get the link visualizer object that links this element to another element specified by the argument.
         Args:
@@ -179,7 +179,7 @@ class Element():
         """
         self._link_visualizer[el] = LinkVisualizer()
 
-    def remove_link_visualizer(self, el: Element) -> None:
+    def remove_link_visualizer(self, el) -> None:
         """
         Deleter function for the lik visualizer of this element
         Args:
@@ -199,27 +199,27 @@ class Element():
 
     @property
     def size(self):
-        return self.visualizer.get_size()
+        return self.visualizer.size
 
     @size.setter
     def size(self, sz):
-        self.visualizer.set_size(sz)
+        self.visualizer.size = sz
 
     @property
     def color(self):
-        return self.visualizer.get_color()
+        return self.visualizer.color
 
     @color.setter
     def color(self, col):
-        self.visualizer.set_color(col)
+        self.visualizer.color = col
 
     @property
     def opacity(self):
-        return self.visualizer.get_opacity()
+        return self.visualizer.opacity
 
     @opacity.setter
     def opacity(self, o):
-        self.visualizer.set_opacity(o)
+        self.visualizer.opacity = o
 
     @property
     def shape(self):
@@ -245,9 +245,9 @@ class Element():
         json = {
             "name": str(self.label),
             "shape": str(self.visualizer.shape),
-            "size": str(self.visualizer.get_size()),
-            "color": [str(self.visualizer.get_color().get_red()), str(self.visualizer.get_color().get_green()),
-                      str(self.visualizer.get_color().get_blue()), str(self.visualizer.get_color().get_alpha())]
+            "size": str(self.visualizer.size),
+            "color": [str(self.visualizer.color.red), str(self.visualizer.color.green),
+                      str(self.visualizer.color.blue), str(self.visualizer.color.alpha)]
         }
         loc_flag = not ((self.visualizer.get_locationX() == Decimal('Infinity')) or (self.visualizer.get_locationY() == Decimal('Infinity')))
         if loc_flag:

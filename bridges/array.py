@@ -18,7 +18,7 @@ from bridges.element import *
 #
 class Array():
     dims = [1,1,1] #used for setting size of array based on dimensions
-    def __init__(self, num_dims, **kwargs):
+    def __init__(self, **kwargs):
         """
         Array constructor
         Args:
@@ -31,21 +31,33 @@ class Array():
         Returns:
             None
         """
-        self._array_data = []
-        self._num_dims = num_dims
         self._dims = [1, 1, 1]
-        if kwargs:
-            if 'dims' in kwargs:
-                self._set_dimensions(kwargs['dims'])
-                self._dims = kwargs['dims']
-            else:
-                self._dims[0] = self._dims[1] = self._dims [2] = self._size = 0
-            if 'x_dim' in kwargs and num_dims >= 1:
+        self._array_data = []
+        if 'num_elements' in kwargs:
+            self._num_dims = 1
+            self._dims[0] = kwargs['num_elements']
+            self._dims[1] = self._dims[2] = 1
+            self.set_dimensions(self._dims)
+        elif 'dims' in kwargs and 'num_dims' in kwargs:
+            self._num_dims = kwargs['num_dims']
+            self.set_dimensions(kwargs['dims'])
+        elif 'x_dim' in kwargs and 'y_dim' in kwargs:
+            if 'z_dim' in kwargs:
+                self._num_dims = 3
                 self._dims[0] = kwargs['x_dim']
-            if 'y_dim' in kwargs and num_dims >= 2:
                 self._dims[1] = kwargs['y_dim']
-            if 'z_dim' in kwargs and num_dims == 3:
                 self._dims[2] = kwargs['z_dim']
+                self.set_dimensions(self._dims)
+            else:
+                self._num_dims = 2
+                self._dims[0] = kwargs['x_dim']
+                self._dims[1] = kwargs['y_dim']
+                self._dims[2] = 1
+                self.set_dimensions(self._dims)
+        else:
+            self._array_data = None
+            self._num_dims = 1
+            self._dims[0] = self._dims[1] = self._dims[2] = self._size = 0
 
     @property
     def num_dims(self) -> int:
@@ -91,7 +103,7 @@ class Array():
         """
         self._size = sz
 
-    def _get_data_structure_type(self) -> str:
+    def get_data_structure_type(self) -> str:
         """
         Gets the data structure type
         Raises:
@@ -104,7 +116,7 @@ class Array():
         else:
             raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D arrays supported at this time")
 
-    def _set_dimensions(self, dim: list) -> None:
+    def set_dimensions(self, dim: list) -> None:
         """
         Sets the size of each dimension and allocates array space
         Args:
@@ -115,7 +127,7 @@ class Array():
         sz = 1
         k = 0
         while k < self.num_dims:
-            Array.dims[k] = dim[k]
+            self._dims[k] = dim[k]
             sz = sz * dim[k]
             k += 1
         #  first check the dimensions are all positive
@@ -127,6 +139,10 @@ class Array():
         while k < self.size:
             self._array_data.append(Element())
             k += 1
+
+    def get_dimensions(self):
+        return self._dims
+
 
     def get_element(self, **kwargs):
         """
@@ -143,10 +159,10 @@ class Array():
             return self._array_data[kwargs['index']]
         if 'x' in kwargs and 'y' in kwargs:
             if 'z' in kwargs:
-                return self._array_data[
-                    kwargs['z'] * self._dims[0] * self._dims[1] + kwargs['y'] * self._dims[0] + kwargs['x']]
+                return self._array_data[kwargs['z'] * self._dims[0] *
+                                        self._dims[1] + kwargs['y'] * self._dims[0] + kwargs['x']]
             else:
-                return self._array_data[kwargs['y'] * self._dims[1] + kwargs['x']]
+                return self._array_data[kwargs['y'] * self._dims[0] + kwargs['x']]
 
     def set_element(self, el: Element, **kwargs):
         """
@@ -169,20 +185,20 @@ class Array():
             else:
                 self._array_data[kwargs['y']*self._dims[1]+ kwargs['x']] = el
 
-    def _get_data_structure_representation(self) -> dict:
+    def get_data_structure_representation(self) -> dict:
         """
         Generating the JSON string for a bridges array object
         Returns:
             dict: the dict that will represent the json when dumped
         """
-        nodes_json = dict()
         #add json representation for each element to dict
         i = 0
+        nodes_json = []
         while i < self.size:
             if self._array_data[i] is not None:
-                nodes_json.update(self._array_data[i]._get_element_representation())
+                nodes_json.append(self._array_data[i].get_element_representation())
             i += 1
         json_dict = {
-            "nodes": [nodes_json]
+            "nodes": nodes_json
         }
         return json_dict
