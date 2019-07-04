@@ -112,7 +112,7 @@ class ColorGrid(Grid):
         """
         Get raw encoding of color grid
         Returns:
-            bytearray
+            bytearray: representing the colors of grid cells
         """
         img_bytes = bytearray()
         for i in range(self.gridSize[0]):
@@ -129,7 +129,7 @@ class ColorGrid(Grid):
         """
         Get the JSON representation of the color grid
         Returns:
-            str
+            str: representing the json construction before dumping
         """
         byte_buff = self.get_rle()
         encoding = "RLE"
