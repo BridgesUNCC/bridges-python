@@ -156,13 +156,6 @@ class Element():
         Raises:
             ValueError: if an element is not passed in
         """
-        try:
-            if type(el) != Element:
-                raise ValueError("Wrong type, Needs to be Element.")
-        except Exception as e:
-            #print stack if exception thrown
-            tb = sys.exc_info()
-            traceback.print_tb(tb)
         if el in self._link_visualizer:
             return self._link_visualizer[el]
         else:

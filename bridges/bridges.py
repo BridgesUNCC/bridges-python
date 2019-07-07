@@ -44,6 +44,7 @@ class Bridges:
             None
         """
         self._assignment_part = 0
+        self._assignment = 0
         self._title = str()
         self._description = str()
         self._set_assignment(assignment)
@@ -119,10 +120,11 @@ class Bridges:
         response = self.connector.post("/assignments/" + self.get_assignment(), ds_json)
 
         if response == 200:
-            print(
-                "\nCheck Your Visualization at the following link:\n\n" + self.connector.get_server_url() + "/assignments/" + str(self.assignment) + "/" + self.username + "\n\n")
+            print("\nCheck Your Visualization at the following link:\n\n" +
+                  self.connector.get_server_url() + "/assignments/" + str(self._assignment) +
+                  "/" + self._username + "\n\n")
 
-            self.assignment_part = self.assignment_part + 1
+            self._assignment_part = self._assignment_part + 1
 
     def _set_assignment(self, assignment) -> None:
         """
@@ -136,7 +138,7 @@ class Bridges:
         """
         if assignment < 0:
             ValueError("Assignment value must be >= 0")
-        elif self.assignment >= 0:
+        elif self._assignment >= 0:
             self._assignment_part = 0
         self._assignment = assignment
 
