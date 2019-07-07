@@ -44,11 +44,24 @@ def main():
     el6.sub_list = el10
 
     el0.visualizer.size = 40
-    el0.get_link_visualizer(el1).color = "red"
+    el0.get_link_visualizer(el1).color = "green"
     el0.get_link_visualizer(el1).thickness = 3
-    el1.get_link_visualizer(el2).color = "blue"
+    el1.get_link_visualizer(el2).color = "red"
     el1.get_link_visualizer(el2).thickness = 3
     el2.get_link_visualizer(el3).color = "cyan"
+    el2.get_link_visualizer(el3).thickness = 3
+
+    # set visualizer type
+    bridges.set_data_structure(el0)
+    # visualize the multi linked list
+    bridges.visualize()
+
+    el0.visualizer.size = 40
+    el0.get_link_visualizer(el1).color = [255, 50, 50, 1.0]
+    el0.get_link_visualizer(el1).thickness = 3
+    el1.get_link_visualizer(el2).color = [0, 0, 0, 1.0]
+    el1.get_link_visualizer(el2).thickness = 3
+    el2.get_link_visualizer(el3).color = [100, 12, 140, 1.0]
     el2.get_link_visualizer(el3).thickness = 3
 
     # set visualizer type
