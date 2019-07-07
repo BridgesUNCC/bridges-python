@@ -28,32 +28,32 @@ class DLelement(SLelement):
         """
         Constructor for DLelement
         Kwargs:
-            e: the genereic object that this DLelement is holding
+            (object) e: the genereic object that this DLelement is holding
             next: the DLelement that should be assigned to the next pointer
             prev: the DLelement that should be assigned to the prev pointer
-            label: the label for this DLelement
+            (str) label: the label for this DLelement
         Return:
             None
         """
         if 'e' in kwargs:
             if 'label' in kwargs:
-                super(DLelement, self).__init__(e=e, label=label)
+                super(DLelement, self).__init__(e=kwargs['e'], label=kwargs['label'])
             else:
-                super(DLelement, self).__init__(e=e)
+                super(DLelement, self).__init__(e=kwargs['e'])
         else:
             super(DLelement, self).__init__()
         if 'next' in kwargs:
-            self.set_next(next)
+            self._next = kwargs['next']
         if 'prev' in kwargs:
-            self.set_prev(prev)
+            self._prev = kwargs['prev']
         else:
-            self.prev = None
+            self._prev = None
 
-    def _get_data_structure_type(self) -> str:
+    def get_data_structure_type(self) -> str:
         """
         This method gets the data structure type
         Returns:
-            str
+            str: representing the data structure type
         """
         return "DoublyLinkedList"
 
@@ -64,7 +64,7 @@ class DLelement(SLelement):
         Returns:
             element
         """
-        return self.next
+        return self._next
 
     @next.setter
     def next(self, el):
@@ -75,7 +75,7 @@ class DLelement(SLelement):
         Returns:
             None
         """
-        self.next = el
+        self._next = el
 
     @property
     def prev(self):
@@ -84,7 +84,7 @@ class DLelement(SLelement):
         Returns:
             element
         """
-        return self.prev
+        return self._prev
 
     @prev.setter
     def prev(self, el):
@@ -96,34 +96,32 @@ class DLelement(SLelement):
             None
         """
         #remove any existing link visualizer from this node
-        if self.prev is not None:
-            self.remove_link_visualizer(self.prev)
-        self.prev = el
+        if self._prev is not None:
+            self.remove_link_visualizer(self._prev)
+        self._prev = el
         #  add a new link visualizer
         if el is not None:
             self.set_link_visualizer(el)
 
-    ##
-    #	Get the JSON representation of the the data structure
-    #
-    def _get_data_structure_representation(self):
+    def get_data_structure_representation(self) -> dict:
+        """
+        Getter for the json representation before dumping
+        Returns:
+            dict: representing the JSON format
+        """
         #  map to reorder the nodes for building JSON
         node_map = dict()
         #  get teh list nodes
         nodes = []
         SLelement.get_list_elements(self, nodes)
         #  generate the JSON of the list nodes
-        nodes_JSON = str()
+        nodes_JSON = []
         k = 0
         while k < len(nodes):
             node_map[nodes[k]] = k
-            nodes_JSON += nodes[k].get_element_representation()
-            nodes_JSON += self.COMMA
+            nodes_JSON.append(nodes[k].get_element_representation())
             k += 1
-        #  remove the last comma
-        if len(nodes) != 0:
-            nodes_JSON = nodes_JSON[:-1]
-        links_JSON = str()
+        links_JSON = []
         k = 0
         while k < len(nodes):
             par = nodes[k]
@@ -131,16 +129,14 @@ class DLelement(SLelement):
             prv = par.prev
             if nxt is not None:
                 #  add the link
-                links_JSON += self.get_link_representation(par.get_link_visualizer(nxt),str(node_map.get(par)), str(node_map.get(nxt)))
-                links_JSON += self.COMMA
+                links_JSON.append(self.get_link_representation(par.get_link_visualizer(nxt), str(node_map.get(par)), str(node_map.get(nxt))))
             if prv is not None:
                 #  add the link
-                links_JSON += (self.get_link_representation(par.get_link_visualizer(prv), str(node_map.get(par)), str(node_map.get(prv))))
-                links_JSON += (self.COMMA)
+                links_JSON.append(self.get_link_representation(par.get_link_visualizer(prv), str(node_map.get(par)), str(node_map.get(prv))))
             k += 1
         #  add the link
-        #  add the link
-        if len(links_JSON) > 0:
-            links_JSON = links_JSON[:-1]
-        json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX + str(nodes_JSON) + self.CLOSE_BOX + self.COMMA + self.QUOTE + "links" + self.QUOTE + self.COLON + self.OPEN_BOX + str(links_JSON) + self.CLOSE_BOX + self.CLOSE_CURLY
-        return json_str
+        json_dict = {
+            "nodes": nodes_JSON,
+            "links": links_JSON
+        }
+        return json_dict

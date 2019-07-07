@@ -131,7 +131,7 @@ class SLelement(Element):
         }
         return json_dict
 
-    def _get_list_elements(self, nodes):
+    def get_list_elements(self, nodes):
         """
         Get the elements of the list
         Args:
