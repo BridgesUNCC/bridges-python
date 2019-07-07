@@ -106,7 +106,7 @@ class SLelement(Element):
         """
         node_map = dict()#map to reorder the nodes for building JSON
         nodes = []#get the list nodes
-        self._get_list_elements(nodes)
+        self.get_list_elements(nodes)
         nodes_JSON = []#generate the JSON of the list nodes
         k = 0
         while k < len(nodes):
