@@ -45,22 +45,21 @@ class CircDLelement(DLelement):
         """
         if 'e' in kwargs:
             if 'next' in kwargs and 'prev' in kwargs:
-                self._next = kwargs['next']
-                self._prev = kwargs['prev']
                 if 'label' in kwargs:
                     super(CircDLelement, self).__init__(e=kwargs['e'], label=kwargs['label'],
                                                         next=kwargs['next'], prev=kwargs['prev'])
                 else:
-                    super(CircDLelement, self).__init__(e=kwargs['e'], next=kwargs['next'], prev=kwargs['prev'])
-
+                    super(CircDLelement, self).__init__(e=kwargs['e'], next=kwargs['next'],
+                                                        prev=kwargs['prev'])
             elif 'label' in kwargs:
                 super(CircDLelement, self).__init__(e=kwargs['e'], label = kwargs['label'])
+                self.next = self.prev = self
             else:
                 super(CircDLelement, self).__init__(e=kwargs['e'])
+                self.next = self.prev = self
         else:
             super(CircDLelement, self).__init__()
-            self._next = self
-            self._prev = self
+            self.next = self.prev = self
 
     def get_data_structure_type(self) -> str:
         """
@@ -77,7 +76,7 @@ class CircDLelement(DLelement):
         Returns:
             DLelement: assigned to next
         """
-        return self._next
+        return super(CircDLelement, self).next
 
     @next.setter
     def next(self, next) -> None:
@@ -88,7 +87,7 @@ class CircDLelement(DLelement):
         Returns:
             None
         """
-        self._next = next
+        DLelement.next.fset(self, next)
 
     @property
     def prev(self):
@@ -97,7 +96,7 @@ class CircDLelement(DLelement):
         Returns:
             DLelement: assigned to prev
         """
-        return self._prev
+        return super(CircDLelement, self).prev
 
     @prev.setter
     def prev(self, prev) -> None:
@@ -108,4 +107,4 @@ class CircDLelement(DLelement):
         Returns:
             None
         """
-        self._prev = prev
+        DLelement.prev.fset(self, prev)
