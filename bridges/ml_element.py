@@ -55,11 +55,6 @@ class MLelement(SLelement):
             self._sublist = None
             self._tag = False
 
-        ##
-        #  Gets the sublist at this node, if it exists
-        #
-        #  @return  the sublist head element, if it exists
-        #
     @property
     def sub_list(self):
         """
@@ -92,7 +87,7 @@ class MLelement(SLelement):
         """
         #by default, color and shape sublist nodes to distinguish them  from
         #remaining nodes
-        self.visualizer.set_color("red")
+        self.visualizer.color = "red"
         self.visualizer.shape = "square"
 
     def get_data_structure_type(self) -> str:
@@ -103,13 +98,18 @@ class MLelement(SLelement):
         """
         return "MultiList"
 
+    @property
     def next(self):
         """
-        Retrieves the lement following this element
+        Retrieves the element following this element
         Returns:
             MLelement
         """
         return super(MLelement, self).next
+
+    @next.setter
+    def next(self, n):
+        SLelement.next.fset(self, n)
 
     @property
     def tag(self) -> bool:
@@ -174,13 +174,13 @@ class MLelement(SLelement):
         Returns:
             element
         """
-        self.get_list_elements_R(self, nodes)
+        self._get_list_elements_R(self, nodes)
 
 
-    def get_list_elements_R(self, list, nodes):
+    def _get_list_elements_R(self, list, nodes):
         el = list
         while el is not None:
             nodes.append(el)
             if el.tag:
-                self.get_list_elements_R(el.sub_list, nodes)
+                self._get_list_elements_R(el.sub_list, nodes)
             el = el.next
