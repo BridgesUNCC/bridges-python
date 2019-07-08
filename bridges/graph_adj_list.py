@@ -43,11 +43,13 @@ class GraphAdjList():
     CLOSE_BOX = "]"
 
     LargeGraphVertSize = 1000
-    ##
-    #
-    # 	Constructor
-    #
-    def __init__(self):
+
+    def __init__(self) -> None:
+        """
+        Constructor for a graph adj list
+        Returns:
+            None
+        """
         self.vertices = dict()
         self.adj_list = dict()
 
@@ -57,20 +59,27 @@ class GraphAdjList():
     # 	@return  The date structure type as a string
     #
     #
-    def get_data_structure_type(self):
+    def get_data_structure_type(self) -> str:
+        """
+        Getter for th data structure type
+        Returns:
+            str: representing the type
+        """
         if self.LargeGraphVertSize < len(self.vertices):
             return "largegraph"
         return "GraphAdjacencyList"
 
-    ##
-    # Adds a new vertex to the graph, initializes the adjacency
-    # list; user is responsible for checking if the vertex already
-    # exists. This method will replace the value for this key
-    #
-    #	@param k - vertex id
-    #	@param E - vertex info, currently used as a label by default
-    #
-    def add_vertex(self, k, e):
+    def add_vertex(self, k, e) -> None:
+        """
+        Adds a new vertex to the graph, initializes the adjacency
+        list; user is responsible for checking if the vertex already exists.
+        This methof will replace the valeue for this key
+        Args:
+            k: the vertex iid
+            e: the vertex info, currently used as a label by default
+        Returns:
+            None
+        """
         #  note: it is the user's responsibility to  check
         #  for duplicate vertices
         self.vertices[k] = Element(val = e)
