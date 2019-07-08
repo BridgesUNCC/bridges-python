@@ -1,10 +1,7 @@
 #!/usr/bin/env python
-from bridges.element import *
 from bridges.sl_element import *
 from bridges.edge import *
 import traceback
-import sys
-import json
 
 ##
 #
@@ -31,16 +28,6 @@ import json
 #
 #
 class GraphAdjList():
-
-    QUOTE = "\""
-    COMMA = ","
-    COLON = ":"
-    OPEN_CURLY = "{"
-    CLOSE_CURLY = "}"
-    OPEN_PAREN = "("
-    CLOSE_PAREN = ")"
-    OPEN_BOX = "["
-    CLOSE_BOX = "]"
 
     LargeGraphVertSize = 1000
 
