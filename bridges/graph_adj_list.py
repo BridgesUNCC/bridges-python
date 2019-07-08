@@ -50,15 +50,9 @@ class GraphAdjList():
         Returns:
             None
         """
-        self.vertices = dict()
+        self._vertices = dict()
         self.adj_list = dict()
 
-    ##
-    # 	This method gets the data structure type
-    #
-    # 	@return  The date structure type as a string
-    #
-    #
     def get_data_structure_type(self) -> str:
         """
         Getter for th data structure type
@@ -96,22 +90,37 @@ class GraphAdjList():
     #	@param dest - destination  vertex of edge
     #
     #
-    def add_edge(self, src, dest, data = None):
+    def add_edge(self, src, dest, data=None) -> None:
+        """
+        Adds a new edge to the graph, adds it to that vertex's
+        adjacency list; user is responsible for checking if the
+        vertex already exists. This version assumes a default edge
+        weight of 1.
+        Args:
+            src: source vertex of edge
+            dest: destination  vertex of edge
+            data: data the edge will hold
+        Returns:
+            None
+        Rasies:
+            ValueError: if the src and dest vertices do not exist
+        """
         #  check to see if the two vertices exist, else
         #  throw an exception
         try:
             if self.vertices.get(src) is None or self.vertices.get(dest) is None:
-                raise ValueError("Vertex " + src + " or " + dest + " does not exist! Add the vertex before creating the edge.")
+                raise ValueError("Vertex " + src + " or " + dest +
+                                 " does not exist! Add the vertex before creating the edge.")
         except Exception as e:
             traceback.print_tb(e.__traceback__)
         if data is not None:
             self.adj_list[src] = SLelement(e=Edge(src, dest, data), next=self.adj_list.get(src))
         else:
-            self.adj_list[src] = SLelement(e = Edge(src, dest), next = self.adj_list.get(src))
+            self.adj_list[src] = SLelement(e=Edge(src, dest), next=self.adj_list.get(src))
 
     def set_vertex_data(self, src, vertex_data):
         try:
-            if(self.vertices[src] == None):
+            if self.vertices[src] is None:
                 raise ValueError("Vertex " + src + " does not exist!")
         except Exception as e:
             traceback.print_tb(e.__traceback__)
@@ -119,7 +128,7 @@ class GraphAdjList():
 
     def get_vertex_data(self, src):
         try:
-            if(self.vertices[src] == None):
+            if self.vertices[src] is None:
                 raise ValueError("Vertex " + src + " does not exist!")
         except Exception as e:
             traceback.print_tb(e.__traceback__)
@@ -127,15 +136,15 @@ class GraphAdjList():
 
     def set_edge_data(self, src, dest, edge_data):
         try:
-            if(self.vertices[src] == None or self.vertices[dest] == None):
+            if self.vertices[src] is None or self.vertices[dest] is None:
                 raise ValueError("Vertex " + src + " or " + dest + " does not exist!")
         except Exception as e:
             traceback.print_tb(e.__traceback__)
         sle = self.adj_list[src]
-        while(sle is not None):
+        while sle is not None:
             edge_dest = sle.get_value().tov()
-            if(edge_dest == dest):
-                if(edge_data is not None):
+            if edge_dest == dest:
+                if edge_data is not None:
                     sle.get_value().set_edge_data(edge_data)
                     return
                 else:
@@ -144,24 +153,23 @@ class GraphAdjList():
         if(sle == None):
             raise ValueError("VEdge from " + src + " to " + dest + "does not exist!")
 
-    ##
-    #	This method returns the graph nodes
-    #
-    #	return - vertices held in the hashmap
-    #
-    #
-    def get_vertices(self):
-        return self.vertices
+    @property
+    def vertices(self) -> dict:
+        """
+        Getter for the graph nodes
+        Returns:
+            dict
+        """
+        return self._vertices
 
-    ##
-    #	This is a convenience method to retrieve a vertex given
-    #	its key
-    #
-    #   @param key - The key for the value in vertices dict
-    #	@return - graph vertex corresponding to its key
-    #
-    #
     def get_vertex(self, key):
+        """
+        Getter for a specific vertex in the dictionary of vertices
+        Args;
+            key: The associated key for the vertex
+        Returns:
+            vertex
+        """
         return self.vertices.get(key)
 
     ##
@@ -239,7 +247,7 @@ class GraphAdjList():
     ##
     #	Get the JSON representation of the the data structure
     #
-    def _get_data_structure_representation(self) -> dict:
+    def get_data_structure_representation(self) -> dict:
 
         # redirect for large graphs
         if len(self.vertices) > self.LargeGraphVertSize:
@@ -285,7 +293,7 @@ class GraphAdjList():
         }
         return json_str
 
-    def _get_data_structure_large_graph(self) -> dict:
+    def get_data_structure_large_graph(self) -> dict:
         nodes_data = []
         node_map = {}
         for i, (key, element) in enumerate(self.vertices.items()):
