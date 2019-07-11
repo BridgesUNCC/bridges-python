@@ -115,11 +115,11 @@ class AVLTreeElement(BSTElement):
         Returns:
             child
         """
-        return super(AVLTreeElement, self).left
+        return super(AVLTreeElement, self).get_child(0)
 
     @left.setter
     def left(self, value):
-        super(AVLTreeElement, self.__class__).left.fset(self, value)
+        super(AVLTreeElement, self.__class__).set_child(0, value)
 
     @property
     def right(self):
@@ -128,8 +128,8 @@ class AVLTreeElement(BSTElement):
         Returns:
             child
         """
-        return super(AVLTreeElement, self).right
+        return super(AVLTreeElement, self).get_child(1)
 
     @right.setter
     def right(self, value):
-        super(AVLTreeElement, self.__class__).right.fset(self, value)
+        super(AVLTreeElement, self.__class__).set_child(1, value)

@@ -49,7 +49,7 @@ class TreeElement(Element):
             self.children.append(kwargs['right'])
 
 
-    def _get_data_structure_type(self) -> str:
+    def get_data_structure_type(self) -> str:
         """
         Gets the data structure type
         Returns:
