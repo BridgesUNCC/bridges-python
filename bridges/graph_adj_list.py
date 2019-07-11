@@ -64,7 +64,7 @@ class GraphAdjList:
         #  note: it is the user's responsibility to  check
         #  for duplicate vertices
         self.vertices[k] = Element(val=e)
-        self.vertices.get(k).set_label(str(k))
+        self.vertices.get(k).label = str(k)
         self.adj_list[k] = None
 
     def add_edge(self, src, dest, data=None) -> None:
