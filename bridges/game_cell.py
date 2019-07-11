@@ -1,3 +1,7 @@
+from bridges.named_color import *
+from bridges.named_symbol import *
+
+
 class GameCell:
 
     def __init__(self, **kwargs):
@@ -17,11 +21,11 @@ class GameCell:
         if 'fg' in kwargs:
             self._fg = kwargs['fg']
         else:
-            self._fg  = NamedColor.white
+            self._fg = NamedColor.white
         if 'symbol' in kwargs:
             self._symbol = kwargs['symbol']
         else:
-            self._symbol = NamedSymbol.non
+            self._symbol = NamedSymbol.A
 
     @property
     def bg(self):
@@ -30,11 +34,14 @@ class GameCell:
         Returns:
             color: background color
         """
-        return self._bg
+        return self._bg.value
 
     @bg.setter
     def bg(self, color):
-        self._bg = color
+        if type(color) == NamedColor:
+            self._bg = color
+        else:
+            self._bg = NamedColor.__getitem__(color)
 
     @property
     def fg(self):
@@ -43,6 +50,8 @@ class GameCell:
         Returns:
             color: the foreground color
         """
+        return self._fg.value
+
     @fg.setter
     def fg(self, color):
         """
@@ -52,7 +61,11 @@ class GameCell:
         Returns:
             None
         """
-        self._fg = color
+        if type(color) == NamedColor:
+            self._fg = color
+        else:
+            self._fg = NamedColor.__getitem__(color)
+
 
     @property
     def symbol(self):
@@ -61,7 +74,7 @@ class GameCell:
         Returns:
             symbol
         """
-        return self._symbol
+        return self._symbol.value
 
     @symbol.setter
     def symbol(self, s):
@@ -72,8 +85,11 @@ class GameCell:
         Returns:
             None
         """
-        self._symbol = s
+        if type(s) == NamedSymbol:
+            self._symbol = s
+        else:
+            if s < 0 or s > 255:
+                raise ValueError("Symbol " + s + " is invalid; symbols must be specified from the range (0, 255)")
+            self._symbol = NamedSymbol.__getitem__(s)
 
-    def byte(self):
-        bytes([self._symbol])
 
