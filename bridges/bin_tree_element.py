@@ -18,6 +18,8 @@ from bridges.tree_element import *
 # @author Kalpathi Subramanian, Mihai Mehedint, Matthew McQuaigue
 #
 #
+
+
 class BinTreeElement(TreeElement):
 
     def __init__(self, **kwargs) -> None:

@@ -6,7 +6,7 @@ def main():
     # create the Bridges object, set credentials
     user = os.environ.get("BRIDGES_USER_NAME")
     key = os.environ.get("BRIDGES_API_KEY")
-    bridges = Bridges(100, user, key)
+    bridges = Bridges(101, user, key)
     bridges.set_visualize_JSON(True)
 
     # for 2D array 4x4

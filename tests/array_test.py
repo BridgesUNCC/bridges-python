@@ -16,7 +16,7 @@ def main():
 
     #populate the array with squares of indicies
     for i in range(arr.size):
-        arr.get_element(i).label = i*i
+        arr[i].label = i*i
 
     #color the array elements
     arr.get_element(0).visualizer.color = "red"

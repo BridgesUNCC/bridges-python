@@ -25,21 +25,28 @@ from bridges.bst_element import *
 #
 class AVLTreeElement(BSTElement):
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, *args, **kwargs) -> None:
         """
         AVL Tree constructor
+        args:
+            key, element
         kwargs:
             key: the search key
             e : the the specific object that the element is holding
         Returns:
             None
         """
+        if len(args) != 0:
+            if len(args) != 2:
+                raise ValueError("Must contain 0 or 2 positional parameters")
+            super(AVLTreeElement, self).__init__(key=args[0], e=args[1])
+
         if 'key' in kwargs and 'e' in kwargs:
-            super(AVLTreeElement, self).__init__(key = kwargs['key'], e = kwargs['e'])
+            super(AVLTreeElement, self).__init__(key=kwargs['key'], e=kwargs['e'])
         elif 'key' in kwargs:
             super(AVLTreeElement, self).key = kwargs['key']
         elif 'e' in kwargs:
-            super(AVLTreeElement, self).__init__(e = kwargs['e'])
+            super(AVLTreeElement, self).__init__(e=kwargs['e'])
         else:
             super(AVLTreeElement, self).__init__()
         self._height = self._bal_factor = 0
@@ -101,6 +108,7 @@ class AVLTreeElement(BSTElement):
         """
         self._bal_factor = value
 
+    @property
     def left(self):
         """
         Getter for the left child of the avl tree
@@ -109,6 +117,11 @@ class AVLTreeElement(BSTElement):
         """
         return super(AVLTreeElement, self).left
 
+    @left.setter
+    def left(self, value):
+        super(AVLTreeElement, self.__class__).left.fset(self, value)
+
+    @property
     def right(self):
         """
         Getter for the right child of the avl tree
@@ -116,3 +129,7 @@ class AVLTreeElement(BSTElement):
             child
         """
         return super(AVLTreeElement, self).right
+
+    @right.setter
+    def right(self, value):
+        super(AVLTreeElement, self.__class__).right.fset(self, value)

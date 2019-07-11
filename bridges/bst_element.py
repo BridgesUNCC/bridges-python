@@ -22,6 +22,8 @@ from bridges.bin_tree_element import *
 #  	for use in a binary search tree implementations.
 #
 #
+
+
 class BSTElement(BinTreeElement):
 
     def __init__(self, **kwargs) -> None:
@@ -37,11 +39,11 @@ class BSTElement(BinTreeElement):
         """
         if 'e' in kwargs:
             if 'left' in kwargs and 'right' in kwargs:
-                super(BinTreeElement, self).__init__(e=kwargs['e'], left = kwargs['left'], right = kwargs['right'])
+                super(BSTElement, self).__init__(e=kwargs['e'], left = kwargs['left'], right = kwargs['right'])
             else:
-                super(BinTreeElement, self).__init__(e = kwargs['e'])
+                super(BSTElement, self).__init__(e = kwargs['e'])
         else:
-            super(BinTreeElement, self).__init__()
+            super(BSTElement, self).__init__()
         if 'key' in kwargs:
             self._key = kwargs['key']
 
@@ -78,15 +80,23 @@ class BSTElement(BinTreeElement):
         """
         Getter for the left element in BST
         Returns:
-            BinTreeElement
+            BSTElement
         """
         return super(BSTElement, self).left
+
+    @left.setter
+    def left(self, value):
+        super(BSTElement, self.__class__).right.fset(self, value)
 
     @property
     def right(self):
         """
         Getter for the right element in BST
         Returns:
-            BinTreeElement
+            BSTElement
         """
         return super(BSTElement, self).right
+
+    @right.setter
+    def right(self, value):
+        super(BSTElement, self.__class__).right.fset(self, value)

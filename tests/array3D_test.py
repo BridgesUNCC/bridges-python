@@ -1,12 +1,14 @@
 from bridges.bridges import *
 from bridges.array import *
+import os
 
 def main():
 
     # create the Bridges object, set credentials
-    bridges = Bridges(0, "testtest", "1243437903811")
+    user = os.environ.get("BRIDGES_USER_NAME")
+    key = os.environ.get("BRIDGES_API_KEY")
+    bridges = Bridges(102, user, key)
     bridges.set_visualize_JSON(True)
-    bridges.connector.set_server("local")
 
     #speify array dimensions and create 3D array
     num_slices = 4
@@ -28,8 +30,8 @@ def main():
     my_array.get_element(x=0, y=3, z=0).visualizer.color = "green"
     my_array.get_element(x=3, y=0, z=0).visualizer.color = "blue"
     my_array.get_element(x=3, y=3, z=0).visualizer.color = "magenta"
-    my_array.get_element(x=1, y=1, z=0).visualizer.color = "cyan"
-    my_array.get_element(x=2, y=2, z=0).visualizer.color = "yellow"
+    my_array[1, 1, 0].visualizer.color = "cyan"
+    my_array.get_element(2, 2, 0).visualizer.color = "yellow"
 
     #set visualizer type
     bridges.set_data_structure(my_array)
