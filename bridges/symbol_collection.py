@@ -1,17 +1,19 @@
 import json
 
-
 class SymbolCollection:
 
     def __init__(self):
-        self.symbols = dict()
-        self.domain = 100.0
+        """
+        COnstructor for collection of symbols
+        """
+        self._symbols = dict()
+        self._domain = 100.0
 
     def get_data_structure_type(self):
         return "SymbolCollection"
 
     def add_symbol(self, s):
-        self.symbols[s.get_identifier()] = s
+        self._symbols[s.identifier] = s
 
     def update_axis_domains(self, s):
         dims = s.get_dimensions()
@@ -29,9 +31,9 @@ class SymbolCollection:
     def _get_data_structure_representation(self):
         symbol_json = []
 
-        for key in self.symbols.keys():
-            self.update_axis_domains(self.symbols[key])
-            symbol_json.append(self.symbols[key].get_json_representation())
+        for key in self._symbols.keys():
+            self.update_axis_domains(self._symbols[key])
+            symbol_json.append(self._symbols[key].get_json_representation())
 
         symbol_json = json.dumps(symbol_json)
         return "\"""domainX\""":[" + str(-self.domain) + "," + str(self.domain) + "],\"""domainY\""":[" + str(-self.domain) + "," + str(self.domain) + "], " + "\"""symbols\""":" + symbol_json + "}"

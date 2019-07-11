@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-# package: bridges.base
 from bridges.sl_element import *
-
 
 ##
 #
@@ -25,80 +23,85 @@ from bridges.sl_element import *
 #
 #
 class DLelement(SLelement):
-    prev = object()
 
-    ##
-    #	Constructs an empty DLelement.
-    # @param e the genereic object that this DLelement is holding
-	# @param next the DLelement that should be assigned to the next pointer
-	# @param prev the DLelement that should be assigned to the prev pointer
-    # @param label the label for this DLelement
-    #
-    def __init__(self, e = None, label = None, next = None, prev = None):
-        if next is not None:
+    def __init__(self, **kwargs) -> None:
+        """
+        Constructor for DLelement
+        Kwargs:
+            e: the genereic object that this DLelement is holding
+            next: the DLelement that should be assigned to the next pointer
+            prev: the DLelement that should be assigned to the prev pointer
+            label: the label for this DLelement
+        Return:
+            None
+        """
+        if 'e' in kwargs:
+            if 'label' in kwargs:
+                super(DLelement, self).__init__(e=e, label=label)
+            else:
+                super(DLelement, self).__init__(e=e)
+        else:
+            super(DLelement, self).__init__()
+        if 'next' in kwargs:
             self.set_next(next)
-        if prev is not None:
+        if 'prev' in kwargs:
             self.set_prev(prev)
-        if e is not None and label is not None:
-            super(DLelement, self).__init__(e = e, label = label)
-            self.prev = None
-        elif e is not None and label is None:
-            super(DLelement, self).__init__(e = e)
         else:
             self.prev = None
-            super(DLelement, self).__init__()
 
-    ##
-    #	This method gets the data structure type
-    #
-    #	@return  The date structure type as a string
-    #
-    def get_data_structure_type(self):
+    def _get_data_structure_type(self) -> str:
+        """
+        This method gets the data structure type
+        Returns:
+            str
+        """
         return "DoublyLinkedList"
 
-    ##
-    # This method returns the pointer to the next DLelement
-    #
-    # @return the DLelement assigned to the next pointer
-    #
-    def get_next(self):
+    @property
+    def next(self):
+        """
+        Getter for the next element in Dlelement
+        Returns:
+            element
+        """
         return self.next
 
-    ##
-    # This method sets the pointer to the next DLelement
-    #
-    # @param next the DLelement that should be assigned to the next pointer
-    #
-    #
-    #
-    # 		public void setNext(DLelement<E> nxt) {
-    # 			this.next = nxt;
-    # 			if (nxt != null)
-    # 				this.setLinkVisualizer(nxt);
-    # 		}
-    #
-    #
-    # This method returns the pointer to the previous DLelement
-    #
-    # @return the DLelement assigned to the prev pointer
-    #
-    def get_prev(self):
+    @next.setter
+    def next(self, el):
+        """
+        Setter for the next element
+        Args:
+            el: element for next
+        Returns:
+            None
+        """
+        self.next = el
+
+    @property
+    def prev(self):
+        """
+        Getter for the prev element in Dlelement
+        Returns:
+            element
+        """
         return self.prev
 
-    ##
-    # This method sets the pointer to the previous DLelement
-    #
-    # @param prev the DLelement that should be assigned to the prev pointer
-    #
-    def set_prev(self, prv):
-        #  first remove any existing link visualizer from this node
-        # 	to its next node
+    @prev.setter
+    def prev(self, el):
+        """
+        Setter for the prev element
+        Args:
+            el: element for prev
+        Returns:
+            None
+        """
+        #remove any existing link visualizer from this node
         if self.prev is not None:
             self.remove_link_visualizer(self.prev)
-        self.prev = prv
+        self.prev = el
         #  add a new link visualizer
-        if prv is not None:
-            self.set_link_visualizer(prv)
+        if el is not None:
+            self.set_link_visualizer(el)
 
     ##
     #	Get the JSON representation of the the data structure

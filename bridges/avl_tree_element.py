@@ -17,93 +17,102 @@ from bridges.bst_element import *
 #	between *  the current element and its left or right child
 #
 #
-#  @author Kalpathi Subramanian, Mihai Mehedint
+#  @author Kalpathi Subramanian, Mihai Mehedint, Matthew McQuaigue
 #
-#  @date 6/22/16, 1/7/17, 5/17/17
+#  @date 6/22/16, 1/7/17, 5/17/17, 6/09/19
 #
 #
 #
 class AVLTreeElement(BSTElement):
 
-    height = int()
-    bal_factor = int()
-
-    ##
-    #
-    # Construct an AVLTreeElement
-    # @param k the search key
-    # @param e the appl specific object that Element is holding
-    #
-    def __init__(self, k = None, e = None):
-        if k is not None:
-            super(AVLTreeElement, self).set_key(k)
-        if e is not None:
-            super(AVLTreeElement, self).__init__(key = k,e = e)
+    def __init__(self, **kwargs) -> None:
+        """
+        AVL Tree constructor
+        kwargs:
+            key: the search key
+            e : the the specific object that the element is holding
+        Returns:
+            None
+        """
+        if 'key' in kwargs and 'e' in kwargs:
+            super(AVLTreeElement, self).__init__(key = kwargs['key'], e = kwargs['e'])
+        elif 'key' in kwargs:
+            super(AVLTreeElement, self).key = kwargs['key']
+        elif 'e' in kwargs:
+            super(AVLTreeElement, self).__init__(e = kwargs['e'])
         else:
             super(AVLTreeElement, self).__init__()
-        self.height = balFactor = 0
+        self._height = self._bal_factor = 0
 
-
-    ##
-    #	This method gets the data structure type
-    #
-    #	@return  The date structure type as a string
-    #
-    #
-    def get_data_structure_type(self):
+    def _get_data_structure_type(self) -> str:
+        """
+        Get the data structure type
+        Returns:
+             str: the type of data structure
+        """
         return "AVLTree"
 
-    ##
-    #	This method returns the height of the tree at this node
-    #
-    #	@return  height
-    #
-    #
-    def get_height(self):
-        return self.height
+    @property
+    def key(self) -> str:
+        """
+        Getter for the search keys
+        Returns:
+            str: represeting the key
+        """
+        return super(AVLTreeElement, self).key
 
-    ##
-    #  This method sets the height of the tree at this node
-    #
-    #  @param   height h
-    #
-    #
-    def set_height(self, h):
-        self.height = h
+    @property
+    def height(self) -> int:
+        """
+        Getter for height of the avl tree at this node
+        Returns:
+            int: the height of the tree
+        """
+        return self._height
 
-    ##
-    #	This method returns the balance factor  of the tree at this node
-    #
-    #   @return  balance factor
-    #
-    #
-    def get_balance_factor(self):
-        return self.bal_factor
+    @height.setter
+    def height(self, value: int) -> None:
+        """
+        Setter function for the height of the avl tree
+        Args:
+            (int) value: An integer for the height at this node
+        Returns:
+            None
+        """
+        self._height = value
 
-    ##
-    #	This method sets the balance factor of the tree at this node
-    #
-    #  @param   balance factor  bf
-    #
-    def set_balance_factor(self, bf):
-        self.bal_factor = bf
+    @property
+    def balance_factor(self) -> int:
+        """
+        Getter for the balance factor  of the tree at this node
+        Returns:
+            int: representing the balance factor
+        """
+        return self._bal_factor
 
-    ##
-    #
-    # This method returns the left child of the tree node
-    #
-    # @return the left child of this node
-    #
-    #
-    def get_left(self):
-        return super(AVLTreeElement, self).get_left()
+    @balance_factor.setter
+    def balance_factor(self, value: int) -> None:
+        """
+        Setter for the balance factor of the tree at this node
+        Args:
+            (int) value: An integer for the balance factor at this node
+        Returns:
+            None
+        """
+        self._bal_factor = value
 
-    ##
-    #
-    #  This method returns the right child of tree node
-    #
-    # @return the right child of this node
-    #
-    #
-    def get_right(self):
-        return super(AVLTreeElement, self).get_right()
+    def left(self):
+        """
+        Getter for the left child of the avl tree
+        Returns:
+            child
+        """
+        return super(AVLTreeElement, self).left
+
+    def right(self):
+        """
+        Getter for the right child of the avl tree
+        Returns:
+            child
+        """
+        return super(AVLTreeElement, self).right

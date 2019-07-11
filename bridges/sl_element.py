@@ -20,131 +20,131 @@ from bridges.element import *
 #
 class SLelement(Element):
 
-    ##
-    # This constructor creates an SLelement object
-    # and sets the next pointer to null
-    # @param label - the label of SLelement that shows up on the bridges visualization
-    # @param e  - the generic object that this SLelement will hold
-    # @param next - the element that should be assigned to the next pointer
-    # 
-    def __init__(self, e = None, label = None, next = None):
-        if e is not None and label is not None:
-            super(SLelement, self).__init__(val = e, label = label)
-            self.next = None
-        if e is not None and label is None and next is not None:
-            super(SLelement, self).__init__(val = e)
-            self.set_next(next)
-        if e is not None and label is None and next is None:
-            super(SLelement, self).__init__(val = e)
-            self.next = None
-        if e is None and label is None and next is not None:
-            self.set_next(next)
+    def __init__(self, **kwargs) -> None:
+        """
+        Conctructor for SLelement object
+        Kwargs:
+            (Generic) e: the generic object that this SLelement will hold
+            (str) label: the label of the SLelement that shows up on the bridges visualization
+            (Element) next: the element that should be assigned to the next pointer
+        Returns:
+            None
+        """
+        if 'e' in kwargs:
+            if 'label' in kwargs:
+                super(SLelement, self).__init__(val=kwargs['e'], label=kwargs['label'])
+            else:
+                super(SLelement, self).__init__(val=kwargs['e'])
         else:
             super(SLelement, self).__init__()
-            self.next = next
+        if 'next' in kwargs:
+            self._next = kwargs['next']
+        else:
+            self._next = None
 
-
-    ##
-    #
-    #	This method gets the data structure type
-    #
-    #	@return  The date structure type as a string
-    #
-    #
-    def get_data_structure_type(self):
+    def get_data_structure_type(self) -> str:
+        """
+        Getter for the data structure type
+        Returns:
+            str: representing the data structure type
+        """
         return "SinglyLinkedList"
 
-    ##
-    # Retrieves the element following this element
-    #
-    # @return - SLelement assigned to next
-    #
-    #
-    def get_next(self):
-        return self.next
+    @property
+    def next(self):
+        """
+        Getter for element following this element
+        Returns:
+            SLelement
+        """
+        return self._next
 
-    ##
-    # Retrieves the value in the SLelement
-    # @return - SLElement value held
-    def get_value(self):
-        return super(SLelement, self).get_value()
+    @next.setter
+    def next(self, n) -> None:
+        """
+        Setter for the element following this element
+        Args:
+            n: the element to be assigned to next
+        Returns:
+            None
+        """
+        self._next = n
+        if n is not None:
+            self.set_link_visualizer(n)
 
-    ##
-    # Sets the value in the SLelement
-    # @return - SLelement value held
-    def set_value(self, val):
-        super(SLelement, self).set_value(val)
-    ##
-    # Sets the element to point to the next SLelement
-    #
-    # @param next - SLelement that should be assigned to the next pointer
-    #
-    def set_next(self, next):
-        self.next = next
-        if next is not None:
-            self.set_link_visualizer(next)
+    @property
+    def value(self):
+        """
+        Getter for the SLelement value to hold
+        Returns:
+            Element
+        """
+        return super(SLelement, self).value
+
+    @value.setter
+    def value(self, val):
+        """
+        Setter for the value that this SLelement will hold
+        Args:
+            val: the value that this SLelment will hold
+        Returns:
+            None
+        """
+        super(SLelement, self).value = val
 
     def list_helper(start):
-        while start.get_next() != None:
-            yield start
-            start = start.get_next()
+        node = start
+        while node.next is not None:
+            yield node
+            node = node.next
 
-
-
-
-
-    def __str__(self):
-        return "SLelement [next=" + self.next + ", getNext()=" + self.get_next() + ", getIdentifier()=" + self.get_identifier() + ", getVisualizer()=" + self.get_visualizer() + ", getClassName()=" + self.get_class_name() + ", getElementRepresentation()=" + self.get_element_representation() + ", getLabel()=" + self.get_label() + ", getValue()=" + self.get_value() + ", toString()=" + super(SLelement, self).__str__() + ", getClass()=" + self.getClass() + ", hashCode()=" + self.hashCode() + "]"
-
-    ##
-    #	Get the JSON representation of the the data structure
-    #
-    def _get_data_structure_representation(self):
-        #  map to reorder the nodes for building JSON
-        node_map = dict()
-        #  get teh list nodes
-        nodes = []
-        self.get_list_elements(nodes)
-        #  generate the JSON of the list nodes
-        nodes_JSON = str()
+    def get_data_structure_representation(self) -> dict:
+        """
+        Getter for this data structure representation
+        Returns:
+            dict: representing the JSON before dumping
+        """
+        node_map = dict()#map to reorder the nodes for building JSON
+        nodes = []#get the list nodes
+        self._get_list_elements(nodes)
+        nodes_JSON = []#generate the JSON of the list nodes
         k = 0
         while k < len(nodes):
             node_map[nodes[k]] = k
-            nodes_JSON += nodes[k].get_element_representation()
-            nodes_JSON += self.COMMA
+            nodes_JSON.append(nodes[k].get_element_representation())
             k += 1
-        #  remove the last comma
-        if len(nodes) != 0:
-            nodes_JSON = nodes_JSON[:-1]
-        links_JSON = str()
+
+        links_JSON = []
         k = 0
         while k < len(nodes):
             par = nodes[k]
             chld = par.next
             if chld is not None:
                 #  add the link
-                links_JSON += (self.get_link_representation(par.get_link_visualizer(chld), str(node_map.get(par)), str(node_map.get(chld))))
-                links_JSON += (self.COMMA)
+                links_JSON.append(self.get_link_representation(par.get_link_visualizer(chld),
+                                                               str(node_map.get(par)), str(node_map.get(chld))))
             k += 1
-        #  add the link
-        if len(links_JSON) > 0:
-            links_JSON = links_JSON[:-1]
-        json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX + str(nodes_JSON) + self.CLOSE_BOX + self.COMMA + self.QUOTE + "links" + self.QUOTE + self.COLON + self.OPEN_BOX + str(links_JSON) + self.CLOSE_BOX + self.CLOSE_CURLY
-        return json_str
+        #add the link
+        json_dict = {
+            "nodes": nodes_JSON,
+            "links": links_JSON
+        }
+        return json_dict
 
-    ##
-    #	Get the elements of the list
-    #
-    #	@param nodes  a vector of the ndoes in the list
-    #
-    #
-    def get_list_elements(self, nodes):
+    def _get_list_elements(self, nodes):
+        """
+        Get the elements of the list
+        Args:
+            nodes: a vector of the nodes in the list
+        Returns:
+            elements of list
+        """
         el = self
-        #  try to handld all lists in subclasses, except multilists
+        #try to handle all lists in subclasses, except multilists
         nodes.clear()
         while el is not None:
             nodes.append(el)
-            el = el.get_next()
+            el = el.next
             #  handle circular lists
             if el == self:
                 break

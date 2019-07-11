@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-from bridges.element import *
 from bridges.link_visualizer import *
 
 ##
 # @brief This class is used to represent the edges in a graph and will
-# 	appear as links in the BRIDGES graph visualization.
+# appear as links in the BRIDGES graph visualization.
 # This object is used in graphs and graph algorithms such as DFS, BFS and shortest
 # path algorithms that need to visit graph edges. The adjacency list
 # representation uses them as the generic paramter, as SLelement<Edge>
@@ -13,60 +12,86 @@ from bridges.link_visualizer import *
 # @author Matthew McQuaigue
 #
 #
-class Edge(object):
+class Edge():
 
-    ##
-    #
-    # Constructors
-    # @param wt integer, representing  edge weight
-    # @param v the terminating vertex of the edge
-    #
-    def __init__(self, v1, v2, data, lv):
+    def __init__(self, v1, v2, data = None) -> None:
+        """
+        Constructor for a edge
+        Args:
+            v1: first vertex of the edge
+            v2: second vertex of the edge
+            data: the data the edge will hold
+        Returns:
+            None
+        """
         self.from_vertex = v1
         self.to_vertex = v2
-        self.set_edge_data(data)
-        self.link_vis(lv)
-
-    def fromv(self):
-        return self.from_vertex
-
-    def tov(self):
-        return self.to_vertex
-
-    def set_thickness(self, th):
-        self.lvis.set_thickness(th)
-
-    def get_thickness(self):
-        return self.lvis.get_thickness()
-
-    def set_color(self, color):
-        self.lvis.set_color(color)
-
-    def get_color(self):
-        return self.lvis.get_color()
-
-    def link_vis(self, lv):
+        self.edge_data = data
         self.lvis = LinkVisualizer()
 
+    @property
+    def tov(self):
+        """
+        Getter for the to vertex
+        Returns:
+            vertex
+        """
+        return self.to_vertex
 
-    ##
-    # Set Edge data (represented as a string for now)
-    #
-    # @param string: application data
-    #
-    def set_edge_data(self, data):
-        self.edge_data = data
+    @property
+    def fromv(self):
+        """
+        Getter for the from vertex
+        Returns:
+            vertex
+        """
+        return self.from_vertex
 
-    ##
-    # Get edge data
-    #
-    # @return the edge data
-    #
-    def get_edge_data(self):
+    @property
+    def thickness(self) -> float:
+        """
+        Getter for the link thickness
+        Returns:
+             float
+        """
+        return self.lvis.thickness
+
+    @thickness.setter
+    def thickness(self, th: float) -> None:
+        """
+        Setter for the thickness of edge
+        Args:
+            th: thickness to be applied
+        Returns:
+            None
+        """
+        self.lvis.thickness = th
+
+    @property
+    def edge_data(self) -> str:
+        """
+        Getter for edge data
+        Returns:
+             str
+        """
         return self.edge_data
 
-    ##
-    # Returns this edge
-    #
+    @edge_data.setter
+    def edge_data(self, data: str) -> None:
+        """
+        Setter for edge data
+        Args:
+            data: data for the edge to hold represented as a string
+        Returns:
+            None
+        """
+        self.edge_data = data
+
+    def set_color(self, color):
+        self.lvis.color = color
+
+    def get_color(self):
+        return self.lvis.color
+
     def get_edge(self):
         return self

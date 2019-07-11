@@ -4,9 +4,9 @@ from bridges.element import *
 ##
 # @brief This class can be used to create arrays of type Element<E>.
 #
-# @author 	Kalpathi Subramanian
+# @author 	Matthew McQuaigue
 #
-# @date  	10/8/16, 5/17/17
+# @date  	10/8/16, 6/09/19
 #
 #	This class can be used to create arrays of type Element<E>  where E
 #	is a generic object representing application specific data.
@@ -17,216 +17,188 @@ from bridges.element import *
 #
 #
 class Array():
-    QUOTE = "\""
-    COMMA = ","
-    COLON = ":"
-    OPEN_CURLY = "{"
-    CLOSE_CURLY = "}"
-    OPEN_PAREN = "("
-    CLOSE_PAREN = ")"
-    OPEN_BOX = "["
-    CLOSE_BOX = "]"
+    dims = [1,1,1] #used for setting size of array based on dimensions
+    def __init__(self, **kwargs):
+        """
+        Array constructor
+        Args:
+            num_dims: The dimensions of the array (1-3). Defaults to 1 dimension (int)
+        Kwargs:
+            dims: size of each dimension (array)
+            x_dim: number of elements on the x dimension (int)
+            y_dim: number of elements on the y dimension (int)
+            z_dim: number of elements on the z dimension (int)
+        Returns:
+            None
+        """
+        self._dims = [1, 1, 1]
+        self._array_data = []
+        if 'num_elements' in kwargs:
+            self._num_dims = 1
+            self._dims[0] = kwargs['num_elements']
+            self._dims[1] = self._dims[2] = 1
+            self.set_dimensions(self._dims)
+        elif 'dims' in kwargs and 'num_dims' in kwargs:
+            self._num_dims = kwargs['num_dims']
+            self.set_dimensions(kwargs['dims'])
+        elif 'x_dim' in kwargs and 'y_dim' in kwargs:
+            if 'z_dim' in kwargs:
+                self._num_dims = 3
+                self._dims[0] = kwargs['x_dim']
+                self._dims[1] = kwargs['y_dim']
+                self._dims[2] = kwargs['z_dim']
+                self.set_dimensions(self._dims)
+            else:
+                self._num_dims = 2
+                self._dims[0] = kwargs['x_dim']
+                self._dims[1] = kwargs['y_dim']
+                self._dims[2] = 1
+                self.set_dimensions(self._dims)
+        else:
+            self._array_data = None
+            self._num_dims = 1
+            self._dims[0] = self._dims[1] = self._dims[2] = self._size = 0
 
-    #  only 2D and 3D arrays supported
-    dims = [1, 1, 1]
+    @property
+    def num_dims(self) -> int:
+        """
+        Getter for representing the number of dimensions in the array
+        Returns:
+            int: number of dimensions
+        """
+        return self._num_dims
 
-    # array_data=[]
+    @num_dims.setter
+    def num_dims(self, value: int) -> None:
+        """
+        Setter function for the number of dimensions for the array
+        Args:
+            value: An integer for the number of dimensions (Between 1 and 3 inclusive)
+        Returns:
+            None
+        Raises:
+            ValueError: if dimension passed in is < 1 or > 3
+        """
+        if value > 3:
+            raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D arrays supported at this time")
+        self._num_dims = value
 
+    @property
+    def size(self) -> int:
+        """
+        Getter for representing the size of array
+        Returns:
+            int: the size
+        """
+        return self._size
 
+    @size.setter
+    def size(self, sz: int) -> None:
+        """
+        Setter for representing the size of the array
+        Args:
+            (int) sz: The size to be set for array
+        Returns:
+            None
+        """
+        self._size = sz
 
-    ##
-    # Construct an array object
-    # @param num_dims number of dimensions of the array
-    # @param dims size of each dimension
-    # @param num_elements in the array
-    # @param x_dim number of elements along dimension 1
-    # @param y_dim number of elements along dimension 1
-    # @param z_dim number of elements along dimension 1
-    #
-    def __init__(self, num_dims = None, dims = None, num_elements = None, x_dim = None, y_dim = None, z_dim = None):
-        if num_dims is None and dims is None and num_elements is None and x_dim is None and y_dim is None and z_dim is None:
-            self.array_data = []
-            self.num_dims = 1
-            self.dims[0] = self.dims[1] = self.dims[2] = self.size = 0
-        elif num_dims is not None and dims is not None:
-            self.array_data = []
-            self.set_num_dimensions(num_dims)
-            self.set_dimensions(dims)
-        elif num_elements is not None:
-            self.array_data = []
-            self.set_num_dimensions(1)
-            self.dims[0] = num_elements
-            self.dims[1] = self.dims[2] = 1
-            self.set_dimensions(self.dims)
-        elif x_dim is not None and y_dim is not None and z_dim is not None:
-            self.array_data = []
-            self.set_num_dimensions(3)
-            self.dims[0] = x_dim
-            self.dims[1] = y_dim
-            self.dims[2] = z_dim
-            self.set_dimensions(self.dims)
-        elif x_dim is not None and y_dim is not None and z_dim is None:
-            self.array_data = []
-            self.set_num_dimensions(2)
-            self.dims[0] = x_dim
-            self.dims[1] = y_dim
-            self.dims[2] = 1
-            self.set_dimensions(self.dims)
-
-
-
-    ##
-    #	This method gets the data structure type
-    #
-    #	@return  The date structure type as a string
-    #
-    def get_data_structure_type(self):
+    def get_data_structure_type(self) -> str:
+        """
+        Gets the data structure type
+        Raises:
+            ValueError: if number of dimenstions is < 1 or > 3
+        Returns:
+            str: type of data structure
+        """
         if (self.num_dims >= 1) and (self.num_dims <= 3):
             return "Array"
         else:
             raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D arrays supported at this time")
 
-    ##
-    #
-    #	Set the number of dimensions of the array;
-    #
-    #	@param nd  number of dimensions
-    #
-    def set_num_dimensions(self, nd):
-        if nd > 3:
-            raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D arrays supported at this time")
-        self.num_dims = nd
-
-    ##
-    #
-    #	Get the number of dimensions of the array;
-    #
-    #	@return   number of dimensions
-    #
-    def get_num_dimensions(self):
-        if self.num_dims > 3:
-            raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D  arrays supported at this time")
-        return self.num_dims
-
-    ##
-    #
-    #	Set the size of each dimensions; also allocates  array space
-    #
-    #	@param dim[]  size of each dimension
-    #
-    def set_dimensions(self, dim):
+    def set_dimensions(self, dim: list) -> None:
+        """
+        Sets the size of each dimension and allocates array space
+        Args:
+            (list) dim: size of each dimension in array
+        Returns:
+             None
+        """
         sz = 1
         k = 0
         while k < self.num_dims:
-            Array.dims[k] = dim[k]
+            self._dims[k] = dim[k]
             sz = sz * dim[k]
             k += 1
         #  first check the dimensions are all positive
         if sz < 0:
             raise ValueError("Invalid dimension value, must be  positive")
         self.size = sz
-        #  allocate space for the array
+        #  allocate space for the array with elements
         k = 0
         while k < self.size:
-            self.array_data.append(Element())
+            self._array_data.append(Element())
             k += 1
 
-    ##
-    #
-    #	Get the size of each dimensions;
-    #
-    #	@param dims[]  size of each dimension is returned
-    #
-    def get_dimensions(self, dims):
-        dims[0] = self.dims[0]
-        dims[1] = self.dims[1]
-        dims[2] = self.dims[2]
+    def get_dimensions(self):
+        return self._dims
 
 
-    ##
-    #
-    #	Get the array size
-    #
-    #	@return size
-    #
-    def get_size(self):
-        return self.size
+    def get_element(self, **kwargs):
+        """
+        Getter function for an element in the array at given position
+        Kwargs:
+            (int) index: the index of array to get in array
+            (int) x: column index into array
+            (int) y: row index into array
+            (int) z: slice index into array
+        Returns:
+            Element: the element at position given
+        """
+        if 'index' in kwargs:
+            return self._array_data[kwargs['index']]
+        if 'x' in kwargs and 'y' in kwargs:
+            if 'z' in kwargs:
+                return self._array_data[kwargs['z'] * self._dims[0] *
+                                        self._dims[1] + kwargs['y'] * self._dims[0] + kwargs['x']]
+            else:
+                return self._array_data[kwargs['y'] * self._dims[0] + kwargs['x']]
 
-    def get_element(self, indx = None, x= None, y = None, z= None):
-        if indx is not None:
-            return self.array_data[indx]
-        elif x is not None and y is not None and z is None:
-            return self.array_data[y*self.dims[1]+ x]
-        elif x is not None and y is not None and z is not None:
-            return self.array_data[z*self.dims[0]*self.dims[1] + y*self.dims[0] + x]
+    def set_element(self, el: Element, **kwargs):
+        """
+        Setter function for an element in the array at given position
+        Args:
+            (Element) el: element object to be assigned to index
+        Kwargs:
+            (int) index: the index of array to get in array
+            (int) x: column index into array
+            (int) y: row index into array
+            (int) z: slice index into array
+        Returns:
+            None
+        """
+        if 'index' in kwargs:
+            self._array_data[kwargs['index']] = el
+        if 'x' in kwargs and 'y' in kwargs:
+            if 'z' in kwargs:
+                self._array_data[kwargs['z']*self._dims[0]*self._dims[1] + kwargs['y']*self._dims[0] + kwargs['x']] = el
+            else:
+                self._array_data[kwargs['y']*self._dims[1]+ kwargs['x']] = el
 
-    ##
-    # @param x  column index into the array
-    # @param y  row index into the array
-    # @param z  depth index into the array
-    # @param el  element object to be assigned at 'indx'
-	#
-    def set_element(self, indx = None, el = None, x = None, y = None, z = None):
-        if indx is not None and el is not None:
-            self.array_data[indx] = el
-        elif el is not None and x is not None and y is not None and z is not None:
-            self.array_data[z * self.dims[0] * self.dims[1] + y * self.dims[0] + x] = el
-        elif el is not None and x is not None and y is not None and z is None:
-            self.array_data[y * self.dims[0] + x] = el
-
-
-    ##
-    #
-    #	Get the object at 'indx'
-    #
-    #	@param indx  index into the array
-    #	@return Element<E>  object at 'indx'
-    #
-    def get_value(self, indx = None, col = None, row = None, slice = None):
-        if col is not None and row is not None and slice is None:
-            return self.array_data[row * self.dims[0] + col]
-        if col is not None and row is not None and slice is not None:
-            return self.array_data[slice * self.dims[0] * self.dims[1] + row * self.dims[0] + col]
-        if col is None and row is None and slice is None and indx is not None:
-            return self.array_data[indx]
-
-    ##
-    #
-    #	Set the input object at 'indx'
-    #
-    #	@param indx  index into the array
-    #	@param el  element object to be assigned at 'indx'
-    #
-    #
-    #
-    def set_value(self, indx = None, col = None, row = None, slice = None, el = None):
-        if indx is not None and el is not None:
-            self.array_data[indx] = el
-        if col is not None and row is not None and el is not None and indx is None:
-            self.array_data[row * self.dims[0] + col] = el
-        if col is not None and row is not None and el is not None and slice is not None and indx is None:
-            self.array_data[slice* self.dims[0] * self.dims[1] + row * self.dims[0] + col] = el
-
-
-    ##
-    # Generating the JSON string for a bridges array object (Array<E>[])
-    #
-    # @param bridges Array object
-    #
-    # @return JSON string
-    #
-    def _get_data_structure_representation(self):
-        nodes_JSON = str()
-        links_JSON = str()
-
+    def get_data_structure_representation(self) -> dict:
+        """
+        Generating the JSON string for a bridges array object
+        Returns:
+            dict: the dict that will represent the json when dumped
+        """
+        #add json representation for each element to dict
         i = 0
+        nodes_json = []
         while i < self.size:
-            if self.array_data[i] is not None:
-                nodes_JSON += (self.array_data[i].get_element_representation() + ",")
+            if self._array_data[i] is not None:
+                nodes_json.append(self._array_data[i].get_element_representation())
             i += 1
-        #  remove last comma
-        nodes_JSON = nodes_JSON[:-1]
-        json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX
-        json_str += nodes_JSON
-        json_str += self.CLOSE_BOX + self.CLOSE_CURLY
-        return json_str
+        json_dict = {
+            "nodes": nodes_json
+        }
+        return json_dict

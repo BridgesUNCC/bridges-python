@@ -25,65 +25,87 @@ from bridges.dl_element import *
 #	linked to another element, appropriate for setting link attributes, between
 #  the element and its previous or next nodes.
 #
-#  @author Kalpathi Subramanian
+#  @author Kalpathi Subramanian, Mathhew McQuaigue
 #
 #	@date   7/17/16, 1/16/17
 #
 #
 class CircDLelement(DLelement):
 
-    ##
-    #
-    #	Constructs an empty CircDLelement with next and prev pointers set
-    #	to itself
-    # @param label the label for this CircDLelement
-    # @param e the genereic object that this CircDLelement is holding
-    # @param next the DLelement that should be assigned to the next pointer
-    # @param prev the DLelement that should be assigned to the prev pointer
-    #
-    def __init__(self, e = None, label = None, next = None, prev = None):
-        if e is not None and label is not None:
-            super(CircDLelement, self).__init__(e = e, label = label)
-            self.set_next(self)
-            self.set_prev(self)
-        elif e is not None and next is not None and prev is not None:
-            super(CircDLelement, self).__init__(e = e, next = next, prev = prev)
-        elif e is None and next is not None and prev is not None:
-            super(CircDLelement, self).__init__()
-            self.set_next(next)
-            self.set_prev(prev)
+    def __init__(self, **kwargs) -> None:
+        """
+        Constructor for an Circularly Doubly Linked Element
+        Args:
+            label: THe label for this CircDLelement
+            e: the generic element object that this CircDLelement will hold
+            next: the next DLelement that should be assigned to the next pointer
+            prev: THe previous DLelement that should be assigned to the next pointer
+        Returns:
+            None
+        """
+        if 'e' in kwargs:
+            if 'next' in kwargs and 'prev' in kwargs:
+                self._next = kwargs['next']
+                self._prev = kwargs['prev']
+                if 'label' in kwargs:
+                    super(CircDLelement, self).__init__(e=kwargs['e'], label=kwargs['label'],
+                                                        next=kwargs['next'], prev=kwargs['prev'])
+                else:
+                    super(CircDLelement, self).__init__(e=kwargs['e'], next=kwargs['next'], prev=kwargs['prev'])
+
+            elif 'label' in kwargs:
+                super(CircDLelement, self).__init__(e=kwargs['e'], label = kwargs['label'])
+            else:
+                super(CircDLelement, self).__init__(e=kwargs['e'])
         else:
             super(CircDLelement, self).__init__()
-            self.next = self
-            self.prev = self
+            self._next = self
+            self._prev = self
 
-
-    ##
-    #
-    #	This method gets the data structure type
-    #
-    #	@return  The date structure type as a string
-    #
-    #
-    def get_data_structure_type(self):
+    def get_data_structure_type(self) -> str:
+        """
+        Gets the data structure type
+        Returns:
+            None
+        """
         return "CircularDoublyLinkedList"
 
-    ##
-    #
-    # This method returns the pointer to the next DLelement
-    #
-    # @return the DLelement assigned to the next pointer
-    #
-    #
-    def get_next(self):
-        return self.next
+    @property
+    def next(self):
+        """
+        Getter for the next element of this CircDLelement
+        Returns:
+            DLelement: assigned to next
+        """
+        return self._next
 
-    ##
-    #
-    # This method returns the pointer to the previous DLelement
-    #
-    # @return the DLelement assigned to the prev pointer
-    #
-    #
-    def get_prev(self):
-        return self.prev
+    @next.setter
+    def next(self, next) -> None:
+        """
+        Setter for the next element for this CircDLelement
+        Args:
+            (DLelement) next: the next element for this CircDLelement
+        Returns:
+            None
+        """
+        self._next = next
+
+    @property
+    def prev(self):
+        """
+        Getter for the prev element of this CircDLelement
+        Returns:
+            DLelement: assigned to prev
+        """
+        return self._prev
+
+    @prev.setter
+    def prev(self, prev) -> None:
+        """
+        Setter for the prev element of this CircDLelement
+        Args:
+            (DLelement) prev: The prev element of this CricDLelement
+        Returns:
+            None
+        """
+        self._prev = prev

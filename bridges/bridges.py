@@ -28,7 +28,6 @@ import json
 #
 #
 
-
 class Bridges:
     vis_type = ""
     ds_handle = None
@@ -45,16 +44,6 @@ class Bridges:
 
     projection_options = {"cartesian", "albersusa", "equirectangular"}
 
-    QUOTE = "\""
-    COMMA = ","
-    COLON = ":"
-    OPEN_CURLY = "{"
-    CLOSE_CURLY = "}"
-    OPEN_PAREN = "("
-    CLOSE_PAREN = ")"
-    OPEN_BOX = "["
-    CLOSE_BOX = "]"
-
     ##
     # Initialize bridges (Constructor)
     # @param assignment this is the assignmen id (integer)
@@ -62,14 +51,23 @@ class Bridges:
     # @param username   this is the username (from the bridges account)
     #
     def __init__(self, assignment, username, appl_id):
-        self.assignment_part = 0
-        self.title = str()
-        self.description = str()
-        self.set_assignment(assignment)
-        self.key = appl_id
+        """
+        Bridges constructor
+        Args:
+            (int) assignment: the number your bridges assignment will have
+            (str) username: your bridges username
+            (str) appl_id: your appl authentication key from bridges acc
+        Returns:
+            None
+        """
+        self._assignment_part = 0
+        self._title = str()
+        self._description = str()
+        self._set_assignment(assignment)
+        self._key = appl_id
         self.connector = Connector(appl_id, username, assignment)
-        self.username = username
-        self.coord_system_type = "cartesian"
+        self._username = username
+        self._coord_system_type = "cartesian"
 
     ##
     #
@@ -83,6 +81,19 @@ class Bridges:
     #
     #
     def set_data_structure(self, ds):
+        """
+        This methof setes the handle to the current data structure; this can
+        be an array, the head of a linked list, root of a tree structure, a graph
+        Arrays of upto 3 dimensions are suppported. It can be any of the data
+        structures supported by BRIDGES. Polymorphism and type casting is used
+        to determine the actual data structure and extract its representtion.
+        Args:
+            ds: the data structure to visualize
+        Returns:
+            None
+        Raises:
+            ValueError: if it is not a BRIDGES data structure
+        """
         try:
             self.ds_handle = ds
             self.vis_type = ds.get_data_structure_type()
@@ -101,7 +112,7 @@ class Bridges:
         nodes_links_str = ""
 
         if (self.vis_type == "Tree" or self.vis_type == "BinaryTree" or self.vis_type == "SinglyLinkedList", self.vis_type == "DoublyLinkedList", self.vis_type == "MultiList", self.vis_type == "CircularSinglyLinkedList", self.vis_type == "CircularDoublyLinkedList", self.vis_type == "Array", self.vis_type == "GraphAdjacencyList", self.vis_type == "ColorGrid", self.vis_type == "KDTree", self.vis_type == "SymbolCollection"):
-            nodes_links_str = self.ds_handle._get_data_structure_representation()
+            nodes_links_str = self.ds_handle.get_data_structure_representation()
 
         ds = {
             "visual": self.vis_type,
@@ -110,22 +121,20 @@ class Bridges:
             "coord_system_type": self.coord_system_type,
             "map_overlay": self.map_overlay,
         }
-        ds_json = json.dumps(ds)[:-1] + ", "
 
         if self.vis_type == "Array":
-            dims = [1,1,1]
             ds_array = self.ds_handle
-            num_dims = ds_array.get_num_dimensions()
-            ds_array.get_dimensions(dims)
-            ds_json += self.QUOTE + "dims" + self.QUOTE + self.COLON + self.OPEN_BOX + str(dims[0]) + self.COMMA + str(dims[1]) + self.COMMA + str(dims[2]) + self.CLOSE_BOX + self.COMMA
-
-            ds_json += nodes_links_str
+            dims = ds_array.get_dimensions()
+            ds["dims"] = [str(dims[0]), str(dims[1]), str(dims[2])]
+            ds.update(nodes_links_str)
         else:
-            ds_json += nodes_links_str
+            ds.update(nodes_links_str)
 
         if self.json_flag:
-            print(ds_json)
+            print(json.dumps(ds))
 
+
+        ds_json = json.dumps(ds)
         response = self.connector.post("/assignments/" + self.get_assignment(), ds_json)
 
         if response == 200:
@@ -140,12 +149,12 @@ class Bridges:
     #  @param assignment number
     #
     #
-    def set_assignment(self, assignment):
+    def _set_assignment(self, assignment):
         if assignment < 0:
             ValueError("Assignment value must be >= 0")
         elif self.assignment >= 0:
-            self.assignment_part = 0
-        self.assignment = assignment
+            self._assignment_part = 0
+        self._assignment = assignment
 
     ##
     # 	Get the assignment id
@@ -155,9 +164,9 @@ class Bridges:
     #
     def get_assignment(self):
         if self.assignment_part < 10:
-            return str(self.assignment) + ".0" + str(self.assignment_part)
+            return str(self._assignment) + ".0" + str(self._assignment_part)
         else:
-            return str(self.assignment) + "." + str(self.assignment_part)
+            return str(self._assignment) + "." + str(self._assignment_part)
 
     ##
     #
@@ -207,9 +216,9 @@ class Bridges:
         return get_color_grid_from_assignment(self.connector.server_url, user, assignment, subassignment)
 
     def get_username(self):
-        return self.username.replace(" ", "+")
+        return self._username.replace(" ", "+")
 
     def get_assignment_id(self):
-        return self.assignment
+        return self._assignment
 
 
