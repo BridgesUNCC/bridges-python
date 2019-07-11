@@ -1,6 +1,6 @@
 ##
 #  @brief This is a class in BRIDGES for representing an (n x n) grid.
-#  @author David Burlinson
+#  @author David Burlinson, Matthew McQuaigue
 #
 import traceback
 
@@ -13,34 +13,41 @@ class Grid:
         """
         Get the data structure type
         Returns:
-            str
+            str: representing the data structure type
         """
         return "Grid"
 
-    def __init__(self, size = None, rows = None, cols = None) -> None:
+    def __init__(self, **kwargs) -> None:
         """
         Grid constructor
-        Args:
+        Kwargs:
             size: size of the grid as array
             rows: number of rows in grid
             cols: number of the columns in grid
         Returns:
             None
         Raises:
-            value error
+            ValueError: if the size dimensions are greater than the max grid sizes (1080, 1920)
         """
-        if size is not None:
-            if ((size[0] <= 0 or size[0] > Grid.maxGridSize[0]) or (size[1] <= 0 or size[1] > Grid.maxGridSize[1])):
-                raise ValueError("Invalid size: [" + str(str(size[0]) + "," + str(size[1]) + "] .. please use values between (0 and " + str(self.maxGridSize[0]) + "] for rows and values between (0 and " + str(self.maxGridSize[1]) + "] for columns"))
+        if 'size' in kwargs:
+            if (kwargs['size'][0] <= 0 or kwargs['size'][0] > Grid.maxGridSize[0]) or \
+                    (kwargs['size'][1] <= 0 or kwargs['size'][1] > Grid.maxGridSize[1]):
+                raise ValueError("Invalid size: [" + str(
+                    str(kwargs['size'][0]) + "," + str(kwargs['size'][1]) + "] .. please use values between (0 and " +
+                    str(self.maxGridSize[0]) + "] for rows and values between (0 and " + str(
+                        self.maxGridSize[1]) + "] for columns"))
             self.grid = []
-            for i in range(size[0]):
+            for i in range(kwargs['size'][0]):
                 self.grid.append([])
-                for j in range(size[1]):
+                for j in range(kwargs['size'][1]):
                     self.grid[i].append(None)
-        if rows is not None and cols is not None:
-            size = [rows, cols]
-            if ((size[0] <= 0 or size[0] > self.maxGridSize[0]) or (size[1] <= 0 or size[1] > self.maxGridSize[1])):
-                raise ValueError("Invalid size: [" + str(str(size[0]) + "," + str(size[1]) + "] .. please use values between (0 and " + str(self.maxGridSize[0]) + "] for rows and values between (0 and " + str(self.maxGridSize[1]) + "] for columns"))
+        if 'rows' in kwargs and 'cols' in kwargs:
+            size = [kwargs['rows'], kwargs['cols']]
+            if (size[0] <= 0 or size[0] > self.maxGridSize[0]) or (size[1] <= 0 or size[1] > self.maxGridSize[1]):
+                raise ValueError("Invalid size: [" + str(
+                    str(size[0]) + "," + str(size[1]) + "] .. please use values between (0 and " + str(
+                        self.maxGridSize[0]) + "] for rows and values between (0 and " + str(
+                        self.maxGridSize[1]) + "] for columns"))
             self.grid = []
             for i in range(size[0]):
                 self.grid.append([])
@@ -52,7 +59,7 @@ class Grid:
         """
         Getter for the dimensions of the grid
         Returns:
-            list
+            list: as the dimensions of the grid
         """
         return [self.gridSize[0], self.gridSize[1]]
 
@@ -60,8 +67,8 @@ class Grid:
         """
         Get the row,col element in the grid
         Args:
-            row: row the element is in
-            col: col the element is in
+            (int) row: row the element is in
+            (int) col: col the element is in
         Returns:
             list, None
         Raises

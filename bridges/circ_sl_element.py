@@ -46,13 +46,15 @@ class CircSLelement(SLelement):
                                                         next = kwargs['next'])
                 else:
                     super(CircSLelement, self).__init__(e=kwargs['e'], label=kwargs['label'])
+                    self.next = self
             else:
                 super(CircSLelement, self).__init__(e=kwargs['e'])
+                self.next = self
         else:
             super(CircSLelement, self).__init__()
-            self.set_next(self)
+            self.next = self
 
-    def _get_data_structure_type(self) -> str:
+    def get_data_structure_type(self) -> str:
         """
         Gets the data structure type
         Returns:
@@ -67,4 +69,15 @@ class CircSLelement(SLelement):
         Returns:
             SLelement: assigned to next
         """
-        return self.next
+        return super(CircSLelement, self).next
+
+    @next.setter
+    def next(self, n) -> None:
+        """
+        Setter for the next element in Circular list
+        Args:
+            n: the next element to have set
+        Returns:
+            None:
+        """
+        SLelement.next.fset(self, n)

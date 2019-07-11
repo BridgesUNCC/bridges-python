@@ -104,10 +104,10 @@ class SLelement(Element):
         Returns:
             dict: representing the JSON before dumping
         """
-        node_map = dict()#map to reorder the nodes for building JSON
-        nodes = []#get the list nodes
-        self._get_list_elements(nodes)
-        nodes_JSON = []#generate the JSON of the list nodes
+        node_map = dict()# map to reorder the nodes for building JSON
+        nodes = []# get the list nodes
+        self.get_list_elements(nodes)
+        nodes_JSON = []# generate the JSON of the list nodes
         k = 0
         while k < len(nodes):
             node_map[nodes[k]] = k
@@ -131,7 +131,7 @@ class SLelement(Element):
         }
         return json_dict
 
-    def _get_list_elements(self, nodes):
+    def get_list_elements(self, nodes):
         """
         Get the elements of the list
         Args:

@@ -217,14 +217,14 @@ class LinkVisualizer():
                 raise ValueError("Invalid Color")
             #assign the element visualizer a color object
             self._color = Color(red, green, blue, alpha)
-        elif type(args[0])== Color:
+        elif len(args) == 1 and type(args[0]) == Color:
             self._color = args[0]
-        elif len(args) == 3:
-            red = args[0]
-            green = args[1]
-            blue = args[2]
-            if len(args) == 4:
-                alpha = args[3]
+        elif len(args) == 1 and type(args[0]) == list:
+            red = args[0][0]
+            green = args[0][1]
+            blue = args[0][2]
+            if len(args[0]) == 4:
+                alpha = args[0][3]
             else:
                 alpha = self.opacity
             self._color = Color(red, green, blue, alpha)
