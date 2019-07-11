@@ -107,7 +107,7 @@ class Array():
         """
         Gets the data structure type
         Raises:
-            ValueError: if number of dimenstions is < 1 or > 3
+            ValueError: if number of dimensions is < 1 or > 3
         Returns:
             str: type of data structure
         """
@@ -143,10 +143,11 @@ class Array():
     def get_dimensions(self):
         return self._dims
 
-
-    def get_element(self, **kwargs):
+    def get_element(self, *args, **kwargs):
         """
         Getter function for an element in the array at given position
+        args:
+            (int) x,y,z,: indices
         Kwargs:
             (int) index: the index of array to get in array
             (int) x: column index into array
@@ -155,21 +156,33 @@ class Array():
         Returns:
             Element: the element at position given
         """
-        if 'index' in kwargs:
+        if len(args) != 0:
+            if len(args) != self._num_dims:
+                raise IndexError("args must be same length as dims")
+            if len(args) == 1:
+                return self._array_data[args[0]]
+            if len(args) == 2:
+                return self._array_data[args[1] * self._dims[0] + args[0]]
+            if len(args) == 3:
+                return self._array_data[args[2] * self._dims[0] * self._dims[1] + args[1] * self._dims[0] + args[0]]
+
+        elif 'index' in kwargs:
             return self._array_data[kwargs['index']]
-        if 'x' in kwargs and 'y' in kwargs:
+        elif 'x' in kwargs and 'y' in kwargs:
             if 'z' in kwargs:
                 return self._array_data[kwargs['z'] * self._dims[0] *
                                         self._dims[1] + kwargs['y'] * self._dims[0] + kwargs['x']]
             else:
                 return self._array_data[kwargs['y'] * self._dims[0] + kwargs['x']]
 
-    def set_element(self, el: Element, **kwargs):
+    def set_element(self, *args, **kwargs):
         """
         Setter function for an element in the array at given position
         Args:
-            (Element) el: element object to be assigned to index
+            (int) x,y,z: indices
+            (Element) el: element object to be assigned to index, always last position arg if using unnamed args
         Kwargs:
+            (Element) el: element object to be assigned to index
             (int) index: the index of array to get in array
             (int) x: column index into array
             (int) y: row index into array
@@ -177,13 +190,49 @@ class Array():
         Returns:
             None
         """
+        if len(args) == 0 and kwargs["element"] is None:
+            raise RuntimeError("Must have at least 1 unnamed element parameter or named element parameter")
+        if len(args) != self._num_dims + 1 and len(args) != 1:
+            raise RuntimeError("Must used proper indices if not using kwargs")
+        else:
+            if len(args) == 2:
+                self._array_data[args[0]] = args[1]
+            if len(args) == 3:
+                self._array_data[args[1] * self._dims[0] + args[0]] = args[2]
+            if len(args) == 4:
+                self._array_data[args[2] * self._dims[0] * self._dims[1] + args[1] * self._dims[0] + args[0]] = args[3]
+
         if 'index' in kwargs:
-            self._array_data[kwargs['index']] = el
+            self._array_data[kwargs['index']] = args[0]
         if 'x' in kwargs and 'y' in kwargs:
             if 'z' in kwargs:
-                self._array_data[kwargs['z']*self._dims[0]*self._dims[1] + kwargs['y']*self._dims[0] + kwargs['x']] = el
+                self._array_data[kwargs['z']*self._dims[0]*self._dims[1] + kwargs['y']*self._dims[0] + kwargs['x']] = args[0]
             else:
-                self._array_data[kwargs['y']*self._dims[1]+ kwargs['x']] = el
+                self._array_data[kwargs['y']*self._dims[1]+ kwargs['x']] = args[0]
+
+    def __getitem__(self, item):
+        """
+        :param  (tuple) item: indices
+        :return: element at index
+        """
+        if type(item) == int:
+            if self._num_dims != 1:
+                raise IndexError("invalid index, pass a tuple of same length of number of dimensions of your array")
+            return self.get_element(item)
+        if len(item) != self._num_dims:
+            raise IndexError("invalid index, pass a tuple of same length of number of dimensions of your array")
+
+        return self.get_element(*item)
+
+    def __setitem__(self, key, value):
+        if type(key) == int:
+            if self._num_dims != 1:
+                raise IndexError("invalid index, pass a tuple of same length of number of dimensions of your array")
+            self.set_element(key, value)
+            return
+        if len(key) != self._num_dims:
+            raise IndexError("invalid index, pass a tuple of same length of number of dimensions of your array")
+        self.set_element(*key, value)
 
     def get_data_structure_representation(self) -> dict:
         """

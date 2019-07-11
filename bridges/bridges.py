@@ -61,6 +61,7 @@ class Bridges:
             None
         """
         self._assignment_part = 0
+        self._assignment = 0
         self._title = str()
         self._description = str()
         self._set_assignment(assignment)
@@ -139,7 +140,7 @@ class Bridges:
 
         if response == 200:
             print(
-                "\nCheck Your Visualization at the following link:\n\n" + self.connector.get_server_url() + "/assignments/" + str(self.assignment) + "/" + self.username + "\n\n")
+                "\nCheck Your Visualization at the following link:\n\n" + self.connector.get_server_url() + "/assignments/" + str(self._assignment) + "/" + self.get_username() + "\n\n")
 
             self.assignment_part = self.assignment_part + 1
 
