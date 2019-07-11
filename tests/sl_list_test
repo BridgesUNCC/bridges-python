@@ -2,7 +2,7 @@ from tests.StudentInfo import *
 from bridges.bridges import *
 from bridges.sl_element import *
 
-def main():
+def main:
     # create the Bridges object, set credentials
     bridges = Bridges(0, "test", "833518929883")
     bridges.set_visualize_JSON(True)
