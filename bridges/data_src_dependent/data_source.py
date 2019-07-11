@@ -1,5 +1,6 @@
 import json
 import requests
+import pickle
 from bridges.data_src_dependent import earthquake_usgs
 from bridges.data_src_dependent import actor_movie_imdb
 from bridges.data_src_dependent import game
@@ -365,7 +366,7 @@ def get_song(songTitle, artistName = None):
 #
 # @return a list of Song objects,
 #
-# 
+#
 def get_song_data():
     all_songs = []
     url = "http://bridgesdata.herokuapp.com/api/songs/"
@@ -526,12 +527,47 @@ def get_assignment(server: str, user: str, assignment: int, subassignment: int =
         raise request.raise_for_status()
 
 
-def get_osm_data(location: str) -> OsmData:
+
+def osm_server_request(url):
+    params = "Accept: application/json"
+    request = requests.get(url, params)
+    if not request.ok:
+        if request.status_code == 404:
+            request = requests.get(url, params)
+            if not request.ok:
+                raise request.raise_for_status()
+            raise RuntimeError("Location: {} is not supported,\n valid names: {}".format(location, valid_names))
+        raise request.raise_for_status()
+
+    server_data = request.content
+
+    return server_data
+
+def get_osm_data(*args) -> OsmData:
     """Takes a location name as a string and returns an OsmData object
-    :param location: str, name of location
+    :param
     :return: OsmData:
     """
     import os
+
+    if (len(args) == 2):
+        location = args[0]
+        level = args[1]
+        url = "http://cci-bridges-osm-t.dyn.uncc.edu/loc?location=" + location + "&level=" + level
+        hash_url = "http://cci-bridges-osm-t.dyn.uncc.edu/hash?location=" + location + "&level=" + level
+    elif (len(args) == 5):
+        minLat = args[0]
+        minLon = args[1]
+        maxLat = args[2]
+        maxLon = args[3]
+        level = args[4]
+        url = "http://cci-bridges-osm-t.dyn.uncc.edu/coords?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
+        hash_url = "http://cci-bridges-osm-t.dyn.uncc.edu/hash?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
+    else:
+        raise RuntimeError("Invalid Map Request Inputs")
+    params = "Accept: application/json"
+    lru = []
+
     try:
         from types import SimpleNamespace as Namespace
     except ImportError:
@@ -540,34 +576,40 @@ def get_osm_data(location: str) -> OsmData:
     if not os.path.isdir("./bridges_data_cache"):
         os.mkdir("./bridges_data_cache")
 
+    #Tries to load the LRU file
+    try:
+        with open("./bridges_data_cache/lru.txt", "rb") as fp:
+            lru = pickle.load(fp)
+    except:
+        pass
+    print(lru)
+
     data = None
+    hash = osm_server_request(hash_url).decode('utf-8')
     for f in os.listdir("./bridges_data_cache"):
-        if f == location.lower() + ".json":
+        if f == hash and hash != "false":
             with open("./bridges_data_cache/" + f, "r") as j:
                 data = json.load(j, object_hook=lambda d: Namespace(**d))
+                try: # Removes the location requested by the user from the LRU list
+                    lru.remove(hash)
+                except:
+                    pass
+                lru.insert(0, hash)
+
 
     if data is None:
-        url = "https://osm-api.herokuapp.com/name/" + location
-        params = "Accept: application/json"
-
-        request = requests.get(url, params)
-        if not request.ok:
-            if request.status_code == 404:
-                url = "https://osm-api.herokuapp.com/name_list"
-                params = "Accept: application/json"
-                request = requests.get(url, params)
-                if not request.ok:
-                    raise request.raise_for_status()
-                data = json.loads(request.content)
-                valid_names = data['names']
-                raise RuntimeError("Location: {} is not supported,\n valid names: {}".format(location, valid_names))
-            raise request.raise_for_status()
-
-        content = request.content
+        content = osm_server_request(url)
         data = json.loads(content.decode('utf-8'), object_hook=lambda d: Namespace(**d))
-        with open("./bridges_data_cache/{}.json".format(location.lower()), "w") as f:
+        hash = osm_server_request(hash_url).decode('utf-8')
+        lru.insert(0, hash)
+
+        with open(f"./bridges_data_cache/{hash}", "w") as f:
             # write to file in cache
             json.dump(json.loads(content.decode('utf-8')), f)
+
+    with open("./bridges_data_cache/lru.txt", "wb") as fp:   #Pickling
+        pickle.dump(lru, fp)
+
 
     try:
         if data.nodes is None or data.edges is None or data.meta is None:
