@@ -177,7 +177,7 @@ class GraphAdjList:
         return self.vertices.values()
 
     def out_going_edge_set_of(self, k):
-        return SLelement.list_helper(self.get_adjacency_list(k))
+        return SLelement.list_helper(start=self.get_adjacency_list(k)[0])
 
     def get_edge_data(self, src, dest):
         sle = self.adj_list[src]

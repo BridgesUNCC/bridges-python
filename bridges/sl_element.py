@@ -93,7 +93,7 @@ class SLelement(Element):
         super(SLelement, self).value = val
 
     def list_helper(start):
-        node = start
+        node = start[0]
         while node.next is not None:
             yield node
             node = node.next
