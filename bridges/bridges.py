@@ -126,16 +126,13 @@ class Bridges:
 
             self._assignment_part = self._assignment_part + 1
 
-    def _set_assignment(self, assignment) -> None:
-        """
-        Setter for the assignment id
-        Args:
-            (int) assignment: the assignment number to be applied
-        Returns:
-            None
-        Raises:
-            ValueError: if the assignment number passed in is less than 0
-        """
+    ##
+    # 	set the assignment id
+    #
+    #  @param assignment number
+    #
+    #
+    def _set_assignment(self, assignment):
         if assignment < 0:
             ValueError("Assignment value must be >= 0")
         elif self._assignment >= 0:
