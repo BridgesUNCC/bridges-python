@@ -556,10 +556,10 @@ def get_osm_data(*args) -> OsmData:
         url = "http://cci-bridges-osm-t.dyn.uncc.edu/loc?location=" + location + "&level=" + level
         hash_url = "http://cci-bridges-osm-t.dyn.uncc.edu/hash?location=" + location + "&level=" + level
     elif (len(args) == 5):
-        minLat = args[0]
-        minLon = args[1]
-        maxLat = args[2]
-        maxLon = args[3]
+        minLat = str(args[0])
+        minLon = str(args[1])
+        maxLat = str(args[2])
+        maxLon = str(args[3])
         level = args[4]
         url = "http://cci-bridges-osm-t.dyn.uncc.edu/coords?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
         hash_url = "http://cci-bridges-osm-t.dyn.uncc.edu/hash?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
@@ -582,7 +582,6 @@ def get_osm_data(*args) -> OsmData:
             lru = pickle.load(fp)
     except:
         pass
-    print(lru)
 
     data = None
     hash = osm_server_request(hash_url).decode('utf-8')
@@ -602,6 +601,13 @@ def get_osm_data(*args) -> OsmData:
         data = json.loads(content.decode('utf-8'), object_hook=lambda d: Namespace(**d))
         hash = osm_server_request(hash_url).decode('utf-8')
         lru.insert(0, hash)
+
+        # Removes least used map if there are more than 30 maps already saved
+        if (len(lru) >= 31):
+            re = lru[len(lru)-1]
+            if (os.path.isfile(f"./bridges_data_cache/{re}")):
+                os.remove(f"./bridges_data_cache/{re}")
+            lru.remove(re)
 
         with open(f"./bridges_data_cache/{hash}", "w") as f:
             # write to file in cache
