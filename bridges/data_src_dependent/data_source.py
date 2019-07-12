@@ -529,11 +529,10 @@ def get_assignment(server: str, user: str, assignment: int, subassignment: int =
 
 
 def osm_server_request(url):
-    params = "Accept: application/json"
-    request = requests.get(url, params)
+    request = requests.get(url)
     if not request.ok:
         if request.status_code == 404:
-            request = requests.get(url, params)
+            request = requests.get(url)
             if not request.ok:
                 raise request.raise_for_status()
             raise RuntimeError("Location: {} is not supported,\n valid names: {}".format(location, valid_names))
@@ -565,7 +564,6 @@ def get_osm_data(*args) -> OsmData:
         hash_url = "http://cci-bridges-osm-t.dyn.uncc.edu/hash?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
     else:
         raise RuntimeError("Invalid Map Request Inputs")
-    params = "Accept: application/json"
     lru = []
 
     try:
@@ -584,21 +582,37 @@ def get_osm_data(*args) -> OsmData:
         pass
 
     data = None
+    not_skip = True
     hash = osm_server_request(hash_url).decode('utf-8')
     for f in os.listdir("./bridges_data_cache"):
         if f == hash and hash != "false":
+            print(f == hash)
+            not_skip = False
             with open("./bridges_data_cache/" + f, "r") as j:
-                data = json.load(j, object_hook=lambda d: Namespace(**d))
+                try:
+                    data = json.load(j, object_hook=lambda d: Namespace(**d))
+                except:
+                    print("Error: Issue reading locally cached map\nRedownloading data")
+                    not_skip = True
                 try: # Removes the location requested by the user from the LRU list
                     lru.remove(hash)
                 except:
                     pass
                 lru.insert(0, hash)
 
-
-    if data is None:
+    if not_skip:
         content = osm_server_request(url)
-        data = json.loads(content.decode('utf-8'), object_hook=lambda d: Namespace(**d))
+        try:
+            data = json.loads(content.decode('utf-8'), object_hook=lambda d: Namespace(**d))
+        except:
+            print("Error: Corrupted JSON download...\nAttempting redownload...")
+            content = osm_server_request(url)
+            try:
+                data = json.loads(content.decode('utf-8'), object_hook=lambda d: Namespace(**d))
+            except Exception as e:
+                print(f"Error: Redownload attempt failed\n{e}")
+                sys.exit(0)
+
         hash = osm_server_request(hash_url).decode('utf-8')
         lru.insert(0, hash)
 
