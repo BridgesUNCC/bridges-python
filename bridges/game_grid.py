@@ -1,5 +1,6 @@
-from bridges.color import *
+from bridges.grid import *
 from bridges.game_cell import *
+import base64
 
 
 class GameGrid(Grid):
@@ -18,7 +19,7 @@ class GameGrid(Grid):
     def __init__(self, rows = None, cols = None):
         self.bf_bg = bytearray()
         self.bf_fg = bytearray()
-        self.bf_symbols = bytearray
+        self.bf_symbols = bytearray()
         if rows is None and cols is None:
             super(GameGrid, self).__init__(rows=30, cols=30)
         else:
@@ -76,10 +77,9 @@ class GameGrid(Grid):
                             fg[count] = gc.fg
                             symbols[count] = gc.symbol
                             count += 1
-
-        json_dict['bg'] = run_length(bg)
-        json_dict['fg'] = run_length(fg)
-        json_dict['symbols'] = run_length(symbols)
+            json_dict['bg'] = self.run_length(bg)
+            json_dict['fg'] = self.run_length(fg)
+            json_dict['symbols'] = self.run_length(symbols)
 
         if self.encoding == "raw":
             for i in range(self.grid_size[0]):
@@ -89,3 +89,26 @@ class GameGrid(Grid):
                             gc = self.grid.get(i).get(j)
                             self.bf_bg.append(gc.bg)
                             self.bf_fg.append(gc.fg)
+                            self.bf_symbols.append(gc.symbol)
+
+            json_dict['bg'] = base64.b64encode(self.bf_bg)
+            json_dict['fg'] = base64.b64encode(self.bf_fg)
+            json_dict['symbols'] = base64.b64encode(self.bf_symbols)
+
+    def run_length(self, arr):
+        count = 1
+        out = str()
+        for i in range(1, len(arr)):
+            if arr[i-1] == arr[i]:
+                count += 1
+                if len(arr) - i == 1:
+                    out += arr[i] + "x" + str(count)
+                else:
+                    out += arr[i-1] + "x" + str(count) + ","
+                    count = 1
+                    if len(arr) - i == 1:
+                        out += arr[i] + 'x' + str(count)
+
+        return out
+
+

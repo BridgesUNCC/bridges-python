@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from bridges.element import *
 
+
 ##
 # 	@brief This class can be used to instantiate Singly Linked Elements.
 # 	This class extends Element and takes a generic parameter <E>
