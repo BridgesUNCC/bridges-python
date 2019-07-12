@@ -586,7 +586,6 @@ def get_osm_data(*args) -> OsmData:
     hash = osm_server_request(hash_url).decode('utf-8')
     for f in os.listdir("./bridges_data_cache"):
         if f == hash and hash != "false":
-            print(f == hash)
             not_skip = False
             with open("./bridges_data_cache/" + f, "r") as j:
                 try:
