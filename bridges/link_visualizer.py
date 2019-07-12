@@ -37,6 +37,8 @@ from bridges.color import *
 #  http://bridgesuncc.github.io/Hello_World_Tutorials/SLL.html
 #
 #
+
+
 class LinkVisualizer():
 
     def __init__(self) -> None:
@@ -110,124 +112,7 @@ class LinkVisualizer():
         Raises:
             ValueError: if the color name provided is not available
         """
-        if len(args) == 1 and type(args[0]) == str:
-            col = args[0].lower()
-            alpha = self.opacity
-            if col == "red":
-                red = 255
-                green = 0
-                blue = 0
-            elif col == "green":
-                red = 0
-                green = 255
-                blue = 0
-            elif col == "blue":
-                red = 0
-                green = 0
-                blue = 255
-            elif col == "yellow":
-                red = 255
-                green = 255
-                blue = 0
-            elif col == "cyan":
-                red = 0
-                green = 255
-                blue = 255
-            elif col == "magenta":
-                red = 255
-                green = 0
-                blue = 255
-            elif col == "white":
-                red = 0
-                green = 0
-                blue = 0
-            elif col == "black":
-                red = 255
-                green = 255
-                blue = 255
-            elif col == "orange":
-                red = 255
-                green = 155
-                blue = 0
-            elif col == "turqouise":
-                red = 173
-                green = 234
-                blue = 234
-            elif col == "maroon":
-                red = 176
-                green = 48
-                blue = 96
-            elif col == "aquamarine":
-                red = 127
-                green = 255
-                blue = 212
-            elif col == "azure":
-                red = 240
-                green = 255
-                blue = 2550
-            elif col == "beige":
-                red = 245
-                green = 245
-                blue = 220
-            elif col == "brown":
-                red = 166
-                green = 42
-                blue = 42
-            elif col == "tan":
-                red = 210
-                green = 180
-                blue = 140
-            elif col == "olive":
-                red = 128
-                green = 128
-                blue = 0
-            elif col == "khaki":
-                red = 240
-                green = 230
-                blue = 140
-            elif col == "bisque":
-                red = 255
-                green = 228
-                blue = 196
-            elif col == "coral":
-                red = 255
-                green = 127
-                blue = 0
-            elif col == "pink":
-                red = 255
-                green = 192
-                blue = 203
-            elif col == "lavender":
-                red = 230
-                green = 230
-                blue = 250
-            elif col == "purple":
-                red = 160
-                green = 32
-                blue = 240
-            elif col == "gold":
-                red = 255
-                green = 215
-                blue = 0
-            elif col == "chartreuse":
-                red = 127
-                green = 255
-                blue = 0
-            else:
-                raise ValueError("Invalid Color")
-            #assign the element visualizer a color object
-            self._color = Color(red, green, blue, alpha)
-        elif len(args) == 1 and type(args[0]) == Color:
-            self._color = args[0]
-        elif len(args) == 1 and type(args[0]) == list:
-            red = args[0][0]
-            green = args[0][1]
-            blue = args[0][2]
-            if len(args[0]) == 4:
-                alpha = args[0][3]
-            else:
-                alpha = self.opacity
-            self._color = Color(red, green, blue, alpha)
+        self._color = Color(*args, *kwargs)
 
     @property
     def opacity(self):

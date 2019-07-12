@@ -74,7 +74,7 @@ class ElementVisualizer():
         return self._color
 
     @color.setter
-    def color(self, *args) -> None:
+    def color(self, *args, **kwargs) -> None:
         """
         Setter for the color of the element in the bridges visualization
         Args:
@@ -85,7 +85,7 @@ class ElementVisualizer():
         Raises:
             ValueError: if the color name provided is not available
         """
-        self._color = Color(*args)
+        self._color = Color(*args, **kwargs)
 
     @property
     def shape(self) -> str:
