@@ -31,7 +31,29 @@ import json
 class Bridges:
     _MaxTitleSize = 50
     _MaxDescSize = 250
-    _projection_options = {"cartesian", "albersusa", "equirectangular"}
+    _projection_options = {"cartesian", "albersusa", "equirectangular", "window"}
+
+    @property
+    def window(self) -> [float]:
+        """
+        his function enables specifying the window that will rendered by default in the view.
+        This only works for graph data types. And the coordinate system need to be set to "window"
+         using set_coord_system_type(), setting this value will set "window" for you.
+        :return: list of 4 floats [x1, x2, y1, y2]
+        """
+        return self._window
+
+    @window.setter
+    def window(self, value: [float]) -> None:
+        try:
+            new_window = [float(x) for x in value]
+        except ValueError:
+            raise ValueError("Value for window should be a list of 4 numbers")
+        except TypeError:
+            raise TypeError("Value for window should be a list of 4 numbers")
+
+        self.set_coord_system_type("window")
+        self._window = new_window
 
     def __init__(self, assignment, username, appl_id):
         """
@@ -54,6 +76,7 @@ class Bridges:
         self._coord_system_type = "cartesian"
         self._json_flag = False
         self._map_overlay = False
+        self._window = [0.0, 0.0, 0.0, 0.0]
         self.ds_handle = None
         self.vis_type = ""
 
@@ -104,6 +127,8 @@ class Bridges:
             "coord_system_type": self._coord_system_type,
             "map_overlay": self._map_overlay,
         }
+        if self._coord_system_type == "window":
+            ds['window'] = self.window
 
         if self.vis_type == "Array":
             ds_array = self.ds_handle
@@ -113,10 +138,10 @@ class Bridges:
         else:
             ds.update(nodes_links_str)
 
-        if self._json_flag:
-            print(json.dumps(ds))
-
         ds_json = json.dumps(ds)
+        if self._json_flag:
+            print(ds_json)
+
         response = self.connector.post("/assignments/" + self.get_assignment(), ds_json)
 
         if response == 200:

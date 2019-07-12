@@ -12,6 +12,8 @@ from bridges.link_visualizer import *
 # @author Matthew McQuaigue
 #
 #
+
+
 class Edge():
 
     def __init__(self, v1, v2, data = None) -> None:
