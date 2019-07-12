@@ -5,6 +5,9 @@ class SocketConnection:
     _sio = socketio.Client()
     _listeners = []
 
+    def __init__(self, b):
+        self.bridges = b
+
     @_sio.event
     def add_listener(self, to_add):
         print("Subscribing to keypress events..")

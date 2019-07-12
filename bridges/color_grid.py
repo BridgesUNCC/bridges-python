@@ -30,8 +30,8 @@ class ColorGrid(Grid):
             None
         """
         super(ColorGrid, self).__init__(rows=rows, cols=cols)
-        self.baseColor = color
-        self.gridSize = [rows, cols]
+        self.base_color = color
+        self.grid_size = [rows, cols]
         self.initialize_grid()
 
     def initialize_grid(self) -> None:
@@ -40,9 +40,9 @@ class ColorGrid(Grid):
         Returns:
             None
         """
-        for i in range(self.gridSize[0]):
-            for j in range(self.gridSize[1]):
-                self.set(i, j, self.baseColor)
+        for i in range(self.grid_size[0]):
+            for j in range(self.grid_size[1]):
+                self.set(i, j, self.base_color)
 
     def set(self, row: int, col: int, color: Color) -> None:
         """
@@ -68,8 +68,8 @@ class ColorGrid(Grid):
         pos = 0
         last = self.grid[0][0]
 
-        while pos < self.gridSize[0] * self.gridSize[1]:
-            posY = pos / self.gridSize[1]
+        while pos < self.grid_size[0] * self.grid_size[1]:
+            posY = pos / self.grid_size[1]
             posX = pos % self.gridSize[1]
             current = self.grid[int(posY)][int(posX)]
 
@@ -103,7 +103,7 @@ class ColorGrid(Grid):
         for k in range(len(last)):
             img_bytes.append(last[k])
 
-        if total_count != self.gridSize[0] * self.gridSize[1]:
+        if total_count != self.grid_size[0] * self.grid_size[1]:
             print("Something broke in getRLE construction")
 
         return img_bytes
@@ -115,9 +115,9 @@ class ColorGrid(Grid):
             bytearray: representing the colors of grid cells
         """
         img_bytes = bytearray()
-        for i in range(self.gridSize[0]):
+        for i in range(self.grid_size[0]):
             if self.grid[i] is not None:
-                for j in range(self.gridSize[1]):
+                for j in range(self.grid_size[1]):
                     if self.grid[i][j] is not None:
                         color = self.grid[i][j]
                         color = color.get_byte_representation()
@@ -134,7 +134,7 @@ class ColorGrid(Grid):
         byte_buff = self.get_rle()
         encoding = "RLE"
 
-        if len(byte_buff) > self.gridSize[0] * self.gridSize[1] * 4:
+        if len(byte_buff) > self.grid_size[0] * self.grid_size[1] * 4:
             encoding = "RAW"
             byte_buff = self.get_raw()
             print("RAW ran")
@@ -144,7 +144,7 @@ class ColorGrid(Grid):
         json_dict = {
             "encoding": encoding,
             "nodes": [base64.b64encode(bytes(byte_buff)).decode()],
-            "dimensions": [self.gridSize[0], self.gridSize[1]]
+            "dimensions": [self.grid_size[0], self.grid_size[1]]
         }
 
         return json_dict

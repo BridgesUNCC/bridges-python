@@ -29,10 +29,13 @@ class GameGrid(Grid):
     def initialize_game_Grid(self):
         for i in range(self.grid_size[0]):
             for j in range(self.grid_size[1]):
-                self.set(i,j,GameCell)
+                self.set(i, j, GameCell)
         self.bf_bg = bytearray(self.grid_size[0]*self.grid_size[1])
         self.bf_fg = bytearray(self.grid_size[0]*self.grid_size[1])
         self.bf_symbols = bytearray(self.grid_size[0]*self.grid_size[1])
+
+    def get_bg_color(self, row, col):
+        return self.get(row, col).bg
 
     def set_bg_color(self, row, col, color):
         if type(color) == NamedColor:
@@ -40,11 +43,20 @@ class GameGrid(Grid):
         else:
             self.get(row, col).bg = NamedColor.__getitem__(color)
 
+    def get_fg_color(self, row, col):
+        return self.get(row, col).fg
+
     def set_fg_color(self, row, col, color):
         if type(color) == NamedColor:
             self.get(row, col).fg = color
         else:
             self.get(row, col).fg = NamedColor.__getitem__(color)
+
+    def get_symbol(self, row, col):
+        return self.get(row, col).symbol
+
+    def get_symbol_color(self, row, col):
+        return self.get(row, col).fg
 
     def draw_object(self, row, col, symbol, color = None):
         if color is not None:

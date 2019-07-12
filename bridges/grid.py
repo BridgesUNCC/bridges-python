@@ -6,7 +6,7 @@ import traceback
 
 class Grid:
     grid = []
-    gridSize = [10, 10]
+    grid_size = [10, 10]
     maxGridSize = [1080, 1920]
 
     def get_data_structure_type(self) -> str:
