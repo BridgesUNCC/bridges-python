@@ -1,9 +1,10 @@
 from bridges.keypress_listener import *
 import traceback
 
+
 class InputHelper(KeyPressListener):
 
-    def input_helper(self):
+    def __init__(self):
         self.up_key = False
         self.down_key  = False
         self.left_key = False
@@ -17,18 +18,18 @@ class InputHelper(KeyPressListener):
 
     def key_press(self, keypress):
         try:
-            type = str(keypress.get("type"))
+            press_type = str(keypress.get("type"))
             key = str(keypress.get("key"))
         except Exception as e:
             traceback.print_tb(e.__traceback__)
             return
 
-        if type == "keyup":
+        if press_type == "keyup":
             set_to_up = True
         else:
             set_to_up = False
 
-        if type == "keydown":
+        if press_type == "keydown":
             set_to_down = True
         else:
             set_to_down = False
@@ -94,8 +95,8 @@ class InputHelper(KeyPressListener):
                 self.d_key = True
 
     def status(self):
-        print("UP:" + self.up() + " DOWN:" + self.down() + " LEFT:" + self.left()
-                + " RIGHT:" + self.right())
+        print("UP:" + str(self.up()) + " DOWN:" + str(self.down()) + " LEFT:" + str(self.left())
+                + " RIGHT:" + str(self.right()))
 
     def up(self):
         return self.up_key
