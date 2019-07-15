@@ -85,9 +85,9 @@ class GameGrid(Grid):
                     for j in range(self.grid_size[1]):
                         if self.grid.get(i).get(j) is None:
                             gc = self.grid.get(i).get(j)
-                            bg[count] = gc.bg
-                            fg[count] = gc.fg
-                            symbols[count] = gc.symbol
+                            bg[count] = gc.bg.value
+                            fg[count] = gc.fg.value
+                            symbols[count] = gc.symbol.value
                             count += 1
             json_dict['bg'] = self.run_length(bg)
             json_dict['fg'] = self.run_length(fg)
@@ -99,9 +99,9 @@ class GameGrid(Grid):
                     for j in range(self.grid_size[1]):
                         if self.grid.get(i).get(j) is None:
                             gc = self.grid.get(i).get(j)
-                            self.bf_bg.append(gc.bg)
-                            self.bf_fg.append(gc.fg)
-                            self.bf_symbols.append(gc.symbol)
+                            self.bf_bg.append(gc.get_bg_byte())
+                            self.bf_fg.append(gc.get_fg_byte())
+                            self.bf_symbols.append(gc.get_symbol_byte())
 
             json_dict['bg'] = base64.b64encode(self.bf_bg)
             json_dict['fg'] = base64.b64encode(self.bf_fg)
