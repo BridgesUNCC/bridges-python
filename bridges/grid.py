@@ -61,7 +61,7 @@ class Grid:
         Returns:
             list: as the dimensions of the grid
         """
-        return [self.gridSize[0], self.gridSize[1]]
+        return [self.grid_size[0], self.grid_size[1]]
 
     def get(self, row: int, col: int):
         """
@@ -70,9 +70,9 @@ class Grid:
             (int) row: row the element is in
             (int) col: col the element is in
         Returns:
-            list, None
+            element, none
         Raises
-            traceback exception
+            Exception: printing the traceback stack if returning the row and column is an error
         """
         try:
             return self.grid[row][col]
@@ -89,5 +89,11 @@ class Grid:
             val: value to be set in (row, col) position
         Returns:
             None
+        Raises:
+            Exception: if setting the element at the row and column is a problem
         """
-        self.grid[int(row)][int(col)] = val
+        try:
+            self.grid[int(row)][int(col)] = val
+        except Exception as e:
+            traceback.print_tb(e.__traceback__)
+            return None
