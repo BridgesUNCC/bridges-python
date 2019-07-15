@@ -66,7 +66,6 @@ class GameCell:
         else:
             self._fg = NamedColor.__getitem__(color)
 
-
     @property
     def symbol(self):
         """
@@ -84,6 +83,8 @@ class GameCell:
             s: the symbol to be applied
         Returns:
             None
+        Raises:
+            ValueError: if the int value for the symbol is < 0 or > 255
         """
         if type(s) == NamedSymbol:
             self._symbol = s
@@ -91,5 +92,14 @@ class GameCell:
             if s < 0 or s > 255:
                 raise ValueError("Symbol " + s + " is invalid; symbols must be specified from the range (0, 255)")
             self._symbol = NamedSymbol.__getitem__(s)
+
+    def get_bg_byte(self):
+        return bytes([self._bg.value])
+
+    def get_fg_byte(self):
+        return bytes([self._fg.value])
+
+    def get_symbol_byte(self):
+        return bytes([self._symbol.value])
 
 

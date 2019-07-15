@@ -1,6 +1,7 @@
-import enum
+from enum import IntEnum
 
-class NamedColor(enum.Enum):
+
+class NamedColor(IntEnum):
     aliceblue = 1
     antiquewhite = 2
     aqua = 3
