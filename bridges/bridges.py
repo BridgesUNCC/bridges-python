@@ -117,7 +117,8 @@ class Bridges:
                 self.vis_type == "MultiList" or self.vis_type == "CircularSinglyLinkedList" or \
                 self.vis_type == "CircularDoublyLinkedList" or self.vis_type == "Array" or \
                 self.vis_type == "GraphAdjacencyList" or self.vis_type == "ColorGrid" or \
-                self.vis_type == "KDTree"or self.vis_type == "SymbolCollection":
+                self.vis_type == "KDTree" or self.vis_type == "SymbolCollection" or \
+                self.vis_type == "GameGrid":
             nodes_links_str = self.ds_handle.get_data_structure_representation()
 
         ds = {
@@ -237,5 +238,8 @@ class Bridges:
 
     def get_assignment_id(self):
         return self._assignment
+
+    def get_key(self):
+        return self._key
 
 

@@ -3,4 +3,4 @@ import abc
 
 class KeyPressListener(abc.ABC):
     @abc.abstractmethod
-    def keypress(self, keypress): pass
+    def key_press(self, keypress): pass

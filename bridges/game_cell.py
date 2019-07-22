@@ -21,11 +21,11 @@ class GameCell:
         if 'fg' in kwargs:
             self._fg = kwargs['fg']
         else:
-            self._fg = NamedColor.white
+            self._fg = NamedColor.cyan
         if 'symbol' in kwargs:
             self._symbol = kwargs['symbol']
         else:
-            self._symbol = NamedSymbol.A
+            self._symbol = NamedSymbol.none
 
     @property
     def bg(self):
@@ -34,14 +34,14 @@ class GameCell:
         Returns:
             color: background color
         """
-        return self._bg.value
+        return self._bg
 
     @bg.setter
     def bg(self, color):
         if type(color) == NamedColor:
             self._bg = color
         else:
-            self._bg = NamedColor.__getitem__(color)
+            self._bg = NamedColor[color]
 
     @property
     def fg(self):
@@ -50,7 +50,7 @@ class GameCell:
         Returns:
             color: the foreground color
         """
-        return self._fg.value
+        return self._fg
 
     @fg.setter
     def fg(self, color):
@@ -64,7 +64,7 @@ class GameCell:
         if type(color) == NamedColor:
             self._fg = color
         else:
-            self._fg = NamedColor.__getitem__(color)
+            self._fg = NamedColor[color]
 
     @property
     def symbol(self):
@@ -73,7 +73,7 @@ class GameCell:
         Returns:
             symbol
         """
-        return self._symbol.value
+        return self._symbol
 
     @symbol.setter
     def symbol(self, s):
@@ -91,7 +91,7 @@ class GameCell:
         else:
             if s < 0 or s > 255:
                 raise ValueError("Symbol " + s + " is invalid; symbols must be specified from the range (0, 255)")
-            self._symbol = NamedSymbol.__getitem__(s)
+            self._symbol = NamedSymbol[s]
 
     def get_bg_byte(self):
         return bytes([self._bg.value])

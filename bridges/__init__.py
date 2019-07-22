@@ -20,3 +20,9 @@ from bridges.ml_element import *
 from bridges.sl_element import *
 from bridges.tree_element import *
 from bridges.color_grid import *
+from bridges.socket_connection import *
+from bridges.keypress_listener import *
+from bridges.gamebase import *
+from bridges.non_blocking_game import *
+from bridges.input_helper import *
+from bridges.blocking_game import *

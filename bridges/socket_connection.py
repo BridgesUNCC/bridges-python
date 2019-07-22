@@ -1,4 +1,5 @@
 import socketio
+import json
 
 
 class SocketConnection:
@@ -16,42 +17,48 @@ class SocketConnection:
     @_sio.event
     def setup_connection(self, user, assignment):
         try:
+            # url = "http://127.0.0.1:3000"
             url = "https://bridges-games.herokuapp.com"
-            self._sio.connect(url)
+            self._sio.connect(url, transports=["websocket"])
 
             student_cred = {
                 'user': user,
-                'assignment': assignment.split('.')[0]
+                'apikey': self.bridges.get_key(),
+                'assignment': self.bridges.get_assignment_id()
             }
+            student_cred = json.dumps(student_cred)
 
+            print("passing student creditials to server..")
             self._sio.emit('credentials', student_cred)
 
         except ConnectionError as e:
             print(e)
 
-    @_sio.event
-    def connect(self):
-        print("Connected")
+    @_sio.on('announcement')
+    def announcement(self, *args):
+        obj = args
+        print("announcement", obj)
 
     @_sio.on('keydown')
-    def keydown(self, args):
+    def keydown(self, *args):
         obj = args[0]
         for i in range(len(self._listeners)):
-            self._listeners[i].keypress(obj)
+            self._listeners[i].key_press(obj)
 
     @_sio.on('keyup')
-    def keyup(self, args):
+    def keyup(self, *args):
         obj = args[0]
         for i in range(len(self._listeners)):
-            self._listeners[i].keypress(obj)
+            self._listeners[i].key_press(obj)
 
-    @_sio.event
-    def disconnect():
+    @_sio.on('disconnect')
+    def disconnect(self):
         print("disconnected")
 
     def send_data(self, dataframe):
-        if self._sio is None:
-            self._sio.emit('gamegrid:recv', dataframe)
+        if self._sio is not None:
+            data = json.dumps(dataframe)
+            self._sio.emit('gamegrid:recv', data)
 
     def close(self):
         self._sio.disconnect()

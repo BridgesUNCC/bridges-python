@@ -1,6 +1,5 @@
-from bridges.games.gamebase import *
-from bridges.socket_connection import *
-from bridges.games.input_helper import *
+from bridges.gamebase import *
+from bridges.input_helper import *
 import time
 
 

@@ -20,28 +20,31 @@ class GameGrid(Grid):
         self.bf_bg = bytearray()
         self.bf_fg = bytearray()
         self.bf_symbols = bytearray()
+        self.encoding = "raw"
         if rows is None and cols is None:
             super(GameGrid, self).__init__(rows=30, cols=30)
+            self.grid_size = [30, 30]
         else:
-            super(GameGrid, self).__init__(rows=rows,cols=cols)
+            super(GameGrid, self).__init__(rows=rows, cols=cols)
+            self.grid_size = [rows, cols]
         self.initialize_game_Grid()
 
     def initialize_game_Grid(self):
         for i in range(self.grid_size[0]):
             for j in range(self.grid_size[1]):
-                self.set(i, j, GameCell)
+                self.set(i, j, GameCell())
         self.bf_bg = bytearray(self.grid_size[0]*self.grid_size[1])
         self.bf_fg = bytearray(self.grid_size[0]*self.grid_size[1])
         self.bf_symbols = bytearray(self.grid_size[0]*self.grid_size[1])
 
     def get_bg_color(self, row, col):
-        return self.get(row, col).bg
+        return super(GameGrid, self).get(row, col).bg
 
     def set_bg_color(self, row, col, color):
         if type(color) == NamedColor:
-            self.get(row,col).bg = color
+            self.get(row, col).bg = color
         else:
-            self.get(row, col).bg = NamedColor.__getitem__(color)
+            self.get(row, col).bg = NamedColor[color]
 
     def get_fg_color(self, row, col):
         return self.get(row, col).fg
@@ -50,7 +53,7 @@ class GameGrid(Grid):
         if type(color) == NamedColor:
             self.get(row, col).fg = color
         else:
-            self.get(row, col).fg = NamedColor.__getitem__(color)
+            self.get(row, col).fg = NamedColor[color]
 
     def get_symbol(self, row, col):
         return self.get(row, col).symbol
@@ -61,7 +64,7 @@ class GameGrid(Grid):
     def draw_object(self, row, col, symbol, color = None):
         if color is not None:
             if type(color) == str:
-                color = NamedColor.__getitem__(color)
+                color = NamedColor[color]
             self.get(row, col).symbol = symbol
             self.get(row, col).fg = color
         else:
@@ -81,13 +84,13 @@ class GameGrid(Grid):
             symbols = []
 
             for i in range(self.grid_size[0]):
-                if self.grid.get(i).get(j) is None:
+                if self.grid[i] is not None:
                     for j in range(self.grid_size[1]):
-                        if self.grid.get(i).get(j) is None:
-                            gc = self.grid.get(i).get(j)
-                            bg[count] = gc.bg.value
-                            fg[count] = gc.fg.value
-                            symbols[count] = gc.symbol.value
+                        if self.grid[i][j] is not None:
+                            gc = self.grid[i][j]
+                            bg.append(gc.bg.value)
+                            fg.append(gc.fg.value)
+                            symbols.append(gc.symbol.value)
                             count += 1
             json_dict['bg'] = self.run_length(bg)
             json_dict['fg'] = self.run_length(fg)
@@ -95,10 +98,10 @@ class GameGrid(Grid):
 
         if self.encoding == "raw":
             for i in range(self.grid_size[0]):
-                if self.grid.get(i).get(j) is None:
+                if self.grid[i] is not None:
                     for j in range(self.grid_size[1]):
-                        if self.grid.get(i).get(j) is None:
-                            gc = self.grid.get(i).get(j)
+                        if self.grid[i][j] is None:
+                            gc = self.grid[i][j]
                             self.bf_bg.append(gc.get_bg_byte())
                             self.bf_fg.append(gc.get_fg_byte())
                             self.bf_symbols.append(gc.get_symbol_byte())
@@ -106,6 +109,7 @@ class GameGrid(Grid):
             json_dict['bg'] = base64.b64encode(self.bf_bg)
             json_dict['fg'] = base64.b64encode(self.bf_fg)
             json_dict['symbols'] = base64.b64encode(self.bf_symbols)
+        return json_dict
 
     def run_length(self, arr):
         count = 1
@@ -114,12 +118,12 @@ class GameGrid(Grid):
             if arr[i-1] == arr[i]:
                 count += 1
                 if len(arr) - i == 1:
-                    out += arr[i] + "x" + str(count)
+                    out += str(arr[i]) + "x" + str(count)
                 else:
-                    out += arr[i-1] + "x" + str(count) + ","
+                    out += str(arr[i-1]) + "x" + str(count) + ","
                     count = 1
                     if len(arr) - i == 1:
-                        out += arr[i] + 'x' + str(count)
+                        out += str(arr[i]) + 'x' + str(count)
 
         return out
 

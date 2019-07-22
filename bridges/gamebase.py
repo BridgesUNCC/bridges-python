@@ -15,17 +15,16 @@ class GameBase(ABC):
 
         self.bridges = Bridges(id, log, key)
 
-        if GameBase.debug:
-            self.bridges.set_visualize_JSON(True)
+        self.bridges.set_visualize_JSON(True)
 
         self.bridges.connector.set_server("local")
 
-        self.grid = GameGrid(c, r)
+        self.grid = GameGrid(r, c)
 
-        self.grid.encoding("rle")
+        self.grid.set_encoding("rle")
 
-        self.sock = SocketConnection(bridges)
-        self.sock.setup_connection(log, key)
+        self.sock = SocketConnection(self.bridges)
+        self.sock.setup_connection(log, id)
 
     def register_keypress(self, kl):
         self.sock.add_listener(kl)
@@ -67,7 +66,7 @@ class GameBase(ABC):
         if self.firsttime:
             self.firsttime = False
 
-            self.bridges.set_data_structure(grid)
+            self.bridges.set_data_structure(self.grid)
             try:
                 self.bridges.visualize()
             except RuntimeError as e:
