@@ -5,7 +5,6 @@
 import traceback
 
 class Grid:
-    grid = []
     grid_size = [10, 10]
     maxGridSize = [1080, 1920]
 

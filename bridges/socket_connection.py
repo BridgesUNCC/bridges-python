@@ -17,7 +17,6 @@ class SocketConnection:
     @_sio.event
     def setup_connection(self, user, assignment):
         try:
-            # url = "http://127.0.0.1:3000"
             url = "https://bridges-games.herokuapp.com"
             self._sio.connect(url, transports=["websocket"])
 
@@ -41,13 +40,14 @@ class SocketConnection:
 
     @_sio.on('keydown')
     def keydown(self, *args):
-        obj = args[0]
+        print(self._listeners)
+        obj = args
         for i in range(len(self._listeners)):
             self._listeners[i].key_press(obj)
 
     @_sio.on('keyup')
     def keyup(self, *args):
-        obj = args[0]
+        obj = args
         for i in range(len(self._listeners)):
             self._listeners[i].key_press(obj)
 

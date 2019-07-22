@@ -61,14 +61,9 @@ class GameGrid(Grid):
     def get_symbol_color(self, row, col):
         return self.get(row, col).fg
 
-    def draw_object(self, row, col, symbol, color = None):
-        if color is not None:
-            if type(color) == str:
-                color = NamedColor[color]
-            self.get(row, col).symbol = symbol
-            self.get(row, col).fg = color
-        else:
-            self.get(row, col).symbol = symbol
+    def draw_object(self, row, col, symbol, color):
+        self.get(row, col).symbol = symbol
+        self.get(row, col).fg = color
 
     def get_data_structure_representation(self):
         count = 0
@@ -119,11 +114,11 @@ class GameGrid(Grid):
                 count += 1
                 if len(arr) - i == 1:
                     out += str(arr[i]) + "x" + str(count)
-                else:
-                    out += str(arr[i-1]) + "x" + str(count) + ","
-                    count = 1
-                    if len(arr) - i == 1:
-                        out += str(arr[i]) + 'x' + str(count)
+            else:
+                out += str(arr[i-1]) + "x" + str(count) + ","
+                count = 1
+                if len(arr) - i == 1:
+                    out += str(arr[i]) + 'x' + str(count)
 
         return out
 

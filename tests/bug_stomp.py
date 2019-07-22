@@ -74,7 +74,7 @@ class BugStomp(NonBlockingGame):
     def paint_screen(self):
         for i in range(0, self.board_size[0]):
             for j in range(0, self.board_size[1]):
-                self.set_bg_color(i, j, NamedColor.burlywood)
+                self.set_bg_color(i, j, NamedColor.crimson)
                 self.draw_object(i, j, NamedSymbol.none, NamedColor.cyan)
 
         if self.score >= 10:
@@ -82,9 +82,9 @@ class BugStomp(NonBlockingGame):
             return
 
         self.paint_score(self.score)
-        self.draw_object(int(self.bug[0]), int(self.bug[1]), NamedSymbol.bug1, NamedColor.crimson)
+        self.draw_object(int(self.bug[0]), int(self.bug[1]), NamedSymbol.bug1, NamedColor.cyan)
 
-        self.draw_object(self.loc[1], self.loc[0], NamedSymbol.man, NamedColor.cyan)
+        self.draw_object(0, 0, NamedSymbol.man, NamedColor.cyan)
 
     def win(self):
         self.draw_object(0, 0, NamedSymbol.A, NamedColor.cyan)
