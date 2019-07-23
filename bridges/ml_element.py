@@ -3,12 +3,15 @@ from bridges.sl_element import *
 
 ##
 # 	@brief This class can be used to instantiate Multi-list Elements.
-# 	This class extends SLelement (singly linked list element) to build multi-lists;
-#	Multilist elements contain a tag that indicates if the element is a sublist or not;
-#	If the element points to a sublist, then the sublist field is the beginning of
-#	this sublist. If not, the data field contains the user specified data item and
-#	list continues (getNext()/setNext()). As in singly linked elements, the next pointer
-#	points to the following list element of the list or sublist.
+#
+#	This class extends SLelement (singly linked list element) to build multi-lists;
+#	Multilist elements contain a tag (boolean) that indicates if the element 
+#	contains a sublist or not; if the tag is true, then there is a sublist beginning
+#	at this node and the starting point is the `sublist' field in the element. 
+#	If the tag is false, then the list continues as a normal singly linked list. 
+#	The sublists are re recursive: any sublist can have its own sublists and so on.
+#	As in singly linked elements, the next pointer points to the following list element and 
+#	each element contains a generic application specific object.
 #
 # 	Multi-list elements contain a visualizer (ElementVisualizer) object for setting
 #	visual attributes (color, shape, opacity, size), necessary for displaying
@@ -17,12 +20,15 @@ from bridges.sl_element import *
 #	Elements also have a LinkVisualizer object, that is used when they are linked to
 #	another element, appropriate for setting link attributes, for instance, between
 #	the current element and its next element. In this case, the link in question is that
-#  which connects the element to the following elements; a similar logic follows for
+#  	which connects the element to the following elements; a similar logic follows for
 #	sublists.
 #
-# @author Kalpathi Subramanian, Matthew McQuaigue
+# 	@author Kalpathi Subramanian, Matthew McQuaigue
 #
+#	@date 2018, 7/23/19
 #
+#	\sa There is a tutorial about Multi Lists : 
+#	 	http://bridgesuncc.github.io/tutorials/ML.html
 #
 #
 class MLelement(SLelement):

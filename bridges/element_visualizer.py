@@ -5,8 +5,17 @@ from bridges.color import *
 from decimal import Decimal
 ##
 # This class is used to store the visualization elements on the for the bridges
-# Visualization, including the color, shape, opacity, and size of the node.
-# <p>
+# Visualization, including the color, shape, opacity, and size of the node.<p>
+#
+# <b>Supported named colors: CSS colors. 
+# Check https://drafts.csswg.org/css-color-3/#svg-color</b>: <p>
+#
+#  <b> Color by RGBA Specification :</b>  Range: 0-255 for each component <p>
+#
+#  <b> Thickness: </b> Range : 0.0-50.0
+#
+#  <b> Opacity: </b> Range (0.0-1.0) </p>
+#
 # Objects of this class are stored as properties of all Element subclasses.
 # Generally, you will manipulating the ElementVisualizer returned from the
 # Element getVisualizer() method, and then call the setVisualizer() method on
@@ -20,8 +29,8 @@ class ElementVisualizer():
         kwargs:
             (str) color: color for this element
             (str) shape: the shape of the element
-            (float) size: the elements size
-            (float) opacity: the elements opacity
+            (float) size: the element size
+            (float) opacity: the element opacity
         Returns:
             None
         """

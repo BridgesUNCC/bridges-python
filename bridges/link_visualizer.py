@@ -17,12 +17,8 @@ from bridges.color import *
 #
 #  Supported attribute values are as follows:<p>
 #
-#  <b>Supported Colors (by name)</b>: <p>
-#  "red", "green", "blue","yellow","cyan","magenta",
-#  "white",, "black", "orange",  "turquoise",  "maroon",  <br>
-#  "aquamarine",  "azure",  "beige", "brown",  "tan",  "olive",
-#  "chartreuse", "khaki", "bisque",  "coral", <br>
-#  "pink",  "lavender",  "purple",  "gold" <p>
+#  <b>Supported Colors: CSS colors. 
+#	Check https://drafts.csswg.org/css-color-3/#svg-color</b>: <p>
 #
 #  <b> Color by RGBA Specification :</b>  Range: 0-255 for each component <p>
 #
@@ -116,13 +112,30 @@ class LinkVisualizer():
 
     @property
     def opacity(self):
+        """
+        Getter for the element opacity
+        Returns:
+            opacity : element opacity 
+        """
         return self.color.alpha
 
     @opacity.setter
     def opacity(self, opacity):
+        """
+        Setter for the elementopacity
+        Args:
+            opacity : opacity value (0-1.0) to set
+        Returns:
+            None
+        """
         self.color.alpha = opacity
 
     def get_link_properties(self):
+        """
+        Getter for the link properties
+        Returns:
+            dict: link properties
+        """
         link_props = {
             "color": [str(self.color.red), str(self.color.green), str(self.color.blue), str(self.color.alpha)],
             "thickness": str(self.thickness),
@@ -131,8 +144,20 @@ class LinkVisualizer():
         return link_props
 
     def get_label(self):
+        """
+        Getter for the link label
+        Returns:
+            string : link label
+        """
         return self.label
 
     def set_label(self, label):
+        """
+        Setter for the element label
+        Args:
+            string : link label
+        Returns:
+            None
+        """
         self.label = label
 

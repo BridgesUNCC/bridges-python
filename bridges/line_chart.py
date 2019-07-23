@@ -1,6 +1,35 @@
 
-
-
+##
+# @brief Show series of data or functions using a line chart.
+#
+# Line charts (https://en.wikipedia.org/wiki/Line_chart) are used to
+# represent graphically functions such as f(x) = 3*x+1, or data such
+# as temperature of a liquid on a stove as time passes. A individual
+# function or a set of data is called "series".
+#
+# A series is represented by two arrays xdata and ydata such that
+# there is a point at (xdata[0], ydata[0]), an other at (xdata[1],
+# ydata[1]), ... One can add a series by passing the two arrays using
+# setDataSeries() or add the arrays individually using setXData() and
+# setYData().
+#
+# The different series have a label associated with them by default
+# which can be disabled (see toggleSeriesLabel()).
+#
+# The data is typically shown with axes that use a linear
+# scale. However, the scale can be changed to logarithmic for each
+# axis individually (see toggleLogarithmicX() and
+# toggleLogarithmic()).
+#
+# The LineChart can have a title (see getTitle() and setTitle()) and
+# a subtitle (see setSubTitle() and getSubTitle()).
+#
+# @author Erik Saule, Kalpathi Subramanian
+#
+# @date 7/23/19
+#
+# \sa Line chart tutorial at 
+#
 class LineChart:
 
     def __init__(self):

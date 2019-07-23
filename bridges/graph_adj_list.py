@@ -27,6 +27,10 @@ import traceback
 #	Convenience methods are provided to add vertices and edges to the graph as well as
 #	retrieve the adjacency list of a vertex, given its id.
 #
+#   @author Matthew Mcquaigue
+#	@date 2018,  7/23/19
+#
+#	\sa graph adjacency list tutorial, http://bridgesuncc.github.io/tutorials/Graph_AL.html
 #
 class GraphAdjList:
     LargeGraphVertSize = 1000
@@ -57,7 +61,7 @@ class GraphAdjList:
         This method will replace the valeue for this key
         Args:
             k: the vertex iid
-            e: the vertex info, currently used as a label by default
+            e: the vertex data, currently used as a label by default
         Returns:
             None
         """
@@ -161,9 +165,9 @@ class GraphAdjList:
         """
         Gets the adjacency list
         Args:
-            vertex: The vertex in adj_list
+            vertex: input  vertex 
         Returns:
-            list
+            list : adjacency list of this vertex
         """
         if vertex is not None:
             return self.adj_list.get(vertex)

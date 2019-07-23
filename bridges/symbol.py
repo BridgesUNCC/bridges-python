@@ -1,5 +1,20 @@
 from bridges.color import *
 
+##
+# @brief This is an abstract class for deriving a
+#  number of Symbol shape objects, for use in a SymbolCollection.
+#  Symbols correspond to a simplified subset of SVG paths
+#  and shapes for custom visual representations in BRIDGES.
+#
+#  Users will typically one of the subclasses of this object for creating shapes
+#
+#  Currently shapes supported are rectangle, circle, polygon, polyline and label; each shape
+#  has a name, location (x, y) and appropriate geometric and non-geometric attributes
+#
+# @author David Burlinson, Kalpathi Subramanian
+# @date 12/24/18, 7/12/19
+#
+#
 class Symbol:
     _ids = 0 #id for this symbol. Class level so each object has unique id
 
@@ -18,20 +33,12 @@ class Symbol:
         self.location_x = 0.0
         Symbol._ids += 1
 
-    def _get_data_structure_type(self) -> str:
-        """
-        Get the data structure type
-        Returns:
-            str
-        """
-        return "Symbol"
-
     @property
     def label(self) -> str:
         """
         Getter for symbol label
         Returns:
-            str
+            str : the label of this shape
         """
         return self.label
 
@@ -40,7 +47,7 @@ class Symbol:
         """
         Setter for symbol label
         Args:
-            label: String to be label
+            label: to be set
         Returns:
             str
         """
@@ -69,7 +76,7 @@ class Symbol:
         """
         Getter for the fill color
         Returns:
-            Color
+            Color : the current fill color of this symbol
         """
         return self.fill_color
 
@@ -78,7 +85,7 @@ class Symbol:
         """
         Setter for the fill color
         Args:
-            color: the color for the fill (Color Object)
+            color: the color to set for the fill
         Returns:
             None
         """
@@ -89,7 +96,7 @@ class Symbol:
         """
         Getter for the stroke color
         Returns:
-            Color
+            Color : the stroke (boundary) color of the shape
         """
         return self.stroke_color
 
@@ -98,7 +105,7 @@ class Symbol:
         """
         Setter for the stroke color
         Args:
-            color: the color for the stroke (Color Object)
+            color: the stroke (boundary) color to set
         Returns:
             None
         """
@@ -109,7 +116,7 @@ class Symbol:
         """
         Getter for the stroke width
         Returns:
-            float
+            float : the stroke width of the shape
         """
         return self.stroke_width
 
@@ -118,7 +125,7 @@ class Symbol:
         """
         Setter for the stroke width
         Args:
-            width: the value for the width
+            width: the stroke width to set
         Returns:
             None
         Raises:
@@ -134,7 +141,7 @@ class Symbol:
         """
         Getter for opacity
         Returns:
-             float
+             float : opacity of the shape
         """
         return self.opacity
 
@@ -143,7 +150,7 @@ class Symbol:
         """
         Setter for opacity
         Args:
-            o: the opacity value
+            o: the opacity value to set (must be in 0-1.0 range) 
         Returns:
             None
         Raises: value error
@@ -158,7 +165,7 @@ class Symbol:
         """
         Getter for stroke_dash
         Returns:
-             float
+             float : the stroke texture
         """
         return self.stroke_dash
 
@@ -167,7 +174,7 @@ class Symbol:
         """
         Setter for stroke_dash
         Args:
-            dash: the stroke_dash value
+            dash: the stroke_dash value to set (0-10 range)
         Returns:
             None
         Raises: value error
@@ -179,9 +186,9 @@ class Symbol:
 
     def set_location(self, x: float, y: float) -> None:
         """
-        Setter for the location of a symbol
+        Setter for the location of the  center of the symbol
         Args:
-            x: x location
+            x: x location 
             y: y location
         Returns:
             None
@@ -198,7 +205,7 @@ class Symbol:
         """
         Getter for the location of a symbol
         Returns:
-            list
+            list : the x and y coordinates of the shape's current location
         """
         return [self.location_x, self.location_y]
 
@@ -206,7 +213,7 @@ class Symbol:
         """
         Getter for the dimensions
         Returns:
-            list
+            list : the bounding box of this shape
         """
         return [0.0, 0.0, 0.0, 0.0]
 
@@ -214,7 +221,7 @@ class Symbol:
         """
         Get the json representation of the Symbol class
         Returns:
-            dict
+            dict : the JSON representation
         """
         ds = {
             "fill": [self.fill_color.get_red(), self.fill_color.get_green(), self.fill_color.get_blue(), self.fill_color.get_alpha()],

@@ -1,6 +1,14 @@
 import json
 from bridges.symbol import *
 
+##
+# @brief This class defines a circle and is part of the symbol collection.
+# A circle  has a radius and a center, which is also its location
+#
+# @author Matthew Mcquaigue
+# @date 2018, 7/23/19
+#
+#
 class Circle(Symbol):
 
     def __init__(self, **kwargs) -> None:
@@ -61,8 +69,8 @@ class Circle(Symbol):
         """
         Set the location and size of the circle
         Args:
-            (int) locx: x location of the circle
-            (int) locy: y location of the circle
+            (int) locx: x coordinate of the center of the circle
+            (int) locy: y coordinate of the center of the circle
             (float) r: radius of the circle
         Returns:
             None
@@ -80,7 +88,7 @@ class Circle(Symbol):
         """
         Getter for the dimensions for the circle
         Returns:
-            list: the circle dimensions
+            list: bounding box of the circle (xmin, xmax, ymin, ymax)
         """
         dims = []
         location = self.get_location()
@@ -96,7 +104,7 @@ class Circle(Symbol):
         """
         Get the json representation of the Circle object
         Returns:
-            dict: representing the JSON before dumping
+            dict: representing the JSON 
         """
         ds_json = super(Circle, self).get_json_representation()
         ds_json["name"] = self.label

@@ -17,8 +17,10 @@ from bridges.tree_element import *
 #
 # @author Kalpathi Subramanian, Mihai Mehedint, Matthew McQuaigue
 #
+# @date   2018, 7/23/19
 #
-
+# \sa Binary tree tutorial, http://bridgesuncc.github.io/tutorials/BinTree.html
+#
 
 class BinTreeElement(TreeElement):
 
@@ -26,10 +28,10 @@ class BinTreeElement(TreeElement):
         """
         Constructor for an empty Binary Tree Element
         kwargs:
-            label: The label for the tree element that shows in visualization
-            e: the generic object that the tree element will hold
-            left: the tree element assigned to child 0
-            right: the tree element assigned to child 1
+            label: The label for the tree element that is displayed in the visualization
+            e: the generic object that the binary tree element will hold
+            left: the binary tree element assigned to child 0
+            right: the binary tree element assigned to child 1
         Returns:
             None
         """
@@ -61,7 +63,7 @@ class BinTreeElement(TreeElement):
         """
         Getter for the left element for the binary tree
         Returns:
-            TreeElement: left child
+            TreeElement: left child of this element
         """
         return super(BinTreeElement, self).get_child(0)
 
@@ -81,7 +83,7 @@ class BinTreeElement(TreeElement):
         """
         Getter for the right element for the binary tree
         Returns:
-            TreeElement: the right child
+            TreeElement: the right child of this element
         """
         return super(BinTreeElement, self).get_child(1)
 

@@ -23,6 +23,9 @@ from bridges.element import *
  #
  # 	@author Matthew McQuaigue
  #
+ # @date   2018, 7/23/19
+ #  \sa Kd tree tutorial http://bridgesuncc.github.io/tutorials/Tree.html
+ #
 class TreeElement(Element):
 
     def __init__(self, **kwargs) -> None:
@@ -69,9 +72,9 @@ class TreeElement(Element):
 
     def get_number_of_children(self) -> int:
         """
-        The number of children of this node
+        Get the number of children at this node
         Returns:
-            int: representing sthe number of children
+            int: representing the number of children
         """
         return len(self.children)
 
@@ -97,7 +100,7 @@ class TreeElement(Element):
         Args:
             index: index to get child
         Returns:
-            Generic: child
+            the child element at this index
         Raises:
             ValueError: if the index is higher than the number of children
         """
@@ -108,9 +111,9 @@ class TreeElement(Element):
 
     def get_data_structure_representation(self) -> dict:
         """
-        Get the hierarchical JSON of the tree representation
+        Get the hierarchical JSON of the tree representation (internal use only)
         Returns:
-            dict: representing the data structures json to be dumped
+            dict: representing the data structures json 
         """
         json_dict = {
             "nodes": self._pre_order(self)
@@ -124,7 +127,7 @@ class TreeElement(Element):
         Args:
             root: the root of the tree structure
         Returns:
-            dict: representiting the json to be dumped
+            dict: representing the json to be returned
         """
         k=0
         json_str = dict()

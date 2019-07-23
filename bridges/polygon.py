@@ -1,6 +1,19 @@
 import json
 from bridges.symbol import *
 
+##
+# @brief This class defines a polygon and is part of the symbol collection.
+#
+# A polygon has a set of vertices, with vertices connected by line
+# segments. It differs from the polyline in the sense that the last
+# and first vertex are connect to close the shape.
+#
+# @author David Burlinson, Kalpathi Subramanian
+#
+# @date 2018, 7/23/19
+#
+# \sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+#
 class Polygon(Symbol):
 
     def __init__(self, pts = None):

@@ -27,8 +27,9 @@ from bridges.dl_element import *
 #
 #  @author Kalpathi Subramanian, Mathhew McQuaigue
 #
-#	@date   7/17/16, 1/16/17
+#	@date   7/17/16, 1/16/17 7/23/19
 #
+#\sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
 #
 class CircDLelement(DLelement):
 
@@ -74,7 +75,7 @@ class CircDLelement(DLelement):
         """
         Getter for the next element of this CircDLelement
         Returns:
-            DLelement: assigned to next
+            DLelement: the following element
         """
         return super(CircDLelement, self).next
 
@@ -83,7 +84,7 @@ class CircDLelement(DLelement):
         """
         Setter for the next element for this CircDLelement
         Args:
-            (DLelement) next: the next element for this CircDLelement
+            (DLelement) next: the next element to be set
         Returns:
             None
         """
@@ -94,7 +95,7 @@ class CircDLelement(DLelement):
         """
         Getter for the prev element of this CircDLelement
         Returns:
-            DLelement: assigned to prev
+            DLelement: the prev element in the list
         """
         return super(CircDLelement, self).prev
 
@@ -103,7 +104,7 @@ class CircDLelement(DLelement):
         """
         Setter for the prev element of this CircDLelement
         Args:
-            (DLelement) prev: The prev element of this CricDLelement
+            (DLelement) prev: The prev element to be set
         Returns:
             None
         """

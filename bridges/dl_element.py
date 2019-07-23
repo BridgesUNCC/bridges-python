@@ -28,7 +28,7 @@ class DLelement(SLelement):
         """
         Constructor for DLelement
         Kwargs:
-            (object) e: the genereic object that this DLelement is holding
+            (object) e: the genereic application specific object that DLelement is holding
             next: the DLelement that should be assigned to the next pointer
             prev: the DLelement that should be assigned to the prev pointer
             (str) label: the label for this DLelement
@@ -62,7 +62,7 @@ class DLelement(SLelement):
         """
         Getter for the next element in Dlelement
         Returns:
-            element
+            element pointed to by this element
         """
         return self._next
 
@@ -71,7 +71,7 @@ class DLelement(SLelement):
         """
         Setter for the next element
         Args:
-            el: element for next
+            el: element to be set 
         Returns:
             None
         """
@@ -82,7 +82,7 @@ class DLelement(SLelement):
         """
         Getter for the prev element in Dlelement
         Returns:
-            element
+            element that is prior to this element
         """
         return self._prev
 
@@ -91,7 +91,8 @@ class DLelement(SLelement):
         """
         Setter for the prev element
         Args:
-            el: element for prev
+            el: element to be set
+
         Returns:
             None
         """
@@ -105,7 +106,7 @@ class DLelement(SLelement):
 
     def get_data_structure_representation(self) -> dict:
         """
-        Getter for the json representation before dumping
+        Getter for the json representation of this list
         Returns:
             dict: representing the JSON format
         """

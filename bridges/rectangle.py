@@ -1,6 +1,16 @@
 import json
 from bridges.symbol import *
 
+##
+# @brief This class defines a rectangle and is part of the symbol collection.
+#
+# A rectangle has height and width
+#
+# @author Matthew Mcquaigue
+# @date 2018, 7/23/19
+#
+# \sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+#
 class Rectangle(Symbol):
 
     def __init__(self, **kwargs) -> None:
@@ -85,7 +95,7 @@ class Rectangle(Symbol):
         """
         Getter for the dimensions of the rectangle
         Returns:
-            list: representing the dimensions
+            list: representing the bounding box of the shape 
         """
         dims = []
         location = self.get_location()
@@ -120,7 +130,7 @@ class Rectangle(Symbol):
         """
         Getter function for the json representation of the data structure/shape
         Returns:
-            dict: representing the json before dumped
+            dict: representing the json 
         """
         ds_json = super(Rectangle, self).get_json_representation()
         ds_json["name"] = super(Rectangle, self).label

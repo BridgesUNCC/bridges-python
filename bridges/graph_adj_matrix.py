@@ -26,8 +26,7 @@ import traceback
 #  @author Kalpathi Subramanian, Mihai Mehedint
 #
 #
-#  \sa Example tutorial at <p>
-#      ?? TO DO
+#  \sa Example tutorial at http://bridgesuncc.github.io/tutorials/Graph_AM.html
 #
 #
 class GraphAdjMatrix():

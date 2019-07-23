@@ -21,6 +21,7 @@ from bridges.bst_element import *
 #
 #  @date 6/22/16, 1/7/17, 5/17/17, 6/09/19
 #
+#  \sa http://bridgesuncc.github.io/tutorials/AVL.html
 #
 #
 class AVLTreeElement(BSTElement):
@@ -119,6 +120,12 @@ class AVLTreeElement(BSTElement):
 
     @left.setter
     def left(self, value):
+        Setter for the left child of this node
+        Args:
+            value:  left child to be set
+        Returns:
+            None
+        """
         super(AVLTreeElement, self.__class__).set_child(0, value)
 
     @property
@@ -126,10 +133,15 @@ class AVLTreeElement(BSTElement):
         """
         Getter for the right child of the avl tree
         Returns:
-            child
+            right child of this tree element
         """
         return super(AVLTreeElement, self).get_child(1)
 
     @right.setter
     def right(self, value):
+        Setter for the right child of this node
+        Args:
+            value:  right child to be set
+        Returns:
+            None
         super(AVLTreeElement, self.__class__).set_child(1, value)

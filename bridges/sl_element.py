@@ -134,7 +134,7 @@ class SLelement(Element):
 
     def get_list_elements(self, nodes):
         """
-        Get the elements of the list
+        Get the elements of the list (for  internal use only)
         Args:
             nodes: a vector of the nodes in the list
         Returns:

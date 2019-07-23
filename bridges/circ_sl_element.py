@@ -24,7 +24,7 @@ from bridges.sl_element import *
 #
 #	@author Kalpathi Subramanian, Matthew McQuaigue
 #
-#	@date 6/22/16, 1/7/17, 5/17/17
+#	@date 6/22/16, 1/7/17, 5/17/17, 7/23/19
 #
 #
 class CircSLelement(SLelement):
@@ -67,7 +67,7 @@ class CircSLelement(SLelement):
         """
         Getter for the next element of this CircSLelement
         Returns:
-            SLelement: assigned to next
+            SLelement:  the element that follows this element
         """
         return super(CircSLelement, self).next
 
@@ -76,7 +76,7 @@ class CircSLelement(SLelement):
         """
         Setter for the next element in Circular list
         Args:
-            n: the next element to have set
+            n: the next element to be set
         Returns:
             None:
         """

@@ -16,11 +16,12 @@ from bridges.bin_tree_element import *
 #
 #  	@author Kalpathi Subramanian, Mihai Mehedint, Matthew McQuaigue
 #
-#  	@date 6/22/16, 1/7/17, 5/17/17
+#  	@date 6/22/16, 1/7/17, 5/17/17, 7/23/19
 #
 #  	@brief This class extends the BinTreeElement class by adding a 'key' value
 #  	for use in a binary search tree implementations.
 #
+#	\sa Binary Search Tree tutorial, http://bridgesuncc.github.io/tutorials/BST.html
 #
 
 
@@ -80,23 +81,33 @@ class BSTElement(BinTreeElement):
         """
         Getter for the left element in BST
         Returns:
-            BSTElement
+            BSTElement: the left child of this element
         """
         return super(BSTElement, self).left
 
     @left.setter
     def left(self, value):
+        """
+        Setter for the left child in BST
+        Returns:
+            None
+        """
         super(BSTElement, self.__class__).right.fset(self, value)
 
     @property
     def right(self):
         """
-        Getter for the right element in BST
+        Getter for the right child in BST
         Returns:
-            BSTElement
+            BSTElement: the right child of the element
         """
         return super(BSTElement, self).right
 
     @right.setter
     def right(self, value):
+        """
+        Setter for the right child in BST
+        Returns:
+            None
+        """
         super(BSTElement, self.__class__).right.fset(self, value)
