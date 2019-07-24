@@ -51,31 +51,31 @@ class NonBlockingGame(GameBase):
             self.control_framerate()
 
     def key_left(self):
-        self.ih.left()
+        return self.ih.left()
 
     def key_right(self):
-        self.ih.right()
+        return self.ih.right()
 
     def key_up(self):
-        self.ih.up()
+        return self.ih.up()
 
     def key_down(self):
-        self.ih.down()
+        return self.ih.down()
 
     def key_q(self):
-        self.ih.q()
+        return self.ih.q()
 
     def key_space(self):
-        self.ih.space()
+        return self.ih.space()
 
     def key_w(self):
-        self.ih.w()
+        return self.ih.w()
 
     def key_a(self):
-        self.ih.a()
+        return self.ih.a()
 
     def key_s(self):
-        self.ih.s()
+        return self.ih.s()
 
     def key_d(self):
-        self.ih.d()
+        return self.ih.d()

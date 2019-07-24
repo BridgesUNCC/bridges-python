@@ -18,13 +18,6 @@ class BugStomp(NonBlockingGame):
         self.set_description("Use the arrow keys to move the person over the bugs - don't let them escape!")
         self.start()
 
-    # def main(self, assid, login, apikey, c, r):
-    #     super(BugStomp, self).__init__(assid, login, apikey, c, r)
-    #
-    #     self.set_title("BUG STOMP")
-    #     self.set_description("Use the arrow keys to move the person over the bugs - don't let them escape!")
-    #     self.start()
-
     def initialize(self):
         self.bug_color = random.choice(list(NamedColor))
         for i in range(0, BugStomp.board_size[0]):
@@ -42,7 +35,7 @@ class BugStomp(NonBlockingGame):
         if self.key_up():
             self.loc[0] -= 1
         if self.key_down():
-            self.loc[1] += 1
+            self.loc[0] += 1
 
         if self.loc[0] < 1:
             self.loc[0] = 1
@@ -56,7 +49,7 @@ class BugStomp(NonBlockingGame):
     def handle_bug(self):
         if self.bugtt1 < 1:
             self.bug = [random.randint(0, self.board_size[0]-1), random.randint(0, self.board_size[1]-1)]
-            self.bugtt1 - random.randint(0, 100-50) + 50
+            self.bugtt1 = random.randint(0, 100-50) + 50
             self.bug_color = random.choice(list(NamedColor))
             self.score -= 1
             if self.score < 0:
@@ -64,7 +57,7 @@ class BugStomp(NonBlockingGame):
         else:
             self.bugtt1 -= 1
             if self.overlap(self.bug, self.loc):
-                self.bug = [random.randint(self.board_size[0]-1), random.randint(self.board_size[1]-1)]
+                self.bug = [random.randint(0, self.board_size[0]-1), random.randint(0, self.board_size[1]-1)]
                 self.bug_color = random.choice(list(NamedColor))
                 self.score += 1
 
@@ -84,7 +77,7 @@ class BugStomp(NonBlockingGame):
         self.paint_score(self.score)
         self.draw_object(int(self.bug[0]), int(self.bug[1]), NamedSymbol.bug1, NamedColor.cyan)
 
-        self.draw_object(0, 0, NamedSymbol.man, NamedColor.cyan)
+        self.draw_object(self.loc[0], self.loc[1], NamedSymbol.man, NamedColor.cyan)
 
     def win(self):
         self.draw_object(0, 0, NamedSymbol.A, NamedColor.cyan)

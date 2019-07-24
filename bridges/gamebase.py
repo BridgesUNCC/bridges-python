@@ -9,7 +9,7 @@ class GameBase(ABC):
 
     def __init__(self, assid, login, apikey, cols, rows):
         self.game_base_init(assid, login, apikey, cols, rows)
-        self.grid_state = dict()
+        self.grid_state = dict
 
     def game_base_init(self, id, log, key, c, r):
         self.firsttime = True
