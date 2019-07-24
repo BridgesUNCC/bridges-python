@@ -8,6 +8,8 @@ from bridges.symbol import *
 # @author Matthew Mcquaigue
 # @date 2018, 7/23/19
 #
+# \sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+#
 #
 class Circle(Symbol):
 

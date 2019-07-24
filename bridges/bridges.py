@@ -159,6 +159,13 @@ class Bridges:
     #
     #
     def _set_assignment(self, assignment):
+        """
+		Setter for assignment id (must be positive)
+        Args: 
+           assignment: assignment number to be set
+        Returns:
+           None
+        """
         if assignment < 0:
             ValueError("Assignment value must be >= 0")
         elif self._assignment >= 0:
@@ -194,7 +201,7 @@ class Bridges:
         """
         Setter for the description of the bridges visualization
         Args:
-            (str) description: representing the description
+            (str) description: representing the assignment description
         Returns:
             None
         """
@@ -215,6 +222,11 @@ class Bridges:
         self._map_overlay = flag
 
     def set_coord_system_type(self, coord):
+        """
+        Setter for the coordinate system type to use in the visualization
+		Args:
+           coord: coordinate system type (used in map overlays (can be 
+           "cartesian", "albersusa", "equirectangular")
         if coord in self._projection_options:
             self._coord_system_type = coord
         else:
@@ -234,12 +246,27 @@ class Bridges:
         return get_color_grid_from_assignment(self.connector.server_url, user, assignment, subassignment)
 
     def get_username(self):
+        """
+        Getter for the assignment user name (BRIDGES credentials)
+        Returns:
+            str: user name
+        """
         return self._username.replace(" ", "+")
 
     def get_assignment_id(self):
+        """
+        Getter for the assignment number
+        Returns:
+            int: assignment number
+        """
         return self._assignment
 
     def get_key(self):
+        """
+        Getter for the API key (BRIDGES credentials)
+        Returns:
+            str: user's API key
+        """
         return self._key
 
 

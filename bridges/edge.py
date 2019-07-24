@@ -36,7 +36,7 @@ class Edge():
         """
         Getter for the to vertex
         Returns:
-            vertex
+            vertex: terminating vertex of edge 
         """
         return self.to_vertex
 
@@ -45,7 +45,7 @@ class Edge():
         """
         Getter for the from vertex
         Returns:
-            vertex
+            vertex : source vertex  of edge
         """
         return self.from_vertex
 
@@ -54,7 +54,7 @@ class Edge():
         """
         Getter for the link thickness
         Returns:
-             float
+             float : link thickness (1.0-10.0 range)
         """
         return self.lvis.thickness
 
@@ -63,7 +63,7 @@ class Edge():
         """
         Setter for the thickness of edge
         Args:
-            th: thickness to be applied
+            th: thickness to be applied (1.0-10.0 range)
         Returns:
             None
         """
@@ -74,7 +74,7 @@ class Edge():
         """
         Getter for edge data
         Returns:
-             str
+             str : data associated with this edge (generic object)
         """
         return self.edge_data
 
@@ -83,16 +83,28 @@ class Edge():
         """
         Setter for edge data
         Args:
-            data: data for the edge to hold represented as a string
+            data: data for the edge to hold (generic object)
         Returns:
             None
         """
         self.edge_data = data
 
     def set_color(self, color):
+        """
+        Setter for edge color
+        Args:
+           color : color to be set (see link visualizer class for setting options)
+        Returns:
+           None
+        """
         self.lvis.color = color
 
     def get_color(self):
+        """
+        Getter for edge color
+        Returns:
+             color of edge (see link visualizer class for setting options
+        """
         return self.lvis.color
 
     def get_edge(self):

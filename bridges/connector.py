@@ -2,7 +2,12 @@
 import requests
 import traceback
 
-
+##
+#
+# @brief This is a class for handling calls to the BRIDGES server to transmit
+# JSON to the server and subsequent visualization. It is not
+# intended for external use
+#
 
 class Connector:
     server_url_live = "http://bridges-cs.herokuapp.com"
