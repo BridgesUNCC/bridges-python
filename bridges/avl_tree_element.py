@@ -120,6 +120,7 @@ class AVLTreeElement(BSTElement):
 
     @left.setter
     def left(self, value):
+		"""
         Setter for the left child of this node
         Args:
             value:  left child to be set
@@ -139,9 +140,11 @@ class AVLTreeElement(BSTElement):
 
     @right.setter
     def right(self, value):
+		"""
         Setter for the right child of this node
         Args:
             value:  right child to be set
         Returns:
             None
+		"""
         super(AVLTreeElement, self.__class__).set_child(1, value)
