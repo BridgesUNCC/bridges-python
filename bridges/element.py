@@ -11,22 +11,24 @@ import sys
 
 ##
 # @brief This is the main superclass in BRIDGES for  deriving a number of
-# 	objects used  in building arrays, lists, trees and graph data structures.
-#  SLelement, DLelement, CircSLelement, CircDLelement, TreeElement, BinTreeElement,
-#	BSTElement, CircSLelement, CircDLelement, AVLTreeElement are all subclasses
-#  (see class hierarchy above).  Element contains  two
+# 	elements used  in building data structures, viz., arrays, lists, trees and graphs.
+#  	SLelement, DLelement, CircSLelement, CircDLelement, MLelement, TreeElement, BinTreeElement,
+#	BSTElement, AVLTreeElement and KDTreeElement are all subclasses
+#  	(see class hierarchy above).  Element contains  two
 #	visualizer objects (ElementVisualizer, LinkVisualizer) for specifying
 #	visual attributes for nodes and links respectively. It also contains a label that
 #	that can be displayed in BRIDGES visualizations.
 #
-#  All the tutorials under
+#  	All the tutorials under
 #
-#	http://bridgesuncc.github.io/Hello_World_Tutorials/Overview.html
+#	http://bridgesuncc.github.io/tutorials/Overview.html
 #
-#  illustrate examples of using different types of Element objects and how to
+#  	illustrate examples of using different types of Element objects and how to
 #	manipulate their visual attributes.
 #
-# @author Mihai Mehedint, Kalpathi Subramanian
+# 	@author Matthew Mcquaigue,  Kalpathi Subramanian
+#
+#	2017, 2018, 6/24/19
 #
 #
 class Element():
@@ -88,9 +90,9 @@ class Element():
     @property
     def value(self) -> object:
         """
-        Getter for the value this element will hold
+        Getter for the value this element is holding
         Returns:
-            generic
+            generic object (application specific)
         """
         return self._value
 
@@ -99,7 +101,7 @@ class Element():
         """
         Setter for the value of an element
         Args:
-            val: the value this element will hold
+            val: the value (generic, application specific object)  this element will hold
         Returns:
             None
         """
@@ -111,7 +113,7 @@ class Element():
         """
         Getter for the element identifier
         Return:
-            str
+            str : element identifier (for internal use)
         """
         return self._identifier
 
@@ -120,7 +122,7 @@ class Element():
         """
         Setter for the element identifier
         Args:
-            int id: the identifier
+            int id: the identifier (for internal use)
         Returns:
             None
         """
@@ -129,18 +131,18 @@ class Element():
     @property
     def visualizer(self) -> ElementVisualizer:
         """
-        The element visualizer for this object
+        Getter for the element visualizer
         Returns:
-            ElementVisualizer
+            ElementVisualizer 
         """
         return self._visualizer
 
     @visualizer.setter
     def visualizer(self, vis: ElementVisualizer) -> None:
         """
-        Setter function for this elements visualizer
+        Setter function for this element visualizer
         Args:
-            (ElementVisualizer) vis: the element visualizer
+            vis: the element visualizer
         Returns:
             None
         """
@@ -148,9 +150,10 @@ class Element():
 
     def get_link_visualizer(self, el) -> LinkVisualizer:
         """
-        Get the link visualizer object that links this element to another element specified by the argument.
+        Getter for  the link visualizer object that links this element to 
+        another element specified by the argument.
         Args:
-            (Element) el: the element terminating the link
+            el: the element terminating the link
         Returns:
             LinkVisualizer: of this element
         Raises:
@@ -166,7 +169,8 @@ class Element():
         """
         Setter for the link visualizer of this element
         Args:
-            (Element) el: the element that will have it link visualizer set
+            (Element) el: the terminating element of this link;
+             creates a new link visualizer for this link
         Returns:
             None
         """
@@ -176,7 +180,8 @@ class Element():
         """
         Deleter function for the lik visualizer of this element
         Args:
-            (Element) el: the element to have its link visualizer deleted
+            (Element) el: the terminating element of the link; the link visualizer 
+            for this link will be deleted
         Returns:
             None
         """
@@ -184,57 +189,137 @@ class Element():
 
     @property
     def label(self):
+        """
+        Getter for the element's label
+        Returns:
+           str: the element's label 
+        """
         return self._label
 
     @label.setter
     def label(self, label):
+        """
+        Setter for the element's label
+		Args:
+           str: the element's label 
+        Returns:
+           None
+        """
         self._label = label
 
     @property
     def size(self):
+        """
+        Getter for the element's size
+        Returns:
+           int: element size (0-50)
+        """
         return self.visualizer.size
 
     @size.setter
     def size(self, sz):
+        """
+        Setter for the element's size
+		Args:
+           sz: the element's size (0-50)
+        Returns:
+           None
+		"""
         self.visualizer.size = sz
 
     @property
     def color(self):
+        """
+        Getter for the element's color
+        Returns:
+           Color: element's color
+        """
         return self.visualizer.color
 
     @color.setter
     def color(self, col):
+        """
+        Setter for the element's size
+		Args:
+           col: the element's color
+        Returns:
+           None
+		"""
         self.visualizer.color = col
 
     @property
     def opacity(self):
+        """
+        Getter for the element's opacity
+        Returns:
+           float: element size (0-1.0)
+        """
         return self.visualizer.opacity
 
     @opacity.setter
-    def opacity(self, o):
-        self.visualizer.opacity = o
+    def opacity(self, op):
+        """
+        Setter for the element's opacity
+		Args:
+           op: the element's size (0-1.0)
+        Returns:
+           None
+		"""
+        self.visualizer.opacity = op
 
     @property
     def shape(self):
+        """
+        Getter for the element's shape type
+        Returns:
+           element shape
+        """
         return self.visualizer.shape
 
     @shape.setter
-    def shape(self, sh):
-        self.visualizer.shape = sh
+    def shape(self, shp):
+        """
+        Setter for the element's shape
+		Args:
+           shp: the element's size (0-1.0)
+        Returns:
+           None
+		"""
+        self.visualizer.shape = shp
 
     def set_location(self, locX, locY):
+        """
+        Setter for the element's location
+		Args:
+           locX: the element's location in X
+           locY: the element's location in Y
+        Returns:
+           None
+		"""
         self.visualizer.set_location(locX, locY)
 
-    def get_location(self):
-        self.visualizer.get_locationX()
-
     def get_locationX(self):
+        """
+        Getter for the element's location in X
+        Returns:
+           float: X coordinate of element's location
+        """
         return self.visualizer.get_locationX()
 
     def get_locationY(self):
+        """
+        Getter for the element's location in Y
+        Returns:
+           float: Y coordinate of element's location
+        """
         return self.visualizer.get_locationY()
 
     def get_element_representation(self):
+        """
+        Getter for the element's JSON representation (for internal use)
+        Returns:
+           str: JSON of element
+        """
         json = {
             "name": str(self.label),
             "shape": str(self.visualizer.shape),
@@ -261,6 +346,15 @@ class Element():
         return json
 
     def get_link_representation(self, lv, src, dest):
+        """
+        Getter for the JSON representation of  the element's link  (for internal use)
+        Args:
+           lv : link visualizer
+           src: source vertex of link
+           dest: destination vertex of link
+        Returns:
+           str: JSON of element's link from src to dest
+        """
         link_json = lv.get_link_properties()
         link_json["source"] = src
         link_json["target"] = dest

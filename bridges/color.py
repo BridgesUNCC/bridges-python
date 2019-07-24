@@ -75,14 +75,22 @@ class Color(object):
     """
     @property
     def red(self) -> int:
-        """red component of color
-        :return int: red component of color
-        Must be a value between 0-255 inclusive
+        """
+        Getter for red component of color (0-255 inclusive)
+        Returns:
+            int: red component of color
         """
         return self._red
 
     @red.setter
     def red(self, value: int):
+        """
+        Setter for red component of color (0-255 inclusive)
+        Args:
+            value(int): red component of color
+		Returns:
+            None
+        """
         try:
             value = int(value)
         except ValueError:
@@ -94,14 +102,22 @@ class Color(object):
 
     @property
     def green(self) -> int:
-        """green component of color
-        :return int: green component of color
-        Must be a value between 0-255 inclusive
+        """
+        Getter for green component of color (0-255 inclusive)
+        Returns:
+            int: green component of color
         """
         return self._green
 
     @green.setter
     def green(self, value: int):
+        """
+        Setter for green component of color (0-255 inclusive)
+        Args:
+            value(int): green component of color
+		Returns:
+            None
+        """
         try:
             value = int(value)
         except ValueError:
@@ -113,14 +129,22 @@ class Color(object):
 
     @property
     def blue(self) -> int:
-        """blue component of color
-        :return int: blue component of color
-        Must be a value between 0-255 inclusive
+        """
+        Getter for blue component of color (0-255 inclusive)
+        Returns:
+            int: blue component of color
         """
         return self._blue
 
     @blue.setter
     def blue(self, value: int):
+        """
+        Setter for blue component of color (0-255 inclusive)
+        Args:
+            value(int): blue component of color
+		Returns:
+            None
+        """
         try:
             value = int(value)
         except ValueError:
@@ -132,14 +156,22 @@ class Color(object):
 
     @property
     def alpha(self) -> float:
-        """alpha component of color
-        :return float: alpha component of color
-        Must be a value between 0.0-1.0 inclusive
+        """
+        Getter for alpha(opacity) component of color (0-1.0 inclusive)
+        Returns:
+            float: alpha component of color
         """
         return self._alpha
 
     @alpha.setter
     def alpha(self, value: float):
+        """
+        Setter for alpha component of color (0-1.0 inclusive)
+        Args:
+            value(float): alpha component of color (0-1.0)
+		Returns:
+            None
+        """
         try:
             value = float(value)
         except ValueError:

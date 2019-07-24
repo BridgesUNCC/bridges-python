@@ -21,6 +21,12 @@ from bridges.sl_element import *
 #	another element, appropriate for setting link attributes, such as in linked lists,
 #	between the current element and its next or previous nodes.
 #
+#   @author Matthew Mcquaigue
+#   @date  2018, 6/24/19
+#
+#   \sa Doubly Linked List tutorial : http://bridgesuncc.github.io/tutorials/DLL.html
+#
+
 #
 class DLelement(SLelement):
 

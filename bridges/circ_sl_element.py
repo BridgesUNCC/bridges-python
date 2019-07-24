@@ -26,6 +26,7 @@ from bridges.sl_element import *
 #
 #	@date 6/22/16, 1/7/17, 5/17/17, 7/23/19
 #
+#\sa Circular singly linked list tutorial: http://bridgesuncc.github.io/tutorials/CSLL.html
 #
 class CircSLelement(SLelement):
 

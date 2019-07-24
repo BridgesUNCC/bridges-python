@@ -27,8 +27,7 @@ from bridges.sl_element import *
 #
 #	@date 2018, 7/23/19
 #
-#	\sa There is a tutorial about Multi Lists : 
-#	 	http://bridgesuncc.github.io/tutorials/ML.html
+#	\sa There is a tutorial about Multi Lists : http://bridgesuncc.github.io/tutorials/ML.html
 #
 #
 class MLelement(SLelement):

@@ -18,6 +18,10 @@ from bridges.element import *
 #	another element, appropriate for setting link attributes, for instance, between
 #	the current element and its next element.
 #
+#	@author Matthew Mcquaigue
+#	@date  2018, 6/24/19
+#
+#	\sa Singly Linked List tutorial : http://bridgesuncc.github.io/tutorials/SLL.html
 #
 class SLelement(Element):
 

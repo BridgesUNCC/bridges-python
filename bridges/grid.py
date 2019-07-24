@@ -1,6 +1,11 @@
 ##
-#  @brief This is a class in BRIDGES for representing an (n x n) grid.
+#  @brief This is a base class in BRIDGES for representing an (n x n) grid.
+#
 #  @author David Burlinson, Matthew McQuaigue
+#
+#  2018, 7/24/19
+#
+#  \sa Color grid tutorial at http://bridgesuncc.github.io/tutorials/Grid.html
 #
 import traceback
 

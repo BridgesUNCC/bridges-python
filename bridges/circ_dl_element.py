@@ -23,13 +23,15 @@ from bridges.dl_element import *
 #
 #	Elements also have a LinkVisualizer object that is used when they are
 #	linked to another element, appropriate for setting link attributes, between
-#  the element and its previous or next nodes.
+#	the element and its previous or next nodes.
 #
-#  @author Kalpathi Subramanian, Mathhew McQuaigue
+#  	@author Kalpathi Subramanian, Mathhew McQuaigue
 #
 #	@date   7/17/16, 1/16/17 7/23/19
 #
-#\sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+#\sa Circular doubly linked list tutorial: http://bridgesuncc.github.io/tutorials/CDLL.html
+#
+
 #
 class CircDLelement(DLelement):
 

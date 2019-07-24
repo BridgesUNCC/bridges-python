@@ -10,16 +10,22 @@ from decimal import Decimal
 # <b>Supported named colors: CSS colors. 
 # Check https://drafts.csswg.org/css-color-3/#svg-color</b>: <p>
 #
-#  <b> Color by RGBA Specification :</b>  Range: 0-255 for each component <p>
+# <b> Color by RGBA Specification :</b>  Range: 0-255 for each component <p>
 #
-#  <b> Thickness: </b> Range : 0.0-50.0
+# <b> Thickness: </b> Range : 0.0-50.0
 #
-#  <b> Opacity: </b> Range (0.0-1.0) </p>
+# <b> Opacity: </b> Range (0.0-1.0) </p>
+#
+# <b> Supported Shapes: </b> "circle", "square", "diamond", "cross", "triangle", "star", "wye". 
 #
 # Objects of this class are stored as properties of all Element subclasses.
 # Generally, you will manipulating the ElementVisualizer returned from the
 # Element getVisualizer() method, and then call the setVisualizer() method on
 # the Element after changes have been made.
+#
+# @author Matthew Mcquaigue
+#
+# @date 2018, 6/24/19
 #
 class ElementVisualizer():
 

@@ -4,8 +4,13 @@ import base64
 
 ##
 #  @brief This is a class in BRIDGES for representing an (n x n) grid.
+#
+#
 #  @author David Burlinson, Matthew McQuaigue
 #
+#  @date 2018, 7/24/19
+#
+#  \sa  Color grid tutorial at http://bridgesuncc.github.io/tutorials/Grid.html
 #
 class ColorGrid(Grid):
 
@@ -15,7 +20,7 @@ class ColorGrid(Grid):
         """
         Get the data structure type
         Returns:
-            str
+            str : data structure type
         """
         return "ColorGrid"
 
@@ -129,7 +134,7 @@ class ColorGrid(Grid):
         """
         Get the JSON representation of the color grid
         Returns:
-            str: representing the json construction before dumping
+            str: representing the json  of the color grid
         """
         byte_buff = self.get_rle()
         encoding = "RLE"

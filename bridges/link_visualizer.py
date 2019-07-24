@@ -17,8 +17,8 @@ from bridges.color import *
 #
 #  Supported attribute values are as follows:<p>
 #
-#  <b>Supported Colors: CSS colors. 
-#	Check https://drafts.csswg.org/css-color-3/#svg-color</b>: <p>
+#  <b>Supported Colors by name: CSS colors; see the Color class for full list, or  at
+#	https://drafts.csswg.org/css-color-3/#svg-color</b>: <p>
 #
 #  <b> Color by RGBA Specification :</b>  Range: 0-255 for each component <p>
 #
@@ -28,6 +28,7 @@ from bridges.color import *
 #
 #  @author Mihai Mehedint, Kalpathi Subramanian, Matthew McQuaigue
 #
+#  @date 2018, 6/24/19
 #
 #  \sa Example Tutorial at <br>
 #  http://bridgesuncc.github.io/Hello_World_Tutorials/SLL.html
@@ -61,31 +62,11 @@ class LinkVisualizer():
         """
         Setter for the thickness of links in visualization
         Args:
-            (float) th: the thickness to be applied to visualization
+            (float) th: the thickness to be applied to the link
         Returns:
             None
         """
         self._thickness = th
-
-    @property
-    def weight(self) -> float:
-        """
-        Getter for the weight on the link
-        Returns:
-            float: weight
-        """
-        return self._weight
-
-    @weight.setter
-    def weight(self, wt: float) -> None:
-        """
-        Setter for the weight of the link
-        Args:
-            (float) wt: weight to be applied
-        Returns:
-            None
-        """
-        self.weight = wt
 
     @property
     def color(self) -> Color:
@@ -101,8 +82,10 @@ class LinkVisualizer():
         """
         Setter for the color of the element in the bridges visualization
         Args:
-            (optional) list: requires either 3 ints 0-255 for RGB and an optional float 0.0-1.0 for alpha EX: color = [0, 255, 0, 1.0]
-            (optional) str: string representing the element color. from web colors: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
+            (optional) list: requires either 3 ints 0-255 for RGB and an optional 
+            float 0.0-1.0 for alpha EX: color = [0, 255, 0, 1.0].
+            (optional) str: string representing the element color. Supported web colors: 
+            https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
         Returns:
             None
         Raises:
