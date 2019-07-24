@@ -57,7 +57,7 @@ class LineChart:
         """
         Is mounse tracking on? 
         Returns:
-			bool: mouse tracking flag
+            bool: mouse tracking flag
         """
         return self._mouse_track
 
@@ -159,13 +159,13 @@ class LineChart:
 
     @sub_title.setter
     def sub_title(self, s):
-		"""
-		Setter for plot sub title
-		Args:
-			s (str): plot sub title
-		Returns:
-			None
-		"""
+        """
+        Setter for plot sub title
+        Args:
+            s (str): plot sub title
+        Returns:
+            None
+        """
         self._plot_subtitle = s
 
     @property

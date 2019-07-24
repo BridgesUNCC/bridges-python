@@ -237,12 +237,12 @@ class Bridges:
         """
         Reconstruct a ColorGrid from an existing ColorGrid on the bridges server
 
-		Args:
-        	user(str): the name of the user who uploaded the assignment
-        	assignment(int): the ID of the assignment to get
-        	subassignment(int): the ID of the subassignment to get (default 0)
-		Returns:
-        	ColorGrid: the ColorGrid stored in the bridges server
+        Args:
+            user(str): the name of the user who uploaded the assignment
+            assignment(int): the ID of the assignment to get
+            subassignment(int): the ID of the subassignment to get (default 0)
+        Returns:
+            ColorGrid: the ColorGrid stored in the bridges server
         """
         from bridges.data_src_dependent.data_source import get_color_grid_from_assignment
         return get_color_grid_from_assignment(self.connector.server_url, user, assignment, subassignment)
