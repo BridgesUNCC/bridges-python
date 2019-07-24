@@ -227,6 +227,7 @@ class Bridges:
         Args:
            coord: coordinate system type (used in map overlays (can be 
            "cartesian", "albersusa", "equirectangular")
+        """
         if coord in self._projection_options:
             self._coord_system_type = coord
         else:
