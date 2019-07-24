@@ -16,9 +16,9 @@ import traceback
 #
 #  The vertices of the graph are held in a Java hashmap, for near constant time access;
 #  this lets us use strings or integral ids for vertices. The edges are accessed
-#	by a second hashmap from each vertex, again assuring near constant access time.
+#    by a second hashmap from each vertex, again assuring near constant access time.
 #  Each edge contains the terminating vertex id and weight, as defined by  the Edge
-#	class structure.
+#    class structure.
 #
 #  Convenience methods are provided to add vertices and edges to the graph. Edges
 #  are retrieved by using the dual hashmap, given the vertex ids of the edge.
@@ -50,7 +50,7 @@ class GraphAdjMatrix():
     CLOSE_BOX = "]"
 
     ##
-    # 	Constructor
+    #     Constructor
     #
     def __init__(self, size = None):
         self.vertices = dict()
@@ -59,21 +59,21 @@ class GraphAdjMatrix():
 
     ##
     #
-    #	This method gets the data structure type
+    #    This method gets the data structure type
     #
-    #	@return  The date structure type as a string
+    #    @return  The date structure type as a string
     #
     #
     def get_data_structure_type(self):
         return "GraphAdjacencyMatrix"
 
     ##
-    # 	Adds a new vertex to the graph, initializes the  adjacency
-    # 	list; user is responsible for checking if the vertex already
-    # 	exists. This method will replace the value for this key
+    #     Adds a new vertex to the graph, initializes the  adjacency
+    #     list; user is responsible for checking if the vertex already
+    #     exists. This method will replace the value for this key
     #
-    # 	@param k - vertex key value
-    # 	@param 3 - user specified data, part of the vertex data
+    #     @param k - vertex key value
+    #     @param 3 - user specified data, part of the vertex data
     #
     #
     def add_vertex(self, k, e):
@@ -90,13 +90,13 @@ class GraphAdjMatrix():
             (self.matrix.get(element.get_label()))[k] =  0 #  col
 
     ##
-    #	Adds a new edge to the graph, adds it to the index corresponding to
-    #	the source, destination vertex ids;  this version of the method assumes
-    #	an edge weight of 1 (unweighted graph); user is responsible for checking if the
-    #	vertices already exist, else an exception is thrown.
+    #    Adds a new edge to the graph, adds it to the index corresponding to
+    #    the source, destination vertex ids;  this version of the method assumes
+    #    an edge weight of 1 (unweighted graph); user is responsible for checking if the
+    #    vertices already exist, else an exception is thrown.
     #
-    #	@param src - source vertex of edge
-    #	@param dest - destination  vertex of edge
+    #    @param src - source vertex of edge
+    #    @param dest - destination  vertex of edge
     #
     #
     def add_edge(self, src, dest, weight = None):
@@ -115,9 +115,9 @@ class GraphAdjMatrix():
 
     ##
     #
-    #	This method returns the graph nodes
+    #    This method returns the graph nodes
     #
-    #	return -- vertices held in an unordered  map
+    #    return -- vertices held in an unordered  map
     #
     #
     def get_vertices(self):
@@ -125,9 +125,9 @@ class GraphAdjMatrix():
 
     ##
     #
-    #	Gets the adjacency matrix
+    #    Gets the adjacency matrix
     #
-    #	@return - the graph's adjacency matrix
+    #    @return - the graph's adjacency matrix
     #
     def get_adjacency_matrix(self, key = None):
         if key is None:
@@ -137,9 +137,9 @@ class GraphAdjMatrix():
 
     ##
     #
-    #	 This is a convenience method to simplify access to the link visualizer;
-    #	 the method assumes the vertex names point to existing vertices, else an exception
-    #	 is thrown
+    #     This is a convenience method to simplify access to the link visualizer;
+    #     the method assumes the vertex names point to existing vertices, else an exception
+    #     is thrown
     #
     #
     def get_link_visualizer(self, src, dest):
@@ -156,9 +156,9 @@ class GraphAdjMatrix():
 
     ##
     #
-    #	This is a convenience method to simplify access to the element visualizer;
-    #	the method assumes the vertex name points to an existing vertice, else an
-    #	exception is thrown
+    #    This is a convenience method to simplify access to the element visualizer;
+    #    the method assumes the vertex name points to an existing vertice, else an
+    #    exception is thrown
     #
     #
     def get_visualizer(self, vertex):
@@ -173,7 +173,7 @@ class GraphAdjMatrix():
         return v.get_visualizer()
 
     ##
-    # 	Get the JSON representation of the the data structure
+    #     Get the JSON representation of the the data structure
     #
     def _get_data_structure_representation(self):
         #  map to reorder the nodes for building JSON

@@ -2,29 +2,29 @@ from bridges.connector import *
 from bridges import ColorGrid
 import json
 ##
-# 	@brief The bridges class is the main class that provides interfaces to datasets,
-#	maintains user and assignment information, and connects to the bridges server.
+#     @brief The bridges class is the main class that provides interfaces to datasets,
+#    maintains user and assignment information, and connects to the bridges server.
 #
-#  	The bridges class is responsible  for initializing the bridges system, specifying
-#  	parameters (user id, assignment id, title, description, data structure
-# 	type, etc) for the student assignment, generating the data structure representation
-# 	and transmission to the bridges server. In addition, it provides interfaces to
-# 	a number of real-world datasets, that makes it easy to access the data for use
-#  	algorithms/data structure assignments. <br>
+#      The bridges class is responsible  for initializing the bridges system, specifying
+#      parameters (user id, assignment id, title, description, data structure
+#     type, etc) for the student assignment, generating the data structure representation
+#     and transmission to the bridges server. In addition, it provides interfaces to
+#     a number of real-world datasets, that makes it easy to access the data for use
+#      algorithms/data structure assignments. <br>
 #
 #   <b>Datasets.</b> The datasets that are currently supported through the BRIDGES API
-# 	include USGS Earthquake Data, IMDB Actor/Movie Data (2 versions), Gutenberg Book
-# 	Collection Meta Data, a Video Game Dataset and Shakespeare Dataset. More information
-# 	is found in the respective methods (below) and at <p>
-# 	http://bridgesuncc.github.io/datasets.html <p>
+#     include USGS Earthquake Data, IMDB Actor/Movie Data (2 versions), Gutenberg Book
+#     Collection Meta Data, a Video Game Dataset and Shakespeare Dataset. More information
+#     is found in the respective methods (below) and at <p>
+#     http://bridgesuncc.github.io/datasets.html <p>
 #
-# 	A typical bridges program includes creating the bridges object, followed by creation
+#     A typical bridges program includes creating the bridges object, followed by creation
 #   of the data structure by the user, assigning visual attributes to elements of the
-# 	data structure, followed by specification of teh data structure type  and the
-# 	call to visualize the data structure (bridges::setDataStructure() and visualize()
-# 	methods).
+#     data structure, followed by specification of teh data structure type  and the
+#     call to visualize the data structure (bridges::setDataStructure() and visualize()
+#     methods).
 #
-#  	@author Sean Gallagher, Kalpathi Subramanaian, Mihai Mehedint, David Burlinson, Matthew Mcquaigue
+#      @author Sean Gallagher, Kalpathi Subramanaian, Mihai Mehedint, David Burlinson, Matthew Mcquaigue
 #
 #
 
@@ -153,14 +153,14 @@ class Bridges:
             self._assignment_part = self._assignment_part + 1
 
     ##
-    # 	set the assignment id
+    #     set the assignment id
     #
     #  @param assignment number
     #
     #
     def _set_assignment(self, assignment):
         """
-		Setter for assignment id (must be positive)
+        Setter for assignment id (must be positive)
         Args: 
            assignment: assignment number to be set
         Returns:
@@ -224,7 +224,7 @@ class Bridges:
     def set_coord_system_type(self, coord):
         """
         Setter for the coordinate system type to use in the visualization
-		Args:
+        Args:
            coord: coordinate system type (used in map overlays (can be 
            "cartesian", "albersusa", "equirectangular")
         if coord in self._projection_options:

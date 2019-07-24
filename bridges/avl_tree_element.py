@@ -1,20 +1,20 @@
 from bridges.bst_element import *
 ##
 #  @brief This class extends the BSTElement class by adding a height and balance factor
-#	fields that are useful in AVL trees.
+#    fields that are useful in AVL trees.
 #
-#	AVL tree elements include a 'height' and a 'balFactor' value,
-#	representing the height and balance factor of the AVL tree at
+#    AVL tree elements include a 'height' and a 'balFactor' value,
+#    representing the height and balance factor of the AVL tree at
 #  that node, respectively. This is useful in representing
-#	AVL trees.
+#    AVL trees.
 #
-#	AVLTree elements contain a visualizer (ElementVisualizer) object for setting visual
+#    AVLTree elements contain a visualizer (ElementVisualizer) object for setting visual
 #  attributes (color, shape, opacity, size), necessary for displaying them in a
 #  web browser.
 #
 #  AVLTree elements also have a LinkVisualizer object, that is used when they are
-#	linked to another element, appropriate for setting link attributes, for instance,
-#	between *  the current element and its left or right child
+#    linked to another element, appropriate for setting link attributes, for instance,
+#    between *  the current element and its left or right child
 #
 #
 #  @author Kalpathi Subramanian, Mihai Mehedint, Matthew McQuaigue
@@ -140,11 +140,11 @@ class AVLTreeElement(BSTElement):
 
     @right.setter
     def right(self, value):
-		"""
+        """
         Setter for the right child of this node
         Args:
             value:  right child to be set
         Returns:
             None
-		"""
+        """
         super(AVLTreeElement, self.__class__).set_child(1, value)
