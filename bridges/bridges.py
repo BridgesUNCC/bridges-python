@@ -236,7 +236,6 @@ class Bridges:
     def get_color_grid_from_assignment(self, user: str, assignment: int, subassignment: int = 0) -> ColorGrid:
         """
         Reconstruct a ColorGrid from an existing ColorGrid on the bridges server
-
         Args:
             user(str): the name of the user who uploaded the assignment
             assignment(int): the ID of the assignment to get
