@@ -264,7 +264,77 @@ class LineChart:
             arr.append(float(x_data[i]))
         return arr
 
+    def check(self) -> bool:
+        correct = True
+        for key, value in self.xaxis_data.items():
+            series = key
+            xdata = value
+            ydata = self.yaxis_data.get(series)
+            if ydata is None:
+                print("Series \"" + series + "\" has xdata but no ydata")
+                correct = False
+            if len(xdata) != len(ydata):
+                print("Series \"" + series + "\" has xdata and ydata of different sizes")
+                correct = False
+            if self.logarithmicx:
+                for i in range(0, len(xdata)):
+                    if xdata[i] <= 0:
+                        print("Xaxis scale is logarithmic but series " + series +
+                              " has xdata[" + str(i) + "] = " + str(xdata[i]) + " (should be stricly positive)")
+            if self.logarithmicy:
+                for i in range(0, len(ydata)):
+                    if ydata[i] <= 0:
+                        print("Yaxis scale is logarithmic but series " + series +
+                              " has ydata[" + str(i) + "] = " + str(ydata[i]) + " (should be stricly positive)")
+        for key, value in self.yaxis_data.items():
+            series = key
+            ydata = value
+            xdata = self.xaxis_data.get(series)
+            if xdata is None:
+                print("Series: " + series + " has ydata but no xdata")
+                correct = False
+
+        return correct
+
     def get_data_structure_representation(self):
-        """
-        """
+        self.check()
+        x_temp = []
+        y_temp = []
+        for key, value in self.xaxis_data.items():
+            data_key = key
+            data_value = value
+            for i in range(0, len(data_value)):
+                x_temp.append(str(data_value[i]))
+            xaxis_json = {
+                "Plot_Name": str(data_key),
+                "xaxis_data": x_temp
+            }
+
+        for key, value in self.yaxis_data.items():
+            data_key = key
+            data_value = value
+            for i in range(0, len(data_value)):
+                y_temp.append(str(data_value[i]))
+            yaxis_json = {
+                "Plot_Name": str(data_key),
+                "yaxis_data": y_temp
+            }
+
+        json_dict = {
+            "plot_title": str(self.title),
+            "subtitle": str(self.sub_title),
+            "xLabel": str(self.x_label),
+            "yLabel": str(self.y_label),
+            "xaxisType": self.logarithmicx,
+            "yaxistype": self.logarithmicy,
+            "options": {
+                "mouseTracking": self._mouse_track,
+                "dataLabels": self.data_label
+            },
+            "xaxis_data": xaxis_json,
+            "yaxis_data": yaxis_json
+        }
+
+        return json_dict
+
         
