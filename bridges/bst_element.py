@@ -66,7 +66,7 @@ class BSTElement(BinTreeElement):
         return self._key
 
     @key.setter
-    def key(self, key: str) -> None:
+    def key(self, k: str) -> None:
         """
         Setter for the bst element key
         Args:
@@ -74,7 +74,7 @@ class BSTElement(BinTreeElement):
         Returns:
             None
         """
-        self._key = key
+        self._key = k
 
     @property
     def left(self):
@@ -85,15 +85,6 @@ class BSTElement(BinTreeElement):
         """
         return super(BSTElement, self).left
 
-    @left.setter
-    def left(self, value):
-        """
-        Setter for the left child in BST
-        Returns:
-            None
-        """
-        super(BSTElement, self.__class__).right.fset(self, value)
-
     @property
     def right(self):
         """
@@ -103,11 +94,10 @@ class BSTElement(BinTreeElement):
         """
         return super(BSTElement, self).right
 
-    @right.setter
-    def right(self, value):
-        """
-        Setter for the right child in BST
-        Returns:
-            None
-        """
-        super(BSTElement, self.__class__).right.fset(self, value)
+    def get_element_representation(self):
+        orig_json_str = dict(super(BSTElement, self).get_element_representation())
+        key_json = {
+            'key': self.key
+        }
+        orig_json_str.update(key_json)
+        return orig_json_str

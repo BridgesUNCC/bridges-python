@@ -112,7 +112,7 @@ class Bridges:
         """
         nodes_links_str = ""
 
-        if self.vis_type == "Tree" or self.vis_type == "BinaryTree" or \
+        if self.vis_type == "Tree" or self.vis_type == "BinaryTree" or self.vis_type == "AVLTree" or\
                 self.vis_type == "SinglyLinkedList" or self.vis_type == "DoublyLinkedList" or \
                 self.vis_type == "MultiList" or self.vis_type == "CircularSinglyLinkedList" or \
                 self.vis_type == "CircularDoublyLinkedList" or self.vis_type == "Array" or \
@@ -128,7 +128,7 @@ class Bridges:
             "coord_system_type": self._coord_system_type,
             "map_overlay": self._map_overlay,
         }
-        if self._coord_system_type == "window":
+        if self.window is not None and len(self.window) == 4:
             ds['window'] = self.window
 
         if self.vis_type == "Array":

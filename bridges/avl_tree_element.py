@@ -52,7 +52,7 @@ class AVLTreeElement(BSTElement):
             super(AVLTreeElement, self).__init__()
         self._height = self._bal_factor = 0
 
-    def _get_data_structure_type(self) -> str:
+    def get_data_structure_type(self) -> str:
         """
         Get the data structure type
         Returns:
@@ -116,18 +116,11 @@ class AVLTreeElement(BSTElement):
         Returns:
             child
         """
-        return super(AVLTreeElement, self).get_child(0)
+        return super(AVLTreeElement, self).left
 
     @left.setter
-    def left(self, value):
-        """
-        Setter for the left child of this node
-        Args:
-            value:  left child to be set
-        Returns:
-            None
-        """
-        super(AVLTreeElement, self.__class__).set_child(0, value)
+    def left(self, val):
+        self.set_child(0, val)
 
     @property
     def right(self):
@@ -136,15 +129,18 @@ class AVLTreeElement(BSTElement):
         Returns:
             right child of this tree element
         """
-        return super(AVLTreeElement, self).get_child(1)
+        return super(AVLTreeElement, self).right
 
     @right.setter
-    def right(self, value):
-        """
-        Setter for the right child of this node
-        Args:
-            value:  right child to be set
-        Returns:
-            None
-        """
-        super(AVLTreeElement, self.__class__).set_child(1, value)
+    def right(self, val):
+        self.set_child(1, val)
+
+    def get_element_representation(self):
+        orig_json_str = super(AVLTreeElement, self).get_element_representation()
+        avl_json = {
+            "height": self.height,
+            "balance_factor": self.balance_factor
+        }
+        orig_json_str.update(avl_json)
+        return orig_json_str
+

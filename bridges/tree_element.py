@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from bridges.element import *
+import json
 
  ## @brief This class extends Element to represent general trees with
  #	arbitrary number of children.
@@ -27,6 +28,15 @@ from bridges.element import *
  #  \sa Kd tree tutorial http://bridgesuncc.github.io/tutorials/Tree.html
  #
 class TreeElement(Element):
+    QUOTE = "\""
+    COMMA = ","
+    COLON = ":"
+    OPEN_CURLY = "{"
+    CLOSE_CURLY = "}"
+    OPEN_PAREN = "("
+    CLOSE_PAREN = ")"
+    OPEN_BOX = "["
+    CLOSE_BOX = "]"
 
     def __init__(self, **kwargs) -> None:
         """
@@ -131,33 +141,33 @@ class TreeElement(Element):
         """
         k=0
         json_str = dict()
-        t_str = str()
-
         if root is not None:
             #  first get the node representation
             elem_rep = root.get_element_representation()
-            #  now get the children
             if root.get_number_of_children() > 0:
-                json_str["children"] = []
-            while k < root.get_number_of_children():
-                if root.get_child(k) is None:
-                    children_json = {
-                        "name": "NULL",
+                elem_rep["children"] = []
+            for i in range(0, root.get_number_of_children()):
+                if root.get_child(i) is None:
+                    temp = {
+                        "name": "NULL"
                     }
-                    json_str["children"].append(children_json)
+                    elem_rep["children"].append(temp)
                 else:
-                    lv = root.get_link_visualizer(root.get_child(k))
-                    children_json = {}
+                    lv = root.get_link_visualizer(root.get_child(i))
                     if lv is not None:
-                        children_json["linkProperties"] = {
-                            "color": [str(lv.get_color().get_red()), str(lv.get_color().get_green()), str(lv.get_color().get_blue()), str(lv.get_color().get_alpha())],
-                            "thickness": str(lv.get_thickness())
+                        temp = {
+                            "linkProperties": {
+                                "color": [lv.color.red, lv.color.green, lv.color.blue, lv.color.alpha],
+                                "thickness": lv.thickness
+                            }
                         }
-                        json_str["children"].append(children_json)
+                        elem_rep["children"].append(temp)
                     else:
-                        children_json["linkProperties"] = {}
-                        json_str["children"].append(children_json)
-                    #  process its children
-                    json_str.update(self._pre_order(root.get_child(k)))
-            k += 1
+                        temp = {
+                            "linkProperties": {}
+                        }
+                        elem_rep["children"].append(temp)
+                    elem_rep['children'].append(self._pre_order(root.get_child(i)))
+            json_str = elem_rep
+
         return json_str

@@ -15,7 +15,7 @@ def main():
 
     # create the Bridges object, set credentials
 
-    bridges = Bridges(0, "test", "833518929883")
+    bridges = Bridges(0, "test", "988181220044")
     bridges.set_visualize_JSON(True)
     bridges.connector.set_server("local")
 

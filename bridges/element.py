@@ -85,7 +85,7 @@ class Element():
         elif 'original' in kwargs:
             self._visualizer = ElementVisualizer(kwargs['original'].get_visualizer())
             self._label = str(kwargs['original'].label)
-            self.value = kwargs['original'].value
+            self._value = kwargs['original']._value
 
     @property
     def value(self) -> object:
@@ -335,14 +335,6 @@ class Element():
             json['key'] = str(kdt.key)
             json['dimension'] = str(kdt.dimension)
             json['thickness'] = str(kdt.thickness)
-        if self.get_data_structure_type() == "BinarySearchTree":
-            bst = self
-            json['key'] = str(bst.key)
-        if self.get_data_structure_type() == "AVLTree":
-            avl = self
-            json['key'] = str(avl.key)
-            json['height'] = str(avl.height)
-            json['balance_factor'] = str(avl.balance_factor)
         return json
 
     def get_link_representation(self, lv, src, dest):

@@ -122,7 +122,7 @@ class LinkVisualizer():
         link_props = {
             "color": [str(self.color.red), str(self.color.green), str(self.color.blue), str(self.color.alpha)],
             "thickness": str(self.thickness),
-            "weight": str(self.weight)
+            "weight": str(self._weight)
         }
         return link_props
 

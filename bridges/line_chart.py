@@ -336,5 +336,3 @@ class LineChart:
         }
 
         return json_dict
-
-        

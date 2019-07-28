@@ -65,10 +65,10 @@ class BinTreeElement(TreeElement):
         Returns:
             TreeElement: left child of this element
         """
-        return super(BinTreeElement, self).get_child(0)
+        return self.get_child(0)
 
     @left.setter
-    def left(self, left) -> None:
+    def left(self, l) -> None:
         """
         Setter for the left element of a binary tree
         Args:
@@ -76,7 +76,7 @@ class BinTreeElement(TreeElement):
         Returns:
             None
         """
-        super(BinTreeElement, self).set_child(0, left)
+        self.set_child(0, l)
 
     @property
     def right(self):
@@ -85,10 +85,10 @@ class BinTreeElement(TreeElement):
         Returns:
             TreeElement: the right child of this element
         """
-        return super(BinTreeElement, self).get_child(1)
+        return self.get_child(1)
 
     @right.setter
-    def right(self, right) -> None:
+    def right(self, r) -> None:
         """
         Setter for the right element of a binary tree
         Args:
@@ -96,4 +96,4 @@ class BinTreeElement(TreeElement):
         Returns:
             None
         """
-        super(BinTreeElement, self).set_child(1, right)
+        self.set_child(1, r)
