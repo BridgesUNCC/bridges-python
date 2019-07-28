@@ -1,5 +1,4 @@
 .idea/
-tests/
 __pycache__/
 *.py[cod]
 export.sh
