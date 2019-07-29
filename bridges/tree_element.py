@@ -139,7 +139,15 @@ class TreeElement(Element):
         Returns:
             dict: representing the json to be returned
         """
-        k=0
+        """
+                Use a preoreder traversal to directly extract a hierarchical
+                JSON representation of the tree
+                Args:
+                    root: the root of the tree structure
+                Returns:
+                    dict: representing the json to be returned
+                """
+        k = 0
         json_str = dict()
         if root is not None:
             #  first get the node representation
@@ -167,7 +175,7 @@ class TreeElement(Element):
                             "linkProperties": {}
                         }
                         elem_rep["children"].append(temp)
-                    elem_rep['children'].append(self._pre_order(root.get_child(i)))
+                    print(self._pre_order(root.get_child(i)))
             json_str = elem_rep
 
         return json_str

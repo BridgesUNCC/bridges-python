@@ -46,7 +46,7 @@ class LinkVisualizer():
         """
         self._color = Color(70, 130, 180, 1.0)
         self._thickness = 1.0
-        self._weight = 1.0
+        self._label = ""
 
     @property
     def thickness(self) -> float:
@@ -113,6 +113,14 @@ class LinkVisualizer():
         """
         self.color.alpha = opacity
 
+    @property
+    def label(self):
+        return self._label
+
+    @label.setter
+    def label(self, l):
+        self._label = l
+
     def get_link_properties(self):
         """
         Getter for the link properties
@@ -122,8 +130,10 @@ class LinkVisualizer():
         link_props = {
             "color": [str(self.color.red), str(self.color.green), str(self.color.blue), str(self.color.alpha)],
             "thickness": str(self.thickness),
-            "weight": str(self._weight)
         }
+        if self.label is not "" or self.label is not None:
+            link_props["label"] = self.label
+
         return link_props
 
     def get_label(self):
