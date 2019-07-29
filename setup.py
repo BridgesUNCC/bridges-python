@@ -8,7 +8,7 @@ setuptools.setup(
     version="3.0.0b1",
     author="BRIDGES",
     author_email="bridges.uncc@gmail.com",
-    description="Bridging Real-world Infrastructure Designed to Goal-align, Engage, and Stimulate, an NFS TUES",
+    description="Bridging Real-world Infrastructure Designed to Goal-align, Engage, and Stimulate, an NSF TUES",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/BridgesUNCC/bridges-python",
