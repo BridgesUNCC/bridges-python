@@ -17,6 +17,7 @@ setuptools.setup(
     install_requires=[
         'requests>=2.21.0',
         'webcolors>=1.8.1',
+        'python-socketio[client]>=4.3.0',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
