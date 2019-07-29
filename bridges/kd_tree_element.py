@@ -130,3 +130,12 @@ class KDTreeElement(BSTElement):
     def right(self, r):
         self.set_child(1, r)
 
+    def get_element_representation(self):
+        orig_json_str = super(KDTreeElement, self).get_element_representation()
+        kdt_dict = {
+            "dimension": str(self.dimension),
+            "thickness": str(self.thickness)
+        }
+        orig_json_str.update(kdt_dict)
+        return orig_json_str
+

@@ -70,7 +70,7 @@ class Edge():
         self._lvis.thickness = th
 
     @property
-    def edge_data(self) -> str:
+    def edge_data(self):
         """
         Getter for edge data
         Returns:
@@ -79,7 +79,7 @@ class Edge():
         return self._edge_data
 
     @edge_data.setter
-    def edge_data(self, data: str) -> None:
+    def edge_data(self, data) -> None:
         """
         Setter for edge data
         Args:

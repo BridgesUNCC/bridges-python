@@ -330,11 +330,6 @@ class Element():
         loc_flag = not ((self.visualizer.location_x == Decimal('Infinity')) or (self.visualizer.location_y == Decimal('Infinity')))
         if loc_flag:
             json['location'] = [str(self.visualizer.location_x), str(self.visualizer.location_y)]
-        if self.get_data_structure_type() == "KDTree":
-            kdt = self
-            json['key'] = str(kdt.key)
-            json['dimension'] = str(kdt.dimension)
-            json['thickness'] = str(kdt.thickness)
         return json
 
     def get_link_representation(self, lv, src, dest):
