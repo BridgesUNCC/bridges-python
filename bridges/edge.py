@@ -26,10 +26,10 @@ class Edge():
         Returns:
             None
         """
-        self.from_vertex = v1
-        self.to_vertex = v2
-        self.edge_data = data
-        self.lvis = LinkVisualizer()
+        self._from_vertex = v1
+        self._to_vertex = v2
+        self._edge_data = data
+        self._lvis = LinkVisualizer()
 
     @property
     def tov(self):
@@ -38,7 +38,7 @@ class Edge():
         Returns:
             vertex: terminating vertex of edge 
         """
-        return self.to_vertex
+        return self._to_vertex
 
     @property
     def fromv(self):
@@ -47,7 +47,7 @@ class Edge():
         Returns:
             vertex : source vertex  of edge
         """
-        return self.from_vertex
+        return self._from_vertex
 
     @property
     def thickness(self) -> float:
@@ -56,7 +56,7 @@ class Edge():
         Returns:
              float : link thickness (1.0-10.0 range)
         """
-        return self.lvis.thickness
+        return self._lvis.thickness
 
     @thickness.setter
     def thickness(self, th: float) -> None:
@@ -67,19 +67,19 @@ class Edge():
         Returns:
             None
         """
-        self.lvis.thickness = th
+        self._lvis.thickness = th
 
     @property
-    def edge_data(self) -> str:
+    def edge_data(self):
         """
         Getter for edge data
         Returns:
              str : data associated with this edge (generic object)
         """
-        return self.edge_data
+        return self._edge_data
 
     @edge_data.setter
-    def edge_data(self, data: str) -> None:
+    def edge_data(self, data) -> None:
         """
         Setter for edge data
         Args:
@@ -87,25 +87,27 @@ class Edge():
         Returns:
             None
         """
-        self.edge_data = data
+        self._edge_data = data
 
-    def set_color(self, color):
-        """
-        Setter for edge color
-        Args:
-           color : color to be set (see link visualizer class for setting options)
-        Returns:
-           None
-        """
-        self.lvis.color = color
-
-    def get_color(self):
+    @property
+    def color(self):
         """
         Getter for edge color
         Returns:
-             color of edge (see link visualizer class for setting options
+                color of edge (see link visualizer class for setting options
         """
-        return self.lvis.color
+        return self._lvis.color
+
+    @color.setter
+    def color(self, color):
+        """
+        Setter for edge color
+        Args:
+            color : color to be set (see link visualizer class for setting options)
+        Returns:
+            None
+        """
+        self._lvis.color = color
 
     def get_edge(self):
         return self

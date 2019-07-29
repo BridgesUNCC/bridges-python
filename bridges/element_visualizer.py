@@ -158,7 +158,8 @@ class ElementVisualizer():
         self._locationX = x
         self._locationY = y
 
-    def get_locationX(self) -> int:
+    @property
+    def location_x(self):
         """
         Getter for the X location of element
         Returns:
@@ -166,7 +167,8 @@ class ElementVisualizer():
         """
         return self._locationX
 
-    def get_locationY(self) -> int:
+    @property
+    def location_y(self):
         """
         Getter for the y location of the element
         Returns:

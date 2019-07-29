@@ -49,27 +49,30 @@ class SymbolCollection:
         """
         dims = s.get_dimensions()
 
-        if abs(dims[0]) > self.domain:
-            self.domain = abs(dims[0])
-        if abs(dims[1]) > self.domain:
-            self.domain = abs(dims[1])
+        if abs(dims[0]) > self._domain:
+            self._domain = abs(dims[0])
+        if abs(dims[1]) > self._domain:
+            self._domain = abs(dims[1])
 
-        if abs(dims[2]) > self.domain:
-            self.domain = abs(dims[2])
-        if abs(dims[3]) > self.domain:
-            self.domain = abs(dims[3])
+        if abs(dims[2]) > self._domain:
+            self._domain = abs(dims[2])
+        if abs(dims[3]) > self._domain:
+            self._domain = abs(dims[3])
 
-    def _get_data_structure_representation(self):
+    def get_data_structure_representation(self):
         """
         Getter for the data structure's JSON representatoin
         Returns:
             str: the data structure representation
         """
         symbol_json = []
-
         for key in self._symbols.keys():
             self.update_axis_domains(self._symbols[key])
             symbol_json.append(self._symbols[key].get_json_representation())
 
-        symbol_json = json.dumps(symbol_json)
-        return "\"""domainX\""":[" + str(-self.domain) + "," + str(self.domain) + "],\"""domainY\""":[" + str(-self.domain) + "," + str(self.domain) + "], " + "\"""symbols\""":" + symbol_json + "}"
+        final_json = {
+            "domainX": [str(-self._domain), str(self._domain)],
+            "domainY": [str(-self._domain), str(self._domain)],
+            "symbols": symbol_json
+        }
+        return final_json

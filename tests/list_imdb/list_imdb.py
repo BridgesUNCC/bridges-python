@@ -5,8 +5,8 @@ from bridges.sl_element import *
 class ListIMDB:
 
     #Init a Bridges connection with your credentials
-    bridges = Bridges(35, "test", "211416381091")
-
+    bridges = Bridges(0, "test", "988181220044")
+    bridges.set_visualize_JSON(True)
     bridges.connector.set_server("local")
 
     #Set an assignment title
@@ -26,12 +26,12 @@ class ListIMDB:
         element = SLelement()
 
         #Set the element label equal to 'Actor = Movie' for each pair.(print it out for sanit Check)
-        element.set_label(myList[i].get_actor() + " - " + myList[i].get_movie())
-        print(element.get_label())
+        element.label = (myList[i].actor + " - " + myList[i].movie)
+        print(element.label)
 
         #add 'next' pointer where appropriate
         if(i > 0):
-            prev.set_next(element)
+            prev.next = element
         else:
             #Set head pointer
             head = element

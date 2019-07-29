@@ -11,8 +11,8 @@ def main():
 
     pair1 = my_list[random.randrange(len(my_list))]
 
-    print(pair1.get_actor())
-    print(pair1.get_movie())
+    print(pair1.actor)
+    print(pair1.movie)
 
 if __name__ == '__main__':
     main()

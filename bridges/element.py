@@ -304,7 +304,7 @@ class Element():
         Returns:
            float: X coordinate of element's location
         """
-        return self.visualizer.get_locationX()
+        return self.visualizer.location_x
 
     def get_locationY(self):
         """
@@ -312,7 +312,7 @@ class Element():
         Returns:
            float: Y coordinate of element's location
         """
-        return self.visualizer.get_locationY()
+        return self.visualizer.location_y
 
     def get_element_representation(self):
         """
@@ -327,14 +327,9 @@ class Element():
             "color": [str(self.visualizer.color.red), str(self.visualizer.color.green),
                       str(self.visualizer.color.blue), str(self.visualizer.color.alpha)]
         }
-        loc_flag = not ((self.visualizer.get_locationX() == Decimal('Infinity')) or (self.visualizer.get_locationY() == Decimal('Infinity')))
+        loc_flag = not ((self.visualizer.location_x == Decimal('Infinity')) or (self.visualizer.location_y == Decimal('Infinity')))
         if loc_flag:
-            json['location'] = [str(self.visualizer.get_locationX()), str(self.visualizer.get_locationY())]
-        if self.get_data_structure_type() == "KDTree":
-            kdt = self
-            json['key'] = str(kdt.key)
-            json['dimension'] = str(kdt.dimension)
-            json['thickness'] = str(kdt.thickness)
+            json['location'] = [str(self.visualizer.location_x), str(self.visualizer.location_y)]
         return json
 
     def get_link_representation(self, lv, src, dest):

@@ -98,10 +98,11 @@ class SLelement(Element):
         super(SLelement, self).value = val
 
     def list_helper(start):
-        node = start[0]
+        node = start
         while node.next is not None:
-            yield node
+            yield node.value
             node = node.next
+        yield node.value
 
     def get_data_structure_representation(self) -> dict:
         """

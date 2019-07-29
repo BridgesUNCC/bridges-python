@@ -30,32 +30,13 @@ import traceback
 #
 #
 class GraphAdjMatrix():
-    #graph vertices list
-    # vertices = dict()
-
-    #holds the adjacency list of edges
-    # matrix = dict()
-
-    #holds edge information for graph edges
-    # edge_data = dict()
-
-    QUOTE = "\""
-    COMMA = ","
-    COLON = ":"
-    OPEN_CURLY = "{"
-    CLOSE_CURLY = "}"
-    OPEN_PAREN = "("
-    CLOSE_PAREN = ")"
-    OPEN_BOX = "["
-    CLOSE_BOX = "]"
-
     ##
     #     Constructor
     #
-    def __init__(self, size = None):
-        self.vertices = dict()
-        self.matrix = dict()
-        self.edge_data = dict()
+    def __init__(self):
+        self._vertices = dict()
+        self._matrix = dict()
+        self._edge_data = dict()
 
     ##
     #
@@ -80,14 +61,14 @@ class GraphAdjMatrix():
         #  note: it is the user's responsibility to  check
         #  for duplicate vertices
         self.vertices[k] = Element(val = e)
-        self.vertices.get(k).set_label(str(k))
+        self.vertices.get(k).label = str(k)
 
         #  create a hashmap for this vertex
-        self.matrix[k] =  dict()
+        self._matrix[k] =  dict()
         #  fill up this vertex's row and column elements
         for k, element in self.vertices.items():
-            (self.matrix.get(k))[element.get_label()] = 0 #  row
-            (self.matrix.get(element.get_label()))[k] =  0 #  col
+            (self._matrix.get(k))[element.label] = 0 #  row
+            (self._matrix.get(element.label))[k] =  0 #  col
 
     ##
     #    Adds a new edge to the graph, adds it to the index corresponding to
@@ -108,20 +89,47 @@ class GraphAdjMatrix():
         except Exception as e:
             traceback.print_tb(e.__traceback__)
         if weight is not None:
-            (self.matrix.get(src))[dest] = weight
+            (self._matrix.get(src))[dest] = weight
         else:
-            (self.matrix.get(src))[dest] =  1
+            (self._matrix.get(src))[dest] =  1
 
+    @property
+    def vertices(self):
+        return self._vertices
 
-    ##
-    #
-    #    This method returns the graph nodes
-    #
-    #    return -- vertices held in an unordered  map
-    #
-    #
-    def get_vertices(self):
-        return self.vertices
+    def set_vertex_data(self, src, vertex_data):
+        try:
+            if self.vertices.get(src) is None:
+                raise ValueError("Vertex " + src + " does not exist!")
+        except Exception as e:
+            traceback.print_tb(e.__traceback__)
+        self.vertices.get(src).value = vertex_data
+
+    def get_vertex_data(self, src):
+        try:
+            if self.vertices.get(src) is None:
+                raise ValueError("Vertex " + src + " does not exist!")
+        except Exception as e:
+            traceback.print_tb(e.__traceback__)
+        return self.vertices.get(src).value
+
+    def set_edge_data(self, src, dest, data):
+        try:
+            if self.vertices.get(src) is None or self.vertices.get(dest) is None:
+                raise ValueError("Vertex " + src + " or " + dest +
+					" does not exist! Add the vertex before creating the edge.")
+        except Exception as e:
+            traceback.print_tb(e.__traceback__)
+        self._edge_data.get(src)[dest] = data
+
+    def get_edge_data(self, src, dest):
+        try:
+            if self.vertices.get(src) is None or self.vertices.get(dest) is None:
+                raise ValueError("Vertex " + src + " or " + dest +
+                                 " does not exist! Add the vertex before creating the edge.")
+        except Exception as e:
+            traceback.print_tb(e.__traceback__)
+        return self._edge_data.get(src)[dest]
 
     ##
     #
@@ -131,9 +139,9 @@ class GraphAdjMatrix():
     #
     def get_adjacency_matrix(self, key = None):
         if key is None:
-            return self.matrix
+            return self._matrix
         else:
-            return self.matrix.get(key)
+            return self._matrix.get(key)
 
     ##
     #
@@ -170,47 +178,36 @@ class GraphAdjMatrix():
                 raise ValueError("Vertex " + vertex + " does not exist! First add the vertices to the graph.")
         except Exception as e:
             traceback.print_tb(e.__traceback__)
-        return v.get_visualizer()
+        return v.visualizer
 
     ##
     #     Get the JSON representation of the the data structure
     #
-    def _get_data_structure_representation(self):
-        #  map to reorder the nodes for building JSON
+    def get_data_structure_representation(self):
         node_map = dict()
-        #  get teh list nodes
         nodes = []
-
+        nodes_json = []
         for key, value in self.vertices.items():
             nodes.append(value)
 
-        #  remap  map these nodes to  0...MaxNodes-1
-        #  and build the nodes JSON
-        nodes_JSON = str()
-        k = 0
-        while k < len(nodes):
+        for k in range(0, len(nodes)):
             node_map[nodes[k]] = k
-            nodes_JSON+=(nodes[k].get_element_representation())
-            nodes_JSON+=(self.COMMA)
-            k += 1
+            nodes_json.append(nodes[k].get_element_representation())
 
-        #  remove the last comma
-        if len(nodes) != 0:
-            nodes_JSON = nodes_JSON[:-1]
-        #  build the links JSON - traverse the adj. lists
-
-        links_JSON = str()
-        for el_src in self.matrix.items():
+        links_json = []
+        for el_src in self._matrix.items():
             src_vert = self.vertices.get(el_src[0])
             src_indx = node_map.get(src_vert)
+
             for el_dest in el_src[1].items():
                 dest_vert = self.vertices.get(el_dest[0])
                 if el_dest[1] > 0:
                     dest_indx = node_map.get(dest_vert)
-                    links_JSON+=(src_vert.get_link_representation(src_vert.get_link_visualizer(dest_vert), str(src_indx), str(dest_indx)))
-                    links_JSON+=self.COMMA
-        #  remove the last comma
-        if len(links_JSON) > 0:
-            links_JSON = links_JSON[:-1]
-        json_str = self.QUOTE + "nodes" + self.QUOTE + self.COLON + self.OPEN_BOX + nodes_JSON.__str__() + self.CLOSE_BOX + self.COMMA + self.QUOTE + "links" + self.QUOTE + self.COLON + self.OPEN_BOX + links_JSON.__str__() + self.CLOSE_BOX + self.CLOSE_CURLY
+                    links_json.append(src_vert.get_link_representation(src_vert.get_link_visualizer(dest_vert),
+                                                                       str(src_indx), str(dest_indx)))
+        json_str = {
+            "nodes": nodes_json,
+            "links": links_json
+        }
+
         return json_str

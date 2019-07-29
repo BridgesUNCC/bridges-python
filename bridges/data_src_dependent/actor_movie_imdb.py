@@ -19,13 +19,13 @@ class ActorMovieIMDB():
     # @param genr - genres  (vector)
     def __init__(self, a = None, m = None, r = None, genr = None):
         if a is not None:
-            self.actor = a
+            self._actor = a
         if m is not None:
-            self.movie = m
+            self._movie = m
         if r is not None:
-            self.rating = r
+            self._rating = r
         if genr is not None:
-            self.genres = genr
+            self._genres = genr
 
     ##
 	#
@@ -34,75 +34,34 @@ class ActorMovieIMDB():
 	#  	 @return actor name (string)
 	#
 	#
-    def get_actor(self):
-        return self.actor
+    @property
+    def actor(self):
+        return self._actor
 
-    ##
-	#
-	#  	 Set actor name
-	#
-	#  	 @param actor name (string)
-	#
-	#
-    def set_actor(self, a):
-        self.actor = a
+    @actor.setter
+    def actor(self, a):
+        self._actor = a
 
-    ##
-	#
-	#  	 Get movie name
-	#
-	#  	 @return movie name (string)
-	#
-	#
-    def get_movie(self):
-        return self.movie
+    @property
+    def movie(self):
+        return self._movie
 
-    ##
-	#
-	#  	 Set movie name
-	#
-	#  	 @param movie name (string)
-	#
-	#
-    def set_movie(self, m):
-        self.movie = m
+    @movie.setter
+    def movie(self, m):
+        self._movie = m
 
-    ##
-	#
-	#  	 Get movie rating
-	#
-	#  	 @return movie rating  (double)
-	#
-	#
-    def get_rating(self):
-        return self.rating
+    @property
+    def rating(self):
+        return self._rating
 
-    ##
-	#
-	#  	 Set movie rating
-	#
-	#  	 @param movie rating (double)
-	#
-	#
-    def set_rating(self, r):
-        self.rating = r
+    @rating.setter
+    def rating(self, r):
+        self._rating = r
 
-    ##
-	#
-	#  	 Get movie genres
-	#
-	#  	 @return movie genres  (vector)
-	#
-	#
-    def get_genres(self):
-        return self.genres
+    @property
+    def generes(self):
+        return self._genres
 
-    ##
-	#
-	#  	 Set movie genres
-	#
-	#  	 @param movie genres (vector)
-	#
-	#  	
-    def set_genres(self, genr):
-        self.genres = genr
+    @generes.setter
+    def generes(self, g):
+        self._genres = g

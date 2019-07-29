@@ -2,24 +2,30 @@
 class Shakespeare:
 
     def __init__(self, title: str = "", type: str = "", text: str = ""):
-        self.title = title
-        self.type = type
-        self.text = text
+        self._title = title
+        self._type = type
+        self._text = text
 
-    def get_title(self):
-        return self.title
+    @property
+    def title(self):
+        return self._title
 
-    def set_title(self, title):
-        self.title = title
+    @title.setter
+    def title(self, t):
+        self._title = t
 
-    def get_type(self):
-        return self.type
+    @property
+    def type(self):
+        return self._type
 
-    def set_type(self,type):
-        self.type = type
+    @type.setter
+    def type(self, t):
+        self._type = t
 
-    def get_text(self):
-        return self.text
+    @property
+    def text(self):
+        return self._text
 
-    def set_text(self, text):
-        self.text = text
+    @text.setter
+    def text(self, t):
+        self._text = t

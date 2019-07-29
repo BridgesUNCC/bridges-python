@@ -3,88 +3,112 @@ class Book:
 
     def __init__(self, authorName, authorBirth, authorDeath, title, lang, genre, subject, numChars, numWords,
                  numSentences, numDifficultWords, url, downloads):
-        self.authorName = authorName
-        self.authorBirth = authorBirth
-        self.authorDeath = authorDeath
-        self.title = title
-        self.lang = lang
-        self.genre = genre
-        self.subject = subject
-        self.url = url
-        self.numChars = numChars
-        self.numWords = numWords
-        self.numSentences = numSentences
-        self.numDifficultWords = numDifficultWords
+        self._authorName = authorName
+        self._authorBirth = authorBirth
+        self._authorDeath = authorDeath
+        self._title = title
+        self._lang = lang
+        self._genre = genre
+        self._subject = subject
+        self._url = url
+        self._numChars = numChars
+        self._numWords = numWords
+        self._numSentences = numSentences
+        self._numDifficultWords = numDifficultWords
 
-    def get_author_name(self):
-        return self.authorName
+    @property
+    def name(self):
+        return self._authorName
 
-    def set_author_name(self, author_name):
-        self.authorName = author_name
+    @name.setter
+    def name(self, n):
+        self._authorName = n
 
-    def get_author_birth(self):
-        return self.authorBirth
+    @property
+    def birth(self):
+        return self._authorBirth
 
-    def set_author_birth(self, author_birth):
-        self.authorBirth = author_birth
+    @birth.setter
+    def birth(self, b):
+        self._authorBirth = b
 
-    def get_author_death(self):
-        return self.authorDeath
+    @property
+    def death(self):
+        return self._authorDeath
 
-    def set_author_death(self,author_death):
-        self.authorDeath = author_death
+    @death.setter
+    def death(self, d):
+        self._authorDeath = d
 
-    def get_title(self):
-        return self.title
+    @property
+    def title(self):
+        return self._title
 
-    def set_title(self,title):
-        self.title = title
+    @title.setter
+    def title(self, t):
+        self._title = t
 
-    def get_lang(self):
-        return self.lang
+    @property
+    def lang(self):
+        return self._lang
 
-    def set_lang(self, lang):
-        self.lang = lang
+    @lang.setter
+    def lang(self, l):
+        self._lang = l
 
-    def get_genre(self):
-        return self.genre
+    @property
+    def genre(self):
+        return self._genre
 
-    def set_genre(self, genre):
-        self.genre = genre
+    @genre.setter
+    def genre(self, g):
+        self._genre = g
 
-    def get_subject(self):
-        return self.subject
+    @property
+    def subject(self):
+        return self._subject
 
-    def set_subject(self, subject):
-        self.subject = subject
+    @subject.setter
+    def subject(self, s):
+        self._subject = s
 
-    def get_url(self):
-        return self.url
+    @property
+    def url(self):
+        return self._url
 
-    def set_url(self,url):
-        self.url = url
+    @url.setter
+    def url(self, u):
+        self._url = u
 
-    def get_num_chars(self):
-        return self.numChars
+    @property
+    def num_chars(self):
+        return self._numChars
 
-    def set_num_chars(self,num_chars):
-        self.numChars = num_chars
+    @num_chars.setter
+    def num_chars(self, n):
+        self._numChars = n
 
-    def get_num_words(self):
-        return self.numWords
+    @property
+    def num_words(self):
+        return self._numWords
 
-    def set_num_words(self,num_words):
-        self.numWords = num_words
+    @num_words.setter
+    def num_words(self, w):
+        self._numWords = w
 
-    def get_num_sentences(self):
-        return self.numSentences
+    @property
+    def num_sentences(self):
+        return self._numSentences
 
-    def set_num_sentences(self,num_sentences):
-        self.numSentences = num_sentences
+    @num_sentences.setter
+    def num_sentences(self, n):
+        self._numSentences = n
 
-    def get_num_difficult_words(self):
-        return self.numDifficultWords
+    @property
+    def num_difficult_words(self):
+        return self._numDifficultWords
 
-    def set_num_difficult_words(self, num_difficult_words):
-        self.numDifficultWords = num_difficult_words
+    @num_difficult_words.setter
+    def num_difficult_words(self, w):
+        self._numDifficultWords = w
 

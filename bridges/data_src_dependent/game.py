@@ -2,31 +2,39 @@
 class Game:
 
     def __init__(self, title: str = "", platform: str = "", rating: float = 0.0, genre: str = ""):
-            self.title = title
-            self.platform = platform
-            self.rating = rating
-            self.genre = genre
+            self._title = title
+            self._platform = platform
+            self._rating = rating
+            self._genre = genre
 
-    def get_title(self):
-        return self.title
+    @property
+    def title(self):
+        return self._title
 
-    def set_title(self, title):
-        self.title = title
+    @title.setter
+    def title(self, t):
+        self._title = t
 
-    def get_platform(self):
-        return self.platform
+    @property
+    def platform(self):
+        return self._platform
 
-    def set_platform(self, platform):
-        self.platform = platform
+    @platform.setter
+    def platform(self, p):
+        self._platform = p
 
-    def get_rating(self):
-        return self.rating
+    @property
+    def rating(self):
+        return self._rating
 
-    def set_rating(self, rating):
-        self.rating = rating
+    @rating.setter
+    def rating(self, r):
+        self._rating = r
 
-    def get_genre(self):
-        return self.genre
+    @property
+    def genre(self):
+        return self._genre
 
-    def set_genre(self, genre):
-        self.genre = genre
+    @genre.setter
+    def genre(self, g):
+        self._genre = g

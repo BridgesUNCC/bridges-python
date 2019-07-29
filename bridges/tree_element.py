@@ -125,10 +125,12 @@ class TreeElement(Element):
         Returns:
             dict: representing the data structures json 
         """
-        json_dict = {
-            "nodes": self._pre_order(self)
-        }
-        return json_dict
+        # json_dict = {
+        #     "nodes": self._pre_order(self)
+        #
+        json_dict = ""
+        json_dict += "{" + self.QUOTE + "nodes" + self.QUOTE + ":" + "{" + str(self._pre_order(self)) + "}" + "}"
+        return json.loads(json_dict)
 
     def _pre_order(self, root) -> dict:
         """
@@ -139,35 +141,75 @@ class TreeElement(Element):
         Returns:
             dict: representing the json to be returned
         """
-        k=0
-        json_str = dict()
+        json_str = ""
+        children = ""
+        link_props = ""
+        elem_rep = ""
+        t_str = str()
+        num = root.get_number_of_children()
         if root is not None:
-            #  first get the node representation
             elem_rep = root.get_element_representation()
+            elem_rep = json.dumps(elem_rep)
+            t_str = elem_rep[1:-1]
+            json_str = t_str
             if root.get_number_of_children() > 0:
-                elem_rep["children"] = []
-            for i in range(0, root.get_number_of_children()):
-                if root.get_child(i) is None:
-                    temp = {
-                        "name": "NULL"
-                    }
-                    elem_rep["children"].append(temp)
+                json_str += "," + self.QUOTE + "children" + self.QUOTE + ":" + "["
+            for k in range(0, root.get_number_of_children()):
+                if root.get_child(k) is None:
+                    json_str += "{" + self.QUOTE + "name" + self.QUOTE + ":" + \
+                        self.QUOTE + "NULL" + self.QUOTE + "}" + ","
                 else:
-                    lv = root.get_link_visualizer(root.get_child(i))
+                    lv = root.get_link_visualizer(root.get_child(k))
+                    json_str += "{"
                     if lv is not None:
-                        temp = {
-                            "linkProperties": {
-                                "color": [lv.color.red, lv.color.green, lv.color.blue, lv.color.alpha],
-                                "thickness": lv.thickness
-                            }
-                        }
-                        elem_rep["children"].append(temp)
+                        json_str += self.QUOTE + "linkProperties" + self.QUOTE + ":" + "{" + \
+                            self.QUOTE + "color" + self.QUOTE + ":" + \
+                            "[" + \
+                            str(lv.color.red) + "," + \
+                            str(lv.color.green) + "," + \
+                            str(lv.color.blue) + "," + \
+                            str(lv.color.alpha) + "]" + "," + \
+                            self.QUOTE + "thickness" + self.QUOTE + ":" + \
+                            str(lv.thickness) + "}" + ","
                     else:
-                        temp = {
-                            "linkProperties": {}
-                        }
-                        elem_rep["children"].append(temp)
-                    elem_rep['children'].append(self._pre_order(root.get_child(i)))
-            json_str = elem_rep
+                        json_str += "linkProperties" + ":" + "{}" + ","
 
+                    json_str += str(self._pre_order(root.get_child(k)))
+                    json_str += "}" + ","
+            if len(json_str) > 0:
+                json_str = json_str[0:-1]
+            json_str += "]"
         return json_str
+
+        # k = 0
+        # json_str = dict()
+        # if root is not None:
+        #     #  first get the node representationS
+        #     elem_rep = root.get_element_representation()
+        #     if root.get_number_of_children() > 0:
+        #         elem_rep["children"] = []
+        #     for i in range(0, root.get_number_of_children()):
+        #         if root.get_child(i) is None:
+        #             temp = {
+        #                 "name": "NULL"
+        #             }
+        #             elem_rep["children"].append(temp)
+        #         else:
+        #             lv = root.get_link_visualizer(root.get_child(i))
+        #             if lv is not None:
+        #                 temp = {
+        #                     "linkProperties": {
+        #                         "color": [lv.color.red, lv.color.green, lv.color.blue, lv.color.alpha],
+        #                         "thickness": lv.thickness
+        #                     }
+        #                 }
+        #                 elem_rep["children"].append(temp)
+        #             else:
+        #                 temp = {
+        #                     "linkProperties": {}
+        #                 }
+        #                 elem_rep["children"].append(temp)
+        #             elem_rep['children'].append(self._pre_order(root.get_child(i)))
+        #     json_str = elem_rep
+        #
+        # return json_str

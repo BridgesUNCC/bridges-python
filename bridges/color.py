@@ -217,6 +217,11 @@ class Color(object):
         """
         col_name = None
         if args:
+            if len(args) == 1 and type(args[0]) == list:
+                self.red = args[0][0]
+                self.green = args[0][1]
+                self.blue = args[0][2]
+                self.alpha = args[0][3]
             if len(args) == 4 or len(args) == 3:
                 self.red = args[0]
                 self.green = args[1]

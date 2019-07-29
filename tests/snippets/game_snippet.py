@@ -11,10 +11,10 @@ def main():
 
     game1 = my_list[random.randrange(len(my_list))]
 
-    print(game1.get_title())
-    print(game1.get_platform())
-    print(game1.get_rating())
-    print(game1.get_genre())
+    print(game1.title)
+    print(game1.platform)
+    print(game1.rating)
+    print(game1.genre)
 
 
 

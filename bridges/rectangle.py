@@ -34,6 +34,9 @@ class Rectangle(Symbol):
             self._height = kwargs['h']
         if 'locx' in kwargs and 'locy' in kwargs:
             self.set_location(kwargs['locx'], kwargs['locy'])
+        else:
+            self.set_location(0.0, 0.0)
+        self.shape_type = 'rect'
 
     def get_name(self) -> str:
         """
@@ -126,6 +129,19 @@ class Rectangle(Symbol):
         self.width = w
         self.height = h
 
+    def translate(self, tx, ty):
+        center = self.get_location()
+        center = self.translate_point(center, tx, ty)
+        self.set_location(center[0], center[1])
+
+    def scale(self, sx, sy):
+        pt = []
+        pt[0] = self.width
+        pt[1] = self.height
+        new_pt = self.scale_point(pt, sx, sy)
+        self.width = new_pt[0]
+        self.height = new_pt[1]
+
     def get_json_representation(self) -> dict:
         """
         Getter function for the json representation of the data structure/shape
@@ -134,7 +150,7 @@ class Rectangle(Symbol):
         """
         ds_json = super(Rectangle, self).get_json_representation()
         ds_json["name"] = super(Rectangle, self).label
-        ds_json["shape"] = self.get_name()
+        ds_json["shape"] = self.shape_type
         ds_json["width"] = self.width
         ds_json['height'] = self.height
 

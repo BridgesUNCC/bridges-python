@@ -19,10 +19,10 @@ def sorting(e):
     return e.magnitude
 
 def main():
-    # Initialize BRIDGES with your credentials
-    bridges = Bridges(0, "test", "211416381091")
-
-    # set title for visualization
+    # create the Bridges object, set credentials
+    bridges = Bridges(0, "test", "988181220044")
+    bridges.set_visualize_JSON(True)
+    bridges.connector.set_server("local")
     bridges.set_title("Bacon Number: IMDB Actor-Movie Data")
 
     bridges.connector.set_server("local")
@@ -39,7 +39,7 @@ def main():
         graph.add_vertex(eq.get_title(), eq.get_title())
         vis = graph.get_visualizer(eq.get_title())
         vis.set_location(eq.get_longit(), eq.get_latit())
-        vis.set_size(eq.get_magnitude())
+        vis.size = eq.get_magnitude()
 
         red = ((eq.get_longit()/180.0)*255)
         if red > 0:
@@ -55,8 +55,7 @@ def main():
         if green < 0:
             green = green * -1
         else: green = green
-
-        vis.set_color(red,green,blue,1.0)
+        vis.color = [int(red),int(green),int(blue),1.0]
 
     bridges.set_coord_system_type("equirectangular")
     bridges.set_data_structure(graph)
@@ -76,8 +75,9 @@ def main():
 
             if distance < 500:
                 graph.add_edge(eq.get_title(), ua.get_title())
-                graph.get_link_visualizer(eq.get_title(), ua.get_title()).set_label("%s.2f KM" % distance)
+                graph.get_link_visualizer(eq.get_title(), ua.get_title()).label = "%s.2f KM" % distance
 
+    bridges.set_data_structure(graph)
     bridges.visualize()
 
     for i in range(99):
@@ -85,8 +85,9 @@ def main():
         vis = graph.get_visualizer(eq.get_title())
 
         vis.set_location(float('inf'), float('inf'))
-        vis.set_size(eq.get_magnitude() * 5)
+        vis.size = eq.get_magnitude() * 5
 
+    bridges.set_data_structure(graph)
     bridges.set_map_overlay(False)
     bridges.visualize()
 

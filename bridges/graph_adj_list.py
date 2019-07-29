@@ -34,6 +34,8 @@ import traceback
 #
 class GraphAdjList:
     LargeGraphVertSize = 1000
+    force_large_viz = False
+    force_small_viz = False
 
     def __init__(self) -> None:
         """
@@ -50,7 +52,9 @@ class GraphAdjList:
         Returns:
             str: representing the type
         """
-        if self.LargeGraphVertSize < len(self.vertices):
+        if (GraphAdjList.force_large_viz == True or (GraphAdjList.force_small_viz == False and
+                                                     self.LargeGraphVertSize < len(self.vertices) and
+                                                     self.are_all_vertices_located())):
             return "largegraph"
         return "GraphAdjacencyList"
 
@@ -181,7 +185,7 @@ class GraphAdjList:
         return self.vertices.values()
 
     def out_going_edge_set_of(self, k):
-        return SLelement.list_helper(start=self.get_adjacency_list(k)[0])
+        return SLelement.list_helper(start=self.get_adjacency_list(k))
 
     def get_edge_data(self, src, dest):
         sle = self.adj_list[src]
@@ -190,6 +194,29 @@ class GraphAdjList:
             if (ed.get_vertex() == dest):
                 return ed.get_edge_data()
             sle = sle.get_next()
+
+    def are_all_vertices_located(self):
+        for element in self.vertices.items():
+            el = element[1]
+            elvis = el.visualizer
+            if(elvis.location_x == float('inf') or elvis.location_y == float('inf')):
+                return False
+        return True
+
+    def force_large_visualization(self, f):
+        if f:
+            GraphAdjList.force_large_viz = True
+            GraphAdjList.force_small_viz = False
+        else:
+            GraphAdjList.force_large_viz = False
+
+    def force_small_visualization(self, f):
+        if f:
+            GraphAdjList.force_small_viz = True
+            GraphAdjList.force_large_viz = False
+        else:
+            GraphAdjList.force_small_viz = False
+
 
     ##
     #
@@ -230,7 +257,7 @@ class GraphAdjList:
                 raise ValueError("Vertex " + vertex + " does not exist! First add the vertices to the graph.")
         except Exception as e:
             traceback.print_tb(e.__traceback__)
-        return v.get_visualizer()
+        return v.visualizer
 
     def get_data_structure_representation(self) -> dict:
         """
@@ -244,7 +271,9 @@ class GraphAdjList:
         links_JSON = []  # array for building the links JSON - traverse the adj. lists
 
         # redirect for large graphs
-        if len(self.vertices) > self.LargeGraphVertSize:
+        if (GraphAdjList.force_large_viz == True or (GraphAdjList.force_small_viz == False and
+                                                     self.LargeGraphVertSize < len(self.vertices) and
+                                                     self.are_all_vertices_located())):
             return self.get_data_structure_large_graph()
 
         # get the objects and add them to the array
@@ -253,8 +282,8 @@ class GraphAdjList:
 
         # append all nodes representation to list of nodes
         for i in range(0, len(nodes)):
-            node_map[nodes[k]] = k
-            nodes_JSON.append(nodes[k].get_element_representation())
+            node_map[nodes[i]] = i
+            nodes_JSON.append(nodes[i].get_element_representation())
 
         # get all nodes in adj_list
         for a_list in self.adj_list.items():
@@ -265,7 +294,7 @@ class GraphAdjList:
                 src_indx = node_map.get(src_vert)
                 #  get the destination vertex index for the JSON (int)
                 edge = links_list.value
-                dest_vert = self.vertices.get(edge.tov())
+                dest_vert = self.vertices.get(edge.tov)
                 dest_indx = node_map.get(dest_vert)
                 #  get link representation
                 links_JSON.append((links_list.get_link_representation(
@@ -280,33 +309,42 @@ class GraphAdjList:
         return json_str
 
     def get_data_structure_large_graph(self) -> dict:
-        nodes_data = []
-        node_map = {}
-        for i, (key, element) in enumerate(self.vertices.items()):
-            node_map[key] = i
-            vis = element.visualizer
-            this_node_data = []
-            if vis.locationX != Decimal("Infinity") and vis.locationY != Decimal("Infinity"):
-                this_node_data.append([vis.locationX, vis.locationY])
+        nodes = []
+        node_map = dict()
 
-            color = vis.color
-            this_node_data.append([x for x in color.rgba])
-            nodes_data.append(this_node_data)
+        for element in self.vertices.items():
+            nodes.append(element[1])
 
-        links_data = []
-        for key, element in self.vertices.items():
-            adj_ele = self.adj_list.get(key)
-            while adj_ele is not None:
-                src = node_map[key]
-                dest = node_map[adj_ele.value.tov()]
-                color = element.get_link_visualizer(self.get_vertex(adj_ele.value.tov())).color
+        nodes_json = []
+        for k in range(0, len(nodes)):
+            node_map[nodes[k]] = k
+            elvis = nodes[k].visualizer
+            loc_str = []
+            if elvis.location_x != float('inf') and elvis.location_y != float('inf'):
+                loc_str.append(elvis.location_x)
+                loc_str.append(elvis.location_y)
+                nodes_json.append(loc_str)
+            color = elvis.color
+            nodes_json.append([color.red, color.green, color.blue, color.alpha])
 
-                links_data.append([src, dest, [x for x in color.rgba]])
-                adj_ele = adj_ele.next
+        links_json = []
+        for a_list in self.adj_list.items():
+            list = a_list[1]
+            src_vert = self.vertices.get(a_list[0])
+            while list is not None:
+                src_indx = node_map.get(src_vert)
+                edge = list.value
+                dest_vert = self.vertices.get(edge.tov)
+                dest_indx = node_map.get(dest_vert)
+                color = src_vert.get_link_visualizer(dest_vert).color
+                links_json.append(src_indx)
+                links_json.append(dest_indx)
+                links_json.append([color.red, color.green, color.blue, color.alpha])
+                list = list.next
 
-        wrapper = {
-            "nodes": nodes_data,
-            "links": links_data
+        graph_alist_json = {
+            "nodes": nodes_json,
+            "links": links_json
         }
 
-        return wrapper
+        return graph_alist_json
