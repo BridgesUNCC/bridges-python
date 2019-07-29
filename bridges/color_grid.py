@@ -75,7 +75,7 @@ class ColorGrid(Grid):
 
         while pos < self.grid_size[0] * self.grid_size[1]:
             posY = pos / self.grid_size[1]
-            posX = pos % self.gridSize[1]
+            posX = pos % self.grid_size[1]
             current = self.grid[int(posY)][int(posX)]
 
             if count == 0:
