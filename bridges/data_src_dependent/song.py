@@ -2,38 +2,49 @@
 class Song:
 
     def __init__(self, artist: str = "", song: str = "", album: str = "", lyrics: str = "", release_date: str = ""):
-        self.artist = artist
-        self.song = song
-        self.lyrics = lyrics
-        self.album = album
-        self.release_date = release_date
+        self._artist = artist
+        self._song = song
+        self._lyrics = lyrics
+        self._album = album
+        self._release_date = release_date
 
-    def get_artist(self):
-        return self.artist
+    @property
+    def artist(self):
+        return self._artist
 
-    def set_artist(self, artist):
-        self.artist = artist
+    @artist.setter
+    def artist(self, a):
+        self._artist = a
 
-    def get_song_title(self):
-        return self.song
+    @property
+    def song_title(self):
+        return self._song
 
-    def set_song_title(self, song):
-        self.song = song
+    @song_title.setter
+    def song_title(self, s):
+        self._song = s
 
-    def get_album_title(self):
-        return self.album
+    @property
+    def album_title(self):
+        return self._album
 
-    def set_album_title(self, album):
-        self.album = album
+    @album_title.setter
+    def album_title(self, a):
+        self._album = a
 
-    def get_lyrics(self):
-        return self.lyrics
+    @property
+    def lyrics(self):
+        return self._lyrics
 
-    def set_lyrics(self, lyrics):
-        self.lyrics = lyrics
+    @lyrics.setter
+    def lyrics(self, l):
+        self._lyrics = l
 
-    def get_release_date(self):
-        return self.release_date
+    @property
+    def release_data(self):
+        return self._release_date
 
-    def set_release_date(self, date):
-        self.release_date = date
+    @release_data.setter
+    def release_data(self, r):
+        self._release_date = r
+
