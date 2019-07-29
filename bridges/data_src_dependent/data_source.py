@@ -552,16 +552,16 @@ def get_osm_data(*args) -> OsmData:
     if (len(args) == 2):
         location = args[0]
         level = args[1]
-        url = "http://cci-bridges-osm-t.dyn.uncc.edu/loc?location=" + location + "&level=" + level
-        hash_url = "http://cci-bridges-osm-t.dyn.uncc.edu/hash?location=" + location + "&level=" + level
+        url = "http://cci-bridges-osm-t.uncc.edu/loc?location=" + location + "&level=" + level
+        hash_url = "http://cci-bridges-osm-t.uncc.edu/hash?location=" + location + "&level=" + level
     elif (len(args) == 5):
         minLat = str(args[0])
         minLon = str(args[1])
         maxLat = str(args[2])
         maxLon = str(args[3])
         level = args[4]
-        url = "http://cci-bridges-osm-t.dyn.uncc.edu/coords?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
-        hash_url = "http://cci-bridges-osm-t.dyn.uncc.edu/hash?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
+        url = "http://cci-bridges-osm-t.uncc.edu/coords?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
+        hash_url = "http://cci-bridges-osm-t.uncc.edu/hash?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
     else:
         raise RuntimeError("Invalid Map Request Inputs")
     lru = []
