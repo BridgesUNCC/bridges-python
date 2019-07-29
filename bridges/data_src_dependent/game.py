@@ -9,15 +9,15 @@ class Game:
 
     @property
     def title(self):
-        return self.title
+        return self._title
 
     @title.setter
     def title(self, t):
-        self._title  = t
+        self._title = t
 
     @property
     def platform(self):
-        return self.title
+        return self._platform
 
     @platform.setter
     def platform(self, p):
@@ -25,7 +25,7 @@ class Game:
 
     @property
     def rating(self):
-        return self.title
+        return self._rating
 
     @rating.setter
     def rating(self, r):

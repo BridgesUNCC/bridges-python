@@ -1,7 +1,5 @@
 from bridges.bridges import *
 from bridges.data_src_dependent.data_source import *
-import sys
-import random
 
 def main():
     bridges = Bridges(0, "test", "211416381091")
@@ -9,10 +7,10 @@ def main():
 
     song = get_song("Delicate")
 
-    print(song.get_artist())
-    print(song.get_album_title())
-    print(song.get_release_date())
-    print(song.get_lyrics()[0:min(100, len(song.get_lyrics()))])
+    print(song.artist)
+    print(song.album_title)
+    print(song.release_date)
+    print(song.lyrics[0:min(100, len(song.lyrics))])
 
 
 if __name__ == '__main__':

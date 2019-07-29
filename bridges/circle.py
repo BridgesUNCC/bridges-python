@@ -28,12 +28,15 @@ class Circle(Symbol):
         super(Circle, self).__init__()
         if 'locx' in kwargs and 'locy' in kwargs:
             self.set_location(kwargs['locx'], kwargs['locy'])
+        else:
+            self.set_location(0.0, 0.0)
         if 'r' in kwargs:
             if kwargs['r'] < 0:
                 raise ValueError("Radius value needs to be positive")
             self.radius = kwargs['r']
         else:
             self.radius = 10
+        self.shape_type = "circle"
 
     def get_name(self) -> str:
         """
@@ -102,6 +105,14 @@ class Circle(Symbol):
 
         return dims
 
+    def translate(self, tx, ty):
+        center = self.get_location()
+        center = self.translate_point(center, tx, ty)
+        self.set_location(center[0], center[1])
+
+    def scale(self, scale):
+        self.radius *= scale
+
     def get_json_representation(self) -> dict:
         """
         Get the json representation of the Circle object
@@ -110,7 +121,7 @@ class Circle(Symbol):
         """
         ds_json = super(Circle, self).get_json_representation()
         ds_json["name"] = self.label
-        ds_json["shape"] = self.get_name()
+        ds_json["shape"] = self.shape_type
         ds_json["r"] = self.radius
 
         return ds_json

@@ -1,7 +1,62 @@
 from bridges.bridges import *
 from bridges.graph_adj_list import *
 from bridges.data_src_dependent.data_source import *
-from tests.graph_bacon_number.l_queue import *
+
+class Link():
+
+    def __init__(self, nextVal, it = None):
+        self.element = it
+        self.next = nextVal
+
+    def __call__(self):
+        return self.next, self.element
+
+    def next(self):
+        return self.next
+
+    def setNext(self, nextVal):
+        self.next = nextVal
+        return self.next
+
+    def element(self):
+        return self.element
+
+    def setElement(self, it):
+        self.element = it
+        return self.element
+
+class LQueue:
+
+    def __init__(self, size = None):
+        self.front = self.rear = Link(nextVal=None)
+        self.size = 0
+
+
+    def clear(self):
+        self.__init__()
+
+    def enqueue(self, it):
+        self.rear.setNext(Link(nextVal=None, it=it))
+        self.rear = self.rear.next
+        self.size += 1
+
+    def dequeue(self):
+        assert self.size != 0, "queue is empty"
+        print(self.front.next.element)
+        it = self.front.next.element
+        self.front.setNext(self.front.next.next)
+        if self.front.next is None:
+            self.rear = self.front
+        self.size -= 1
+        return it
+
+    def frontValue(self):
+        assert self.size != 0, "queue is empty"
+        return self.front.next().element()
+
+    def length(self):
+        return self.size
+
 
 def get_bacon_number(gr, src_actor, dest_actor, mark, dist, parent):
     #need to use queue, as we are soing a BFS search
@@ -24,10 +79,8 @@ def get_bacon_number(gr, src_actor, dest_actor, mark, dist, parent):
         sl_list = gr.get_adjacency_list(vertex)
         sle = sl_list
         while(sle is not None):
-
             #get destination vertex
-            w = sle.get_value().get_vertex()
-
+            w = sle.value.tov
 
             # if unvisited, mark it as visited and add to the queue,
             # increment distance and point parent back to vertex
@@ -57,32 +110,27 @@ def get_bacon_number(gr, src_actor, dest_actor, mark, dist, parent):
                         #color the nodes in the path
                         #example gr.getVisualizer(key-val).setColor("red")
 
-                        gr.get_visualizer(p).set_color("red")
-                        gr.get_visualizer(p).set_size(50)
-                        gr.get_visualizer(p).set_opacity(1.0)
+                        gr.get_visualizer(p).color = "red"
+                        gr.get_visualizer(p).size = 50
+                        gr.get_visualizer(p).opacity = 1.0
 
                         # next, color the link but check the parent is not "none", else you will
                         # get an exception
                         # example: gr.getLinkVisualizer(src-key, dest-key).setColor("red")
                         par = parent[p]
                         if(par is not "none"):
-                            gr.get_link_visualizer(p, par).set_color("red")
-                            gr.get_link_visualizer(p, par).set_thickness(10)
+                            gr.get_link_visualizer(p, par).color = "red"
+                            gr.get_link_visualizer(p, par).thickness = 10
 
                         p = par
 
                     return dist[dest_actor]
-            sle = sle.get_next()
-
+            sle = sle.next
 
 def main():
-
-    #Initialize BRIDGES with your credentials
-    bridges = Bridges(0, "test","211416381091")
-
-    # set title for visualization
-    bridges.set_title("Bacon Number: IMDB Actor-Movie Data")
-
+    # create the Bridges object, set credentials
+    bridges = Bridges(0, "test", "988181220044")
+    bridges.set_visualize_JSON(True)
     bridges.connector.set_server("local")
 
     #use an adjacency list based graph
@@ -94,14 +142,14 @@ def main():
     for k in range(len(actor_list)):
 
         #get the actor movie names
-        actor = actor_list[k].get_actor()
-        movie = actor_list[k].get_movie()
+        actor = actor_list[k].actor
+        movie = actor_list[k].movie
 
         # our graph needs to have a unique set of actors and movies
         # so create the actor and movie vertices only if they dont already
         # exist use an STL map to check for that
 
-        vertices = gr.get_vertices()
+        vertices = gr.vertices
 
         # add actor if does not exist
         if(actor not in vertices):
@@ -121,13 +169,13 @@ def main():
 		#connected to in "red" and do the same for "Kevin_Bacon_(I)" in "green"
 		#specify colors by their names, "red", for example
         if(actor == ("Cate_Blanchett")):
-            gr.get_link_visualizer(actor, movie).set_color("orange")
-            gr.get_visualizer(actor).set_color("orange")
-            gr.get_visualizer(movie).set_color("orange")
+            gr.get_link_visualizer(actor, movie).color = "orange"
+            gr.get_visualizer(actor).color = "orange"
+            gr.get_visualizer(movie).color = "orange"
         if (actor == ("Kevin_Bacon_(I)")):
-            gr.get_link_visualizer(actor, movie).set_color("green")
-            gr.get_visualizer(actor).set_color("green")
-            gr.get_visualizer(movie).set_color("green")
+            gr.get_link_visualizer(actor, movie).color = "green"
+            gr.get_visualizer(actor).color = "green"
+            gr.get_visualizer(movie).color = "green"
 
     # set the data structure handle and visualize the input graph
     bridges.set_data_structure(gr)
@@ -138,7 +186,7 @@ def main():
     dist = dict()
 
     # init maps for bacon number algorithm
-    items = list(gr.get_vertices().keys())
+    items = list(gr.vertices.keys())
     for i in range(len(items)):
         mark[items[i]] = "unvisited"
         parent[items[i]] = "none"

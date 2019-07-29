@@ -41,10 +41,10 @@ class Song:
         self._lyrics = l
 
     @property
-    def release_data(self):
+    def release_date(self):
         return self._release_date
 
-    @release_data.setter
-    def release_data(self, r):
+    @release_date.setter
+    def release_date(self, r):
         self._release_date = r
 

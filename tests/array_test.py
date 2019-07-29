@@ -1,14 +1,11 @@
 from bridges.bridges import *
 from bridges.array import *
-import os
+
 
 def main():
-
-    # create the Bridges object, set credentials
-    user = os.environ.get("BRIDGES_USER_NAME")
-    key = os.environ.get("BRIDGES_API_KEY")
-    bridges = Bridges(100, user, key)
+    bridges = Bridges(0, "test", "988181220044")
     bridges.set_visualize_JSON(True)
+    bridges.connector.set_server("local")
     #set array dimensions, allocate array fo elements
     arraySize = 10
 
@@ -19,19 +16,18 @@ def main():
         arr[i].label = i*i
 
     #color the array elements
-    arr.get_element(0).visualizer.color = "red"
-    arr.get_element(1).visualizer.color = "green"
-    arr.get_element(2).visualizer.color = "blue"
-    arr.get_element(3).visualizer.color = "cyan"
-    arr.get_element(4).visualizer.color = "magenta"
-    arr.get_element(5).visualizer.color = "yellow"
-    arr.get_element(6).visualizer.color = "red"
-    arr.get_element(7).visualizer.color = "green"
-    arr.get_element(8).visualizer.color = "blue"
-    arr.get_element(9).visualizer.color = "black"
+    arr[0].visualizer.color = "red"
+    arr[1].visualizer.color = "green"
+    arr[2].visualizer.color = "blue"
+    arr[3].visualizer.color = "cyan"
+    arr[4].visualizer.color = "magenta"
+    arr[5].visualizer.color = "yellow"
+    arr[6].visualizer.color = "red"
+    arr[7].visualizer.color = "green"
+    arr[8].visualizer.color = "blue"
+    arr[9].visualizer.color = "black"
 
     arr[5].color = "white"
-    print(arr[5])
 
     # tell Bridges what data structure to visualize
     bridges.set_data_structure(arr)

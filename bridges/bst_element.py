@@ -85,6 +85,10 @@ class BSTElement(BinTreeElement):
         """
         return super(BSTElement, self).left
 
+    @left.setter
+    def left(self, l):
+        self.set_child(0, l)
+
     @property
     def right(self):
         """
@@ -93,6 +97,10 @@ class BSTElement(BinTreeElement):
             BSTElement: the right child of the element
         """
         return super(BSTElement, self).right
+
+    @right.setter
+    def right(self, r):
+        self.set_child(1, r)
 
     def get_element_representation(self):
         orig_json_str = dict(super(BSTElement, self).get_element_representation())

@@ -1,5 +1,5 @@
 from bridges.color import *
-
+import math
 ##
 # @brief This is an abstract class for deriving a
 #  number of Symbol shape objects, for use in a SymbolCollection.
@@ -23,14 +23,15 @@ class Symbol:
         Constructor for a Symbol
         """
         self._identifier = str(Symbol._ids)
-        self.label = ""
-        self.fill_color = Color("blue")
-        self.stroke_color = Color("white")
-        self.opacity = 1.0
-        self.stroke_width = 1.0
-        self.stroke_dash = 1
-        self.location_y = 0.0
-        self.location_x = 0.0
+        self._label = ""
+        self._fill_color = Color("blue")
+        self._stroke_color = Color("white")
+        self._opacity = 1.0
+        self._stroke_width = 1.0
+        self._stroke_dash = 1
+        self._location_y = 0.0
+        self._location_x = 0.0
+        self._shape_type = "circle"
         Symbol._ids += 1
 
     @property
@@ -40,7 +41,7 @@ class Symbol:
         Returns:
             str : the label of this shape
         """
-        return self.label
+        return self._label
 
     @label.setter
     def label(self, label: str) -> None:
@@ -51,16 +52,7 @@ class Symbol:
         Returns:
             str
         """
-        self.label = label
-
-    @label.deleter
-    def label(self) -> None:
-        """
-        Deleter for label
-        Returns:
-            None
-        """
-        del self.label
+        self._label = label
 
     @property
     def identifier(self) -> str:
@@ -69,7 +61,7 @@ class Symbol:
         Returns:
             str
         """
-        return self.identifier
+        return self._identifier
 
     @property
     def fill_color(self) -> Color:
@@ -78,10 +70,10 @@ class Symbol:
         Returns:
             Color : the current fill color of this symbol
         """
-        return self.fill_color
+        return self._fill_color
 
     @fill_color.setter
-    def fill_color(self, color: Color) -> None:
+    def fill_color(self, *args, **kwargs) -> None:
         """
         Setter for the fill color
         Args:
@@ -89,7 +81,7 @@ class Symbol:
         Returns:
             None
         """
-        self.fill_color = color
+        self._fill_color = Color(*args, **kwargs)
 
     @property
     def stroke_color(self) -> Color:
@@ -98,10 +90,10 @@ class Symbol:
         Returns:
             Color : the stroke (boundary) color of the shape
         """
-        return self.stroke_color
+        return self._stroke_color
 
     @stroke_color.setter
-    def stroke_color(self, color: Color) -> None:
+    def stroke_color(self, *args, **kwargs) -> None:
         """
         Setter for the stroke color
         Args:
@@ -109,7 +101,7 @@ class Symbol:
         Returns:
             None
         """
-        self.stroke_color = color
+        self._stroke_color = Color(*args, **kwargs)
 
     @property
     def stroke_width(self) -> float:
@@ -118,7 +110,7 @@ class Symbol:
         Returns:
             float : the stroke width of the shape
         """
-        return self.stroke_width
+        return self._stroke_width
 
     @stroke_width.setter
     def stroke_width(self, width: float) -> None:
@@ -134,7 +126,7 @@ class Symbol:
         if width <= 0.0 or width > 10.0:
             raise ValueError("Stroke width must be between 0 and 10")
         else:
-            self.stroke_width = width
+            self._stroke_width = width
 
     @property
     def opacity(self) -> float:
@@ -143,7 +135,7 @@ class Symbol:
         Returns:
              float : opacity of the shape
         """
-        return self.opacity
+        return self._opacity
 
     @opacity.setter
     def opacity(self, o: float):
@@ -158,7 +150,7 @@ class Symbol:
         if o <= 0.0 or o > 1.0:
             raise ValueError("Opacity must be between 0.0 and 1.0")
         else:
-            self.opacity = o
+            self._opacity = o
 
     @property
     def stroke_dash(self) -> float:
@@ -167,7 +159,7 @@ class Symbol:
         Returns:
              float : the stroke texture
         """
-        return self.stroke_dash
+        return self._stroke_dash
 
     @stroke_dash.setter
     def stroke_dash(self, dash: float):
@@ -182,7 +174,15 @@ class Symbol:
         if dash < 0 or dash > 10:
             raise ValueError("Dash must be between 0 and 10 (inclusive)")
         else:
-            self.stroke_dash = dash
+            self._stroke_dash = dash
+
+    @property
+    def shape_type(self):
+        return self._shape_type
+
+    @shape_type.setter
+    def shape_type(self, shape):
+        self._shape_type = shape
 
     def set_location(self, x: float, y: float) -> None:
         """
@@ -196,8 +196,8 @@ class Symbol:
             Value error
         """
         if x > float('-inf') and x < float('inf') and y > float('-inf') and y < float('inf'):
-            self.location_x = x
-            self.location_y = y
+            self._location_x = x
+            self._location_y = y
         else:
             raise ValueError("Coordinates must be real numbers")
 
@@ -207,7 +207,7 @@ class Symbol:
         Returns:
             list : the x and y coordinates of the shape's current location
         """
-        return [self.location_x, self.location_y]
+        return [self._location_x, self._location_y]
 
     def get_dimensions(self) -> list:
         """
@@ -217,6 +217,28 @@ class Symbol:
         """
         return [0.0, 0.0, 0.0, 0.0]
 
+    def translate_point(self, pt, tx, ty):
+        pt[0] += tx
+        pt[1] += ty
+        return pt
+
+    def scale_point(self, pt, sx, sy):
+        pt[0] *= sx
+        pt[1] *= sy
+        return pt
+
+    def rotate_point(self, pt, angle):
+        angle_r = math.radians(angle)
+        c = math.cos(angle_r)
+        s = math.sin(angle_r)
+
+        tmp = []
+        tmp[0] = pt[0] * c - pt[1] * s
+        tmp[1] = pt[0] * s + pt[1] * c
+        pt[0] = float(tmp[0])
+        pt[1] - float(tmp[1])
+        return pt
+
     def get_json_representation(self) -> dict:
         """
         Get the json representation of the Symbol class
@@ -224,14 +246,14 @@ class Symbol:
             dict : the JSON representation
         """
         ds = {
-            "fill": [self.fill_color.get_red(), self.fill_color.get_green(), self.fill_color.get_blue(), self.fill_color.get_alpha()],
+            "fill": [self.fill_color.red, self.fill_color.green, self.fill_color.blue, self.fill_color.alpha],
             "opacity": self.opacity,
-            "stroke": [self.stroke_color.get_red(), self.stroke_color.get_green(), self.stroke_color.get_blue(), self.stroke_color.get_alpha()],
+            "stroke": [self.stroke_color.red, self.stroke_color.green, self.stroke_color.blue, self.stroke_color.alpha],
             "stroke-width": self.stroke_width,
             "stroke-dasharray": self.stroke_dash,
             "location": {
-                "x": self.location_x,
-                "y": self.location_y
+                "x": self._location_x,
+                "y": self._location_y
             }
         }
         return ds

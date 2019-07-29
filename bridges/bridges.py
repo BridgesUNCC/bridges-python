@@ -116,9 +116,9 @@ class Bridges:
                 self.vis_type == "SinglyLinkedList" or self.vis_type == "DoublyLinkedList" or \
                 self.vis_type == "MultiList" or self.vis_type == "CircularSinglyLinkedList" or \
                 self.vis_type == "CircularDoublyLinkedList" or self.vis_type == "Array" or \
-                self.vis_type == "GraphAdjacencyList" or self.vis_type == "ColorGrid" or \
-                self.vis_type == "KDTree" or self.vis_type == "SymbolCollection" or \
-                self.vis_type == "GameGrid":
+                self.vis_type == "GraphAdjacencyList" or self.vis_type == "ColorGrid" or self.vis_type == "GraphAdjacencyMatrix" or \
+                self.vis_type == "largegraph" or self.vis_type == "KDTree" or self.vis_type == "SymbolCollection" or \
+                self.vis_type == "GameGrid" or self.vis_type == "BinarySearchTree":
             nodes_links_str = self.ds_handle.get_data_structure_representation()
 
         ds = {

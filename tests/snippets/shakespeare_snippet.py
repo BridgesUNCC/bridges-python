@@ -11,9 +11,9 @@ def main():
 
     work1 = my_list[random.randrange(len(my_list))]
 
-    print(work1.get_title())
-    print(work1.get_type())
-    print(work1.get_text()[0:min(100, len(work1.get_text()))])
+    print(work1.title)
+    print(work1.type)
+    print(work1.text[0:min(100, len(work1.text))])
 
 
 if __name__ == '__main__':
