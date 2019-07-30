@@ -9,7 +9,6 @@ from bridges.element import *
 #	building block for singly linked lists. Singly linked elements have a field
 #	pointing to the next element along the list.
 #
-#
 # 	Elements contain a visualizer (ElementVisualizer) object for setting visual
 #	attributes (color, shape, opacity, size), necessary for displaying them in a
 #	web browser.
@@ -21,7 +20,7 @@ from bridges.element import *
 #	@author Matthew Mcquaigue
 #	@date  2018, 6/24/19
 #
-#	\sa Singly Linked List tutorial : http://bridgesuncc.github.io/tutorials/SLL.html
+#	\sa Singly Linked List tutorial : http://bridgesuncc.github.io/tutorials/SinglyLinkedList.html
 #
 class SLelement(Element):
 

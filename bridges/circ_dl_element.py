@@ -29,7 +29,7 @@ from bridges.dl_element import *
 #
 #	@date   7/17/16, 1/16/17 7/23/19
 #
-#\sa Circular doubly linked list tutorial: http://bridgesuncc.github.io/tutorials/CDLL.html
+#\sa Circular doubly linked list tutorial: http://bridgesuncc.github.io/tutorials/CircularDoublyLinkedList.html
 #
 
 #

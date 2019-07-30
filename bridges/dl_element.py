@@ -24,7 +24,7 @@ from bridges.sl_element import *
 #   @author Matthew Mcquaigue
 #   @date  2018, 6/24/19
 #
-#   \sa Doubly Linked List tutorial : http://bridgesuncc.github.io/tutorials/DLL.html
+#   \sa Doubly Linked List tutorial : http://bridgesuncc.github.io/tutorials/DoublyLinkedList.html
 #
 
 #
