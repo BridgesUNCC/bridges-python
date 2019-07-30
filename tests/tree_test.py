@@ -14,34 +14,32 @@ def main():
             +	"The other six nodes are neutral color.")
 
     # create tree nodes
-    t0 = TreeElement(e = "Hello")
-    t1 = TreeElement(e= "this")
-    t2 = TreeElement(e="is")
-    t3 = TreeElement(e="a")
-    t4 = TreeElement(e="generic")
-    t5 = TreeElement(e="tree")
-    t6 = TreeElement(e="representation")
-
-    # put in labels for each node; simply use integers
-    t0.label = "10"
-    t1.label = "20"
-    t2.label = "30"
-    t3.label = "40"
-    t4.label = "50"
-    t5.label = "60"
-    t6.label = "70"
+    t0 = TreeElement(e ="Hello", label="Hello")
+    t2 = TreeElement(e="this", label="this")
+    t3 = TreeElement(e="is", label='is')
+    t4 = TreeElement(e="a", label='a')
+    t5 = TreeElement(e="generic", label="generic")
+    t6 = TreeElement(e="tree", label='tree')
+    t7 = TreeElement(e="representation", label = "representation")
 
     # add links to children
-    t0.add_child(t1)
     t0.add_child(t2)
-    t0.add_child(t5)
-    t2.add_child(t4)
+    t0.add_child(t3)
+    t0.add_child(t4)
     t2.add_child(t5)
-    t3.add_child(t6)
+    t2.add_child(t6)
+    t3.add_child(t7)
 
     # set some visual attributes
     t0.color = "red"
     t0.opacity = 0.3
+
+    t0.get_link_visualizer(t2).color = "green"
+    t0.get_link_visualizer(t2).thickness = 2.0
+    t0.get_link_visualizer(t3).color = "blue"
+    t0.get_link_visualizer(t3).thickness = 2.0
+    t0.get_link_visualizer(t4).color = "orange"
+    t0.get_link_visualizer(t4).thickness = 2.0
 
     # set visualizer type
     bridges.set_data_structure(t0)

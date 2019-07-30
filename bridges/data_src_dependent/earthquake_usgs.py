@@ -5,121 +5,136 @@ class EarthquakeUSGS:
 
     def getDate(self):
 
-        s = self.get_time()
-        epoch_time = int(self.get_time())
+        s = self._time
+        epoch_time = int(self._time)
         eq_time = epoch_time/1000
 
         eqt = time.gmtime(eq_time)
 
-        year = eqt.tm_year + 1900
-        month = eqt.tm_mon
-        day = eqt.tm_mday
-        hour = eqt.tm_hour
-        sec = eqt.tm_sec
-        min = eqt.tm_min
+        self._year = eqt.tm_year + 1900
+        self._month = eqt.tm_mon
+        self._day = eqt.tm_mday
+        self._hour = eqt.tm_hour
+        self._sec = eqt.tm_sec
+        self._min = eqt.tm_min
 
     def __init__(self, magnitude = None, longit = None, latit = None, location = None, title = None, url = None, time = None):
         if magnitude is not None:
-            self.magnitude = magnitude
+            self._magnitude = magnitude
         else:
-            self.magnitude = 0.0
-
+            self._magnitude = 0.0
         if longit is not None:
-            self.longit = longit
+            self._longit = longit
         else:
-            self.longit = 0.0
-
+            self._longit = 0.0
         if latit is not None:
-            self.latit = latit
+            self._latit = latit
         else:
-            self.latit = 0.0
-
+            self._latit = 0.0
         if location is not None:
-            self.location = location
+            self._location = location
         else:
-            self.location = ""
-
+            self._location = ""
         if title is not None:
-            self.title = title
+            self._title = title
         else:
-            self.title = ""
-
+            self._title = ""
         if url is not None:
-            self.url = url
+            self._url = url
         else:
-            self.url = ""
-
+            self._url = ""
         if time is not None:
-            self.time = time
+            self._time = time
         else:
-            self.time = ""
-            self.year = self.month = self.day = self.hour = self.min = self.sec =0
+            self._time = ""
+            self._year = self._month = self._day = self._hour = self._min = self._sec =0
 
-    def get_time(self):
-        return self.time
-
-    def set_time(self, tm):
-        self.time = tm
-
-    def get_year(self):
+    @property
+    def time(self):
         self.getDate()
-        return self.year
+        return self._time
 
-    def get_month(self):
+    @time.setter
+    def time(self, tm):
+        self._time = tm
+
+    @property
+    def year(self):
         self.getDate()
-        return self.month
+        return self._year
 
-    def get_day(self):
+    @property
+    def month(self):
         self.getDate()
-        return self.day
+        return self._month
 
-    def get_hour(self):
+    @property
+    def day(self):
         self.getDate()
-        return self.hour
+        return self._day
 
-    def get_minutes(self):
+    @property
+    def hour(self):
         self.getDate()
-        return self.min
+        return self._hour
 
-    def get_seconds(self):
+    @property
+    def minutes(self):
         self.getDate()
-        return self.sec
+        return self._min
 
-    def get_latit(self):
-        return self.latit
+    @property
+    def seconds(self):
+        self.getDate()
+        return self._sec
 
-    def set_latit(self, latit):
-        self.latit = latit
+    @property
+    def latit(self):
+        return self._latit
 
-    def get_longit(self):
-        return self.longit
+    @latit.setter
+    def latit(self, latit):
+        self._latit = latit
 
-    def set_longit(self, longit):
-        self.longit = longit
+    @property
+    def longit(self):
+        return self._longit
 
-    def get_location(self):
-        return self.location
+    @longit.setter
+    def longit(self, longit):
+        self._longit = longit
 
-    def set_location(self, location):
-        self.location = location
+    @property
+    def location(self):
+        return self._location
 
-    def get_title(self):
-        return self.title
+    @location.setter
+    def location(self, location):
+        self._location = location
 
-    def set_title(self, title):
-        self.title = title
+    @property
+    def title(self):
+        return self._title
 
-    def get_url(self):
-        return self.url
+    @title.setter
+    def title(self, title):
+        self._title = title
 
-    def set_url(self, url):
-        self.url = url
+    @property
+    def url(self):
+        return self._url
 
-    def get_magnitude(self):
-        return self.magnitude
+    @url.setter
+    def url(self, url):
+        self._url = url
 
-    def set_magnitude(self,magnitude):
-        self.magnitude = magnitude
+    @property
+    def magnitude(self):
+        return self._magnitude
+
+    @magnitude.setter
+    def magnitude(self,magnitude):
+        self._magnitude = magnitude
 
 
 

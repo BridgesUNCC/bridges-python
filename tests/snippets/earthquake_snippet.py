@@ -13,11 +13,11 @@ def main():
 
     quake1 = my_list[random.randrange(len(my_list))]
 
-    print(quake1.get_latit())
-    print(quake1.get_longit())
-    print(quake1.get_location())
-    print(quake1.get_title())
-    print(quake1.get_magnitude())
+    print(quake1.latit)
+    print(quake1.longit)
+    print(quake1.location)
+    print(quake1.title)
+    print(quake1.magnitude)
 
 
 if __name__ == '__main__':

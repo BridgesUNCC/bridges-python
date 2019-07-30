@@ -42,17 +42,20 @@ class KDTreeElement(BSTElement):
                 else:
                     super(KDTreeElement, self).__init__(e=kwargs['val'], label=kwargs['label'])
             else:
-                super(KDTreeElement, self).__init__(e=kwargs['val'])
+                if 'left' and 'right' in kwargs:
+                    super(KDTreeElement, self).__init__(e=kwargs['val'], left=kwargs['left'], right=kwargs['right'])
+                else:
+                    super(KDTreeElement, self).__init__(e=kwargs['val'])
         else:
             super(KDTreeElement, self).__init__()
         if 'key' in kwargs:
-            super(KDTreeElement, self).key = kwargs['key']
+            super(KDTreeElement, self.__class__).key.fset(self, kwargs['key'])
         if 'th' in kwargs:
             self._thickness = kwargs['th']
         else:
             self._thickness = 0.0
-        if 'dim' in kwargs['dim']:
-            self._dimension = 0
+        if 'dim' in kwargs:
+            self._dimension = kwargs['dim']
         else:
             self._dimension = 0
 
@@ -62,7 +65,7 @@ class KDTreeElement(BSTElement):
         Returns:
             str: of the the data structure type
         """
-        return "KDTree"
+        return "KdTree"
 
     @property
     def dimension(self) -> int:
