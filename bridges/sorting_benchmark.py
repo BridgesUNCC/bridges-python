@@ -8,7 +8,7 @@ class SortingBenchmark:
 
     def __init__(self, p):
         p.x_label = "Size of Array"
-        p.y_label = "Runtime (in ms)"
+        p.y_label = "Runtime (in us)"
         self._plot = p
         self.r = random
         self._max_size = 1
@@ -80,7 +80,7 @@ class SortingBenchmark:
         if base <= 1.0:
             print("base should be > 1.0")
 
-    def genertate(self, arr, n):
+    def generate(self, arr, n):
         for i in range(0, n):
             arr[i] = self.r.randint(0, 2*n)
 
@@ -103,7 +103,7 @@ class SortingBenchmark:
         for n in range(self.base_size, self.max_size):
             n = max(self.geometric * n + self.increment, n + 1)
             arr = []
-            self.genertate(arr, n)
+            self.generate(arr, n)
 
             start = datetime.now().microsecond
             runnable(arr)

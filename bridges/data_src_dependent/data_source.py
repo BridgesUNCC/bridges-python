@@ -8,6 +8,7 @@ from bridges.data_src_dependent import shakespeare
 from bridges.data_src_dependent import gutenberg_book
 from bridges.data_src_dependent import cancer_incidence
 from bridges.data_src_dependent import song
+from bridges.data_src_dependent import lru_cache
 from bridges.data_src_dependent.osm import *
 from bridges.data_src_dependent.actor_movie_imdb import *
 from bridges.color_grid import ColorGrid
@@ -552,52 +553,35 @@ def get_osm_data(*args) -> OsmData:
     if (len(args) == 2):
         location = args[0]
         level = args[1]
-        url = "http://cci-bridges-osm-t.dyn.uncc.edu/loc?location=" + location + "&level=" + level
-        hash_url = "http://cci-bridges-osm-t.dyn.uncc.edu/hash?location=" + location + "&level=" + level
+        url = "http://cci-bridges-osm-t.uncc.edu/loc?location=" + location + "&level=" + level
+        hash_url = "http://cci-bridges-osm-t.uncc.edu/hash?location=" + location + "&level=" + level
     elif (len(args) == 5):
         minLat = str(args[0])
         minLon = str(args[1])
         maxLat = str(args[2])
         maxLon = str(args[3])
         level = args[4]
-        url = "http://cci-bridges-osm-t.dyn.uncc.edu/coords?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
-        hash_url = "http://cci-bridges-osm-t.dyn.uncc.edu/hash?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
+        url = "http://cci-bridges-osm-t.uncc.edu/coords?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
+        hash_url = "http://cci-bridges-osm-t.uncc.edu/hash?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
     else:
         raise RuntimeError("Invalid Map Request Inputs")
-    lru = []
+
+    lru = lru_cache.lru_cache(30)
+
+
 
     try:
         from types import SimpleNamespace as Namespace
     except ImportError:
         from argparse import Namespace
 
-    if not os.path.isdir("./bridges_data_cache"):
-        os.mkdir("./bridges_data_cache")
-
-    #Tries to load the LRU file
-    try:
-        with open("./bridges_data_cache/lru.txt", "rb") as fp:
-            lru = pickle.load(fp)
-    except:
-        pass
 
     data = None
     not_skip = True
     hash = osm_server_request(hash_url).decode('utf-8')
-    for f in os.listdir("./bridges_data_cache"):
-        if f == hash and hash != "false":
-            not_skip = False
-            with open("./bridges_data_cache/" + f, "r") as j:
-                try:
-                    data = json.load(j, object_hook=lambda d: Namespace(**d))
-                except:
-                    print("Error: Issue reading locally cached map\nRedownloading data")
-                    not_skip = True
-                try: # Removes the location requested by the user from the LRU list
-                    lru.remove(hash)
-                except:
-                    pass
-                lru.insert(0, hash)
+    if (hash != "false" and lru.inCache(hash)):
+        not_skip = False
+        data = lru.get(hash)
 
     if not_skip:
         content = osm_server_request(url)
@@ -613,21 +597,7 @@ def get_osm_data(*args) -> OsmData:
                 sys.exit(0)
 
         hash = osm_server_request(hash_url).decode('utf-8')
-        lru.insert(0, hash)
-
-        # Removes least used map if there are more than 30 maps already saved
-        if (len(lru) >= 31):
-            re = lru[len(lru)-1]
-            if (os.path.isfile(f"./bridges_data_cache/{re}")):
-                os.remove(f"./bridges_data_cache/{re}")
-            lru.remove(re)
-
-        with open(f"./bridges_data_cache/{hash}", "w") as f:
-            # write to file in cache
-            json.dump(json.loads(content.decode('utf-8')), f)
-
-    with open("./bridges_data_cache/lru.txt", "wb") as fp:   #Pickling
-        pickle.dump(lru, fp)
+        lru.put(hash, data)
 
 
     try:

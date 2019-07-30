@@ -18,7 +18,7 @@ class GameBase(ABC):
 
         self.bridges.set_visualize_JSON(True)
 
-        self.bridges.connector.set_server("local")
+        self.bridges.connector.set_server("games")
 
         self.grid = GameGrid(r, c)
 

@@ -21,7 +21,7 @@ from bridges.bin_tree_element import *
 #  	@brief This class extends the BinTreeElement class by adding a 'key' value
 #  	for use in a binary search tree implementations.
 #
-#	\sa Binary Search Tree tutorial, http://bridgesuncc.github.io/tutorials/BST.html
+#	\sa Binary Search Tree tutorial, http://bridgesuncc.github.io/tutorials/BinarySearchTree.html
 #
 
 
