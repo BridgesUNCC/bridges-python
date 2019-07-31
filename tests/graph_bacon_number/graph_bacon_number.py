@@ -42,7 +42,6 @@ class LQueue:
 
     def dequeue(self):
         assert self.size != 0, "queue is empty"
-        print(self.front.next.element)
         it = self.front.next.element
         self.front.setNext(self.front.next.next)
         if self.front.next is None:

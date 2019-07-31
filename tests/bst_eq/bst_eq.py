@@ -39,7 +39,7 @@ class BST:
         if rt is None:
             n = BSTElement(key=k, e=e)
             eq = n.value
-            n.label = eq.get_title() + eq.get_time()
+            n.label = eq.title + eq.time
             return n
         if rt.key > k:
             rt.left = self.insert_help(rt.left, k, e)
@@ -91,9 +91,8 @@ def main():
     eqlist = get_earthquake_usgs_data(100)
     bst = BST()
     for i in range(len(eqlist)):
-        if eqlist[i].get_magnitude() > 2:
-            bst.insert(eqlist[i].get_magnitude(), eqlist[i])
-            print(bst.node_count)
+        if eqlist[i].magnitude > 2:
+            bst.insert(eqlist[i].magnitude, eqlist[i])
 
     bridges.set_data_structure(bst.get_tree_root())
     bridges.visualize()
