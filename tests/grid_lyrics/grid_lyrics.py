@@ -94,15 +94,11 @@ def norm(vector):
 
 
 def main():
-    # Init a Bridges Connection with your credentials
-    bridges = Bridges(36, "test", "211416381091")
-
-    # Set assignment title
-    bridges.set_title("ListEQ Example")
-
+    bridges = Bridges(0, "test", "988181220044")
+    bridges.set_visualize_JSON(True)
     bridges.connector.set_server("local")
 
-    song = get_song("Delicate").get_lyrics()
+    song = get_song("Delicate").lyrics
     lyrics = split_lyrics(song)
 
     if len(lyrics) > 480:

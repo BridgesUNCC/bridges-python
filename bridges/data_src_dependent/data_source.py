@@ -53,8 +53,8 @@ def get_game_data():
 
 def parse_actor_movie_imdb(item):
     am_pair = ActorMovieIMDB()
-    am_pair.set_actor(item["actor"])
-    am_pair.set_movie(item["movie"])
+    am_pair.actor = item["actor"]
+    am_pair.movie = item["movie"]
     return am_pair
 
 
@@ -104,13 +104,13 @@ def get_actor_movie_imdb_data2():
         for i in range(len(D)):
             V = D[i]
             am_pair = parse_actor_movie_imdb(V)
-            am_pair.set_rating(int(V['rating']))
+            am_pair.rating = int(V['rating'])
 
             genre = V['genres']
             v = []
             for k in range(len(genre)):
                 v.append(genre[k])
-            am_pair.set_genres(v)
+            am_pair._genres = v
             am_list.append(am_pair)
         return am_list
     else:

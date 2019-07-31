@@ -27,7 +27,6 @@ class ListIMDB:
 
         #Set the element label equal to 'Actor = Movie' for each pair.(print it out for sanit Check)
         element.label = (myList[i].actor + " - " + myList[i].movie)
-        print(element.label)
 
         #add 'next' pointer where appropriate
         if(i > 0):

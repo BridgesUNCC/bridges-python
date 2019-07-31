@@ -6,27 +6,27 @@ from bridges.graph_adj_list import *
 def create_genre_vertices(g, genres):
     for k in range(len(genres)):
         g.add_vertex(genres[k], ActorMovieIMDB())
-        g.get_vertex(genres[k]).get_visualizer().set_color("red")
-        g.get_vertex(genres[k]).get_visualizer().set_opacity(0.5)
-        g.get_vertex(genres[k]).get_visualizer().set_size(50)
+        g.get_vertex(genres[k]).color = "red"
+        g.get_vertex(genres[k]).opacity = 0.5
+        g.get_vertex(genres[k]).size = 50
 
 def group_movies_by_actors(g, actor_movie_data):
-    verts = g.get_vertices()
+    verts = g.vertices
     for k in range(len(actor_movie_data)):
-        actor = actor_movie_data[k].get_actor()
-        movie = actor_movie_data[k].get_movie()
-        m_genre = actor_movie_data[k].get_genres()
-        rating = actor_movie_data[k].get_rating()
+        actor = actor_movie_data[k].actor
+        movie = actor_movie_data[k].movie
+        m_genre = actor_movie_data[k].generes
+        rating = actor_movie_data[k].rating
 
-        if(actor not in g.get_vertices()):
+        if(actor not in g.vertices):
             g.add_vertex(actor, actor_movie_data[k])
-            verts[actor].get_visualizer().set_color("green")
-            verts[actor].set_label(actor)
+            verts[actor].color = "green"
+            verts[actor].label = actor
 
-        if (movie not in g.get_vertices()):
+        if (movie not in g.vertices):
             g.add_vertex(movie, actor_movie_data[k])
-            verts[movie].get_visualizer().set_color("yellow")
-            verts[movie].set_label(movie)
+            verts[movie].color = "yellow"
+            verts[movie].label = movie
 
         g.add_edge(actor,movie,1)
         g.add_edge(movie,actor,1)
@@ -34,28 +34,22 @@ def group_movies_by_actors(g, actor_movie_data):
         for l in range(len(m_genre)):
             genre = m_genre[l]
             g.add_edge(movie, genre, 1)
-            rating = g.get_vertex(movie).get_value().get_rating()
-            label = g.get_vertex(movie).get_label() + "(" + str(rating) + ")"
-            g.get_vertex(movie).set_label(label)
-
+            label = g.get_vertex(movie).label + "(" + str(rating) + ")"
+            g.get_vertex(movie).label = label
             if rating < 5.0:
-                g.get_vertex(movie).get_visualizer().set_color("blue")
+                g.get_vertex(movie).color = "blue"
             elif rating < 6.0:
-                g.get_vertex(movie).get_visualizer().set_color("green")
+                g.get_vertex(movie).color = "green"
             elif rating < 7.0:
-                g.get_vertex(movie).get_visualizer().set_color("yellow")
+                g.get_vertex(movie).color ="yellow"
             elif rating < 8.0:
-                g.get_vertex(movie).get_visualizer().set_color("tan")
+                g.get_vertex(movie).color = "tan"
             else:
-                g.get_vertex(movie).get_visualizer().set_color("gold")
+                g.get_vertex(movie).color = "gold"
 
 def main():
-    # Initialize BRIDGES with your credentials
-    bridges = Bridges(0, "test", "211416381091")
-
-    # set title for visualization
-    bridges.set_title("Graph Example(IMDB Data): Movies Grouped by Genre")
-
+    bridges = Bridges(0, "test", "988181220044")
+    bridges.set_visualize_JSON(True)
     bridges.connector.set_server("local")
 
     g = GraphAdjList()

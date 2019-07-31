@@ -20,12 +20,20 @@ class ActorMovieIMDB():
     def __init__(self, a = None, m = None, r = None, genr = None):
         if a is not None:
             self._actor = a
+        else:
+            self._actor = ""
         if m is not None:
             self._movie = m
+        else:
+            self._movie = ""
         if r is not None:
             self._rating = r
+        else:
+            self._rating = float
         if genr is not None:
             self._genres = genr
+        else:
+            self._genres = []
 
     ##
 	#
