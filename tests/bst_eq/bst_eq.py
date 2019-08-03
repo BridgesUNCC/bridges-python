@@ -39,7 +39,7 @@ class BST:
         if rt is None:
             n = BSTElement(key=k, e=e)
             eq = n.value
-            n.label = eq.title + eq.time
+            n.label = eq.title + " " + eq.time
             return n
         if rt.key > k:
             rt.left = self.insert_help(rt.left, k, e)

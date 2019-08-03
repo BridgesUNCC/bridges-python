@@ -1,24 +1,16 @@
+import datetime
 import time
-
 
 class EarthquakeUSGS:
 
-    def getDate(self):
-
-        s = self._time
+    def get_time(self):
         epoch_time = int(self._time)
         eq_time = epoch_time/1000
-
         eqt = time.gmtime(eq_time)
-
-        self._year = eqt.tm_year + 1900
-        self._month = eqt.tm_mon
-        self._day = eqt.tm_mday
-        self._hour = eqt.tm_hour
-        self._sec = eqt.tm_sec
-        self._min = eqt.tm_min
+        self.time = time.strftime("%Y-%m-%d %H:%M:%S", eqt)
 
     def __init__(self, magnitude = None, longit = None, latit = None, location = None, title = None, url = None, time = None):
+        self._time = int()
         if magnitude is not None:
             self._magnitude = magnitude
         else:
@@ -44,49 +36,16 @@ class EarthquakeUSGS:
         else:
             self._url = ""
         if time is not None:
-            self._time = time
-        else:
-            self._time = ""
-            self._year = self._month = self._day = self._hour = self._min = self._sec =0
+            self.time = time
 
     @property
     def time(self):
-        self.getDate()
+        self.get_time()
         return self._time
 
     @time.setter
     def time(self, tm):
         self._time = tm
-
-    @property
-    def year(self):
-        self.getDate()
-        return self._year
-
-    @property
-    def month(self):
-        self.getDate()
-        return self._month
-
-    @property
-    def day(self):
-        self.getDate()
-        return self._day
-
-    @property
-    def hour(self):
-        self.getDate()
-        return self._hour
-
-    @property
-    def minutes(self):
-        self.getDate()
-        return self._min
-
-    @property
-    def seconds(self):
-        self.getDate()
-        return self._sec
 
     @property
     def latit(self):
