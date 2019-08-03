@@ -162,9 +162,9 @@ class Array():
             if len(args) == 1:
                 return self._array_data[args[0]]
             if len(args) == 2:
-                return self._array_data[args[1] * self._dims[0] + args[0]]
+                return self._array_data[args[0] * self._dims[0] + args[1]]
             if len(args) == 3:
-                return self._array_data[args[2] * self._dims[0] * self._dims[1] + args[1] * self._dims[0] + args[0]]
+                return self._array_data[args[0] * self._dims[0] * self._dims[1] + args[1] * self._dims[0] + args[2]]
 
         elif 'index' in kwargs:
             return self._array_data[kwargs['index']]
