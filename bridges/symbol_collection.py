@@ -66,13 +66,13 @@ class SymbolCollection:
             str: the data structure representation
         """
         symbol_json = []
-        for key in self._symbols.keys():
-            self.update_axis_domains(self._symbols[key])
-            symbol_json.append(self._symbols[key].get_json_representation())
+        for key, value in self._symbols.items():
+            self.update_axis_domains(value)
+            symbol_json.append(value.get_json_representation())
 
         final_json = {
-            "domainX": [str(-self._domain), str(self._domain)],
-            "domainY": [str(-self._domain), str(self._domain)],
+            "domainX": [-self._domain, self._domain],
+            "domainY": [-self._domain, self._domain],
             "symbols": symbol_json
         }
         return final_json

@@ -14,7 +14,9 @@ import math
 # @author David Burlinson, Kalpathi Subramanian
 # @date 12/24/18, 7/12/19
 #
-#
+
+
+
 class Symbol:
     _ids = 0 #id for this symbol. Class level so each object has unique id
 
@@ -25,7 +27,7 @@ class Symbol:
         self._identifier = str(Symbol._ids)
         self._label = ""
         self._fill_color = Color("blue")
-        self._stroke_color = Color("white")
+        self._stroke_color = Color("blue")
         self._opacity = 1.0
         self._stroke_width = 1.0
         self._stroke_dash = 1
@@ -246,15 +248,30 @@ class Symbol:
             dict : the JSON representation
         """
         ds = {
-            "fill": [self.fill_color.red, self.fill_color.green, self.fill_color.blue, self.fill_color.alpha],
-            "opacity": self.opacity,
-            "stroke": [self.stroke_color.red, self.stroke_color.green, self.stroke_color.blue, self.stroke_color.alpha],
-            "stroke-width": self.stroke_width,
-            "stroke-dasharray": self.stroke_dash,
-            "location": {
+            # "fill": [self.fill_color.red, self.fill_color.green, self.fill_color.blue, self.fill_color.alpha],
+            # "opacity": self.opacity,
+            # "stroke": [self.stroke_color.red, self.stroke_color.green, self.stroke_color.blue, self.stroke_color.alpha],
+            # "stroke-width": self.stroke_width,
+            # "stroke-dasharray": self.stroke_dash,
+            # "location": {
+            #     "x": self._location_x,
+            #     "y": self._location_y
+            # }
+        }
+        if self.fill_color != Color("blue"):
+            ds['fill'] = [self.fill_color.red, self.fill_color.green, self.fill_color.blue, self.fill_color.alpha]
+        if self.opacity != 1.0:
+            ds['opacity'] = self.opacity
+        if self.stroke_color != Color("blue"):
+            ds['stroke'] = [self.stroke_color.red, self.stroke_color.green, self.stroke_color.blue, self.stroke_color.alpha]
+        if self.stroke_width != 1.0:
+            ds['stroke-width'] = self.stroke_width
+        if self.stroke_dash != 1:
+            ds['stoke-dasharray'] = self.stroke_dash
+        if self._location_x != 0.0 or self._location_y != 0.0:
+            ds['location'] = {
                 "x": self._location_x,
                 "y": self._location_y
             }
-        }
         return ds
 

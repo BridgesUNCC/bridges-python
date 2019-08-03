@@ -16,17 +16,18 @@ def main():
 
     sc = SymbolCollection()
     s1 = Rectangle(w=50, h=50, locx=-25.0, locy=0.0)
-    s1.fill_color = "green"
+    s1.fill_color = "red"
     sc.add_symbol(s1)
 
-    s2 = Circle(x=25.0, y=0.0, r=25)
+    s2 = Circle(locx=25.0, locy=0.0, r=25)
     s2.fill_color = "green"
     sc.add_symbol(s2)
 
     s3 = Polygon()
     s3.add_point(-25,-10)
     s3.add_point(25, 0)
-    s3.stroke_color = "magenta"
+    s3.add_point(0.0, 50.0)
+    s3.stroke_color = "darkorchid"
     s3.stroke_width = 2.0
     sc.add_symbol(s3)
 

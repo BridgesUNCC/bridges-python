@@ -22,7 +22,7 @@ class Polyline(Symbol):
             self._points = pts
         else:
             self._points = []
-        self.shape_type = "polyline"
+        self._shape_type = "polyline"
 
     def get_name(self):
         return "polyline"
@@ -41,7 +41,7 @@ class Polyline(Symbol):
 
     @points.setter
     def points(self, pts):
-        self.points = pts
+        self._points = pts
 
     def get_dimensions(self):
         minx = float('inf')
@@ -49,9 +49,7 @@ class Polyline(Symbol):
         maxx = float('-inf')
         maxy = float('-inf')
 
-        x = 0.0
-        y = 0.0
-        for i in range(0,len(self.points),2):
+        for i in range(0, len(self.points), 2):
             x = self.points[i]
             y = self.points[i+1]
             if (x < minx):
@@ -117,6 +115,7 @@ class Polyline(Symbol):
                 bbox[3] = self.points[k+1]
         center[0] = bbox[0] + (bbox[2] - bbox[0]) / 2.0
         center[1] = bbox[1] + (bbox[3] - bbox[1]) / 2.0
+        return center
 
     def get_json_representation(self):
 
