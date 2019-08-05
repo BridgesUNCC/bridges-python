@@ -9,10 +9,13 @@ from bridges.data_src_dependent import gutenberg_book
 from bridges.data_src_dependent import cancer_incidence
 from bridges.data_src_dependent import song
 from bridges.data_src_dependent import lru_cache
+from bridges.data_src_dependent import movie_actor_wiki_data
 from bridges.data_src_dependent.osm import *
 from bridges.data_src_dependent.actor_movie_imdb import *
 from bridges.color_grid import ColorGrid
 from bridges.color import Color
+from SPARQLWrapper import SPARQLWrapper, JSON
+
 
 
 ##
@@ -625,6 +628,42 @@ def get_osm_data(*args) -> OsmData:
 
     except AttributeError:
         raise RuntimeError("Malformed JSON: Unable to parse")
+
+
+def _get_wiki_actor_movie_direct(year_begin, year_end, array_out):
+    sparql = SPARQLWrapper("https://query.wikidata.org/sparql")
+    sparql.setQuery("""
+    SELECT ?movie ?movieLabel ?actor ?actorLabel WHERE \
+    {\
+      ?movie wdt:P31 wd:Q11424.\
+      ?movie wdt:P161 ?actor.\
+      ?movie wdt:P364 wd:Q1860.\
+      ?movie wdt:P577 ?date.\
+      FILTER(YEAR(?date) >= """ + str(year_begin) + """ && YEAR(?date) <= """ + str(year_end) + """).\
+        SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". } \
+    }
+    """)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    for result in results["results"]["bindings"]:
+        mak = movie_actor_wiki_data.MovieActorWikiData()
+        actor_uri = str(result['actor']['value'])
+        movie_uri = str(result['movie']['value'])
+        actor_uri = actor_uri.replace("http://www.wikidata.org/entity/","",1)
+        movie_uri = movie_uri.replace("http://www.wikidata.org/entity/","",1)
+        mak.actor_uri = actor_uri
+        mak.movie_uri = movie_uri
+        mak.movie_name = str(result['movieLabel']['value'])
+        mak.actor_name = str(result['actorLabel']['value'])
+        array_out.append(mak)
+        #print(result['movie']['value'])
+
+
+def get_wiki_data_actor_movie(year_begin, year_end):
+    ret = []
+    for y in range(year_begin, year_end):
+        _get_wiki_actor_movie_direct(y, y, ret)
+    return ret
 
 
 class DataSource:

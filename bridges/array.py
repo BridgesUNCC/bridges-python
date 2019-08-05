@@ -33,31 +33,11 @@ class Array():
         """
         self._dims = [1, 1, 1]
         self._array_data = []
-        if 'num_elements' in kwargs:
-            self._num_dims = 1
-            self._dims[0] = kwargs['num_elements']
-            self._dims[1] = self._dims[2] = 1
-            self.set_dimensions(self._dims)
-        elif 'dims' in kwargs and 'num_dims' in kwargs:
-            self._num_dims = kwargs['num_dims']
-            self.set_dimensions(kwargs['dims'])
-        elif 'x_dim' in kwargs and 'y_dim' in kwargs:
-            if 'z_dim' in kwargs:
-                self._num_dims = 3
-                self._dims[0] = kwargs['x_dim']
-                self._dims[1] = kwargs['y_dim']
-                self._dims[2] = kwargs['z_dim']
-                self.set_dimensions(self._dims)
-            else:
-                self._num_dims = 2
-                self._dims[0] = kwargs['x_dim']
-                self._dims[1] = kwargs['y_dim']
-                self._dims[2] = 1
-                self.set_dimensions(self._dims)
-        else:
-            self._array_data = None
-            self._num_dims = 1
-            self._dims[0] = self._dims[1] = self._dims[2] = self._size = 0
+        self._num_dims = 1
+        self._size = 0
+        if 'num_dims' in kwargs:
+            if 'dims' in kwargs:
+                self.set_size(kwargs['num_dims'], kwargs['dims'])
 
     @property
     def num_dims(self) -> int:
@@ -103,6 +83,20 @@ class Array():
         """
         self._size = sz
 
+    def set_size(self, nd, dim):
+        if dim[0] <=0 or dim[1] <=0 or dim[2] <= 0:
+            raise ValueError("Invalid dimension value, must be  positive")
+
+        self._dims[0] = dim[0]
+        self._dims[1] = dim[1]
+        self._dims[2] = dim[2]
+        self.num_dims = nd
+        self.size = dim[0]*dim[1]*dim[2]
+
+        for k in range(0, self.size):
+            self._array_data.append(Element())
+
+
     def get_data_structure_type(self) -> str:
         """
         Gets the data structure type
@@ -115,30 +109,6 @@ class Array():
             return "Array"
         else:
             raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D arrays supported at this time")
-
-    def set_dimensions(self, dim: list) -> None:
-        """
-        Sets the size of each dimension and allocates array space
-        Args:
-            (list) dim: size of each dimension in array
-        Returns:
-             None
-        """
-        sz = 1
-        k = 0
-        while k < self.num_dims:
-            self._dims[k] = dim[k]
-            sz = sz * dim[k]
-            k += 1
-        #  first check the dimensions are all positive
-        if sz < 0:
-            raise ValueError("Invalid dimension value, must be  positive")
-        self.size = sz
-        #  allocate space for the array with elements
-        k = 0
-        while k < self.size:
-            self._array_data.append(Element())
-            k += 1
 
     def get_dimensions(self):
         return self._dims
@@ -248,6 +218,7 @@ class Array():
                 nodes_json.append(self._array_data[i].get_element_representation())
             i += 1
         json_dict = {
-            "nodes": nodes_json
+            "nodes": nodes_json,
+            "dims": [self._dims[0], self._dims[1], self._dims[2]]
         }
         return json_dict
