@@ -18,6 +18,7 @@ setuptools.setup(
         'requests>=2.21.0',
         'webcolors>=1.8.1',
         'python-socketio[client]>=4.3.0',
+        'SPARQLWrapper>=1.8.4',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
