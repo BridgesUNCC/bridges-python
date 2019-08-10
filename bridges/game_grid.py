@@ -61,7 +61,7 @@ class GameGrid(Grid):
     def get_symbol_color(self, row, col):
         return self.get(row, col).fg
 
-    def draw_object(self, row, col, symbol, color):
+    def draw_symbol(self, row, col, symbol, color):
         self.get(row, col).symbol = symbol
         self.get(row, col).fg = color
 

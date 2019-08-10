@@ -17,6 +17,15 @@ class NonBlockingGame(GameBase):
         self.time_of_last_frame = int(round(time.time() * 1000))
         self.ih = InputHelper()
         self.register_keypress(self.ih)
+        self._fps = 30
+
+    @property
+    def fps(self):
+        return self._fps
+
+    @fps.setter
+    def fps(self, frames):
+        self._fps = frames
 
     def sleep_timer(self, timems=None):
         if timems is None:
@@ -27,8 +36,7 @@ class NonBlockingGame(GameBase):
             quit()
 
     def control_framerate(self):
-        fps = 30
-        hz = 1./fps
+        hz = 1./self._fps
 
         current_time = int(round(time.time() * 1000))
         theoretical_next_frame = self.time_of_last_frame + int(hz*1000)

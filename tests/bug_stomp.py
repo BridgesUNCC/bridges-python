@@ -23,7 +23,7 @@ class BugStomp(NonBlockingGame):
         for i in range(0, BugStomp.board_size[0]):
             for j in range(0, BugStomp.board_size[1]):
                 self.set_bg_color(i, j, NamedColor.cyan)
-                self.draw_object(i, j, NamedSymbol.none, NamedColor.burlywood)
+                self.draw_symbol(i, j, NamedSymbol.none, NamedColor.burlywood)
 
         self.bug = [BugStomp.board_size[0] / 2, BugStomp.board_size[1] / 2]
 
@@ -68,34 +68,34 @@ class BugStomp(NonBlockingGame):
         for i in range(0, self.board_size[0]):
             for j in range(0, self.board_size[1]):
                 self.set_bg_color(i, j, NamedColor.crimson)
-                self.draw_object(i, j, NamedSymbol.none, NamedColor.cyan)
+                self.draw_symbol(i, j, NamedSymbol.none, NamedColor.cyan)
 
         if self.score >= 10:
             self.win()
             return
 
         self.paint_score(self.score)
-        self.draw_object(int(self.bug[0]), int(self.bug[1]), NamedSymbol.bug1, NamedColor.cyan)
+        self.draw_symbol(int(self.bug[0]), int(self.bug[1]), NamedSymbol.bug1, NamedColor.cyan)
 
-        self.draw_object(self.loc[0], self.loc[1], NamedSymbol.man, NamedColor.cyan)
+        self.draw_symbol(self.loc[0], self.loc[1], NamedSymbol.man, NamedColor.cyan)
 
     def win(self):
-        self.draw_object(0, 0, NamedSymbol.A, NamedColor.cyan)
-        self.draw_object(0, 1, NamedSymbol.B, NamedColor.cyan)
-        self.draw_object(0, 2, NamedSymbol.B, NamedColor.cyan)
-        self.draw_object(0, 3, NamedSymbol.B, NamedColor.cyan)
-        self.draw_object(0, 4, NamedSymbol.B, NamedColor.cyan)
-        self.draw_object(0, 5, NamedSymbol.B, NamedColor.cyan)
-        self.draw_object(0, 6, NamedSymbol.B, NamedColor.cyan)
-        self.draw_object(0, 7, NamedSymbol.B, NamedColor.cyan)
+        self.draw_symbol(0, 0, NamedSymbol.A, NamedColor.cyan)
+        self.draw_symbol(0, 1, NamedSymbol.B, NamedColor.cyan)
+        self.draw_symbol(0, 2, NamedSymbol.B, NamedColor.cyan)
+        self.draw_symbol(0, 3, NamedSymbol.B, NamedColor.cyan)
+        self.draw_symbol(0, 4, NamedSymbol.B, NamedColor.cyan)
+        self.draw_symbol(0, 5, NamedSymbol.B, NamedColor.cyan)
+        self.draw_symbol(0, 6, NamedSymbol.B, NamedColor.cyan)
+        self.draw_symbol(0, 7, NamedSymbol.B, NamedColor.cyan)
 
     def paint_score(self, score):
-        self.draw_object(0, 0, NamedSymbol.S, NamedColor.black)
-        self.draw_object(0, 1, NamedSymbol.C, NamedColor.black)
-        self.draw_object(0, 2, NamedSymbol.O, NamedColor.black)
-        self.draw_object(0, 3, NamedSymbol.R, NamedColor.black)
-        self.draw_object(0, 4, NamedSymbol.E, NamedColor.black)
-        self.draw_object(0, 6, NamedSymbol.B, NamedColor.black)
+        self.draw_symbol(0, 0, NamedSymbol.S, NamedColor.black)
+        self.draw_symbol(0, 1, NamedSymbol.C, NamedColor.black)
+        self.draw_symbol(0, 2, NamedSymbol.O, NamedColor.black)
+        self.draw_symbol(0, 3, NamedSymbol.R, NamedColor.black)
+        self.draw_symbol(0, 4, NamedSymbol.E, NamedColor.black)
+        self.draw_symbol(0, 6, NamedSymbol.B, NamedColor.black)
 
     def game_loop(self):
         if self.score >= 10:
@@ -103,7 +103,8 @@ class BugStomp(NonBlockingGame):
         self.handle_bug()
         self.handle_input()
         self.paint_screen()
+        print(self.fps)
 
 
 if __name__ == "__main__":
-    t = BugStomp(0, 'test', '988181220044', BugStomp.board_size[0], BugStomp.board_size[1])
+    t = BugStomp(0, 'test', '137842425086', BugStomp.board_size[0], BugStomp.board_size[1])

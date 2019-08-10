@@ -60,8 +60,8 @@ class GameBase(ABC):
     def get_symbol_color(self, x, y):
         return self.grid.get_symbol_color(x, y)
 
-    def draw_object(self, x, y, s, c):
-        self.grid.draw_object(x, y, s, c)
+    def draw_symbol(self, x, y, s, c):
+        self.grid.draw_symbol(x, y, s, c)
 
     def render(self):
         if self.firsttime:
@@ -75,6 +75,16 @@ class GameBase(ABC):
 
         self.grid_state = self.grid.get_data_structure_representation()
         self.sock.send_data(self.grid_state)
+
+    @property
+    def board_width(self):
+        width = self.grid.dimensions
+        return width[1]
+
+    @property
+    def board_height(self):
+        height = self.grid.dimensions
+        return height[0]
 
 
 

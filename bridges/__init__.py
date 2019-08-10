@@ -26,3 +26,4 @@ from bridges.gamebase import *
 from bridges.non_blocking_game import *
 from bridges.input_helper import *
 from bridges.blocking_game import *
+from bridges.line_chart import *
