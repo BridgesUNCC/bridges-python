@@ -212,8 +212,8 @@ class LineChart:
         """
         Setter for plot data on X and Y axes
         Args:
-            x_data (dict):  plot data for x axis
-            y_data (dict):  plot data for y axis
+            x_data:  plot data for x axis
+            y_data:  plot data for y axis
         Returns:
             None
         """
@@ -224,11 +224,11 @@ class LineChart:
         """
         Setter for plot data on X axis
         Args:
-            x_data (dict):  plot data
+            x_data:  plot data
         Returns:
             None
         """
-        self.xaxis_data[series] = self.convert(x_data)
+        self.xaxis_data[series] = x_data
 
     def get_x_data(self, series):
         """
@@ -242,11 +242,11 @@ class LineChart:
         """
         Setter for plot data on Y axis
         Args:
-            y_data (dict):  plot data
+            y_data:  plot data
         Returns:
             None
         """
-        self.yaxis_data[series] = self.convert(y_data)
+        self.yaxis_data[series] = y_data
 
     def get_y_data(self, series):
         """
@@ -300,6 +300,8 @@ class LineChart:
         self.check()
         x_temp = []
         y_temp = []
+        xaxis_json = dict()
+        yaxis_json = dict()
         for key, value in self.xaxis_data.items():
             data_key = key
             data_value = value
@@ -329,7 +331,7 @@ class LineChart:
             "yaxistype": self.logarithmicy,
             "options": {
                 "mouseTracking": self._mouse_track,
-                "dataLabels": self.data_label
+                "dataLabels": str(self.data_label)
             },
             "xaxis_data": xaxis_json,
             "yaxis_data": yaxis_json
