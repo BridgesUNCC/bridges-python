@@ -306,7 +306,7 @@ class LineChart:
             data_key = key
             data_value = value
             for i in range(0, len(data_value)):
-                x_temp.append(str(data_value[i]))
+                x_temp.append(data_value[i])
             xaxis_json = {
                 "Plot_Name": str(data_key),
                 "xaxis_data": x_temp
@@ -316,7 +316,7 @@ class LineChart:
             data_key = key
             data_value = value
             for i in range(0, len(data_value)):
-                y_temp.append(str(data_value[i]))
+                y_temp.append(data_value[i])
             yaxis_json = {
                 "Plot_Name": str(data_key),
                 "yaxis_data": y_temp
@@ -328,13 +328,13 @@ class LineChart:
             "xLabel": str(self.x_label),
             "yLabel": str(self.y_label),
             "xaxisType": self.logarithmicx,
-            "yaxistype": self.logarithmicy,
+            "yaxisType": self.logarithmicy,
             "options": {
                 "mouseTracking": self._mouse_track,
                 "dataLabels": str(self.data_label)
             },
-            "xaxis_data": xaxis_json,
-            "yaxis_data": yaxis_json
+            "xaxis_data": [xaxis_json],
+            "yaxis_data": [yaxis_json]
         }
 
         return json_dict
