@@ -131,13 +131,7 @@ class Bridges:
         if self.window is not None and len(self.window) == 4:
             ds['window'] = self.window
 
-        if self.vis_type == "Array":
-            ds_array = self.ds_handle
-            dims = ds_array.get_dimensions()
-            ds["dims"] = [str(dims[0]), str(dims[1]), str(dims[2])]
-            ds.update(nodes_links_str)
-        else:
-            ds.update(nodes_links_str)
+        ds.update(nodes_links_str)
 
         ds_json = json.dumps(ds)
         if self._json_flag:
