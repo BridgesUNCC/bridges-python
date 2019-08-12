@@ -29,7 +29,7 @@ class GraphBenchmark:
             movie_graph.add_edge(ma.actor_uri, ma.movie_uri)
             edge_count += 2
 
-        return [vertex_count, edge_count]
+        return vertex_count, edge_count
 
     def _highest_degree_vertex(self, gr):
         max_degree = -1

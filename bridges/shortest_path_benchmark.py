@@ -41,8 +41,7 @@ class ShortestPathBenchmark(GraphBenchmark):
         radius = 0.2
         while radius < 0.15:
             osm_data = get_osm_data(reflat - radius, reflong - radius, reflat+radius, reflong+radius)
-            graph = GraphAdjList
-            osm_data.get_graph()
+            graph = osm_data.get_graph()
             vtx_count = self._count_vertices(graph)
             edge_count = self._count_edges(graph)
             root = self.__get_center(osm_data, graph, reflat, reflong)

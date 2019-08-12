@@ -23,8 +23,10 @@ class BFSBenchamrk(GraphBenchmark):
             graph = GraphAdjList()
             vertex_count, edge_count = self._genertate_wiki_data_movie_actor(year, 2019, graph)
             root = self._highest_degree_vertex(graph)
+            level = dict()
+            parent = dict()
             start = int(round(time_.time() * 1000))
-            bfsalgo(graph, root)
+            bfsalgo(graph, root, level, parent)
             end = int(round(time_.time() * 1000))
             elapsed_time = end - start
 
