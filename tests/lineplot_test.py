@@ -15,7 +15,8 @@ def task1(bridges):
         ydata.append(t)
 
     lc.set_data_series("10^4 n at 1MHz", xdata, ydata)
-
+    xdata.clear()
+    ydata.clear()
     print(lc.get_data_structure_representation())
     bridges.set_data_structure(lc)
     bridges.visualize()
