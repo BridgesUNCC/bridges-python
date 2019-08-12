@@ -117,7 +117,7 @@ class GraphAdjList:
                 raise ValueError("Vertex " + src + " does not exist!")
         except Exception as e:
             traceback.print_tb(e.__traceback__)
-        self.vertices[src].set_value(vertex_data)
+        self.vertices[src].value = vertex_data
 
     def get_vertex_data(self, src):
         try:
@@ -125,7 +125,7 @@ class GraphAdjList:
                 raise ValueError("Vertex " + src + " does not exist!")
         except Exception as e:
             traceback.print_tb(e.__traceback__)
-        return self.vertices[src].get_value()
+        return self.vertices[src].value
 
     def set_edge_data(self, src, dest, edge_data):
         try:
@@ -135,13 +135,13 @@ class GraphAdjList:
             traceback.print_tb(e.__traceback__)
         sle = self.adj_list[src]
         while sle is not None:
-            edge_dest = sle.value.tov()
+            edge_dest = sle.value.tov
             if edge_dest == dest:
                 if edge_data is not None:
                     sle.value.set_edge_data(edge_data)
                     return
                 else:
-                    return sle.value.get_edge_data()
+                    return sle.value.edge_data
             sle = sle.next
         if sle is None:
             raise ValueError("VEdge from " + src + " to " + dest + "does not exist!")
@@ -190,10 +190,10 @@ class GraphAdjList:
     def get_edge_data(self, src, dest):
         sle = self.adj_list[src]
         while sle is not None:
-            ed = sle.get_value()
-            if (ed.get_vertex() == dest):
+            ed = sle.value
+            if ed.get_vertex() == dest:
                 return ed.get_edge_data()
-            sle = sle.get_next()
+            sle = sle.next
 
     def are_all_vertices_located(self):
         for element in self.vertices.items():

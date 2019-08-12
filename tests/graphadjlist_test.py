@@ -5,7 +5,7 @@ from bridges.bridges import *
 
 def main():
     # Init a Bridges connection with your credentials
-    bridges = Bridges(0, "test", "988181220044")
+    bridges = Bridges(0, "test", "211416381091")
     bridges.set_visualize_JSON(True)
     bridges.connector.set_server("local")
 
