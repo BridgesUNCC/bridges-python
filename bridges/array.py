@@ -14,20 +14,16 @@ from bridges.element import *
 #	Arrays are internally represented as 1D arrays; currently 1D, 2D  and
 #	3D arrays are supported.
 #
-#
+#   Example Tutorial at: http://bridgesuncc.github.io/tutorials/Array.html (1D, 2D, and 3D Array)
 #
 class Array():
     dims = [1,1,1] #used for setting size of array based on dimensions
     def __init__(self, **kwargs):
         """
         Array constructor
-        Args:
-            num_dims: The dimensions of the array (1-3). Defaults to 1 dimension (int)
         Kwargs:
             dims: size of each dimension (array)
-            x_dim: number of elements on the x dimension (int)
-            y_dim: number of elements on the y dimension (int)
-            z_dim: number of elements on the z dimension (int)
+            num_dims: The dimensions of the array (1-3). Defaults to 1 dimension (int)
         Returns:
             None
         """
@@ -83,7 +79,15 @@ class Array():
         """
         self._size = sz
 
-    def set_size(self, nd, dim):
+    def set_size(self, nd: int, dim: list) -> None:
+        """
+        Set the size of each dimensions; also allocates  array space
+        Args:
+            (int) nd: number of dimensions
+            (list) dim: size of each dimension
+        Returns:
+            None
+        """
         if dim[0] <=0 or dim[1] <=0 or dim[2] <= 0:
             raise ValueError("Invalid dimension value, must be  positive")
 
@@ -110,7 +114,12 @@ class Array():
         else:
             raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D arrays supported at this time")
 
-    def get_dimensions(self):
+    def get_dimensions(self) -> list:
+        """
+        Get the size of each dimensions
+        Returns:
+            list: size of each dimension
+        """
         return self._dims
 
     def get_element(self, *args, **kwargs):
