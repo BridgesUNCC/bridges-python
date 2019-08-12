@@ -72,7 +72,7 @@ class BinTreeElement(TreeElement):
         """
         Setter for the left element of a binary tree
         Args:
-            left: the left element to set
+            l: the left element to set
         Returns:
             None
         """
@@ -92,7 +92,7 @@ class BinTreeElement(TreeElement):
         """
         Setter for the right element of a binary tree
         Args:
-            right: the right element to set
+            r: the right element to set
         Returns:
             None
         """
