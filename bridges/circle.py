@@ -8,7 +8,7 @@ from bridges.symbol import *
 # @author Matthew Mcquaigue
 # @date 2018, 7/23/19
 #
-# \sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+# Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
 #
 #
 class Circle(Symbol):
@@ -87,8 +87,6 @@ class Circle(Symbol):
             raise ValueError("Radius value needs to be positive")
         self.radius = r
 
-    ################################################
-
     def get_dimensions(self) -> list:
         """
         Getter for the dimensions for the circle
@@ -105,12 +103,25 @@ class Circle(Symbol):
 
         return dims
 
-    def translate(self, tx, ty):
+    def translate(self, tx:float, ty:float):
+        """
+        translate the circle
+        Arrgs:
+            (float) tx: x translation
+            (float) ty: y translation
+        """
         center = self.get_location()
         center = self.translate_point(center, tx, ty)
         self.set_location(center[0], center[1])
 
-    def scale(self, scale):
+    def scale(self, scale:float):
+        """
+        Scale the circle. Only the radius needs to be scaled, using a single scale value
+        Args:
+            (float) scale: scale factor
+        """
+        # scale onlt the radius
+        # center stays the same
         self.radius *= scale
 
     def get_json_representation(self) -> dict:
