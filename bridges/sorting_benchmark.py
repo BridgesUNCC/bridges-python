@@ -55,10 +55,20 @@ class SortingBenchmark:
 
     @property
     def max_size(self):
+        """
+        Getter for the max_size of array
+        Returns:
+            the max size
+        """
         return self._max_size
 
     @max_size.setter
     def max_size(self, size):
+        """
+        Puts a cap on the largest array to be used
+        Args:
+            size: Maximum size considered
+        """
         self._max_size = size
 
     @property
@@ -67,6 +77,11 @@ class SortingBenchmark:
 
     @base_size.setter
     def base_size(self, size):
+        """
+        Smallest array to be used
+        Args:
+            size: size of the smallest array to use
+        """
         self._base_size = size
 
     @property
@@ -75,6 +90,11 @@ class SortingBenchmark:
 
     @increment.setter
     def increment(self, inc):
+        """
+        Sets the increment for the benchmark size
+        Args:
+            inc: new value of the increment
+        """
         self._increment = inc
 
     @property
@@ -83,6 +103,11 @@ class SortingBenchmark:
 
     @geometric.setter
     def geometric(self, base):
+        """
+        Sets a geometric progression for the benchmark size
+        Args:
+            base: new base of the geometric progression
+        """
         self._geo_base = base
 
     @property
@@ -91,15 +116,44 @@ class SortingBenchmark:
 
     @time_cap.setter
     def time_cap(self, cap_in_ms):
+        """
+        Sets an upper bound to the time of a run.
+        The benchmark will end after a run if it takes more than the
+        given amount of time. So it is possible a particular run takes
+        more than the alloted time, but that will be the last run.
+        Args:
+            cap_in_ms: time limit in seconds
+        """
         self._time_cap_ms = cap_in_ms
 
     def linear_range(self, base_sz, max_sz, nb_point):
+        """
+        brief The benchmark will sample a range with a fixed number of
+		points.
+		The benchmark will sample about nbPoint equally distributed in
+		the range [base_size, max_size]
+        Args:
+            base_sz: lower bound of the range sampled
+            max_sz: upper bound of the range sampled
+            nb_points: number of sample
+        """
         self.base_size = base_sz
         self.max_size = max_sz
         self.increment = ((max_sz - base_sz) / nb_point)
         self.geometric = 1.0
 
     def geometric_range(self, base_sz, max_sz, base):
+        """
+        The benchmark will sample a range using in geometrically
+		increasing sequence.
+        The benchmark will sample the range [baseSize; maxSize] using a
+		geometric distribution in base base. That is to say, it will
+		sample base_ize, base*base_ize, base*base*base_ize, ...
+        Args:
+            base_sz: lower bound of the range sampled
+            max_sz: upper bound of the range sampled
+            base: base of the geometric increase
+        """
         self.base_size = base_sz
         self.max_size = max_sz
         self.increment = 0
@@ -107,11 +161,11 @@ class SortingBenchmark:
         if base <= 1.0:
             print("base should be > 1.0")
 
-    def generate(self, arr, n):
+    def __generate(self, arr, n):
         for i in range(0, n):
             arr.append(self.r.randint(0, 2*n))
 
-    def check(self, arr, n):
+    def __check(self, arr, n):
         ok = True
         for i in range(1, n):
             if arr[i] < arr[i -1]:
@@ -120,6 +174,13 @@ class SortingBenchmark:
         return ok
 
     def run(self, algo_name, runnable):
+        """
+        benchmark one implementation
+        Args:
+            algo_name: screen name of the algorithm to be used in the visualization
+            runnable: pointer to the sorting function to benchmark
+        :return:
+        """
         time = []
         x_data = []
 
@@ -130,14 +191,14 @@ class SortingBenchmark:
         n = self.base_size
         while n < self.max_size:
             arr = []
-            self.generate(arr, int(n))
+            self.__generate(arr, int(n))
 
             start = int(round(time_.time() * 1000))
             runnable(arr)
             end = int(round(time_.time() * 1000))
             runtime = end - start
 
-            if self.check(arr, int(n)) == False:
+            if self.__check(arr, int(n)) == False:
                 print("Sorting algorithm " + algo_name + " is incorrect")
 
             time.append(float(runtime))

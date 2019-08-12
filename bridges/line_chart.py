@@ -223,6 +223,7 @@ class LineChart:
         """
         Setter for plot data on X axis
         Args:
+            series: the name of the series
             x_data:  plot data
         Returns:
             None
