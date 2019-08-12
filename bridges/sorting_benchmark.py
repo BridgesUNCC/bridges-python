@@ -1,6 +1,5 @@
-from bridges.line_chart import *
 import random
-from datetime import datetime
+import time as time_
 
 
 class SortingBenchmark:
@@ -82,7 +81,7 @@ class SortingBenchmark:
 
     def generate(self, arr, n):
         for i in range(0, n):
-            arr[i] = self.r.randint(0, 2*n)
+            arr.append(self.r.randint(0, 2*n))
 
     def check(self, arr, n):
         ok = True
@@ -100,17 +99,17 @@ class SortingBenchmark:
             print(self.geometric)
             print(self.increment)
 
-        for n in range(self.base_size, self.max_size):
-            n = max(self.geometric * n + self.increment, n + 1)
+        n = self.base_size
+        while n < self.max_size:
             arr = []
-            self.generate(arr, n)
+            self.generate(arr, int(n))
 
-            start = datetime.now().microsecond
+            start = int(round(time_.time() * 1000))
             runnable(arr)
-            end = datetime.now().microsecond
+            end = int(round(time_.time() * 1000))
             runtime = end - start
 
-            if self.check(arr, n) == False:
+            if self.check(arr, int(n)) == False:
                 print("Sorting algorithm " + algo_name + " is incorrect")
 
             time.append(float(runtime))
@@ -119,5 +118,6 @@ class SortingBenchmark:
             if runtime > self.time_cap:
                 break
 
+            n = max(self.geometric * n + self.increment, n + 1)
         self.plot.set_x_data(algo_name, x_data)
         self.plot.set_y_data(algo_name, time)

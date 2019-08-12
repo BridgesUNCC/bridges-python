@@ -43,7 +43,7 @@ class ShortestPathBenchmark(GraphBenchmark):
             osm_data.get_graph()
             vtx_count = self._count_vertices(graph)
             edge_count = self._count_edges(graph)
-            root  = self.__get_center(osm_data, graph, reflat, reflong)
+            root = self.__get_center(osm_data, graph, reflat, reflong)
 
             level = dict()
             parent = dict()

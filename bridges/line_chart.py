@@ -298,11 +298,11 @@ class LineChart:
 
     def get_data_structure_representation(self):
         self.check()
-        x_temp = []
-        y_temp = []
+
         xaxis_json = []
         yaxis_json = []
         for key, value in self.xaxis_data.items():
+            x_temp = []
             data_key = key
             data_value = value
             for i in range(0, len(data_value)):
@@ -315,6 +315,7 @@ class LineChart:
 
 
         for key, value in self.yaxis_data.items():
+            y_temp = []
             data_key = key
             data_value = value
             for i in range(0, len(data_value)):
