@@ -28,7 +28,6 @@
 #
 # @date 7/23/19
 #
-# \sa Line chart tutorial at 
 #
 class LineChart:
 
@@ -257,8 +256,6 @@ class LineChart:
         return self.yaxis_data[series]
 
     def convert(self, x_data):
-        """
-        """
         arr = []
         for i in range(len(x_data)):
             arr.append(float(x_data[i]))

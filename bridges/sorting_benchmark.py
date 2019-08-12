@@ -3,8 +3,36 @@ import time as time_
 
 
 class SortingBenchmark:
+    """
+    @brief Benchmarks sorting algorithm
 
+	Benchmarks sorting algorithms and add time series to a LineChart.
 
+	The benchmark goes from an initial size controlled by
+	setBaseSize() to a largest size controlled by setMaxSize(). One
+	can also set a maximum time spent on a particular run using
+	setTimeCap().
+
+	The benchmark goes from a array size of n to the next one of
+	geoBase  n + increment, where the base is controlled by
+	geometric and increment is controlled by
+	increment. For simpler use one can set a purley linear
+	sampling with linear_range() or a purely geometric one with
+	geometric_range().
+
+	sorting algorithms can be passed to the run function for being benchmarked. A typical use would look something like
+
+	\code{.py}
+	def mysort(int array, int arraysize)
+	lc = LineChart();
+	sb SortingBenchmark(lc);
+	sb.linear_range (100, 1000, 5);
+	sb.run("mysortingalgorithm", mysort);
+	\endcode
+
+	@author Erik Saule
+	@date 07/20/2019
+    """
     def __init__(self, p):
         p.x_label = "Size of Array"
         p.y_label = "Runtime (in us)"
