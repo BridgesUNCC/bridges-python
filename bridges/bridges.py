@@ -146,12 +146,7 @@ class Bridges:
 
             self._assignment_part = self._assignment_part + 1
 
-    ##
-    #     set the assignment id
-    #
-    #  @param assignment number
-    #
-    #
+
     def _set_assignment(self, assignment):
         """
         Setter for assignment id (must be positive)
