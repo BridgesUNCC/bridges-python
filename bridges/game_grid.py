@@ -4,8 +4,17 @@ import base64
 
 
 class GameGrid(Grid):
+    """
+    This is a class in BRIDGES for representing an (m x n) grid. Each position in the grid will hold a GameCell object, each of which has a foreground color, background color, and a symbol.
+    @author David Burlinson, Matthew McQuaigue
+    """
 
-    def set_encoding(self, encoding):
+    def set_encoding(self, encoding: str) -> None:
+        """
+        Enable changing the game grid encoding when building JSON representation.
+        Args:
+            (str) encoding: type of encoding. Supports "raw" and "rle"
+        """
         if encoding == "raw" or encoding == "rle":
             self.encoding = encoding
         else:
@@ -17,6 +26,12 @@ class GameGrid(Grid):
         return "GameGrid"
 
     def __init__(self, rows = None, cols = None):
+        """
+        Grid Constructor
+        Args:
+            (int) rows: representing the number of rows of the grid
+            (int) cols: representing the number of columns of the grid
+        """
         self.bf_bg = bytearray()
         self.bf_fg = bytearray()
         self.bf_symbols = bytearray()
@@ -29,7 +44,10 @@ class GameGrid(Grid):
             self.grid_size = [rows, cols]
         self.initialize_game_Grid()
 
-    def initialize_game_Grid(self):
+    def initialize_game_Grid(self) -> None:
+        """
+        Populate the grid with default game cells
+        """
         for i in range(self.grid_size[0]):
             for j in range(self.grid_size[1]):
                 self.set(i, j, GameCell())
@@ -37,35 +55,91 @@ class GameGrid(Grid):
         self.bf_fg = bytearray(self.grid_size[0]*self.grid_size[1])
         self.bf_symbols = bytearray(self.grid_size[0]*self.grid_size[1])
 
-    def get_bg_color(self, row, col):
+    def get_bg_color(self, row: int, col: int):
+        """
+        Get the background color at cell row, col
+        Args:
+            (int) row: row index to get color
+            (int) col: col index to get color
+        Returns:
+            Color at row, col
+        """
         return super(GameGrid, self).get(row, col).bg
 
-    def set_bg_color(self, row, col, color):
+    def set_bg_color(self, row: int, col: int, color) -> None:
+        """
+        Set background color of a cell using an enum argument
+        Args:
+            (int) row: row index to set color
+            (int) col: col index to set color
+            color: Named Color enum argument to set the background at the chosen position
+        """
         if type(color) == NamedColor:
             self.get(row, col).bg = color
         else:
             self.get(row, col).bg = NamedColor[color]
 
-    def get_fg_color(self, row, col):
+    def get_fg_color(self, row: int, col: int):
+        """
+        Get the foreground color at cell row, col
+        Args:
+            (int) row: row index to get color
+            (int) col: col index to get color
+        Returns:
+            Color at row, col
+        """
         return self.get(row, col).fg
 
-    def set_fg_color(self, row, col, color):
+    def set_fg_color(self, row: int, col: int, color):
+        """
+        Set foreground color of a cell using an enum argument
+        Args:
+            (int) row: row index to set color
+            (int) col: col index to set color
+            color: Named Color enum argument to set the background at the chosen position
+        """
         if type(color) == NamedColor:
             self.get(row, col).fg = color
         else:
             self.get(row, col).fg = NamedColor[color]
 
-    def get_symbol(self, row, col):
+    def get_symbol(self, row: int, col: int):
+        """
+        Get the symbol at cell row, col
+        Args:
+            (int) row: row index to get color
+            (int) col: col index to get color
+        """
         return self.get(row, col).symbol
 
     def get_symbol_color(self, row, col):
+        """
+        Get the symbol color at row,col
+        Args:
+            (int) row: row index to get color
+            (int) col: col index to get color
+        """
         return self.get(row, col).fg
 
     def draw_symbol(self, row, col, symbol, color):
+        """
+        Draw a symbol at the location of row,col with color
+        Args:
+            (int) row: row index to set color
+            (int) col: col index to set color
+            symbol: symbol argument to set the symbol at the chosen position
+            color: Named Color enum argument to set the background at the chosen position
+        :return:
+        """
         self.get(row, col).symbol = symbol
         self.get(row, col).fg = color
 
-    def get_data_structure_representation(self):
+    def get_data_structure_representation(self) -> dict:
+        """
+        Get the JSON representation of the game grid. Contains separate foreground, background, and symbol arrays
+        Returns:
+            dict: represnting the game_grids json
+        """
         count = 0
 
         json_dict = {
