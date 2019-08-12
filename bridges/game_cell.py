@@ -3,7 +3,13 @@ from bridges.named_symbol import *
 
 
 class GameCell:
+    """
+    This class is used to represent cells in GameGrids in BRIDGES.
+    Each cell has a foreground color, background color, and symbol.
 
+    @author David Burlinson, Matthew McQuaigue
+    @date 9/06/18
+    """
     def __init__(self, **kwargs):
         """
         Constructor for the cell of a gamegrid
@@ -94,12 +100,24 @@ class GameCell:
             self._symbol = NamedSymbol[s]
 
     def get_bg_byte(self):
+        """
+        Returns:
+            background color as byte (index of value in NamedColor)
+        """
         return bytes([self._bg.value])
 
     def get_fg_byte(self):
+        """
+        Returns:
+            foreground color as byte (index of value in NamedColor)
+        """
         return bytes([self._fg.value])
 
     def get_symbol_byte(self):
+        """
+        Returns:
+             symbol as byte
+        """
         return bytes([self._symbol.value])
 
 
