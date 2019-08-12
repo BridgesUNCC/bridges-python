@@ -3,7 +3,7 @@ import time
 
 class EarthquakeUSGS:
 
-    def get_time(self, tm):
+    def __set_time_from_unix_timestamp(self, tm):
         epoch_time = int(tm)
         eq_time = epoch_time/1000
         eqt = time.gmtime(eq_time)
@@ -44,7 +44,7 @@ class EarthquakeUSGS:
 
     @time.setter
     def time(self, tm):
-        self.get_time(tm)
+        self.__set_time_from_unix_timestamp(tm)
 
     @property
     def latit(self):
