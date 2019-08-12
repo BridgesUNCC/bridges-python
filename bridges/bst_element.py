@@ -21,7 +21,7 @@ from bridges.bin_tree_element import *
 #  	@brief This class extends the BinTreeElement class by adding a 'key' value
 #  	for use in a binary search tree implementations.
 #
-#	\sa Binary Search Tree tutorial, http://bridgesuncc.github.io/tutorials/BinarySearchTree.html
+#	Binary Search Tree tutorial, http://bridgesuncc.github.io/tutorials/BinarySearchTree.html
 #
 
 
@@ -87,6 +87,11 @@ class BSTElement(BinTreeElement):
 
     @left.setter
     def left(self, l):
+        """
+        Setter for the left element in BST
+        Args:
+            l: the value for the left child to be set as
+        """
         self.set_child(0, l)
 
     @property
@@ -100,9 +105,19 @@ class BSTElement(BinTreeElement):
 
     @right.setter
     def right(self, r):
+        """
+        Setter for the right element in BST
+        Args:
+            r: the value for the right child to be set as
+        """
         self.set_child(1, r)
 
-    def get_element_representation(self):
+    def get_element_representation(self) -> dict:
+        """
+        Augment the element with the "key" field
+        Returns:
+            dict: representing the json of this tree
+        """
         orig_json_str = dict(super(BSTElement, self).get_element_representation())
         key_json = {
             'key': self.key
