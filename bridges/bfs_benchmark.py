@@ -65,7 +65,7 @@ class BFSBenchamrk(GraphBenchmark):
                 break
             years = 1.2 * years + 1
 
-        self.__plot.set_x_data(algo_name, edge_count)
+        self.__plot.set_x_data(algo_name, edge_cnt)
         self.__plot.set_y_data(algo_name, time)
 
 
