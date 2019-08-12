@@ -2,6 +2,8 @@ from bridges.line_chart import *
 from bridges.graph_benchmark import *
 from bridges.data_src_dependent.data_source import *
 from datetime import datetime
+import time as time_
+
 
 
 class ShortestPathBenchmark(GraphBenchmark):
@@ -9,8 +11,8 @@ class ShortestPathBenchmark(GraphBenchmark):
     def __init__(self, p):
         super(ShortestPathBenchmark,self).__init__()
         self.__plot = p
-        p.x_label = "Number of Edges"
-        p.y_label = "Runtime (in s)"
+        self.__plot.x_label = "Number of Edges"
+        self.__plot.y_label = "Runtime (in s)"
 
     def __get_center(self, osm_data, graph, latc, lonc):
         def dist_function(v):
@@ -48,9 +50,9 @@ class ShortestPathBenchmark(GraphBenchmark):
             level = dict()
             parent = dict()
 
-            start = datetime.now()
+            start = int(round(time_.time() * 1000))
             spalgo(graph, root, level, parent)
-            end = datetime.now()
+            end = int(round(time_.time() * 1000))
 
             elapsed_seconds = end - start
             time.append(elapsed_seconds)

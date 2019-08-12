@@ -1,16 +1,18 @@
 from bridges.graph_benchmark import *
 from bridges.line_chart import *
 from datetime import datetime
+import time as time_
+
 
 class BFSBenchamrk(GraphBenchmark):
 
     def __init__(self, p):
         super(BFSBenchamrk, self).__init__()
         self.__plot = p
-        p.x_label = "Number of Edges"
-        p.y_label = "Runtime (in s)"
+        self.__plot.x_label = "Number of Edges"
+        self.__plot.y_label = "Runtime (in s)"
 
-    def run(self, algo_name, bfsalgo, gr, root, level, parent):
+    def run(self, algo_name, bfsalgo):
         time = []
         vtx_count = []
         edge_count = []
@@ -21,9 +23,9 @@ class BFSBenchamrk(GraphBenchmark):
             graph = GraphAdjList()
             vertex_count, edge_count = self._genertate_wiki_data_movie_actor(year, 2019, graph)
             root = self._highest_degree_vertex(graph)
-            start = datetime.now()
-            bfsalgo(graph, root, level, parent)
-            end = datetime.now()
+            start = int(round(time_.time() * 1000))
+            bfsalgo(graph, root)
+            end = int(round(time_.time() * 1000))
             elapsed_time = end - start
 
             time.append(elapsed_time)
