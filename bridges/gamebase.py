@@ -8,6 +8,11 @@ class GameBase(ABC):
     debug = True
 
     def __init__(self, assid, login, apikey, cols, rows):
+        """
+        PROTECTED constructor prevent the object from being
+        directly created. Since GameBase is meant to be a purely internal
+        class, that seems appropriate.
+        """
         self.game_base_init(assid, login, apikey, cols, rows)
         self.grid_state = dict
 
