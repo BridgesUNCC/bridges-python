@@ -300,27 +300,31 @@ class LineChart:
         self.check()
         x_temp = []
         y_temp = []
-        xaxis_json = dict()
-        yaxis_json = dict()
+        xaxis_json = []
+        yaxis_json = []
         for key, value in self.xaxis_data.items():
             data_key = key
             data_value = value
             for i in range(0, len(data_value)):
                 x_temp.append(data_value[i])
-            xaxis_json = {
+            temp_xaxis_json = {
                 "Plot_Name": str(data_key),
                 "xaxis_data": x_temp
             }
+            xaxis_json.append(temp_xaxis_json)
+
 
         for key, value in self.yaxis_data.items():
             data_key = key
             data_value = value
             for i in range(0, len(data_value)):
                 y_temp.append(data_value[i])
-            yaxis_json = {
+            temp_yaxis_json = {
                 "Plot_Name": str(data_key),
                 "yaxis_data": y_temp
             }
+            yaxis_json.append(temp_yaxis_json)
+
 
         json_dict = {
             "plot_title": str(self.title),
@@ -333,8 +337,8 @@ class LineChart:
                 "mouseTracking": self._mouse_track,
                 "dataLabels": str(self.data_label)
             },
-            "xaxis_data": [xaxis_json],
-            "yaxis_data": [yaxis_json]
+            "xaxis_data": xaxis_json,
+            "yaxis_data": yaxis_json
         }
 
         return json_dict
