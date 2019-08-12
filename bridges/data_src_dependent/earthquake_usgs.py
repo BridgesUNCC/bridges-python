@@ -3,11 +3,11 @@ import time
 
 class EarthquakeUSGS:
 
-    def get_time(self):
-        epoch_time = int(self._time)
+    def get_time(self, tm):
+        epoch_time = int(tm)
         eq_time = epoch_time/1000
         eqt = time.gmtime(eq_time)
-        self.time = time.strftime("%Y-%m-%d %H:%M:%S", eqt)
+        self._time = time.strftime("%Y-%m-%d %H:%M:%S", eqt)
 
     def __init__(self, magnitude = None, longit = None, latit = None, location = None, title = None, url = None, time = None):
         self._time = int()
@@ -40,12 +40,11 @@ class EarthquakeUSGS:
 
     @property
     def time(self):
-        self.get_time()
         return self._time
 
     @time.setter
     def time(self, tm):
-        self._time = tm
+        self.get_time(tm)
 
     @property
     def latit(self):
