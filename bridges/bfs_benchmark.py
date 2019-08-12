@@ -42,7 +42,7 @@ class BFSBenchamrk(GraphBenchmark):
         """
         time = []
         vtx_count = []
-        edge_count = []
+        edge_cnt = []
 
         years = 0
         while years < 120:
@@ -59,7 +59,7 @@ class BFSBenchamrk(GraphBenchmark):
 
             time.append(elapsed_time)
             vtx_count.append(vertex_count)
-            edge_count.append(edge_count)
+            edge_cnt.append(edge_count)
 
             if elapsed_time > self.time_cap:
                 break
