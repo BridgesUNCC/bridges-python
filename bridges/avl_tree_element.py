@@ -14,14 +14,14 @@ from bridges.bst_element import *
 #
 #  AVLTree elements also have a LinkVisualizer object, that is used when they are
 #    linked to another element, appropriate for setting link attributes, for instance,
-#    between *  the current element and its left or right child
+#    between the current element and its left or right child
 #
 #
 #  @author Kalpathi Subramanian, Mihai Mehedint, Matthew McQuaigue
 #
 #  @date 6/22/16, 1/7/17, 5/17/17, 6/09/19
 #
-#  \sa http://bridgesuncc.github.io/tutorials/AVL.html
+#  Example tutorial using AVLTreeElement at: http://bridgesuncc.github.io/tutorials/AVL.html
 #
 #
 class AVLTreeElement(BSTElement):
@@ -119,7 +119,14 @@ class AVLTreeElement(BSTElement):
         return super(AVLTreeElement, self).left
 
     @left.setter
-    def left(self, val):
+    def left(self, val) -> None:
+        """
+        Setter for the left child of the avl tree
+        Args:
+            val: the value to be set for the left child to hold
+        Returns:
+            None
+        """
         self.set_child(0, val)
 
     @property
@@ -132,10 +139,22 @@ class AVLTreeElement(BSTElement):
         return super(AVLTreeElement, self).right
 
     @right.setter
-    def right(self, val):
+    def right(self, val) -> None:
+        """
+        Setter for the right child of the avl tree
+        Args:
+            val: the value to be set for the tight child to hold
+        Returns:
+            None
+        """
         self.set_child(1, val)
 
-    def get_element_representation(self):
+    def get_element_representation(self) -> dict:
+        """
+        Augment the element with the "height" and "balance factor" fields
+        Returns:
+            dict: representing the json of this element
+        """
         orig_json_str = super(AVLTreeElement, self).get_element_representation()
         avl_json = {
             "height": self.height,
