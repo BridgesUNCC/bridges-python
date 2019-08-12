@@ -5,12 +5,24 @@ import base64
 ##
 #  @brief This is a class in BRIDGES for representing an (n x n) grid.
 #
+#  A ColorGrid is essentially an image. One can construct an image of
+#  a particular size using the ColorGrid() constructor to be either
+#  blank or filled with a particular Color depending on which
+#  constructor is called.
+#
+# \code{.py}
+#  grid = new ColorGrid(rows, columns)
+#  grid.set(2, 3, Color("lightsalmon")
+#  \endcode
+# 
+#  You can get a ColorGrid from an existing Bridges ColorGrid assignment using
+#  bridges.get_color_grid_from_assignment(bridges.get_username(), bridges.get_assignment_id(), 0)
 #
 #  @author David Burlinson, Matthew McQuaigue
 #
 #  @date 2018, 7/24/19
 #
-#  \sa  Color grid tutorial at http://bridgesuncc.github.io/tutorials/Grid.html
+#  Color grid tutorial at http://bridgesuncc.github.io/tutorials/Grid.html
 #
 class ColorGrid(Grid):
 
