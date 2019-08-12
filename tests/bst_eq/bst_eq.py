@@ -82,7 +82,7 @@ class BST:
 
 def main():
     # create the Bridges object, set credentials
-    bridges = Bridges(0, "test", "988181220044")
+    bridges = Bridges(0, "test", "211416381091")
     bridges.set_visualize_JSON(True)
     bridges.connector.set_server("local")
     bridges.set_title("Recent Earthquakes(USGIS Data)")
