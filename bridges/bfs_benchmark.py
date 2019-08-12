@@ -5,7 +5,28 @@ import time as time_
 
 
 class BFSBenchamrk(GraphBenchmark):
+    """
+    @brief Benchmarks Breadth First Search algorithms.
 
+	Benchmarks BFS algorithms and add time series to a LineChart.
+
+	One can also set a maximum time spent on a particular run
+	using setTimeCap().
+
+	The BFS algorithms must have for prototype:
+
+	and can be passed to the run function for being
+	benchmarked. A typical use would look something like
+
+	code
+	lc LineChart();
+	sb BFSBenchmark(lc);
+	sb.run("mybfsalgorithm", bfsalgo);
+	endcode
+
+	@author Erik Saule
+	@date 07212019
+    """
     def __init__(self, p):
         super(BFSBenchamrk, self).__init__()
         self.__plot = p
@@ -13,6 +34,12 @@ class BFSBenchamrk(GraphBenchmark):
         self.__plot.y_label = "Runtime (in s)"
 
     def run(self, algo_name, bfsalgo):
+        """
+        benchmark one implementation
+        Args:
+            algo_name: screen name of the algorithm to be used in the visualization
+            bfsalgo: pointer to the sorting function to benchmark
+        """
         time = []
         vtx_count = []
         edge_count = []
