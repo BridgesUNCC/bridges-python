@@ -1,57 +1,35 @@
-#!/usr/bin/env python
 from bridges.element_visualizer import *
 from bridges.link_visualizer import *
 import re
 from decimal import Decimal
 import traceback
 import sys
-# from bridges.kd_tree_element import *
-
 
 
 ##
 # @brief This is the main superclass in BRIDGES for  deriving a number of
-#     elements used  in building data structures, viz., arrays, lists, trees and graphs.
-#      SLelement, DLelement, CircSLelement, CircDLelement, MLelement, TreeElement, BinTreeElement,
-#    BSTElement, AVLTreeElement and KDTreeElement are all subclasses
-#      (see class hierarchy above).  Element contains  two
-#    visualizer objects (ElementVisualizer, LinkVisualizer) for specifying
-#    visual attributes for nodes and links respectively. It also contains a label that
-#    that can be displayed in BRIDGES visualizations.
+#  elements used  in building data structures, viz., arrays, lists, trees and graphs.
+#  SLelement, DLelement, CircSLelement, CircDLelement, MLelement, TreeElement, BinTreeElement,
+#  BSTElement, AVLTreeElement and KDTreeElement are all subclasses
+#  (see class hierarchy above).  Element contains  two
+#  visualizer objects (ElementVisualizer, LinkVisualizer) for specifying
+#  visual attributes for nodes and links respectively. It also contains a label that
+#  that can be displayed in BRIDGES visualizations.
 #
-#      All the tutorials under
+#  All the tutorials under
 #
-#    http://bridgesuncc.github.io/tutorials/Overview.html
+#  http://bridgesuncc.github.io/tutorials/Overview.html
 #
-#      illustrate examples of using different types of Element objects and how to
-#    manipulate their visual attributes.
+#  illustrate examples of using different types of Element objects and how to
+#  manipulate their visual attributes.
 #
-#     @author Matthew Mcquaigue,  Kalpathi Subramanian
+#  @author Matthew Mcquaigue,  Kalpathi Subramanian
 #
-#    2017, 2018, 6/24/19
+#  2017, 2018, 6/24/19
 #
 #
 class Element():
     ids = 0
-
-    #
-    #     this is the number of pattern matches where the new string
-    #      can be inserted; useful in case we insert line breaks at a
-    #      desired number of characters is the pattern is change to
-    #     white space this index can be changed to 2 words to insert a
-    #     line break every 2 words
-    word_number = 0
-
-    # this is the string value that replaces the pattern found in the label
-    INSERT_STRING = "\\n"
-
-    #     for more complex patterns the key must be changed
-    #     like so "((John) (.+?))" returns "John firstWordAfterJohn":
-    #     John writes, John doe, John eats etc.
-    #     (\\w) matches any word (\\d) any digit (\\D) any non digit
-    #     (\\s) a white space (\\s*) zero or more whitespaces, (\\s+)
-    #     one or more
-    DIVIDE_KEY = "(\r?\n)|(\n)|(\f)|(\r)|(%n)"
 
     def get_data_structure_type(self) -> str:
         """
