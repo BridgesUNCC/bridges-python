@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 from bridges.link_visualizer import *
 
 ##
@@ -12,7 +11,6 @@ from bridges.link_visualizer import *
 # @author Matthew McQuaigue
 #
 #
-
 
 class Edge():
 
@@ -110,4 +108,9 @@ class Edge():
         self._lvis.color = color
 
     def get_edge(self):
+        """
+        Get this edge object
+        Returns:
+            self: this edge object
+        """
         return self

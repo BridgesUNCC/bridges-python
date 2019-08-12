@@ -14,7 +14,7 @@ import base64
 #  grid = new ColorGrid(rows, columns)
 #  grid.set(2, 3, Color("lightsalmon")
 #  \endcode
-# 
+#
 #  You can get a ColorGrid from an existing Bridges ColorGrid assignment using
 #  bridges.get_color_grid_from_assignment(bridges.get_username(), bridges.get_assignment_id(), 0)
 #
