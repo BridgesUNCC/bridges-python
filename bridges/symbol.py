@@ -234,9 +234,7 @@ class Symbol:
         c = math.cos(angle_r)
         s = math.sin(angle_r)
 
-        tmp = []
-        tmp[0] = pt[0] * c - pt[1] * s
-        tmp[1] = pt[0] * s + pt[1] * c
+        tmp = [pt[0] * c - pt[1] * s, pt[0] * s + pt[1] * c]
         pt[0] = float(tmp[0])
         pt[1] - float(tmp[1])
         return pt

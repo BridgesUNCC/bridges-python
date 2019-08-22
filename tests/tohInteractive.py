@@ -1,26 +1,27 @@
 # First import the relevant Bridges classes
 from bridges.bridges import *
-from bridges.array import *
 from bridges.symbol_collection import *
 from bridges.rectangle import *
 
-bridges = Bridges(1, "test", "137842425086")
+bridges = Bridges(1, "test", "211416381091")
+bridges.connector.set_server('local')
+bridges.set_visualize_JSON(True)
 sc = SymbolCollection()
 
-disk1 = Rectangle(20, 10, -50, 10)
-disk2 = Rectangle(30, 10, -50, 0)
-disk3 = Rectangle(40, 10, -50, -10)
+disk1 = Rectangle(w=20, h=10, locx=-50, locy=10)
+disk2 = Rectangle(w=30, h=10, locx=-50, locy=0)
+disk3 = Rectangle(w=40, h=10, locx=-50, locy=-10)
 
 src = []
 dest = []
 aux = []
 
 def makePegs(size):
-    src_peg = Rectangle(10, 30, -50, 0)
+    src_peg = Rectangle(w=10, h=30, locx=-50, locy=0)
     sc.add_symbol(src_peg)
-    dest_peg = Rectangle(10, 30, 0, 0)
+    dest_peg = Rectangle(w=10, h=30, locx=0, locy=0)
     sc.add_symbol(dest_peg)
-    aux_peg = Rectangle(10, 30, 50, 0)
+    aux_peg = Rectangle(w=10, h=30, locx=50, locy=0)
     sc.add_symbol(aux_peg)
 
 def makeDisks(size):
@@ -64,6 +65,8 @@ def displayCurrent(src, aux, dest):
         elif s[i] == 3:
             disk3.set_location(-50, -10)
 
+
+
     # bridges.set_data_structure(sc)
     # bridges.setTitle("Source")
     # bridges.visualize()
@@ -77,15 +80,12 @@ def displayCurrent(src, aux, dest):
     # else:
     #     sA = Array(num_elements=len(a))
     for x in range(len(a)):
-        if a[x] == 1:
+        if a[x] == 1 and len(a) == 2:
             disk1.set_location(0, 10)
         elif a[x] == 2:
             disk2.set_location(0, 0)
         elif a[x] == 3:
             disk3.set_location(0, -10)
-    # bridges.set_data_structure(sc)
-   #  bridges.setTitle("Aux")
-   #  bridges.visualize()
 
 
     # sD = ""
@@ -103,9 +103,7 @@ def displayCurrent(src, aux, dest):
         elif d[y] == 3:
             disk3.set_location(50, -10)
 
-    print(src)
     bridges.set_data_structure(sc)
-    # bridges.setTitle("Dest")
     bridges.visualize()
 
 
