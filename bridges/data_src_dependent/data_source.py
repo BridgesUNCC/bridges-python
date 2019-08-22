@@ -656,7 +656,7 @@ def _get_wiki_actor_movie_direct(year_begin, year_end, array_out):
         mak.movie_name = str(result['movieLabel']['value'])
         mak.actor_name = str(result['actorLabel']['value'])
         array_out.append(mak)
-        #print(result['movie']['value'])
+        # print(result['movie']['value'])
 
 
 def get_wiki_data_actor_movie(year_begin, year_end):
