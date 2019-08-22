@@ -643,6 +643,7 @@ def _get_wiki_actor_movie_direct(year_begin, year_end, array_out):
         SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". } \
     }
     """)
+    sparql.addCustomHttpHeader("User-Agent", 'bridges-python')
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
     for result in results["results"]["bindings"]:
