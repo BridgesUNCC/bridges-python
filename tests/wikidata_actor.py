@@ -1,6 +1,7 @@
 from bridges.bridges import *
 from bridges.bfs_benchmark import *
 import time
+import queue
 
 
 def get_bacon_number(gr, src_actor, mark, dist, parent):

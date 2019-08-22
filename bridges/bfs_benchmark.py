@@ -48,15 +48,14 @@ class BFSBenchamrk(GraphBenchmark):
         while years < 120:
             year = 2019 - years
             graph = GraphAdjList()
-            vertex_count, edge_count = self._genertate_wiki_data_movie_actor(year, 2019, graph)
+            vertex_count, edge_count = self._genertate_wiki_data_movie_actor(int(year), 2019, graph)
             root = self._highest_degree_vertex(graph)
             level = dict()
             parent = dict()
-            start = int(round(time_.time() * 1000))
+            start = float((time_.time() * 1000))
             bfsalgo(graph, root, level, parent)
-            end = int(round(time_.time() * 1000))
+            end = float((time_.time() * 1000))
             elapsed_time = end - start
-
             time.append(elapsed_time)
             vtx_count.append(vertex_count)
             edge_cnt.append(edge_count)
