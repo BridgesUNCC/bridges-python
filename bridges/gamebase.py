@@ -45,30 +45,106 @@ class GameBase(ABC):
         pass
 
     def quit(self):
+        """
+        calling this function causes the game to end.
+
+        Returns:
+            None
+        """
         self.game_started = False
 
     def set_title(self, title):
+        """
+        sets title of game
+
+        Returns:
+            None
+        """
         self.bridges.set_title(title)
 
     def set_description(self, desc):
+        """
+        sets description of the game
+
+        Returns:
+            None
+        """
         self.bridges.set_description(desc)
 
-    def get_bg_color(self, x, y):
-        return self.grid.get_bg_color(x, y)
+    def get_bg_color(self, row, col):
+        """
+        gets background color of a cell
 
-    def set_bg_color(self, x, y, color):
-        self.grid.set_bg_color(x, y, color)
+        Args:
+            row: the row of the cell
+            col: the column of the cell
 
-    def get_symbol(self, x ,y):
-        return self.grid.get_symbol(x, y)
+        Returns:
+            returns a NamedColor
+        """
+        return self.grid.get_bg_color(row, col)
 
-    def get_symbol_color(self, x, y):
-        return self.grid.get_symbol_color(x, y)
+    def set_bg_color(self, row, col, color):
+        """
+        sets background color of a cell
 
-    def draw_symbol(self, x, y, s, c):
-        self.grid.draw_symbol(x, y, s, c)
+        Args:
+            row: the row of the cell
+            col: the column of the cell
+
+        Returns:
+            None
+        """
+        self.grid.set_bg_color(row, col, color)
+
+    def get_symbol(self, row, col):
+        """
+        gets symbol of the  cell at row, col
+
+        Args:
+            row: the row of the cell
+            col: the column of the cell
+
+        Returns:
+            Symbol of type NamedSymbol
+        """
+
+        return self.grid.get_symbol(row, col)
+
+    def get_symbol_color(self, row, col):
+        """
+        gets symbol color of the  cell at row, col
+
+        Args:
+            row: the row of the cell
+            col: the column of the cell
+
+        Returns:
+            color of type NamedColor
+        """
+
+        return self.grid.get_symbol_color(row, col)
+
+    def draw_symbol(self, row, col, s, c):
+        """
+        draw symbol s with color col at  cell (row, col)
+
+        Args:
+            row: the row of the cell
+            col: the column of the cell
+            s: symbol
+            c: color
+
+        Returns:
+            color of type NamedColor
+        """
+        self.grid.draw_symbol(row, col, s, c)
 
     def render(self):
+        """
+        renders the board
+		"""
+
         if self.firsttime:
             self.firsttime = False
 
@@ -83,17 +159,17 @@ class GameBase(ABC):
 
     @property
     def board_width(self):
+        """
+        setter/getter property for board width
+        """
         width = self.grid.dimensions
         return width[1]
 
     @property
     def board_height(self):
+        """
+        setter/getter property for board height
+        """
         height = self.grid.dimensions
         return height[0]
-
-
-
-
-
-
 

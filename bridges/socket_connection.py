@@ -32,13 +32,13 @@ class SocketConnection:
         except ConnectionError as e:
             print(e)
 
-    @_sio.on('announcement')
-    def announcement(*args):
-        print("announcement", *args)
+#    @_sio.on('announcement')
+#    def announcement(*args):
+#        print("announcement", *args)
 
     @_sio.on('keydown')
     def keydown(*args):
-        print(*args)
+        #print(*args)
         for i in range(0, len(SocketConnection._listeners)):
             SocketConnection._listeners[i].key_press(*args)
 
