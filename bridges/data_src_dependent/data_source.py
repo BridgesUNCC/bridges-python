@@ -11,6 +11,7 @@ from bridges.data_src_dependent import song
 from bridges.data_src_dependent import lru_cache
 from bridges.data_src_dependent import movie_actor_wiki_data
 from bridges.data_src_dependent.osm import *
+from bridges.data_src_dependent.elevation import *
 from bridges.data_src_dependent.actor_movie_imdb import *
 from bridges.color_grid import ColorGrid
 from bridges.color import Color
@@ -628,6 +629,77 @@ def get_osm_data(*args) -> OsmData:
 
     except AttributeError:
         raise RuntimeError("Malformed JSON: Unable to parse")
+
+
+
+def elevation_server(url):
+    request = requests.get(url)
+    if not request.ok:
+        if request.status_code == 404:
+            request = requests.get(url)
+            if not request.ok:
+                raise request.raise_for_status()
+            raise RuntimeError("Issue with request")
+        raise request.raise_for_status()
+
+    server_data = request.content
+
+    return server_data
+
+
+
+def get_elevation_data(*args):
+    base_url = "http://127.0.0.1:5000/elevation"
+    hash_url = "http://127.0.0.1:5000/hash"
+    #minLon, minLat, maxLon, maxLat
+
+    coords = args[0]
+
+    if len(args) == 2:
+        res = args[1]
+    else:
+        res = .0166
+
+    url = base_url + f"?minLon={coords[0]}&minLat={coords[1]}&maxLon={coords[2]}&maxLat={coords[3]}&resX={res}&resY={res}"
+    hash_url = hash_url + f"?minLon={coords[0]}&minLat={coords[1]}&maxLon={coords[2]}&maxLat={coords[3]}&resX={res}&resY={res}"
+    #loads cache
+    lru = lru_cache.lru_cache(30)
+
+
+    data = None
+    not_skip = True
+    hash = False
+    hash = elevation_server(hash_url).decode('utf-8')
+    if (hash != "false" and lru.inCache(hash)):
+        not_skip = False
+        data = lru.get(hash)
+
+    if not_skip:
+        data = elevation_server(url).decode("utf-8")
+
+    hash = elevation_server(hash_url).decode('utf-8')
+    lru.put(hash, data)
+
+    
+    #parse and build object
+    ret_ele = EleData()
+    
+    file_array = data.splitlines()
+    ret_ele.cols = file_array[0].split(" ")[-1]
+    ret_ele.rows = file_array[1].split(" ")[-1]
+    ret_ele._xll = file_array[2].split(" ")[-1]
+    ret_ele._yll = file_array[3].split(" ")[-1]
+    ret_ele.cellsize = file_array[4].split(" ")[-1]
+
+    x = 5
+    while (x < len(file_array)):
+        arr = file_array[x].replace("\n", "").split(" ")
+        arr.pop(0)
+        ret_ele.data.append(arr)
+        x += 1
+
+
+    return ret_ele
 
 
 def _get_wiki_actor_movie_direct(year_begin, year_end, array_out):
