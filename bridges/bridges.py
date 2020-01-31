@@ -1,5 +1,7 @@
 from bridges.connector import *
 from bridges import ColorGrid
+import os
+
 import json
 ##
 #     @brief The bridges class is the main class that provides interfaces to datasets,
@@ -67,12 +69,15 @@ class Bridges:
         """
         self._assignment_part = 0
         self._assignment = 0
+        self._username = str()
+        self._key = str()
         self._title = str()
         self._description = str()
-        self._set_assignment(assignment)
-        self._key = appl_id
-        self.connector = Connector(appl_id, username, assignment)
-        self._username = username
+        self.set_assignment(assignment)
+        self.set_username(username)
+        self.set_key(appl_id)
+
+        self.connector = Connector(self.get_key(), self.get_username(), self.get_assignment())
         self._coord_system_type = "cartesian"
         self._json_flag = False
         self._map_overlay = False
@@ -147,7 +152,7 @@ class Bridges:
             self._assignment_part = self._assignment_part + 1
 
 
-    def _set_assignment(self, assignment):
+    def set_assignment(self, assignment):
         """
         Setter for assignment id (must be positive)
         Args: 
@@ -155,6 +160,9 @@ class Bridges:
         Returns:
            None
         """
+        force = os.getenv("FORCE_BRIDGES_ASSIGNMENT", "")
+        if (force != ""):
+            assignment = int(force)
         if assignment < 0:
             ValueError("Assignment value must be >= 0")
         elif self._assignment >= 0:
@@ -236,13 +244,26 @@ class Bridges:
         from bridges.data_src_dependent.data_source import get_color_grid_from_assignment
         return get_color_grid_from_assignment(self.connector.server_url, user, assignment, subassignment)
 
+    def set_username(self, username):
+        """
+        Setter for username (must be a string)
+        Args: 
+           username: username to be set
+        Returns:
+           None
+        """
+        force = os.getenv("FORCE_BRIDGES_USERNAME", "")
+        if (force != ""):
+            username = force
+        self._username = username.replace(" ", "+")
+    
     def get_username(self):
         """
         Getter for the assignment user name (BRIDGES credentials)
         Returns:
             str: user name
         """
-        return self._username.replace(" ", "+")
+        return self._username
 
     def get_assignment_id(self):
         """
@@ -251,6 +272,20 @@ class Bridges:
             int: assignment number
         """
         return self._assignment
+
+
+    def set_key(self, apikey):
+        """
+        Setter for API Key (BRIDGES Credentials)
+        Args: 
+           apikey: api key to be set
+        Returns:
+           None
+        """
+        force = os.getenv("FORCE_BRIDGES_APIKEY", "")
+        if (force != ""):
+            apikey = force
+        self._key = apikey.replace(" ", "+")
 
     def get_key(self):
         """
