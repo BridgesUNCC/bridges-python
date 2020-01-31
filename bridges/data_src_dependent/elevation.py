@@ -48,6 +48,15 @@ class EleData:
     def cellsize(self, value):
         self._cellsize = value
     
+    @property
+    def maxVal(self):
+        return self._maxVal
+
+    @maxVal.setter
+    def maxVal(self, value):
+        self._maxVal = value
+
+
 
     def __init__(self):
         self.ncols = 0
@@ -57,3 +66,4 @@ class EleData:
         self._yll = 0
         self._cellsize = 0
         self.name = None
+        self._maxVal = 0
