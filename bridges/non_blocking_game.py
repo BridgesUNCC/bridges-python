@@ -151,13 +151,6 @@ class NonBlockingGame(GameBase):
         """
         Call this function from main to start game
         """
-        self.sleep_timer()
-
-        self.render()
-
-        self.initialize()
-
-        self.game_started = True
 
         frame = 0
 
@@ -165,15 +158,28 @@ class NonBlockingGame(GameBase):
         if (framelimit):
             framelimit = int(framelimit)
             print("limiting number of frame to " + str(framelimit))
-            
-        while self.game_started:
-            self.game_loop()
+
+        try:
+            self.sleep_timer()
+
             self.render()
-            self.control_framerate()
-            frame = frame + 1
-            if (framelimit and frame > framelimit):
-                print ("frame limit of "+ str(framelimit) +" frames reached")
-                self.quit()
+
+            self.initialize()
+
+            self.game_started = True
+
+            while self.game_started:
+                self.game_loop()
+                self.render()
+                self.control_framerate()
+                frame = frame + 1
+                if (framelimit and frame > framelimit):
+                    print ("frame limit of "+ str(framelimit) +" frames reached")
+                    self.quit()
+        except:
+            self.close()
+            raise
+        
         self.close()
 
     def key_left(self):
