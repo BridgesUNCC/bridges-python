@@ -32,6 +32,9 @@ class GameBase(ABC):
         self.sock = SocketConnection(self.bridges)
         self.sock.setup_connection(log, id)
 
+    def close(self):
+        self.sock.close()
+        
     def register_keypress(self, kl):
         self.sock.add_listener(kl)
 

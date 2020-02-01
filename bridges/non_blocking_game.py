@@ -173,7 +173,8 @@ class NonBlockingGame(GameBase):
             frame = frame + 1
             if (framelimit and frame > framelimit):
                 print ("frame limit of "+ str(framelimit) +" frames reached")
-                self.quit()            
+                self.quit()
+        self.close()
 
     def key_left(self):
         """
