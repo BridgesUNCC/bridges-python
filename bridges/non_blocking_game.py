@@ -159,10 +159,21 @@ class NonBlockingGame(GameBase):
 
         self.game_started = True
 
+        frame = 0
+
+        framelimit = os.getenv("FORCE_BRIDGES_FRAMELIMIT", None)
+        if (framelimit):
+            framelimit = int(framelimit)
+            print("limiting number of frame to " + str(framelimit))
+            
         while self.game_started:
             self.game_loop()
             self.render()
             self.control_framerate()
+            frame = frame + 1
+            if (framelimit and frame > framelimit):
+                print ("frame limit of "+ str(framelimit) +" frames reached")
+                self.quit()            
 
     def key_left(self):
         """
