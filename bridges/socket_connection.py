@@ -26,7 +26,7 @@ class SocketConnection:
             }
             student_cred = json.dumps(student_cred)
 
-            print("passing student creditials to server..")
+            print("passing student credentials to server..")
             SocketConnection._sio.emit('credentials', student_cred)
 
         except ConnectionError as e:
