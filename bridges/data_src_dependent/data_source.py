@@ -691,13 +691,17 @@ def get_elevation_data(*args):
     ret_ele._yll = file_array[3].split(" ")[-1]
     ret_ele.cellsize = file_array[4].split(" ")[-1]
 
+    maxVal = -9999999999
     x = 5
     while (x < len(file_array)):
         arr = file_array[x].replace("\n", "").split(" ")
         arr.pop(0)
         ret_ele.data.append(arr)
+        for y in arr:
+            if(int(y) > maxVal):
+                maxVal = int(y)
         x += 1
-
+    ret_ele.maxVal = maxVal
 
     return ret_ele
 

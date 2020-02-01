@@ -27,3 +27,5 @@ from bridges.non_blocking_game import *
 from bridges.input_helper import *
 from bridges.blocking_game import *
 from bridges.line_chart import *
+from bridges.audio_channel import *
+from bridges.audio_clip import *
