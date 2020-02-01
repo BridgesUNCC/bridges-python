@@ -21,7 +21,7 @@ class GameBase(ABC):
 
         self.bridges = Bridges(id, log, key)
 
-        self.bridges.set_visualize_JSON(True)
+        #self.bridges.set_visualize_JSON(True)
 
         self.bridges.connector.set_server("games")
 
