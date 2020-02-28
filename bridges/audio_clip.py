@@ -54,10 +54,14 @@ class AudioClip(object):
             count = 0
             for i in range(0, len(framebytes), self.get_sample_bytes()):
                 if self.get_sample_bytes() != 3:
-                    self.set_sample(channel, count, int.from_bytes(framebytes[i:i+self.get_sample_bytes()], byteorder='little', signed=True))
+                    val = int.from_bytes(framebytes[i:i+self.get_sample_bytes()], byteorder='little', signed=True)
+                    scaled = (val / ((2 ** self.get_sample_bits() / 2) - 1)) * ((2 ** 32 / 2) - 1)
+                    self.set_sample(channel, count, val)
                 else:
                     # Pad an empty byte to the start of 24 bit waves
-                    self.set_sample(channel, count, int.from_bytes(b'\x00' + framebytes[i:i+self.get_sample_bytes()], byteorder='little', signed=True))
+                    val = int.from_bytes(b'\x00' + framebytes[i:i+self.get_sample_bytes()], byteorder='little', signed=True)
+                    scaled = (val / ((2 ** self.get_sample_bits() / 2) - 1)) * ((2 ** 32 / 2) - 1)
+                    self.set_sample(channel, count, val)
                 
                 channel += 1
 
@@ -108,9 +112,15 @@ class AudioClip(object):
             (int) channel: The index of the channel to get. 0 for front-left, 1 for front-right, etc.
             (int) index: The index of the sample to get. From 0 - get_sample_count()
         Returns:
-            int: The sample at index which must be less than get_sample_count()
+            int: The 32 bit sample
         """
-        return self.get_channel(channel).get_sample(index)
+        value = self.get_channel(channel).get_sample(index)
+
+        minmax32 = (2 ** 32 // 2) - 1
+        minmaxbit = (2 ** self.get_sample_bits() // 2) - 1
+
+        scaled_sample = (value / minmaxbit) * minmax32
+        return int(scaled_sample)
 
     def set_sample(self, channel: int, index: int, value: int) -> None:
         """
@@ -122,12 +132,15 @@ class AudioClip(object):
         Returns:
             None
         """
-        minmax32 = (2 ** self.get_sample_bits() // 2) - 1
+        minmax32 = (2 ** 32 // 2) - 1
         if value < -minmax32 - 1:
-            raise ValueError("Sample value out of minimum for signed %d bit integer with value %d" % (self.get_sample_bits(), value))
+            raise ValueError("Sample value out of minimum for signed 32 bit integer with value %d" % (value))
         if value > minmax32:
-            raise ValueError("Sample value out of maxmium for signed %d bit integer with value %d" % (self.get_sample_bits(), value))
+            raise ValueError("Sample value out of maxmium for signed 32 bit integer with value %d" % (value))
         
+        minmaxbit = (2 ** self.get_sample_bits() // 2) - 1
+        scaled_sample = (value / minmax32) * minmaxbit
+
         self.get_channel(channel).set_sample(index, int(value))
 
     def get_sample_bits(self) -> int:
@@ -158,6 +171,14 @@ class AudioClip(object):
         else:
             raise ValueError("Wave file sample bytes of unsupported length %d, supported lengths are 8, 16, 24, and 32 bit" % (self.get_sample_bytes() * 8))
 
+    def get_data_structure_type(self) -> str:
+        """
+        Get the data structure type
+        Returns:
+            str : data structure type
+        """
+        return "Audio"
+
     def get_data_structure_representation(self) -> dict:
         """ Return a dictionary of the data in this audio file
         Returns:
@@ -175,13 +196,14 @@ class AudioClip(object):
         framedata = []
         for i in range(self.sample_count):
             for c in range(self.num_channels):
-                framedata.append(self.get_sample(c, i))
+                # Go straight to channel sample for correct bit data
+                framedata.append(self._channels[c].get_sample(i))
 
         if self.get_sample_bytes() == 4:
             newarr = []
             for val in framedata:
-                minmax32 = (2 ** 32 / 2) - 1
-                minmax16 = (2 ** 16 / 2) - 1
+                minmax32 = (2 ** 32 / 2.0) - 1
+                minmax16 = (2 ** 16 / 2.0) - 1
 
                 newval = (val / minmax32) * minmax16
 
@@ -224,6 +246,6 @@ class AudioClip(object):
                 data.append(int.from_bytes(chunk[i:i+audio.get_sample_bytes()], byteorder='little', signed=True))
 
         for i in range(audio.get_sample_count() * audio.get_num_channels()):
-            audio.set_sample(i % audio.get_num_channels(), int(i / audio.get_num_channels()), data[i])
+            audio.set_sample(i % audio.get_num_channels(), int(i / audio.get_num_channels()), (data[i] / ((2 ** audio.get_sample_bits() / 2) - 1) * ((2 ** 32 / 2) - 1)))
 
         return audio
