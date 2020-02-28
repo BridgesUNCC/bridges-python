@@ -649,8 +649,8 @@ def elevation_server(url):
 
 
 def get_elevation_data(*args):
-    base_url = "http://127.0.0.1:5000/elevation"
-    hash_url = "http://127.0.0.1:5000/hash"
+    base_url = "http://cci-bridges-elevation-t.dyn.uncc.edu/elevation"
+    hash_url = "http://cci-bridges-elevation-t.dyn.uncc.edu/hash"
     #minLon, minLat, maxLon, maxLat
 
     coords = args[0]
