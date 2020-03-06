@@ -154,7 +154,7 @@ class ElementVisualizer():
             None
         """
         self.prop['locationX'] = x
-        self.prop['locationy'] = y
+        self.prop['locationY'] = y
         self._locationX = x
         self._locationY = y
 

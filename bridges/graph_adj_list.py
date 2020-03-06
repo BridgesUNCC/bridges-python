@@ -317,29 +317,32 @@ class GraphAdjList:
 
         nodes_json = []
         for k in range(0, len(nodes)):
+            nodes_json.append([])
             node_map[nodes[k]] = k
             elvis = nodes[k].visualizer
             loc_str = []
             if elvis.location_x != float('inf') and elvis.location_y != float('inf'):
                 loc_str.append(elvis.location_x)
                 loc_str.append(elvis.location_y)
-                nodes_json.append(loc_str)
+                nodes_json[k].append(loc_str)
             color = elvis.color
-            nodes_json.append([color.red, color.green, color.blue, color.alpha])
+            nodes_json[k].append([color.red, color.green, color.blue, color.alpha])
 
         links_json = []
         for a_list in self.adj_list.items():
             list = a_list[1]
             src_vert = self.vertices.get(a_list[0])
             while list is not None:
+                link_json=[]
                 src_indx = node_map.get(src_vert)
                 edge = list.value
                 dest_vert = self.vertices.get(edge.tov)
                 dest_indx = node_map.get(dest_vert)
                 color = src_vert.get_link_visualizer(dest_vert).color
-                links_json.append(src_indx)
-                links_json.append(dest_indx)
-                links_json.append([color.red, color.green, color.blue, color.alpha])
+                link_json.append(src_indx)
+                link_json.append(dest_indx)
+                link_json.append([color.red, color.green, color.blue, color.alpha])
+                links_json.append(link_json)
                 list = list.next
 
         graph_alist_json = {
