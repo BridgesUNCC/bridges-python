@@ -215,7 +215,7 @@ class Symbol:
         """
         Getter for the dimensions
         Returns:
-            list : the bounding box of this shape
+            list : the bounding box of this shape (xmin, xmax, ymin, ymax)
         """
         return [0.0, 0.0, 0.0, 0.0]
 

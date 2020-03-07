@@ -98,15 +98,15 @@ class Rectangle(Symbol):
         """
         Getter for the dimensions of the rectangle
         Returns:
-            list: representing the bounding box of the shape 
+            list: the bounding box of the shape (xmin, xmax, ymin, ymax)
         """
         dims = []
         location = self.get_location()
 
         dims.append(location[0] - self.width/2)
-        dims.append(location[0] - self.width/2)
+        dims.append(location[0] + self.width/2)
         dims.append(location[1] - self.height/2)
-        dims.append(location[1] - self.height/2)
+        dims.append(location[1] + self.height/2)
 
         return dims
 

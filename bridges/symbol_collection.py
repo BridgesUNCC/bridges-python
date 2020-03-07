@@ -19,8 +19,19 @@ class SymbolCollection:
         Constructor for collection of symbols
         """
         self._symbols = dict()
-        self._domain = 100.0
+        self._domainxmin = -100
+        self._domainxmax = 100
+        self._domainymin = -100
+        self._domainymax = 100
+        self._autoupdateviewport = True
 
+    def setviewport(self, xmin, xmax, ymin, ymax):
+        self._autoupdateviewport = False
+        self._domainxmin = xmin
+        self._domainxmax = xmax
+        self._domainymin = ymin
+        self._domainymax = ymax    
+        
     def get_data_structure_type(self):
         """
         Getter for the data structure type
@@ -49,15 +60,15 @@ class SymbolCollection:
         """
         dims = s.get_dimensions()
 
-        if abs(dims[0]) > self._domain:
-            self._domain = abs(dims[0])
-        if abs(dims[1]) > self._domain:
-            self._domain = abs(dims[1])
+        if dims[0] < self._domainxmin:
+            self._domainxmin = dims[0]
+        if dims[1] > self._domainxmax:
+            self._domainxmax = dims[1]
 
-        if abs(dims[2]) > self._domain:
-            self._domain = abs(dims[2])
-        if abs(dims[3]) > self._domain:
-            self._domain = abs(dims[3])
+        if dims[2] < self._domainymin:
+            self._domainymin = dims[2]
+        if dims[3] > self._domainymax:
+            self._domainymax = dims[3]
 
     def get_data_structure_representation(self):
         """
@@ -67,12 +78,13 @@ class SymbolCollection:
         """
         symbol_json = []
         for key, value in self._symbols.items():
-            self.update_axis_domains(value)
+            if (self._autoupdateviewport):
+                self.update_axis_domains(value)
             symbol_json.append(value.get_json_representation())
 
         final_json = {
-            "domainX": [-self._domain, self._domain],
-            "domainY": [-self._domain, self._domain],
+            "domainX": [self._domainxmin, self._domainxmax],
+            "domainY": [-self._domainymin, self._domainymax],
             "symbols": symbol_json
         }
         return final_json
