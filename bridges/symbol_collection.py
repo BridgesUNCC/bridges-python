@@ -84,7 +84,7 @@ class SymbolCollection:
 
         final_json = {
             "domainX": [self._domainxmin, self._domainxmax],
-            "domainY": [-self._domainymin, self._domainymax],
+            "domainY": [self._domainymin, self._domainymax],
             "symbols": symbol_json
         }
         return final_json
