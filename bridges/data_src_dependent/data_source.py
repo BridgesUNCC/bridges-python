@@ -660,8 +660,8 @@ def get_elevation_data(*args):
     else:
         res = .0166
 
-    url = base_url + f"?minLon={coords[0]}&minLat={coords[1]}&maxLon={coords[2]}&maxLat={coords[3]}&resX={res}&resY={res}"
-    hash_url = hash_url + f"?minLon={coords[0]}&minLat={coords[1]}&maxLon={coords[2]}&maxLat={coords[3]}&resX={res}&resY={res}"
+    url = base_url + f"?minLat={coords[0]}&minLon={coords[1]}&maxLat={coords[2]}&maxLon={coords[3]}&resX={res}&resY={res}"
+    hash_url = hash_url + f"?minLat={coords[0]}&minLon={coords[1]}&maxLat={coords[2]}&maxLon={coords[3]}&resX={res}&resY={res}"
     #loads cache
     lru = lru_cache.lru_cache(30)
 
