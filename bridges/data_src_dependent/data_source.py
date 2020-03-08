@@ -649,19 +649,31 @@ def elevation_server(url):
 
 
 def get_elevation_data(*args):
+    """This function returns elevation data for the requested
+    location and resolution. Note that the data returned may be for a
+    slightly different location and resolution than requested.
+
+    :param args[0]: a bounding box, aka an array [minLat, minLon, maxLat, maxLon]
+    :param args[1]: spatial resolution, aka the distance between two samples (in degrees)
+
+    :return EleData for the bounding box and resolution requested (approximately)
+    """
     base_url = "http://cci-bridges-elevation-t.dyn.uncc.edu/elevation"
     hash_url = "http://cci-bridges-elevation-t.dyn.uncc.edu/hash"
-    #minLon, minLat, maxLon, maxLat
 
     coords = args[0]
+    minLat = coords[0]
+    minLon = coords[1]
+    maxLat = coords[2]
+    maxLon = coords[3]
 
+    res = .0166
+        
     if len(args) == 2:
         res = args[1]
-    else:
-        res = .0166
-
-    url = base_url + f"?minLat={coords[0]}&minLon={coords[1]}&maxLat={coords[2]}&maxLon={coords[3]}&resX={res}&resY={res}"
-    hash_url = hash_url + f"?minLat={coords[0]}&minLon={coords[1]}&maxLat={coords[2]}&maxLon={coords[3]}&resX={res}&resY={res}"
+        
+    url = base_url + f"?minLat={minLat}&minLon={minLon}&maxLat={maxLat}&maxLon={maxLon}&resX={res}&resY={res}"
+    hash_url = hash_url + f"?minLat={minLat}&minLon={minLon}&maxLat={maxLat}&maxLon={maxLon}&resX={res}&resY={res}"
     #loads cache
     lru = lru_cache.lru_cache(30)
 
