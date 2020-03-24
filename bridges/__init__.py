@@ -20,12 +20,24 @@ from bridges.ml_element import *
 from bridges.sl_element import *
 from bridges.tree_element import *
 from bridges.color_grid import *
+# games
 from bridges.socket_connection import *
 from bridges.keypress_listener import *
 from bridges.gamebase import *
 from bridges.non_blocking_game import *
 from bridges.input_helper import *
 from bridges.blocking_game import *
+# line chart
 from bridges.line_chart import *
+# audio
 from bridges.audio_channel import *
 from bridges.audio_clip import *
+# symbol collection
+from bridges.symbol_collection import *
+from bridges.symbol import *
+from bridges.circle import *
+from bridges.rectangle import *
+from bridges.polygon import *
+from bridges.polyline import *
+from bridges.label import *
+
