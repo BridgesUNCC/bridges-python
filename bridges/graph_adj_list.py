@@ -96,10 +96,7 @@ class GraphAdjList:
                                  " does not exist! Add the vertex before creating the edge.")
         except Exception as e:
             traceback.print_tb(e.__traceback__)
-        if data is not None:
-            self.adj_list[src] = SLelement(e=Edge(src, dest, data), next=self.adj_list.get(src))
-        else:
-            self.adj_list[src] = SLelement(e=Edge(src, dest), next=self.adj_list.get(src))
+        self.adj_list[src] = SLelement(e=Edge(src, dest, data), next=self.adj_list.get(src))
 
     def set_vertex_data(self, src, vertex_data) -> None:
         """
