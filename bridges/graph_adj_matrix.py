@@ -54,7 +54,7 @@ class GraphAdjMatrix():
     #     exists. This method will replace the value for this key
     #
     #     @param k - vertex key value
-    #     @param 3 - user specified data, part of the vertex data
+    #     @param e - user specified data, part of the vertex data
     #
     #
     def add_vertex(self, k, e):
