@@ -14,7 +14,7 @@ from bridges.link_visualizer import *
 
 class Edge():
 
-    def __init__(self, v1, v2, data = None) -> None:
+    def __init__(self, v1, v2, data=None) -> None:
         """
         Constructor for a edge
         Args:
@@ -106,6 +106,34 @@ class Edge():
             None
         """
         self._lvis.color = color
+
+    @property
+    def opacity(self):
+        """
+        Getter for the element opacity
+        Returns:
+            opacity : element opacity
+        """
+        return self.color.alpha
+
+    @opacity.setter
+    def opacity(self, opacity):
+        """
+        Setter for the elementopacity
+        Args:
+            opacity : opacity value (0-1.0) to set
+        Returns:
+            None
+        """
+        self.color.alpha = opacity
+
+    @property
+    def label(self):
+        return self._lvis.label
+
+    @label.setter
+    def label(self, l):
+        self._lvis.label = l
 
     def get_edge(self):
         """
