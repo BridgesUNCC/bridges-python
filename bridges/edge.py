@@ -48,6 +48,24 @@ class Edge():
         return self._from_vertex
 
     @property
+    def destination(self):
+        """
+        Getter for the to vertex
+        Returns:
+            vertex: terminating vertex of edge
+        """
+        return self._to_vertex
+
+    @property
+    def source(self):
+        """
+        Getter for the from vertex
+        Returns:
+            vertex : source vertex  of edge
+        """
+        return self._from_vertex
+
+    @property
     def thickness(self) -> float:
         """
         Getter for the link thickness

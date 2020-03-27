@@ -34,17 +34,8 @@ class SLelement(Element):
         Returns:
             None
         """
-        if 'e' in kwargs:
-            if 'label' in kwargs:
-                super(SLelement, self).__init__(val=kwargs['e'], label=kwargs['label'])
-            else:
-                super(SLelement, self).__init__(val=kwargs['e'])
-        else:
-            super(SLelement, self).__init__()
-        if 'next' in kwargs:
-            self._next = kwargs['next']
-        else:
-            self._next = None
+        super(SLelement, self).__init__(val=kwargs.get('e'), label=kwargs.get('label'))
+        self._next = kwargs.get('next')
 
     def get_data_structure_type(self) -> str:
         """

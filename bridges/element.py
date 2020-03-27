@@ -28,7 +28,7 @@ import sys
 #  2017, 2018, 6/24/19
 #
 #
-class Element():
+class Element:
     ids = 0
 
     def get_data_structure_type(self) -> str:
@@ -54,13 +54,17 @@ class Element():
         self._link_visualizer = dict()
         self._ids = Element.ids
         self._identifier = str(self._ids)
-        self._label = "Default"
         self._visualizer = ElementVisualizer()
-        if 'val' in kwargs:
-            self._value = kwargs['val']
-            if 'label' in kwargs:
-                self._label = kwargs['label']
-        elif 'original' in kwargs:
+        self._value = kwargs.get('val')
+        self._label = kwargs.get('label') if kwargs.get('label') else "Default"
+
+        if kwargs.get("color"):
+            self.color = kwargs['color']
+
+        if kwargs.get("opacity"):
+            self.opacity = kwargs['opacity']
+
+        if 'original' in kwargs:
             self._visualizer = ElementVisualizer(kwargs['original'].get_visualizer())
             self._label = str(kwargs['original'].label)
             self._value = kwargs['original']._value
@@ -264,6 +268,10 @@ class Element():
            None
         """
         self.visualizer.shape = shp
+
+    @property
+    def id(self) -> int:
+        return self._ids
 
     def set_location(self, locX, locY):
         """

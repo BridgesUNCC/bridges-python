@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+from typing import Any, Union
+
 from bridges.sl_element import *
 from bridges.edge import *
 import traceback
@@ -58,24 +60,39 @@ class GraphAdjList:
             return "largegraph"
         return "GraphAdjacencyList"
 
-    def add_vertex(self, k, e) -> None:
+    def add_vertex(self, id: str, label: str = None, data: Any = None, **kwargs) -> Element:
         """
         Adds a new vertex to the graph, initializes the adjacency
         list; user is responsible for checking if the vertex already exists.
-        This method will replace the valeue for this key
+        This method will replace the value for this key
         Args:
-            k: the vertex iid
-            e: the vertex data, currently used as a label by default
+            id: the vertex id
+            label: vertex label
+            data: the vertex data
+        Kwargs:
+            color: color of vertex
+            opacity: opacity of vertex
+            original: an existing Element instance to copy
         Returns:
-            None
+            newly created Vertex
         """
         #  note: it is the user's responsibility to  check
         #  for duplicate vertices
-        self.vertices[k] = Element(val=e)
-        self.vertices.get(k).label = str(k)
-        self.adj_list[k] = None
+        self.vertices[id] = Element(val=data, **kwargs)
+        self.vertices.get(id).label = str(label) if label is not None else str(id)
+        self.adj_list[id] = None
 
-    def add_edge(self, src, dest, data=None) -> None:
+        return self.vertices[id]
+
+    def add_edge(self,
+                 src: Union[str, Element],
+                 dest: Union[str, Element],
+                 label: str = None,
+                 data: any = None,
+                 color: Union[str, Color] = "blue",
+                 thickness: float = 1.0,
+                 opacity: float = 1.0
+                 ) -> Edge:
         """
         Adds a new edge to the graph, adds it to that vertex's
         adjacency list; user is responsible for checking if the
@@ -84,25 +101,37 @@ class GraphAdjList:
         Args:
             src: source vertex of edge
             dest: destination  vertex of edge
+            label: label of edge,
+            color: color of edge,
+            thickness: thickness of edge,
+            opacity: opacity of edge,
             data: data the edge will hold
         Returns:
-            None
+            newly created Edge
         Rasies:
             ValueError: if the src and dest vertices do not exist
         """
+        source_id = self._resolve_id(src)
+        dest_id = self._resolve_id(dest)
+        if source_id is None or dest_id is None:
+            raise ValueError("Vertex " + src + " or " + dest +
+                             " does not exist! Add the vertex before creating the edge.")
         try:
-            if self.vertices.get(src) is None or self.vertices.get(dest) is None:
+            if self.vertices.get(source_id) is None or self.vertices.get(dest_id) is None:
                 raise ValueError("Vertex " + src + " or " + dest +
                                  " does not exist! Add the vertex before creating the edge.")
         except Exception as e:
             traceback.print_tb(e.__traceback__)
-        self.adj_list[src] = SLelement(e=Edge(src, dest, data), next=self.adj_list.get(src))
+        self.adj_list[source_id] = SLelement(e=Edge(source_id, dest_id, data), next=self.adj_list.get(src), label=label,
+                                       color=color, thickness=thickness, opacity=opacity)
+
+        return self.adj_list[source_id].value
 
     def set_vertex_data(self, src, vertex_data) -> None:
         """
         Set for the data at a given vertex
         Args:
-            src: the source vetrex
+            src: the source vertex
             vertex_data: The data for the vertex
         Returns:
             None
@@ -188,9 +217,29 @@ class GraphAdjList:
         sle = self.adj_list[src]
         while sle is not None:
             ed = sle.value
-            if ed.get_vertex() == dest:
+            if ed.destination == dest:
                 return ed.get_edge_data()
             sle = sle.next
+
+    def get_edge(self, src: Union[str, Element], dest: Union[str, Element]):
+        source_id = self._resolve_id(src)
+        dest_id = self._resolve_id(dest)
+        if source_id is None or dest_id is None:
+            raise ValueError("Vertex " + src + " or " + dest +
+                             " does not exist! Add the vertex before creating the edge.")
+
+        sle = self.adj_list[source_id]
+        while sle is not None:
+            ed = sle.value
+            if ed.destination == dest_id:
+                return ed
+            sle = sle.next
+
+    def _resolve_id(self, key_or_element: Union[str, Element]) -> Union[str, None]:
+        if type(key_or_element) is str:
+            return key_or_element
+        else:
+            return [key for key, value in self.vertices.items() if value == key_or_element].pop()
 
     def are_all_vertices_located(self):
         for element in self.vertices.items():

@@ -30,7 +30,7 @@ from bridges.sl_element import *
 #
 class DLelement(SLelement):
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, *args, **kwargs) -> None:
         """
         Constructor for DLelement
         Kwargs:
@@ -41,19 +41,9 @@ class DLelement(SLelement):
         Return:
             None
         """
-        if 'e' in kwargs:
-            if 'label' in kwargs:
-                super(DLelement, self).__init__(e=kwargs['e'], label=kwargs['label'])
-            else:
-                super(DLelement, self).__init__(e=kwargs['e'])
-        else:
-            super(DLelement, self).__init__()
-        if 'next' in kwargs:
-            self._next = kwargs['next']
-        if 'prev' in kwargs:
-            self._prev = kwargs['prev']
-        else:
-            self._prev = None
+        super(DLelement, self).__init__(**kwargs)
+        self._next = kwargs.get('next')
+        self._prev = kwargs.get('prev')
 
     def get_data_structure_type(self) -> str:
         """
