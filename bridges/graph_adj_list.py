@@ -344,7 +344,7 @@ class GraphAdjList:
                 dest_indx = node_map.get(dest_vert)
                 #  get link representation
                 links_JSON.append((links_list.get_link_representation(
-                                   src_vert.get_link_visualizer(dest_vert),
+                                   edge._lvis,
                                    str(src_indx),
                                    str(dest_indx))))
                 links_list = links_list.next
