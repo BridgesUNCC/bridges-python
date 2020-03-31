@@ -64,7 +64,7 @@ class Element:
         if kwargs.get("opacity"):
             self.opacity = kwargs['opacity']
 
-        if 'original' in kwargs:
+        if kwargs.get("original"):
             self._visualizer = ElementVisualizer(kwargs['original'].get_visualizer())
             self._label = str(kwargs['original'].label)
             self._value = kwargs['original']._value

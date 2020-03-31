@@ -60,7 +60,13 @@ class GraphAdjList:
             return "largegraph"
         return "GraphAdjacencyList"
 
-    def add_vertex(self, id: str, label: str = None, data: Any = None, **kwargs) -> Element:
+    def add_vertex(self, id: str,
+                   label: str = None,
+                   data: Any = None,
+                   color: Union[str, Color] = "blue",
+                   opacity: float = 1.0,
+                   original: Element = None
+                   ) -> Element:
         """
         Adds a new vertex to the graph, initializes the adjacency
         list; user is responsible for checking if the vertex already exists.
@@ -69,16 +75,15 @@ class GraphAdjList:
             id: the vertex id
             label: vertex label
             data: the vertex data
-        Kwargs:
             color: color of vertex
             opacity: opacity of vertex
-            original: an existing Element instance to copy
+            original: an existing Element instance to copy, this will nullify other arguments
         Returns:
             newly created Vertex
         """
         #  note: it is the user's responsibility to  check
         #  for duplicate vertices
-        self.vertices[id] = Element(val=data, **kwargs)
+        self.vertices[id] = Element(val=data, color=color, opacity=opacity, original=original)
         self.vertices.get(id).label = str(label) if label is not None else str(id)
         self.adj_list[id] = None
 
