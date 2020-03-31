@@ -12,19 +12,7 @@ import traceback
 #        graphs in BRIDGES
 #
 #    The GraphAdjList class can be used to represent adjacency list based  graphs
-#    in BRIDGES; it takes 2 generic parameters: (1) K, which is an orderable
-#    key value used in accessing vertices (in constant time) using a hashmap. This
-#    permits data sets that need to be accessed by keys that are strings, and
-#    (2) E, an application defined type, and used in the Edge representation.
-#    The class is simply a wrapper  around the Java Hashmap class
-#    and, thus, derives all its operations from it.
-#    BRIDGES provides methods to visualize the graph  and its contents.
-#
-#    The vertices of the graph are held in a Java hashmap, for near constant time access;
-#    this lets us use strings or integral ids for vertices. The adjacency lists,
-#    also a Java hashmap  are built for each vertex and contain the edge (terminating
-#    vertex id, weight) in the Edge structure, defined separately. Adjacency lists
-#    are singly linked lists using the BRIDGES SLelement.
+#    in BRIDGES
 #
 #    Convenience methods are provided to add vertices and edges to the graph as well as
 #    retrieve the adjacency list of a vertex, given its id.
