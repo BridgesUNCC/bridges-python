@@ -115,8 +115,8 @@ class GraphAdjList:
                                  " does not exist! Add the vertex before creating the edge.")
         except Exception as e:
             traceback.print_tb(e.__traceback__)
-        self.adj_list[source_id] = SLelement(e=Edge(source_id, dest_id, data), next=self.adj_list.get(src), label=label,
-                                       color=color, thickness=thickness, opacity=opacity)
+        self.adj_list[source_id] = SLelement(e=Edge(source_id, dest_id, data, label=label, color=color,
+                                                    thickness=thickness), next=self.adj_list.get(src))
 
         return self.adj_list[source_id].value
 
