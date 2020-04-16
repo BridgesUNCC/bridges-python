@@ -2,101 +2,108 @@
 
 class EleData:
     """
-    Getter for data width
+    @brief class storing elevation data.
+
+    The data is stored as a 2d array .data of .cols columns and .rows rows.
+    The data at [0][0] are at location .xll, .yll and the spatial resolution is .cellsize.
     """
+
     @property
     def cols(self):
+        """
+        Getter for data width
+        """
         return self.ncols
 
-    """
-    Setter for data width
-    """
     @cols.setter
     def cols(self, ncols):
+        """
+        Setter for data width
+        """
         self.ncols = ncols
 
-    """
-    Getter for data height
-    """
     @property
     def rows(self):
+        """
+        Getter for data height
+        """
         return self.nrows
 
-    """
-    Setter for data height
-    """
     @rows.setter
     def rows(self, nrows):
+        """
+        Setter for data height
+        """
         self.nrows = nrows 
 
-    """
-    Getter for elev. data
-    """
     @property
     def data(self):
+        """
+        Getter for elev. data
+        """
         return self._data
 
-    """
-    Setter for elev. data
-    """
     @data.setter
     def data(self, eledata):
+        """
+        Setter for elev. data
+        """
         self._data = eledata
 
-    """
-    Getter for data origin (X)
-    """
     @property
     def xll(self):
+        """
+        Getter for data origin (X)
+        """
         return self._xll
 
-    """
-    Setter for data origin (X)
-    """
     @xll.setter
     def xll(self, value):
+        """
+        Setter for data origin (X)
+        """
         self._xll = value
 
-    """
-    Getter for data origin (Y)
-    """
     @property
     def yll(self):
+        """
+        Getter for data origin (Y)
+        """
         return self._yll
 
-    """
-    Setter for data origin (Y)
-    """
     @yll.setter
     def yll(self, value):
+        """
+        Setter for data origin (Y)
+        """
         self._yll = value
 
-    """
-    Getter for cell size
-    """
     @property
     def cellsize(self):
+        """
+        Getter for cell size
+        """
         return self._cellsize
 
-    """
-    Setter for cell size
-    """
     @cellsize.setter
     def cellsize(self, value):
+        """
+        Setter for cell size
+        """
         self._cellsize = value
     
-    """
-    Getter for max val
-    """
     @property
     def maxVal(self):
+        """
+        Getter for max val
+        """
         return self._maxVal
 
-    """
-    Setter for max val
-    """
     @maxVal.setter
     def maxVal(self, value):
+        """
+        Setter for max val
+        """
         self._maxVal = value
 
 
