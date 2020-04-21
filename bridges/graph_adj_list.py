@@ -174,13 +174,13 @@ class GraphAdjList:
         """
         return self._vertices
 
-    def get_vertex(self, key):
+    def get_vertex(self, key: str):
         """
         Getter for a specific vertex in the dictionary of vertices
         Args;
             key: The associated key for the vertex
         Returns:
-            vertex
+            vertex: Element or None
         """
         return self.vertices.get(key)
 
@@ -231,8 +231,10 @@ class GraphAdjList:
     def _resolve_id(self, key_or_element: Union[str, Element]) -> Union[str, None]:
         if type(key_or_element) is str:
             return key_or_element
-        else:
+        elif type(key_or_element) is Element:
             return [key for key, value in self.vertices.items() if value == key_or_element].pop()
+        else:
+            return key_or_element
 
     def are_all_vertices_located(self):
         for element in self.vertices.items():
@@ -269,15 +271,7 @@ class GraphAdjList:
     def get_link_visualizer(self, src, dest):
         #  get the source and destination vertex elements
         #  and check to see if they exist
-        v1 = self.vertices.get(src)
-        v2 = self.vertices.get(dest)
-        try:
-            if v1 is None or v2 is None:
-                raise ValueError(
-                    "Vertex " + src + " or " + dest + " does not exist! First add the vertices to the graph.")
-        except Exception as e:
-            traceback.print_tb(e.__traceback__)
-        return v1.get_link_visualizer(v2)
+        return self.get_edge(src, dest)
 
     ##
     #
@@ -377,7 +371,7 @@ class GraphAdjList:
                 edge = list.value
                 dest_vert = self.vertices.get(edge.tov)
                 dest_indx = node_map.get(dest_vert)
-                color = src_vert.get_link_visualizer(dest_vert).color
+                color = edge.color
                 link_json.append(src_indx)
                 link_json.append(dest_indx)
                 link_json.append([color.red, color.green, color.blue, color.alpha])

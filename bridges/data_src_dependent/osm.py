@@ -231,12 +231,12 @@ class OsmData:
         """
         ret_graph = GraphAdjList()
         for k, vertex in enumerate(self.vertices):
-            ret_graph.add_vertex(k, vertex)
+            ret_graph.add_vertex(k, data=vertex)
             ret_graph.get_vertex(k).visualizer.set_location(vertex.cartesian_coord[0], vertex.cartesian_coord[1])
             ret_graph.get_vertex(k).visualizer.color = ("green")
 
         for k, edge in enumerate(self.edges):
-            ret_graph.add_edge(edge.source, edge.destination, edge.distance)
+            ret_graph.add_edge(edge.source, edge.destination, data=edge.distance)
 
         return ret_graph
 

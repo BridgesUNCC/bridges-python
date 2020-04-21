@@ -330,7 +330,7 @@ def get_song(songTitle, artistName = None):
     url.replace(" ", "%20")
 
     r = requests.get(url = url, params = str(PARAMS))
-    if r.status_code is not 200:
+    if r.status_code != 200:
         raise ConnectionError("HTTP Request Failed. Error Code: " + r.status_code)
     r = r.json()
     if "artist" in r:
@@ -438,7 +438,7 @@ def get_color_grid_from_assignment(server: str, user: str, assignment: int, suba
             raise RuntimeError("Malformed ColorGrid JSON: not a ColorGrid")
 
         data_list = assignment_object.data
-        if len(data_list) is not 1:
+        if len(data_list) != 1:
             raise RuntimeError("Malformed JSON: data is malformed")
         data = data_list[0]
         try:

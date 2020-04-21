@@ -57,16 +57,19 @@ class Bridges:
         self.set_coord_system_type("window")
         self._window = new_window
 
-    def __init__(self, assignment, username, appl_id):
+    def __init__(self, assignment, username=None, appl_id=None):
         """
         Bridges constructor
         Args:
             (int) assignment: the number your bridges assignment will have
-            (str) username: your bridges username
-            (str) appl_id: your appl authentication key from bridges acc
+            (str) username: your bridges username, optional if BRIDGES_USER_NAME in env
+            (str) appl_id: your appl authentication key from bridges acc, optional if BRIDGES_API_KEY in env
         Returns:
             None
         """
+        username = username if username is not None else os.getenv("BRIDGES_USER_NAME")
+        appl_id = appl_id if appl_id is not None else os.getenv("BRIDGES_API_KEY")
+
         self._assignment_part = 0
         self._assignment = 0
         self._username = str()
@@ -295,5 +298,13 @@ class Bridges:
             str: user's API key
         """
         return self._key
+
+    def set_server_url(self, server_url: str) -> None:
+        """
+        Sets url for the output of the visualize method
+        :param server_url: string, must be one of {live, clone, local, games}
+        :return: None
+        """
+        self.connector.set_server_url(server_url)
 
 
