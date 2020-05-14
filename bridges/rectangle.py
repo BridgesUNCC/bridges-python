@@ -66,7 +66,7 @@ class Rectangle(Symbol):
         Raises:
             ValueError: if the width is < 0 or > 300
         """
-        if w <= 0 or w > 300:
+        if w <= 0:
             raise ValueError("Width needs to be in the range(0-300)")
         self._width = w
 
@@ -90,7 +90,7 @@ class Rectangle(Symbol):
         Raises:
             ValueError: if the height is < 0 or > 300
         """
-        if h <= 0 or h > 300:
+        if h <= 0:
             raise ValueError("Height needs to be in the range(0-300)")
         self._height = h
 
@@ -103,10 +103,10 @@ class Rectangle(Symbol):
         dims = []
         location = self.get_location()
 
-        dims.append(location[0] - self.width/2)
-        dims.append(location[0] + self.width/2)
-        dims.append(location[1] - self.height/2)
-        dims.append(location[1] + self.height/2)
+        dims.append(location[0])
+        dims.append(location[0] + self.width)
+        dims.append(location[1])
+        dims.append(location[1] + self.height)
 
         return dims
 
@@ -124,7 +124,7 @@ class Rectangle(Symbol):
             ValueError: if the height or width is < 0 or > 300
         """
         self.set_location(locx, locy)
-        if w <= 0 or w > 300 or h <= 0 or h > 300:
+        if w <= 0 or h <= 0:
             raise ValueError("Height, Width need to be in the range(0-300)")
         self.width = w
         self.height = h
