@@ -83,6 +83,7 @@ class Bridges:
         self.connector = Connector(self.get_key(), self.get_username(), self.get_assignment())
         self._coord_system_type = "cartesian"
         self._json_flag = False
+        self._post_url_flag = True
         self._map_overlay = False
         self._window = [0.0, 0.0, 0.0, 0.0]
         self.ds_handle = None
@@ -108,8 +109,32 @@ class Bridges:
         except ValueError:
             print("Exception Thrown: Data structure passed to BRIDGES is null!\n")
 
+
+    """
+    This method controls if the JSON of data structure is printed to the console 
+    or not
+
+    Args:
+        flag : flag that controls if the data structure json is printed to 
+               console or not
+    Returns:
+        None
+    """
     def set_visualize_JSON(self, flag):
         self._json_flag = flag
+
+    """
+    This method controls if the visualization  url is printed to the console 
+    or not
+
+    Args:
+        flag : flag that controls if the url to the visualization is output to 
+               console
+    Returns:
+        None
+    """
+    def post_visualization_link(self, flag):
+        self._post_url_flag = flag
 
     def visualize(self) -> None:
         """
@@ -148,7 +173,7 @@ class Bridges:
 
         response = self.connector.post("/assignments/" + self.get_assignment(), ds_json)
 
-        if response == 200:
+        if response == 200 and self._post_url_flag:
             print("\nCheck Your Visualization at the following link:\n\n" +
                   self.connector.get_server_url() + "/assignments/" + str(self._assignment) +
                   "/" + self._username + "\n\n")
