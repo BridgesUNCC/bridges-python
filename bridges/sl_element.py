@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from bridges.element import *
+import copy
 
 
 ##
@@ -37,6 +38,7 @@ class SLelement(Element):
         super(SLelement, self).__init__(val=kwargs.get('e'), label=kwargs.get('label'))
         self._next = kwargs.get('next')
 
+
     def get_data_structure_type(self) -> str:
         """
         Getter for the data structure type
@@ -44,6 +46,7 @@ class SLelement(Element):
             str: representing the data structure type
         """
         return "SinglyLinkedList"
+
 
     @property
     def next(self):
@@ -127,6 +130,8 @@ class SLelement(Element):
         }
         return json_dict
 
+
+
     def get_list_elements(self, nodes):
         """
         Get the elements of the list (for  internal use only)
@@ -144,3 +149,23 @@ class SLelement(Element):
             #  handle circular lists
             if el == self:
                 break
+
+    def iterator(self):
+        return SLelementIterator(self)
+
+
+class SLelementIterator():
+
+    def __init__(self, current):
+        self.current = current
+
+    def has_next(self):
+        return self.current is not None
+
+    def next(self):
+        if not self.has_next():
+            raise StopIteration
+
+        ret = self.current.value
+        self.current = self.current.next
+        return ret

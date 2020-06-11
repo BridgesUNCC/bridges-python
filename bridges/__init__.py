@@ -1,4 +1,5 @@
 from bridges.data_src_dependent.data_source import *
+from bridges.mesh import *
 from bridges.array import *
 from bridges.avl_tree_element import *
 from bridges.bst_element import *

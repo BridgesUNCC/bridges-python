@@ -45,6 +45,7 @@ class DLelement(SLelement):
         self._next = kwargs.get('next')
         self._prev = kwargs.get('prev')
 
+
     def get_data_structure_type(self) -> str:
         """
         This method gets the data structure type
@@ -137,3 +138,19 @@ class DLelement(SLelement):
             "links": links_JSON
         }
         return json_dict
+
+    def reverse_iterator(self):
+        return DLelementReverseIterator(self)
+
+class DLelementReverseIterator():
+
+    def __init__(self, current):
+        self.current = current
+
+    def has_next(self):
+        return self.current is not None
+
+    def next(self):
+        ret = self.current.value
+        self.current = self.current.prev
+        return ret

@@ -1,4 +1,5 @@
 from bridges.dl_element import *
+
 ##
 #  @brief This class can be used to instantiate Circular Doubly Linked
 #  List Elements.
@@ -110,3 +111,48 @@ class CircDLelement(DLelement):
             None
         """
         DLelement.prev.fset(self, prev)
+
+    def iterator(self):
+        return CircDLelementIterator(self)
+
+    def reverse_iterator(self):
+        return CircDLelementReverseIterator(self)
+
+class CircDLelementIterator():
+    def __init__(self, current):
+        self.current = current
+        self.first = current
+        self.at_start = True
+
+    def has_next(self):
+        if ((self.current == self.first) and not self.at_start):
+            return False
+
+        return True
+
+    def next(self):
+        ret = self.current.value
+        self.current = self.current.next
+        self.at_start = False
+        return ret
+
+class CircDLelementReverseIterator():
+
+    def __init__(self, current):
+        self.current = current
+        self.first = current
+        self.at_start = True
+
+    def has_next(self):
+
+        if ((self.current == self.first) and not self.at_start):
+            return False
+
+        return True
+
+    def next(self):
+        ret = self.current.value
+        self.current = self.current.prev
+        self.at_start = False
+        return ret
+
