@@ -81,3 +81,25 @@ class CircSLelement(SLelement):
             None:
         """
         SLelement.next.fset(self, n)
+
+    def iterator(self):
+        return CircSlelementIterator(self)
+
+class CircSlelementIterator():
+
+    def __init__(self, current):
+        self. current = current
+        self. first = current
+        self.at_start = True
+
+    def has_next(self):
+        if((self.current == self.first) and not self.at_start):
+            return False
+
+        return True
+
+    def next(self):
+        ret = self.current.value
+        self.current = self.current.next
+        self.at_start = False
+        return ret
