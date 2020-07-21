@@ -16,7 +16,7 @@ class GameBase(ABC):
         self.game_base_init(assid, login, apikey, cols, rows)
         self.grid_state = dict
 
-    def game_base_init(self, id, log, key, c, r):
+    def game_base_init(self, id, log, key, r, c):
         self.firsttime = True
 
         self.bridges = Bridges(id, log, key)
@@ -165,14 +165,14 @@ class GameBase(ABC):
         """
         setter/getter property for board width
         """
-        width = self.grid.dimensions
-        return width[1]
+        dims = self.grid.dimensions
+        return dims[1]
 
     @property
     def board_height(self):
         """
         setter/getter property for board height
         """
-        height = self.grid.dimensions
-        return height[0]
+        dims = self.grid.dimensions
+        return dims[0]
 
