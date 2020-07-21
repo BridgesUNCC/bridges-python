@@ -1,6 +1,9 @@
 #!/bin/sh
 
-doxygen bridges_doxygen_python.cfg 2>&1 | tee log
+(
+    cat bridges_doxygen_python.cfg
+    echo "PROJECT_NUMBER = `git describe --tags`"
+) | doxygen - 2>&1 | tee log
 
 rm report*
 
