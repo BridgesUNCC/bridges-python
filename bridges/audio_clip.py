@@ -17,7 +17,7 @@ from bridges.audio_channel import AudioChannel
 #  @date 2020, 1/31/2020
 #
 class AudioClip(object):
-    def __init__(self, filepath: str="", sample_count: int=0, sample_rate: int=44100, num_channels: int=1, sample_bits: int=32) -> None:
+    def __init__(self, filepath: str="", sample_count: int=0, num_channels: int=1, sample_bits: int=32, sample_rate: int=44100) -> None:
         """
         AudioBase constructor
         Args:
@@ -32,6 +32,15 @@ class AudioClip(object):
 
         if sample_count > 1000000000:
             raise ValueError("Maximum frames exceeded with value %d" % self.get_sample_count())
+
+        if sample_bits != 8 and sample_bits != 16 and sample_bits != 24 and sample_bits != 32:
+            raise ValueError("sample_bits should be 8, 16, 24, or 32")
+
+        if num_channels <= 0:
+            raise ValueError("num_channels should be positive")
+
+        if sample_rate <= 0:
+            raise ValueError("sample_rate should be positive")
         
         self.sample_count = sample_count
         self.sample_rate = sample_rate
@@ -139,6 +148,7 @@ class AudioClip(object):
             raise ValueError("Sample value out of maxmium for signed 32 bit integer with value %d" % (value))
         
         minmaxbit = (2 ** self.get_sample_bits() // 2) - 1
+
         scaled_sample = (value / minmax32) * minmaxbit
 
         self.get_channel(channel).set_sample(index, int(value))
