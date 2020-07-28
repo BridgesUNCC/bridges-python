@@ -12,6 +12,7 @@ from bridges.data_src_dependent import lru_cache
 from bridges.data_src_dependent import movie_actor_wiki_data
 from bridges.data_src_dependent.osm import *
 from bridges.data_src_dependent.elevation import *
+from bridges.data_src_dependent.amenity import *
 from bridges.data_src_dependent.actor_movie_imdb import *
 from bridges.color_grid import ColorGrid
 from bridges.color import Color
@@ -647,7 +648,6 @@ def elevation_server(url):
     return server_data
 
 
-
 def get_elevation_data(*args):
     """This function returns elevation data for the requested
     location and resolution. Note that the data returned may be for a
@@ -755,6 +755,71 @@ def get_wiki_data_actor_movie(year_begin, year_end):
     for y in range(year_begin, year_end):
         _get_wiki_actor_movie_direct(y, y, ret)
     return ret
+
+
+
+def get_amenity_data(*args):
+    
+    if(len(args)) == 5:
+        url = f"http://192.168.2.14:8080/amenity?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
+    elif(len(args) == 2):
+        url = f"http://192.168.2.14:8080/amenity?city={args[0]}&amenity={args[1]}"
+    else:
+        raise RuntimeError("Invalid Number of Map Request Inputs")
+
+   
+    
+    data = None
+    not_skip = True
+
+    #TODO: Hash check and store
+    '''
+    hash = osm_server_request(hash_url).decode('utf-8')
+    if (hash != "false" and lru.inCache(hash)):
+        not_skip = False
+        data = lru.get(hash)
+    '''
+    if (not_skip):
+        content =  osm_server_request(url)
+        try:
+            data = json.loads(content.decode('utf-8'))
+        except:
+            print("Error: Corrupted JSON download...\nAttempting redownload...")
+            content = osm_server_request(url)
+            try:
+                data = json.loads(content.decode('utf-8'))
+            except Exception as e:
+                print(f"Error: Redownload attempt failed\n{e}")
+                raise RuntimeError(e)
+                sys.exit(0)
+
+        #hash = osm_server_request(hash_url).decode('utf-8')
+        #lru.put(hash, data)
+
+
+    ret_data = amenities()
+
+    #TODO: Parse data into object
+    for i, node in enumerate(data['nodes']):
+        temp = amenityData()
+        for x, vals in enumerate(node):
+            if (x == 0):
+                temp.id = vals
+            elif (x == 1):
+                temp.lat = vals
+            elif (x == 2):
+                temp.lon = vals
+            elif (x == 3):
+                temp.name = vals
+            else:
+                temp.addOther = vals
+        ret_data.data = temp
+    
+    temp_meta = meta(data['meta']['minlat'], data['meta']['minlon'], data['meta']['maxlat'], data['meta']['maxlon'], data['meta']['count'])
+    ret_data.meta = temp_meta
+
+    return ret_data
+
 
 
 class DataSource:
