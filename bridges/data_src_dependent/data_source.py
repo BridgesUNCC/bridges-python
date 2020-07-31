@@ -761,24 +761,25 @@ def get_wiki_data_actor_movie(year_begin, year_end):
 def get_amenity_data(*args):
     
     if(len(args)) == 5:
-        url = f"http://192.168.2.14:8080/amenity?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
+        url = f"http://cci-bridges-osm.uncc.edu/amenity?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
+        hash_url = f"http://cci-bridges-osm.uncc.edu/hash?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
     elif(len(args) == 2):
-        url = f"http://192.168.2.14:8080/amenity?city={args[0]}&amenity={args[1]}"
+        url = f"http://cci-bridges-osm.uncc.edu/amenity?location={args[0]}&amenity={args[1]}"
+        hash_url = f"http://cci-bridges-osm.uncc.edu/hash?location={args[0]}&amenity={args[1]}"
     else:
         raise RuntimeError("Invalid Number of Map Request Inputs")
 
-   
-    
+    lru = lru_cache.lru_cache(30)
     data = None
     not_skip = True
 
-    #TODO: Hash check and store
-    '''
+
+    
     hash = osm_server_request(hash_url).decode('utf-8')
     if (hash != "false" and lru.inCache(hash)):
         not_skip = False
         data = lru.get(hash)
-    '''
+    
     if (not_skip):
         content =  osm_server_request(url)
         try:
@@ -793,13 +794,13 @@ def get_amenity_data(*args):
                 raise RuntimeError(e)
                 sys.exit(0)
 
-        #hash = osm_server_request(hash_url).decode('utf-8')
-        #lru.put(hash, data)
+        hash = osm_server_request(hash_url).decode('utf-8')
+        lru.put(hash, data)
 
 
     ret_data = amenities()
 
-    #TODO: Parse data into object
+
     for i, node in enumerate(data['nodes']):
         temp = amenityData()
         for x, vals in enumerate(node):
