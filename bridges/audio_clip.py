@@ -10,7 +10,7 @@ from bridges.audio_channel import AudioChannel
 #  @brief This is a class in BRIDGES for multi-channel audio data
 #
 #  This class contains a list of channels that contain sample data. The samples audio are 
-#  encoded in 8, 16, 24, or 32 bit integers. All methods use 32 bits when taking and returning samples.
+#  encoded in 8, 16, 24, or 32 bit integers. 
 #
 #  @author Luke Sloop
 #
@@ -65,16 +65,9 @@ class AudioClip(object):
                 if self.get_sample_bytes() == 1:
                     val = int.from_bytes(framebytes[i:i+self.get_sample_bytes()], byteorder='little', signed=False)
                     val = val - 128
-                    scaled = (val / ((2 ** self.get_sample_bits() / 2) - 1)) * ((2 ** 32 / 2) - 1)
-                    self.set_sample(channel, count, val)
-                elif self.get_sample_bytes() != 3:
-                    val = int.from_bytes(framebytes[i:i+self.get_sample_bytes()], byteorder='little', signed=True)
-                    scaled = (val / ((2 ** self.get_sample_bits() / 2) - 1)) * ((2 ** 32 / 2) - 1)
                     self.set_sample(channel, count, val)
                 else:
-                    # Pad an empty byte to the start of 24 bit waves
-                    val = int.from_bytes(b'\x00' + framebytes[i:i+self.get_sample_bytes()], byteorder='little', signed=True)
-                    scaled = (val / ((2 ** self.get_sample_bits() / 2) - 1)) * ((2 ** 32 / 2) - 1)
+                    val = int.from_bytes(framebytes[i:i+self.get_sample_bytes()], byteorder='little', signed=True)
                     self.set_sample(channel, count, val)
                 
                 channel += 1
@@ -126,15 +119,11 @@ class AudioClip(object):
             (int) channel: The index of the channel to get. 0 for front-left, 1 for front-right, etc.
             (int) index: The index of the sample to get. From 0 - get_sample_count()
         Returns:
-            int: The 32 bit sample
+            int: The sample in the [-2^(get_sample_bits()-1) ;  2^(get_sample_bits()-1)) range
         """
         value = self.get_channel(channel).get_sample(index)
 
-        minmax32 = (2 ** 32 // 2) - 1
-        minmaxbit = (2 ** self.get_sample_bits() // 2) - 1
-
-        scaled_sample = (value / minmaxbit) * minmax32
-        return int(scaled_sample)
+        return int(value)
 
     def set_sample(self, channel: int, index: int, value: int) -> None:
         """
@@ -142,20 +131,14 @@ class AudioClip(object):
         Args:
             (int) channel: The index of the channel to get. 0 for front-left, 1 for front-right, etc.
             (int) index: The index of sampledata to set which must be less than get_sample_count()
-            (int) value: The value to set the sample to which must be a valid signed integer with bit length get_sample_bits()
+            (int) value: The value to set the sample to which must be a valid signed integer with bit length get_sample_bits(). That is to say in the [-2^(get_sample_bits()-1) ;  2^(get_sample_bits()-1)) range).
         Returns:
             None
         """
-        minmax32 = (2 ** 32 // 2) - 1
-        if value < -minmax32 - 1:
-            raise ValueError("Sample value out of minimum for signed 32 bit integer with value %d" % (value))
-        if value > minmax32:
-            raise ValueError("Sample value out of maxmium for signed 32 bit integer with value %d" % (value))
+
+        if (value < -2**(self.get_sample_bits()-1)) or (value >= 2**(self.get_sample_bits()-1)):
+            raise ValueError("Audio value Out of Bound. Should be in [-2^(get_sample_bits()-1) ;  2^(get_sample_bits()-1)) range")
         
-        minmaxbit = (2 ** self.get_sample_bits() // 2) - 1
-
-        scaled_sample = (value / minmax32) * minmaxbit
-
         self.get_channel(channel).set_sample(index, int(value))
 
     def get_sample_bits(self) -> int:
@@ -229,10 +212,9 @@ class AudioClip(object):
         elif self.get_sample_bytes() != 3:
             json_dict["samples"] = base64.b64encode(array.array(self._get_type_code(), framedata).tobytes()).decode("utf-8")
         else:
-            # 24 Bit samples have a pad that must be removed first
             shiftedbytes = bytearray()
             for sample in framedata:
-                shiftedbytes += int.to_bytes(sample >> 8, length=3, byteorder='little', signed=True)
+                shiftedbytes += int.to_bytes(sample, length=3, byteorder='little', signed=True)
 
             json_dict["samples"] = base64.b64encode(shiftedbytes).decode("utf-8")
 
