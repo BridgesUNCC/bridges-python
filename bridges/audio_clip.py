@@ -62,7 +62,12 @@ class AudioClip(object):
             channel = 0
             count = 0
             for i in range(0, len(framebytes), self.get_sample_bytes()):
-                if self.get_sample_bytes() != 3:
+                if self.get_sample_bytes() == 1:
+                    val = int.from_bytes(framebytes[i:i+self.get_sample_bytes()], byteorder='little', signed=False)
+                    val = val - 128
+                    scaled = (val / ((2 ** self.get_sample_bits() / 2) - 1)) * ((2 ** 32 / 2) - 1)
+                    self.set_sample(channel, count, val)
+                elif self.get_sample_bytes() != 3:
                     val = int.from_bytes(framebytes[i:i+self.get_sample_bytes()], byteorder='little', signed=True)
                     scaled = (val / ((2 ** self.get_sample_bits() / 2) - 1)) * ((2 ** 32 / 2) - 1)
                     self.set_sample(channel, count, val)
