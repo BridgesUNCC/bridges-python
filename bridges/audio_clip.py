@@ -57,6 +57,7 @@ from bridges.audio_channel import AudioChannel
 #
 #  @date 2020, 1/31/2020
 #
+##
 class AudioClip(object):
     def __init__(self, filepath: str="", sample_count: int=0, num_channels: int=1, sample_bits: int=32, sample_rate: int=44100) -> None:
         """
