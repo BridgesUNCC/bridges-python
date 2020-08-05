@@ -7,16 +7,16 @@ from abc import ABC, abstractmethod
 class GameBase(ABC):
     debug = True
 
-    def __init__(self, assid, login, apikey, cols, rows):
+    def __init__(self, assid, login, apikey, rows, cols):
         """
         PROTECTED constructor prevent the object from being
         directly created. Since GameBase is meant to be a purely internal
         class, that seems appropriate.
         """
-        self.game_base_init(assid, login, apikey, cols, rows)
+        self.game_base_init(assid, login, apikey, rows, cols)
         self.grid_state = dict
 
-    def game_base_init(self, id, log, key, r, c):
+    def game_base_init(self, id, log, key, rows, cols):
         self.firsttime = True
 
         self.bridges = Bridges(id, log, key)
@@ -25,7 +25,7 @@ class GameBase(ABC):
 
         self.bridges.connector.set_server("games")
 
-        self.grid = GameGrid(r, c)
+        self.grid = GameGrid(rows, cols)
 
         self.grid.set_encoding("rle")
 
