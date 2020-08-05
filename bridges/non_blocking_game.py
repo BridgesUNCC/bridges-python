@@ -102,11 +102,11 @@ class NonBlockingGame(GameBase):
     """
 
     def __init__(self, assid, login, apikey, rows, cols):
-        super(NonBlockingGame, self).__init__(assid, login, apikey, cols, rows)
+        super(NonBlockingGame, self).__init__(assid, login, apikey, rows, cols)
         if cols*rows > 1024:
             print("ERROR: Number of cells in a non-blocking game grid cannot exceed 32x32 or 1024.")
             exit(1)
-
+				
         self.time_of_last_frame = int(round(time.time() * 1000))
         self.ih = InputHelper()
         self.register_keypress(self.ih)
