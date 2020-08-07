@@ -135,7 +135,7 @@ class Rectangle(Symbol):
         self.set_location(center[0], center[1])
 
     def scale(self, sx, sy):
-        pt = []
+        pt = [0., 0.]
         pt[0] = self.width
         pt[1] = self.height
         new_pt = self.scale_point(pt, sx, sy)
