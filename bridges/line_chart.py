@@ -52,7 +52,7 @@ class LineChart:
         return "LineChart"
 
     @property
-    def mosue_track(self) -> bool:
+    def mouse_track(self) -> bool:
         """
         Is mounse tracking on? 
         Returns:
@@ -60,8 +60,8 @@ class LineChart:
         """
         return self._mouse_track
 
-    @mosue_track.setter
-    def mosue_track(self, val: bool):
+    @mouse_track.setter
+    def mouse_track(self, val: bool):
         """
         Set mouse tracking flag
         Args:
