@@ -194,7 +194,7 @@ class Element:
         """
         Getter for the element's size
         Returns:
-           int: element size (0-50)
+           float: element size (0-50)
         """
         return self.visualizer.size
 
@@ -203,7 +203,7 @@ class Element:
         """
         Setter for the element's size
         Args:
-           sz: the element's size (0-50)
+           sz: the element's size (0.-50.)
         Returns:
            None
         """
