@@ -28,6 +28,11 @@ import traceback
 #  visualization only supports locations (actually they are mandatory)
 #  and colors, all other attributes are ignored.
 #
+# BRIDGES picks the rendering engine automatically. But it can be
+# forced to pick one used forceLargeVizualization() and
+# forceSmallVizualization
+# 
+#
 #
 class GraphAdjList:
     LargeGraphVertSize = 1000
@@ -252,13 +257,18 @@ class GraphAdjList:
         return True
 
     def force_large_visualization(self, f):
-        """
-        force the rendering engine to use large graph visualization
+        """force the rendering engine to use large graph visualization
         
+        This forces the rendering to a more bandwidth efficient at the
+	cost of having less features. The large graph visualization
+	only renders vertices that have specified locations. The only
+	usable attribute for vertices and edges are colors.
+
         Args:
           (bool) f: set to true to force the visualization engine to use large graphs visualization. Setting to false does not prevent large visualization to be used, just does not force it.
         Returns:
           None
+
         """
         if f:
             GraphAdjList.force_large_viz = True
@@ -267,13 +277,17 @@ class GraphAdjList:
             GraphAdjList.force_large_viz = False
 
     def force_small_visualization(self, f):
-        """
-        force the rendering engine to use small graph visualization
+        """force the rendering engine to use small graph visualization
         
+        The small visualization uses more bandwidth, have more
+	features, and support a force directed layout for vertices
+	which do not have a specified location.
+
         Args:
           (bool) f: set to true to force the visualization engine to use small graphs visualization. Setting to false does not prevent small visualization to be used, just does not force it.
         Returns:
           None
+
         """
         if f:
             GraphAdjList.force_small_viz = True
