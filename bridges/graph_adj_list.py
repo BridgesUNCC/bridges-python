@@ -22,6 +22,13 @@ import traceback
 #
 #    \sa graph adjacency list tutorial, http://bridgesuncc.github.io/tutorials/Graph_AL.html
 #
+#  There are two visualization engines available for graph. The small
+#  graph visualization supports all attributes of vertices and edges
+#  but is prohibitively slow on large graphs. The large graph
+#  visualization only supports locations (actually they are mandatory)
+#  and colors, all other attributes are ignored.
+#
+#
 class GraphAdjList:
     LargeGraphVertSize = 1000
     force_large_viz = False
@@ -245,6 +252,14 @@ class GraphAdjList:
         return True
 
     def force_large_visualization(self, f):
+        """
+        force the rendering engine to use large graph visualization
+        
+        Args:
+          (bool) f: set to true to force the visualization engine to use large graphs visualization. Setting to false does not prevent large visualization to be used, just does not force it.
+        Returns:
+          None
+        """
         if f:
             GraphAdjList.force_large_viz = True
             GraphAdjList.force_small_viz = False
@@ -252,6 +267,14 @@ class GraphAdjList:
             GraphAdjList.force_large_viz = False
 
     def force_small_visualization(self, f):
+        """
+        force the rendering engine to use small graph visualization
+        
+        Args:
+          (bool) f: set to true to force the visualization engine to use small graphs visualization. Setting to false does not prevent small visualization to be used, just does not force it.
+        Returns:
+          None
+        """
         if f:
             GraphAdjList.force_small_viz = True
             GraphAdjList.force_large_viz = False
