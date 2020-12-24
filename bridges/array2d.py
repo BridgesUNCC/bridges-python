@@ -3,7 +3,7 @@ from bridges.array import *
 
 class Array2D(Array):
     """
-    @brief This class can be used to create arrays of type Element<E>.
+    @brief This class can be used to create 2D arrays of type Element<E>.
 
     @author 	Kalpathi Subramanian, Matthew McQuaigue
 

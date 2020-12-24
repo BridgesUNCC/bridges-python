@@ -3,7 +3,7 @@ from bridges.array import *
 
 class Array3D(Array):
     """
-    @brief This class can be used to create two dimensional arrays of type Element<E>.
+    @brief This class can be used to create three dimensional arrays of type Element<E>.
 
     @author 	Kalpathi Subramanian
 
