@@ -1,7 +1,18 @@
 
+##
+#    This class is a helper class to be used with amenities data retrieved from
+#    OpenStreet Map data
+#
+#    @author Jay Strahler
+#
+#    @date 12/28/20 
+#
 
 class amenityData:
 
+    ##
+    #    get id of amenity
+    #
     @property
     def id(self): 
         return self.id_val
@@ -10,6 +21,9 @@ class amenityData:
     def id(self, id_val):
         self.id_val = id_val
 
+    ##
+    #    get latitude of amenity
+    #
     @property
     def lat(self): 
         return self.lat_val

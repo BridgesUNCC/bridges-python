@@ -64,17 +64,17 @@ def parse_actor_movie_imdb(item):
 
 
 ##
-# Get ActorMovie IMDB Data
+# @brief Get ActorMovie IMDB Data
 # retrieved, formatted into a list of ActorMovieIMDB objects
 #
-# @param number the number of actor/movie pairs, but currently unused,
-# 	returns all records.
+# @param count the number of actor/movie pairs, but currently unused,
+#     returns all records.
 # @throws Exception if the request fails
 #
 # @return a list of ActorMovieIMDB objects, but only actor and
 # movie fields in this version
 #
-def get_actor_movie_imdb_data(number = 0):
+def get_actor_movie_imdb_data(count = 0):
 
     wrapper = []
 
@@ -126,17 +126,17 @@ def get_actor_movie_imdb_data2():
 
 
 ##
-# Get USGS earthquake data
+# @brief Get USGS earthquake data
 # USGS Tweet data (https://earthquake.usgs.gov/earthquakes/map/)
 # retrieved, formatted into a list of EarthquakeUSGS objects
 #
-# @param number the number of earthquake records retrieved,
-# 	limited to 5000
+# @param count the number of earthquake records retrieved,
+#
 # @throws Exception if the request fails
 #
 # @return a list of earthquake records
 #
-def get_earthquake_usgs_data(number = 0):
+def get_earthquake_usgs_data(count = 0):
 
     wrapper = []
     url = "http://earthquakes-uncc.herokuapp.com/eq"
@@ -163,7 +163,7 @@ def get_earthquake_usgs_data(number = 0):
 
 ##
 #
-# Get data of Shakespeare works (plays, poems)
+# @brief Get data of Shakespeare works (plays, poems)
 #
 # This function retrieves  and formats the data into a
 #   a list of Shakespeare objects.
@@ -174,7 +174,7 @@ def get_earthquake_usgs_data(number = 0):
 # @throws Exception if the request fails
 #
 # @param endpoint  can be either "plays" or "poems". If this is
-# 		 		specified, then only these types of works are retrieved.
+#                  specified, then only these types of works are retrieved.
 # @param textOnly  if this is set, then only the text is retrieved.
 #
 # @return an array of Shakespeare objects
@@ -202,8 +202,8 @@ def get_shakespeare_data(endpoint = "", textonly = False):
 
 ##
 #
-# Get meta data of the Gutenberg book collection (1000 books)
-# 		This function retrieves,  and formats the data into a list of
+# @brief Get meta data of the Gutenberg book collection (1000 books)
+#         This function retrieves,  and formats the data into a list of
 # GutenbergBook objects
 #
 # @throws Exception if the request fails
@@ -253,9 +253,11 @@ def get_gutenberg_book_data(num = 0):
 
 
 ##
-# Retrieves the CDC dataset into a vector of records
+# @brief Retrieves the CDC cancer incidence dataset into a list of records
 # See CancerIncidence class for more information
 #
+# @param num  count of records to be retrieved
+# @return cancer incidence data records in a list
 #
 def get_cancer_incident_data(num = 0):
 
@@ -302,7 +304,7 @@ def get_cancer_incident_data(num = 0):
 
 ##
 #
-# Get data of a particular songs (including lyrics) using the Genius API
+# Get data of a particular song (including lyrics) using the Genius API
 # (https://docs.genius.com/), given the song title and artist name.
 # Valid endpoints:  http://bridgesdata.herokuapp.com/api/songs/find/
 # Valid queryParams: song title, artist name
@@ -310,6 +312,9 @@ def get_cancer_incident_data(num = 0):
 # This function retrieves  and formats the data into a
 # Song object. The song if not cached in the local DB is queried
 # and added to the DB
+#
+# @param songTitle title of song
+# @param artistName name of artist
 #
 # @throws Exception if the request fails
 #
@@ -415,6 +420,19 @@ def get_song_data():
     return all_songs
 
 
+##
+#    @brief This method retrieves a stored ColorGrid based assignment from the
+#    server.
+#
+#  This method can be useful in earlier courses to work with an existing
+#  data structure holding a dataset, like an image.
+#
+#    @param server  server holding the assignment
+#    @param assignment  assignment number
+#    @param subassignment  sub-assignment number
+# 
+#    @return ColorGrid structure
+#
 def get_color_grid_from_assignment(server: str, user: str, assignment: int, subassignment: int = 0) -> ColorGrid:
     """
     Reconstruct a ColorGrid from an existing ColorGrid on the bridges server
@@ -512,6 +530,15 @@ def get_color_grid_from_assignment(server: str, user: str, assignment: int, suba
     return color_grid
 
 
+##
+#    @brief This method retrieves a stored assignment from the server.
+#
+#    @param server  server holding the assignment
+#    @param assignment  assignment number
+#    @param subassignment  sub-assignment number
+# 
+#    @return data structure representation of the assignment as a JSON string
+#
 def get_assignment(server: str, user: str, assignment: int, subassignment: int = 0) -> str:
     """
     This function obtains the JSON representation of a particular assignment as a string
@@ -533,7 +560,11 @@ def get_assignment(server: str, user: str, assignment: int, subassignment: int =
         raise request.raise_for_status()
 
 
-
+## 
+# @brief Fulfills a server request for OpenStreetMap
+#
+# For internal use only
+#
 def osm_server_request(url):
     request = requests.get(url)
     if not request.ok:
@@ -548,11 +579,14 @@ def osm_server_request(url):
 
     return server_data
 
+##
+#    @brief This method retrieves an OpenStreet Map dataset, given a location
+#         by name (string).
+#
+#    
+#    @param args location name
+#    @return OSM data
 def get_osm_data(*args) -> OsmData:
-    """Takes a location name as a string and returns an OsmData object
-    :param
-    :return: OsmData:
-    """
     import os
 
     if (len(args) == 2):
@@ -633,6 +667,11 @@ def get_osm_data(*args) -> OsmData:
 
 
 
+## 
+# @brief Fulfills a server request for elevation data
+#
+# For internal use only
+#
 def elevation_server(url):
     request = requests.get(url)
     if not request.ok:
@@ -648,16 +687,17 @@ def elevation_server(url):
     return server_data
 
 
+##
+#    @brief This method retrieves an OpenStreet Map dataset, given a location
+#         by name (string).
+#
+#    
+#    @param args[0]: a bounding box, aka an array [minLat, minLon, maxLat, maxLon]
+#    @param args[1]: spatial resolution, aka the distance between two samples 
+#            (in degrees)
+#    @return Elevation data for the bounding box and resolution requested 
+#            (approximately) [type: ElevationData]
 def get_elevation_data(*args):
-    """This function returns elevation data for the requested
-    location and resolution. Note that the data returned may be for a
-    slightly different location and resolution than requested.
-
-    :param args[0]: a bounding box, aka an array [minLat, minLon, maxLat, maxLon]
-    :param args[1]: spatial resolution, aka the distance between two samples (in degrees)
-
-    :return EleData for the bounding box and resolution requested (approximately)
-    """
     base_url = "http://cci-bridges-elevation-t.dyn.uncc.edu/elevation"
     hash_url = "http://cci-bridges-elevation-t.dyn.uncc.edu/hash"
 
@@ -676,7 +716,6 @@ def get_elevation_data(*args):
     hash_url = hash_url + f"?minLat={minLat}&minLon={minLon}&maxLat={maxLat}&maxLon={maxLon}&resX={res}&resY={res}"
     #loads cache
     lru = lru_cache.lru_cache(30)
-
 
     data = None
     not_skip = True
@@ -749,7 +788,14 @@ def _get_wiki_actor_movie_direct(year_begin, year_end, array_out):
         array_out.append(mak)
         # print(result['movie']['value'])
 
-
+##
+#    @brief This method retrieves an actor-movie data from Wikidata, given a 
+#        sparkl query
+#
+#    @param year_begin  beginning year
+#    @param year_end    ending year
+#    @return  a list of the actor-movie data of type MovieActorWikiData
+#    
 def get_wiki_data_actor_movie(year_begin, year_end):
     ret = []
     for y in range(year_begin, year_end):
@@ -758,6 +804,17 @@ def get_wiki_data_actor_movie(year_begin, year_end):
 
 
 
+##
+#    @brief This method retrieves amenity data from Open Street Map datasets.
+#
+#    @param args[0] minimum latitude
+#    @param args[1] minimum longitude
+#    @param args[2] maximum latitude
+#    @param args[3] maximum longitude
+#    @param args[4] amenity type
+#
+#    @return  a list of amenities
+#    
 def get_amenity_data(*args):
     
     if(len(args)) == 5:
