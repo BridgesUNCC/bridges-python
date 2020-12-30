@@ -84,12 +84,12 @@ class GraphAdjList:
                  nullify other arguments
        Returns:
             newly created Vertex
-	   """
-        self.vertices[id] = Element(val=data, color=color, opacity=opacity, original=original)
-        self.vertices.get(id).label = str(label) if label is not None else str(id)
-        self.adj_list[id] = None
+       """
+       self.vertices[id] = Element(val=data, color=color, opacity=opacity, original=original)
+       self.vertices.get(id).label = str(label) if label is not None else str(id)
+       self.adj_list[id] = None
 
-        return self.vertices[id]
+       return self.vertices[id]
 
     def add_edge(self,
                  src: Union[str, Element],

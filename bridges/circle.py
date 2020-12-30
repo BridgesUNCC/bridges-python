@@ -125,7 +125,7 @@ class Circle(Symbol):
 		Returns:
             None
         """
-        self.radius *= scale
+        self.radius *= sc
 
     def get_json_representation(self) -> dict:
         """

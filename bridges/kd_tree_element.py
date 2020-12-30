@@ -126,8 +126,6 @@ class KDTreeElement(BSTElement):
             None
         """
         self.set_child(0, l)
-        Returns:
-            None
 
     @property
     def right(self):
