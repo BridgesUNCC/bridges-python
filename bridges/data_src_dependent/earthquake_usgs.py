@@ -56,7 +56,7 @@ class EarthquakeUSGS:
         else:
             self._url = ""
         if time is not None:
-            self.time = time
+            self._time = time
 
     ##
     #  Get occurrence time (epoch)  of quake

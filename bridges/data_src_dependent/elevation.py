@@ -64,6 +64,7 @@ class ElevationData:
     #
     @property
     def xll(self):
+        return self._x11
 
     ##
     # @brief Set X coord of origin of  elevation data grid

@@ -78,7 +78,7 @@ def get_actor_movie_imdb_data(count = 0):
 
     wrapper = []
 
-    url = "http://bridgesdata.herokuapp.com/api/imdb?limit=" + str(number)
+    url = "http://bridgesdata.herokuapp.com/api/imdb?limit=" + str(count)
     PARAMS = {"Accept: application/json"}
 
     r = requests.get(url=url, params=str(PARAMS))
@@ -140,10 +140,10 @@ def get_earthquake_usgs_data(count = 0):
 
     wrapper = []
     url = "http://earthquakes-uncc.herokuapp.com/eq"
-    latest_url = "http://earthquakes-uncc.herokuapp.com/eq/latest/" + str(number)
+    latest_url = "http://earthquakes-uncc.herokuapp.com/eq/latest/" + str(count)
     PARAMS = {"Accept: application/json"}
 
-    if number <= 0:
+    if count <= 0:
         r = requests.get(url=url, params=str(PARAMS))
         r = r.json()
         for i in range(len(r)):
