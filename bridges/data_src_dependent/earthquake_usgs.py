@@ -29,7 +29,8 @@ class EarthquakeUSGS:
     # @param url       url for more information
     # @param time       occurrence time of quake
     #
-    def __init__(self, magnitude=None, longit=None, latit=None, location=None, title=None, url=None, time=None):
+    def __init__(self, magnitude=None, longit=None, latit=None, location=None, 
+                     title=None, url=None, time=None):
         self._time = int()
         if magnitude is not None:
             self._magnitude = magnitude
@@ -56,7 +57,7 @@ class EarthquakeUSGS:
         else:
             self._url = ""
         if time is not None:
-            self._time = time
+            self._time =  time
 
     ##
     #  Get occurrence time (epoch)  of quake
