@@ -8,8 +8,9 @@ from bridges.link_visualizer import *
 # representation uses them as the generic paramter, as SLelement<Edge>
 # bridges represents Edges as links between pairs of elements
 #
-# @author Matthew McQuaigue
+# @author Matthew McQuaigue, Kalpathi Subramanian
 #
+# @date 2019, 2020
 #
 
 class Edge():
@@ -137,16 +138,16 @@ class Edge():
     @property
     def opacity(self):
         """
-        Getter for the element opacity
+        Getter for the edge opacity
         Returns:
-            opacity : element opacity
+            opacity : edge opacity
         """
         return self.color.alpha
 
     @opacity.setter
     def opacity(self, opacity):
         """
-        Setter for the elementopacity
+        Setter for the edge opacity
         Args:
             opacity : opacity value (0-1.0) to set
         Returns:
@@ -156,10 +157,22 @@ class Edge():
 
     @property
     def label(self):
+        """
+        Getter for the edge label
+        Returns:
+            (string) : edge label
+        """
         return self._lvis.label
 
     @label.setter
     def label(self, l):
+        """
+        Setter for the edge label
+        Args:
+            l : lavel value (string) to set
+        Returns:
+            None
+        """
         self._lvis.label = l
 
     def get_edge(self):

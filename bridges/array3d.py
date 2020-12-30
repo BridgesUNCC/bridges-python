@@ -1,23 +1,24 @@
 from bridges.array import *
 
+##	@brief This class can be used to create three dimensional arrays of 
+#		type Element<E>.
+#	
+#	@author 	Matthew Mcquaigue, Kalpathi Subramanian
+#	
+#	@date  	7/18/19, 12/29, 20
+#	
+#	This class can be used to create three dimensional arrays of 
+#	type Element<E>  where E is a generic object representing application 
+#	specific data.
+#	
+#	Arrays are internally represented as 1D arrays; currently 1D, 2D  and
+#	3D arrays are supported.
+#	
+#	Example Tutorial at: http:bridgesuncc.github.iotutorialsArray.html 
+#		(1D, 2D, and 3D Array)<br>
+#	
 
 class Array3D(Array):
-    """
-    @brief This class can be used to create three dimensional arrays of type Element<E>.
-
-    @author 	Kalpathi Subramanian
-
-    @date  	71819
-
- 	This class can be used to create three dimensional arrays of type Element<E>  where E
- 	is a generic object representing application specific data.
-
- 	Arrays are internally represented as 1D arrays; currently 1D, 2D  and
- 	3D arrays are supported.
-
-    Example Tutorial at: http:bridgesuncc.github.iotutorialsArray.html (1D, 2D, and 3D Array)<br>
-    """
-
     def __init__(self, **kwargs):
         """
         Create an array object with the specified dimensions

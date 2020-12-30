@@ -110,7 +110,7 @@ class Color(object):
         return self._green
 
     @green.setter
-    def green(self, value: int):
+    def green(self, value: int): 
         """
         Setter for green component of color (0-255 inclusive)
         Args:

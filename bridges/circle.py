@@ -103,25 +103,28 @@ class Circle(Symbol):
 
         return dims
 
-    def translate(self, tx:float, ty:float):
+    def translate(self, tx:float, ty:float) -> None:
         """
-        translate the circle
-        Arrgs:
+        Translate the circle by tx, ty
+        Args:
             (float) tx: x translation
             (float) ty: y translation
+		Returns:
+            None
         """
         center = self.get_location()
         center = self.translate_point(center, tx, ty)
         self.set_location(center[0], center[1])
 
-    def scale(self, scale:float):
+    def scale(self, sc:float) -> None:
         """
-        Scale the circle. Only the radius needs to be scaled, using a single scale value
+        Scale the circle. 
+        Only the radius needs to be scaled, using a single scale value
         Args:
-            (float) scale: scale factor
+            (float) sc: scale factor
+		Returns:
+            None
         """
-        # scale onlt the radius
-        # center stays the same
         self.radius *= scale
 
     def get_json_representation(self) -> dict:

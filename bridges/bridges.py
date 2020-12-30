@@ -16,7 +16,7 @@ import json
 #
 #   <b>Datasets.</b> The datasets that are currently supported through the BRIDGES API
 #     include USGS Earthquake Data, IMDB Actor/Movie Data (2 versions), Gutenberg Book
-#     Collection Meta Data, a Video Game Dataset and Shakespeare Dataset. More information
+#     Collection Meta Data, a Video Game Dataset, Shakespeare Dataset, OpenStreetMap and Elevation map data. More information
 #     is found in the respective methods (below) and at <p>
 #     http://bridgesuncc.github.io/datasets.html <p>
 #
@@ -26,8 +26,9 @@ import json
 #     call to visualize the data structure (bridges::setDataStructure() and visualize()
 #     methods).
 #
-#      @author Sean Gallagher, Kalpathi Subramanaian, Mihai Mehedint, David Burlinson, Matthew Mcquaigue
+#      @author Sean Gallagher, Kalpathi Subramanaian, Mihai Mehedint, David Burlinson, Matthew Mcquaigue, Erik Saule, Jamie Payton
 #
+#     @date 2015, 2016, 2017, 2018, 2019, 2020
 #
 
 class Bridges:
@@ -327,8 +328,10 @@ class Bridges:
     def set_server_url(self, server_url: str) -> None:
         """
         Sets url for the output of the visualize method
-        :param server_url: string, must be one of {live, clone, local, games}
-        :return: None
+        Args:
+			param server_url: string, must be one of {live, clone, local, games}
+		Returns:
+        	None
         """
         self.connector.set_server_url(server_url)
 

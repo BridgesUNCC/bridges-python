@@ -70,7 +70,7 @@ class BSTElement(BinTreeElement):
         """
         Setter for the bst element key
         Args:
-            key: the key for the element
+            k: the key for the element
         Returns:
             None
         """
