@@ -23,7 +23,7 @@ class Connector:
     debug = False
 
     ##
-    # Connector object constructor
+    # @brief Connector object constructor
     # @param key is the user_key
     # @param username is students username
     # @param assignment is the assignment number for the assignment
@@ -34,13 +34,19 @@ class Connector:
         self.server_url = "http://bridges-cs.herokuapp.com"
 
     ##
-    # Set the server based on a keyword for url
+    # @brief Set the server based on a keyword for url
     # @param server is one of the three string keywords('live', 'clone', 'local')
     # that is passed to change the server that the bridges visualization will be sent to
     def set_server(self, server):
         self.set_server_url(server)
 
 
+    ##
+    # @brief Set the server url (string)
+    # that is passed to change the server that the bridges visualization 
+	# will be sent to
+    #
+    # @param server is one of the three strings ('live', 'clone', 'local')
     def set_server_url(self, server_url):
         switcher = {
             "live": "http://bridges-cs.herokuapp.com",
@@ -51,9 +57,17 @@ class Connector:
         self.server_url = switcher.get(server_url, ValueError("Use: live, clone, local to determine url"))
 
 
+    ##
+    # @brief Get the server url (string)
+    # @return server url (string)
     def get_server_url(self):
         return self.server_url
 
+   	##
+   	# @brief post the data (JSON) to the server
+	# @param url  url of server
+	# @param data JSON of the data structure representation
+	#
     def post(self, url, data):
         try:
             if self.key.isdigit() is not True:
@@ -67,6 +81,10 @@ class Connector:
             print(r.text)
         return r.status_code
 
+   	##
+   	# @brief prepare the  post string for transmission to the server
+	# @param url  url of server
+	#
     def prepare(self, url):
         out = self.server_url
         out += url

@@ -78,7 +78,7 @@ class Color(object):
         """
         Getter for red component of color (0-255 inclusive)
         Returns:
-            int: red component of color
+            (int) red component of color
         """
         return self._red
 
@@ -183,15 +183,27 @@ class Color(object):
 
     @property
     def rgba(self) -> (int, int, int, float):
-        """RGBA components as respective tuple
-        Represents the RGBA values of the color as a tuple, can be used to set or get all values at once
-        :return (int, int, int, float): RGBA values respectively
+        """
+        RGBA components as respective tuple.
+        Represents the RGBA values of the color as a tuple, can be 
+        used to set or get all values at once
+        Args:
+            None
+        Returns:
+            (int, int, int, float) - RGBA values respectively
         """
         return self.red, self.green, self.blue, self.alpha
 
     @rgba.setter
     def rgba(self, rgba: (int, int, int, float)):
-            self.red, self.blue, self.green, self.alpha = rgba
+        """
+        Set RGBA components.
+        Args:
+            rgba: r,g,b,a (list)
+		Returns: 
+            None
+        """
+        self.red, self.blue, self.green, self.alpha = rgba
 
     def __init__(self, *args, **kwargs):
         """ Constructor for a Color object

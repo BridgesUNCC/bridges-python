@@ -9,14 +9,31 @@ class GameBase(ABC):
 
     def __init__(self, assid, login, apikey, rows, cols):
         """
-        PROTECTED constructor prevent the object from being
+        PROTECTED constructor prevents the object from being
         directly created. Since GameBase is meant to be a purely internal
         class, that seems appropriate.
+
+        Args:
+            assid: assignment number
+            login: user name
+            apikey: authentication id
+            rows: height of game grid
+            cols: width of game grid
+		Returns:
+			None
         """
         self.game_base_init(assid, login, apikey, rows, cols)
         self.grid_state = dict
 
     def game_base_init(self, id, log, key, rows, cols):
+        """
+        Args:
+            id: assignment number
+            log: user name
+            key: authentication id
+            rows: height of game grid
+            cols: width of game grid
+        """
         self.firsttime = True
 
         self.bridges = Bridges(id, log, key)
@@ -33,6 +50,9 @@ class GameBase(ABC):
         self.sock.setup_connection(log, id)
 
     def close(self):
+        """
+        close the socket connection (and game)
+        """
         self.sock.close()
         
     def register_keypress(self, kl):
@@ -146,7 +166,7 @@ class GameBase(ABC):
     def render(self):
         """
         renders the board
-		"""
+        """
 
         if self.firsttime:
             self.firsttime = False

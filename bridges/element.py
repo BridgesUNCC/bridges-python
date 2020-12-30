@@ -271,6 +271,11 @@ class Element:
 
     @property
     def id(self) -> int:
+        """
+        Get numer of ids of element object
+        Returns:
+           (int) number of ids of element
+        """
         return self._ids
 
     def set_location(self, locX, locY):

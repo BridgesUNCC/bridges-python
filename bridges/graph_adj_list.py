@@ -61,28 +61,30 @@ class GraphAdjList:
         return "GraphAdjacencyList"
 
     def add_vertex(self, id: str,
-                   label: str = None,
-                   data: Any = None,
-                   color: Union[str, Color] = "blue",
-                   opacity: float = 1.0,
-                   original: Element = None
-                   ) -> Element:
-        """
-        Adds a new vertex to the graph, initializes the adjacency
-        list; user is responsible for checking if the vertex already exists.
-        This method will replace the value for this key
-        Args:
+        label: str = None,
+        data: Any = None,
+        color: Union[str, Color] = "blue",
+        opacity: float = 1.0,
+        original: Element = None
+       ) -> Element:
+       """
+       Adds a new vertex to the graph, initializes the adjacency
+       list; user is responsible for checking if the vertex already exists.
+       This method will replace the value for this key.
+       Note: it is the user's responsibility to  check
+       for duplicate vertices
+     
+       Args:
             id: the vertex id
             label: vertex label
-            data: the vertex data
-            color: color of vertex
-            opacity: opacity of vertex
-            original: an existing Element instance to copy, this will nullify other arguments
-        Returns:
+            data:  the vertex data
+            color:  color of vertex
+            opacity:  opacity of vertex
+            original:  an existing Element instance to copy, this will 
+                 nullify other arguments
+       Returns:
             newly created Vertex
-        """
-        #  note: it is the user's responsibility to  check
-        #  for duplicate vertices
+	   """
         self.vertices[id] = Element(val=data, color=color, opacity=opacity, original=original)
         self.vertices.get(id).label = str(label) if label is not None else str(id)
         self.adj_list[id] = None
@@ -113,7 +115,7 @@ class GraphAdjList:
             data: data the edge will hold
         Returns:
             newly created Edge
-        Rasies:
+        Raises:
             ValueError: if the src and dest vertices do not exist
         """
         source_id = self._resolve_id(src)
@@ -260,9 +262,9 @@ class GraphAdjList:
         """force the rendering engine to use large graph visualization
         
         This forces the rendering to a more bandwidth efficient at the
-	cost of having less features. The large graph visualization
-	only renders vertices that have specified locations. The only
-	usable attribute for vertices and edges are colors.
+    cost of having less features. The large graph visualization
+    only renders vertices that have specified locations. The only
+    usable attribute for vertices and edges are colors.
 
         Args:
           (bool) f: set to true to force the visualization engine to use large graphs visualization. Setting to false does not prevent large visualization to be used, just does not force it.
@@ -277,16 +279,17 @@ class GraphAdjList:
             GraphAdjList.force_large_viz = False
 
     def force_small_visualization(self, f):
-        """force the rendering engine to use small graph visualization
+        """
+        force the rendering engine to use small graph visualization
         
         The small visualization uses more bandwidth, have more
-	features, and support a force directed layout for vertices
-	which do not have a specified location.
+        features, and support a force directed layout for vertices
+        which do not have a specified location.
 
         Args:
-          (bool) f: set to true to force the visualization engine to use small graphs visualization. Setting to false does not prevent small visualization to be used, just does not force it.
+           (bool) f: set to true to force the visualization engine to use small graphs visualization. Setting to false does not prevent small visualization to be used, just does not force it.
         Returns:
-          None
+            None
 
         """
         if f:

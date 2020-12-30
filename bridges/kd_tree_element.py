@@ -118,7 +118,16 @@ class KDTreeElement(BSTElement):
 
     @left.setter
     def left(self, l):
+        """
+        Set left child
+        Args:
+            l: left child to set
+        Returns:
+            None
+        """
         self.set_child(0, l)
+        Returns:
+            None
 
     @property
     def right(self):
@@ -131,6 +140,13 @@ class KDTreeElement(BSTElement):
 
     @right.setter
     def right(self, r):
+        """
+        Set right child
+        Args:
+            r: right child to set
+        Returns:
+            None
+        """
         self.set_child(1, r)
 
     def get_element_representation(self):
