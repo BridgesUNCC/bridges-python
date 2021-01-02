@@ -122,14 +122,14 @@ class EarthquakeUSGS:
 
     ##
     #  
-    #    Get the title of quake (typically a one line description)
-    #
+    #   Get the title of quake (typically a one line description)
+    #   @return title of quake
     @property
     def title(self) -> str:
         return self._title
 
     ##
-    #      Set title of quake
+    #    Set title of quake
     #    @param  title of quake to set
     #
     @title.setter

@@ -2,6 +2,13 @@ import json
 import os
 import pickle
 
+##
+# This class is used to cache very large datasets, such as the OpenStreet Map data.
+# This is for internal use only for efficiency.
+#
+# @author Jay Strahler, Erik Saule
+# @date  2019, 2020
+#
 
 class lru_cache():
 

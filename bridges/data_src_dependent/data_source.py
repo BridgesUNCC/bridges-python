@@ -95,7 +95,15 @@ def get_actor_movie_imdb_data(count = 0):
     return wrapper
 
 def get_actor_movie_imdb_data2():
-
+    """
+    Get ActorMovie IMDB Data. Data is retrieved, formatted into a list of ActorMovieIMDB objects
+    Args:
+        count: the number of actor/movie pairs, but currently unused,
+    Returns:
+        All records.
+    Throws: 
+        Exception if the request fails
+    """
     url = "https://bridgesdata.herokuapp.com/api/imdb2"
 
     r = requests.get(url = url)
