@@ -68,11 +68,7 @@ class GraphAdjList:
         original: Element = None
        ) -> Element:
        """
-       Adds a new vertex to the graph, initializes the adjacency
-       list; user is responsible for checking if the vertex already exists.
-       This method will replace the value for this key.
-       Note: it is the user's responsibility to  check
-       for duplicate vertices
+       Adds a new vertex to the graph. Initializes the adjacency list; user is responsible for checking if the vertex already exists.  This method will replace the value for this key.  Note: it is the user's responsibility to  check for duplicate vertices
      
        Args:
             id: the vertex id
@@ -101,10 +97,7 @@ class GraphAdjList:
                  opacity: float = 1.0
                  ) -> Edge:
         """
-        Adds a new edge to the graph, adds it to that vertex's
-        adjacency list; user is responsible for checking if the
-        vertex already exists. This version assumes a default edge
-        weight of 1.
+        Adds a new edge to the graph. Adds edge to that vertex's adjacency list; user is responsible for checking if the vertex already exists. This version assumes a default edge weight of 1.
         Args:
             src: source vertex of edge
             dest: destination  vertex of edge
@@ -136,7 +129,7 @@ class GraphAdjList:
 
     def set_vertex_data(self, src, vertex_data) -> None:
         """
-        Set for the data at a given vertex
+        Set for the data for a given vertex.
         Args:
             src: the source vertex
             vertex_data: The data for the vertex
@@ -153,6 +146,13 @@ class GraphAdjList:
         self.vertices[src].value = vertex_data
 
     def get_vertex_data(self, src):
+        """
+        Get the data stored as part of this vertex.
+        Args:
+            src: the source vertex
+        Returns:
+            data stored at this vertex
+        """
         try:
             if self.vertices[src] is None:
                 raise ValueError("Vertex " + src + " does not exist!")
@@ -161,6 +161,13 @@ class GraphAdjList:
         return self.vertices[src].value
 
     def set_edge_data(self, src, dest, edge_data):
+        """
+        Set edge specific data for the edge.
+        Args:
+            src: source vertex of edge
+            dest: destination vertex of edge
+            edge_data: edge specific data
+        """
         try:
             if self.vertices[src] is None or self.vertices[dest] is None:
                 raise ValueError("Vertex " + src + " or " + dest + " does not exist!")
@@ -188,10 +195,10 @@ class GraphAdjList:
         """
         return self._vertices
 
-    def get_vertex(self, key: str):
+    def get_vertex(self, key):
         """
-        Getter for a specific vertex in the dictionary of vertices
-        Args;
+        Getter for a specific vertex in the dictionary of vertices.
+        Args:
             key: The associated key for the vertex
         Returns:
             vertex: Element or None
@@ -212,15 +219,36 @@ class GraphAdjList:
             return self.adj_list
 
     def key_set(self):
+        """
+        Gets the keys for all the graph vertices
+		Returns:
+			the keys for the vertices in the graph; used with iterators
+		"""
         return self.vertices.keys()
 
     def value_set(self):
         return self.vertices.values()
 
-    def out_going_edge_set_of(self, k):
+    def out_going_edge_set_of(self, v):
+        """
+        Get the outgoing set of edges from a given vertex
+        Args:
+           v: the given vertex 
+        Returns:
+           outgoing edge set (used in iterartors)
+        """
         return SLelement.list_helper(start=self.get_adjacency_list(k))
 
     def get_edge_data(self, src, dest):
+        """
+        Get edge specific data from this edge.
+
+        Args:
+            src: source vertex of edge
+            dest: destination vertex of edge
+        Returns:
+            data stored on this edge
+        """
         sle = self.adj_list[src]
         while sle is not None:
             ed = sle.value
@@ -229,6 +257,15 @@ class GraphAdjList:
             sle = sle.next
 
     def get_edge(self, src: Union[str, Element], dest: Union[str, Element]):
+        """
+        Get the edge given its vertices.
+
+        Args:
+            src: source vertex of edge
+            dest: destination vertex of edge
+        Returns:
+            edge corresponding to the source and dest vertices
+        """
         source_id = self._resolve_id(src)
         dest_id = self._resolve_id(dest)
         if source_id is None or dest_id is None:
@@ -251,6 +288,11 @@ class GraphAdjList:
             return key_or_element
 
     def are_all_vertices_located(self):
+        """
+        Check if all vertices in the graph have a valid location
+        Returns:
+            a boolean
+        """
         for element in self.vertices.items():
             el = element[1]
             elvis = el.visualizer
@@ -259,15 +301,11 @@ class GraphAdjList:
         return True
 
     def force_large_visualization(self, f):
-        """force the rendering engine to use large graph visualization
-        
-        This forces the rendering to a more bandwidth efficient at the
-    cost of having less features. The large graph visualization
-    only renders vertices that have specified locations. The only
-    usable attribute for vertices and edges are colors.
+        """
+        Force the rendering engine to use large graph visualization. This forces the rendering to a more bandwidth efficient at the cost of having less features. The large graph visualization only renders vertices that have specified locations. The only usable attribute for vertices and edges are colors.
 
         Args:
-          (bool) f: set to true to force the visualization engine to use large graphs visualization. Setting to false does not prevent large visualization to be used, just does not force it.
+          f: boolean set to true to force the visualization engine to use large graphs visualization. Setting to false does not prevent large visualization to be used, just does not force it.
         Returns:
           None
 
@@ -280,14 +318,14 @@ class GraphAdjList:
 
     def force_small_visualization(self, f):
         """
-        force the rendering engine to use small graph visualization
+        Force the rendering engine to use small graph visualization
         
         The small visualization uses more bandwidth, have more
         features, and support a force directed layout for vertices
         which do not have a specified location.
 
         Args:
-           (bool) f: set to true to force the visualization engine to use small graphs visualization. Setting to false does not prevent small visualization to be used, just does not force it.
+           f: boolean set to true to force the visualization engine to use small graphs visualization. Setting to false does not prevent small visualization to be used, just does not force it.
         Returns:
             None
 
@@ -298,32 +336,25 @@ class GraphAdjList:
         else:
             GraphAdjList.force_small_viz = False
 
-
-    ##
-    #
-    #     This is a convenience method to simplify access to the link visualizer;
-    #     the method assumes the vertex names point to existing vertices, else an exception
-    #     is thrown
-    #
-    #   @param src - source vertex of edge
-    #   @param dest - destination vertex of edge
-    #
     def get_link_visualizer(self, src, dest):
+        """
+        This is a convenience method to simplify access to the link visualizer; the method assumes the vertex names point to existing vertices, else an exception is thrown
+       Args:
+            src - source vertex of edge
+            dest - destination vertex of edge
+        """
         #  get the source and destination vertex elements
         #  and check to see if they exist
         return self.get_edge(src, dest)
 
-    ##
-    #
-    #    This is a convenience method to simplify access to the element visualizer;
-    #    the method assumes the vertex name points to an existing vertice, else an
-    #    exception is thrown
-    #
-    #   @param vertex - The vertex for which visualizer is wanted
-    #
     def get_visualizer(self, vertex):
-        #  get the source and destination vertex elements
-        #  and check to see if they exist
+        """
+        This is a convenience method to simplify access to the element visualizer.
+	
+        The method assumes the vertex name points to an existing vertex, else an exception is thrown
+       Args:
+            vertex - The vertex for which visualizer is wanted
+       """
         v = self.vertices.get(vertex)
         try:
             if v is None:
@@ -334,9 +365,9 @@ class GraphAdjList:
 
     def get_data_structure_representation(self) -> dict:
         """
-        Get the representation of the data structure as a dict
+        Get the data structure representation
         Returns:
-            dict: representing the JSON format before dumping to server
+              dict, a JSON representation of the structure 
         """
         node_map = dict()  # map to reorder the nodes for building JSON
         nodes = []  # get the list nodes
@@ -382,6 +413,11 @@ class GraphAdjList:
         return json_str
 
     def get_data_structure_large_graph(self) -> dict:
+        """
+        Gets the JSON of the large graph representation
+        Returns:
+            the data structure representation 
+        """
         nodes = []
         node_map = dict()
 

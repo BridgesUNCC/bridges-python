@@ -90,7 +90,7 @@ class Symbol:
         """
         Getter for the stroke color
         Returns:
-            Color : the stroke (boundary) color of the shape
+            the stroke (boundary) color of the shape
         """
         return self._stroke_color
 

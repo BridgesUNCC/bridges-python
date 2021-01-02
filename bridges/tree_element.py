@@ -42,10 +42,10 @@ class TreeElement(Element):
         """
         Constructor for Tree Element
         Kwargs:
-            label: The label for the tree element that shows in visualization
-            e: the generic object that the tree element will hold
-            left: the tree element assigned to child 0
-            right: the tree element assigned to child 1
+            (0): The label for the tree element that shows in visualization
+            (1): the generic object 'e' that the tree element will hold
+            (2): the tree element assigned to child 0
+            (3): the tree element assigned to child 1
         Returns:
             None
         """

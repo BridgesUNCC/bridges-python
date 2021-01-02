@@ -102,6 +102,7 @@ class GameCell:
 
     def get_bg_byte(self):
         """
+        Gets the background color as a byte.
         Returns:
             background color as byte (index of value in NamedColor)
         """
@@ -109,6 +110,7 @@ class GameCell:
 
     def get_fg_byte(self):
         """
+        Gets the foreground color as a byte.
         Returns:
             foreground color as byte (index of value in NamedColor)
         """
@@ -116,6 +118,7 @@ class GameCell:
 
     def get_symbol_byte(self):
         """
+        Gets the symbol as a byte.
         Returns:
              symbol as byte
         """

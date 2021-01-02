@@ -18,7 +18,7 @@ class AudioChannel(object):
 
     def set_sample(self, index: int, value: int) -> None:
 		##
-		#	@briefSet the sample at index. The sample value should be a valid signed integer with get_sample_bits() number of bits.
+		#	@brief Set the sample at index. The sample value should be a valid signed integer with get_sample_bits() number of bits.
 		# 	@param index  The index on this channel to set (int)
 		#	@param value  The signed integer value to set the sample to (int)
 		#
