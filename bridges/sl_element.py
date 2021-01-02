@@ -91,6 +91,9 @@ class SLelement(Element):
         super(SLelement, self).value = val
 
     def list_helper(start):
+        """
+        helper method for graph adjacency list
+        """
         node = start
         while node.next is not None:
             yield node.value
@@ -151,6 +154,9 @@ class SLelement(Element):
                 break
 
     def iterator(self):
+        """
+        used for range loops
+        """
         return SLelementIterator(self)
 
 

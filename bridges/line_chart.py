@@ -257,6 +257,13 @@ class LineChart:
         return self.yaxis_data[series]
 
     def convert(self, x_data):
+        """
+        Convert input data into an array of floats.
+        Args:
+            x_data : input data in a list of values
+        Returns:
+            A list of floats of the same data
+        """
         arr = []
         for i in range(len(x_data)):
             arr.append(float(x_data[i]))
@@ -295,6 +302,11 @@ class LineChart:
         return correct
 
     def get_data_structure_representation(self):
+        """
+        Get a JSON of the data structure representation
+        Returns:
+            JSON string of the data structure
+        """
         self.check()
 
         xaxis_json = []

@@ -113,9 +113,15 @@ class CircDLelement(DLelement):
         DLelement.prev.fset(self, prev)
 
     def iterator(self):
+        """
+        list iterator to be used with range loops 
+        """
         return CircDLelementIterator(self)
 
     def reverse_iterator(self):
+        """
+        list reverse iterator to be used with range loops 
+        """
         return CircDLelementReverseIterator(self)
 
 class CircDLelementIterator():

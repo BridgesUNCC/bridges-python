@@ -6,7 +6,7 @@ from bridges.sl_element import *
 # 	@author Mihai Mehedint, Kalpathi Subramanian
 #
 #
-# 	@brief This class is used to create doubly linked element objects.
+# 	This class is used to create doubly linked element objects.
 #
 #	This class extends Element and takes a generic parameter <E> representing
 #	application specific data. This element forms the basic building block for
@@ -140,6 +140,9 @@ class DLelement(SLelement):
         return json_dict
 
     def reverse_iterator(self):
+        """
+        This iterator is used with range loops
+        """
         return DLelementReverseIterator(self)
 
 class DLelementReverseIterator():

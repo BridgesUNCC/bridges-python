@@ -5,7 +5,8 @@ import webcolors
 
 
 class Color(object):
-    """This class is used to represent colors in bridges.
+    """
+    This class is used to represent colors in bridges.
 
     We use and RGBA model to represent colors, with the Red Green and Blue components ranging from 0-255,
     with the alpha ranging from 0.0-1.0 inclusive.
@@ -40,12 +41,7 @@ class Color(object):
     teal, thistle, tomato, turquoise, violet, wheat, white, whitesmoke, 
     yellow, yellowgreen
 
-    Attributes:
-        red (int): red component of color ranging from 0-255 inclusive (default 0)
-        green (int): green component of color ranging from 0-255 inclusive (default 0)
-        blue (int): blue component of color ranging from 0-255 inclusive (default 0)
-        alpha (float): alpha component of color ranging from 0.0-1.0 inclusive (default 1.0)
-        rgba (tuple(int, int, int, alpha)): RGBA components as respective tuple
+    Attributes: red (int): red component of color ranging from 0-255 inclusive (default 0) green (int): green component of color ranging from 0-255 inclusive (default 0) blue (int): blue component of color ranging from 0-255 inclusive (default 0) alpha (float): alpha component of color ranging from 0.0-1.0 inclusive (default 1.0) rgba (tuple(int, int, int, alpha)): RGBA components as respective tuple
     Args:
         args: int, int, int, Optional(float) or a str as singular arg
         kwargs:
@@ -184,9 +180,7 @@ class Color(object):
     @property
     def rgba(self) -> (int, int, int, float):
         """
-        RGBA components as respective tuple.
-        Represents the RGBA values of the color as a tuple, can be 
-        used to set or get all values at once
+        RGBA components as respective tuple.  Represents the RGBA values of the color as a tuple, can be used to set or get all values at once
         Args:
             None
         Returns:
@@ -207,11 +201,12 @@ class Color(object):
 
     def __init__(self, *args, **kwargs):
         """ Constructor for a Color object
-        Usage: requires either 3 ints 0-255 for RGB and an optional float 0.0-1.0 for alpha or a str of a web color
-        can also key the RGBA values with r, g, b, a or red, green, blue, alpha respectively and col_name for the str
-        :param args: int, int, int, optional float or just a str
-        :param kwargs: r/red: int, b/blue: int, g/green: int optional a/alpha: float or col_name: str
-        :return: None
+        Usage: requires either 3 ints 0-255 for RGB and an optional float 0.0-1.0 for alpha or a str of a web color can also key the RGBA values with r, g, b, a or red, green, blue, alpha respectively and col_name for the str
+        Args:
+            args: int, int, int, optional float or just a str
+            kwargs: r/red: int, b/blue: int, g/green: int optional a/alpha: float or col_name: str
+        Returns:
+            None
         """
         self._red = 0
         self._green = 0
@@ -221,11 +216,10 @@ class Color(object):
 
     def set_color(self, *args, **kwargs) -> None:
         """
-        Usage: requires either 3 ints 0-255 for RGB and an optional float 0.0-1.0 for alpha or a str of a web color
-        can also key the RGBA values with r, g, b, a or red, green, blue, alpha respectively and col_name for the str
-        :param args: int, int, int optional float or str
-        :param kwargs: r/red: int, b/blue: int, g/green: int optional a/alpha: float or col_name: str
-        :return: None
+        Sets color for a an element or link. Requires either 3 ints 0-255 for RGB and an optional float 0.0-1.0 for alpha or a str of a web color can also key the RGBA values with r, g, b, a or red, green, blue, alpha respectively and col_name for the str
+        Args:
+            args: int, int, int optional float or str
+            kwargs: r/red: int, b/blue: int, g/green: int optional a/alpha: float or col_name: str
         """
         col_name = None
         if args:
@@ -283,7 +277,11 @@ class Color(object):
                 raise ValueError(col_name + " is not a valid color name")
 
     def get_byte_representation(self) -> list:
-        """:return list(int):RGBA values as list of ints from 0-255"""
+        """
+        Gets the RGBA values as list of ints from 0-255
+        Returns:
+            byte representation of color
+        """
         r = self.red
         g = self.green
         b = self.blue

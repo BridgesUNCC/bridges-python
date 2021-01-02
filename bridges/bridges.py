@@ -39,15 +39,17 @@ class Bridges:
     @property
     def window(self) -> [float]:
         """
-        his function enables specifying the window that will rendered by default in the view.
-        This only works for graph data types. And the coordinate system need to be set to "window"
-         using set_coord_system_type(), setting this value will set "window" for you.
-        :return: list of 4 floats [x1, x2, y1, y2]
+        This function returns the current window size.  This only works for graph data types. And the coordinate system need to be set to "window" using set_coord_system_type(), setting this value will set "window" for you.
+        Returns:
+           return a list of 4 floats [x1, x2, y1, y2]
         """
         return self._window
 
     @window.setter
     def window(self, value: [float]) -> None:
+        """
+        This function sets the current window size that will rendered by default in the view.  This only works for graph data types. And the coordinate system need to be set to "window" using set_coord_system_type(), setting this value will set "window" for you.
+        """
         try:
             new_window = [float(x) for x in value]
         except ValueError:
@@ -92,11 +94,7 @@ class Bridges:
 
     def set_data_structure(self, ds):
         """
-        This method sets the handle to the current data structure; this can
-        be an array, the head of a linked list, root of a tree structure, a graph
-        Arrays of upto 3 dimensions are suppported. It can be any of the data
-        structures supported by BRIDGES. Polymorphism and type casting is used
-        to determine the actual data structure and extract its representtion.
+        Set the data structure type.  This method sets the handle to the current data structure; this can be an array, the head of a linked list, root of a tree structure, a graph Arrays of upto 3 dimensions are suppported. It can be any of the data structures supported by BRIDGES. Polymorphism and type casting is used to determine the actual data structure and extract its representtion.
         Args:
             ds: the data structure to visualize
         Returns:
@@ -111,36 +109,27 @@ class Bridges:
             print("Exception Thrown: Data structure passed to BRIDGES is null!\n")
 
 
-    """
-    This method controls if the JSON of data structure is printed to the console 
-    or not
-
-    Args:
-        flag : flag that controls if the data structure json is printed to 
-               console or not
-    Returns:
-        None
-    """
     def set_visualize_JSON(self, flag):
+        """
+        This method controls if the data structure's JSON representation is printed to the console or not
+        Args:
+            flag : flag that controls if the JSON of the data structure representation is output to console
+        Returns:
+            None
+        """
         self._json_flag = flag
 
-    """
-    This method controls if the visualization  url is printed to the console 
-    or not
-
-    Args:
-        flag : flag that controls if the url to the visualization is output to 
-               console
-    Returns:
-        None
-    """
     def post_visualization_link(self, flag):
+        """
+        This method controls (with a flag) if the visualization url is printed to the console or not.
+        Args:
+            flag : flag that controls if the url to the visualization is output to console
+        """
         self._post_url_flag = flag
 
     def visualize(self) -> None:
         """
-        Method for generating the representation of the data structure in the form of JSON
-        and sends the information to the bridges server for generating the visualization
+        Method for generating the representation of the data structure in the form of JSON and sends the information to the bridges server for generating the visualization
         Returns:
             None
         """

@@ -83,6 +83,9 @@ class CircSLelement(SLelement):
         SLelement.next.fset(self, n)
 
     def iterator(self):
+        """
+        list iterator  for use in range loops
+        """
         return CircSlelementIterator(self)
 
 class CircSlelementIterator():

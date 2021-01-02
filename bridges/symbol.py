@@ -180,10 +180,20 @@ class Symbol:
 
     @property
     def shape_type(self):
+        """
+        Get the shape type (string)
+        Returns:
+            shape name (string)
+        """
         return self._shape_type
 
     @shape_type.setter
     def shape_type(self, shape):
+        """
+        Set the shape type (string)
+        Args:
+            shape: shape name to set
+        """
         self._shape_type = shape
 
     def set_location(self, x: float, y: float) -> None:
@@ -220,16 +230,33 @@ class Symbol:
         return [0.0, 0.0, 0.0, 0.0]
 
     def translate_point(self, pt, tx, ty):
+        """
+        Translate a point by tx, ty along X and Y respectively
+        Args:
+            tx: translation factor in X
+            ty: translation factor in Y
+        """
         pt[0] += tx
         pt[1] += ty
         return pt
 
     def scale_point(self, pt, sx, sy):
+        """
+        Scale a point by sx, sy along X and Y respectively
+        Args:
+            sx: scale factor in X
+            sy: scale factor in Y
+        """
         pt[0] *= sx
         pt[1] *= sy
         return pt
 
     def rotate_point(self, pt, angle):
+        """
+        Rotate a point by 'angle' (2D rotation)
+        Args:
+            angle: rotation angle
+        """
         angle_r = math.radians(angle)
         c = math.cos(angle_r)
         s = math.sin(angle_r)

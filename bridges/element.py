@@ -41,12 +41,13 @@ class Element:
 
     def __init__(self, **kwargs) -> None:
         """
-        Element constructor
-        creates an Element Visualizer and unique identifier for the current element
-        kwargs:
-            (str) label: the string that is visible on the bridges Visualization
-            (generic) val: value used to construct Element
-            (Element) original: element object to copy
+        Element constructor. Creates an Element Visualizer and unique identifier for the current element.
+        Args:
+            (0) : "label" - the string label that is visible on the bridges Visualization
+            (1) : "value" - data value (or object) E  used to construct Element
+            (2) : "original" - element object to copy (if named "original")
+            (3) : "color"  - color of element
+            (4) : "opacity" - opacity of element
         Returns:
             None
         """

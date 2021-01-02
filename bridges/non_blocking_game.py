@@ -115,16 +115,19 @@ class NonBlockingGame(GameBase):
     @property
     def fps(self):
         """
-        What frame rate is the game running at?
+        Get the frame rate at which the game running.
         Returns:
-            The target framerate. The game could be somewhat
-            slower depending on how computationally expensive the
-            gameloop is and on the speed of the network
+            The target framerate. The game could be somewhat slower depending on how computationally expensive the gameloop is and on the speed of the network
         """
         return self._fps
 
     @fps.setter
     def fps(self, frames):
+        """
+        Set the frame rate at which the game running.
+        Args:
+            frames: frame rate to be set.
+        """
         self._fps = frames
 
     def sleep_timer(self, timems=None):

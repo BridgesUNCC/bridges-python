@@ -130,11 +130,24 @@ class Rectangle(Symbol):
         self.height = h
 
     def translate(self, tx, ty):
+        """
+        Translate the rectangle by tx, ty along X and Y respectively
+        Args:
+           tx: translation factor in X
+           ty: translation factor in Y
+        """
+
         center = self.get_location()
         center = self.translate_point(center, tx, ty)
         self.set_location(center[0], center[1])
 
     def scale(self, sx, sy):
+        """
+        Scale the rectangle by sx, sy along X and Y respectively
+        Args:
+           sx: translation factor in X
+           sy: translation factor in Y
+        """
         pt = [0., 0.]
         pt[0] = self.width
         pt[1] = self.height

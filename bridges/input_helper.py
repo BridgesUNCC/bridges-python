@@ -1,10 +1,24 @@
 from bridges.keypress_listener import *
 import traceback
 
+## This is meant to be an internal class, not something
+# that the library user will use
+# 
+# This class provide input device (mouse and keyboard)
+#handling for Bridges games
+# 
+# @sa See the Games Tutorials at
+# http://bridgesuncc.github.io/tutorials/NonBlockingGame.html
+# for more information on keys and mouse device usage.
+# 
+# @author Erik Saule, David Burlinson
+# @date 2018, 2019, 2020, 1/2/21
 
 class InputHelper(KeyPressListener):
-
     def __init__(self):
+        """
+        Constructor. All key initializations done here.
+        """
         self.up_key = False
         self.down_key  = False
         self.left_key = False
@@ -17,6 +31,11 @@ class InputHelper(KeyPressListener):
         self.d_key = False
 
     def key_press(self, keypress):
+        """
+        Record a key press event
+        Args:
+            keypress: keypress event
+        """
         try:
             press_type = str(keypress.get("type"))
             key = str(keypress.get("key"))
@@ -99,33 +118,83 @@ class InputHelper(KeyPressListener):
                 + " RIGHT:" + str(self.right()))
 
     def up(self):
+        """
+        Get the up arrow key.
+        Returns:
+            the 'Up Arrow' key
+        """
         return self.up_key
 
     def down(self):
+        """
+        Get the down arrow key.
+        Returns:
+            the 'Down Arrow' key
+        """
         return self.down_key
 
     def left(self):
+        """
+        Get the left arrow key.
+        Returns:
+            the 'Left Arrow' key
+        """
         return self.left_key
 
     def right(self):
+        """
+        Get the right arrow key.
+        Returns:
+            the 'Right Arrow' key
+        """
         return self.right_key
 
     def q(self):
+        """
+        Get the 'q' arrow key.
+        Returns:
+            the 'q' key
+        """
         return self.q_key
 
     def space(self):
+        """
+        Get the ' ' (space) key.
+        Returns:
+            the 'Space' key
+        """
         return self.space_key
 
     def w(self):
+        """
+        Get the 'w' (space) key.
+        Returns:
+            the 'w' key
+        """
         return self.w_key
 
     def a(self):
+        """
+        Get the 'a' (space) key.
+        Returns:
+            the 'a' key
+        """
         return self.a_key
 
     def s(self):
+        """
+        Get the 's' (space) key.
+        Returns:
+            the 's' key
+        """
         return self.s_key
 
     def d(self):
+        """
+        Get the 'd' (space) key.
+        Returns:
+            the 'd' key
+        """
         return self.d_key
 
 

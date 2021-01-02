@@ -45,6 +45,13 @@ class GameCell:
 
     @bg.setter
     def bg(self, color):
+        """
+        Setter for the background color
+        Args:
+            color: color to be set
+        Returns:
+            None
+        """
         if type(color) == NamedColor:
             self._bg = color
         else:

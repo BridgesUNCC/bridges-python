@@ -9,9 +9,7 @@ class GameBase(ABC):
 
     def __init__(self, assid, login, apikey, rows, cols):
         """
-        PROTECTED constructor prevents the object from being
-        directly created. Since GameBase is meant to be a purely internal
-        class, that seems appropriate.
+        PROTECTED constructor prevents the object from being directly created. Since GameBase is meant to be a purely internal class, that seems appropriate.
 
         Args:
             assid: assignment number
@@ -27,6 +25,7 @@ class GameBase(ABC):
 
     def game_base_init(self, id, log, key, rows, cols):
         """
+        Initializes the gamebase object
         Args:
             id: assignment number
             log: user name
@@ -59,12 +58,21 @@ class GameBase(ABC):
         self.sock.add_listener(kl)
 
     def start(self):
+        """
+        "starts the game. Called once at the beginning"
+        """
         pass
 
     def initialize(self):
+        """
+        "Game initialization. . Called once at the beginning"
+        """
         pass
 
     def game_loop(self):
+        """
+        "Method contains all of the game logica and can call other user defined methods"
+        """
         pass
 
     def quit(self):

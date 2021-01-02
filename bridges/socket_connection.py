@@ -1,6 +1,11 @@
 import socketio
 import json
 
+##
+# This class is used internally as part of the BRIDGES Game API to set up 
+# connections to the BRIDGES Game server. Not to be used directly by BRIDGES 
+# users directly
+#
 
 class SocketConnection:
     _sio = socketio.Client()

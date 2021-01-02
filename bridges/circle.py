@@ -118,10 +118,9 @@ class Circle(Symbol):
 
     def scale(self, sc:float) -> None:
         """
-        Scale the circle. 
-        Only the radius needs to be scaled, using a single scale value
+        Scale the circle.  Only the radius needs to be scaled, using a single scale value
         Args:
-            (float) sc: scale factor
+            sc: scale factor (float)
 		Returns:
             None
         """

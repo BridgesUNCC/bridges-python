@@ -26,6 +26,14 @@ class SymbolCollection:
         self._autoupdateviewport = True
 
     def setviewport(self, xmin, xmax, ymin, ymax):
+        """
+        Set the display size.
+        Args:
+            xmin: min x coordinate
+            xmax: max x coordinate
+            ymin: min y coordinate
+            ymax: max y coordinate
+        """
         self._autoupdateviewport = False
         self._domainxmin = xmin
         self._domainxmax = xmax
@@ -34,7 +42,7 @@ class SymbolCollection:
         
     def get_data_structure_type(self):
         """
-        Getter for the data structure type
+        Getter for the data structure type as a JSON string
         Returns
             str: the data structure type
         """
