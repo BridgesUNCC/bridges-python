@@ -57,7 +57,7 @@ class EarthquakeUSGS:
         else:
             self._url = ""
         if time is not None:
-            self._time =  time
+            self.time =  time
 
     ##
     #  Get occurrence time (epoch)  of quake
@@ -70,7 +70,6 @@ class EarthquakeUSGS:
     #      Set occurrence time (epoch)  of quake
     #    @param tm  occurrence time (epoch)    
     #
-    @property
     @time.setter
     def time(self, tm) -> None:
         self.__set_time_from_unix_timestamp(tm)
