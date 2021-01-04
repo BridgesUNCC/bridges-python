@@ -237,7 +237,7 @@ class GraphAdjList:
         Returns:
            outgoing edge set (used in iterartors)
         """
-        return SLelement.list_helper(start=self.get_adjacency_list(k))
+        return SLelement.list_helper(start=self.get_adjacency_list(v))
 
     def get_edge_data(self, src, dest):
         """
