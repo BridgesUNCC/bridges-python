@@ -50,12 +50,12 @@ import traceback
 #    using the get_visualizer() and get_link_visualizer() methods.  For instance,
 #    
 #    \code{java}
-#    GraphAdjList<String, Integer, Double> graph = something();
+#    GraphAdjList graph = something();
 #    graph.add_vertex("baskin");
 #    graph.add_vertex("robins");
 #    graph.add_edge("baskin","robins");
-#    graph.get_visualizer().setColor("cyan");
-#    graph.get_visualizer().setShape("square");
+#    graph.get_visualizer().set_color("cyan");
+#    graph.get_visualizer().set_shape("square");
 #    graph.get_link_visualizer("baskin", "robins").set_color("green");
 #    graph.get_link_visualizer("baskin", "robins").set_opacity("0.5f");
 #    \endcode
