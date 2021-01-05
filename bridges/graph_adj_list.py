@@ -14,11 +14,55 @@ import traceback
 #    The GraphAdjList class can be used to represent adjacency list based  graphs
 #    in BRIDGES
 #
-#    Convenience methods are provided to add vertices and edges to the graph as well as
+#    Convenience methods are provided to add vertices and edges to 
+#    the graph as well as
 #    retrieve the adjacency list of a vertex, given its id.
+#    Convenience method addVertex() is provided to add vertices to
+#    the graph, and addEdge() is provided to add edges.  Edges are
+#    retrieved by using the dual hashmap, given the vertex ids of the
+#    edge. Vertices can be styled directly from the vertex element
+#    returned by getVertex(), and edges are styled from a LinkVisualizer
+#    one can access through getLinkVisualizer(). Here is a simple example:
+#    
+#    \code{java}
+#    graph = GraphAdjList()
+#    graph.add_vertex("a");
+#    graph.add_vertex("b");
+#    graph.add_edge("a", "b");
+#    graph.get_vertex("a").set_shape("square");
+#    graph.get_link_visualizer("a", "b").set_color("yellow");
+#    \endcode
+#    
+#    Adjacency lists are singly linked lists using the BRIDGES
+#    SLelement. Iterators are provided for easy traversal of the
+#    adjacency lists. For instance,
+#    
+#    \code{java}
+#    graph = GraphAdjList()
+#    for (e : graph.out_going_edge_set_of("a"))
+#       print("a -> "+e.tov());
+#    \endcode
+#    
+#    Graphs can have their nodes and links affected by visual attributes. Nodes
+#    can have color, size, opacity and shape and  detailed in the ElementVisualizer
+#    class. Edges support attributes such as color, thickness and opacity and are
+#    detailed in the LinkVisualizer class.  Element and link attributes are set
+#    using the get_visualizer() and get_link_visualizer() methods.  For instance,
+#    
+#    \code{java}
+#    GraphAdjList<String, Integer, Double> graph = something();
+#    graph.add_vertex("baskin");
+#    graph.add_vertex("robins");
+#    graph.add_edge("baskin","robins");
+#    graph.get_visualizer().setColor("cyan");
+#    graph.get_visualizer().setShape("square");
+#    graph.get_link_visualizer("baskin", "robins").set_color("green");
+#    graph.get_link_visualizer("baskin", "robins").set_opacity("0.5f");
+#    \endcode
 #
-#   @author Matthew Mcquaigue
-#    @date 2018,  7/23/19
+#
+#   @author Matthew Mcquaigue, Kalpathi Subramanian
+#    @date 2018,  7/23/19, 1/5/21
 #
 #    \sa graph adjacency list tutorial, http://bridgesuncc.github.io/tutorials/Graph_AL.html
 #
