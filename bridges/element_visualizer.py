@@ -42,7 +42,7 @@ class ElementVisualizer():
         """
         self.prop = dict()
         self._color = Color(70, 130, 180, 1.0)
-        if color is not "green":
+        if color != "green":
             self.color = color
         self._shape = shape
         self._size = size

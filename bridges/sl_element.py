@@ -94,6 +94,8 @@ class SLelement(Element):
         """
         helper method for graph adjacency list
         """
+        if start is None:
+            return
         node = start
         while node.next is not None:
             yield node.value

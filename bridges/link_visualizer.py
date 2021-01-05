@@ -131,7 +131,7 @@ class LinkVisualizer():
             "color": [str(self.color.red), str(self.color.green), str(self.color.blue), str(self.color.alpha)],
             "thickness": str(self.thickness),
         }
-        if self.label is not "" or self.label is not None:
+        if self.label != "" or self.label is not None:
             link_props["label"] = self.label
 
         return link_props
