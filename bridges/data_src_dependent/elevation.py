@@ -1,131 +1,149 @@
 
-##
-#    @brief  Class that holds elevation data
-#    
-#    Class that holds Elevation data. 
-#   The data is stored as a 2d array .data of .cols columns and .rows rows.
-#    The data at [0][0] are at location xll, yll and the spatial resolution 
-#    is cellsize.
-#    
-#    @author Jay Strahler, Kalpathi Subramanian
-#    
-#    @date 3/28/20, 12/29/20
-#    
-#    
-
 class ElevationData:
+    """
+    @brief  Class that holds elevation data
+
+    The data is stored as a 2d array .data of .cols columns and .rows rows.
+    The data at [0][0] are at location xll, yll and the spatial resolution 
+    is cellsize.
+
+    @author Jay Strahler, Kalpathi Subramanian
+    
+    @date 3/28/20, 12/29/20, 1/6/20
+    """
+
     @property
     def cols(self):
-    """ 
-    Get data width
-    Returns:
-        return the width of the data
-    """ 
+        """ 
+        @brief Get data width
+        Returns:
+            return the width of the data
+        """ 
         return self.ncols
 
     @cols.setter
     def cols(self, ncols):
-    """
-    Set width of elevation data grid
-    Args:
-         ncols:  elevation data width to set
-    """
+        """
+        @brief Set width of elevation data grid
+        Args:
+             ncols:  elevation data width to set
+        """
         self.ncols = ncols
 
-    """
-    Get data height
-    Returns:
-        return the height of the data
-    """
     @property
     def rows(self):
+        """
+        Get data height
+        Returns:
+            return the height of the data
+        """
         return self.nrows
 
     @rows.setter
     def rows(self, nrows):
-    """
-    Set height of elevation data grid
-    Args: 
-       nrows:  dlevation data height to set
-    """
+        """
+        Set height of elevation data grid
+        Args: 
+           nrows:  dlevation data height to set
+        """
         self.nrows = nrows 
 
-    ##
-    # @brief Get elevation data
-    #
     @property
     def data(self):
+        """ 
+        @brief Get elevation data
+        Returns:
+            return the elevation data
+        """ 
         return self._data
 
-    ##
-    # @brief Set elevation data
-    # @param eledata  elevation data to set
-    #
     @data.setter
     def data(self, eledata):
+        """
+        @brief Set elevation data
+        Args: 
+          eledata:  elevation data to set
+        """
         self._data = eledata
 
-    ##
-    # @brief Get X coord of data origin
-    #
     @property
     def xll(self):
+        """ 
+        @brief Get xcoord of  data origin
+        Returns:
+            return the elevation data lower left (x coord)
+        """ 
         return self._x11
 
-    ##
-    # @brief Set X coord of origin of  elevation data grid
-    # @param value  lower left x coord of data
-    #
     @xll.setter
-    def xll(self, value):
-        self._xll = value
+    def xll(self, xcoord):
+        """
+        @brief Set xcoord of elevation data origin
+        Args: 
+          xcoord:  elevation data xcoord of origin to set
+        """
+        self._xll = xcoord
 
-    ##
-    # @brief Get Y coord of data origin
-    #
     @property
     def yll(self):
+        """ 
+        @brief Get ycoord of  data origin
+        Returns:
+            return the elevation data lower left (y coord)
+        """ 
         return self._yll
 
-    ##
-    # @brief Set Y coord of origin of  elevation data grid
-    # @param value  lower left y coord of data
-    #
     @yll.setter
-    def yll(self, value):
-        self._yll = value
+    def yll(self, ycoord):
+        """
+        @brief Set ycoord of elevation data origin
+        Args: 
+          ycoord:  elevation data ycoord of origin to set
+        """
+        self._yll = ycoord
 
-    ##
-    # @brief Get data resolution (cell size)
-    #
     @property
     def cellsize(self):
+        """ 
+        @brief Get cell size (resolution)  of  elevation data
+        Returns:
+            return the elevation data cell size
+        """ 
         return self._cellsize
 
-    ##
-    # @brief Set max elevation value in the data
-    # @param value  cell size of this dataset
-    #
     @cellsize.setter
     def cellsize(self, value):
+        """
+        @brief Set cell size (resolution)  of elevation data
+        Args: 
+          value:  cell size to set
+        """
         self._cellsize = value
     
-    ##
-    # @brief Get max elevation value in the data
-    #
     @property
     def maxVal(self):
+        """ 
+        @brief Get max elevation value in the data
+        Returns:
+            return the max value in data
+        """ 
         return self._maxVal
 
     @maxVal.setter
     def maxVal(self, value):
+        """
+        @brief Set max elevation value in the data
+        Args: 
+          value:  max value to set
+        """
         self._maxVal = value
 
 
 
-    ##
-    # @brief Constructor
     def __init__(self):
+        """
+        @brief Constructor - initialize elevation object
+        """
         self.ncols = 0
         self.nrows = 0
         self._data = []

@@ -1,104 +1,121 @@
-##
-#    @brief  A Song object, used along with the Songs data source.
-#    
-#    This is a convenience class provided for  users who wish to use this
-#    data source as part of their application. It provides an API that makes
-#    it easy to access the attributes of this data set.
-#    
-#    Refer to tutorial examples to using this data source in data structure
-#    assignments.
-#    
-#    
-#    @author Matthew Mcquaigue, Kalpathi Subramanian
-#    @date   2018, 12/29/20
-
 class Song:
-    ## @brief Constructor
-    #    @param artist song artist
-    #    @param song song title
-    #    @param album song album
-    #    @param lyrics lyrics of song
-    #    @param release_data release date of song
-    #
+    """
+    @brief  A Song object, used along with the Songs data source.
+
+    This is a convenience class provided for  users who wish to use this
+    data source as part of their application. It provides an API that makes
+    it easy to access the attributes of this data set.
+    
+    Refer to tutorial examples to using this data source in data structure
+    assignments.
+
+    @author Matthew Mcquaigue, Kalpathi Subramanian
+    @date   2018, 12/29/20
+    """
+
     def __init__(self, artist: str = "", song: str = "", album: str = "", lyrics: str = "", release_date: str = ""):
+        """
+        @brief Constructor
+        Args:
+            artist: song artist
+            song: song title
+            album: song album
+            lyrics: lyrics of song
+            release_data: release date of song
+        """
         self._artist = artist
         self._song = song
         self._lyrics = lyrics
         self._album = album
         self._release_date = release_date
 
-    ##
-    # @brief return artist of song
-    #
     @property
     def artist(self):
+        """
+        @brief return artist of song
+        Returns:
+            artist name of song
+        """
         return self._artist
 
-    ##
-    # @brief set artist name
-    # @param a artist name to be set
-    #
     @artist.setter
     def artist(self, a):
+        """
+        @brief Set artist of song
+        Args:
+            a: artist name to set
+        """
         self._artist = a
 
-    ##
-    # return title of song
-    #
     @property
     def song_title(self):
+        """
+        @brief return title of song
+        Returns:
+            song title
+        """
         return self._song
 
-    ##
-    # @brief set title of song
-    # @param s song title to be set
-    #
     @song_title.setter
     def song_title(self, s):
+        """
+        @brief Set the song title
+        Args:
+            s: artist name to set
+        """
         self._song = s
 
-    ##
-    # @brief return album of song
-    #
     @property
     def album_title(self):
+        """
+        @brief return album title
+        Returns:
+            album title of song
+        """
         return self._album
 
-    ##
-    # @brief set album title
-    # @param a album title to be set
-    #
     @album_title.setter
     def album_title(self, a):
+        """
+        @brief Set title of song
+        Args:
+            a: album title to set
+        """
         self._album = a
 
-    ##
-    # @brief return lyrics of song
-    #
     @property
     def lyrics(self):
+        """
+        @brief return lyrics of song
+        Returns:
+            lyrics of song
+        """
         return self._lyrics
 
-    ##
-    # @brief set song lyrics
-    # @param l song lyrics to be set
-    #
     @lyrics.setter
     def lyrics(self, l):
+        """
+        @brief Set artist of song
+        Args:
+            l:  lyrics data to set
+        """
         self._lyrics = l
 
-    ##
-    # @brief return release date of song
-    #
     @property
     def release_date(self):
+        """
+        @brief return release date of song
+        Returns:
+            release date of song
+        """
         return self._release_date
 
-    ##
-    # @brief set song release date
-    # @param l song release date to be set
-    #
     @release_date.setter
     def release_date(self, r):
+        """
+        @brief Set release date of song
+        Args:
+            r: release date to set
+        """
         self._release_date = r
 

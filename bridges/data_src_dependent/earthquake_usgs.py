@@ -1,36 +1,38 @@
 import datetime
 import time
 
-##
-#
-#    Class that hold earthquake data, for use with USGIS retrieved quake data.
-#    Class that holds earthquake USGIS data. BRIDGES uses scripts to 
-#    continually monitor USGIS site (tweets) and retrieve the latest 
-#    quake data for use in student projects.
-#
-#    @author Matthew Mcquaigue, Kalpathi Subramanian,
-#    @date  2/18/18, 12/29/20
-#
 
 class EarthquakeUSGS:
+    """
+    @brief Class that holds earthquake data records.
+
+    Class that hold earthquake data, for use with USGIS retrieved quake data.
+    BRIDGES uses scripts to 
+    continually monitor USGIS site (tweets) and retrieve the latest 
+    quake data for use in student projects.
+
+    @author Matthew Mcquaigue, Kalpathi Subramanian,
+    @date  2/18/18, 12/29/20, 1/6/21
+    """
     def __set_time_from_unix_timestamp(self, tm):
         epoch_time = int(tm)
         eq_time = epoch_time / 1000
         eqt = time.gmtime(eq_time)
         self._time = time.strftime("%Y-%m-%d %H:%M:%S", eqt)
 
-    ##
-    # constructor
-    # @param magnitude magnitude of quake 
-    # @param latitude  latitude position
-    # @param longitude longitude position
-    # @param location  location of quake
-    # @param title     title (has some of eq info in a string)
-    # @param url       url for more information
-    # @param time       occurrence time of quake
-    #
     def __init__(self, magnitude=None, longit=None, latit=None, location=None, 
                      title=None, url=None, time=None):
+        """
+        @brief constructor
+        Args: 
+            magnitude: magnitude of quake 
+            latitude: latitude position
+            longitude: longitude position
+            location:  location of quake
+            title:     title (has some of eq info in a string)
+            url:       url for more information
+            time:       occurrence time of quake
+        """
         self._time = int()
         if magnitude is not None:
             self._magnitude = magnitude
@@ -59,108 +61,123 @@ class EarthquakeUSGS:
         if time is not None:
             self.time =  time
 
-    ##
-    #  Get occurrence time (epoch)  of quake
-    #
     @property
     def time(self):
+        """   
+        @brief Get occurrence time (epoch)  of quake
+        Returns:
+            Quake occurrence time
+        """
         return self._time
 
-    ##
-    #      Set occurrence time (epoch)  of quake
-    #    @param tm  occurrence time (epoch)    
-    #
     @time.setter
     def time(self, tm) -> None:
+        """   
+        @brief Set occurrence time (epoch)  of quake
+        Args:
+            tm: Quake occurrence time to set
+        """
         self.__set_time_from_unix_timestamp(tm)
 
-    ##
-    #  Get latitude of quake
-    #
     @property
     def latit(self) -> float:
+        """   
+        @brief Get latitude of quake
+        Returns:
+            Quake latitude
+        """
         return self._latit
 
-    ##
-    #      Set latitude of quake
-    #    @param  latit latitude to set
-    #
     @latit.setter
     def latit(self, latit: float) -> None:
+        """   
+        @brief Set latitude of quake
+        Args:
+            latit: quake latitude to set
+        """
         self._latit = latit
 
-    ##
-    #  Get longitude of quake
-    #
     @property
     def longit(self) -> float:
+        """   
+        @brief Get longitude of quake
+        Returns:
+            Quake longitude
+        """
         return self._longit
 
-    ##
-    #      Set longitude of quake
-    #    @param  longit longitude to set
-    #
     @longit.setter
     def longit(self, longit: float) -> None:
+        """   
+        @brief Set longitude of quake
+        Args:
+            longit: quake longitude to set
+        """
         self._longit = longit
 
-    ##
-    # Get the location of quake (typically a city or something of the sort)
-    #
     @property
     def location(self) -> str:
+        """   
+        @brief Get location of quake (typically a city or something of the sort)
+        Returns:
+            Quake location 
+        """
         return self._location
 
-    ##
-    #      Set location of quake
-    #    @param  location location to set
-    #
     @location.setter
     def location(self, location: str):
+        """   
+        @brief Set location of quake
+        Args:
+            location: quake location to set
+        """
         self._location = location
 
-    ##
-    #  
-    #   Get the title of quake (typically a one line description)
-    #   @return title of quake
     @property
     def title(self) -> str:
+        """   
+        @brief Get quake title 
+        Returns:
+            Quake title 
+        """
         return self._title
 
-    ##
-    #    Set title of quake
-    #    @param  title of quake to set
-    #
     @title.setter
     def title(self, title: str):
+        """   
+        @brief Set title of quake
+        Args:
+            title: quake title to set
+        """
         self._title = title
 
-    ##
-    #  Get url of quake
-    #
     @property
     def url(self) -> str:
+        """   
+        @brief Get quake url 
+        Returns:
+            Quake url 
+        """
         return self._url
 
-    ##
-    #      Set url of quake
-    #    @param  url of quake to set
-    #
     @url.setter
     def url(self, url: str):
+        """   
+        @brief Set url of quake
+        Args:
+            url: quake url to set
+        """
         self._url = url
 
-    ##
-    #  @brief Get magnitude of quake on the Richter scale 
-    #
     @property
     def magnitude(self) -> float:
+        """   
+        @brief Get quake magnitude (Richter scale) 
+        Returns:
+            Quake magnitude 
+        """
         return self._magnitude
 
-    ##
-    #      Set magnitude of quake
-    #    @param  magn magnitude of quake to set
-    #
     @magnitude.setter
     def magnitude(self, magn: float):
         """
