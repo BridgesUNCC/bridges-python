@@ -7,9 +7,10 @@
 
 rm report*
 
-grep warning log | sed 's/.*\/\([a-Z_0-9]*\.py\).*/\1/g' | sort | uniq -c > report
+#grep warning log | sed 's/.*\/\([a-Z_0-9]*\.py\).*/\1/g' | sort | uniq -c > report
+grep warning log | sed 's/.*\/\([[:alpha:]_[:digit:]]*\.py\).*/\1/g' | sort | uniq -c > report
 
-for file in $(grep warning log | sed 's/.*\/\([a-Z_0-9]*\.py\).*/\1/g' | sort | uniq);
+for file in $(grep warning log | sed 's/.*\/\([[:alpha:]_[:digit:]]*\.py\).*/\1/g' | sort | uniq);
 do
     grep /$file log > report.${file}
 done
