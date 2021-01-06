@@ -1,29 +1,34 @@
 import math
 from bridges.graph_adj_list import *
 
-##
-#    @brief  Class that hold Open Street Map edges
-#    
-#    Class that holds Open Street Map edges from https://openstreetmap.org
-#    
-#    @author Erik Saule, Matthew Mcquaigue, Jay Strahler, Kalpathi Subramanian
-#    @date 2019, 12/28/20
-#
-
 class OsmEdge:
-    ##
-    # @brief Get source vertex (int)
-    #
+    """
+    @brief  Class that hold Open Street Map edges
+        
+    Class that holds Open Street Map edges from https://openstreetmap.org
+
+    @author Erik Saule, Matthew Mcquaigue, Jay Strahler, Kalpathi Subramanian
+    @date 2019, 12/28/20
+    """
+
     @property
     def source(self) -> int:
+        """
+        @brief Get source vertex (int)
+
+        Returns:
+            source vertex of edge
+        """ 
         return self._source
 
-    ##
-    # @brief Set source vertex 
-    # @param source  source vertex to set (int)
-    #
+    
     @source.setter
     def source(self, source: int):
+        """
+        @brief Set source vertex 
+        Args:
+            source: source vertex to set
+        """
         try:
             value = int(source)
         except ValueError:
@@ -31,26 +36,30 @@ class OsmEdge:
 
         self._source = value
 
-    ##
-    # @brief delete source vertex
-    #
     @source.deleter
     def source(self):
+        """
+        @brief delete source vertex
+        """
         del self._source
 
-    ##
-    # @brief Get destination vertex
-    #
     @property
     def destination(self) -> int:
+        """
+        @brief Get destination vertex
+
+        Returns: 
+            destination vertex of edge
+        """
         return self._destination
 
-    ##
-    # @brief Set destination vertex 
-    # @param source  destination vertex to set (int)
-    #
     @destination.setter
     def destination(self, destination: int):
+        """
+        @brief Set destination vertex 
+        Args:
+             destination:  destination vertex to set (int)
+        """ 
         try:
             value = int(destination)
         except ValueError:
@@ -58,26 +67,29 @@ class OsmEdge:
 
         self._destination = value
 
-    ##
-    # @brief Delete destination vertex
-    #
     @destination.deleter
     def destination(self):
+        """
+        @brief delete destination vertex
+        """
         del self._destination
 
-    ##
-    # @brief Get distance between two vertices of the edge (float)
-    #
     @property
     def distance(self) -> float:
+        """
+        @brief Get distance between two vertices of the edge (float)
+        Returns:
+            edge length
+        """
         return self._distance
 
-    ##
-    # @brief Set distance between source and destination
-    # @param distance  distance to set (float)
-    #
     @distance.setter
     def distance(self, distance: float):
+        """
+        @brief Set distance between source and destination
+        Args:
+            distance:  distance to set (float)
+        """
         try:
             value = float(distance)
         except ValueError:
@@ -85,24 +97,21 @@ class OsmEdge:
 
         self._distance = value
 
-    ##
-    # @brief Delete distance between edge vertices
-    #
     @distance.deleter
     def distance(self):
+        """
+        @brief Delete distance between edge vertices
+        """
         del self._distance
 
 
-    ## @brief Constructor
-    #    @param source source vertex of edge
-    #    @param destination destination vertex of edge
-    #    @param distance distance between the source and destination vertices
-    #
     def __init__(self, source: int, destination: int, distance: float):
-        """OsmEdge, represents edge between two OsmVertex points
-        :param source: int, ID of source vertex
-        :param destination: ID of destination vertex
-        :param distance: float, distance between the vertices
+        """
+        @brief Constructor
+        Args:
+            source: source vertex of edge
+            destination: destination vertex of edge
+            distance: distance between the source and destination vertices
         """
         self._source = 0
         self._destination = 0
@@ -112,29 +121,33 @@ class OsmEdge:
         self.distance = distance
 
 
-##
-#    @brief  Class that hold Open Street Map vertices
-#    
-#    Class that holds Open Street Map vertices from https://openstreetmap.org
-#    
-#    @author Jay Strahler, Matthew Mcquaigue, Erik Saule, Kalpathi Subramanian
-#    @date 2/14/19, 12/29/20
-
 class OsmVertex:
-    ##
-    #    @brief Get latitude of vertex position
-    #    @return float
-    #
+    """
+    @brief  Class that hold Open Street Map vertices
+    
+    Class that holds Open Street Map vertices from https://openstreetmap.org
+    
+    @author Jay Strahler, Matthew Mcquaigue, Erik Saule, Kalpathi Subramanian
+    @date 2/14/19, 12/29/20
+    """
+
     @property
     def latitude(self) -> float:
+        """
+        @brief Get latitude of vertex position
+
+        Returns:
+            latitude of vertex
+        """
         return self._latitude
 
-    ##
-    #    @brief Set latitude of vertex position
-    #    @param latitude latitude to set (float)
-    #
     @latitude.setter
     def latitude(self, latitude: float):
+        """
+        @brief Set latitude of vertex position
+        Args:
+            latitude: vertex latitude to set (float)
+        """ 
         try:
             value = float(latitude)
         except ValueError:
@@ -143,26 +156,30 @@ class OsmVertex:
         self._latitude = value
         self._to_cartesian_coord()
 
-    ##
-    #    @brief Delete latitude of vertex position
-    #
     @latitude.deleter
     def latitude(self):
+        """
+        @brief Delete latitude of vertex position
+        """
         del self._latitude
 
-    ##
-    #    @brief Get longitude of vertex position
-    #    @return float
     @property
     def longitude(self) -> float:
+        """
+        @brief Get longitude of vertex position
+
+        Returns:
+            longitude of vertex
+        """
         return self._longitude
 
-    ##
-    #    @brief Set longitude of vertex position
-    #    @param longitude to set (float)
-    #
     @longitude.setter
     def longitude(self, longitude: float):
+        """
+        @brief Set longitude of vertex position
+        Args:
+            longitude: vertex latitude to set (float)
+        """ 
         try:
             value = float(longitude)
         except ValueError:
@@ -176,6 +193,9 @@ class OsmVertex:
     #
     @longitude.deleter
     def longitude(self):
+        """
+        @brief Delete longitude of vertex position
+        """
         del self._longitude
 
     ## 
@@ -201,37 +221,36 @@ class OsmVertex:
         self._to_cartesian_coord()
 
 
-##
-#    @brief  Class that hold Open Street Map Data
-#    
-#    Class that holds Open Street Map data, from https://openstreetmap.org
-#    
-#    @author Jay Strahler, Matthew Mcquaigue, Erik Saule, Kalpathi Subramanian
-#    @date 2/16/19, 12/28/20
-#    
 
 class OsmData:
+    """
+    @brief  Class that hold Open Street Map Data
+    
+    Class that holds Open Street Map data, from https://openstreetmap.org
+    
+    @author Jay Strahler, Matthew Mcquaigue, Erik Saule, Kalpathi Subramanian
+    @date 2/16/19, 12/28/20, 1/6/21
+    """
     from typing import List
     VertexList = List[OsmVertex]
     EdgeList = List[OsmEdge]
 
-    ##
-    #    get vertices of the dataset (list)
-    #   @return list of vertices
-    #
     @property
     def vertices(self) -> VertexList:
-        """List of OsmVertex objects
-        :return List[OsmVertex]
+        """
+        @brief get vertices of the dataset (list)
+        Returns:
+            list of vertices
         """
         return self._vertices
 
-    ##
-    #    Set vertices of the dataset (VertexList)
-    #   @param vertices (VertexList) 
-    #
     @vertices.setter
     def vertices(self, vertices: VertexList):
+        """
+        @brief Set vertices of the dataset (VertexList)
+        Args:
+             vertices: VertexList  to set
+        """
         if not isinstance(vertices, list):
             raise ValueError("vertices must be a list of OsmVertex objects")
 
@@ -267,20 +286,19 @@ class OsmData:
         self.cartesian_range_y = cart_range_y
         self._vertices = vertices
 
-    ##
-    #    Delete  vertices of the dataset
-    #
     @vertices.deleter
     def vertices(self):
+        """
+        Delete  vertices of the dataset
+        """
         del self._vertices
 
-    ##
-    #    @brief Get edges  of the dataset (EdgeList)
-    #    @return edges (EdgeList)
     @property
     def edges(self) -> EdgeList:
-        """List of OsmEdge objects
-        :return: List[OsmEdge]
+        """
+        @brief Get edges  of the dataset (EdgeList)
+        Returns:
+           edges of the OSM data
         """
         return self._edges
 
@@ -289,6 +307,11 @@ class OsmData:
     #    @return edges (EdgeList)
     @edges.setter
     def edges(self, edges: EdgeList):
+        """
+        @brief Set edges  of the dataset
+        Args:
+           edges: edges to set
+        """
         if not isinstance(edges, list):
             raise ValueError("edges must be a list of OsmVertex objects")
         for edge in edges:
@@ -296,26 +319,26 @@ class OsmData:
                 raise ValueError("edges must be a list of OsmEdge objects")
         self._edges = edges
 
-    ##
-    #    Delete  edges of the dataset
-    #
     @edges.deleter
     def edges(self):
+        """
+        @brief delete the edges in the dataset
+        """
         del self._edges
 
-    ##
-    #      @brief Construct an adjacency list graph from the data
-    #    @return graph (GraphAdjList)
-    #
     def get_graph(self) -> GraphAdjList:
-        """Construct a graph out of the vertex and edge
-        data of the OSM object. The graph will associate the length
+        """
+        @brief Construct a graph out of the vertex and edge data of the OSM object. 
+
+        The graph will associate the length
         of the edge to the graph edge. No data is bound to the vertices
 
         The vertices of the graph will be located at
         the location where given in the data set
         converted to cartesian coordinates
-        :return: GraphAdjList
+ 
+        Returns:
+            adjacency list based graph
         """
         ret_graph = GraphAdjList()
         for k, vertex in enumerate(self.vertices):
@@ -329,6 +352,9 @@ class OsmData:
         return ret_graph
 
     def __init__(self):
+        """
+        @brief constructor
+        """
         self._vertices = []
         self._edges = []
         self.latitude_range = []

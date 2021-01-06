@@ -20,19 +20,17 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 
 
 
-##
-#
-# Get meta data of the IGN games collection.
-#
-# This function retrieves  and formats the data into a list of
-# Game objects
-#
-# @throws Exception if the request fails
-#
-# @return a list of Game objects,
-#
-#
 def get_game_data():
+    """
+    @brief Get meta data of the IGN games collection.
+
+    This function retrieves  and formats the data into a list of
+    Game objects
+
+    @throws Exception if the request fails
+    
+    @return a list of Game objects,
+    """
 
     wrapper = []
 
@@ -57,24 +55,31 @@ def get_game_data():
 
 
 def parse_actor_movie_imdb(item):
+    """
+    @brief Parses an actor movie pair
+    Args:
+        item: input actor-movie pair
+    """
     am_pair = ActorMovieIMDB()
     am_pair.actor = item["actor"]
     am_pair.movie = item["movie"]
     return am_pair
 
 
-##
-# @brief Get ActorMovie IMDB Data
-# retrieved, formatted into a list of ActorMovieIMDB objects
-#
-# @param count the number of actor/movie pairs, but currently unused,
-#     returns all records.
-# @throws Exception if the request fails
-#
-# @return a list of ActorMovieIMDB objects, but only actor and
-# movie fields in this version
-#
 def get_actor_movie_imdb_data(count = 0):
+    """
+    @brief Get ActorMovie IMDB Data. 
+
+    Data is retrieved, formatted into a list of ActorMovieIMDB objects
+
+    Args:
+        count: count of the number of actor/movie pairs, but currently unused,
+        returns all records.
+
+    Returns:
+        a list of ActorMovieIMDB objects, but only actor and movie fields in this version
+    @throws Exception if the request fails
+    """
 
     wrapper = []
 
@@ -130,22 +135,21 @@ def get_actor_movie_imdb_data2():
         r.raise_for_status()
 
 
-
-
-
-##
-# @brief Get USGS earthquake data
-# USGS Tweet data (https://earthquake.usgs.gov/earthquakes/map/)
-# retrieved, formatted into a list of EarthquakeUSGS objects
-#
-# @param count the number of earthquake records retrieved,
-#
-# @throws Exception if the request fails
-#
-# @return a list of earthquake records
-#
 def get_earthquake_usgs_data(count = 0):
+    """
+    @brief Get USGS earthquake data
 
+    USGS Tweet data (https://earthquake.usgs.gov/earthquakes/map/). Data
+    retrieved, formatted into a list of EarthquakeUSGS objects
+
+    Args:
+        count: the number of earthquake records retrieved
+
+    @throws Exception if the request fails
+
+    Returns:
+        a list of earthquake records
+    """
     wrapper = []
     url = "http://earthquakes-uncc.herokuapp.com/eq"
     latest_url = "http://earthquakes-uncc.herokuapp.com/eq/latest/" + str(count)
@@ -169,26 +173,27 @@ def get_earthquake_usgs_data(count = 0):
     return wrapper
 
 
-##
-#
-# @brief Get data of Shakespeare works (plays, poems)
-#
-# This function retrieves  and formats the data into a
-#   a list of Shakespeare objects.
-#
-# Valid endpoints: 'poems','plays', <title>
-# Valid queryParams: format{simple}
-#
-# @throws Exception if the request fails
-#
-# @param endpoint  can be either "plays" or "poems". If this is
-#                  specified, then only these types of works are retrieved.
-# @param textOnly  if this is set, then only the text is retrieved.
-#
-# @return an array of Shakespeare objects
-#
-#
 def get_shakespeare_data(endpoint = "", textonly = False):
+    """
+    @brief Get data of Shakespeare works (plays, poems)
+
+    This function retrieves  and formats the data into a
+    a list of Shakespeare objects.
+
+    Valid endpoints: 'poems','plays', <title>
+    Valid queryParams: format{simple}
+
+    @throws Exception if the request fails
+
+    Args: 
+        endpoint:  can be either "plays" or "poems". If this is
+            specified, then only these types of works are retrieved.
+        textOnly:  if this is set, then only the text is retrieved.
+
+    Returns:
+        An array of Shakespeare objects
+    """
+
     wrapper = []
     url = "http://bridgesdata.herokuapp.com/api/shakespeare/"
     PARAMS = {"Accept: application/json"}
@@ -208,18 +213,19 @@ def get_shakespeare_data(endpoint = "", textonly = False):
     return wrapper
 
 
-##
-#
-# @brief Get meta data of the Gutenberg book collection (1000 books)
-#         This function retrieves,  and formats the data into a list of
-# GutenbergBook objects
-#
-# @throws Exception if the request fails
-#
-# @return a list of GutenbergBook objects,
-#
-#
 def get_gutenberg_book_data(num = 0):
+
+    """
+    @brief Get meta data of the Gutenberg book collection (1000 books)
+
+    This function retrieves,  and formats the data into a list of
+    GutenbergBook objects
+
+    @throws Exception if the request fails
+
+    Returns:
+        A list of GutenbergBook objects,
+    """
     wrapper = []
     url = "http://bridgesdata.herokuapp.com/api/books"
     PARAMS = {"Accept: application/json"}
@@ -260,15 +266,17 @@ def get_gutenberg_book_data(num = 0):
     return wrapper
 
 
-##
-# @brief Retrieves the CDC cancer incidence dataset into a list of records
-# See CancerIncidence class for more information
-#
-# @param num  count of records to be retrieved
-# @return cancer incidence data records in a list
-#
 def get_cancer_incident_data(num = 0):
+    """
+    @brief Retrieves the CDC cancer incidence dataset.
 
+    Returns a list of records.  See CancerIncidence class for more information
+
+    Args:
+        num:  count of records to be retrieved
+    Returns:
+         cancer incidence data records in a list
+    """
     wrapper = []
     url = "https://bridgesdata.herokuapp.com/api/cancer/withlocations"
     PARAMS = {"Accept: application/json"}
@@ -310,26 +318,27 @@ def get_cancer_incident_data(num = 0):
     return wrapper
 
 
-##
-#
-# Get data of a particular song (including lyrics) using the Genius API
-# (https://docs.genius.com/), given the song title and artist name.
-# Valid endpoints:  http://bridgesdata.herokuapp.com/api/songs/find/
-# Valid queryParams: song title, artist name
-#
-# This function retrieves  and formats the data into a
-# Song object. The song if not cached in the local DB is queried
-# and added to the DB
-#
-# @param songTitle title of song
-# @param artistName name of artist
-#
-# @throws Exception if the request fails
-#
-# @return a Song object,
-#
-#
 def get_song(songTitle, artistName = None):
+    """
+    @brief Get data of a particular song (including lyrics) using the Genius API.
+
+    Data from Genius API(https://docs.genius.com/), given the song title and artist name.
+    Valid endpoints:  http://bridgesdata.herokuapp.com/api/songs/find/
+    Valid queryParams: song title, artist name
+
+    This function retrieves  and formats the data into a
+    Song object. The song if not cached in the local DB is queried
+    and added to the DB
+
+    Args:
+        songTitle: title of song
+        artistName: name of artist
+
+    @throws Exception if the request fails
+
+    Returns:
+         a Song object,
+    """
     wrapper = []
     url = "http://bridgesdata.herokuapp.com/api/songs/find/"
     PARAMS = {"Accept: application/json"}
@@ -371,22 +380,23 @@ def get_song(songTitle, artistName = None):
     return song.Song(artist, songs, album, lyrics, release_date)
 
 
-##
-#
-# Get data of the songs (including lyrics) using the Genius API
-# https://docs.genius.com/
-# Valid endpoints:  https://bridgesdata.herokuapp.com/api/songs/
-#
-# This function retrieves  and formats the data into a list of
-# Song objects. This version of the API retrieves all the cached
-# songs in the local DB.
-#
-# @throws Exception if the request fails
-#
-# @return a list of Song objects,
-#
-#
 def get_song_data():
+    """
+
+    Get data of the songs (including lyrics) using the Genius API.
+
+    Song data from https://docs.genius.com/.
+    Valid endpoints:  https://bridgesdata.herokuapp.com/api/songs/
+
+    This function retrieves  and formats the data into a list of
+    Song objects. This version of the API retrieves all the cached
+    songs in the local DB.
+
+    @throws Exception if the request fails
+
+    Returns:
+         A list of Song objects,
+    """
     all_songs = []
     url = "http://bridgesdata.herokuapp.com/api/songs/"
     params = {"Accept: application/json"}
@@ -428,29 +438,22 @@ def get_song_data():
     return all_songs
 
 
-##
-#    @brief This method retrieves a stored ColorGrid based assignment from the
-#    server.
-#
-#  This method can be useful in earlier courses to work with an existing
-#  data structure holding a dataset, like an image.
-#
-#    @param server  server holding the assignment
-#    @param assignment  assignment number
-#    @param subassignment  sub-assignment number
-# 
-#    @return ColorGrid structure
-#
 def get_color_grid_from_assignment(server: str, user: str, assignment: int, subassignment: int = 0) -> ColorGrid:
     """
-    Reconstruct a ColorGrid from an existing ColorGrid on the bridges server
+    @brief Reconstruct a ColorGrid from an existing ColorGrid on the bridges server
 
-    :param str server: internal server url of bridges object
-    :param str user: the name of the user who uploaded the assignment
-    :param int assignment: the ID of the assignment to get
-    :param int subassignment: the ID of the subassignment to get (default 0)
-    :return: ColorGrid: the ColorGrid stored in the bridges server
+    This method can be useful in early CS courses like CS1 or CS2  to 
+    work with an existing data structure holding a dataset, like an image.
+
+    Args:
+        server:  server holding the assignment
+        assignment:  assignment number
+        subassignment:  sub-assignment number
+
+    Returns:
+        ColorGrid structure
     """
+
     response = get_assignment(server, user, assignment, subassignment)
 
     try:
@@ -538,24 +541,18 @@ def get_color_grid_from_assignment(server: str, user: str, assignment: int, suba
     return color_grid
 
 
-##
-#    @brief This method retrieves a stored assignment from the server.
-#
-#    @param server  server holding the assignment
-#    @param assignment  assignment number
-#    @param subassignment  sub-assignment number
-# 
-#    @return data structure representation of the assignment as a JSON string
-#
 def get_assignment(server: str, user: str, assignment: int, subassignment: int = 0) -> str:
     """
-    This function obtains the JSON representation of a particular assignment as a string
+    @brief This method retrieves a stored assignment from the server.
 
-    :param str server: internal server url of bridges object
-    :param str user: the name of the user who uploaded the assignment
-    :param int assignment: the ID of the assignment to get
-    :param int subassignment: the ID of the subassignment to get (default 0)
-    :return str that is the JSON representation of the subassignment as stored by the bridges server
+    Args:
+        server:  server holding the assignment
+        user: the name of the user who uploaded the assignment
+        assignment:  assignment number
+        subassignment:  sub-assignment number
+
+    Returns:
+        data structure representation of the assignment as a JSON string
     """
     subassignment_fixed = "0{}".format(subassignment) if subassignment < 10 else subassignment
     url = "{}/assignmentJSON/{}.{}/{}".format(server, assignment, subassignment_fixed, user)
@@ -568,12 +565,16 @@ def get_assignment(server: str, user: str, assignment: int, subassignment: int =
         raise request.raise_for_status()
 
 
-## 
-# @brief Fulfills a server request for OpenStreetMap
-#
-# For internal use only
-#
 def osm_server_request(url):
+    """
+    @brief Fulfills a server request for OpenStreetMap
+
+    For internal use only
+
+    Args:
+        url: url for server to process
+
+    """
     request = requests.get(url)
     if not request.ok:
         if request.status_code == 404:
@@ -587,14 +588,17 @@ def osm_server_request(url):
 
     return server_data
 
-##
-#    @brief This method retrieves an OpenStreet Map dataset, given a location
-#         by name (string).
-#
-#    
-#    @param args location name
-#    @return OSM data
 def get_osm_data(*args) -> OsmData:
+    """
+    @brief This method retrieves an OpenStreet Map dataset, given a location
+    by name (string).
+
+    Args:
+        args: location name
+
+    Returns:
+        OSM data
+    """
     import os
 
     if (len(args) == 2):
@@ -675,12 +679,12 @@ def get_osm_data(*args) -> OsmData:
 
 
 
-## 
-# @brief Fulfills a server request for elevation data
-#
-# For internal use only
-#
 def elevation_server(url):
+    """
+    @brief Fulfills a server request for elevation data
+    
+    For internal use only
+    """
     request = requests.get(url)
     if not request.ok:
         if request.status_code == 404:
@@ -695,17 +699,20 @@ def elevation_server(url):
     return server_data
 
 
-##
-#    @brief This method retrieves an OpenStreet Map dataset, given a location
-#         by name (string).
-#
-#    
-#    @param args[0]: a bounding box, aka an array [minLat, minLon, maxLat, maxLon]
-#    @param args[1]: spatial resolution, aka the distance between two samples 
-#            (in degrees)
-#    @return Elevation data for the bounding box and resolution requested 
-#            (approximately) [type: ElevationData]
+
+
 def get_elevation_data(*args):
+    """
+    @brief This method retrieves an Elevation  Map dataset, given a location
+        by name (string).
+    Args:
+        args(0): a bounding box, aka an array [minLat, minLon, maxLat, maxLon]
+        args(1): spatial resolution, aka the distance between two samples (in degrees)
+
+    Returns:
+        Elevation data for the bounding box and resolution requested 
+        (approximately) [type: ElevationData]
+    """
     base_url = "http://cci-bridges-elevation-t.dyn.uncc.edu/elevation"
     hash_url = "http://cci-bridges-elevation-t.dyn.uncc.edu/hash"
 
@@ -768,6 +775,13 @@ def get_elevation_data(*args):
 
 
 def _get_wiki_actor_movie_direct(year_begin, year_end, array_out):
+    """
+    @brief get actor movie data from wiki data
+    Args:
+        year_begin: beginning year of data
+        year_end: ending year of data.
+        array_out: returned data in an array
+    """
     sparql = SPARQLWrapper("https://query.wikidata.org/sparql")
     sparql.setQuery("""
     SELECT ?movie ?movieLabel ?actor ?actorLabel WHERE \
@@ -796,15 +810,19 @@ def _get_wiki_actor_movie_direct(year_begin, year_end, array_out):
         array_out.append(mak)
         # print(result['movie']['value'])
 
-##
-#    @brief This method retrieves an actor-movie data from Wikidata, given a 
-#        sparkl query
-#
-#    @param year_begin  beginning year
-#    @param year_end    ending year
-#    @return  a list of the actor-movie data of type MovieActorWikiData
-#    
 def get_wiki_data_actor_movie(year_begin, year_end):
+    """
+    @brief This method retrieves an actor-movie data from Wikidata
+
+    Usess a sparkl query
+
+    Args:
+        year_begin:  beginning year of data request
+        year_end:    ending year of data request
+
+    Returns:
+        A list of the actor-movie data of type MovieActorWikiData
+    """
     ret = []
     for y in range(year_begin, year_end):
         _get_wiki_actor_movie_direct(y, y, ret)
@@ -812,18 +830,20 @@ def get_wiki_data_actor_movie(year_begin, year_end):
 
 
 
-##
-#    @brief This method retrieves amenity data from Open Street Map datasets.
-#
-#    @param args[0] minimum latitude
-#    @param args[1] minimum longitude
-#    @param args[2] maximum latitude
-#    @param args[3] maximum longitude
-#    @param args[4] amenity type
-#
-#    @return  a list of amenities
-#    
 def get_amenity_data(*args):
+    """
+    @brief This method retrieves amenity data from Open Street Map datasets.
+    
+    Args:
+        [0]: minimum latitude
+        [1]: minimum longitude
+        [2]: maximum latitude
+        [3]: maximum longitude
+        [4]: amenity type
+    
+    Returns:
+        A list of amenities
+    """
     
     if(len(args)) == 5:
         url = f"http://cci-bridges-osm.uncc.edu/amenity?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
