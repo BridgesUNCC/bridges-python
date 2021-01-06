@@ -14,34 +14,40 @@
 #    
 
 class ElevationData:
-    ##
-    # @brief Get data width
-    #
     @property
     def cols(self):
+    """ 
+    Get data width
+    Returns:
+        return the width of the data
+    """ 
         return self.ncols
 
-    ##
-    # @brief Set width of elevation data grid
-    # @param ncols  elevation data width to set
-    #
     @cols.setter
     def cols(self, ncols):
+    """
+    Set width of elevation data grid
+    Args:
+         ncols:  elevation data width to set
+    """
         self.ncols = ncols
 
-    ##
-    # @brief Get data height
-    #
+    """
+    Get data height
+    Returns:
+        return the height of the data
+    """
     @property
     def rows(self):
         return self.nrows
 
-    ##
-    # @brief Set height of elevation data grid
-    # @param nrows  dlevation data height to set
-    #
     @rows.setter
     def rows(self, nrows):
+    """
+    Set height of elevation data grid
+    Args: 
+       nrows:  dlevation data height to set
+    """
         self.nrows = nrows 
 
     ##
