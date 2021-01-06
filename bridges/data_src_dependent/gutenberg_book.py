@@ -247,7 +247,7 @@ class GutenbergBook:
         """
         @brief Set book's number of sentences
         Args:
-            w: number of sentences to set
+            n: number of sentences to set
         """
         self._num_sentences = n
 
@@ -283,7 +283,7 @@ class GutenbergBook:
         """
         @brief Set book's number of downloads
         Args:
-            w: download count to set
+            d: download count to set
         """
         self._downloads = d
 

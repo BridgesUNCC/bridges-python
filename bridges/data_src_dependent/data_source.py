@@ -180,7 +180,7 @@ def get_shakespeare_data(endpoint = "", textonly = False):
     This function retrieves  and formats the data into a
     a list of Shakespeare objects.
 
-    Valid endpoints: 'poems','plays', <title>
+    Valid endpoints: 'poems','plays'
     Valid queryParams: format{simple}
 
     @throws Exception if the request fails
@@ -188,7 +188,7 @@ def get_shakespeare_data(endpoint = "", textonly = False):
     Args: 
         endpoint:  can be either "plays" or "poems". If this is
             specified, then only these types of works are retrieved.
-        textOnly:  if this is set, then only the text is retrieved.
+        textonly:  if this is set, then only the text is retrieved.
 
     Returns:
         An array of Shakespeare objects
@@ -447,6 +447,7 @@ def get_color_grid_from_assignment(server: str, user: str, assignment: int, suba
 
     Args:
         server:  server holding the assignment
+        user:  user name
         assignment:  assignment number
         subassignment:  sub-assignment number
 

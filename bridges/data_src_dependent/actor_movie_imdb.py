@@ -51,16 +51,12 @@ class ActorMovieIMDB():
     @actor.setter
     def actor(self, a):
         """
-        Set actor
+        Set actor name
         Args:
             a:  actor to set
         """
         self._actor = a
 
-        """
-        @brief Get movie name
-        Returns:
-            movie name 
         """
     @property
     def movie(self):
@@ -92,25 +88,25 @@ class ActorMovieIMDB():
     @rating.setter
     def rating(self, r):
         """
-        @brief Set movie
+        @brief Set movie rating
         Args:
-            m:  movie to set
+            r:  rating to set
         """
         self._rating = r
 
     @property
     def genres(self):
         """
-        @brief Set movie genres
+        @brief Get movie genres
         Returns:
-            movie rating 
+            movie genres 
         """
         return self._genres
 
     @genres.setter
     def genres(self, g):
         """
-        @brief Set genres
+        @brief Set movie genres
         Args:
             g:  genres to set (list of strings)
         """

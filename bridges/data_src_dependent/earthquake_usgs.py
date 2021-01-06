@@ -26,8 +26,8 @@ class EarthquakeUSGS:
         @brief constructor
         Args: 
             magnitude: magnitude of quake 
-            latitude: latitude position
-            longitude: longitude position
+            latit: latitude position
+            longit: longitude position
             location:  location of quake
             title:     title (has some of eq info in a string)
             url:       url for more information
@@ -183,6 +183,6 @@ class EarthquakeUSGS:
         """
         Setter for the magnitude of the quake
         Args:
-            magnitude: magnitude to set
+            magn: magnitude to set
         """
         self._magnitude = magnitude

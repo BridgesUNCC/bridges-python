@@ -19,6 +19,7 @@ class Game:
         @brief Constructor
         Args:
             title:  game title
+            platform: game platform
             rating:  game rating
             genre:   game's genres
         """

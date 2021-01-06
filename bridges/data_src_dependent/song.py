@@ -21,7 +21,7 @@ class Song:
             song: song title
             album: song album
             lyrics: lyrics of song
-            release_data: release date of song
+            release_date: release date of song
         """
         self._artist = artist
         self._song = song
