@@ -69,8 +69,8 @@ class Connector:
    	    """
    	    @brief post the data (JSON) to the server
         Args:
-	        url:  url of server
-	        data: JSON of the data structure representation
+            url:  url of server
+            data: JSON of the data structure representation
         """
         try:
             if self.key.isdigit() is not True:
