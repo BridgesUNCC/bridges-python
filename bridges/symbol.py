@@ -1,23 +1,25 @@
 from bridges.color import *
 import math
-##
-# @brief This is an abstract class for deriving a
-#  number of Symbol shape objects, for use in a SymbolCollection.
-#  Symbols correspond to a simplified subset of SVG paths
-#  and shapes for custom visual representations in BRIDGES.
-#
-#  Users will typically one of the subclasses of this object for creating shapes
-#
-#  Currently shapes supported are rectangle, circle, polygon, polyline and label; each shape
-#  has a name, location (x, y) and appropriate geometric and non-geometric attributes
-#
-# @author David Burlinson, Kalpathi Subramanian
-# @date 12/24/18, 7/12/19
-#
-
 
 
 class Symbol:
+    """
+    @brief  This is the base class for constructing simple shapes in BRIDGES.
+    
+    This is an abstract class for deriving a
+    number of Symbol shape objects, for use in a SymbolCollection.
+    Symbols correspond to a simplified subset of SVG paths
+    and shapes for custom visual representations in BRIDGES.
+    
+    Users will typically one of the subclasses of this object for creating shapes
+    
+    Currently shapes supported are rectangle, circle, polygon, polyline and label; each shape
+    has a name, location (x, y) and appropriate geometric and non-geometric attributes
+    
+    @author David Burlinson, Kalpathi Subramanian
+    @date 12/24/18, 7/12/19
+    """
+
     _ids = 0 #id for this symbol. Class level so each object has unique id
 
     def __init__(self):
@@ -97,7 +99,7 @@ class Symbol:
     @stroke_color.setter
     def stroke_color(self, *args, **kwargs) -> None:
         """
-        Setter for the stroke color
+        @brief Setter for the stroke color
         Args:
             color: the stroke (boundary) color to set
         Returns:
@@ -233,6 +235,7 @@ class Symbol:
         """
         Translate a point by tx, ty along X and Y respectively
         Args:
+            pt: 2D point to be translated
             tx: translation factor in X
             ty: translation factor in Y
         """
@@ -244,6 +247,7 @@ class Symbol:
         """
         Scale a point by sx, sy along X and Y respectively
         Args:
+            pt: 2D point to be scaled
             sx: scale factor in X
             sy: scale factor in Y
         """
@@ -255,6 +259,7 @@ class Symbol:
         """
         Rotate a point by 'angle' (2D rotation)
         Args:
+            pt: 2D point to be rotated
             angle: rotation angle
         """
         angle_r = math.radians(angle)

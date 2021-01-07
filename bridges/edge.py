@@ -1,29 +1,30 @@
 from bridges.link_visualizer import *
 
-##
-# @brief This class is used to represent the edges in a graph and will
-# appear as links in the BRIDGES graph visualization.
-# This object is used in graphs and graph algorithms such as DFS, BFS and shortest
-# path algorithms that need to visit graph edges. The adjacency list
-# representation uses them as the generic paramter, as SLelement<Edge>
-# bridges represents Edges as links between pairs of elements
-#
-# @author Matthew McQuaigue, Kalpathi Subramanian
-#
-# @date 2019, 2020
-#
-
 class Edge():
+    """
+    @brief This class is used to represent the edges in a graph and will appear as links in the BRIDGES graph visualization.
+
+    This object is used in graphs and graph algorithms such as DFS, BFS and shortest
+    path algorithms that need to visit graph edges. The adjacency list
+    representation uses them as the generic paramter, as SLelement<Edge>
+    bridges represents Edges as links between pairs of elements
+
+    @author Matthew McQuaigue, Kalpathi Subramanian
+
+    @date 2019, 2020, 2021
+    """
+
 
     def __init__(self, v1, v2, data=None, label: str = None, color: Color = None, thickness: float = None) -> None:
         """
-        Constructor for a edge
+        @brief Constructor for a edge
         Args:
             v1: first vertex of the edge
             v2: second vertex of the edge
             data: the data the edge will hold
-        Returns:
-            None
+            label: edge label
+            color: edge color
+            thickness: edge thickness
         """
         self._from_vertex = v1
         self._to_vertex = v2

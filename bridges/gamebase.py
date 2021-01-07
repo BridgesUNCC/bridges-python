@@ -122,6 +122,7 @@ class GameBase(ABC):
         Args:
             row: the row of the cell
             col: the column of the cell
+            color: color to be set
 
         Returns:
             None

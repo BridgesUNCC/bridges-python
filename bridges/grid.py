@@ -1,15 +1,17 @@
-##
-#  @brief This is a base class in BRIDGES for representing an (n x n) grid.
-#
-#  @author David Burlinson, Matthew McQuaigue
-#
-#  2018, 7/24/19
-#
-#  \sa Color grid tutorial at http://bridgesuncc.github.io/tutorials/Grid.html
-#
-import traceback
+
 
 class Grid:
+    """
+    @brief This is a base class in BRIDGES for representing an (n x n) grid.
+    
+    @author David Burlinson, Matthew McQuaigue
+
+    @date  2018, 7/24/19, 2021
+
+    \sa Color grid tutorial at http://bridgesuncc.github.io/tutorials/Grid.html
+    """
+    import traceback
+
     grid_size = [10, 10]
     maxGridSize = [1080, 1920]
 

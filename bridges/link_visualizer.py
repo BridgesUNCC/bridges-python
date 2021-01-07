@@ -4,39 +4,35 @@ from bridges.color import *
 
 # from Element import Element
 
-##
-#  @brief This class maintains the visual attributes of links that join
-#  bridges elements.
-#
-#  Visual properties include color, thickness, and opacity.
-#  Objects of this class are stored as part of the Element class.
-#  Generally, a user will manipulate the LinkVisualizer returned from the
-#  Element's getLinkVisualizer(Element it) method (which it is the bridges element
-#	this element is linked to), and then set attributes using its methods. Links are
-#  utilized in all types of linked lists, tree and graph structures.
-#
-#  Supported attribute values are as follows:<p>
-#
-#  <b>Supported Colors by name: CSS colors; see the Color class for full list, or  at
-#	https://drafts.csswg.org/css-color-3/#svg-color</b>: <p>
-#
-#  <b> Color by RGBA Specification :</b>  Range: 0-255 for each component <p>
-#
-#  <b> Thickness: </b> Range : 0.0-50.0
-#
-#  <b> Opacity: </b> Range (0.0-1.0) </p>
-#
-#  @author Mihai Mehedint, Kalpathi Subramanian, Matthew McQuaigue
-#
-#  @date 2018, 6/24/19
-#
-#  \sa Example Tutorial at <br>
-#  http://bridgesuncc.github.io/Hello_World_Tutorials/SLL.html
-#
-#
-
-
 class LinkVisualizer():
+    """
+    @brief This class maintains the visual attributes of links that join bridges elements.
+    
+    Visual properties include color, thickness, and opacity.
+    Objects of this class are stored as part of the Element class.
+    Generally, a user will manipulate the LinkVisualizer returned from the
+    Element's getLinkVisualizer(Element it) method (which it is the bridges element
+    this element is linked to), and then set attributes using its methods. Links are
+    utilized in all types of linked lists, tree and graph structures.
+    
+    Supported attribute values are as follows:<p>
+    
+    <b>Supported Colors by name:</b> CSS colors; see the Color class for full list, or  at
+    https://drafts.csswg.org/css-color-3/#svg-color</b>: <p>
+    
+    <b> Color by RGBA Specification :</b>  Range: 0-255 for each component <p>
+    
+    <b> Thickness: </b> Range : 0.0-50.0
+    
+    <b> Opacity: </b> Range (0.0-1.0) </p>
+    
+    @author Mihai Mehedint, Kalpathi Subramanian, Matthew McQuaigue
+    
+    @date 2018, 6/24/19
+    
+    \sa Example Tutorial at <br>
+    http://bridgesuncc.github.io/Hello_World_Tutorials/SLL.html
+    """
 
     def __init__(self) -> None:
         """
@@ -148,7 +144,7 @@ class LinkVisualizer():
         """
         Setter for the element label
         Args:
-            string : link label
+            label : link label (string)
         Returns:
             None
         """

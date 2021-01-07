@@ -1,28 +1,28 @@
 #!/usr/bin/env python
 from bridges.tree_element import *
-##
-# 	@brief This class is extended from the TreeElement class  and can be used to create
-#	binary tree element objects.
-#
-# 	The BinTree element class is the building block for creating binary tree structures.
-#  It contains two children (viz., left, right).
-#
-#  BinTreeElement contains a visualizer (ElementVisualizer) object for setting visual
-#  attributes (color, shape, opacity, size), necessary for displaying them in a
-#  web browser.
-#
-#  Elements also have a LinkVisualizer object, that is used when they are linked to
-#  another element, appropriate for setting link attributes, for instance, between
-#  the current element and its left or  right child
-#
-# @author Kalpathi Subramanian, Mihai Mehedint, Matthew McQuaigue
-#
-# @date   2018, 7/23/19
-#
-# \sa Binary tree tutorial, http://bridgesuncc.github.io/tutorials/BinTree.html
-#
+
 
 class BinTreeElement(TreeElement):
+    """
+    @brief This class is extended from the TreeElement class  and can be used to create binary tree element objects.
+    
+    The BinTree element class is the building block for creating binary tree structures.
+    It contains two children (viz., left, right).
+    
+    BinTreeElement contains a visualizer (ElementVisualizer) object for setting visual
+    attributes (color, shape, opacity, size), necessary for displaying them in a
+    web browser.
+    
+    Elements also have a LinkVisualizer object, that is used when they are linked to
+    another element, appropriate for setting link attributes, for instance, between
+    the current element and its left or  right child
+    
+    @author Kalpathi Subramanian, Mihai Mehedint, Matthew McQuaigue
+    
+    @date   2018, 7/23/19, 1/6/21
+    
+    \sa Binary tree tutorial, http://bridgesuncc.github.io/tutorials/BinTree.html
+    """
 
     def __init__(self, **kwargs) -> None:
         """

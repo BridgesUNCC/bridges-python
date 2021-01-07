@@ -6,29 +6,32 @@ import traceback
 import sys
 
 
-##
-# @brief This is the main superclass in BRIDGES for  deriving a number of
-#  elements used  in building data structures, viz., arrays, lists, trees and graphs.
-#  SLelement, DLelement, CircSLelement, CircDLelement, MLelement, TreeElement, BinTreeElement,
-#  BSTElement, AVLTreeElement and KDTreeElement are all subclasses
-#  (see class hierarchy above).  Element contains  two
-#  visualizer objects (ElementVisualizer, LinkVisualizer) for specifying
-#  visual attributes for nodes and links respectively. It also contains a label that
-#  that can be displayed in BRIDGES visualizations.
-#
-#  All the tutorials under
-#
-#  http://bridgesuncc.github.io/tutorials/Overview.html
-#
-#  illustrate examples of using different types of Element objects and how to
-#  manipulate their visual attributes.
-#
-#  @author Matthew Mcquaigue,  Kalpathi Subramanian
-#
-#  2017, 2018, 6/24/19
-#
-#
 class Element:
+    """
+    @brief  This is the main superclass in BRIDGES for  deriving a number of
+    elements used  in building data structures.
+    
+    This is the main superclass in BRIDGES for  deriving a number of
+    elements used  in building data structures, viz., arrays, lists, trees and graphs.
+    SLelement, DLelement, CircSLelement, CircDLelement, MLelement, TreeElement, BinTreeElement,
+    BSTElement, AVLTreeElement and KDTreeElement are all subclasses
+    (see class hierarchy above).  Element contains  two
+    visualizer objects (ElementVisualizer, LinkVisualizer) for specifying
+    visual attributes for nodes and links respectively. It also contains a label that
+    that can be displayed in BRIDGES visualizations.
+    
+    All the tutorials under
+    
+    http://bridgesuncc.github.io/tutorials/Overview.html
+    
+    illustrate examples of using different types of Element objects and how to
+    manipulate their visual attributes.
+    
+    @author Matthew Mcquaigue,  Kalpathi Subramanian
+    
+    2017, 2018, 6/24/19, 2020, 2021
+    
+    """
     ids = 0
 
     def get_data_structure_type(self) -> str:
@@ -96,7 +99,7 @@ class Element:
         """
         Getter for the element identifier
         Return:
-            str : element identifier (for internal use)
+            str: element identifier (for internal use)
         """
         return self._identifier
 
@@ -105,7 +108,7 @@ class Element:
         """
         Setter for the element identifier
         Args:
-            int id: the identifier (for internal use)
+            id: the identifier (for internal use)
         Returns:
             None
         """
@@ -184,7 +187,7 @@ class Element:
         """
         Setter for the element's label
         Args:
-           str: the element's label 
+           label: the element's label 
         Returns:
            None
         """

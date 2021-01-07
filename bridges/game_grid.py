@@ -29,8 +29,8 @@ class GameGrid(Grid):
         """
         Grid Constructor
         Args:
-            (int) rows: representing the number of rows of the grid
-            (int) cols: representing the number of columns of the grid
+            rows: representing the number of rows of the grid
+            cols: representing the number of columns of the grid
         """
         self.bf_bg = bytearray()
         self.bf_fg = bytearray()
@@ -59,8 +59,8 @@ class GameGrid(Grid):
         """
         Get the background color at cell row, col
         Args:
-            (int) row: row index to get color
-            (int) col: col index to get color
+            row: row index to get color
+            col: col index to get color
         Returns:
             Color at row, col
         """
@@ -70,8 +70,8 @@ class GameGrid(Grid):
         """
         Set background color of a cell using an enum argument
         Args:
-            (int) row: row index to set color
-            (int) col: col index to set color
+            row: row index to set color
+            col: col index to set color
             color: Named Color enum argument to set the background at the chosen position
         """
         if type(color) == NamedColor:
@@ -94,8 +94,8 @@ class GameGrid(Grid):
         """
         Set foreground color of a cell using an enum argument
         Args:
-            (int) row: row index to set color
-            (int) col: col index to set color
+            row: row index to set color
+            col: col index to set color
             color: Named Color enum argument to set the background at the chosen position
         """
         if type(color) == NamedColor:
@@ -107,8 +107,8 @@ class GameGrid(Grid):
         """
         Get the symbol at cell row, col
         Args:
-            (int) row: row index to get color
-            (int) col: col index to get color
+            row: row index to get color
+            col: col index to get color
         """
         return self.get(row, col).symbol
 
@@ -125,11 +125,10 @@ class GameGrid(Grid):
         """
         Draw a symbol at the location of row,col with color
         Args:
-            (int) row: row index to set color
-            (int) col: col index to set color
+            row: row index to set color
+            col: col index to set color
             symbol: symbol argument to set the symbol at the chosen position
             color: Named Color enum argument to set the background at the chosen position
-        :return:
         """
         self.get(row, col).symbol = symbol
         self.get(row, col).fg = color

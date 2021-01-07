@@ -181,8 +181,6 @@ class Color(object):
     def rgba(self) -> (int, int, int, float):
         """
         RGBA components as respective tuple.  Represents the RGBA values of the color as a tuple, can be used to set or get all values at once
-        Args:
-            None
         Returns:
             (int, int, int, float) - RGBA values respectively
         """

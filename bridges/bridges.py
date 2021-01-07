@@ -3,35 +3,35 @@ from bridges import ColorGrid
 import os
 
 import json
-##
-#     @brief The bridges class is the main class that provides interfaces to datasets,
-#    maintains user and assignment information, and connects to the bridges server.
-#
-#      The bridges class is responsible  for initializing the bridges system, specifying
-#      parameters (user id, assignment id, title, description, data structure
-#     type, etc) for the student assignment, generating the data structure representation
-#     and transmission to the bridges server. In addition, it provides interfaces to
-#     a number of real-world datasets, that makes it easy to access the data for use
-#      algorithms/data structure assignments. <br>
-#
-#   <b>Datasets.</b> The datasets that are currently supported through the BRIDGES API
-#     include USGS Earthquake Data, IMDB Actor/Movie Data (2 versions), Gutenberg Book
-#     Collection Meta Data, a Video Game Dataset, Shakespeare Dataset, OpenStreetMap and Elevation map data. More information
-#     is found in the respective methods (below) and at <p>
-#     http://bridgesuncc.github.io/datasets.html <p>
-#
-#     A typical bridges program includes creating the bridges object, followed by creation
-#   of the data structure by the user, assigning visual attributes to elements of the
-#     data structure, followed by specification of teh data structure type  and the
-#     call to visualize the data structure (bridges::setDataStructure() and visualize()
-#     methods).
-#
-#      @author Sean Gallagher, Kalpathi Subramanaian, Mihai Mehedint, David Burlinson, Matthew Mcquaigue, Erik Saule, Jamie Payton
-#
-#     @date 2015, 2016, 2017, 2018, 2019, 2020
-#
 
 class Bridges:
+    """
+    @brief The bridges class is the main class that provides interfaces to datasets, maintains user and assignment information, and connects to the bridges server.
+    
+    The bridges class is responsible  for initializing the bridges system, specifying
+    parameters (user id, assignment id, title, description, data structure
+    type, etc) for the student assignment, generating the data structure representation
+    and transmission to the bridges server. In addition, it provides interfaces to
+    a number of real-world datasets, that makes it easy to access the data for use
+    algorithms/data structure assignments. <br>
+    
+    Datasets. The datasets that are currently supported through the BRIDGES API
+    include USGS Earthquake Data, IMDB Actor/Movie Data (2 versions), Gutenberg Book
+    Collection Meta Data, a Video Game Dataset, Shakespeare Dataset, OpenStreetMap and Elevation map data. More information
+    is found in the respective methods (below) and at 
+    http://bridgesuncc.github.io/datasets.html <p>
+    
+    A typical bridges program includes creating the bridges object, followed by creation
+    of the data structure by the user, assigning visual attributes to elements of the
+    data structure, followed by specification of teh data structure type  and the
+    call to visualize the data structure (bridges::setDataStructure() and visualize()
+    methods).
+    
+    @author Sean Gallagher, Kalpathi Subramanaian, Mihai Mehedint, David Burlinson, Matthew Mcquaigue, Erik Saule, Jamie Payton
+    
+    @date 2015, 2016, 2017, 2018, 2019, 2020, 2021
+    """
+
     _MaxTitleSize = 50
     _MaxDescSize = 250
     _projection_options = {"cartesian", "albersusa", "equirectangular", "window"}
@@ -318,9 +318,9 @@ class Bridges:
         """
         Sets url for the output of the visualize method
         Args:
-			param server_url: string, must be one of {live, clone, local, games}
+            server_url: string, must be one of {live, clone, local, games}
 		Returns:
-        	None
+            None
         """
         self.connector.set_server_url(server_url)
 

@@ -3,27 +3,28 @@ from bridges.element import *
 import copy
 
 
-##
-# 	@brief This class can be used to instantiate Singly Linked Elements.
-# 	This class extends Element and takes a generic parameter <E>
-#	representing application specific data. This element forms the basic
-#	building block for singly linked lists. Singly linked elements have a field
-#	pointing to the next element along the list.
-#
-# 	Elements contain a visualizer (ElementVisualizer) object for setting visual
-#	attributes (color, shape, opacity, size), necessary for displaying them in a
-#	web browser.
-#
-#	Elements also have a LinkVisualizer object, that is used when they are linked to
-#	another element, appropriate for setting link attributes, for instance, between
-#	the current element and its next element.
-#
-#	@author Matthew Mcquaigue
-#	@date  2018, 6/24/19
-#
-#	\sa Singly Linked List tutorial : http://bridgesuncc.github.io/tutorials/SinglyLinkedList.html
-#
 class SLelement(Element):
+    """
+    @brief This class can be used to instantiate Singly Linked Elements.
+    
+    This class extends Element and takes a generic parameter <E>
+    representing application specific data. This element forms the basic
+    building block for singly linked lists. Singly linked elements have a field
+    pointing to the next element along the list.
+    
+    Elements contain a visualizer (ElementVisualizer) object for setting visual
+    attributes (color, shape, opacity, size), necessary for displaying them in a
+    web browser.
+    
+    Elements also have a LinkVisualizer object, that is used when they are linked to
+    another element, appropriate for setting link attributes, for instance, between
+    the current element and its next element.
+    
+    @author Matthew Mcquaigue
+    @date  2018, 6/24/19, 2021
+    
+    \sa Singly Linked List tutorial : http://bridgesuncc.github.io/tutorials/SinglyLinkedList.html
+    """
 
     def __init__(self, **kwargs) -> None:
         """
