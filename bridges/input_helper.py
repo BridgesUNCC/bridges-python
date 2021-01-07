@@ -1,9 +1,10 @@
 from bridges.keypress_listener import *
 import traceback
 
+class InputHelper(KeyPressListener):
     """
     @brief This is meant to be an internal class, not something that the library user will use.
-    
+
     This class provide input device (mouse and keyboard)
     handling for Bridges games
     
@@ -15,7 +16,6 @@ import traceback
     @date 2018, 2019, 2020, 1/2/21
     """
 
-class InputHelper(KeyPressListener):
     def __init__(self):
         """
         Constructor. All key initializations done here.

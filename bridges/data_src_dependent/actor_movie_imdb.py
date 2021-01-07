@@ -57,7 +57,6 @@ class ActorMovieIMDB():
         """
         self._actor = a
 
-        """
     @property
     def movie(self):
         """

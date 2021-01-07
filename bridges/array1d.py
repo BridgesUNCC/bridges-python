@@ -24,10 +24,10 @@ class Array1D(Array):
 
 
     def __init__(self, sz=None):
-	    """
-	    @brief Create a 1D array object
-	    @param sz number of elements in the array
-	    """
+        """
+        @brief Create a 1D array object
+        @param sz number of elements in the array
+        """
         super(Array1D, self).__init__()
         if sz is not None:
             self.size = sz

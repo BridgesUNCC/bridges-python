@@ -66,7 +66,7 @@ class Connector:
         return self.server_url
 
     def post(self, url, data):
-   	    """
+        """
    	    @brief post the data (JSON) to the server
         Args:
             url:  url of server
@@ -86,10 +86,10 @@ class Connector:
 
     def prepare(self, url):
    	    """
-   	    @brief prepare the  post string for transmission to the server
+        @brief prepare the  post string for transmission to the server
         Args:
-	        url:  url of server
-	    """
+            url:  url of server
+        """
         out = self.server_url
         out += url
         out += "?apikey=" + self.key + "&username=" + self.username
