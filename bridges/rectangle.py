@@ -1,17 +1,17 @@
 import json
 from bridges.symbol import *
 
-##
-# @brief This class defines a rectangle and is part of the symbol collection.
-#
-# A rectangle has height and width
-#
-# @author Matthew Mcquaigue
-# @date 2018, 7/23/19
-#
-# \sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
-#
 class Rectangle(Symbol):
+    """
+    @brief This class defines a rectangle and is part of the symbol collection.
+    
+    A rectangle has height and width
+    
+    @author Matthew Mcquaigue
+    @date 2018, 7/23/19
+    
+    \sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+    """
 
     def __init__(self, **kwargs) -> None:
         """

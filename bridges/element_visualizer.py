@@ -3,31 +3,33 @@ from decimal import Decimal
 from bridges.element import *
 from bridges.color import *
 from decimal import Decimal
-##
-# This class is used to store the visualization elements on the for the bridges
-# Visualization, including the color, shape, opacity, and size of the node.<p>
-#
-# <b>Supported named colors: CSS colors. 
-# Check https://drafts.csswg.org/css-color-3/#svg-color</b>: <p>
-#
-# <b> Color by RGBA Specification :</b>  Range: 0-255 for each component <p>
-#
-# <b> Thickness: </b> Range : 0.0-50.0
-#
-# <b> Opacity: </b> Range (0.0-1.0) </p>
-#
-# <b> Supported Shapes: </b> "circle", "square", "diamond", "cross", "triangle", "star", "wye". 
-#
-# Objects of this class are stored as properties of all Element subclasses.
-# Generally, you will manipulating the ElementVisualizer returned from the
-# Element getVisualizer() method, and then call the setVisualizer() method on
-# the Element after changes have been made.
-#
-# @author Matthew Mcquaigue
-#
-# @date 2018, 6/24/19
-#
+
 class ElementVisualizer():
+
+    """
+    @brief This class is used to store the visualization elements on the for the bridges
+    Visualization, including the color, shape, opacity, and size of the node.<p>
+    
+    <b>Supported named colors: CSS colors. 
+    Check https://drafts.csswg.org/css-color-3/#svg-color</b>: <p>
+    
+    <b> Color by RGBA Specification :</b>  Range: 0-255 for each component <p>
+    
+    <b> Thickness: </b> Range : 0.0-50.0
+    
+    <b> Opacity: </b> Range (0.0-1.0) </p>
+    
+    <b> Supported Shapes: </b> "circle", "square", "diamond", "cross", "triangle", "star", "wye". 
+    
+    Objects of this class are stored as properties of all Element subclasses.
+    Generally, you will manipulating the ElementVisualizer returned from the
+    Element getVisualizer() method, and then call the setVisualizer() method on
+    the Element after changes have been made.
+    
+    @author Matthew Mcquaigue
+    
+    @date 2018, 6/24/19
+    """
 
     def __init__(self, color="green", shape ="circle", size=10.0, opacity=1.0):
         """

@@ -1,18 +1,19 @@
 from bridges.keypress_listener import *
 import traceback
 
-## This is meant to be an internal class, not something
-# that the library user will use
-# 
-# This class provide input device (mouse and keyboard)
-#handling for Bridges games
-# 
-# @sa See the Games Tutorials at
-# http://bridgesuncc.github.io/tutorials/NonBlockingGame.html
-# for more information on keys and mouse device usage.
-# 
-# @author Erik Saule, David Burlinson
-# @date 2018, 2019, 2020, 1/2/21
+    """
+    @brief This is meant to be an internal class, not something that the library user will use.
+    
+    This class provide input device (mouse and keyboard)
+    handling for Bridges games
+    
+    @sa See the Games Tutorials at
+    http://bridgesuncc.github.io/tutorials/NonBlockingGame.html
+    for more information on keys and mouse device usage.
+    
+    @author Erik Saule, David Burlinson
+    @date 2018, 2019, 2020, 1/2/21
+    """
 
 class InputHelper(KeyPressListener):
     def __init__(self):

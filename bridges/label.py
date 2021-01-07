@@ -1,17 +1,17 @@
 import json
 from bridges.symbol import *
 
-#
-# This class provides support for text labels to be associated with shapes. Labels have 
-# width, height, font size.
-# \sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
-#
-#
-# \sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
-#
-
 class Label(Symbol):
-
+    """
+    @brief This class provides support for text labels to be associated with shapes. 
+    
+    Labels have width, height, font size.
+    
+    \sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+    
+    
+    \sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+    """
     def __init__(self, label = None):
         super(Label, self).__init__()
         if label is not None:

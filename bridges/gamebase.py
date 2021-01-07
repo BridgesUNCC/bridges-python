@@ -5,6 +5,13 @@ from abc import ABC, abstractmethod
 
 
 class GameBase(ABC):
+    """
+    @brief This is the base class for all games in BRIDGES
+
+    @author David Burlinson, Erik Saule
+    @date 2020, 2021
+
+    """
     debug = True
 
     def __init__(self, assid, login, apikey, rows, cols):

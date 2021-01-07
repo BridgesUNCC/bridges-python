@@ -1,17 +1,17 @@
 import json
 from bridges.symbol import *
 
-##
-# @brief This class defines a circle and is part of the symbol collection.
-# A circle  has a radius and a center, which is also its location
-#
-# @author Matthew Mcquaigue
-# @date 2018, 7/23/19
-#
-# Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
-#
-#
+
 class Circle(Symbol):
+    """
+    @brief This class defines a circle and is part of the symbol collection.
+    A circle  has a radius and a center, which is also its location
+    
+    @author Matthew Mcquaigue
+    @date 2018, 7/23/19
+    
+    Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+    """
 
     def __init__(self, **kwargs) -> None:
         """

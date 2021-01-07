@@ -1,31 +1,31 @@
 from bridges.bin_tree_element import *
-##
-#    @brief The BSTElement class is the building block for creating binary search trees.
-#
-#   The BSTElement class is the building block for creating binary search tree structures.
-#    It contains two children (viz., left, right), and a search key, to be used
-#    in search operations .
-#
-#    BSTElement contains a visualizer (ElementVisualizer) object for setting visual
-#    attributes (color, shape, opacity, size), necessary for displaying them in a
-#    web browser.
-#
-#    BST Elements also have a LinkVisualizer object, that is used when they are linked to
-#    another element, appropriate for setting link attributes, for instance, between
-#    the current element and its left or right child
-#
-#  	@author Kalpathi Subramanian, Mihai Mehedint, Matthew McQuaigue
-#
-#  	@date 6/22/16, 1/7/17, 5/17/17, 7/23/19
-#
-#  	@brief This class extends the BinTreeElement class by adding a 'key' value
-#  	for use in a binary search tree implementations.
-#
-#	Binary Search Tree tutorial, http://bridgesuncc.github.io/tutorials/BinarySearchTree.html
-#
 
 
 class BSTElement(BinTreeElement):
+    """
+    @brief The BSTElement class is the building block for creating binary search trees.
+    
+    The BSTElement class is the building block for creating binary search tree structures.
+    It contains two children (viz., left, right), and a search key, to be used
+    in search operations .
+    
+    BSTElement contains a visualizer (ElementVisualizer) object for setting visual
+    attributes (color, shape, opacity, size), necessary for displaying them in a
+    web browser.
+    
+    BST Elements also have a LinkVisualizer object, that is used when they are linked to
+    another element, appropriate for setting link attributes, for instance, between
+    the current element and its left or right child
+    
+    @author Kalpathi Subramanian, Mihai Mehedint, Matthew McQuaigue
+    
+    @date 6/22/16, 1/7/17, 5/17/17, 7/23/19, 2021
+    
+    @brief This class extends the BinTreeElement class by adding a 'key' value
+    for use in a binary search tree implementations.
+    
+    Binary Search Tree tutorial, http://bridgesuncc.github.io/tutorials/BinarySearchTree.html
+    """
 
     def __init__(self, **kwargs) -> None:
         """

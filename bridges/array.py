@@ -1,22 +1,23 @@
 #!/usr/bin/env python
 from bridges.element import *
 
-##
-# @brief This class can be used to create arrays of type Element<E>.
-#
-# @author 	Matthew McQuaigue
-#
-# @date  	10/8/16, 6/09/19
-#
-#	This class can be used to create arrays of type Element<E>  where E
-#	is a generic object representing application specific data.
-#
-#	Arrays are internally represented as 1D arrays; currently 1D, 2D  and
-#	3D arrays are supported.
-#
-#   Example Tutorial at: http://bridgesuncc.github.io/tutorials/Array.html (1D, 2D, and 3D Array)
-#
 class Array():
+    """
+    @brief This class can be used to create arrays of type Element<E>.
+    
+    @author 	Matthew McQuaigue
+    
+    @date  	10/8/16, 6/09/19
+    
+    This class can be used to create arrays of type Element<E>  where E
+    is a generic object representing application specific data.
+    
+    Arrays are internally represented as 1D arrays; currently 1D, 2D  and
+    3D arrays are supported.
+    
+    Example Tutorial at: http://bridgesuncc.github.io/tutorials/Array.html (1D, 2D, and 3D Array)
+    """
+
     dims = [1,1,1] #used for setting size of array based on dimensions
     def __init__(self, **kwargs):
         """

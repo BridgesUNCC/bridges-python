@@ -1,16 +1,18 @@
 from bridges.named_color import *
 from bridges.named_symbol import *
 
-##
-#	This class is used to represent cells in GameGrids in BRIDGES.
-#	Each cell has a foreground color, background color, and symbol.
-#	@sa  Refer to the Game tutorial at 
-#		http://bridgesuncc.github.io/tutorials/NonBlockingGame.html
-#	@author David Burlinson, Matthew McQuaigue
-#	@date 9/06/18
-#
-
 class GameCell:
+    """
+    This class is used to represent cells in GameGrids in BRIDGES.
+    Each cell has a foreground color, background color, and symbol.
+    @sa  Refer to the Game tutorial at 
+    
+    http://bridgesuncc.github.io/tutorials/NonBlockingGame.html
+    
+    @author David Burlinson, Matthew McQuaigue
+    @date 9/06/18
+    """
+
     def __init__(self, **kwargs):
         """
         Constructor for the cell of a gamegrid

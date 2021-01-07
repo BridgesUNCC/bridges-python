@@ -1,35 +1,36 @@
 from bridges.element import *
 import traceback
-##
-#
-#  @brief The GraphAdjMatrix class can be used to represent adjacency matrix based
-#      graphs in BRIDGES
-#
-#  The GraphAdjMatrix class can be used to represent adjacency matrix based  graphs
-#  in BRIDGES; it takes 2 generic parameters: (1) K, which is an orderable
-#  key value used in accessing vertices (in constant time) using a hashmap. This
-#  permits data sets that need to be accessed by keys that are strings, and
-#  (2) E, an application defined type, and used in the Edge representation.
-#  The class is simply a wrapper  around the Java Hashmap class
-#  and, thus, derives all its operations from it.
-#  BRIDGES provides methods to visualize the graph  and its contents.
-#
-#  The vertices of the graph are held in a Java hashmap, for near constant time access;
-#  this lets us use strings or integral ids for vertices. The edges are accessed
-#    by a second hashmap from each vertex, again assuring near constant access time.
-#  Each edge contains the terminating vertex id and weight, as defined by  the Edge
-#    class structure.
-#
-#  Convenience methods are provided to add vertices and edges to the graph. Edges
-#  are retrieved by using the dual hashmap, given the vertex ids of the edge.
-#
-#  @author Kalpathi Subramanian, Mihai Mehedint
-#
-#
-#  \sa Example tutorial at http://bridgesuncc.github.io/tutorials/Graph_AM.html
-#
-#
+
 class GraphAdjMatrix():
+    """
+    @brief The GraphAdjMatrix class can be used to represent adjacency matrix based
+    graphs in BRIDGES
+    
+    The GraphAdjMatrix class can be used to represent adjacency matrix based  graphs
+    in BRIDGES; it takes 2 generic parameters: (1) K, which is an orderable
+    key value used in accessing vertices (in constant time) using a hashmap. This
+    permits data sets that need to be accessed by keys that are strings, and
+    (2) E, an application defined type, and used in the Edge representation.
+    The class is simply a wrapper  around the Java Hashmap class
+    and, thus, derives all its operations from it.
+    BRIDGES provides methods to visualize the graph  and its contents.
+    
+    The vertices of the graph are held in a Java hashmap, for near constant time access;
+    this lets us use strings or integral ids for vertices. The edges are accessed
+    by a second hashmap from each vertex, again assuring near constant access time.
+    Each edge contains the terminating vertex id and weight, as defined by  the Edge
+    class structure.
+    
+    Convenience methods are provided to add vertices and edges to the graph. Edges
+    are retrieved by using the dual hashmap, given the vertex ids of the edge.
+    
+    @author Kalpathi Subramanian, Mihai Mehedint
+    
+    
+    \sa Example tutorial at http://bridgesuncc.github.io/tutorials/Graph_AM.html
+    
+    """
+
     ##
     #     Constructor
     #

@@ -6,59 +6,58 @@ import array
 import math
 from bridges.audio_channel import AudioChannel
 
-##
-#  @brief This class provides support for reading, modifying, and playing, audio waveform.
-#
-#This class provides a way to represent an AudioClip (think of a
-#.WAV file) in Bridges as waveforms.
-#
-#An AudioClip can be composed of multiple channels: a stereo sound
-#would be composed of 2 channels (Left and Right), a mono sound
-#would be composed of a single channel. A 5.1 sound would be
-#composed of 6 channels. When building an AudioClip from a file, the
-#number of channels is taken from the file; some constructors have a
-#num_channels parameter that enables to pass the number of channels
-#explicitly. If unsure, one can know how many channels are in an
-#audio clip using get_num_channels().
-#
-#Each channel is essentially a 1D signal. That is to say, it is an
-#array of values that represent how far the membrane of a speaker
-#should be from its resting position. The quality of the sound is
-#controlled by two parameters: sampling rate and sampling depth.
-#
-#Sampling rate tells how many positions per second are encoded by
-#the AudioClip. It is expressed in Hertz. CD quality is 44100Hz;
-#while walkie-talkies use 8000Hz. It is set automatically if read
-#from a file; or it can be passed as the sampleRate parameter to
-#some of the constructors. The sampling rate can be obtained from an
-#AudioClip using get_sample_rate().
-#
-#The length of an AudioClip is expressed in number of samples. So if
-#an AudioClip is composed of 16,000 samples with a sampling rate of
-#8000Hz, the clip would be 2 seconds long. The number of samples
-#can obtained with get_sample_count(); it is set from a file or can be
-#passed as the sampleCount parameter of some of the constructor.
-#
-#The sampling depth indicates how many different positions the
-#membrane can take. It is typically expressed in bits with supported
-#values being 8-bit, 16-bit, 24-bit, and 32-bit. If a clip is
-#encoded with a depth of 8 bits, the membrane can take 2^8 different
-#position ranging from -128 to +127, with 0 being the resting
-#position. The sampling depth is read from files or passed as the
-#sampleBits parameter of the constructor. The sampling depth of an
-#existing clip can be obtained with get_sample_bits().
-#
-#The individual samples are accessed with the get_sample() and
-#set_sample() functions. The samples are integer values in the
-#[-2^(get_sample_bits()-1) ; 2^(get_sample_bits()-1)[ range. The
-#functions allow to specify for channel and sample index.
-#
-#  @author Luke Sloop, Erik Saule
-#
-#  @date 2020, 1/31/2020
-#
-##
 class AudioClip(object):
+    """
+    @brief This class provides support for reading, modifying, and playing, audio waveform.
+    
+    This class provides a way to represent an AudioClip (think of a
+    WAV file) in Bridges as waveforms.
+    
+    An AudioClip can be composed of multiple channels: a stereo sound
+    would be composed of 2 channels (Left and Right), a mono sound
+    would be composed of a single channel. A 5.1 sound would be
+    composed of 6 channels. When building an AudioClip from a file, the
+    number of channels is taken from the file; some constructors have a
+    num_channels parameter that enables to pass the number of channels
+    explicitly. If unsure, one can know how many channels are in an
+    audio clip using get_num_channels().
+    
+    Each channel is essentially a 1D signal. That is to say, it is an
+    array of values that represent how far the membrane of a speaker
+    should be from its resting position. The quality of the sound is
+    controlled by two parameters: sampling rate and sampling depth.
+    
+    Sampling rate tells how many positions per second are encoded by
+    the AudioClip. It is expressed in Hertz. CD quality is 44100Hz;
+    while walkie-talkies use 8000Hz. It is set automatically if read
+    from a file; or it can be passed as the sampleRate parameter to
+    some of the constructors. The sampling rate can be obtained from an
+    AudioClip using get_sample_rate().
+     
+    The length of an AudioClip is expressed in number of samples. So if
+    an AudioClip is composed of 16,000 samples with a sampling rate of
+    8000Hz, the clip would be 2 seconds long. The number of samples
+    can obtained with get_sample_count(); it is set from a file or can be
+    passed as the sampleCount parameter of some of the constructor.
+    
+    The sampling depth indicates how many different positions the
+    membrane can take. It is typically expressed in bits with supported
+    values being 8-bit, 16-bit, 24-bit, and 32-bit. If a clip is
+    encoded with a depth of 8 bits, the membrane can take 2^8 different
+    position ranging from -128 to +127, with 0 being the resting
+    position. The sampling depth is read from files or passed as the
+    sampleBits parameter of the constructor. The sampling depth of an
+    existing clip can be obtained with get_sample_bits().
+    
+    The individual samples are accessed with the get_sample() and
+    set_sample() functions. The samples are integer values in the
+    2^(get_sample_bits()-1) ; 2^(get_sample_bits()-1)[ range. The
+    functions allow to specify for channel and sample index.
+    
+    @author Luke Sloop, Erik Saule
+    
+    @date 2020, 1/31/2020, 2021
+    """
     def __init__(self, filepath: str="", sample_count: int=0, num_channels: int=1, sample_bits: int=32, sample_rate: int=44100) -> None:
         """
         AudioBase constructor.

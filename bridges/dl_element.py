@@ -1,34 +1,29 @@
 #!/usr/bin/env python
 from bridges.sl_element import *
 
-##
-#
-# 	@author Mihai Mehedint, Kalpathi Subramanian
-#
-#
-# 	This class is used to create doubly linked element objects.
-#
-#	This class extends Element and takes a generic parameter <E> representing
-#	application specific data. This element forms the basic building block for
-#	doubly linked lists. Doubly linked elements have two links,
-# 	"next" and "previous", that point to the previous and succeeding nodes along the list.
-#
-#	Elements contain a visualizer (ElementVisualizer) object for setting visual
-#	attributes (color, shape, opacity, size), necessary for displaying them in a web
-#	browser.
-#
-#	Elements also have a LinkVisualizer object that is used when they are linked to
-#	another element, appropriate for setting link attributes, such as in linked lists,
-#	between the current element and its next or previous nodes.
-#
-#   @author Matthew Mcquaigue
-#   @date  2018, 6/24/19
-#
-#   \sa Doubly Linked List tutorial : http://bridgesuncc.github.io/tutorials/DoublyLinkedList.html
-#
-
-#
 class DLelement(SLelement):
+    """
+    @brief This class is used to create doubly linked element objects.
+    
+    This class extends Element and takes a generic parameter <E> representing
+    application specific data. This element forms the basic building block for
+    doubly linked lists. Doubly linked elements have two links,
+    "next" and "previous", that point to the previous and succeeding nodes along the list.
+    
+    Elements contain a visualizer (ElementVisualizer) object for setting visual
+    attributes (color, shape, opacity, size), necessary for displaying them in a web
+    browser.
+    
+    Elements also have a LinkVisualizer object that is used when they are linked to
+    another element, appropriate for setting link attributes, such as in linked lists,
+    between the current element and its next or previous nodes.
+    
+    @author Mihai Mehedint, Kalpathi Subramanian
+    @date  2018, 6/24/19
+    
+    \sa Doubly Linked List tutorial : http://bridgesuncc.github.io/tutorials/DoublyLinkedList.html
+    """
+
 
     def __init__(self, *args, **kwargs) -> None:
         """

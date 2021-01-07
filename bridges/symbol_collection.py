@@ -1,19 +1,17 @@
 import json
 
-##
-# @brief the SymbolCollection object is a container object to hold a collection of symbols
-#  (rectangles, polygons, circles, labels).
-#
-# @author Matthew Mcquaigue
-#
-# @date 2018, 7/23/19
-#
-# \sa Symbol Collection tutorial, 
-#     http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
-#
-#
 class SymbolCollection:
-
+    """
+    @brief the SymbolCollection object is a container object to hold a collection of symbols
+    (rectangles, polygons, circles, labels).
+    
+    @author Matthew Mcquaigue
+    
+    @date 2018, 7/23/19
+    
+    \sa Symbol Collection tutorial, 
+    http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+    """
     def __init__(self):
         """
         Constructor for collection of symbols

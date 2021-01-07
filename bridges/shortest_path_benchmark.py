@@ -4,8 +4,6 @@ from bridges.data_src_dependent.data_source import *
 from datetime import datetime
 import time as time_
 
-
-
 class ShortestPathBenchmark(GraphBenchmark):
 
     def __init__(self, p):

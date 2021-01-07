@@ -2,32 +2,34 @@
 from bridges.element import *
 import json
 
- ## @brief This class extends Element to represent general trees with
- #	arbitrary number of children.
- #
- # 	TreeElement nodes can have an arbitrary number of child nodes(held in
- # 	in a vector in the order in which they were added). The
- # 	visualization of trees assumes that the children are drawn in order
- # 	from left to right.
- #
- #  Tree Elements have labels (string) that are displayed on the visualization.
- #  Elements take an generic object E as a user defined parameter, which can be
- #  any native type or object.
- #
- #  Elements contain a visualizer (ElementVisualizer) object for setting visual
- #  attributes (color, shape, opacity, size), necessary for displaying them in a web
- #  browser.
- #
- #  Elements also have a LinkVisualizer object that is used when they are
- #  linked to another element, appropriate for setting link attributes, between parent
- # 	and child nodes.
- #
- # 	@author Matthew McQuaigue
- #
- # @date   2018, 7/23/19
- #  \sa Kd tree tutorial http://bridgesuncc.github.io/tutorials/Tree.html
- #
 class TreeElement(Element):
+    """ 
+    @brief This class extends Element to represent general trees with
+    arbitrary number of children.
+    
+    TreeElement nodes can have an arbitrary number of child nodes(held in
+    in a vector in the order in which they were added). The
+    visualization of trees assumes that the children are drawn in order
+    from left to right.
+    
+    Tree Elements have labels (string) that are displayed on the visualization.
+    Elements take an generic object E as a user defined parameter, which can be
+    any native type or object.
+    
+    Elements contain a visualizer (ElementVisualizer) object for setting visual
+    attributes (color, shape, opacity, size), necessary for displaying them in a web
+    browser.
+    
+    Elements also have a LinkVisualizer object that is used when they are
+    linked to another element, appropriate for setting link attributes, between parent
+    and child nodes.
+    
+    @author Matthew McQuaigue
+    
+    @date   2018, 7/23/19
+    \sa Kd tree tutorial http://bridgesuncc.github.io/tutorials/Tree.html
+    """
+
     QUOTE = "\""
     COMMA = ","
     COLON = ":"
