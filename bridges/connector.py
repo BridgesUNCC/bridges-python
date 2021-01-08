@@ -67,7 +67,7 @@ class Connector:
 
     def post(self, url, data):
         """
-   	    @brief post the data (JSON) to the server
+        @brief post the data (JSON) to the server
         Args:
             url:  url of server
             data: JSON of the data structure representation
@@ -80,12 +80,12 @@ class Connector:
 
         r = requests.post(self.prepare(url), headers={u'content-type': u'application/json'}, data=data.encode('utf-8'))
         if r.status_code != 200:
-            print(r.status_code, r.reason)
-            print(r.text)
+             print(r.status_code, r.reason)
+             print(r.text)
         return r.status_code
 
     def prepare(self, url):
-   	    """
+        """
         @brief prepare the  post string for transmission to the server
         Args:
             url:  url of server
