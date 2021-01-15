@@ -722,8 +722,8 @@ def get_elevation_data(*args):
         Elevation data for the bounding box and resolution requested 
         (approximately) [type: ElevationData]
     """
-    base_url = "http://cci-bridges-elevation-t.dyn.uncc.edu/elevation"
-    hash_url = "http://cci-bridges-elevation-t.dyn.uncc.edu/hash"
+    base_url = "http://bridges-data-server-elevation.bridgesuncc.org/elevation"
+    hash_url = "http://bridges-data-server-elevation.bridgesuncc.org/hash"
 
     coords = args[0]
     minLat = coords[0]
@@ -757,7 +757,7 @@ def get_elevation_data(*args):
 
     
     #parse and build object
-    ret_ele = EleData()
+    ret_ele = ElevationData()
     
     file_array = data.splitlines()
     ret_ele.cols = int(file_array[0].split(" ")[-1])
