@@ -589,6 +589,10 @@ def osm_server_request(url):
 
     return server_data
 
+def _get_osm_baseurl():
+    #return "http://cci-bridges-osm.uncc.edu/"
+    return "http://bridges-data-server-osm.bridgesuncc.org/"
+
 def get_osm_data(*args) -> OsmData:
     """
     @brief This method retrieves an OpenStreet Map dataset, given a location
@@ -602,25 +606,29 @@ def get_osm_data(*args) -> OsmData:
     """
     import os
 
+    debug = True
+    
     if (len(args) == 2):
         location = args[0]
         level = args[1]
-        url = "http://cci-bridges-osm.uncc.edu/loc?location=" + location + "&level=" + level
-        hash_url = "http://cci-bridges-osm.uncc.edu/hash?location=" + location + "&level=" + level
+        url = _get_osm_baseurl()+"/loc?location=" + location + "&level=" + level
+        hash_url = _get_osm_baseurl()+"/hash?location=" + location + "&level=" + level
     elif (len(args) == 5):
         minLat = str(args[0])
         minLon = str(args[1])
         maxLat = str(args[2])
         maxLon = str(args[3])
         level = args[4]
-        url = "http://cci-bridges-osm.uncc.edu/coords?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
-        hash_url = "http://cci-bridges-osm.uncc.edu/hash?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
+        url = _get_osm_baseurl()+"/coords?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
+        hash_url = _get_osm_baseurl()+"/hash?minLon=" + minLon + "&minLat=" + minLat + "&maxLon=" + maxLon + "&maxLat=" + maxLat + "&level=" + level
     else:
         raise RuntimeError("Invalid Map Request Inputs")
 
     lru = lru_cache.lru_cache(30)
 
-
+    if debug:
+        print ("url: "+url)
+        print ("hash_url: "+hash_url)
 
     try:
         from types import SimpleNamespace as Namespace
@@ -841,17 +849,20 @@ def get_amenity_data(*args):
         [2]: maximum latitude
         [3]: maximum longitude
         [4]: amenity type
-    
+      or
+        [0]: location string
+        [1]: amenity type
+
     Returns:
         A list of amenities
     """
     
     if(len(args)) == 5:
-        url = f"http://cci-bridges-osm.uncc.edu/amenity?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
-        hash_url = f"http://cci-bridges-osm.uncc.edu/hash?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
+        url = f"{_get_osm_baseurl()}/amenity?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
+        hash_url = f"{_get_osm_baseurl()}/hash?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
     elif(len(args) == 2):
-        url = f"http://cci-bridges-osm.uncc.edu/amenity?location={args[0]}&amenity={args[1]}"
-        hash_url = f"http://cci-bridges-osm.uncc.edu/hash?location={args[0]}&amenity={args[1]}"
+        url = f"{_get_osm_baseurl()}/amenity?location={args[0]}&amenity={args[1]}"
+        hash_url = f"{_get_osm_baseurl()}/hash?location={args[0]}&amenity={args[1]}"
     else:
         raise RuntimeError("Invalid Number of Map Request Inputs")
 
