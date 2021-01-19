@@ -73,7 +73,7 @@ class ElevationData:
         Returns:
             return the elevation data lower left (x coord)
         """ 
-        return self._x11
+        return self._xll
 
     @xll.setter
     def xll(self, xcoord):
