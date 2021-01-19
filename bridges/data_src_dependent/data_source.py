@@ -853,6 +853,8 @@ def get_amenity_data(*args):
         [0]: location string
         [1]: amenity type
 
+    Valid types are "food", "school", "firestation", "airport", "heli"
+
     Returns:
         A list of amenities
     """
