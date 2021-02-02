@@ -1,6 +1,8 @@
 import json
 import requests
 import pickle
+import urllib.parse
+
 from bridges.data_src_dependent import earthquake_usgs
 from bridges.data_src_dependent import actor_movie_imdb
 from bridges.data_src_dependent import game
@@ -344,13 +346,11 @@ def get_song(songTitle, artistName = None):
     PARAMS = {"Accept: application/json"}
 
     if len(songTitle):
-        url = url + songTitle
+        url = url + urllib.parse.quote(songTitle)
 
     if artistName is not None:
         if len(artistName):
-            url += "?artistName=" + artistName
-
-    url.replace(" ", "%20")
+            url += "?artistName=" + urllib.parse.quote(artistName)
 
     r = requests.get(url = url, params = str(PARAMS))
     if r.status_code != 200:
@@ -590,7 +590,6 @@ def osm_server_request(url):
     return server_data
 
 def _get_osm_baseurl():
-    #return "http://cci-bridges-osm.uncc.edu/"
     return "http://bridges-data-server-osm.bridgesuncc.org/"
 
 def get_osm_data(*args) -> OsmData:
@@ -611,8 +610,8 @@ def get_osm_data(*args) -> OsmData:
     if (len(args) == 2):
         location = args[0]
         level = args[1]
-        url = _get_osm_baseurl()+"/loc?location=" + location + "&level=" + level
-        hash_url = _get_osm_baseurl()+"/hash?location=" + location + "&level=" + level
+        url = _get_osm_baseurl()+"/loc?location=" + urllib.parse.quote(location) + "&level=" + urllib.parse.quote(level)
+        hash_url = _get_osm_baseurl()+"/hash?location=" + urllib.parse.quote(location) + "&level=" + urllib.parse.quote(level)
     elif (len(args) == 5):
         minLat = str(args[0])
         minLon = str(args[1])
@@ -726,10 +725,10 @@ def get_elevation_data(*args):
     hash_url = "http://bridges-data-server-elevation.bridgesuncc.org/hash"
 
     coords = args[0]
-    minLat = coords[0]
-    minLon = coords[1]
-    maxLat = coords[2]
-    maxLon = coords[3]
+    minLat = str(coords[0])
+    minLon = str(coords[1])
+    maxLat = str(coords[2])
+    maxLon = str(coords[3])
 
     res = .0166
         
@@ -861,9 +860,9 @@ def get_amenity_data(*args):
     
     if(len(args)) == 5:
         url = f"{_get_osm_baseurl()}/amenity?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
-        hash_url = f"{_get_osm_baseurl()}/hash?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
+        hash_url = f"{_get_osm_baseurl()}/hash?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={urllib.parse.quote(args[4])}"
     elif(len(args) == 2):
-        url = f"{_get_osm_baseurl()}/amenity?location={args[0]}&amenity={args[1]}"
+        url = f"{_get_osm_baseurl()}/amenity?location={urllib.parse.quote(args[0])}&amenity={urllib.parse.quote(args[1])}"
         hash_url = f"{_get_osm_baseurl()}/hash?location={args[0]}&amenity={args[1]}"
     else:
         raise RuntimeError("Invalid Number of Map Request Inputs")
@@ -872,8 +871,6 @@ def get_amenity_data(*args):
     data = None
     not_skip = True
 
-
-    
     hash = osm_server_request(hash_url).decode('utf-8')
     if (hash != "false" and lru.inCache(hash)):
         not_skip = False
