@@ -20,3 +20,9 @@ Just take a look at setup.py and follow the instructions provided in the link.
 ## To PyPi
 1. Create an account here https://pypi.org/
 2. Gain access to push here https://pypi.org/project/bridges/
+
+## packaging for bridges website
+
+```
+zip -r bridges-python-VERSION.zip bridges/
+```
