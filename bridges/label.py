@@ -87,28 +87,27 @@ class Label(Symbol):
         else:
             self._font_size = size
 
-    def rotation_angle(self) -> float:
+    @property
+    def rotation_angle(self) -> None:
         """
         Returns the rotation angle of the label
 
         Returns:
             rotation angle (in degrees)
         """
-        print("calling rotation angle getter..")
         return self._rotation_angle
 
+    @rotation_angle.setter
     def rotation_angle(self, angle: float) -> None:
         """
         Set the orientation of the label text
         Only, horizontal, vertical and 45 deg. text is supported
 
         Args:
-            angl: rotation angle (in degrees)
+            angle: rotation angle (in degrees)
         Returns:
             None
         """
-        print("calling rotation angle setter..")
-        print ("Angle1:" + str(angle))
         self._rotation_angle = angle
 
     def get_bounding_box(self):
@@ -142,34 +141,33 @@ class Label(Symbol):
                 #support spaces only, no special chars
                 length += 0.55
 
-            length *= self._font_size;
+        length *= self._font_size;
 
-            width = length
-            height = self._font_size
-            if upper_case_exists: 
-                height += 0.3*self._font_size
-            else:
-                height += 0.1*self._font_size
+        width = length
+        height = self._font_size
+        if upper_case_exists: 
+            height += 0.3*self._font_size
+        else:
+            height += 0.1*self._font_size
 
-            # account for text orientation to compute bounding box
-            # support for 0, 45 and 90 deg. only
-            bbox_width = length
-            bbox_height = height
-            angle = self._rotation_angle
-            print ("Angle:" + str(self._rotation_angle))
-            if (angle == 90. or angle == -90.):
-                bbox_width = height
-                bbox_height = length
-            elif (angle == -45. or angle == 45.): 
-                bbox_width  = length/math.sqrt(2.0)
-                bbox_height = length/math.sqrt(2.0);
+        # account for text orientation to compute bounding box
+        # support for 0, 45 and 90 deg. only
+        bbox_width = length
+        bbox_height = height
+        angle = self._rotation_angle
+        if (angle == 90. or angle == -90.):
+            bbox_width = height
+            bbox_height = length
+        elif (angle == -45. or angle == 45.): 
+            bbox_width  = length/math.sqrt(2.0)
+            bbox_height = length/math.sqrt(2.0);
 
-            x = self.get_location()[0]
-            y = self.get_location()[1] 
+        x = self.get_location()[0]
+        y = self.get_location()[1] 
 
-            # return bounding box as a list
-            return [x - bbox_width/2., y - bbox_height/2., 
-                    x + bbox_width/2., y + bbox_height/2.] 
+        # return bounding box as a list
+        return [x - bbox_width/2., y - bbox_height/2., 
+                x + bbox_width/2., y + bbox_height/2.] 
 
     def get_dimensions(self):
         """
@@ -192,6 +190,7 @@ class Label(Symbol):
         ds_json = super(Label,self).get_json_representation()
         ds_json["name"] = super(Label, self).label
         ds_json["shape"] = "text"
+        ds_json["angle"] = self._rotation_angle
         ds_json["font-size"] = self.font_size
 
         return ds_json
