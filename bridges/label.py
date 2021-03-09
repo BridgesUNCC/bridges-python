@@ -150,24 +150,52 @@ class Label(Symbol):
         else:
             height += 0.1*self._font_size
 
-        # account for text orientation to compute bounding box
-        # support for 0, 45 and 90 deg. only
+        # account for text orientation to compute bounding box 
         bbox_width = length
         bbox_height = height
         angle = self._rotation_angle
-        if (angle == 90. or angle == -90.):
-            bbox_width = height
-            bbox_height = length
-        elif (angle == -45. or angle == 45.): 
-            bbox_width  = length/math.sqrt(2.0)
-            bbox_height = length/math.sqrt(2.0);
+        loc_x = self.get_location()[0]
+        loc_y = self.get_location()[1] 
+        bbox = [0., 0., 0., 0.]
+        pt = [0., 0.]
+        bbox[0] = bbox[1] = float("inf")
+        bbox[2] = bbox[3] = float("-inf")
 
-        x = self.get_location()[0]
-        y = self.get_location()[1] 
+         # rotate  the four corners of the bounding box
+         # only need to rotate the 3 points of the box
+        for k in range(4):
+             if k == 0:       # lower left
+                 pt[0] = pt[1] = 0.
+             elif k == 1:     # upper left
+                 pt[0] = 0. 
+                 pt[1] = bbox_height;
+             elif k == 2:     # lower right
+                 pt[0] = bbox_width 
+                 pt[1] = 0.;
+             elif k == 3:     # upper right
+                 pt[0] = bbox_width;
+                 pt[1] = bbox_height; 
 
-        # return bounding box as a list
-        return [x - bbox_width/2., y - bbox_height/2., 
-                x + bbox_width/2., y + bbox_height/2.] 
+             self.rotate_point (pt, angle);
+             # update bounding box
+             if pt[0] < bbox[0]: 
+                 bbox[0] = pt[0]
+             if pt[1] < bbox[1]:
+                 bbox[1] = pt[1]
+             if pt[0] > bbox[2]:
+                 bbox[2] = pt[0]
+             if pt[1] > bbox[3]: 
+                 bbox[3] = pt[1]
+
+        #translate center of box to center of label
+        tx = loc_x - (bbox[0] + (bbox[2]-bbox[0])/2.);
+        ty = loc_y - (bbox[1] + (bbox[3]-bbox[1])/2.);
+        bbox[0] += tx; 
+        bbox[1] += ty; 
+        bbox[2] += tx;
+        bbox[3] += ty;
+
+        return bbox
 
     def get_dimensions(self):
         """

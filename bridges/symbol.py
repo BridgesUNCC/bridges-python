@@ -268,7 +268,7 @@ class Symbol:
 
         tmp = [pt[0] * c - pt[1] * s, pt[0] * s + pt[1] * c]
         pt[0] = float(tmp[0])
-        pt[1] - float(tmp[1])
+        pt[1] = float(tmp[1])
         return pt
 
     def get_json_representation(self) -> dict:
