@@ -822,7 +822,7 @@ def get_wiki_data_actor_movie(year_begin, year_end):
     """
     @brief This method retrieves an actor-movie data from Wikidata
 
-    Usess a sparkl query
+    Uses a sparql query
 
     Args:
         year_begin:  beginning year of data request
