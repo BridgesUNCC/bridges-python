@@ -832,7 +832,7 @@ def get_wiki_data_actor_movie(year_begin, year_end):
         A list of the actor-movie data of type MovieActorWikiData
     """
     ret = []
-    for y in range(year_begin, year_end):
+    for y in range(year_begin, year_end+1):
         _get_wiki_actor_movie_direct(y, y, ret)
     return ret
 
