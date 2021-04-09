@@ -1,6 +1,6 @@
 
 
-class MoviegctorWikiData:
+class MovieActorWikiData:
     """
     @brief This is a helper class for accessing actor-movie data from Wikidata.
     
