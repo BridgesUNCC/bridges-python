@@ -785,21 +785,34 @@ def _get_wiki_actor_movie_direct(year_begin, year_end, array_out):
         year_end: ending year of data.
         array_out: returned data in an array
     """
-    sparql = SPARQLWrapper("https://query.wikidata.org/sparql")
-    sparql.setQuery("""
-    SELECT ?movie ?movieLabel ?actor ?actorLabel WHERE \
-    {\
-      ?movie wdt:P31 wd:Q11424.\
-      ?movie wdt:P161 ?actor.\
-      ?movie wdt:P364 wd:Q1860.\
-      ?movie wdt:P577 ?date.\
-      FILTER(YEAR(?date) >= """ + str(year_begin) + """ && YEAR(?date) <= """ + str(year_end) + """).\
-        SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". } \
-    }
-    """)
-    sparql.addCustomHttpHeader("User-Agent", 'bridges-python')
-    sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
+    # allocate cache - this makes no sense
+    lru = lru_cache.lru_cache(30)
+
+    # check cache code name and check cache
+    code_name = "wikidata-actormovie-" + str(year_begin) + "-" + str(year_end)
+    print(code_name)
+    from_cache = False
+    if lru.inCache(code_name):  
+        results = lru.get(code_name)
+        from_cache = True
+    else:
+        sparql = SPARQLWrapper("https://query.wikidata.org/sparql")
+        sparql.setQuery("""
+            SELECT ?movie ?movieLabel ?actor ?actorLabel WHERE \
+            {\
+                ?movie wdt:P31 wd:Q11424.\
+                ?movie wdt:P161 ?actor.\
+                ?movie wdt:P364 wd:Q1860.\
+                ?movie wdt:P577 ?date.\
+                FILTER(YEAR(?date) >= """ + str(year_begin) + """ && YEAR(?date) <= """ + str(year_end) + """).\
+                SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". } \
+            }
+        """)
+        sparql.addCustomHttpHeader("User-Agent", 'bridges-python')
+        sparql.setReturnFormat(JSON)
+        results = sparql.query().convert()
+        lru.put(code_name, results)
+
     for result in results["results"]["bindings"]:
         mak = movie_actor_wiki_data.MovieActorWikiData()
         actor_uri = str(result['actor']['value'])
@@ -817,7 +830,7 @@ def get_wiki_data_actor_movie(year_begin, year_end):
     """
     @brief This method retrieves an actor-movie data from Wikidata
 
-    Usess a sparkl query
+    Uses a sparql query
 
     Args:
         year_begin:  beginning year of data request
@@ -827,7 +840,7 @@ def get_wiki_data_actor_movie(year_begin, year_end):
         A list of the actor-movie data of type MovieActorWikiData
     """
     ret = []
-    for y in range(year_begin, year_end):
+    for y in range(year_begin, year_end+1):
         _get_wiki_actor_movie_direct(y, y, ret)
     return ret
 
