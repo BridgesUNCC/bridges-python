@@ -8,6 +8,7 @@ from bridges.data_src_dependent import actor_movie_imdb
 from bridges.data_src_dependent import game
 from bridges.data_src_dependent import shakespeare
 from bridges.data_src_dependent import gutenberg_book
+from bridges.data_src_dependent import gutenberg_meta
 from bridges.data_src_dependent import cancer_incidence
 from bridges.data_src_dependent import song
 from bridges.data_src_dependent import lru_cache
@@ -685,11 +686,9 @@ def get_osm_data(*args) -> OsmData:
     except AttributeError:
         raise RuntimeError("Malformed JSON: Unable to parse")
 
-
-
-def elevation_server(url):
+def server_request(url):
     """
-    @brief Fulfills a server request for elevation data
+    @brief Fulfills a server request
     
     For internal use only
     """
@@ -699,15 +698,12 @@ def elevation_server(url):
             request = requests.get(url)
             if not request.ok:
                 raise request.raise_for_status()
-            raise RuntimeError("Issue with request")
+            raise RuntimeError("Issue with server request")
         raise request.raise_for_status()
 
     server_data = request.content
 
     return server_data
-
-
-
 
 def get_elevation_data(*args):
     """
@@ -743,15 +739,15 @@ def get_elevation_data(*args):
     data = None
     not_skip = True
     hash = False
-    hash = elevation_server(hash_url).decode('utf-8')
+    hash = server_request(hash_url).decode('utf-8')
     if (hash != "false" and lru.inCache(hash)):
         not_skip = False
         data = lru.get(hash)
 
     if not_skip:
-        data = elevation_server(url).decode("utf-8")
+        data = server_request(url).decode("utf-8")
 
-    hash = elevation_server(hash_url).decode('utf-8')
+    hash = server_request(hash_url).decode('utf-8')
     lru.put(hash, data)
 
     
@@ -780,7 +776,6 @@ def get_elevation_data(*args):
     ret_ele.maxVal = maxVal
 
     return ret_ele
-
 
 def _get_wiki_actor_movie_direct(year_begin, year_end, array_out):
     """
@@ -835,8 +830,6 @@ def get_wiki_data_actor_movie(year_begin, year_end):
     for y in range(year_begin, year_end):
         _get_wiki_actor_movie_direct(y, y, ret)
     return ret
-
-
 
 def get_amenity_data(*args):
     """
@@ -916,6 +909,63 @@ def get_amenity_data(*args):
     ret_data.meta = temp_meta
 
     return ret_data
+
+def search_gutenberg(*args):
+    url = f"http://192.168.2.14:5000"
+    url = url + f"/search?search={args[0]}&type={args[1]}"
+
+    content = server_request(url)
+    data = json.loads(content.decode('utf-8'))
+
+    meta_obj_list = []
+    for node in data['book_list']:
+        meta = gutenberg_meta.GutenbergMeta
+
+        meta.id = node["id"]
+        meta.title = node['title']
+        meta.lang = node["lang"]
+        meta.date = node["date_added"]
+        meta.authors = node["authors"]
+        meta.genres = node["genres"]
+        meta.loc = node["loc_class"]
+
+        meta_obj_list.append(meta)
+
+    return meta_obj_list
+
+def meta_gutenberg(id):
+    url = "http://192.168.2.14:5000"
+    url = url + "/meta?id=" + str(id)
+
+    content = server_request(url)
+    data = json.loads(content.decode('utf-8'))
+
+    meta = gutenberg_meta.GutenbergMeta
+    for node in data['book_list']:
+        
+        
+        meta.id = node["id"]
+        meta.title = node['title']
+        meta.lang = node["lang"]
+        meta.date = node["date_added"]
+        meta.authors = node["authors"]
+        meta.genres = node["genres"]
+        meta.loc = node["loc_class"]
+        
+        
+        
+    return meta
+
+def text_gutenberg(id, strip = False):
+    url = "http://192.168.2.14:5000"
+    url = url + "/book?id=" + str(id)
+
+    content = server_request(url)
+    data = content.decode('utf-8')
+
+    # TODO: Cache book text locally (use ID as unique identifier)
+
+    return data
 
 
 
