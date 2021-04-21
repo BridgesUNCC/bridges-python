@@ -973,11 +973,17 @@ def text_gutenberg(id, strip = False):
     url = "http://192.168.2.14:5000"
     url = url + "/book?id=" + str(id)
 
-    content = server_request(url)
-    data = content.decode('utf-8')
-
-    # TODO: Cache book text locally (use ID as unique identifier)
-
+    lru = lru_cache.lru_cache(30)
+    try:
+        if (lru.inCache(str(id))):
+            data = lru.get(str(id))
+        else:
+            content = server_request(url)
+            data = content.decode('utf-8')
+            lru.put(str(id), data)
+    except Exception as e:
+        print(e)
+        raise RuntimeError(e)
     return data
 
 
