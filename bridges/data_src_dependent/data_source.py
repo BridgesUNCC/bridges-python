@@ -21,7 +21,7 @@ from bridges.color_grid import ColorGrid
 from bridges.color import Color
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-
+gutenberg_url = "http://bridges-data-server-gutenberg.bridgesuncc.org"
 
 def get_game_data():
     """
@@ -924,8 +924,7 @@ def get_amenity_data(*args):
     return ret_data
 
 def search_gutenberg(*args):
-    url = f"http://192.168.2.14:5000"
-    url = url + f"/search?search={args[0]}&type={args[1]}"
+    url = gutenberg_url + f"/search?search={args[0]}&type={args[1]}"
 
     content = server_request(url)
     data = json.loads(content.decode('utf-8'))
@@ -947,8 +946,7 @@ def search_gutenberg(*args):
     return meta_obj_list
 
 def meta_gutenberg(id):
-    url = "http://192.168.2.14:5000"
-    url = url + "/meta?id=" + str(id)
+    url = gutenberg_url + "/meta?id=" + str(id)
 
     content = server_request(url)
     data = json.loads(content.decode('utf-8'))
@@ -970,8 +968,7 @@ def meta_gutenberg(id):
     return meta
 
 def text_gutenberg(id, strip = False):
-    url = "http://192.168.2.14:5000"
-    url = url + "/book?id=" + str(id)
+    url = gutenberg_url + "/book?id=" + str(id)
 
     lru = lru_cache.lru_cache(30)
     try:
