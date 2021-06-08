@@ -924,6 +924,13 @@ def get_amenity_data(*args):
     return ret_data
 
 def search_gutenberg(*args):
+    """
+    function to search for a gutenberg book given a search string and type of metadata to search through
+    :param args:
+        args[0]: search string, i.e home
+        args[1]: metadata type, i.e id, title, lang, date_added, authors, genres, loc_class
+    :return: a list of books with containing matched strings from the specified metadata type
+    """
     url = gutenberg_url + f"/search?search={args[0]}&type={args[1]}"
 
     content = server_request(url)
@@ -946,6 +953,11 @@ def search_gutenberg(*args):
     return meta_obj_list
 
 def meta_gutenberg(id):
+    """
+    function to retrieve the metadata of a gutenberg book given its ID
+    :param id: ID of the book
+    :return: a dictionary containing the metadata of the gutenberg book
+    """
     url = gutenberg_url + "/meta?id=" + str(id)
 
     content = server_request(url)
@@ -962,12 +974,16 @@ def meta_gutenberg(id):
         meta.authors = node["authors"]
         meta.genres = node["genres"]
         meta.loc = node["loc_class"]
-        
-        
-        
+
     return meta
 
 def text_gutenberg(id, strip = False):
+    """
+    function to retrieve the text of a gutenberg book given the ID
+    :param id: id of the book
+    :param strip: boolean to determine if headers and footers are stripped from the text
+    :return: string of text for the book
+    """
     url = gutenberg_url + "/book?id=" + str(id)
 
     lru = lru_cache.lru_cache(30)

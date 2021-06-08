@@ -1,6 +1,17 @@
 class GutenbergMeta:
 
     def __init__(self, id = 0, title = "", lang = "", date_added = "", authors = [], genres = [], loc = []):
+        """
+        Constructor for a gutenbergmeta object that holds the metadata
+        for a gutenberg book
+        :param id: book id
+        :param title: book title
+        :param lang: book language
+        :param date_added: data the book was added
+        :param authors: authors of the book
+        :param genres: book genres
+        :param loc:
+        """
         self.id = id
         self.title = title
         self.lang = lang
