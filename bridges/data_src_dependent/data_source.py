@@ -923,7 +923,7 @@ def get_amenity_data(*args):
 
     return ret_data
 
-def search_gutenberg(*args):
+def search_gutenberg_book_metadata(*args):
     """
     function to search for a gutenberg book given a search string and type of metadata to search through
     :param args:
@@ -936,7 +936,7 @@ def search_gutenberg(*args):
     content = server_request(url)
     data = json.loads(content.decode('utf-8'))
 
-    meta_obj_list = []
+    book_list = []
     for node in data['book_list']:
         meta = gutenberg_meta.GutenbergMeta
 
@@ -948,11 +948,11 @@ def search_gutenberg(*args):
         meta.genres = node["genres"]
         meta.loc = node["loc_class"]
 
-        meta_obj_list.append(meta)
+        book_list.append(meta)
 
-    return meta_obj_list
+    return book_list
 
-def meta_gutenberg(id):
+def get_gutenberg_book_metadata(id):
     """
     function to retrieve the metadata of a gutenberg book given its ID
     :param id: ID of the book
@@ -977,7 +977,7 @@ def meta_gutenberg(id):
 
     return meta
 
-def text_gutenberg(id, strip = False):
+def gutenberg_book_text(id, strip = False):
     """
     function to retrieve the text of a gutenberg book given the ID
     :param id: id of the book
