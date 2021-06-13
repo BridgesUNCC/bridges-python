@@ -923,7 +923,7 @@ def get_amenity_data(*args):
 
     return ret_data
 
-def search_gutenberg_book_metadata(*args):
+def get_gutenberg_book_metadata(*args):
     """
     function to search for a gutenberg book given a search string and type of metadata to search through
     :param args:
@@ -952,7 +952,7 @@ def search_gutenberg_book_metadata(*args):
 
     return book_list
 
-def get_gutenberg_book_metadata(id):
+def get_a_gutenberg_book_metadata(id):
     """
     function to retrieve the metadata of a gutenberg book given its ID
     :param id: ID of the book
