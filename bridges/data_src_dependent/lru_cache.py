@@ -49,8 +49,11 @@ class lru_cache():
 
 
 
+
+
+
     def get(self, hash):
-        with open("./bridges_data_cache/" + hash, "rb") as j:
+        with open("./bridges_data/python/" + hash, "rb") as j:
             try:
                 data = pickle.load(j)
             except:
@@ -60,6 +63,6 @@ class lru_cache():
 
 
     def inCache(self, file_name):
-        if (os.path.isfile(f"./bridges_data_cache/{file_name}")):
+        if (os.path.isfile(f"./bridges_data/python/{file_name}")):
             return True
         return False

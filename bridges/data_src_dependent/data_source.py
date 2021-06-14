@@ -988,7 +988,7 @@ def gutenberg_book_text(id, strip = False):
 
     lru = lru_cache.lru_cache(30)
     try:
-        if (lru.inCache(str(id))):
+        if (lru.inCache("gutenberg" + str(id))):
             data = lru.get(str(id))
         else:
             content = server_request(url)
