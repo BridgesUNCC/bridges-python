@@ -989,11 +989,11 @@ def gutenberg_book_text(id, strip = False):
     lru = lru_cache.lru_cache(30)
     try:
         if (lru.inCache("gutenberg" + str(id))):
-            data = lru.get(str(id))
+            data = lru.get("gutenberg" + str(id))
         else:
             content = server_request(url)
             data = content.decode('utf-8')
-            lru.put(str(id), data)
+            lru.put("gutenberg" + str(id), data)
     except Exception as e:
         print(e)
         raise RuntimeError(e)

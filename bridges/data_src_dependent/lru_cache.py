@@ -15,45 +15,42 @@ class lru_cache():
     def __init__(self, max_cache_size: int = 0):
         self.max_cache_size = max_cache_size + 1
         self.lru = []
-        if not os.path.isdir("./bridges_data_cache"):
-            os.mkdir("./bridges_data_cache")
+        self.cache_dir = os.environ['HOME'] + "/.cache/bridges_data/python/"
+        if not os.path.isdir(self.cache_dir):
+            os.mkdir(self.cache_dir)
 
 
     def put(self, hash, content):
         try:
-            with open("./bridges_data_cache/lru.txt", "rb") as fp:
+            with open(self.cache_dir + "/lru.txt", "rb") as fp:
                 self.lru = pickle.load(fp)
         except:
             pass
-
 
         try: # Removes the location requested by the user from the LRU list
             self.lru.remove(hash)
         except:
             pass
+
         self.lru.insert(0, hash)
 
         # Removes least used map if there are more than 30 maps already saved
         if (len(self.lru) >= self.max_cache_size):
             re = self.lru[len(self.lru)-1]
-            if (os.path.isfile(f"./bridges_data_cache/{re}")):
-                os.remove(f"./bridges_data_cache/{re}")
+            if (os.path.isfile(self.cache_dir + re)):
+                os.remove(self.cache_dir + re)
             self.lru.remove(re)
 
-        with open("./bridges_data_cache/lru.txt", "wb") as fp:   #Pickling
+        with open(self.cache_dir + "lru.txt", "wb") as fp:   #Pickling
             pickle.dump(self.lru, fp)
 
-        with open(f"./bridges_data_cache/{hash}", "wb") as f:   # write to file in cache
+        with open(self.cache_dir + hash, "wb") as f:   # write to file in cache
             pickle.dump(content, f)
         return
 
 
-
-
-
-
     def get(self, hash):
-        with open("./bridges_data/python/" + hash, "rb") as j:
+        with open(self.cache_dir + hash, "rb") as j:
             try:
                 data = pickle.load(j)
             except:
@@ -63,6 +60,6 @@ class lru_cache():
 
 
     def inCache(self, file_name):
-        if (os.path.isfile(f"./bridges_data/python/{file_name}")):
+        if (os.path.isfile(self.cache_dir + file_name)):
             return True
         return False
