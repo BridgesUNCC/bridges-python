@@ -997,7 +997,10 @@ def gutenberg_book_text(id, strip = False):
     except Exception as e:
         print(e)
         raise RuntimeError(e)
-    return data
+
+    book_data = json.loads(data)
+
+    return book_data['book']
 
 
 
