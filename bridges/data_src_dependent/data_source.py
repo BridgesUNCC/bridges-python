@@ -1000,7 +1000,7 @@ def gutenberg_book_text(id, strip = False):
 
     book_data = json.loads(data)
 
-    return book_data['book']
+    return book_data
 
 
 
