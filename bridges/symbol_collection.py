@@ -44,7 +44,7 @@ class SymbolCollection:
         Returns
             str: the data structure type
         """
-        return "SymbolCollection"
+        return "SymbolCollectionV2"
 
     def add_symbol(self, s):
         """
