@@ -298,10 +298,10 @@ class Symbol:
 
     def set_transform(self, a:float, b:float, c:float, d:float, e:float, f:float):
         self._xform[0][0] = a
-        self._xform[0][1] = b
-        self._xform[0][2] = c
-        self._xform[1][0] = d
-        self._xform[1][1] = e
+        self._xform[0][1] = c
+        self._xform[0][2] = e
+        self._xform[1][0] = b
+        self._xform[1][1] = d
         self._xform[1][2] = f
         self._xform[2][0] = 0.0
         self._xform[2][1] = 0.0
@@ -350,10 +350,10 @@ class Symbol:
 
         obj = self.get_json_representation()
 
-        obj['id'] = id
+        obj['ID'] = id
 
         if parent is not None:
-            obj['parentid'] = parent
+            obj['parentID'] = parent
 
         symbol_json.update(obj)
 
