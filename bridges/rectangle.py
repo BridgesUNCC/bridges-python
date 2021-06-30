@@ -27,18 +27,17 @@ class Rectangle(Symbol):
             ValueError: if the width or height is less than 0
         """
         super(Rectangle, self).__init__()
+        self._width = 1.0
+        self._height = 1.0
         if 'w' in kwargs and 'h' in kwargs:
             if kwargs['w'] < 0 or kwargs['h'] < 0:
                 raise ValueError("Illegal height or width! Height and Width values need to be positive")
             self._width = kwargs['w']
             self._height = kwargs['h']
-        if 'locx' in kwargs and 'locy' in kwargs:
-            self.set_location(kwargs['locx'], kwargs['locy'])
-        else:
-            self.set_location(0.0, 0.0)
-        self.shape_type = 'rect'
+        self.locx = 0.0
+        self.locy = 0.0
 
-    def get_name(self) -> str:
+    def get_shape_type(self) -> str:
         """
         Getter for the name of the shape
         Returns:
@@ -94,22 +93,6 @@ class Rectangle(Symbol):
             raise ValueError("Height needs to be in the range(0-300)")
         self._height = h
 
-    def get_dimensions(self) -> list:
-        """
-        Getter for the dimensions of the rectangle
-        Returns:
-            list: the bounding box of the shape (xmin, xmax, ymin, ymax)
-        """
-        dims = []
-        location = self.get_location()
-
-        dims.append(location[0])
-        dims.append(location[0] + self.width)
-        dims.append(location[1])
-        dims.append(location[1] + self.height)
-
-        return dims
-
     def set_rectangle(self, locx, locy, w, h):
         """
         Setter function for setting the rectangles size and location from scratch
@@ -123,37 +106,12 @@ class Rectangle(Symbol):
         Raises:
             ValueError: if the height or width is < 0 or > 300
         """
-        self.set_location(locx, locy)
+        self.locx = locx
+        self.locy = locy
         if w <= 0 or h <= 0:
             raise ValueError("Height, Width need to be in the range(0-300)")
         self.width = w
         self.height = h
-
-    def translate(self, tx, ty):
-        """
-        Translate the rectangle by tx, ty along X and Y respectively
-        Args:
-           tx: translation factor in X
-           ty: translation factor in Y
-        """
-
-        center = self.get_location()
-        center = self.translate_point(center, tx, ty)
-        self.set_location(center[0], center[1])
-
-    def scale(self, sx, sy):
-        """
-        Scale the rectangle by sx, sy along X and Y respectively
-        Args:
-           sx: translation factor in X
-           sy: translation factor in Y
-        """
-        pt = [0., 0.]
-        pt[0] = self.width
-        pt[1] = self.height
-        new_pt = self.scale_point(pt, sx, sy)
-        self.width = new_pt[0]
-        self.height = new_pt[1]
 
     def get_json_representation(self) -> dict:
         """
@@ -162,8 +120,9 @@ class Rectangle(Symbol):
             dict: representing the json 
         """
         ds_json = super(Rectangle, self).get_json_representation()
-        ds_json["name"] = super(Rectangle, self).label
-        ds_json["shape"] = self.shape_type
+
+        loc = [self.locx, self.locy]
+        ds_json['lowerleftcorner'] = loc
         ds_json["width"] = self.width
         ds_json['height'] = self.height
 

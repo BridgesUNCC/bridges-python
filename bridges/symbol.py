@@ -56,7 +56,7 @@ class Symbol:
         """
         self._label = label
 
-    def shape_type(self):
+    def get_shape_type(self):
         return ""
 
     @property
@@ -327,6 +327,7 @@ class Symbol:
             #     "y": self._location_y
             # }
         }
+        ds["type"] = self.get_shape_type()
         if self.fill_color is not None:
             ds['fill'] = [self.fill_color.red, self.fill_color.green, self.fill_color.blue, self.fill_color.alpha]
         if self.opacity is not  None:
