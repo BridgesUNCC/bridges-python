@@ -34,8 +34,13 @@ class Rectangle(Symbol):
                 raise ValueError("Illegal height or width! Height and Width values need to be positive")
             self._width = kwargs['w']
             self._height = kwargs['h']
-        self.locx = 0.0
-        self.locy = 0.0
+        if 'locx' in kwargs and 'locy' in kwargs:
+            self.locx = kwargs['locx']
+            self.locy = kwargs['locy']
+        else:
+            self.locx = 0.0
+            self.locy = 0.0
+
 
     def get_shape_type(self) -> str:
         """
