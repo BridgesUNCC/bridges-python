@@ -13,9 +13,8 @@ class Polygon(Polyline):
             super(Polygon, self).__init__(pts = pts)
         else:
             super(Polygon, self).__init__()
-        self.shape_type = "polygon"
 
-    def get_name(self):
+    def get_shape_type(self):
         """
         Get the name of this symbol
         """
