@@ -16,7 +16,7 @@ class SymbolCollection:
         """
         Constructor for collection of symbols
         """
-        self._symbols = dict()
+        self._symbols = []
         self._domainxmin = -100
         self._domainxmax = 100
         self._domainymin = -100
@@ -54,7 +54,7 @@ class SymbolCollection:
         Returns:
              none 
         """
-        self._symbols[s.identifier] = s
+        self._symbols.append(s)
 
     def update_axis_domains(self, s):
         """
@@ -64,17 +64,18 @@ class SymbolCollection:
         Returns:
              none
         """
-        dims = s.get_dimensions()
-
-        if dims[0] < self._domainxmin:
-            self._domainxmin = dims[0]
-        if dims[1] > self._domainxmax:
-            self._domainxmax = dims[1]
-
-        if dims[2] < self._domainymin:
-            self._domainymin = dims[2]
-        if dims[3] > self._domainymax:
-            self._domainymax = dims[3]
+        # dims = s.get_dimensions()
+        #
+        # if dims[0] < self._domainxmin:
+        #     self._domainxmin = dims[0]
+        # if dims[1] > self._domainxmax:
+        #     self._domainxmax = dims[1]
+        #
+        # if dims[2] < self._domainymin:
+        #     self._domainymin = dims[2]
+        # if dims[3] > self._domainymax:
+        #     self._domainymax = dims[3]
+        return
 
     def get_data_structure_representation(self):
         """
@@ -82,11 +83,11 @@ class SymbolCollection:
         Returns:
             str: the data structure representation
         """
-        symbol_json = []
-        for key, value in self._symbols.items():
+        symbol_json = dict()
+        for i in range(len(self._symbols)):
             if (self._autoupdateviewport):
-                self.update_axis_domains(value)
-            symbol_json.append(value.get_json_representation())
+                self.update_axis_domains(self._symbols[i])
+            self._symbols[i].add_all_json(symbol_json, None)
 
         final_json = {
             "domainX": [self._domainxmin, self._domainxmax],
