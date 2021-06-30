@@ -27,9 +27,8 @@ class Polyline(Symbol):
             self._points = pts
         else:
             self._points = []
-        self._shape_type = "polyline"
 
-    def get_name(self):
+    def get_symbol_type(self):
         """
         Get the name of the symbol
         Returns:
@@ -69,110 +68,10 @@ class Polyline(Symbol):
         """
         self._points = pts
 
-    def get_dimensions(self):
-        """
-        Get the bounding box of the polyline.
-        """
-        minx = float('inf')
-        miny = float('inf')
-        maxx = float('-inf')
-        maxy = float('-inf')
-
-        for i in range(0, len(self.points), 2):
-            x = self.points[i]
-            y = self.points[i+1]
-            if (x < minx):
-                minx = x
-            if (x > maxx):
-                maxx = x
-            if (y < miny):
-                miny = y
-            if (y > maxy):
-                maxy = y
-
-        return [minx, maxx, miny, maxy]
-
-    def translate(self, tx, ty):
-        """
-        Translate the polyline by tx, ty along X and Y respectively
-        Args:
-           tx: translation factor in X
-           ty: translation factor in Y
-        """
-        for k in range(0, len(self.points), 2):
-            self.points[k] = self.points[k] + tx
-            self.points[k + 1] = self.points[k+1] + ty
-
-    def rotate(self, angle):
-        """
-        Rotat the polyline by 'angle' (2D rotation) 
-        Args:
-           angle: angle of rotation in degrees
-        """
-        center = []
-        center = self.get_center(center)
-        transl = []
-        transl[0] = -center[0]
-        transl[1] = -center[1]
-        self.translate(transl[0], transl[1])
-        for k in range(0, len(self.points), 2):
-            tmp = []
-            tmp[0] = self.points[k]
-            tmp[1] = self.points[k+1]
-            tmp = self.rotate_point(tmp, angle)
-            self.points[k] = tmp[0]
-            self.points[k+1] = tmp[1]
-        transl[0] = center[0]
-        transl[1] = center[1]
-        self.translate(transl[0], transl[1])
-
-    def scale(self, sx, sy):
-        """
-        Scale the polyline by sx, sy along X and Y respectively
-        Args:
-           sx: scale factor in X
-           sy: scale factor in Y
-        """
-        center = []
-        center = self.get_center(center)
-        transl = []
-        transl[0] = -center[0]
-        transl[1] = -center[1]
-        self.translate(transl[0], transl[1])
-        for k in range(0, len(self.points), 2):
-            self.points[k] = self.points[k] * sx
-            self.points[k+1] = self.points[k+1] * sy
-        transl[0] = center[0]
-        transl[1] = center[1]
-        self.translate(transl[0], transl[1])
-
-    def get_center(self, center):
-        """
-        Get the center of the polyline (use the bounding box center)
-        Args:
-            center : [output] returns the computed center as a 2 element list
-        """
-        bbox = []
-        bbox[0] = bbox[1] = 100000.0
-        bbox[2] = bbox[3] = -10000.0
-        for k in range(0, len(self.points), 2):
-            if self.points[k] < bbox[0]:
-                bbox[0] = self.points[k]
-            if self.points[k] > bbox[2]:
-                bbox[2] = self.points[k]
-            if self.points[k+1] < bbox[1]:
-                bbox[1] = self.points[k+1]
-            if self.points[k+1] > bbox[3]:
-                bbox[3] = self.points[k+1]
-        center[0] = bbox[0] + (bbox[2] - bbox[0]) / 2.0
-        center[1] = bbox[1] + (bbox[3] - bbox[1]) / 2.0
-        return center
 
     def get_json_representation(self):
 
         ds_json = super(Polyline, self).get_json_representation()
-        ds_json["name"] = self.label
-        ds_json["shape"] = self.shape_type
         ds_json["points"] = self.points
 
         return ds_json
