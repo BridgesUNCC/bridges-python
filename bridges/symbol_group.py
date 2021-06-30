@@ -26,4 +26,4 @@ class SymbolGroup(Symbol):
         symbol_json.update(obj)
 
         for i in range(len(self.al)):
-            al[i].add_all_json(symbol_json, id)
+            self.al[i].add_all_json(symbol_json, id)
