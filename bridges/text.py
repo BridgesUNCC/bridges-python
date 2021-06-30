@@ -11,7 +11,7 @@ class Text(Symbol):
         else:
             self._text = ""
 
-        self.stroke_width = 0.0
+        self.stroke_width = 1.0
 
         self._font_size = None
         self._anchor_alignment_lr = None

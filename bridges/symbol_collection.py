@@ -83,7 +83,7 @@ class SymbolCollection:
         Returns:
             str: the data structure representation
         """
-        symbol_json = dict()
+        symbol_json = []
         for i in range(len(self._symbols)):
             if (self._autoupdateviewport):
                 self.update_axis_domains(self._symbols[i])

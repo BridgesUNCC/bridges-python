@@ -248,8 +248,8 @@ class Symbol:
             scale_m = [[0.0 for i in range(3)] for j in range(3)]
 
             self.identity(scale_m)
-            scale_m[0][0] = sx
-            scale_m[0][1] = sy
+            scale_m[0][0] = args[0]
+            scale_m[0][1] = args[1]
 
             self._xform = self.mat_mult(self._xform, scale_m)
         elif len(args) is 4:
@@ -329,7 +329,7 @@ class Symbol:
         }
         ds["type"] = self.get_shape_type()
         if self.fill_color is not None:
-            ds['fill'] = [self.fill_color.red, self.fill_color.green, self.fill_color.blue, self.fill_color.alpha]
+            ds['fill-color'] = [self.fill_color.red, self.fill_color.green, self.fill_color.blue, self.fill_color.alpha]
         if self.opacity is not  None:
             ds['opacity'] = self.opacity
         if self._xform_flag:
@@ -337,7 +337,7 @@ class Symbol:
         if self.label is not None:
             ds['label'] = self.label
         if self.stroke_color is not None:
-            ds['stroke'] = [self.stroke_color.red, self.stroke_color.green, self.stroke_color.blue, self.stroke_color.alpha]
+            ds['stroke-color'] = [self.stroke_color.red, self.stroke_color.green, self.stroke_color.blue, self.stroke_color.alpha]
         if self.stroke_width is not None:
             ds['stroke-width'] = self.stroke_width
         if self.stroke_dash is not None:
@@ -356,5 +356,5 @@ class Symbol:
         if parent is not None:
             obj['parentID'] = parent
 
-        symbol_json.update(obj)
+        symbol_json.append(obj)
 

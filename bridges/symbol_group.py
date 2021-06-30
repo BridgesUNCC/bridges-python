@@ -10,10 +10,10 @@ class SymbolGroup(Symbol):
     def add_symbol(self, s):
         self.al.append(s)
 
-    def shape_type(self):
+    def get_shape_type(self):
         return "group"
 
-    def get_all_json(self, symbol_json, parent):
+    def add_all_json(self, symbol_json, parent):
         id = len(symbol_json)
 
         obj = self.get_json_representation()
@@ -23,7 +23,7 @@ class SymbolGroup(Symbol):
         if parent is not None:
             obj['parentID'] = parent
 
-        symbol_json.update(obj)
+        symbol_json.append(obj)
 
         for i in range(len(self.al)):
             self.al[i].add_all_json(symbol_json, id)
