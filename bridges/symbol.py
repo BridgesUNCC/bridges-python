@@ -345,3 +345,15 @@ class Symbol:
             ds['layer-dasharray'] = self.layer
         return ds
 
+    def add_all_json(self, symbol_json, parent):
+        id = len(symbol_json)
+
+        obj = self.get_json_representation()
+
+        obj['id'] = id
+
+        if parent is not None:
+            obj['parentid'] = parent
+
+        symbol_json.update(obj)
+
