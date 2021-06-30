@@ -343,7 +343,7 @@ class Symbol:
         if self.stroke_dash is not None:
             ds['stoke-dasharray'] = self.stroke_dash
         if self.layer is not None:
-            ds['layer-dasharray'] = self.layer
+            ds['layer'] = self.layer
         return ds
 
     def add_all_json(self, symbol_json, parent):
