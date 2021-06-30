@@ -20,23 +20,21 @@ class Symbol:
     @date 12/24/18, 7/12/19
     """
 
-    _ids = 0 #id for this symbol. Class level so each object has unique id
 
     def __init__(self):
         """
         Constructor for a Symbol
         """
-        self._identifier = str(Symbol._ids)
-        self._label = ""
-        self._fill_color = Color("white")
-        self._stroke_color = Color("white")
-        self._opacity = 1.0
-        self._stroke_width = 1.0
-        self._stroke_dash = 1
-        self._location_y = 0.0
-        self._location_x = 0.0
-        self._shape_type = "circle"
-        Symbol._ids += 1
+        self._label = None
+        self._fill_color = None
+        self._stroke_color = None
+        self._opacity = None
+        self._stroke_width = None
+        self._stroke_dash = None
+        self._layer = None
+        self._transform = None
+        self._xform = [[0.0 for i in range(3)] for j in range(3)] #3x3
+        self._xform_flag = False
 
     @property
     def label(self) -> str:
@@ -58,14 +56,8 @@ class Symbol:
         """
         self._label = label
 
-    @property
-    def identifier(self) -> str:
-        """
-        Getter for the symbols identifier
-        Returns:
-            str
-        """
-        return self._identifier
+    def shape_type(self):
+        return ""
 
     @property
     def fill_color(self) -> Color:
@@ -181,95 +173,142 @@ class Symbol:
             self._stroke_dash = dash
 
     @property
-    def shape_type(self):
-        """
-        Get the shape type (string)
-        Returns:
-            shape name (string)
-        """
-        return self._shape_type
+    def layer(self) -> int:
+        return self._layer
 
-    @shape_type.setter
-    def shape_type(self, shape):
-        """
-        Set the shape type (string)
-        Args:
-            shape: shape name to set
-        """
-        self._shape_type = shape
+    @layer.setter
+    def layer(self, l: int):
+        self._layer = l
 
-    def set_location(self, x: float, y: float) -> None:
-        """
-        Setter for the location of the  center of the symbol
-        Args:
-            x: x location 
-            y: y location
-        Returns:
-            None
-        Raises:
-            Value error
-        """
-        if x > float('-inf') and x < float('inf') and y > float('-inf') and y < float('inf'):
-            self._location_x = x
-            self._location_y = y
-        else:
-            raise ValueError("Coordinates must be real numbers")
+    @property
+    def xform(self):
+        return self._xform
 
-    def get_location(self) -> list:
-        """
-        Getter for the location of a symbol
-        Returns:
-            list : the x and y coordinates of the shape's current location
-        """
-        return [self._location_x, self._location_y]
 
-    def get_dimensions(self) -> list:
+    def print_mat(self, m: list):
         """
-        Getter for the dimensions
-        Returns:
-            list : the bounding box of this shape (xmin, xmax, ymin, ymax)
+        print the current matrix for debugging
+        :param m: 3x3 matrix as 2d list to be printed
         """
-        return [0.0, 0.0, 0.0, 0.0]
+        for i in range(3):
+            for j in range(3):
+                print(m[i][j] + ",")
+        print("\n")
 
-    def translate_point(self, pt, tx, ty):
+    def identity(self, m: list) -> list:
         """
-        Translate a point by tx, ty along X and Y respectively
-        Args:
-            pt: 2D point to be translated
-            tx: translation factor in X
-            ty: translation factor in Y
+        create the identity matrix
+        :param m: is a 3x3 input matrix as a 2d list
+        :return: a 2d list as a 3x3 identity matrix
         """
-        pt[0] += tx
-        pt[1] += ty
-        return pt
+        for i in range(3):
+            for j in range(3):
+                if i is j:
+                    m[i][j] = 1.0
+                else:
+                    m[i][j] = 0.0
 
-    def scale_point(self, pt, sx, sy):
-        """
-        Scale a point by sx, sy along X and Y respectively
-        Args:
-            pt: 2D point to be scaled
-            sx: scale factor in X
-            sy: scale factor in Y
-        """
-        pt[0] *= sx
-        pt[1] *= sy
-        return pt
+        return m
 
-    def rotate_point(self, pt, angle):
-        """
-        Rotate a point by 'angle' (2D rotation)
-        Args:
-            pt: 2D point to be rotated
-            angle: rotation angle
-        """
-        angle_r = math.radians(angle)
-        c = math.cos(angle_r)
-        s = math.sin(angle_r)
+    def mat_mult(self, m1: list, m2: list) -> list:
+        result = [[0.0 for i in range(3)] for j in range(3)]
 
-        tmp = [pt[0] * c - pt[1] * s, pt[0] * s + pt[1] * c]
-        pt[0] = float(tmp[0])
-        pt[1] = float(tmp[1])
-        return pt
+        for i in range(3):
+            for j in range(3):
+                for k in range(3):
+                    result[i][j] += m1[i][k] * m2[k][j]
+
+        return result
+
+    def vec_mat_mult(self, m: list, v: list) -> list:
+        v_out = [m[0][0]*v[0] + m[0][1]*v[1] + m[0][2] * v[2],
+				m[1][0]*v[0] + m[1][1]*v[1] + m[1][2] * v[2],
+				1.0]
+
+        return v_out
+
+
+    def translate(self, tx: float, ty: float):
+        transl = [[0.0 for i in range(3)] for j in range(3)]
+
+        self.identity(transl)
+
+        #apply transform
+        transl[0][2] = tx
+        transl[1][2] = ty
+
+        #update symbol transform matrix
+        self._xform = self.mat_mult(self._xform, transl)
+
+        self._xform_flag = True
+
+    def scale(self, *args):
+
+        if len(args) is 2:
+            scale_m = [[0.0 for i in range(3)] for j in range(3)]
+
+            self.identity(scale_m)
+            scale_m[0][0] = sx
+            scale_m[0][1] = sy
+
+            self._xform = self.mat_mult(self._xform, scale_m)
+        elif len(args) is 4:
+            scale_m = [[args[0], 0.0, 0.0], [0.0, args[1], 0.0], [0.0, 0.0, 1.0]]
+
+            transl_pre = [[1.0, 0.0, -args[2]], [0.0, 1.0, -args[3]], [0.0, 0.0, 1.0]]
+            transl_post = [[1.0, 0.0, args[2]], [0.0, 1.0, args[2]], [0,0, 0.0, 1.0]]
+
+            scale_comp = self.mat_mult(transl_post, self.mat_mult(scale_m, transl_pre))
+
+            self._xform =self.mat_mult(self._xform, scale_comp)
+
+
+        self._xform_flag = True
+
+    def rotate(self, *args):
+        if len(args) is 1:
+            rotate_m = [[0.0 for i in range(3)] for j in range(3)]
+
+            self.identity(rotate_m)
+
+            angle_r = args[0] * (math.pi / 180.0)
+            cos_a = math.cos(angle_r)
+            sin_a = math.sin(angle_r)
+
+            rotate_m[0][0] = rotate_m[1][1] = cos_a
+            rotate_m[0][1] = -sin_a
+            rotate_m[1][0] = sin_a
+
+            self._xform = self.mat_mult(self._xform, rotate_m)
+        elif len(args) is 3:
+            angle_r = args[0] * (math.pi / 180.0)
+            cos_a = math.cos(angle_r)
+            sin_a = math.sin(angle_r)
+
+            rotate_m = [[cos_a, -sin_a, 0.0], [sin_a, cos_a, 0.0], [0.0, 0.0, 1.0]]
+            transl_pre = [[1.0, 0.0, -args[1]], [0.0, 1.0, -args[2]], [0.0, 0.0, 1.0]]
+            transl_post = [[1.0, 0.0, args[1]], [0.0, 1.0, args[2]], [0, 0, 0.0, 1.0]]
+
+            rot_comp = self.mat_mult(transl_post, self.mat_mult(rotate_m, transl_pre))
+
+            self._xform = self.mat_mult(self._xform, rot_comp)
+
+
+        self._xform_flag = True
+
+    def set_transform(self, a:float, b:float, c:float, d:float, e:float, f:float):
+        self._xform[0][0] = a
+        self._xform[0][1] = b
+        self._xform[0][2] = c
+        self._xform[1][0] = d
+        self._xform[1][1] = e
+        self._xform[1][2] = f
+        self._xform[2][0] = 0.0
+        self._xform[2][1] = 0.0
+        self._xform[2][2] = 1.0
+
+        self._xform_flag = True
+
 
     def get_json_representation(self) -> dict:
         """
@@ -288,20 +327,21 @@ class Symbol:
             #     "y": self._location_y
             # }
         }
-        if self.fill_color != Color("white"):
+        if self.fill_color is not None:
             ds['fill'] = [self.fill_color.red, self.fill_color.green, self.fill_color.blue, self.fill_color.alpha]
-        if self.opacity != 1.0:
+        if self.opacity is not  None:
             ds['opacity'] = self.opacity
-        if self.stroke_color != Color("white"):
+        if self._xform_flag:
+            ds['transform'] = [self._xform[0][0], self._xform[1][0], self._xform[0][1], self._xform[1][1], self._xform[0][2], self._xform[1][2]]
+        if self.label is not None:
+            ds['label'] = self.label
+        if self.stroke_color is not None:
             ds['stroke'] = [self.stroke_color.red, self.stroke_color.green, self.stroke_color.blue, self.stroke_color.alpha]
-        if self.stroke_width != 1.0:
+        if self.stroke_width is not None:
             ds['stroke-width'] = self.stroke_width
-        if self.stroke_dash != 1:
+        if self.stroke_dash is not None:
             ds['stoke-dasharray'] = self.stroke_dash
-        if self._location_x != 0.0 or self._location_y != 0.0:
-            ds['location'] = {
-                "x": self._location_x,
-                "y": self._location_y
-            }
+        if self.layer is not None:
+            ds['layer-dasharray'] = self.layer
         return ds
 
