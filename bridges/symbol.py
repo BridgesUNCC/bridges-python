@@ -35,6 +35,7 @@ class Symbol:
         self._transform = None
         self._xform = [[0.0 for i in range(3)] for j in range(3)] #3x3
         self._xform_flag = False
+        self.identity(self._xform)
 
     @property
     def label(self) -> str:
@@ -212,11 +213,13 @@ class Symbol:
 
     def mat_mult(self, m1: list, m2: list) -> list:
         result = [[0.0 for i in range(3)] for j in range(3)]
-
+        print(m2)
         for i in range(3):
             for j in range(3):
                 for k in range(3):
                     result[i][j] += m1[i][k] * m2[k][j]
+
+        print(result)
 
         return result
 
