@@ -15,9 +15,19 @@ class lru_cache():
     def __init__(self, max_cache_size: int = 0):
         self.max_cache_size = max_cache_size + 1
         self.lru = []
-        self.cache_dir = os.environ['HOME'] + "/.cache/bridges_data/python/"
+
+        if "HOME" in os.environ:
+            self.cache_dir = os.environ['HOME'] + "/.cache/bridges_data/python/"
+
+        elif os.name == "nt" and os.path.isdir(os.getenv('APPDATA') + "/local/bridges_data/python/"):
+            self.cache_dir = os.getenv('APPDATA') + "/local/bridges_data/python/"
+
+        else:
+            self.cache_dir = os.getcwd() + "/.cache/bridges_data/python/"
+
+
         if not os.path.isdir(self.cache_dir):
-            os.mkdir(self.cache_dir)
+            os.makedirs(self.cache_dir)
 
 
     def put(self, hash, content):
