@@ -22,56 +22,56 @@ class GutenbergMeta:
 
     @property
     def id(self):
-        return self.id
+        return self.__id
 
     @id.setter
     def id(self, i):
-        self.id = i
+        self.__id = i
 
     @property
     def title(self):
-        return self.title
+        return self.__title
 
     @title.setter
     def title(self, i):
-        self.title = i
+        self.__title = i
 
     @property
     def lang(self):
-        return self.lang
+        return self.__lang
     
     @lang.setter
     def lang(self, i):
-        self.lang = i
+        self.__lang = i
 
     @property
     def date(self):
-        return self.date_added
+        return self._date_added
     
     @date.setter
     def date(self, i):
-        self.date_added = i
+        self.__date_added = i
 
     @property
     def authors(self):
-        return self.authors_list
+        return self.__authors_list
 
     @authors.setter
     def authors(self, i):
-        self.authors_list = i
+        self.__authors_list = i
 
     @property
     def genres(self):
-        return self.genres_list
+        return self.__genres_list
 
     @genres.setter
     def genres(self, i):
-        self.genres_list = i
+        self.__genres_list = i
 
     @property
     def loc(self):
-        return self.loc_list
+        return self.__loc_list
 
     @loc.setter
     def loc(self, i):
-        self.loc_list = i
+        self.__loc_list = i

@@ -938,7 +938,7 @@ def get_gutenberg_book_metadata(*args):
 
     book_list = []
     for node in data['book_list']:
-        meta = gutenberg_meta.GutenbergMeta
+        meta = gutenberg_meta.GutenbergMeta ()
 
         meta.id = node["id"]
         meta.title = node['title']
