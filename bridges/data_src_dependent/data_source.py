@@ -21,7 +21,7 @@ from bridges.color_grid import ColorGrid
 from bridges.color import Color
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-gutenberg_url = "http://bridges-data-server-gutenberg.bridgesuncc.org"
+gutenberg_url = "http://bridges-data-server-gutenberg-t.bridgesuncc.org"
 
 def get_game_data():
     """
