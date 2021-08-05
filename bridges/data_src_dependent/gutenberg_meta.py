@@ -22,56 +22,126 @@ class GutenbergMeta:
 
     @property
     def id(self):
+        """
+        @brief get book's id
+        Returns:
+            id of book
+        """
         return self.__id
 
     @id.setter
     def id(self, i):
+        """
+        @brief Set book's id
+        Args:
+            i:  id of book
+        """
         self.__id = i
 
     @property
     def title(self):
+        """
+        @brief get book's title
+        Returns:
+            title of book
+        """
         return self.__title
 
     @title.setter
     def title(self, i):
+        """
+        @brief Set book's title
+        Args:
+            i:  title of book
+        """
         self.__title = i
 
     @property
     def lang(self):
+        """
+        @brief get book's language
+        Returns:
+            language of book
+        """
         return self.__lang
     
     @lang.setter
     def lang(self, i):
+        """
+        @brief Set book's language
+        Args:
+            i:  language of book
+        """
         self.__lang = i
 
     @property
     def date(self):
+        """
+        @brief get book's date added to gutenberg
+        Returns:
+            date of book
+        """
         return self._date_added
     
     @date.setter
     def date(self, i):
+        """
+        @brief Set book's date added to gutenberg
+        Args:
+            i:  date of book
+        """
         self.__date_added = i
 
     @property
     def authors(self):
+        """
+        @brief get book's authors
+        Returns:
+            authors of book
+        """
         return self.__authors_list
 
     @authors.setter
     def authors(self, i):
+        """
+        @brief Set book's authors
+        Args:
+            i:  authors of book
+        """
         self.__authors_list = i
 
     @property
     def genres(self):
+        """
+        @brief get book's genres
+        Returns:
+            genres of book
+        """
         return self.__genres_list
 
     @genres.setter
     def genres(self, i):
+        """
+        @brief Set book's genres
+        Args:
+            i:  genres of book
+        """
         self.__genres_list = i
 
     @property
     def loc(self):
+        """
+        @brief get book's library of congress classifications
+        Returns:
+            library of congress calssifications of book
+        """
         return self.__loc_list
 
     @loc.setter
     def loc(self, i):
+        """
+        @brief Set book's library of congress classifications
+        Args:
+            i:  library of congress classifications of book
+        """
         self.__loc_list = i
