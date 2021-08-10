@@ -24,5 +24,5 @@ Just take a look at setup.py and follow the instructions provided in the link.
 ## packaging for bridges website
 
 ```
-zip -r bridges-python-VERSION.zip bridges/
+zip -r bridges-python-VERSION.zip bridges/ setup.py
 ```
