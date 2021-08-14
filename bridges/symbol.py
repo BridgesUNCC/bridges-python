@@ -246,8 +246,24 @@ class Symbol:
         self._xform_flag = True
 
     def scale(self, *args):
+        """
+        scale the symbol from a particular center location
 
-        if len(args) is 2:
+        if args is a single float, then scale both dimensions from the origin (what you want in 99% of cases)
+
+        if args is two floats, scale x based on args[0] and y based on args[1] from the origin
+
+        if args is four float, scale x based on args[0] and y based on args[1] from point args[2],args[3]
+        """        
+        if len(args) is 1:
+            scale_m = [[0.0 for i in range(3)] for j in range(3)]
+
+            self.identity(scale_m)
+            scale_m[0][0] = args[0]
+            scale_m[0][1] = args[0]
+
+            self._xform = self.mat_mult(self._xform, scale_m)
+        elif len(args) is 2:
             scale_m = [[0.0 for i in range(3)] for j in range(3)]
 
             self.identity(scale_m)
