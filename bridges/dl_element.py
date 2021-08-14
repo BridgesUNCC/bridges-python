@@ -21,7 +21,7 @@ class DLelement(SLelement):
     @author Mihai Mehedint, Kalpathi Subramanian
     @date  2018, 6/24/19
     
-    \sa Doubly Linked List tutorial : http://bridgesuncc.github.io/tutorials/DoublyLinkedList.html
+    \sa Doubly Linked List tutorial : https://bridgesuncc.github.io/tutorials/DoublyLinkedList.html
     """
 
 

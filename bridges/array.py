@@ -15,7 +15,7 @@ class Array():
     Arrays are internally represented as 1D arrays; currently 1D, 2D  and
     3D arrays are supported.
     
-    Example Tutorial at: http://bridgesuncc.github.io/tutorials/Array.html (1D, 2D, and 3D Array)
+    Example Tutorial at: https://bridgesuncc.github.io/tutorials/Array.html (1D, 2D, and 3D Array)
     """
 
     dims = [1,1,1] #used for setting size of array based on dimensions

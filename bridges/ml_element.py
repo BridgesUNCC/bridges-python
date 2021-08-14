@@ -28,7 +28,7 @@ class MLelement(SLelement):
     
     @date 2018, 7/23/19, 2021
     
-    \sa There is a tutorial about Multi Lists : http://bridgesuncc.github.io/tutorials/ML.html
+    \sa There is a tutorial about Multi Lists : https://bridgesuncc.github.io/tutorials/MultiList.html
     """
 
     def __init__(self, **kwargs) -> None:

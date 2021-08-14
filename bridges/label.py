@@ -8,10 +8,7 @@ class Label(Symbol):
     
     Labels have width, height, font size.
     
-    \sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
-    
-    
-    \sa Shape collection tutorial, http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+    \sa Shape collection tutorial, https://bridgesuncc.github.io/tutorials/Symbol_Collection.html
     """
     def __init__(self, label = None):
         super(Label, self).__init__()

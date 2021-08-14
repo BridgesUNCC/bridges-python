@@ -16,7 +16,7 @@ class Array3D(Array):
     Arrays are internally represented as 1D arrays; currently 1D, 2D  and
     3D arrays are supported.
     
-    Example Tutorial at: http:bridgesuncc.github.iotutorialsArray.html 
+    Example Tutorial at: https://bridgesuncc.github.io/tutorials/Array.html 
     (1D, 2D, and 3D Array)<br>
     """
 

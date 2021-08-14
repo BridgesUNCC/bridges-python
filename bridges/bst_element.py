@@ -24,7 +24,7 @@ class BSTElement(BinTreeElement):
     @brief This class extends the BinTreeElement class by adding a 'key' value
     for use in a binary search tree implementations.
     
-    Binary Search Tree tutorial, http://bridgesuncc.github.io/tutorials/BinarySearchTree.html
+    Binary Search Tree tutorial, https://bridgesuncc.github.io/tutorials/BinarySearchTree.html
     """
 
     def __init__(self, **kwargs) -> None:

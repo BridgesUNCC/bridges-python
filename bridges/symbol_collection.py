@@ -10,7 +10,7 @@ class SymbolCollection:
     @date 2018, 7/23/19
     
     \sa Symbol Collection tutorial, 
-    http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+    https://bridgesuncc.github.io/tutorials/Symbol_Collection.html
     """
     def __init__(self):
         """

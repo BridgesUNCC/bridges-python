@@ -23,7 +23,7 @@ class ColorGrid(Grid):
     
     @date 2018, 7/24/19, 2021
     
-    Color grid tutorial at http://bridgesuncc.github.io/tutorials/Grid.html
+    Color grid tutorial at https://bridgesuncc.github.io/tutorials/Grid.html
     """
 
 

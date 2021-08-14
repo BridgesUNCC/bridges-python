@@ -26,7 +26,7 @@ class CircSLelement(SLelement):
     
     @date 6/22/16, 1/7/17, 5/17/17, 7/23/19, 12/29/20
     
-    Circular singly linked list tutorial: http://bridgesuncc.github.io/tutorials/CircularSinglyLinkedList.html
+    Circular singly linked list tutorial: https://bridgesuncc.github.io/tutorials/CircularSinglyLinkedList.html
     """
 
     def __init__(self, **kwargs) -> None:

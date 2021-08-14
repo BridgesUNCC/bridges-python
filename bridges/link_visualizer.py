@@ -31,7 +31,7 @@ class LinkVisualizer():
     @date 2018, 6/24/19
     
     \sa Example Tutorial at <br>
-    http://bridgesuncc.github.io/Hello_World_Tutorials/SLL.html
+    https://bridgesuncc.github.io/tutorials/SinglyLinkedList.html
     """
 
     def __init__(self) -> None:

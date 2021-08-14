@@ -8,7 +8,7 @@ class Grid:
 
     @date  2018, 7/24/19, 2021
 
-    \sa Color grid tutorial at http://bridgesuncc.github.io/tutorials/Grid.html
+    \sa Color grid tutorial at https://bridgesuncc.github.io/tutorials/Grid.html
     """
     import traceback
 

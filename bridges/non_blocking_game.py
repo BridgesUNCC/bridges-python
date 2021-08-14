@@ -98,7 +98,7 @@ class NonBlockingGame(GameBase):
 	@author Erik Saule
 	@date 72119
 
-    NonBlockingGame tutorial at: http://bridgesuncc.github.io/tutorials/NonBlockingGame.html
+    NonBlockingGame tutorial at: https://bridgesuncc.github.io/tutorials/NonBlockingGame.html
     """
 
     def __init__(self, assid, login, apikey, rows, cols):

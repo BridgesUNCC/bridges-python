@@ -19,7 +19,7 @@ class Bridges:
     include USGS Earthquake Data, IMDB Actor/Movie Data (2 versions), Gutenberg Book
     Collection Meta Data, a Video Game Dataset, Shakespeare Dataset, OpenStreetMap and Elevation map data. More information
     is found in the respective methods (below) and at 
-    http://bridgesuncc.github.io/datasets.html <p>
+    https://bridgesuncc.github.io/datasets.html <p>
     
     A typical bridges program includes creating the bridges object, followed by creation
     of the data structure by the user, assigning visual attributes to elements of the

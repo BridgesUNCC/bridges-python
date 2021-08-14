@@ -19,7 +19,7 @@ class Array1D(Array):
         System.out.println(i);
     \endcode
     
-    Example Tutorial at: http://bridgesuncc.github.io/tutorials/Array.html (1D, 2D, and 3D Array)<br>
+    Example Tutorial at: https://bridgesuncc.github.io/tutorials/Array.html (1D, 2D, and 3D Array)<br>
     """
 
 

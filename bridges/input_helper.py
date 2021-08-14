@@ -9,7 +9,7 @@ class InputHelper(KeyPressListener):
     handling for Bridges games
     
     @sa See the Games Tutorials at
-    http://bridgesuncc.github.io/tutorials/NonBlockingGame.html
+    https://bridgesuncc.github.io/tutorials/NonBlockingGame.html
     for more information on keys and mouse device usage.
     
     @author Erik Saule, David Burlinson

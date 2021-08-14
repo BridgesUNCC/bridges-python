@@ -29,7 +29,7 @@ class CircDLelement(DLelement):
     
     @date   7/17/16, 1/16/17 7/23/19, 2021
     
-    Circular doubly linked list tutorial: http://bridgesuncc.github.io/tutorials/CircularDoublyLinkedList.html
+    Circular doubly linked list tutorial: https://bridgesuncc.github.io/tutorials/CircularDoublyLinkedList.html
     """
 
 

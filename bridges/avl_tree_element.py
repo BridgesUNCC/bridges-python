@@ -23,7 +23,7 @@ class AVLTreeElement(BSTElement):
     
     @date 6/22/16, 1/7/17, 5/17/17, 6/09/19
     
-    Example tutorial using AVLTreeElement at: http://bridgesuncc.github.io/tutorials/AVL.html
+    Example tutorial using AVLTreeElement at: https://bridgesuncc.github.io/tutorials/AVL.html
     """
     def __init__(self, *args, **kwargs) -> None:
         """

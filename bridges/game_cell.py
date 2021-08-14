@@ -7,7 +7,7 @@ class GameCell:
     Each cell has a foreground color, background color, and symbol.
     @sa  Refer to the Game tutorial at 
     
-    http://bridgesuncc.github.io/tutorials/NonBlockingGame.html
+    https://bridgesuncc.github.io/tutorials/NonBlockingGame.html
     
     @author David Burlinson, Matthew McQuaigue
     @date 9/06/18

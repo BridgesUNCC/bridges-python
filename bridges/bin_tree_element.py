@@ -21,7 +21,7 @@ class BinTreeElement(TreeElement):
     
     @date   2018, 7/23/19, 1/6/21
     
-    \sa Binary tree tutorial, http://bridgesuncc.github.io/tutorials/BinTree.html
+    \sa Binary tree tutorial, https://bridgesuncc.github.io/tutorials/BinTree.html
     """
 
     def __init__(self, **kwargs) -> None:

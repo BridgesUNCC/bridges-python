@@ -22,7 +22,7 @@ class Element:
     
     All the tutorials under
     
-    http://bridgesuncc.github.io/tutorials/Overview.html
+    https://bridgesuncc.github.io/tutorials/Overview.html
     
     illustrate examples of using different types of Element objects and how to
     manipulate their visual attributes.

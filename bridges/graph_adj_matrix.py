@@ -27,7 +27,7 @@ class GraphAdjMatrix():
     @author Kalpathi Subramanian, Mihai Mehedint
     
     
-    \sa Example tutorial at http://bridgesuncc.github.io/tutorials/Graph_AM.html
+    \sa Example tutorial at https://bridgesuncc.github.io/tutorials/Graph_AM.html
     
     """
 
