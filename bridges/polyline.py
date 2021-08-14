@@ -28,7 +28,7 @@ class Polyline(Symbol):
         else:
             self._points = []
 
-    def get_symbol_type(self):
+    def get_shape_type(self):
         """
         Get the name of the symbol
         Returns:
