@@ -63,7 +63,7 @@ class GraphAdjList:
     @author Matthew Mcquaigue, Kalpathi Subramanian
     @date 2018,  7/23/19, 1/5/21
     
-    \sa graph adjacency list tutorial, http://bridgesuncc.github.io/tutorials/Graph_AL.html
+    \sa graph adjacency list tutorial, http://bridgesuncc.github.io/tutorials/Graph.html
     
     There are two visualization engines available for graph. The small
     graph visualization supports all attributes of vertices and edges
