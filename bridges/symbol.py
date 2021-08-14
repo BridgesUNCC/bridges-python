@@ -256,26 +256,19 @@ class Symbol:
         if args is four float, scale x based on args[0] and y based on args[1] from point args[2],args[3]
         """        
         if len(args) is 1:
-            scale_m = [[0.0 for i in range(3)] for j in range(3)]
-
-            self.identity(scale_m)
-            scale_m[0][0] = args[0]
-            scale_m[0][1] = args[0]
-
+            scale_m = [[args[0], 0.0, 0.0], [0.0, args[0], 0.0], [0.0, 0.0, 1.0]]
+            
             self._xform = self.mat_mult(self._xform, scale_m)
         elif len(args) is 2:
-            scale_m = [[0.0 for i in range(3)] for j in range(3)]
 
-            self.identity(scale_m)
-            scale_m[0][0] = args[0]
-            scale_m[0][1] = args[1]
-
+            scale_m = [[args[0], 0.0, 0.0], [0.0, args[1], 0.0], [0.0, 0.0, 1.0]]
+            
             self._xform = self.mat_mult(self._xform, scale_m)
         elif len(args) is 4:
             scale_m = [[args[0], 0.0, 0.0], [0.0, args[1], 0.0], [0.0, 0.0, 1.0]]
 
             transl_pre = [[1.0, 0.0, -args[2]], [0.0, 1.0, -args[3]], [0.0, 0.0, 1.0]]
-            transl_post = [[1.0, 0.0, args[2]], [0.0, 1.0, args[2]], [0,0, 0.0, 1.0]]
+            transl_post = [[1.0, 0.0, args[2]], [0.0, 1.0, args[3]], [0,0, 0.0, 1.0]]
 
             scale_comp = self.mat_mult(transl_post, self.mat_mult(scale_m, transl_pre))
 
