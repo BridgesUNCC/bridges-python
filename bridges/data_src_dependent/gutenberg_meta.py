@@ -1,5 +1,18 @@
 class GutenbergMeta:
+    """
+    @brief Class to hold the meta data of various books from 
+    the Gutenberg Project. This is to be used with the 
+    Gutenberg request functions. 
 
+    This class holds id, title, language, date_added,
+    authors, genres, and library of congress classifications.
+
+    For an example, check out https://bridgesuncc.github.io/tutorials/Data_Gutenberg.html
+    
+    @author Jay Strahler
+    
+    @date 12/28/20 
+    """
     def __init__(self, id = 0, title = "", lang = "", date_added = "", authors = [], genres = [], loc = []):
         """
         Constructor for a gutenbergmeta object that holds the metadata

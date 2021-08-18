@@ -8,6 +8,8 @@ class ActorMovieIMDB():
     movie pairs and no other attribute data. The second also has
     movie ratings and genres.
 
+    For an example, check out https://bridgesuncc.github.io/tutorials/Data_IMDB.html
+
     @author Kalpathi Subramanian, Matthew Mcquaigue
 
     @date 2/18/18, 12/29/20

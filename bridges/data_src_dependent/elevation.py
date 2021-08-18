@@ -7,6 +7,8 @@ class ElevationData:
     The data at [0][0] are at location xll, yll and the spatial resolution 
     is cellsize.
 
+    For an example, check out https://bridgesuncc.github.io/tutorials/Data_Elevation.html
+
     @author Jay Strahler, Kalpathi Subramanian
     
     @date 3/28/20, 12/29/20, 1/6/20

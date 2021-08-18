@@ -10,8 +10,8 @@
 #    Refer to tutorial examples to using this data source in data structure
 #    assignments.
 #    
-#    Refer to tutorial examples to using this data source in data structure
-#    assignments.
+#    For an example, check out https://bridgesuncc.github.io/tutorials/Data_Shakespeare.html
+#
 #    @author Matthew Mcauaigue, Kalpathi Subramanian
 #
 #    @date   2018, 12/28/20

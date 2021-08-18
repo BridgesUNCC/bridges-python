@@ -6,8 +6,7 @@ class Song:
     data source as part of their application. It provides an API that makes
     it easy to access the attributes of this data set.
     
-    Refer to tutorial examples to using this data source in data structure
-    assignments.
+    For an example, check out https://bridgesuncc.github.io/tutorials/Data_Song_Lyrics.html
 
     @author Matthew Mcquaigue, Kalpathi Subramanian
     @date   2018, 12/29/20

@@ -9,6 +9,8 @@ class Game:
     
     Each game record has title, platform on which it can be played,
     rating,  and a list of genres.
+
+    For an example, check out https://bridgesuncc.github.io/tutorials/Data_IGN_Games.html
     
     @author Matthew Mcquaigue, Kalpathi Subramanian
     @date   2/1/17, 12/29/20, 1/6/21

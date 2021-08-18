@@ -11,6 +11,8 @@ class EarthquakeUSGS:
     continually monitor USGIS site (tweets) and retrieve the latest 
     quake data for use in student projects.
 
+    For an example, check out https://bridgesuncc.github.io/tutorials/Data_EQ_USGS.html
+
     @author Matthew Mcquaigue, Kalpathi Subramanian,
     @date  2/18/18, 12/29/20, 1/6/21
     """

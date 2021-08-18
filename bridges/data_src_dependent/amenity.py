@@ -4,6 +4,11 @@ class amenityData:
     """
     @brief This class is a helper class to be used with amenities data retrieved from
     OpenStreet Map data
+
+    The dataset contains amenity id, latitude, longitude, name, and a list of 
+    various other values.
+
+    For an example, check out https://bridgesuncc.github.io/tutorials/Data_Amenity.html
     
     @author Jay Strahler
     
@@ -105,7 +110,18 @@ class amenityData:
         self.other_data = []
 
 class meta:
+    """
+    @brief This class is a helper class to be used with amenities data retrieved from
+    OpenStreet Map data
 
+    This meta dataset contains the base information of the query requested.
+    This includes minimum latitude, minimum longitude, maximum latitude, 
+    maximum longitude, and a count of the total values returned.
+    
+    @author Jay Strahler
+    
+    @date 12/28/20 
+    """
     @property
     def minLat(self): 
         return self.minLat_val
@@ -155,7 +171,18 @@ class meta:
         self.count_val = count_val
 
 class amenities:
+    """
+    @brief This class is a helper class to be used with amenities data retrieved from
+    OpenStreet Map data
 
+    The dataset contains a list of amenityData objects, and the meta object. 
+
+    For an example, check out https://bridgesuncc.github.io/tutorials/Data_Amenity.html
+    
+    @author Jay Strahler
+    
+    @date 12/28/20 
+    """
     @property
     def data(self):
         return self.data_val

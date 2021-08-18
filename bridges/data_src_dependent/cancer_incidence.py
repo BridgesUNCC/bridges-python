@@ -5,6 +5,8 @@
 #    Disease Control, the following data set focuses on the crude rate for
 #    all types of cancer reported for different demograpic groups.
 #    Significant groupings include age, gender, race and geographical area.
+#
+#    For an example, check out https://bridgesuncc.github.io/tutorials/Data_CancerIncidence.html
 #    
 #    http://www.cdc.gov/cancer/npcr/uscs/download_data.htm
 #    Data: Courtesy of Corgis Datasets, 2017
