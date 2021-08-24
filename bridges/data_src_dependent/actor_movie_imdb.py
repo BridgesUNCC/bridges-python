@@ -1,5 +1,6 @@
-"""
-    A class to hold actor movie data -- using IMDB dataset.
+class ActorMovieIMDB():
+    """
+    @brief A class to hold actor movie data -- using IMDB dataset.  
 
     This dataset has a set of actor-movie pairs with movie rating and
     genres, possibly. There are two datasets, the first has 1813 actor
@@ -9,13 +10,12 @@
     This object is generally not created by the user, to see how its created check 
     out bridges::data_src_dependent::data_source::get_actor_movie_imdb_data()
 
-    For an example, check out https://bridgesuncc.github.io/tutorials/Data_IMDB.html
+    @sa For an example, check out https://bridgesuncc.github.io/tutorials/Data_IMDB.html
 
     @author Kalpathi Subramanian, Matthew Mcquaigue
 
     @date 2/18/18, 12/29/20
     """
-class ActorMovieIMDB():
     
     def __init__(self, a = None, m = None, r = None, genr = None):
         """

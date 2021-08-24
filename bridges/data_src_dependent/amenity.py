@@ -1,22 +1,20 @@
 
-"""
-@brief This class is a helper class to be used with amenities data retrieved from
-OpenStreet Map data
-
-The dataset contains amenity id, latitude, longitude, name, and a list of 
-various other values.
-
-This object is generally not created by the user, to see how its created check 
-out bridges::data_src_dependent::data_source::get_amenity_data()
-
-For an example, check out https://bridgesuncc.github.io/tutorials/Data_Amenity.html
-    
-@author Jay Strahler
-    
-@date 12/28/20 
-"""
 class amenityData:
+    """
+    @brief This class is a helper class to be used with amenities data retrieved from OpenStreet Map data
+
+    The dataset contains amenity id, latitude, longitude, name, and a list of 
+    various other values.
+
+    This object is generally not created by the user, to see how its created check 
+    out bridges::data_src_dependent::data_source::get_amenity_data()
     
+    @sa For an example, check out https://bridgesuncc.github.io/tutorials/Data_Amenity.html
+    
+    @author Jay Strahler
+    
+    @date 12/28/20 
+    """
     @property
     def id(self): 
         """

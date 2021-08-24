@@ -1,9 +1,6 @@
-
-
 class GutenbergBook:
     """
-    @brief  A Gutenberg Book object metadata only, used along with the
-    books data source.
+    @brief  A Gutenberg Book object metadata only, used along with the books data source.
  
     This is a convenience class provided for  users who wish to use this
     data source as part of their application. It provides an API that makes

@@ -1,4 +1,5 @@
-"""
+class ElevationData:
+    """
     @brief  Class that holds elevation data
 
     The data is stored as a 2d array .data of .cols columns and .rows rows.
@@ -8,14 +9,13 @@
     This object is generally not created by the user, to see how its created check 
     out bridges::data_src_dependent::data_source::get_elevation_data()
 
-    For an example, check out https://bridgesuncc.github.io/tutorials/Data_Elevation.html
+    @sa For an example, check out https://bridgesuncc.github.io/tutorials/Data_Elevation.html
 
     @author Jay Strahler, Kalpathi Subramanian
     
     @date 3/28/20, 12/29/20, 1/6/20
-"""
+    """
 
-class ElevationData:
     
 
     @property

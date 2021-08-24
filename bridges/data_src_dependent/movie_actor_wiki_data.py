@@ -1,18 +1,16 @@
 
-"""
+class MovieActorWikiData:
+    """
     @brief This is a helper class for accessing actor-movie data from Wikidata.
 
     This object is generally not created by the user, to see how its created check 
     out bridges::data_src_dependent::data_source::get_wiki_data_actor_movie()
 
-    For an example, check out https://bridgesuncc.github.io/tutorials/Data_WikiDataActor.html
+    @sa For an example, check out https://bridgesuncc.github.io/tutorials/Data_WikiDataActor.html
     
     @author Erik Saule, Matthew Mcquaigue, Kalpathi Subramanian
     @date  2020, 1/6/21
-"""
-class MovieActorWikiData:
-    
-
+    """
     def __init__(self):
         """
         Constructor
