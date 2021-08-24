@@ -1,21 +1,24 @@
 
-##
-#    @brief  A Shakespeare Data source object containing sonnets, poems and
-#    plays
-#    
-#    This is a convenience class provided for  users who wish to use this
-#    data source as part of their application. It provides an API that makes
-#    it easy to access the attributes of this data set.
-#    
-#    Refer to tutorial examples to using this data source in data structure
-#    assignments.
-#    
-#    For an example, check out https://bridgesuncc.github.io/tutorials/Data_Shakespeare.html
-#
-#    @author Matthew Mcauaigue, Kalpathi Subramanian
-#
-#    @date   2018, 12/28/20
-#    
+"""
+@brief  A Shakespeare Data source object containing sonnets, poems and
+plays
+   
+This is a convenience class provided for  users who wish to use this
+data source as part of their application. It provides an API that makes
+it easy to access the attributes of this data set.
+
+Refer to tutorial examples to using this data source in data structure
+assignments.
+
+This object is generally not created by the user, to see how its created check 
+out bridges::data_src_dependent::data_source::get_shakespeare_data()
+
+For an example, check out https://bridgesuncc.github.io/tutorials/Data_Shakespeare.html
+
+@author Matthew Mcauaigue, Kalpathi Subramanian
+
+@date   2018, 12/28/20
+"""
 
 class Shakespeare:
 

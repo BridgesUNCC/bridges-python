@@ -1,9 +1,7 @@
 import datetime
 import time
 
-
-class EarthquakeUSGS:
-    """
+"""
     @brief Class that holds earthquake data records.
 
     Class that hold earthquake data, for use with USGIS retrieved quake data.
@@ -11,11 +9,16 @@ class EarthquakeUSGS:
     continually monitor USGIS site (tweets) and retrieve the latest 
     quake data for use in student projects.
 
+    This object is generally not created by the user, to see how its created check 
+    out bridges::data_src_dependent::data_source::get_earthquake_usgs_data()
+
     For an example, check out https://bridgesuncc.github.io/tutorials/Data_EQ_USGS.html
 
     @author Matthew Mcquaigue, Kalpathi Subramanian,
     @date  2/18/18, 12/29/20, 1/6/21
     """
+class EarthquakeUSGS:
+    
     def __set_time_from_unix_timestamp(self, tm):
         epoch_time = int(tm)
         eq_time = epoch_time / 1000

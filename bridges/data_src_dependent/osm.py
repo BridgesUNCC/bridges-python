@@ -1,18 +1,22 @@
 import math
 from bridges.graph_adj_list import *
 
+"""
+@brief  Class that hold Open Street Map edges
+   
+Class that holds Open Street Map edges from https://openstreetmap.org
+
+For an example, check out https://bridgesuncc.github.io/tutorials/Data_OSM.html
+
+This object is generally not created by the user, to see how its created check 
+out bridges::data_src_dependent::data_source::get_osm_data()
+
+@author Erik Saule, Matthew Mcquaigue, Jay Strahler, Kalpathi Subramanian
+@date 2019, 12/28/20
+"""
 class OsmEdge:
-    """
-    @brief  Class that hold Open Street Map edges
-        
-    Class that holds Open Street Map edges from https://openstreetmap.org
-
-    For an example, check out https://bridgesuncc.github.io/tutorials/Data_OSM.html
-
-    @author Erik Saule, Matthew Mcquaigue, Jay Strahler, Kalpathi Subramanian
-    @date 2019, 12/28/20
-    """
-
+    
+    
     @property
     def source(self) -> int:
         """

@@ -5,6 +5,9 @@ class Song:
     This is a convenience class provided for  users who wish to use this
     data source as part of their application. It provides an API that makes
     it easy to access the attributes of this data set.
+
+    This object is generally not created by the user, to see how its created check 
+    out bridges::data_src_dependent::data_source::get_song()
     
     For an example, check out https://bridgesuncc.github.io/tutorials/Data_Song_Lyrics.html
 

@@ -24,4 +24,3 @@ echo
 echo ===========================================
 echo See per file report with "cat report.$file"
 echo ===========================================
-

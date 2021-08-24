@@ -1,6 +1,5 @@
 
-class Game:
-    """
+"""
     @brief  A Game object, used along with the Games data source.
     
     This is a convenience class provided for  users who wish to use this
@@ -10,11 +9,15 @@ class Game:
     Each game record has title, platform on which it can be played,
     rating,  and a list of genres.
 
+    This object is generally not created by the user, to see how its created check 
+    out bridges::data_src_dependent::data_source::get_game_data()
+
     For an example, check out https://bridgesuncc.github.io/tutorials/Data_IGN_Games.html
     
     @author Matthew Mcquaigue, Kalpathi Subramanian
     @date   2/1/17, 12/29/20, 1/6/21
-    """
+"""
+class Game:
 
     def __init__(self, title: str = "", platform: str = "", rating: float = 0.0, genre: str = ""):
         """
