@@ -21,7 +21,38 @@ from bridges.color_grid import ColorGrid
 from bridges.color import Color
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-gutenberg_url = "http://bridges-data-server-gutenberg.bridgesuncc.org"
+
+source_type = "live"
+
+def set_source_type(t):
+    global source_type
+    if (t == "testing"):
+        source_type = "testing"
+    elif (t == "local"):
+        source_type = "local"
+    return
+
+def get_gutenberg_url():
+    if source_type == "testing":
+        return "http://bridges-data-server-gutenberg-t.bridgesuncc.org"
+    elif source_type == "local":
+        return "http://localhost:3000"
+    return "http://bridges-data-server-gutenberg.bridgesuncc.org"
+
+def _get_osm_baseurl():
+    if source_type == "local":
+        return "http://localhost:3000"
+    return "http://bridges-data-server-osm.bridgesuncc.org"
+
+def get_elevation_url():
+    if source_type == "local":
+        return "http://localhost:3000"
+    return "http://bridges-data-server-elevation.bridgesuncc.org"
+
+def get_amenity_url():
+    if source_type == "local":
+        return "http://localhost:3000"
+    return "http://bridges-data-server-osm.bridgesuncc.org"
 
 def get_game_data():
     """
@@ -590,8 +621,6 @@ def osm_server_request(url):
 
     return server_data
 
-def _get_osm_baseurl():
-    return "http://bridges-data-server-osm.bridgesuncc.org/"
 
 def get_osm_data(*args) -> OsmData:
     """
@@ -698,7 +727,12 @@ def server_request(url):
             request = requests.get(url)
             if not request.ok:
                 raise request.raise_for_status()
-            raise RuntimeError("Issue with server request")
+            raise RuntimeError("404 issue with server request")
+        elif request.status_code == 504:
+            request = requests.get(url)
+            if not request.ok:
+                raise request.raise_for_status()
+            raise RuntimeError(f"504 issue with server request: {request.raise_for_status}")
         raise request.raise_for_status()
 
     server_data = request.content
@@ -717,8 +751,8 @@ def get_elevation_data(*args):
         Elevation data for the bounding box and resolution requested 
         (approximately) [type: ElevationData]
     """
-    base_url = "http://bridges-data-server-elevation.bridgesuncc.org/elevation"
-    hash_url = "http://bridges-data-server-elevation.bridgesuncc.org/hash"
+    base_url = get_elevation_url + "/elevation"
+    hash_url = get_elevation_url + "/hash"
 
     coords = args[0]
     minLat = str(coords[0])
@@ -865,11 +899,11 @@ def get_amenity_data(*args):
     """
     
     if(len(args)) == 5:
-        url = f"{_get_osm_baseurl()}/amenity?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
-        hash_url = f"{_get_osm_baseurl()}/hash?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={urllib.parse.quote(args[4])}"
+        url = f"{get_amenity_url()}/amenity?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
+        hash_url = f"{get_amenity_url()}/hash?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={urllib.parse.quote(args[4])}"
     elif(len(args) == 2):
-        url = f"{_get_osm_baseurl()}/amenity?location={urllib.parse.quote(args[0])}&amenity={urllib.parse.quote(args[1])}"
-        hash_url = f"{_get_osm_baseurl()}/hash?location={args[0]}&amenity={args[1]}"
+        url = f"{get_amenity_url()}/amenity?location={urllib.parse.quote(args[0])}&amenity={urllib.parse.quote(args[1])}"
+        hash_url = f"{get_amenity_url()}/hash?location={args[0]}&amenity={args[1]}"
     else:
         raise RuntimeError("Invalid Number of Map Request Inputs")
 
@@ -931,7 +965,7 @@ def get_gutenberg_book_metadata(*args):
         args[1]: metadata type, i.e id, title, lang, date_added, authors, genres, loc_class
     :return: a list of books with containing matched strings from the specified metadata type
     """
-    url = gutenberg_url + f"/search?search={args[0]}&type={args[1]}"
+    url = get_gutenberg_url() + f"/search?search={args[0]}&type={args[1]}"
 
     content = server_request(url)
     data = json.loads(content.decode('utf-8'))
@@ -958,7 +992,7 @@ def get_a_gutenberg_book_metadata(id):
     :param id: ID of the book
     :return: a dictionary containing the metadata of the gutenberg book
     """
-    url = gutenberg_url + "/meta?id=" + str(id)
+    url = get_gutenberg_url() + "/meta?id=" + str(id)
 
     content = server_request(url)
     data = json.loads(content.decode('utf-8'))
@@ -984,13 +1018,17 @@ def gutenberg_book_text(id, strip = False):
     :param strip: boolean to determine if headers and footers are stripped from the text
     :return: json containing the text of the book
     """
-    url = gutenberg_url + "/book?id=" + str(id)
-
-    lru = lru_cache.lru_cache(30)
+    url = get_gutenberg_url() + "/book?id=" + str(id)
+    
+    lru = lru_cache.lru_cache(120)
     try:
         if (lru.inCache("gutenberg" + str(id))):
+            if source_type == "local" or source_type == "testing":
+                print(f"Using cache to request {id}")
             data = lru.get("gutenberg" + str(id))
         else:
+            if source_type == "local" or source_type == "testing":
+                print(f"Using {source_type} server to request {id}")
             content = server_request(url)
             data = content.decode('utf-8')
             lru.put("gutenberg" + str(id), data)
