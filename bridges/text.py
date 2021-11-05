@@ -41,6 +41,14 @@ class Text(Symbol):
         self._font_size = s
 
     def set_anchor_alignment(self, typeLR, typeTB):
+        '''
+        Sets the alignment parameters for the text label
+        
+        @param typeLR valid parameters are "left", "middle", and "right"
+        @param typeTB valid parameters are "top", "bottom",  "embottom", "emtop", "middle"
+
+        @return  symbol
+        '''
         self._anchor_alignment_lr = typeLR
         self._anchor_alignment_tb = typeTB
 
