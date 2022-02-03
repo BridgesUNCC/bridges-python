@@ -294,7 +294,7 @@ class GraphAdjList:
         while sle is not None:
             ed = sle.value
             if ed.destination == dest:
-                return ed.get_edge_data()
+                return ed.edge_data
             sle = sle.next
 
     def get_edge(self, src: Union[str, Element], dest: Union[str, Element]):
