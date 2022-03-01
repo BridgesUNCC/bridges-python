@@ -751,8 +751,8 @@ def get_elevation_data(*args):
         Elevation data for the bounding box and resolution requested 
         (approximately) [type: ElevationData]
     """
-    base_url = get_elevation_url + "/elevation"
-    hash_url = get_elevation_url + "/hash"
+    base_url = get_elevation_url() + "/elevation"
+    hash_url = get_elevation_url() + "/hash"
 
     coords = args[0]
     minLat = str(coords[0])

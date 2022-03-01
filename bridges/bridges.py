@@ -88,6 +88,7 @@ class Bridges:
         self._json_flag = False
         self._post_url_flag = True
         self._map_overlay = False
+        self._map = "us"
         self._window = [0.0, 0.0, 0.0, 0.0]
         self.ds_handle = None
         self.vis_type = ""
@@ -142,7 +143,7 @@ class Bridges:
                 self.vis_type == "GraphAdjacencyList" or self.vis_type == "ColorGrid" or self.vis_type == "GraphAdjacencyMatrix" or \
                 self.vis_type == "largegraph" or self.vis_type == "KdTree" or self.vis_type == "SymbolCollection" or \
                 self.vis_type == "GameGrid" or self.vis_type == "BinarySearchTree" or self.vis_type == "LineChart" or \
-                self.vis_type == "Audio" or self.vis_type == "SymbolCollectionV2":
+                self.vis_type == "Audio" or self.vis_type == "SymbolCollectionV2" or self.vis_type == "Scene":
             nodes_links_str = self.ds_handle.get_data_structure_representation()
 
         ds = {
@@ -151,6 +152,7 @@ class Bridges:
             "description": self._description,
             "coord_system_type": self._coord_system_type,
             "map_overlay": self._map_overlay,
+            "map": self._map,
         }
         if self.window is not None and len(self.window) == 4:
             ds['window'] = self.window
@@ -236,6 +238,14 @@ class Bridges:
             None
         """
         self._map_overlay = flag
+
+    @property
+    def map(self):
+        return self._map
+
+    @map.setter
+    def map(self, new_map):
+        self._map = new_map
 
     def set_coord_system_type(self, coord):
         """
