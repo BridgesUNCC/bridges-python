@@ -88,7 +88,7 @@ class Bridges:
         self._json_flag = False
         self._post_url_flag = True
         self._map_overlay = False
-        self._map = "us"
+        self._map = ["us", "all"]
         self._window = [0.0, 0.0, 0.0, 0.0]
         self.ds_handle = None
         self.vis_type = ""
