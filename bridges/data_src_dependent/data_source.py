@@ -9,6 +9,7 @@ from bridges.data_src_dependent import game
 from bridges.data_src_dependent import shakespeare
 from bridges.data_src_dependent import gutenberg_book
 from bridges.data_src_dependent import gutenberg_meta
+from bridges.data_src_dependent import reddit
 from bridges.data_src_dependent import cancer_incidence
 from bridges.data_src_dependent import song
 from bridges.data_src_dependent import lru_cache
@@ -1040,7 +1041,32 @@ def gutenberg_book_text(id, strip = False):
 
     return book_data
 
+def reddit_data(subreddit, time_request = -9999):
+    url = f"http://bridges-data-server-reddit-t.bridgesuncc.org/cache?subreddit={subreddit}&time_resquest={time_request}" 
+    content = server_request(url)
+    data = json.loads(content.decode("utf-8"))
 
+    reddit_posts = []
+
+    for n in data:
+        post = reddit.reddit
+        post.id = data[n]["id"]
+        post.title = data[n]["title"]
+        post.author = data[n]["author"]
+        post.score = int(data[n]["score"])
+        post.vote_ratio = int(data[n]["vote_ratio"])
+        post.comment_count = int(data[n]["comment_count"])
+        post.subreddit = data[n]["subreddit"]
+        post.post_time = int(data[n]["post_time"])
+        post.url = data[n]["url"]
+        post.text = data[n]["text"]
+
+        reddit_posts.append(post)
+
+
+
+
+    return reddit_posts
 
 class DataSource:
     pass
