@@ -9,6 +9,7 @@ from bridges.data_src_dependent import game
 from bridges.data_src_dependent import shakespeare
 from bridges.data_src_dependent import gutenberg_book
 from bridges.data_src_dependent import gutenberg_meta
+from bridges.data_src_dependent import reddit
 from bridges.data_src_dependent import cancer_incidence
 from bridges.data_src_dependent import song
 from bridges.data_src_dependent import lru_cache
@@ -32,6 +33,14 @@ def set_source_type(t):
     elif (t == "local"):
         source_type = "local"
     return
+
+def get_reddit_url():
+    if source_type == "testing":
+        return "http://bridges-data-server-reddit-t.bridgesuncc.org"
+    elif source_type == "local":
+        return "http://localhost:9999"
+    else:
+        return "http://bridges-data-server-reddit.bridgesuncc.org"
 
 def get_gutenberg_url():
     if source_type == "testing":
@@ -1079,7 +1088,43 @@ def gutenberg_book_text(id, strip = False):
 
     return book_data
 
+def reddit_data(subreddit, time_request = -9999):
+    """
+    @brief function to retrieve the metadata of a gutenberg book given its ID
+    :param subreddit: the name of the subreddit
+    :param time_request: unix timestamp of when requested subreddit was generated
+    :return: a list of reddit objects with the data of the posts
+    """
+    base_url = get_reddit_url()
+    url = f"{base_url}/cache?subreddit={subreddit}&time_resquest={time_request}"
 
+
+
+
+    content = server_request(url)
+    data = json.loads(content.decode("utf-8"))
+
+    reddit_posts = []
+
+    for n in data:
+        post = reddit.reddit
+        post.id = data[n]["id"]
+        post.title = data[n]["title"]
+        post.author = data[n]["author"]
+        post.score = int(data[n]["score"])
+        post.vote_ratio = int(data[n]["vote_ratio"])
+        post.comment_count = int(data[n]["comment_count"])
+        post.subreddit = data[n]["subreddit"]
+        post.post_time = int(data[n]["post_time"])
+        post.url = data[n]["url"]
+        post.text = data[n]["text"]
+
+        reddit_posts.append(post)
+
+
+
+
+    return reddit_posts
 
 
 
