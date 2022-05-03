@@ -101,7 +101,7 @@ def get_game_data():
 def get_us_cities_data(**kwargs):
     wrapper = []
 
-    url = "http://localhost:3001/api/us_cities"
+    url = "http://bridgesdata.herokuapp.com/api/us_cities"
     if len(kwargs) > 0:
         url = url + '?'
         if kwargs.get('state'):
