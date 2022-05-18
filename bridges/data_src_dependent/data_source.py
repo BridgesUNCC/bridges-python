@@ -9,10 +9,12 @@ from bridges.data_src_dependent import game
 from bridges.data_src_dependent import shakespeare
 from bridges.data_src_dependent import gutenberg_book
 from bridges.data_src_dependent import gutenberg_meta
+from bridges.data_src_dependent import reddit
 from bridges.data_src_dependent import cancer_incidence
 from bridges.data_src_dependent import song
 from bridges.data_src_dependent import lru_cache
 from bridges.data_src_dependent import movie_actor_wiki_data
+from bridges.data_src_dependent import us_cities
 from bridges.data_src_dependent.osm import *
 from bridges.data_src_dependent.elevation import *
 from bridges.data_src_dependent.amenity import *
@@ -31,6 +33,14 @@ def set_source_type(t):
     elif (t == "local"):
         source_type = "local"
     return
+
+def get_reddit_url():
+    if source_type == "testing":
+        return "http://bridges-data-server-reddit-t.bridgesuncc.org"
+    elif source_type == "local":
+        return "http://localhost:9999"
+    else:
+        return "http://bridges-data-server-reddit.bridgesuncc.org"
 
 def get_gutenberg_url():
     if source_type == "testing":
@@ -86,6 +96,44 @@ def get_game_data():
             genre.append(str(G[j]))
         wrapper.append(game.Game(V["game"], V["platform"], V["rating"], str(genre)))
     return wrapper
+
+
+def get_us_cities_data(**kwargs):
+    wrapper = []
+
+    url = "http://bridgesdata.herokuapp.com/api/us_cities"
+    if len(kwargs) > 0:
+        url = url + '?'
+        if kwargs.get('state'):
+            url = url + 'state=' + kwargs['state'] + '&'
+        if kwargs.get('population'):
+            url = url + 'population=' + str(kwargs['population']) + '&'
+        if kwargs.get('minll'):
+            url = url + 'minLatLong=' + str(kwargs['minll'][0]) + ',' + str(kwargs['minll'][1]) + '&'
+        if kwargs.get('maxll'):
+            url = url + 'maxLatLong=' + str(kwargs['maxll'][0]) + ',' + str(kwargs['maxll'][1]) + '&'
+        if kwargs.get('elevation'):
+            url = url + 'elevation=' + str(kwargs['elevation']) + '&'
+        if kwargs.get('limit'):
+            url = url + 'limit=' + str(kwargs['limit']) + '&'
+        url = url[:-1]  # remove last &
+
+    print(url)
+    PARAMS = {"Accept: application/json"}
+
+    r = requests.get(url=url, params=str(PARAMS))
+
+    r = r.json()
+
+    D = r["data"]
+
+    for i in range(len(D)):
+        V = D[i]
+        wrapper.append(us_cities.USCities(city = V['city'], state=V['state'], country = V['country'], lat = V['lat'], lon=V['lon'], elevation=V['elevation'],
+                                          population = V['population'], timezone=V['timezone']))
+    return wrapper
+
+
 
 
 def parse_actor_movie_imdb(item):
@@ -1039,6 +1087,44 @@ def gutenberg_book_text(id, strip = False):
     book_data = json.loads(data)
 
     return book_data
+
+def reddit_data(subreddit, time_request = -9999):
+    """
+    @brief function to retrieve the metadata of a gutenberg book given its ID
+    :param subreddit: the name of the subreddit
+    :param time_request: unix timestamp of when requested subreddit was generated
+    :return: a list of reddit objects with the data of the posts
+    """
+    base_url = get_reddit_url()
+    url = f"{base_url}/cache?subreddit={subreddit}&time_resquest={time_request}"
+
+
+
+
+    content = server_request(url)
+    data = json.loads(content.decode("utf-8"))
+
+    reddit_posts = []
+
+    for n in data:
+        post = reddit.reddit
+        post.id = data[n]["id"]
+        post.title = data[n]["title"]
+        post.author = data[n]["author"]
+        post.score = int(data[n]["score"])
+        post.vote_ratio = int(data[n]["vote_ratio"])
+        post.comment_count = int(data[n]["comment_count"])
+        post.subreddit = data[n]["subreddit"]
+        post.post_time = int(data[n]["post_time"])
+        post.url = data[n]["url"]
+        post.text = data[n]["text"]
+
+        reddit_posts.append(post)
+
+
+
+
+    return reddit_posts
 
 
 
