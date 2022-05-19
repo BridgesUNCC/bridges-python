@@ -204,7 +204,7 @@ class Symbol:
         """
         for i in range(3):
             for j in range(3):
-                if i is j:
+                if i == j:
                     m[i][j] = 1.0
                 else:
                     m[i][j] = 0.0
@@ -255,16 +255,16 @@ class Symbol:
 
         if args is four float, scale x based on args[0] and y based on args[1] from point args[2],args[3]
         """        
-        if len(args) is 1:
+        if len(args) == 1:
             scale_m = [[args[0], 0.0, 0.0], [0.0, args[0], 0.0], [0.0, 0.0, 1.0]]
             
             self._xform = self.mat_mult(self._xform, scale_m)
-        elif len(args) is 2:
+        elif len(args) == 2:
 
             scale_m = [[args[0], 0.0, 0.0], [0.0, args[1], 0.0], [0.0, 0.0, 1.0]]
             
             self._xform = self.mat_mult(self._xform, scale_m)
-        elif len(args) is 4:
+        elif len(args) == 4:
             scale_m = [[args[0], 0.0, 0.0], [0.0, args[1], 0.0], [0.0, 0.0, 1.0]]
 
             transl_pre = [[1.0, 0.0, -args[2]], [0.0, 1.0, -args[3]], [0.0, 0.0, 1.0]]
@@ -278,7 +278,7 @@ class Symbol:
         self._xform_flag = True
 
     def rotate(self, *args):
-        if len(args) is 1:
+        if len(args) == 1:
             rotate_m = [[0.0 for i in range(3)] for j in range(3)]
 
             self.identity(rotate_m)
@@ -292,7 +292,7 @@ class Symbol:
             rotate_m[1][0] = sin_a
 
             self._xform = self.mat_mult(self._xform, rotate_m)
-        elif len(args) is 3:
+        elif len(args) == 3:
             angle_r = args[0] * (math.pi / 180.0)
             cos_a = math.cos(angle_r)
             sin_a = math.sin(angle_r)
