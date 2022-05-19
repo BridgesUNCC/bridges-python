@@ -133,6 +133,42 @@ def get_us_cities_data(**kwargs):
                                           population = V['population'], timezone=V['timezone']))
     return wrapper
 
+def get_world_cities_data(**kwargs):
+    wrapper = []
+
+    url = "http://localhost:3001/api/world_cities"
+    # url = "http://bridgesdata.herokuapp.com/api/world_cities"
+    if len(kwargs) > 0:
+        url = url + '?'
+        if kwargs.get('state'):
+            url = url + 'state=' + kwargs['state'] + '&'
+        if kwargs.get('population'):
+            url = url + 'population=' + str(kwargs['population']) + '&'
+        if kwargs.get('minll'):
+            url = url + 'minLatLong=' + str(kwargs['minll'][0]) + ',' + str(kwargs['minll'][1]) + '&'
+        if kwargs.get('maxll'):
+            url = url + 'maxLatLong=' + str(kwargs['maxll'][0]) + ',' + str(kwargs['maxll'][1]) + '&'
+        if kwargs.get('elevation'):
+            url = url + 'elevation=' + str(kwargs['elevation']) + '&'
+        if kwargs.get('limit'):
+            url = url + 'limit=' + str(kwargs['limit']) + '&'
+        url = url[:-1]  # remove last &
+
+    print(url)
+    PARAMS = {"Accept: application/json"}
+
+    r = requests.get(url=url, params=str(PARAMS))
+
+    r = r.json()
+
+    D = r["data"]
+
+    for i in range(len(D)):
+        V = D[i]
+        wrapper.append(us_cities.USCities(city = V['city'], state=V['state'], country = V['country'], lat = V['lat'], lon=V['lon'], elevation=V['elevation'],
+                                          population = V['population'], timezone=V['timezone']))
+    return wrapper
+
 
 
 
