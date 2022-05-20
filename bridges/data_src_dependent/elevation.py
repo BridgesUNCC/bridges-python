@@ -17,7 +17,6 @@ class ElevationData:
     """
 
     
-
     @property
     def cols(self):
         """ 
@@ -145,6 +144,25 @@ class ElevationData:
         self._maxVal = value
 
 
+    @property
+    def minVal(self):
+        """ 
+        @brief Get min elevation value in the data
+        Returns:
+            return the min value in data
+        """ 
+        return self._minVal
+
+    @minVal.setter
+    def minVal(self, value):
+        """
+        @brief Set min elevation value in the data
+        Args: 
+          value:  min value to set
+        """
+        self._minVal = value
+
+        
 
     def __init__(self):
         """
@@ -158,3 +176,4 @@ class ElevationData:
         self._cellsize = 0
         self.name = None
         self._maxVal = 0
+        self._minVal = 0

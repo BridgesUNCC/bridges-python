@@ -879,7 +879,8 @@ def get_elevation_data(*args):
     ret_ele._yll = float(file_array[3].split(" ")[-1])
     ret_ele.cellsize = float(file_array[4].split(" ")[-1])
 
-    maxVal = -9999999999
+    maxVal = float('-inf')
+    minVal = float('inf')
     x = 5
     while (x < len(file_array)):
         arr = file_array[x].replace("\n", "").split(" ")
@@ -889,9 +890,12 @@ def get_elevation_data(*args):
             parsedline.append(int(y))
             if(int(y) > maxVal):
                 maxVal = int(y)
+            if(int(y) < minVal):
+                minVal = int(y)
         ret_ele.data.append(parsedline)
         x += 1
     ret_ele.maxVal = maxVal
+    ret_ele.minVal = minVal    
 
     return ret_ele
 
