@@ -43,7 +43,22 @@ class SortingBenchmark:
         self._increment = 1
         self._geo_base = 1
         self._time_cap_ms = float('inf')
+        self._generator = "random"
         self.debug = False
+
+    @property
+    def generator(self):
+        return self._generator
+
+    
+    @generator.setter
+    def generator(self, generator_name: str):
+        """
+        @param generator_name possible values are "random", "inorder", "reverseorder", "fewdifferentvalues", "almostsorted"
+        """        
+        if generator_name not in ["random", "inorder", "reverseorder", "fewdifferentvalues", "almostsorted"]:
+            raise ValueError("unknown generator")
+        self._generator = generator_name
 
     @property
     def plot(self):
@@ -162,9 +177,46 @@ class SortingBenchmark:
             print("base should be > 1.0")
 
     def __generate(self, arr, n):
+        if self._generator == "random":
+            self.__generate_random(arr, n)
+        elif self._generator == "inorder":
+            self.__generate_inorder(arr, n)
+        elif self._generator == "reverseorder":
+            self.__generate_reverseorder(arr, n)
+        elif self._generator == "fewdifferentvalues":
+            self.__generate_fewdifferentvalues(arr, n)
+        elif self._generator == "almostsorted":
+            self.__generate_almostsorted(arr, n)
+        else:
+            raise RuntimeError("generator unknown")
+        
+    def __generate_random(self, arr, n):
         for i in range(0, n):
             arr.append(self.r.randint(0, 2*n))
 
+    def __generate_inorder(self, arr, n):
+        for i in range(0, n):
+            arr.append(i)
+
+    def __generate_reverseorder(self, arr, n):
+        for i in range(0, n):
+            arr.append(n-i)
+
+    def __generate_fewdifferentvalues(self, arr, n):
+        for i in range(0, n):
+            arr.append(self.r.randint(0, 4))
+
+    def __generate_almostsorted(self, arr, n):
+        if n < 20:
+            self.__generate_random(arr, n)
+        else:
+            for i in range(0, n-20):
+                arr.append(i)
+            for i in range(0, 20):
+                arr.append(self.r.randint(0, 2*n))
+
+            
+            
     def __check(self, arr, n):
         ok = True
         for i in range(1, n):
