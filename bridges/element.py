@@ -318,13 +318,13 @@ class Element:
         json = {
             "name": str(self.label),
             "shape": str(self.visualizer.shape),
-            "size": str(self.visualizer.size),
+            "size": self.visualizer.size,
             "color": [str(self.visualizer.color.red), str(self.visualizer.color.green),
                       str(self.visualizer.color.blue), str(self.visualizer.color.alpha)]
         }
         loc_flag = not ((self.visualizer.location_x == Decimal('Infinity')) or (self.visualizer.location_y == Decimal('Infinity')))
         if loc_flag:
-            json['location'] = [str(self.visualizer.location_x), str(self.visualizer.location_y)]
+            json['location'] = [self.visualizer.location_x, self.visualizer.location_y]
         return json
 
     def get_link_representation(self, lv, src, dest):
