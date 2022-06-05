@@ -1,6 +1,7 @@
 
 import requests
 import traceback
+import os
 
 class Connector:
     """
@@ -30,7 +31,7 @@ class Connector:
         self.key = key
         self.username = username
         self.assignment = assignment
-        self.server_url = "http://bridges-cs.herokuapp.com"
+        self.set_server_url ("live")
 
     def set_server(self, server):
         """
@@ -54,6 +55,10 @@ class Connector:
             "local": "http://127.0.0.1:3000",
             "games": "http://bridges-games.herokuapp.com"
         }
+        force = os.getenv("FORCE_BRIDGES_APISERVER", "")
+        if (force != ""):
+            server_url = force
+        
         self.server_url = switcher.get(server_url, ValueError("Use: live, clone, local to determine url"))
 
 
