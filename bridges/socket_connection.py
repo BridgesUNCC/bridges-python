@@ -10,7 +10,7 @@ class SocketConnection:
 
     _sio = socketio.Client()
     _listeners = []
-    _verbose = False
+    _verbose = True
     
     def __init__(self, b):
         self.bridges = b
@@ -48,16 +48,12 @@ class SocketConnection:
 
     @_sio.on('keydown')
     def keydown(*args):
-        if self._verbose:
-            print ("processing keydown")
         #print(*args)
         for i in range(0, len(SocketConnection._listeners)):
             SocketConnection._listeners[i].key_press(*args)
 
     @_sio.on('keyup')
     def keyup(*args):
-        if self._verbose:
-            print ("processing keyup")
         for i in range(0, len(SocketConnection._listeners)):
             SocketConnection._listeners[i].key_press(*args)
 
