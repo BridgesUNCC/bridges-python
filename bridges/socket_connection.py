@@ -10,7 +10,7 @@ class SocketConnection:
 
     _sio = socketio.Client()
     _listeners = []
-    _verbose = True
+    _verbose = False
     
     def __init__(self, b):
         self.bridges = b
