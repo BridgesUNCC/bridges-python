@@ -73,8 +73,23 @@ def main():
     cube = Primitives("cube")
     cube.color = 'green'
     cube.position = [0.0, 0.0, 0.0]
-    cube.transform.append(['T', 1.0, 0.0, 0.0], ['R', 0.0, 1.0, 0.0])
+    cube.transform.append(['T', 1.0, 0.0, 0.0])
+    cube.transform.append(['R', 0.0, 1.0, 0.0])
     scene.add(cube)
+
+    cube1 = Primitives("cube")
+    cube1.color = 'green'
+    cube1.position = [0.0, 0.0, 0.0]
+    cube1.transform.append(['T', 100.0, 1.0, 0.0])
+    cube1.transform.append(['R', 0.0, 1.0, 0.0])
+    scene.add(cube1)
+
+    cube2 = Primitives("cube")
+    cube2.color = 'green'
+    cube2.position = [0.0, 0.0, 0.0]
+    cube2.transform.append(['T', 1.0, 0.0, 100.0])
+    cube2.transform.append(['R', 0.0, 1.0, 0.0])
+    scene.add(cube2)
 
     bridges.set_data_structure(scene)
     bridges.visualize()
