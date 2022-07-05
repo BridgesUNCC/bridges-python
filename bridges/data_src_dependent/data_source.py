@@ -1147,7 +1147,7 @@ def reddit_data(subreddit, time_request = -9999):
     reddit_posts = []
 
     for n in data:
-        post = reddit.reddit
+        post = reddit.reddit()
         post.id = data[n]["id"]
         post.title = data[n]["title"]
         post.author = data[n]["author"]
