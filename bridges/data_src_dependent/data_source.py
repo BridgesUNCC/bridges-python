@@ -1128,17 +1128,21 @@ def gutenberg_book_text(id, strip = False):
 
     return book_data
 
+def reddit_available_subreddit():
+    base_url = get_reddit_url()
+    url = f"{base_url}/listJSON"
+    content = server_request(url)
+    return json.loads(content.decode("utf-8"))
+
 def reddit_data(subreddit, time_request = -9999):
     """
-    @brief function to retrieve the metadata of a gutenberg book given its ID
-    :param subreddit: the name of the subreddit
-    :param time_request: unix timestamp of when requested subreddit was generated
+    @brief function to retrieve the reddit post from a subreddit
+    :param subreddit: the name of the subreddit ( check list available at http://bridges-data-server-reddit.bridgesuncc.org/list ) 
+    :param time_request: unix timestamp of when requested subreddit was generated or less than 0 for now
     :return: a list of reddit objects with the data of the posts
     """
     base_url = get_reddit_url()
     url = f"{base_url}/cache?subreddit={subreddit}&time_resquest={time_request}"
-
-
 
 
     content = server_request(url)
