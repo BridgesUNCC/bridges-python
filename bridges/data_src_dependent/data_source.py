@@ -99,6 +99,19 @@ def get_game_data():
 
 
 def get_us_cities_data(**kwargs):
+    """
+    @brief retrieves a set of cities filtered by provided arguments
+    Args:
+        kwargs: can be one or more of the following:
+        'city' : city name
+        'state' : US state
+        'minPopulation','maxPopulation : include cities within this  population range
+        'minElevation', 'maxElevation' : include cities within this  elevation range
+        'minLat', 'maxLat': include cities within this latitude range
+        'minLong', 'maxLong': include cities within this longitude range
+        'limit':  number of cities to be included
+    """
+
     wrapper = []
 
     url = "http://bridgesdata.herokuapp.com/api/us_cities"
