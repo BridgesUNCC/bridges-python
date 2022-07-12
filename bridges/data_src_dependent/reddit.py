@@ -1,6 +1,21 @@
 class reddit:
+    """
+    @brief  A reddit object representing a reddit post, used along with the reddit data source.
 
-    def __init__(self, id = 0, title = "", author= "", score = 0, vote_ratio = 0, comment_count = 0, subreddit = "", post_time = 0, url = "", text = ""):
+    This is a convenience class provided for  users who wish to use this
+    data source as part of their application. It provides an API that makes
+    it easy to access the attributes of this data set.
+
+    This object is generally not created by the user, to see how its created check 
+    out bridges::data_src_dependent::data_source::reddit_data()
+    
+    For an example, check out https://bridgesuncc.github.io/tutorials/
+
+    @author Erik Saule, Jay Strahler
+    @date   12/1222
+    """
+
+    def __init__(self, id = 0, title = "", author= "", score = 0, vote_ratio = 0.0, comment_count = 0, subreddit = "", post_time = 0, url = "", text = ""):
         self.id = id
         self.title = title
         self.author = author
@@ -14,6 +29,13 @@ class reddit:
 
     @property
     def id(self):
+        """
+        @brief return id of the reddit post
+
+        Returns:
+            string: id 
+        """
+
         return self.__id
 
     @id.setter
@@ -22,6 +44,12 @@ class reddit:
 
     @property
     def title(self):
+        """
+        @brief return the title of the reddit post
+
+        Returns:
+            string: title 
+        """
         return self.__title
 
     @title.setter
@@ -30,6 +58,12 @@ class reddit:
 
     @property
     def author(self):
+        """
+        @brief return the author of the reddit post
+
+        Returns:
+            string: author's username
+        """
         return self.__author
 
     @author.setter
@@ -38,6 +72,12 @@ class reddit:
 
     @property
     def score(self):
+        """
+        @brief return the score (upvotes) of the reddit post
+
+        Returns:
+            int: score (upvotes)
+        """
         return self.__score
 
     @score.setter
@@ -46,6 +86,12 @@ class reddit:
 
     @property
     def vote_ratio(self):
+        """
+        @brief ratio of upvote to downvotes of the reddit post
+
+        Returns:
+            float: vote ratio
+        """
         return self.__vote_ratio
 
     @vote_ratio.setter
@@ -54,6 +100,12 @@ class reddit:
 
     @property
     def comment_count(self):
+        """
+        @brief number of comments on that reddit post
+
+        Returns:
+            int: number of comments
+        """
         return self.__comment_count
 
     @comment_count.setter
@@ -62,6 +114,12 @@ class reddit:
 
     @property
     def subreddit(self):
+        """
+        @brief name of the subreddit the post appeared in
+
+        Returns:
+            string: subreddit name
+        """
         return self.__subreddit
 
     @subreddit.setter
@@ -70,6 +128,12 @@ class reddit:
 
     @property
     def post_time(self):
+        """
+        @brief time the post was made (UNIX time)
+
+        Returns:
+            int: unix time
+        """
         return self.__post_time
 
     @post_time.setter
@@ -78,6 +142,14 @@ class reddit:
 
     @property
     def url(self):
+        """
+        @brief URL associated with the post. 
+
+        This could be the url of the reddit post itself or the URL of an associated article/video
+
+        Returns:
+            string: URL
+        """
         return self.__url
 
     @url.setter
@@ -86,6 +158,16 @@ class reddit:
 
     @property
     def text(self):
+        """
+        @brief returns the text of the reddit post.
+
+        The text of the reddit post. Often in markdown format.
+
+        The text could be empty if the reddit post is just a link to a video or an article
+
+        Returns:
+            string: full text of the reddit post
+        """
         return self.__text
 
     @text.setter
