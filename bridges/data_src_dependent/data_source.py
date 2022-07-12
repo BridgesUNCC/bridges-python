@@ -1163,7 +1163,7 @@ def available_subreddits():
 
 def reddit_data(subreddit, time_request = -9999):
     """
-    @brief function to retrieve the reddit post from a subreddit
+    @brief  retrieves the reddit post from a subreddit
     :param subreddit: the name of the subreddit ( check list available at http://bridges-data-server-reddit.bridgesuncc.org/list ) 
     :param time_request: unix timestamp of when requested subreddit was generated or less than 0 for now
     :return: a list of reddit objects with the data of the posts

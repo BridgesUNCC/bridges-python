@@ -73,10 +73,10 @@ class reddit:
     @property
     def score(self):
         """
-        @brief return the score (upvotes) of the reddit post
+        @brief return the score (upvotes-downvotes) of the reddit post
 
         Returns:
-            int: score (upvotes)
+            int: score (upvotes - downvotes)
         """
         return self.__score
 
