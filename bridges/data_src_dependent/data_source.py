@@ -107,10 +107,10 @@ def get_us_cities_data(**kwargs):
         kwargs: can be one or more of the following:
         'city' : city name
         'state' : US state
-        'minPopulation','maxPopulation : include cities within this  population range
-        'minElevation', 'maxElevation' : include cities within this  elevation range
-        'minLat', 'maxLat': include cities within this latitude range
-        'minLong', 'maxLong': include cities within this longitude range
+        'timezone': cities within this timezone
+        'min_pop','max_pop : include cities within this  population range
+        'min_elev', 'max_elev' : include cities within this  elevation range
+        'min_lat_long', 'max_lat_long': include cities within this latitude/longitude range
         'limit':  number of cities to be included
     """
 
@@ -121,14 +121,18 @@ def get_us_cities_data(**kwargs):
         url = url + '?'
         if kwargs.get('state'):
             url = url + 'state=' + kwargs['state'] + '&'
-        if kwargs.get('population'):
-            url = url + 'population=' + str(kwargs['population']) + '&'
-        if kwargs.get('minll'):
-            url = url + 'minLatLong=' + str(kwargs['minll'][0]) + ',' + str(kwargs['minll'][1]) + '&'
-        if kwargs.get('maxll'):
-            url = url + 'maxLatLong=' + str(kwargs['maxll'][0]) + ',' + str(kwargs['maxll'][1]) + '&'
-        if kwargs.get('elevation'):
-            url = url + 'elevation=' + str(kwargs['elevation']) + '&'
+        if kwargs.get('min_pop'):
+            url = url + 'minPopulation=' + str(kwargs['min_pop']) + '&'
+        if kwargs.get('max_pop'):
+            url = url + 'maxPopulation=' + str(kwargs['max_pop']) + '&'
+        if kwargs.get('min_lat_long'):
+            url = url + 'minLatLong=' + str(kwargs['minll'][0]) + ',' + str(kwargs['min_lat_long'][1]) + '&'
+        if kwargs.get('max_lat_long'):
+            url = url + 'maxLatLong=' + str(kwargs['max_lat_long'][0]) + ',' + str(kwargs['max_lat_long'][1]) + '&'
+        if kwargs.get('min_elev'):
+            url = url + 'minElevation=' + str(kwargs['min_elev']) + '&'
+        if kwargs.get('max_elev'):
+            url = url + 'maxElevation=' + str(kwargs['max_elev']) + '&'
         if kwargs.get('limit'):
             url = url + 'limit=' + str(kwargs['limit']) + '&'
         url = url[:-1]  # remove last &
@@ -157,14 +161,18 @@ def get_world_cities_data(**kwargs):
         url = url + '?'
         if kwargs.get('state'):
             url = url + 'state=' + kwargs['state'] + '&'
-        if kwargs.get('population'):
-            url = url + 'population=' + str(kwargs['population']) + '&'
-        if kwargs.get('minll'):
+        if kwargs.get('min_pop'):
+            url = url + 'minPopulation=' + str(kwargs['min_pop']) + '&'
+        if kwargs.get('maxpop'):
+            url = url + 'maxPopulation=' + str(kwargs['max_pop']) + '&'
+        if kwargs.get('min_lat_long'):
             url = url + 'minLatLong=' + str(kwargs['minll'][0]) + ',' + str(kwargs['minll'][1]) + '&'
-        if kwargs.get('maxll'):
+        if kwargs.get('max_lat_long'):
             url = url + 'maxLatLong=' + str(kwargs['maxll'][0]) + ',' + str(kwargs['maxll'][1]) + '&'
-        if kwargs.get('elevation'):
-            url = url + 'elevation=' + str(kwargs['elevation']) + '&'
+        if kwargs.get('min_elev'):
+            url = url + 'minElevation=' + str(kwargs['min_elev']) + '&'
+        if kwargs.get('max_elev'):
+            url = url + 'maxElevation=' + str(kwargs['max_elev']) + '&'
         if kwargs.get('limit'):
             url = url + 'limit=' + str(kwargs['limit']) + '&'
         url = url[:-1]  # remove last &
