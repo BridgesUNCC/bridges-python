@@ -1136,12 +1136,13 @@ def reddit_data(subreddit, time_request = -9999):
     :return: a list of reddit objects with the data of the posts
     """
     base_url = get_reddit_url()
-    url = f"{base_url}/cache?subreddit={subreddit}&time_resquest={time_request}"
-
-
-
+    print ("reddit base url:" + base_url)
+    url = f"{base_url}/cache?subreddit={subreddit}&time_request={time_request}"
+    print ("reddit url:" + url)
 
     content = server_request(url)
+    print ("Object type:" + str(type(content)))
+    print("reddit content:" + str(content))
     data = json.loads(content.decode("utf-8"))
 
     reddit_posts = []
