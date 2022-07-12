@@ -1165,6 +1165,8 @@ def reddit_data(subreddit, time_request = -9999):
 
 
     content = server_request(url)
+    print ("Object type:" + str(type(content)))
+    print("reddit content:" + str(content))
     data = json.loads(content.decode("utf-8"))
 
     reddit_posts = []
