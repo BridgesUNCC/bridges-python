@@ -30,8 +30,10 @@ def set_source_type(t):
     global source_type
     if (t == "testing"):
         source_type = "testing"
-    elif (t == "local"):
+    if (t == "local"):
         source_type = "local"
+    if (t == "live"):
+        source_type = "live"
     return
 
 def get_reddit_url():
@@ -1156,7 +1158,7 @@ def reddit_data(subreddit, time_request = -9999):
         post.title = data[n]["title"]
         post.author = data[n]["author"]
         post.score = int(data[n]["score"])
-        post.vote_ratio = int(data[n]["vote_ratio"])
+        post.vote_ratio = float(data[n]["vote_ratio"])
         post.comment_count = int(data[n]["comment_count"])
         post.subreddit = data[n]["subreddit"]
         post.post_time = int(data[n]["post_time"])
@@ -1164,9 +1166,6 @@ def reddit_data(subreddit, time_request = -9999):
         post.text = data[n]["text"]
 
         reddit_posts.append(post)
-
-
-
 
     return reddit_posts
 
