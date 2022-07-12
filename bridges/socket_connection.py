@@ -10,7 +10,8 @@ class SocketConnection:
 
     _sio = socketio.Client()
     _listeners = []
-
+    _verbose = False
+    
     def __init__(self, b):
         self.bridges = b
 
@@ -21,17 +22,21 @@ class SocketConnection:
 
     def setup_connection(self, user, assignment):
         try:
-            url = "https://bridges-games.herokuapp.com"
+            #url = "https://bridges-games.herokuapp.com"
+            url = self.bridges.connector.get_server_url()
+            if self._verbose:
+                print ("attempting to connect to socket.io at "+url)
             SocketConnection._sio.connect(url, transports=["websocket"])
 
             student_cred = {
-                'user': user,
+                'user': self.bridges.get_username(),
                 'apikey': self.bridges.get_key(),
                 'assignment': self.bridges.get_assignment_id()
             }
             student_cred = json.dumps(student_cred)
 
-            print("passing student credentials to server..")
+            if self._verbose:
+                print("passing student credentials to server..")
             SocketConnection._sio.emit('credentials', student_cred)
 
         except ConnectionError as e:

@@ -30,8 +30,10 @@ def set_source_type(t):
     global source_type
     if (t == "testing"):
         source_type = "testing"
-    elif (t == "local"):
+    if (t == "local"):
         source_type = "local"
+    if (t == "live"):
+        source_type = "live"
     return
 
 def get_reddit_url():
@@ -99,6 +101,19 @@ def get_game_data():
 
 
 def get_us_cities_data(**kwargs):
+    """
+    @brief retrieves a set of cities filtered by provided arguments
+    Args:
+        kwargs: can be one or more of the following:
+        'city' : city name
+        'state' : US state
+        'minPopulation','maxPopulation : include cities within this  population range
+        'minElevation', 'maxElevation' : include cities within this  elevation range
+        'minLat', 'maxLat': include cities within this latitude range
+        'minLong', 'maxLong': include cities within this longitude range
+        'limit':  number of cities to be included
+    """
+
     wrapper = []
 
     url = "http://bridgesdata.herokuapp.com/api/us_cities"
@@ -1128,17 +1143,22 @@ def gutenberg_book_text(id, strip = False):
 
     return book_data
 
+def reddit_available_subreddit():
+    base_url = get_reddit_url()
+    url = f"{base_url}/listJSON"
+    content = server_request(url)
+    return json.loads(content.decode("utf-8"))
+
 def reddit_data(subreddit, time_request = -9999):
     """
-    @brief function to retrieve the metadata of a gutenberg book given its ID
-    :param subreddit: the name of the subreddit
-    :param time_request: unix timestamp of when requested subreddit was generated
+    @brief function to retrieve the reddit post from a subreddit
+    :param subreddit: the name of the subreddit ( check list available at http://bridges-data-server-reddit.bridgesuncc.org/list ) 
+    :param time_request: unix timestamp of when requested subreddit was generated or less than 0 for now
     :return: a list of reddit objects with the data of the posts
     """
     base_url = get_reddit_url()
-    print ("reddit base url:" + base_url)
-    url = f"{base_url}/cache?subreddit={subreddit}&time_request={time_request}"
-    print ("reddit url:" + url)
+    url = f"{base_url}/cache?subreddit={subreddit}&time_resquest={time_request}"
+
 
     content = server_request(url)
     print ("Object type:" + str(type(content)))
@@ -1148,12 +1168,12 @@ def reddit_data(subreddit, time_request = -9999):
     reddit_posts = []
 
     for n in data:
-        post = reddit.reddit
+        post = reddit.reddit()
         post.id = data[n]["id"]
         post.title = data[n]["title"]
         post.author = data[n]["author"]
         post.score = int(data[n]["score"])
-        post.vote_ratio = int(data[n]["vote_ratio"])
+        post.vote_ratio = float(data[n]["vote_ratio"])
         post.comment_count = int(data[n]["comment_count"])
         post.subreddit = data[n]["subreddit"]
         post.post_time = int(data[n]["post_time"])
@@ -1161,9 +1181,6 @@ def reddit_data(subreddit, time_request = -9999):
         post.text = data[n]["text"]
 
         reddit_posts.append(post)
-
-
-
 
     return reddit_posts
 
