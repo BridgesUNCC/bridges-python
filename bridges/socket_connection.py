@@ -61,10 +61,10 @@ class SocketConnection:
     def disconnect(*args):
         print(*args, "disconnected")
 
-    def send_data(self, dataframe):
+    def send_data(self, dataframe, vistype):
         if SocketConnection._sio is not None:
             data = json.dumps(dataframe)
-            SocketConnection._sio.emit('gamegrid:recv', data)
+            SocketConnection._sio.emit(vistype.lower() + ':recv', data)
 
     def close(self):
         SocketConnection._sio.disconnect()

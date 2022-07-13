@@ -46,7 +46,7 @@ class GameBase(ABC):
 
         #self.bridges.set_visualize_JSON(True)
 
-        self.bridges.connector.set_server("games")
+        self.bridges.connector.set_server("local")
 
         self.grid = GameGrid(rows, cols)
 
@@ -194,7 +194,7 @@ class GameBase(ABC):
                 print(e)
 
         self.grid_state = self.grid.get_data_structure_representation()
-        self.sock.send_data(self.grid_state)
+        self.sock.send_data(self.grid_state, self.grid.get_data_structure_type())
 
     @property
     def board_width(self):
