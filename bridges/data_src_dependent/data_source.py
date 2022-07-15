@@ -739,7 +739,7 @@ def _osm_server_request(url):
 
 def get_osm_data(*args) -> OsmData:
     """
-    @brief This method retrieves an OpenStreet Map dataset given a location
+    @brief This method retrieves an OpenStreet Map dataset given a location.
     
     The function can either take a city name or a bounding box in lat/long. The city name can be taken from the list at http://bridges-data-server-osm.bridgesuncc.org/cities
 
@@ -747,8 +747,15 @@ def get_osm_data(*args) -> OsmData:
 
 
     Args:
-        args: either there are two arguments: location:str and level:str
-              or there are 5 arguments minLat:float minLon:float maxLat:float maxLon:float and level:str
+        locname: name of a city (str)
+        level:  level of detail (str)
+
+    Args alternatively:
+         minLat: minimum latitude of the bounding box (float)
+         minLon: minimum longitude of the bounding box (float)
+         maxLat: maximum latitude of the bounding box (float)
+         maxLon: maximum longitude of the bounding box (float)
+         level: level of detail (str)
 
     Returns:
         OsmData
@@ -1006,22 +1013,23 @@ def get_amenity_data(*args) -> amenities :
     """
     @brief This method retrieves amenity data from Open Street Map datasets.
     
-    Args:
-        [0]: minimum latitude
-        [1]: minimum longitude
-        [2]: maximum latitude
-        [3]: maximum longitude
-        [4]: amenity type
-      or
-        [0]: location string
-        [1]: amenity type
-
     Valid types are "food", "school", "firestation", "airport", "heli"
+
+    Args:
+         minLat: minimum latitude of the bounding box (float)
+         minLon: minimum longitude of the bounding box (float)
+         maxLat: maximum latitude of the bounding box (float)
+         maxLon: maximum longitude of the bounding box (float)
+         type: amenity type (str)
+
+    Args alternatively:
+        locname: name of a city (str)
+        type:  amenity type (str)
+
 
     Returns:
         A list of amenities
     """
-    
     if(len(args)) == 5:
         url = f"{_get_amenity_url()}/amenity?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
         hash_url = f"{_get_amenity_url()}/hash?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={urllib.parse.quote(args[4])}"
