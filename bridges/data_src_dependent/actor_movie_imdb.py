@@ -1,4 +1,4 @@
-class ActorMovieIMDB():
+class ActorMovieIMDB:
     """
     @brief A class to hold actor movie data -- using IMDB dataset.  
 

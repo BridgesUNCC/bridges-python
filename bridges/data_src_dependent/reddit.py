@@ -1,4 +1,4 @@
-class reddit:
+class Reddit:
     """
     @brief  A reddit object representing a reddit post, used along with the reddit data source.
 

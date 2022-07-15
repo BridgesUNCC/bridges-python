@@ -3,17 +3,17 @@ import requests
 import pickle
 import urllib.parse
 
-from bridges.data_src_dependent import earthquake_usgs
+from bridges.data_src_dependent.earthquake_usgs import *
 from bridges.data_src_dependent import actor_movie_imdb
-from bridges.data_src_dependent import game
-from bridges.data_src_dependent import shakespeare
-from bridges.data_src_dependent import gutenberg_book
-from bridges.data_src_dependent import gutenberg_meta
-from bridges.data_src_dependent import reddit
-from bridges.data_src_dependent import cancer_incidence
-from bridges.data_src_dependent import song
+from bridges.data_src_dependent.game import *
+from bridges.data_src_dependent.shakespeare import *
+from bridges.data_src_dependent.gutenberg_book import *
+from bridges.data_src_dependent.gutenberg_meta import *
+from bridges.data_src_dependent.reddit import *
+from bridges.data_src_dependent.cancer_incidence import *
+from bridges.data_src_dependent.song import *
 from bridges.data_src_dependent import lru_cache
-from bridges.data_src_dependent import movie_actor_wiki_data
+from bridges.data_src_dependent.movie_actor_wiki_data import *
 from bridges.data_src_dependent.us_cities import *
 from bridges.data_src_dependent.osm import *
 from bridges.data_src_dependent.elevation import *
@@ -152,7 +152,7 @@ def get_us_cities_data(**kwargs) -> USCities:
                                           population = V['population'], timezone=V['timezone']))
     return wrapper
 
-def get_world_cities_data(**kwargs):
+def get_world_cities_data(**kwargs) -> USCities:
     wrapper = []
 
     url = "http://localhost:3001/api/world_cities"
@@ -188,14 +188,14 @@ def get_world_cities_data(**kwargs):
 
     for i in range(len(D)):
         V = D[i]
-        wrapper.append(us_cities.USCities(city = V['city'], state=V['state'], country = V['country'], lat = V['lat'], lon=V['lon'], elevation=V['elevation'],
+        wrapper.append(USCities(city = V['city'], state=V['state'], country = V['country'], lat = V['lat'], lon=V['lon'], elevation=V['elevation'],
                                           population = V['population'], timezone=V['timezone']))
     return wrapper
 
 
 
 
-def _parse_actor_movie_imdb(item):
+def _parse_actor_movie_imdb(item) -> ActorMovieIMDB:
     """
     @brief Parses an actor movie pair
 
@@ -208,7 +208,7 @@ def _parse_actor_movie_imdb(item):
     return am_pair
 
 
-def get_actor_movie_imdb_data(count = 0):
+def get_actor_movie_imdb_data(count = 0) -> ActorMovieIMDB:
     """
     @brief Get ActorMovie IMDB Data. 
 
@@ -237,11 +237,11 @@ def get_actor_movie_imdb_data(count = 0):
 
     for i in range(len(D)):
         V = D[i]
-        wrapper.append(actor_movie_imdb.ActorMovieIMDB(V["actor"], V["movie"]))
+        wrapper.append(ActorMovieIMDB(V["actor"], V["movie"]))
 
     return wrapper
 
-def get_actor_movie_imdb_data2():
+def get_actor_movie_imdb_data2() -> ActorMovieIMDB:
     """
     Get ActorMovie IMDB Data. Data is retrieved, formatted into a list of ActorMovieIMDB objects
 
@@ -280,7 +280,7 @@ def get_actor_movie_imdb_data2():
         r.raise_for_status()
 
 
-def get_earthquake_usgs_data(count = 0):
+def get_earthquake_usgs_data(count = 0) -> EarthquakeUSGS:
     """
     @brief Get USGS earthquake data
 
@@ -318,7 +318,7 @@ def get_earthquake_usgs_data(count = 0):
     return wrapper
 
 
-def get_shakespeare_data(endpoint = "", textonly = False):
+def get_shakespeare_data(endpoint = "", textonly = False) -> Shakespeare:
     """
     @brief Get data of Shakespeare works (plays, poems)
 
@@ -358,7 +358,7 @@ def get_shakespeare_data(endpoint = "", textonly = False):
     return wrapper
 
 
-def get_gutenberg_book_data(num = 0):
+def get_gutenberg_book_data(num = 0) -> GutenbergBook:
 
     """
     @brief Get meta data of the Gutenberg book collection (1000 books)
@@ -413,7 +413,7 @@ def get_gutenberg_book_data(num = 0):
     return wrapper
 
 
-def get_cancer_incident_data(num = 0):
+def get_cancer_incident_data(num = 0) -> CancerIncidence:
     """
     @brief Retrieves the CDC cancer incidence dataset.
 
@@ -465,7 +465,7 @@ def get_cancer_incident_data(num = 0):
     return wrapper
 
 
-def get_song(songTitle, artistName = None):
+def get_song(songTitle, artistName = None) -> Song:
     """
     @brief Get data of a particular song (including lyrics) using the Genius API.
 
@@ -525,7 +525,7 @@ def get_song(songTitle, artistName = None):
     return song.Song(artist, songs, album, lyrics, release_date)
 
 
-def get_song_data():
+def get_song_data() -> List[Song]:
     """
 
     Get data of the songs (including lyrics) using the Genius API.
@@ -600,7 +600,7 @@ def get_color_grid_from_assignment(server: str, user: str, assignment: int, suba
         ColorGrid structure
     """
 
-    response = get_assignment(server, user, assignment, subassignment)
+    response = _get_assignment(server, user, assignment, subassignment)
 
     try:
         from types import SimpleNamespace as Namespace
@@ -687,9 +687,11 @@ def get_color_grid_from_assignment(server: str, user: str, assignment: int, suba
     return color_grid
 
 
-def get_assignment(server: str, user: str, assignment: int, subassignment: int = 0) -> str:
+def _get_assignment(server: str, user: str, assignment: int, subassignment: int = 0) -> str:
     """
     @brief This method retrieves a stored assignment from the server.
+
+    It is unlikely a student would eve want to use this directly
 
     Args:
         server:  server holding the assignment
@@ -711,7 +713,7 @@ def get_assignment(server: str, user: str, assignment: int, subassignment: int =
         raise request.raise_for_status()
 
 
-def osm_server_request(url):
+def _osm_server_request(url):
     """
     @brief Fulfills a server request for OpenStreetMap
 
@@ -785,25 +787,25 @@ def get_osm_data(*args) -> OsmData:
 
     data = None
     not_skip = True
-    hash = osm_server_request(hash_url).decode('utf-8')
+    hash = _osm_server_request(hash_url).decode('utf-8')
     if (hash != "false" and lru.inCache(hash)):
         not_skip = False
         data = lru.get(hash)
 
     if not_skip:
-        content = osm_server_request(url)
+        content = _osm_server_request(url)
         try:
             data = json.loads(content.decode('utf-8'), object_hook=lambda d: Namespace(**d))
         except:
             print("Error: Corrupted JSON download...\nAttempting redownload...")
-            content = osm_server_request(url)
+            content = _osm_server_request(url)
             try:
                 data = json.loads(content.decode('utf-8'), object_hook=lambda d: Namespace(**d))
             except Exception as e:
                 print(f"Error: Redownload attempt failed\n{e}")
                 sys.exit(0)
 
-        hash = osm_server_request(hash_url).decode('utf-8')
+        hash = _osm_server_request(hash_url).decode('utf-8')
         lru.put(hash, data)
 
 
@@ -833,7 +835,7 @@ def get_osm_data(*args) -> OsmData:
     except AttributeError:
         raise RuntimeError("Malformed JSON: Unable to parse")
 
-def server_request(url):
+def _server_request(url):
     """
     @brief Fulfills a server request
     
@@ -857,7 +859,7 @@ def server_request(url):
 
     return server_data
 
-def get_elevation_data(*args):
+def get_elevation_data(*args) -> ElevationData:
     """
     @brief This method retrieves an Elevation  Map dataset, given a location
         by name (string).
@@ -891,15 +893,15 @@ def get_elevation_data(*args):
     data = None
     not_skip = True
     hash = False
-    hash = server_request(hash_url).decode('utf-8')
+    hash = _server_request(hash_url).decode('utf-8')
     if (hash != "false" and lru.inCache(hash)):
         not_skip = False
         data = lru.get(hash)
 
     if not_skip:
-        data = server_request(url).decode("utf-8")
+        data = _server_request(url).decode("utf-8")
 
-    hash = server_request(hash_url).decode('utf-8')
+    hash = _server_request(hash_url).decode('utf-8')
     lru.put(hash, data)
 
     
@@ -982,7 +984,7 @@ def _get_wiki_actor_movie_direct(year_begin, year_end, array_out):
         array_out.append(mak)
         # print(result['movie']['value'])
 
-def get_wiki_data_actor_movie(year_begin, year_end):
+def get_wiki_data_actor_movie(year_begin, year_end) -> List[MovieActorWikiData]:
     """
     @brief This method retrieves an actor-movie data from Wikidata
 
@@ -1000,7 +1002,7 @@ def get_wiki_data_actor_movie(year_begin, year_end):
         _get_wiki_actor_movie_direct(y, y, ret)
     return ret
 
-def get_amenity_data(*args):
+def get_amenity_data(*args) -> amenities :
     """
     @brief This method retrieves amenity data from Open Street Map datasets.
     
@@ -1033,18 +1035,18 @@ def get_amenity_data(*args):
     data = None
     not_skip = True
 
-    hash = osm_server_request(hash_url).decode('utf-8')
+    hash = _osm_server_request(hash_url).decode('utf-8')
     if (hash != "false" and lru.inCache(hash)):
         not_skip = False
         data = lru.get(hash)
     
     if (not_skip):
-        content =  osm_server_request(url)
+        content =  _osm_server_request(url)
         try:
             data = json.loads(content.decode('utf-8'))
         except:
             print("Error: Corrupted JSON download...\nAttempting redownload...")
-            content = osm_server_request(url)
+            content = _osm_server_request(url)
             try:
                 data = json.loads(content.decode('utf-8'))
             except Exception as e:
@@ -1052,7 +1054,7 @@ def get_amenity_data(*args):
                 raise RuntimeError(e)
                 sys.exit(0)
 
-        hash = osm_server_request(hash_url).decode('utf-8')
+        hash = _osm_server_request(hash_url).decode('utf-8')
         lru.put(hash, data)
 
 
@@ -1079,7 +1081,7 @@ def get_amenity_data(*args):
 
     return ret_data
 
-def get_gutenberg_book_metadata(*args):
+def get_gutenberg_book_metadata(*args) -> list[GutenbergMeta]:
     """
     @brief function to search for a gutenberg book given a search string and type of metadata to search through
 
@@ -1091,7 +1093,7 @@ def get_gutenberg_book_metadata(*args):
     """
     url = _get_gutenberg_url() + f"/search?search={args[0]}&type={args[1]}"
 
-    content = server_request(url)
+    content = _server_request(url)
     data = json.loads(content.decode('utf-8'))
 
     book_list = []
@@ -1110,7 +1112,7 @@ def get_gutenberg_book_metadata(*args):
 
     return book_list
 
-def get_a_gutenberg_book_metadata(id):
+def get_a_gutenberg_book_metadata(id) -> GutenbergMeta:
     """
     @brief function to retrieve the metadata of a gutenberg book given its ID
     :param id: ID of the book
@@ -1118,10 +1120,10 @@ def get_a_gutenberg_book_metadata(id):
     """
     url = _get_gutenberg_url() + "/meta?id=" + str(id)
 
-    content = server_request(url)
+    content = _server_request(url)
     data = json.loads(content.decode('utf-8'))
 
-    meta = gutenberg_meta.GutenbergMeta
+    meta = gutenberg_meta.GutenbergMeta()
     for node in data['book_list']:
         
         
@@ -1153,7 +1155,7 @@ def gutenberg_book_text(id, strip = False):
         else:
             if source_type == "local" or source_type == "testing":
                 print(f"Using {source_type} server to request {id}")
-            content = server_request(url)
+            content = _server_request(url)
             data = content.decode('utf-8')
             lru.put("gutenberg" + str(id), data)
     except Exception as e:
@@ -1164,17 +1166,17 @@ def gutenberg_book_text(id, strip = False):
 
     return book_data
 
-def available_subreddits():
+def available_subreddits() -> List[str]:
     """
     @brief retrieves the subreddits made available by BRIDGES
     :return: a list of strings which identify subreddits
     """
     base_url = _get_reddit_url()
     url = f"{base_url}/listJSON"
-    content = server_request(url)
+    content = _server_request(url)
     return json.loads(content.decode("utf-8"))
 
-def reddit_data(subreddit, time_request = -9999):
+def reddit_data(subreddit, time_request = -9999) -> Reddit:
     """
     @brief  retrieves the reddit post from a subreddit
     :param subreddit: the name of the subreddit ( check list available at http://bridges-data-server-reddit.bridgesuncc.org/list ) 
@@ -1185,7 +1187,7 @@ def reddit_data(subreddit, time_request = -9999):
     url = f"{base_url}/cache?subreddit={subreddit}&time_resquest={time_request}"
 
 
-    content = server_request(url)
+    content = _server_request(url)
     print ("Object type:" + str(type(content)))
     print("reddit content:" + str(content))
     data = json.loads(content.decode("utf-8"))
@@ -1193,7 +1195,7 @@ def reddit_data(subreddit, time_request = -9999):
     reddit_posts = []
 
     for n in data:
-        post = reddit.reddit()
+        post = reddit.Reddit()
         post.id = data[n]["id"]
         post.title = data[n]["title"]
         post.author = data[n]["author"]
