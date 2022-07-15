@@ -741,15 +741,16 @@ def get_osm_data(*args) -> OsmData:
     by name (string).
 
     Args:
-        args: location name
+        args: either there are two arguments: location:str and level:str
+or there are 5 argument minLat:float minLon:float maxLat:float maxLon:float and level:str
 
     Returns:
-        OSM data
+        OsmData
     """
     import os
 
     debug = True
-    
+
     if (len(args) == 2):
         location = args[0]
         level = args[1]

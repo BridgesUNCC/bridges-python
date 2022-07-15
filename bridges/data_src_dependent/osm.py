@@ -250,7 +250,7 @@ class OsmData:
     EdgeList = List[OsmEdge]
 
     @property
-    def vertices(self) -> VertexList:
+    def vertices(self) -> List[OsmVertex]:
         """
         @brief get vertices of the dataset (list)
         Returns:
@@ -259,7 +259,7 @@ class OsmData:
         return self._vertices
 
     @vertices.setter
-    def vertices(self, vertices: VertexList):
+    def vertices(self, vertices: List[OsmVertex]):
         """
         @brief Set vertices of the dataset (VertexList)
         Args:
@@ -308,7 +308,7 @@ class OsmData:
         del self._vertices
 
     @property
-    def edges(self) -> EdgeList:
+    def edges(self) -> List[OsmEdge]:
         """
         @brief Get edges  of the dataset (EdgeList)
         Returns:

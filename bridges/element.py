@@ -118,6 +118,7 @@ class Element:
     def visualizer(self) -> ElementVisualizer:
         """
         Getter for the element visualizer
+
         Returns:
             ElementVisualizer 
         """
@@ -127,8 +128,10 @@ class Element:
     def visualizer(self, vis: ElementVisualizer) -> None:
         """
         Setter function for this element visualizer
+
         Args:
             vis: the element visualizer
+
         Returns:
             None
         """
