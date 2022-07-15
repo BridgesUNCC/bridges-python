@@ -737,12 +737,16 @@ def osm_server_request(url):
 
 def get_osm_data(*args) -> OsmData:
     """
-    @brief This method retrieves an OpenStreet Map dataset, given a location
-    by name (string).
+    @brief This method retrieves an OpenStreet Map dataset given a location
+    
+    The function can either take a city name or a bounding box in lat/long. The city name can be taken from the list at http://bridges-data-server-osm.bridgesuncc.org/cities
+
+    The function also take a level of detail which can be anything in ["motorway", "trunk", "primary", "secondary", "tertiary, "unclassified", "residential", "living_street", "service", "trails", "walking", "bicycle" ]
+
 
     Args:
         args: either there are two arguments: location:str and level:str
-or there are 5 argument minLat:float minLon:float maxLat:float maxLon:float and level:str
+              or there are 5 arguments minLat:float minLon:float maxLat:float maxLon:float and level:str
 
     Returns:
         OsmData
