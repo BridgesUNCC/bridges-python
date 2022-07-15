@@ -14,7 +14,7 @@ from bridges.data_src_dependent.cancer_incidence import *
 from bridges.data_src_dependent.song import *
 from bridges.data_src_dependent import lru_cache
 from bridges.data_src_dependent.movie_actor_wiki_data import *
-from bridges.data_src_dependent.us_cities import *
+from bridges.data_src_dependent.city import *
 from bridges.data_src_dependent.osm import *
 from bridges.data_src_dependent.elevation import *
 from bridges.data_src_dependent.amenity import *
@@ -100,7 +100,7 @@ def get_game_data():
     return wrapper
 
 
-def get_us_cities_data(**kwargs) -> USCities:
+def get_us_cities_data(**kwargs) -> City:
     """
     @brief retrieves a set of cities filtered by provided arguments
     Args:
@@ -148,11 +148,11 @@ def get_us_cities_data(**kwargs) -> USCities:
 
     for i in range(len(D)):
         V = D[i]
-        wrapper.append(USCities(city = V['city'], state=V['state'], country = V['country'], lat = V['lat'], lon=V['lon'], elevation=V['elevation'],
+        wrapper.append(City(city = V['city'], state=V['state'], country = V['country'], lat = V['lat'], lon=V['lon'], elevation=V['elevation'],
                                           population = V['population'], timezone=V['timezone']))
     return wrapper
 
-def get_world_cities_data(**kwargs) -> USCities:
+def get_world_cities_data(**kwargs) -> City:
     wrapper = []
 
     url = "http://localhost:3001/api/world_cities"
@@ -1088,7 +1088,8 @@ def get_amenity_data(*args) -> amenities :
 
     return ret_data
 
-def get_gutenberg_book_metadata(*args) -> list[GutenbergMeta]:
+#def get_gutenberg_book_metadata(*args) -> list[GutenbergMeta]:
+def get_gutenberg_book_metadata(*args) -> GutenbergMeta:
     """
     @brief function to search for a gutenberg book given a search string and type of metadata to search through
 

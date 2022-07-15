@@ -1,6 +1,6 @@
 
 
-class USCities:
+class City:
     """
     @brief  Class that hold city data
     """
