@@ -8,7 +8,9 @@ class GutenbergMeta:
     authors, genres, and library of congress classifications.
 
     This object is generally not created by the user, to see how its created check 
-    out bridges::data_src_dependent::data_source::get_gutenberg_book_metadata()
+    out bridges::data_src_dependent::data_source::get_gutenberg_book_metadata() or bridges::data_src_dependent::data_source::get_a_gutenberg_book_metadata()
+
+    One can get the actual text of a book using bridges::data_src_dependent::data_source::gutenberg_book_text()
 
     @sa A tutorial of how to use the Gutenberg data in BRIDGES is 
          available: check out https://bridgesuncc.github.io/tutorials/Data_Gutenberg.html

@@ -5,7 +5,11 @@ class GutenbergBook:
     This is a convenience class provided for  users who wish to use this
     data source as part of their application. It provides an API that makes
     it easy to access the attributes of this data set.
+
+    Objects of this type are not meant to be created directly, but rather returned by a call to bridges::data_src_dependent::data_source::get_gutenberg_book_data()
    
+    This data type is deprecated and you may want to use GutenbergMeta instead.
+
     Refer to tutorial examples to using this data source in data structure
     assignments.
      

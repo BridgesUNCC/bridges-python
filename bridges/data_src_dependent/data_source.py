@@ -244,10 +244,13 @@ def get_actor_movie_imdb_data(count = 0):
 def get_actor_movie_imdb_data2():
     """
     Get ActorMovie IMDB Data. Data is retrieved, formatted into a list of ActorMovieIMDB objects
+
     Args:
         count: the number of actor/movie pairs, but currently unused,
+
     Returns:
         All records.
+
     Throws: 
         Exception if the request fails
     """
@@ -362,6 +365,8 @@ def get_gutenberg_book_data(num = 0):
 
     This function retrieves,  and formats the data into a list of
     GutenbergBook objects
+
+    (deprecated you may want to use get_gutenberg_book_metadata() instead. )
 
     @throws Exception if the request fails
 
@@ -1072,9 +1077,11 @@ def get_amenity_data(*args):
 def get_gutenberg_book_metadata(*args):
     """
     @brief function to search for a gutenberg book given a search string and type of metadata to search through
+
     :param args:
         args[0]: search string, i.e home
         args[1]: metadata type, i.e id, title, lang, date_added, authors, genres, loc_class
+
     :return: a list of books with containing matched strings from the specified metadata type
     """
     url = get_gutenberg_url() + f"/search?search={args[0]}&type={args[1]}"
