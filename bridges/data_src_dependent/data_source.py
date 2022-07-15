@@ -14,7 +14,7 @@ from bridges.data_src_dependent import cancer_incidence
 from bridges.data_src_dependent import song
 from bridges.data_src_dependent import lru_cache
 from bridges.data_src_dependent import movie_actor_wiki_data
-from bridges.data_src_dependent import us_cities
+from bridges.data_src_dependent.us_cities import *
 from bridges.data_src_dependent.osm import *
 from bridges.data_src_dependent.elevation import *
 from bridges.data_src_dependent.amenity import *
@@ -26,7 +26,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 
 source_type = "live"
 
-def set_source_type(t):
+def set_source_type(t) -> None:
     global source_type
     if (t == "testing"):
         source_type = "testing"
@@ -56,12 +56,12 @@ def _get_osm_baseurl():
         return "http://localhost:3000"
     return "http://bridges-data-server-osm.bridgesuncc.org"
 
-def get_elevation_url():
+def _get_elevation_url():
     if source_type == "local":
         return "http://localhost:3000"
     return "http://bridges-data-server-elevation.bridgesuncc.org"
 
-def get_amenity_url():
+def _get_amenity_url():
     if source_type == "local":
         return "http://localhost:3000"
     return "http://bridges-data-server-osm.bridgesuncc.org"
@@ -100,7 +100,7 @@ def get_game_data():
     return wrapper
 
 
-def get_us_cities_data(**kwargs):
+def get_us_cities_data(**kwargs) -> USCities:
     """
     @brief retrieves a set of cities filtered by provided arguments
     Args:
@@ -148,7 +148,7 @@ def get_us_cities_data(**kwargs):
 
     for i in range(len(D)):
         V = D[i]
-        wrapper.append(us_cities.USCities(city = V['city'], state=V['state'], country = V['country'], lat = V['lat'], lon=V['lon'], elevation=V['elevation'],
+        wrapper.append(USCities(city = V['city'], state=V['state'], country = V['country'], lat = V['lat'], lon=V['lon'], elevation=V['elevation'],
                                           population = V['population'], timezone=V['timezone']))
     return wrapper
 
@@ -869,8 +869,8 @@ def get_elevation_data(*args):
         Elevation data for the bounding box and resolution requested 
         (approximately) [type: ElevationData]
     """
-    base_url = get_elevation_url() + "/elevation"
-    hash_url = get_elevation_url() + "/hash"
+    base_url = _get_elevation_url() + "/elevation"
+    hash_url = _get_elevation_url() + "/hash"
 
     coords = args[0]
     minLat = str(coords[0])
@@ -1021,11 +1021,11 @@ def get_amenity_data(*args):
     """
     
     if(len(args)) == 5:
-        url = f"{get_amenity_url()}/amenity?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
-        hash_url = f"{get_amenity_url()}/hash?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={urllib.parse.quote(args[4])}"
+        url = f"{_get_amenity_url()}/amenity?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={args[4]}"
+        hash_url = f"{_get_amenity_url()}/hash?minLat={args[0]}&minLon={args[1]}&maxLat={args[2]}&maxLon={args[3]}&amenity={urllib.parse.quote(args[4])}"
     elif(len(args) == 2):
-        url = f"{get_amenity_url()}/amenity?location={urllib.parse.quote(args[0])}&amenity={urllib.parse.quote(args[1])}"
-        hash_url = f"{get_amenity_url()}/hash?location={args[0]}&amenity={args[1]}"
+        url = f"{_get_amenity_url()}/amenity?location={urllib.parse.quote(args[0])}&amenity={urllib.parse.quote(args[1])}"
+        hash_url = f"{_get_amenity_url()}/hash?location={args[0]}&amenity={args[1]}"
     else:
         raise RuntimeError("Invalid Number of Map Request Inputs")
 

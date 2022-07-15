@@ -1,7 +1,11 @@
 
 
-class USCities():
+class USCities:
+    """
+    @brief  Class that hold city data
+    """
 
+    
     def __init__(self, city:str = None, state:str = None, country:str = None, lat:float = None, lon:float = None, elevation:int = None, population:int = None, timezone:str = None):
         self._city = city
         self._state = state
