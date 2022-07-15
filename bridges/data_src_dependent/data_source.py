@@ -36,7 +36,7 @@ def set_source_type(t):
         source_type = "live"
     return
 
-def get_reddit_url():
+def _get_reddit_url():
     if source_type == "testing":
         return "http://bridges-data-server-reddit-t.bridgesuncc.org"
     elif source_type == "local":
@@ -44,7 +44,7 @@ def get_reddit_url():
     else:
         return "http://bridges-data-server-reddit.bridgesuncc.org"
 
-def get_gutenberg_url():
+def _get_gutenberg_url():
     if source_type == "testing":
         return "http://bridges-data-server-gutenberg-t.bridgesuncc.org"
     elif source_type == "local":
@@ -195,7 +195,7 @@ def get_world_cities_data(**kwargs):
 
 
 
-def parse_actor_movie_imdb(item):
+def _parse_actor_movie_imdb(item):
     """
     @brief Parses an actor movie pair
 
@@ -266,7 +266,7 @@ def get_actor_movie_imdb_data2():
     if status == 200:
         for i in range(len(D)):
             V = D[i]
-            am_pair = parse_actor_movie_imdb(V)
+            am_pair = _parse_actor_movie_imdb(V)
             am_pair.rating = int(V['rating'])
 
             genre = V['genres']
@@ -1089,7 +1089,7 @@ def get_gutenberg_book_metadata(*args):
 
     :return: a list of books with containing matched strings from the specified metadata type
     """
-    url = get_gutenberg_url() + f"/search?search={args[0]}&type={args[1]}"
+    url = _get_gutenberg_url() + f"/search?search={args[0]}&type={args[1]}"
 
     content = server_request(url)
     data = json.loads(content.decode('utf-8'))
@@ -1116,7 +1116,7 @@ def get_a_gutenberg_book_metadata(id):
     :param id: ID of the book
     :return: a dictionary containing the metadata of the gutenberg book
     """
-    url = get_gutenberg_url() + "/meta?id=" + str(id)
+    url = _get_gutenberg_url() + "/meta?id=" + str(id)
 
     content = server_request(url)
     data = json.loads(content.decode('utf-8'))
@@ -1169,7 +1169,7 @@ def available_subreddits():
     @brief retrieves the subreddits made available by BRIDGES
     :return: a list of strings which identify subreddits
     """
-    base_url = get_reddit_url()
+    base_url = _get_reddit_url()
     url = f"{base_url}/listJSON"
     content = server_request(url)
     return json.loads(content.decode("utf-8"))
@@ -1181,7 +1181,7 @@ def reddit_data(subreddit, time_request = -9999):
     :param time_request: unix timestamp of when requested subreddit was generated or less than 0 for now
     :return: a list of reddit objects with the data of the posts
     """
-    base_url = get_reddit_url()
+    base_url = _get_reddit_url()
     url = f"{base_url}/cache?subreddit={subreddit}&time_resquest={time_request}"
 
 
