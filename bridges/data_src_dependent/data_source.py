@@ -868,15 +868,14 @@ def _server_request(url):
 
 def get_elevation_data(*args) -> ElevationData:
     """
-    @brief This method retrieves an Elevation  Map dataset, given a location
-        by name (string).
+    @brief This method retrieves an Elevation  Map dataset, given a location by name (string).
+
     Args:
         args(0): a bounding box, aka an array [minLat, minLon, maxLat, maxLon]
         args(1): spatial resolution, aka the distance between two samples (in degrees)
 
     Returns:
-        Elevation data for the bounding box and resolution requested 
-        (approximately) [type: ElevationData]
+        Elevation data for the bounding box and resolution requested  (approximately) [type: ElevationData]
     """
     base_url = _get_elevation_url() + "/elevation"
     hash_url = _get_elevation_url() + "/hash"
