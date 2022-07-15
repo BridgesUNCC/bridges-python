@@ -198,6 +198,7 @@ def get_world_cities_data(**kwargs):
 def parse_actor_movie_imdb(item):
     """
     @brief Parses an actor movie pair
+
     Args:
         item: input actor-movie pair
     """

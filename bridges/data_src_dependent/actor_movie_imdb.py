@@ -8,7 +8,7 @@ class ActorMovieIMDB():
     movie ratings and genres.
 
     This object is generally not created by the user, to see how its created check 
-    out bridges::data_src_dependent::data_source::get_actor_movie_imdb_data()
+    out bridges::data_src_dependent::data_source::get_actor_movie_imdb_data() and bridges::data_src_dependent::data_source::get_actor_movie_imdb_data2()
 
     @sa For an example, check out https://bridgesuncc.github.io/tutorials/Data_IMDB.html
 
