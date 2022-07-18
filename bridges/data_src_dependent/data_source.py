@@ -100,7 +100,7 @@ def get_game_data():
     return wrapper
 
 
-def get_us_cities_data(**kwargs) -> City:
+def get_us_cities_data(**kwargs) -> List[City]:
     """
     @brief retrieves a set of cities filtered by provided arguments
     Args:
@@ -152,7 +152,7 @@ def get_us_cities_data(**kwargs) -> City:
                                           population = V['population'], timezone=V['timezone']))
     return wrapper
 
-def get_world_cities_data(**kwargs) -> City:
+def get_world_cities_data(**kwargs) -> List[City]:
     wrapper = []
 
     url = "http://localhost:3001/api/world_cities"
@@ -306,7 +306,7 @@ def get_earthquake_usgs_data(count = 0) -> EarthquakeUSGS:
         for i in range(len(r)):
             V = r[i]["properties"]
             G = r[i]["geometry"]["coordinates"]
-            wrapper.append(earthquake_usgs.EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
+            wrapper.append(EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
     else:
         r = requests.get(url=latest_url, params=str(PARAMS))
         data = r.json()
@@ -314,7 +314,7 @@ def get_earthquake_usgs_data(count = 0) -> EarthquakeUSGS:
         for i in range(len(D)):
             V = D[i]["properties"]
             G = D[i]["geometry"]["coordinates"]
-            wrapper.append(earthquake_usgs.EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
+            wrapper.append(EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
     return wrapper
 
 
