@@ -175,6 +175,5 @@ class SLelementIterator():
         if not self.has_next():
             raise StopIteration
 
-        ret = self.current.value
         self.current = self.current.next
-        return ret
+        return self.current
