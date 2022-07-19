@@ -1008,7 +1008,7 @@ def get_wiki_data_actor_movie(year_begin, year_end) -> List[MovieActorWikiData]:
         _get_wiki_actor_movie_direct(y, y, ret)
     return ret
 
-def get_amenity_data(*args) -> amenities :
+def get_amenity_data(*args) -> List[Amenity] :
     """
     @brief This method retrieves amenity data from Open Street Map datasets.
     
@@ -1065,26 +1065,23 @@ def get_amenity_data(*args) -> amenities :
         lru.put(hash, data)
 
 
-    ret_data = amenities()
-
+    ret_data = []
 
     for i, node in enumerate(data['nodes']):
-        temp = amenityData()
+        amen = Amenity()
         for x, vals in enumerate(node):
             if (x == 0):
-                temp.id = vals
+                amen.id = vals
             elif (x == 1):
-                temp.lat = vals
+                amen.lat = vals
             elif (x == 2):
-                temp.lon = vals
+                amen.lon = vals
             elif (x == 3):
-                temp.name = vals
+                amen.name = vals
             else:
-                temp.addOther = vals
-        ret_data.data = temp
+                amen.addOther = vals
+        ret_data.append(amen)
     
-    temp_meta = meta(data['meta']['minlat'], data['meta']['minlon'], data['meta']['maxlat'], data['meta']['maxlon'], data['meta']['count'])
-    ret_data.meta = temp_meta
 
     return ret_data
 
