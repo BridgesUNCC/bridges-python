@@ -126,9 +126,9 @@ def get_us_cities_data(**kwargs) -> List[City]:
         if kwargs.get('max_pop'):
             url = url + 'maxPopulation=' + str(kwargs['max_pop']) + '&'
         if kwargs.get('min_lat_long'):
-            url = url + 'minLatLong=' + str(kwargs['minll'][0]) + ',' + str(kwargs['min_lat_long'][1]) + '&'
+            url = url + 'minLatLong=' + str(kwargs['min_lat_long']) + '&'
         if kwargs.get('max_lat_long'):
-            url = url + 'maxLatLong=' + str(kwargs['max_lat_long'][0]) + ',' + str(kwargs['max_lat_long'][1]) + '&'
+            url = url + 'maxLatLong=' + str(kwargs['max_lat_long']) + '&'
         if kwargs.get('min_elev'):
             url = url + 'minElevation=' + str(kwargs['min_elev']) + '&'
         if kwargs.get('max_elev'):
