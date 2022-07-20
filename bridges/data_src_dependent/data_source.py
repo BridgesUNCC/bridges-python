@@ -1113,7 +1113,7 @@ def get_gutenberg_book_metadata(*args) -> GutenbergMeta:
 
     book_list = []
     for node in data['book_list']:
-        meta = gutenberg_meta.GutenbergMeta ()
+        meta = GutenbergMeta ()
 
         meta.id = node["id"]
         meta.title = node['title']
@@ -1138,7 +1138,7 @@ def get_a_gutenberg_book_metadata(id) -> GutenbergMeta:
     content = _server_request(url)
     data = json.loads(content.decode('utf-8'))
 
-    meta = gutenberg_meta.GutenbergMeta()
+    meta = GutenbergMeta()
     for node in data['book_list']:
         
         
@@ -1159,7 +1159,7 @@ def gutenberg_book_text(id, strip = False):
     :param strip: boolean to determine if headers and footers are stripped from the text
     :return: json containing the text of the book
     """
-    url = get_gutenberg_url() + "/book?id=" + str(id)
+    url = _get_gutenberg_url() + "/book?id=" + str(id)
     
     lru = lru_cache.lru_cache(120)
     try:
@@ -1179,7 +1179,7 @@ def gutenberg_book_text(id, strip = False):
 
     book_data = json.loads(data)
 
-    return book_data
+    return book_data[str(id)]
 
 def available_subreddits() -> List[str]:
     """

@@ -99,7 +99,7 @@ class GutenbergMeta:
         Returns:
             date of book
         """
-        return self._date_added
+        return self.__date_added
     
     @date.setter
     def date(self, i):
