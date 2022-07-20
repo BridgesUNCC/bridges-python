@@ -1094,8 +1094,7 @@ def get_amenity_data(*args) -> List[Amenity] :
 
     return ret_data
 
-#def get_gutenberg_book_metadata(*args) -> list[GutenbergMeta]:
-def get_gutenberg_book_metadata(*args) -> GutenbergMeta:
+def get_gutenberg_book_metadata(*args) -> List[GutenbergMeta]:
     """
     @brief function to search for a gutenberg book given a search string and type of metadata to search through
 
