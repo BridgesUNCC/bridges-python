@@ -105,12 +105,17 @@ def get_us_cities_data(**kwargs) -> List[City]:
     @brief retrieves a set of cities filtered by provided arguments
     Args:
         kwargs: can be one or more of the following:
-        'city' : city name
-        'state' : US state
+        'city': city name
+        'state': US state
         'timezone': cities within this timezone
-        'min_pop','max_pop : include cities within this  population range
-        'min_elev', 'max_elev' : include cities within this  elevation range
-        'min_lat_long', 'max_lat_long': include cities within this latitude/longitude range
+        'min_pop': include cities larger than this number
+        'max_pop': include cities smaller than this number
+        'min_elev':  include cities larger than this  elevation 
+        'max_elev': include cities smaller than this  elevation 
+        'min_lat':  min latitude
+        'min_long':  min longitude
+        'max_lat':  max latitude
+        'max_long': max longtude
         'limit':  number of cities to be included
     """
 
@@ -125,10 +130,15 @@ def get_us_cities_data(**kwargs) -> List[City]:
             url = url + 'minPopulation=' + str(kwargs['min_pop']) + '&'
         if kwargs.get('max_pop'):
             url = url + 'maxPopulation=' + str(kwargs['max_pop']) + '&'
-        if kwargs.get('min_lat_long'):
-            url = url + 'minLatLong=' + str(kwargs['min_lat_long']) + '&'
-        if kwargs.get('max_lat_long'):
-            url = url + 'maxLatLong=' + str(kwargs['max_lat_long']) + '&'
+        if kwargs.get('min_lat'):
+            url = url + 'minLat=' + str(kwargs['min_lat']) + '&'
+            print('url(partial): ' + url)
+        if kwargs.get('min_long'):
+            url = url + 'minLong=' + str(kwargs['min_long']) + '&'
+        if kwargs.get('max_lat'):
+            url = url + 'maxLat=' + str(kwargs['max_lat']) + '&'
+        if kwargs.get('max_long'):
+            url = url + 'maxLong=' + str(kwargs['max_long']) + '&'
         if kwargs.get('min_elev'):
             url = url + 'minElevation=' + str(kwargs['min_elev']) + '&'
         if kwargs.get('max_elev'):
