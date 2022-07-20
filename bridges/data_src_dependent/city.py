@@ -2,9 +2,22 @@
 
 class City:
     """
-    @brief  Class that hold city data
-    """
+    @brief Class that holds data of a city
+    
+    A user would not normally create an City object but
+    rather obtain one from calling bridges::data_src_dependent::data_source::get_us_cities_data(),
+    bridges::data_src_dependent::data_source::get_world_cities_data() (to come)
 
+    A tutorial on how to use the City objects is available at:
+    https://bridgesuncc.github.io/tutorials/Data_USCities.html 
+
+    Each city object contains the city name, state, country, time zone, elevation,
+    population and lat/long location information.
+
+    @author Kalpathi Subramanian
+
+    @date 6/7/22
+    """
     
     def __init__(self, city:str = None, state:str = None, country:str = None, lat:float = None, lon:float = None, elevation:int = None, population:int = None, timezone:str = None):
         self._city = city
