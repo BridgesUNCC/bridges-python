@@ -2,17 +2,17 @@ from bridges.array import *
 
 class Array2D(Array):
     """
-    brief This class can be used to create 2D arrays of type Element<E>.
+    brief This class can be used to create 2D arrays of type Element.
     
-    @author 	Kalpathi Subramanian, Matthew McQuaigue
+    @author 	Kalpathi Subramanian, Matthew McQuaigue, Erik Saule
     
-    @date  	10816, 51717, 53018
+    @date  	10/8/16, 5/17/17, 5/30/18, 7/20/22
     
-    This class can be used to create arrays of type Element<E>  where E
-    is a generic object representing application specific data.
+    This class can be used to create 2D arrays of type Element. Element
+    enables to store objects of any types and provide styling features
+    for visualization purposes.
     
-    Arrays are internally represented as 1D arrays; currently 1D, 2D  and
-    3D arrays are supported.
+    Array2D are internally represented as 1D arrays.
     
     Example Tutorial at: https//:bridgesuncc.github.io/tutorials/Array.html 
     (1D, 2D, and 3D Array)<br>

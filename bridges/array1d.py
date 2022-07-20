@@ -2,21 +2,25 @@ from bridges.array import *
 
 class Array1D(Array):
     """
-    @brief This is a class can be used to create 1 dimensional arrays of type Element<E>.
+    @brief This is a class can be used to create 1 dimensional arrays of type Element.
     
     @author 	Kalpathi Subramanian, Matthew McQuaigue
     
     @date  	7/18/19
     
-    This class can be used to create 1D arrays of type Element<E>  where E
-    is a generic object representing application specific data.
-    
+    This class can be used to create 1D arrays of type Element. Element
+    enables to store objects of any types and provide styling features
+    for visualization purposes.
+
     Array1D has iterator semantic to enable range for loops. For instance,
     
     \code{java}
-    Array1D<Integer> arr = something();
-    for (Integer i : arr)
-        System.out.println(i);
+    arr = Array1D(3)
+    arr[0] = Element("a")
+    arr[1] = Element("b")
+    arr[2] = Element("c")
+    for el in arr:
+        print(el.label)
     \endcode
     
     Example Tutorial at: https://bridgesuncc.github.io/tutorials/Array.html (1D, 2D, and 3D Array)<br>

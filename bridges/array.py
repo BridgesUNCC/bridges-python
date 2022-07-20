@@ -2,20 +2,21 @@
 from bridges.element import *
 
 class Array():
-    """
-    @brief This class can be used to create arrays of type Element<E>.
+    """@brief This class can be used to create arrays of type Element.
     
-    @author 	Matthew McQuaigue
+    @author 	Matthew McQuaigue, Erik Saule
     
-    @date  	10/8/16, 6/09/19
+    @date  	10/8/16, 6/09/19, 7/20/22
     
-    This class can be used to create arrays of type Element<E>  where E
-    is a generic object representing application specific data.
+    This class can be used to create arrays of type Element. Element
+    enables to store objects of any types and provide styling features
+    for visualization purposes.
     
     Arrays are internally represented as 1D arrays; currently 1D, 2D  and
     3D arrays are supported.
     
     Example Tutorial at: https://bridgesuncc.github.io/tutorials/Array.html (1D, 2D, and 3D Array)
+
     """
 
     dims = [1,1,1] #used for setting size of array based on dimensions
@@ -115,7 +116,7 @@ class Array():
         else:
             raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D arrays supported at this time")
 
-    def get_dimensions(self) -> list:
+    def get_dimensions(self) -> list[int]:
         """
         Get the size of each dimensions
         Returns:
@@ -123,7 +124,7 @@ class Array():
         """
         return self._dims
 
-    def get_element(self, *args, **kwargs):
+    def get_element(self, *args, **kwargs) -> Element:
         """
         Getter function for an element in the array at given position
         args:
