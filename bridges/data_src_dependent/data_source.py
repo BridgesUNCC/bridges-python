@@ -364,7 +364,7 @@ def get_shakespeare_data(endpoint = "", textonly = False) -> Shakespeare:
     D = r["data"]
     for i in range(len(D)):
         V = D[i]
-        wrapper.append(shakespeare.Shakespeare(V["title"], V["type"], V["text"]))
+        wrapper.append(Shakespeare(V["title"], V["type"], V["text"]))
     return wrapper
 
 
@@ -446,9 +446,8 @@ def get_cancer_incident_data(num = 0) -> CancerIncidence:
 
     D = r["data"]
 
-    # c = CancerIncidence.CancerIncidence()
     for i in range(len(D)):
-        c = cancer_incidence.CancerIncidence()
+        c = CancerIncidence()
         v = D[i]
         age = v["Age"]
         c.set_age_adjusted_rate(age["Age Adjusted Rate"])
@@ -532,7 +531,7 @@ def get_song(songTitle, artistName = None) -> Song:
     else:
         release_date = ""
 
-    return song.Song(artist, songs, album, lyrics, release_date)
+    return Song(artist, songs, album, lyrics, release_date)
 
 
 def get_song_data() -> List[Song]:
@@ -589,7 +588,7 @@ def get_song_data() -> List[Song]:
         else:
             release_date = ""
 
-        all_songs.append(song.Song(artist, song, album, lyrics, release_date))
+        all_songs.append(Song(artist, song, album, lyrics, release_date))
     return all_songs
 
 
@@ -988,7 +987,7 @@ def _get_wiki_actor_movie_direct(year_begin, year_end, array_out):
         lru.put(code_name, results)
 
     for result in results["results"]["bindings"]:
-        mak = movie_actor_wiki_data.MovieActorWikiData()
+        mak = MovieActorWikiData()
         actor_uri = str(result['actor']['value'])
         movie_uri = str(result['movie']['value'])
         actor_uri = actor_uri.replace("http://www.wikidata.org/entity/","",1)
@@ -1210,7 +1209,7 @@ def reddit_data(subreddit, time_request = -9999) -> Reddit:
     reddit_posts = []
 
     for n in data:
-        post = reddit.Reddit()
+        post = Reddit()
         post.id = data[n]["id"]
         post.title = data[n]["title"]
         post.author = data[n]["author"]
