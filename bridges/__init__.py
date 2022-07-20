@@ -39,5 +39,4 @@ from bridges.circle import *
 from bridges.rectangle import *
 from bridges.polygon import *
 from bridges.polyline import *
-from bridges.label import *
 
