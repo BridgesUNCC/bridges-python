@@ -116,7 +116,7 @@ class Array():
         else:
             raise ValueError("Invalid number of dimensions. Only 1D, 2D and 3D arrays supported at this time")
 
-    def get_dimensions(self) -> list[int]:
+    def get_dimensions(self) -> List[int]:
         """
         Get the size of each dimensions
         Returns:

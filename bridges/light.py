@@ -1,0 +1,56 @@
+import webcolors
+class Light:
+
+    def __init__(self, position:list, color:str):
+        self._position = position
+        self._color = color
+        self._light_type = "directional"
+
+    @property
+    def position(self):
+        return self._position
+
+    @position.setter
+    def position(self, pos:list):
+        self._position = pos
+
+    @property
+    def color(self):
+        return self._color
+
+    @color.setter
+    def color(self, *args, **kwargs):
+        """
+        Sets color for a an element or link. Requires either 3 ints 0-255 for RGB and an optional float 0.0-1.0 for alpha or a str of a web color can also key the RGBA values with r, g, b, a or red, green, blue, alpha respectively and col_name for the str
+        Args:
+            args: int, int, int optional float or str
+            kwargs: r/red: int, b/blue: int, g/green: int optional a/alpha: float or col_name: str
+        """
+        col_name = None
+        if args:
+            errorcondition = True
+            if len(args) == 1 and type(args[0]) == list:
+                self._color = [args[0][0] / 255, args[0][1] / 255, args[0][2] / 255, args[0][3]]
+                errorcondition = False
+            if len(args) == 4 or len(args) == 3:
+                self._color = [args[0] / 255, args[1] / 255, args[2] / 255, 1.0]
+                if len(args) == 4:
+                    self._color = args[3]
+                errorcondition = False
+            elif len(args) == 1:
+                if type(args[0]) is str:
+                    col_name = args[0]
+                    errorcondition = False
+            if errorcondition:
+                raise ValueError(
+                    "To use Color constructor pass 3 RGB values and a float alpha value or a color name or a Color object")
+        elif kwargs:
+            if 'col_name' in kwargs:
+                col_name = kwargs['col_name']
+
+        if col_name is not None:
+            try:
+                web_color = webcolors.name_to_rgb(col_name)
+                self.color = web_color.red, web_color.green, web_color.blue
+            except ValueError:
+                raise ValueError(col_name + " is not a valid color name")

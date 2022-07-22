@@ -28,7 +28,7 @@ class Camera:
     def fov(self, fov:int):
         self._fov = fov
 
-    def push_representation(self, scene_json):
-        scene_json['camera'] = self._object_json
+    def push_representation(self):
+        return self._object_json
 
 

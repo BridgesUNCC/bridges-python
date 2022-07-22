@@ -111,9 +111,8 @@ class GameBase3D(ABC):
 
     def render(self):
         """
-        renders the board
+        renders the scene
         """
-
         if self.firsttime:
             self.firsttime = False
 

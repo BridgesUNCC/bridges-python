@@ -42,9 +42,6 @@ class SocketConnection:
         except ConnectionError as e:
             print(e)
 
-#    @_sio.on('announcement')
-#    def announcement(*args):
-#        print("announcement", *args)
 
     @_sio.on('keydown')
     def keydown(*args):
