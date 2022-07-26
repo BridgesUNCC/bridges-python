@@ -346,7 +346,7 @@ class LineChart:
             "yaxisType": self.logarithmicy,
             "options": {
                 "mouseTracking": self._mouse_track,
-                "dataLabels": str(self.data_label)
+                "dataLabels": self.data_label
             },
             "xaxis_data": xaxis_json,
             "yaxis_data": yaxis_json
