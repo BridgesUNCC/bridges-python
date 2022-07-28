@@ -9,10 +9,10 @@ class Reddit:
     This object is generally not created by the user, to see how its created check 
     out bridges::data_src_dependent::data_source::reddit_data()
     
-    For an example, check out https://bridgesuncc.github.io/tutorials/
+    For an example, check out https://bridgesuncc.github.io/tutorials/Data_Reddit.html
 
     @author Erik Saule, Jay Strahler
-    @date   12/1222
+    @date   12/12/22
     """
 
     def __init__(self, id = 0, title = "", author= "", score = 0, vote_ratio = 0.0, comment_count = 0, subreddit = "", post_time = 0, url = "", text = ""):
