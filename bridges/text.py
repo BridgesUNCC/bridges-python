@@ -56,6 +56,17 @@ class Text(Symbol):
         self._locx = x
         self._locy = y
 
+    @property
+    def anchor_location(self) -> tuple[float, float]:
+        return (self._locx, self._locy)
+
+    @anchor_location.setter
+    def anchor_location(self, l : tuple[float, float] ) -> None:
+        self._locx = l[0];
+        self._locy = l[1];
+
+    
+        
     def get_json_representation(self):
 
         json_builder = super(Text, self).get_json_representation()

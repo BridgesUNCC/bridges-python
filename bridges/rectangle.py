@@ -2,15 +2,16 @@ import json
 from bridges.symbol import *
 
 class Rectangle(Symbol):
-    """
-    @brief This class defines a rectangle and is part of the symbol collection.
+    """@brief This class defines a rectangle and is part of the symbol collection.
     
-    A rectangle has height and width
+    A rectangle is defined by the location of teh lower left corner
+    (smaller values of x and y) and by height and width
     
     @author Matthew Mcquaigue
     @date 2018, 7/23/19
     
     \sa Shape collection tutorial, https://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+
     """
 
     def __init__(self, **kwargs) -> None:
@@ -19,8 +20,8 @@ class Rectangle(Symbol):
         Kwargs:
             (float) w: width of the rectangle
             (float) h: height of the rectangle
-            (float) locx: x location of rectangle
-            (float) locy: y loaction of rectangle
+            (float) locx: x location of the lower left of the rectangle
+            (float) locy: y loaction of the lower left of the rectangle
         Returns:
             None
         Raises:
@@ -35,11 +36,11 @@ class Rectangle(Symbol):
             self._width = kwargs['w']
             self._height = kwargs['h']
         if 'locx' in kwargs and 'locy' in kwargs:
-            self.locx = kwargs['locx']
-            self.locy = kwargs['locy']
+            self._locx = kwargs['locx']
+            self._locy = kwargs['locy']
         else:
-            self.locx = 0.0
-            self.locy = 0.0
+            self._locx = 0.0
+            self._locy = 0.0
 
 
     def get_shape_type(self) -> str:
@@ -68,10 +69,10 @@ class Rectangle(Symbol):
         Returns:
             None
         Raises:
-            ValueError: if the width is < 0 or > 300
+            ValueError: if the width is < 0
         """
         if w <= 0:
-            raise ValueError("Width needs to be in the range(0-300)")
+            raise ValueError("Width needs to be positive")
         self._width = w
 
     @property
@@ -92,32 +93,39 @@ class Rectangle(Symbol):
         Returns:
             None
         Raises:
-            ValueError: if the height is < 0 or > 300
+            ValueError: if the height is < 0
         """
         if h <= 0:
-            raise ValueError("Height needs to be in the range(0-300)")
+            raise ValueError("Height needs to be positive")
         self._height = h
 
     def set_rectangle(self, locx, locy, w, h):
         """
         Setter function for setting the rectangles size and location from scratch
         Args:
-            (float) locx: the x location of rectangle
-            (float) locy: the y location of rectangle
+            (float) locx: the x location of the lower left of the rectangle
+            (float) locy: the y location of the lower left of the rectangle
             (float) w: the width of rectangle
             (float) h: the height of rectangle
         Returns:
             None
         Raises:
-            ValueError: if the height or width is < 0 or > 300
+            ValueError: if the height or width is < 0
         """
-        self.locx = locx
-        self.locy = locy
-        if w <= 0 or h <= 0:
-            raise ValueError("Height, Width need to be in the range(0-300)")
+        self._locx = locx
+        self._locy = locy
         self.width = w
         self.height = h
 
+    @property
+    def lower_left(self) -> tuple[float, float]:
+        return (self._locx, self._locy)
+
+    @lower_left.setter
+    def lower_left(self, ll: tuple[float, float]):
+        self._locx=ll[0]
+        self._locy=ll[1]
+        
     def get_json_representation(self) -> dict:
         """
         Getter function for the json representation of the data structure/shape
@@ -126,7 +134,7 @@ class Rectangle(Symbol):
         """
         ds_json = super(Rectangle, self).get_json_representation()
 
-        loc = [self.locx, self.locy]
+        loc = [self._locx, self._locy]
         ds_json['lowerleftcorner'] = loc
         ds_json["width"] = self.width
         ds_json['height'] = self.height
