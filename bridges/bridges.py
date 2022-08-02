@@ -96,7 +96,8 @@ class Bridges:
         self.connector = Connector(self.get_key(), self.get_username(), self.get_assignment())
         self._coord_system_type = "cartesian"
         self._json_flag = False
-        self._label_flag = False
+        self._element_label_flag = False
+        self._link_label_flag = False
         self._post_url_flag = True
         self._map_overlay = False
         self._map = ["us", "all"]
@@ -120,15 +121,25 @@ class Bridges:
         except ValueError:
             print("Exception Thrown: Data structure passed to BRIDGES is null!\n")
 
-    def set_label_flag(self, flag):
+    def set_element_label_flag(self, flag):
         """
-        This method controls if the labels of the visualization are to be on or off
+        This method controls if the labels of the visualization elements are to be on or off
         Args:
             flag : flag that controls the labels
         Returns:
             None
         """
-        self._label_flag = flag
+        self._element_label_flag = flag
+
+    def set_link_label_flag(self, flag):
+        """
+        This method controls if the labels of the visualization links (edges) are to be on or off
+        Args:
+            flag : flag that controls the labels
+        Returns:
+            None
+        """
+        self._link_label_flag = flag
 
 
     def set_visualize_JSON(self, flag):
@@ -173,7 +184,8 @@ class Bridges:
             "description": self._description,
             "coord_system_type": self._coord_system_type,
             "map_overlay": self._map_overlay,
-            "label_flag": self._label_flag,
+            "element_label_flag": self._element_label_flag,
+            "link_label_flag": self._link_label_flag,
             "map": self._map,
         }
         if self.window is not None and len(self.window) == 4:
