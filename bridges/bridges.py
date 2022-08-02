@@ -35,7 +35,8 @@ class Bridges:
     _MaxTitleSize = 50
     _MaxDescSize = 250
     _projection_options = {"cartesian", "albersusa", "equirectangular", "window"}
-
+    _debug = False
+    
     @property
     def window(self) -> [float]:
         """
@@ -44,7 +45,7 @@ class Bridges:
            return a list of 4 floats [x1, x2, y1, y2]
         """
         return self._window
-
+    
     @window.setter
     def window(self, value: [float]) -> None:
         """
@@ -60,6 +61,15 @@ class Bridges:
         self.set_coord_system_type("window")
         self._window = new_window
 
+    @property
+    def debug(self) -> bool:
+        return self._debug
+
+    @debug.setter
+    def debug(self, value: bool) -> None:
+        self._debug = value
+        self.connector.debug = value
+        
     def __init__(self, assignment, username=None, appl_id=None):
         """
         Bridges constructor
@@ -160,7 +170,7 @@ class Bridges:
         ds.update(nodes_links_str)
 
         ds_json = json.dumps(ds)
-        if self._json_flag:
+        if self._json_flag or self._debug:
             print(ds_json)
 
         response = self.connector.post("/assignments/" + self.get_assignment(), ds_json)

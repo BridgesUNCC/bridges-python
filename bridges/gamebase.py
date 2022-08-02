@@ -14,7 +14,7 @@ class GameBase(ABC):
     """
     debug = True
 
-    def __init__(self, assid, login, apikey, rows, cols):
+    def __init__(self, assid, login, apikey, rows, cols, debug=False):
         """
         PROTECTED constructor prevents the object from being directly created. Since GameBase is meant to be a purely internal class, that seems appropriate.
 
@@ -27,10 +27,11 @@ class GameBase(ABC):
 		Returns:
 			None
         """
-        self.game_base_init(assid, login, apikey, rows, cols)
-        self.grid_state = dict
+        self.game_base_init(assid, login, apikey, rows, cols, debug)
+        self.grid_state = dict()
+        self.debug=debug
 
-    def game_base_init(self, id, log, key, rows, cols):
+    def game_base_init(self, id, log, key, rows, cols, debug=False):
         """
         Initializes the gamebase object
         Args:
@@ -43,10 +44,6 @@ class GameBase(ABC):
         self.firsttime = True
 
         self.bridges = Bridges(id, log, key)
-
-        #self.bridges.set_visualize_JSON(True)
-
-        self.bridges.connector.set_server("local")
 
         self.grid = GameGrid(rows, cols)
 
