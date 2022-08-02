@@ -44,11 +44,13 @@ class GameBase(ABC):
         self.firsttime = True
 
         self.bridges = Bridges(id, log, key)
-
+        self.bridges.debug = debug
+        self.bridges.set_server_url("games")
+        
         self.grid = GameGrid(rows, cols)
 
         self.grid.set_encoding("rle")
-
+        
         self.sock = SocketConnection(self.bridges)
         self.sock.setup_connection(log, id)
 
@@ -180,7 +182,6 @@ class GameBase(ABC):
         """
         renders the board
         """
-
         if self.firsttime:
             self.firsttime = False
 
