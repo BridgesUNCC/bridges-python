@@ -96,7 +96,7 @@ def get_game_data():
         genre = []
         for j in range(len(G)):
             genre.append(str(G[j]))
-        wrapper.append(game.Game(V["game"], V["platform"], V["rating"], str(genre)))
+        wrapper.append(Game(V["game"], V["platform"], V["rating"], str(genre)))
     return wrapper
 
 

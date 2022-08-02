@@ -101,8 +101,8 @@ class NonBlockingGame(GameBase):
     NonBlockingGame tutorial at: https://bridgesuncc.github.io/tutorials/NonBlockingGame.html
     """
 
-    def __init__(self, assid, login, apikey, rows, cols):
-        super(NonBlockingGame, self).__init__(assid, login, apikey, rows, cols)
+    def __init__(self, assid, login, apikey, rows, cols, debug=False):
+        super(NonBlockingGame, self).__init__(assid, login, apikey, rows, cols, debug)
         if cols*rows > 1024:
             print("ERROR: Number of cells in a non-blocking game grid cannot exceed 32x32 or 1024.")
             exit(1)

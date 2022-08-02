@@ -24,7 +24,7 @@ class SocketConnection:
         try:
             #url = "https://bridges-games.herokuapp.com"
             url = self.bridges.connector.get_server_url()
-            if self._verbose:
+            if self._verbose or self.bridges.debug:
                 print ("attempting to connect to socket.io at "+url)
             SocketConnection._sio.connect(url, transports=["websocket"])
 
@@ -35,7 +35,7 @@ class SocketConnection:
             }
             student_cred = json.dumps(student_cred)
 
-            if self._verbose:
+            if self._verbose or self.bridges.debug:
                 print("passing student credentials to server..")
             SocketConnection._sio.emit('credentials', student_cred)
 
