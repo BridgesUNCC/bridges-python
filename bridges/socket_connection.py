@@ -22,7 +22,6 @@ class SocketConnection:
 
     def setup_connection(self, user, assignment):
         try:
-            #url = "https://bridges-games.herokuapp.com"
             url = self.bridges.connector.get_server_url()
             if self._verbose or self.bridges.debug:
                 print ("attempting to connect to socket.io at "+url)
@@ -45,12 +44,13 @@ class SocketConnection:
 
     @_sio.on('keydown')
     def keydown(*args):
-        #print(*args)
+        #    print(*args)
         for i in range(0, len(SocketConnection._listeners)):
             SocketConnection._listeners[i].key_press(*args)
 
     @_sio.on('keyup')
     def keyup(*args):
+        #print(*args)
         for i in range(0, len(SocketConnection._listeners)):
             SocketConnection._listeners[i].key_press(*args)
 
@@ -62,6 +62,9 @@ class SocketConnection:
         if SocketConnection._sio is not None:
             data = json.dumps(dataframe)
             SocketConnection._sio.emit(vistype.lower() + ':recv', data)
+        else:
+            if self.bridges.debug:
+                print ("SocketConnection._sio is none")
 
     def close(self):
         SocketConnection._sio.disconnect()
