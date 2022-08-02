@@ -120,14 +120,19 @@ class Bridges:
         except ValueError:
             print("Exception Thrown: Data structure passed to BRIDGES is null!\n")
 
-    def set_label_flag(self, flag):
+    @property
+    def label_flag(self):
+        return self._label_flag
+
+    @label_flag.setter
+    def label_flag(self, flag):
         """
-        This method controls if the labels of the visualization are to be on or off
-        Args:
-            flag : flag that controls the labels
-        Returns:
-            None
-        """
+            This method controls if the labels of the visualization are to be on or off
+            Args:
+                flag : flag that controls the labels
+            Returns:
+                None
+            """
         self._label_flag = flag
 
 
