@@ -75,8 +75,8 @@ class Circle(Symbol):
         """
         Set the location and size of the circle
         Args:
-            (int) locx: x coordinate of the center of the circle
-            (int) locy: y coordinate of the center of the circle
+            (float) locx: x coordinate of the center of the circle
+            (float) locy: y coordinate of the center of the circle
             (float) r: radius of the circle
         Returns:
             None
