@@ -1,5 +1,6 @@
 import json
 from bridges.symbol import *
+from typing import Tuple
 
 
 class Circle(Symbol):
@@ -88,11 +89,11 @@ class Circle(Symbol):
         self.radius = r
 
     @property
-    def center(self) -> tuple[float, float]:
+    def center(self) -> Tuple[float, float]:
         return (self._locx, self._locy)
 
     @center.setter
-    def center(self, l: tuple[float, float]) -> None :
+    def center(self, l: Tuple[float, float]) -> None :
         self._locx = l[0]
         self._locy = l[1]
                 

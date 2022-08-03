@@ -1,5 +1,6 @@
 import json
 from bridges.symbol import *
+from typing import Tuple
 
 class Rectangle(Symbol):
     """@brief This class defines a rectangle and is part of the symbol collection.
@@ -118,11 +119,11 @@ class Rectangle(Symbol):
         self.height = h
 
     @property
-    def lower_left(self) -> tuple[float, float]:
+    def lower_left(self) -> Tuple[float, float]:
         return (self._locx, self._locy)
 
     @lower_left.setter
-    def lower_left(self, ll: tuple[float, float]):
+    def lower_left(self, ll: Tuple[float, float]):
         self._locx=ll[0]
         self._locy=ll[1]
         
