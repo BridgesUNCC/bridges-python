@@ -134,7 +134,8 @@ def get_us_cities_data(**kwargs) -> List[City]:
         # check if params is a subset of legal_keys
         print(legal_keys)
         print(params)
-        #if (!params.issubset(legal_keys)
+        #if !params.issubset(legal_keys):  # one or more parameters incorrect
+        #    raise Exception("One or more unsupported  arguments.\n Legal Keys:\n  'city', 'state', 'country', 'min_lat', 'max_lat', 'min_long', 'max_long', 'min_pop', 'max_pop', 'time_zone', 'limit' "); 
 
         url = url + '?'
         if kwargs.get('state'):
