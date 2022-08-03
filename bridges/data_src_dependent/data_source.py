@@ -123,6 +123,19 @@ def get_us_cities_data(**kwargs) -> List[City]:
 
     url = "http://bridgesdata.herokuapp.com/api/us_cities"
     if len(kwargs) > 0:
+        #  do some error checking on argumnts
+        #  put legal keys in a set
+        legal_keys = {'city', 'state', 'country', 'min_pop', 'max_pop', 'min_elev', 
+           'max_elev', 'min_lat', 'max_lat', 'min_long', 'max_long', 'time_zone', 'limit'}
+        # get the arguments into another set
+        params = {}
+        for key, value in kwargs.items():
+            params.add (value)
+        # check if params is a subset of legal_keys
+        print(legal_keys)
+        print(params)
+        #if (!params.issubset(legal_keys)
+
         url = url + '?'
         if kwargs.get('state'):
             url = url + 'state=' + kwargs['state'] + '&'
