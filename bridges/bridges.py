@@ -145,6 +145,7 @@ class Bridges:
         """
         This method returns the json flag, which controls if the json is to be printed
         """
+        return self._json_flag
 
     def set_json_flag(self, flag):
         """
