@@ -3,7 +3,15 @@ from bridges.symbol import *
 
 class Text(Symbol):
 
+    """ 
+    @brief This is an object for defining text labels as part of the symbol collection
+ 
+    @author Matthew Mcquaigue, Erik Saule
+    @date   7/18/22 (last modified)
 
+	@\sa Symbol Collection tutorial : 
+         http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+    """
     def __init__(self, label = None):
         super(Text, self).__init__()
         if label is not None:
@@ -53,6 +61,13 @@ class Text(Symbol):
         self._anchor_alignment_tb = typeTB
 
     def set_anchor_location(self, x, y):
+        """
+        sets the origin for the label
+
+        @param x x coordinate (in pixels)
+        @param y y coordinate (in pixels)
+        """
+
         self._locx = x
         self._locy = y
 
@@ -71,6 +86,4 @@ class Text(Symbol):
             json_builder['anchor-alignmentTB'] = self._anchor_alignment_tb
 
         return json_builder
-
-
 
