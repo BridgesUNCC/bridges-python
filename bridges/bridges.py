@@ -141,8 +141,13 @@ class Bridges:
         """
         self._link_label_flag = flag
 
+    def get_json_flag(self)->bool:
+        """
+        This method returns the json flag, which controls if the json is to be printed
+        """
+        return self._json_flag
 
-    def set_visualize_JSON(self, flag):
+    def set_json_flag(self, flag):
         """
         This method controls if the data structure's JSON representation is printed to the console or not
         Args:

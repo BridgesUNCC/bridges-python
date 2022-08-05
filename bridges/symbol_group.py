@@ -10,6 +10,9 @@ class SymbolGroup(Symbol):
     def add_symbol(self, s):
         self.al.append(s)
 
+    def get_all_symbols(self):
+        return self.al
+        
     def get_shape_type(self):
         return "group"
 

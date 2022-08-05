@@ -123,6 +123,20 @@ def get_us_cities_data(**kwargs) -> List[City]:
 
     url = "http://bridgesdata.herokuapp.com/api/us_cities"
     if len(kwargs) > 0:
+        #  do some error checking on argumnts
+        #  put legal keys in a set
+        legal_keys = {'city', 'state', 'country', 'min_pop', 'max_pop', 'min_elev', 
+           'max_elev', 'min_lat', 'max_lat', 'min_long', 'max_long', 'time_zone', 'limit'}
+        # get the arguments into another set
+        params = set()
+        for key, value in kwargs.items():
+            params.add(key)
+        # check if params is a subset of legal_keys
+        if not params.issubset(legal_keys):  # one or more parameters incorrect
+            raise Exception("\nOne or more  unsupported  key values is incorrect.\n\n" +  
+			"Supplied Key Values\n" + str(params) + "\n\nLegal Key Values:\n  'city', 'state', 'country', 'min_lat', 'max_lat', 'min_long', 'max_long', 'min_pop', 'max_pop', 'time_zone', 'limit' "); 
+            return
+
         url = url + '?'
         if kwargs.get('state'):
             url = url + 'state=' + kwargs['state'] + '&'
@@ -132,7 +146,6 @@ def get_us_cities_data(**kwargs) -> List[City]:
             url = url + 'maxPopulation=' + str(kwargs['max_pop']) + '&'
         if kwargs.get('min_lat'):
             url = url + 'minLat=' + str(kwargs['min_lat']) + '&'
-            print('url(partial): ' + url)
         if kwargs.get('min_long'):
             url = url + 'minLong=' + str(kwargs['min_long']) + '&'
         if kwargs.get('max_lat'):
@@ -147,7 +160,6 @@ def get_us_cities_data(**kwargs) -> List[City]:
             url = url + 'limit=' + str(kwargs['limit']) + '&'
         url = url[:-1]  # remove last &
 
-    print(url)
     PARAMS = {"Accept: application/json"}
 
     r = requests.get(url=url, params=str(PARAMS))

@@ -1,4 +1,5 @@
 from bridges.symbol import *
+from typing import Tuple
 
 
 class Text(Symbol):
@@ -71,6 +72,17 @@ class Text(Symbol):
         self._locx = x
         self._locy = y
 
+    @property
+    def anchor_location(self) -> Tuple[float, float]:
+        return (self._locx, self._locy)
+
+    @anchor_location.setter
+    def anchor_location(self, l : Tuple[float, float] ) -> None:
+        self._locx = l[0];
+        self._locy = l[1];
+
+    
+        
     def get_json_representation(self):
 
         json_builder = super(Text, self).get_json_representation()
