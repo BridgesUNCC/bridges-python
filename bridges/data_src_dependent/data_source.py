@@ -163,7 +163,10 @@ def get_us_cities_data(**kwargs) -> List[City]:
     PARAMS = {"Accept: application/json"}
 
     r = requests.get(url=url, params=str(PARAMS))
-
+    
+    if r.status_code != 200:
+        raise Exception(" HTTP code : "+str(r.status_code)+" when accessing "+url)
+    
     r = r.json()
 
     D = r["data"]
@@ -520,7 +523,7 @@ def get_song(songTitle, artistName = None) -> Song:
 
     r = requests.get(url = url, params = str(PARAMS))
     if r.status_code != 200:
-        raise ConnectionError("HTTP Request Failed. Error Code: " + r.status_code)
+        raise ConnectionError("HTTP Request Failed. Error Code: " + str(r.status_code) + " when accessing "+url)
     r = r.json()
     if "artist" in r:
         artist = r["artist"]
