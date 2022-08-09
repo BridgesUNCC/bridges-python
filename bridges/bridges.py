@@ -70,7 +70,7 @@ class Bridges:
         self._debug = value
         self.connector.debug = value
         
-    def __init__(self, assignment, username=None, appl_id=None):
+    def __init__(self, assignment:int, username:str=None, appl_id:str=None):
         """
         Bridges constructor
         Args:
@@ -123,11 +123,11 @@ class Bridges:
 
 
     @property
-    def element_label_flag(self):
+    def element_label_flag(self)->bool:
         return self._element_label_flag
 
     @element_label_flag.setter
-    def element_label_flag(self, flag):
+    def element_label_flag(self, flag:bool):
         """
             This method controls if the labels for the elements of the visualization are to be on or off
             Args:
@@ -138,11 +138,11 @@ class Bridges:
         self._element_label_flag = flag
 
     @property
-    def link_label_flag(self):
+    def link_label_flag(self)->bool:
         return self._link_label_flag
 
     @link_label_flag.setter
-    def link_label_flag(self, flag):
+    def link_label_flag(self, flag:bool):
         """
             This method controls if the labels for the links in the visualization are to be on or off
             Args:
@@ -158,7 +158,7 @@ class Bridges:
         """
         return self._json_flag
 
-    def set_json_flag(self, flag):
+    def set_json_flag(self, flag:bool):
         """
         This method controls if the data structure's JSON representation is printed to the console or not
         Args:
@@ -168,7 +168,7 @@ class Bridges:
         """
         self._json_flag = flag
 
-    def post_visualization_link(self, flag):
+    def post_visualization_link(self, flag:bool):
         """
         This method controls (with a flag) if the visualization url is printed to the console or not.
         Args:
@@ -223,7 +223,7 @@ class Bridges:
             self._assignment_part = self._assignment_part + 1
 
 
-    def set_assignment(self, assignment):
+    def set_assignment(self, assignment:int):
         """
         Setter for assignment id (must be positive)
         Args: 
@@ -251,7 +251,7 @@ class Bridges:
         else:
             return str(self._assignment) + "." + str(self._assignment_part)
 
-    def set_title(self, title) -> None:
+    def set_title(self, title:str) -> None:
         """
         Setter for the title of the bridges visualization
         Args:
@@ -265,7 +265,7 @@ class Bridges:
         else:
             self._title = title
 
-    def set_description(self, description) -> None:
+    def set_description(self, description:str) -> None:
         """
         Setter for the description of the bridges visualization
         Args:
@@ -279,7 +279,7 @@ class Bridges:
         else:
             self._description = description
 
-    def set_map_overlay(self, flag):
+    def set_map_overlay(self, flag:bool):
         """
         Setter for if the visualization will have a map overlay
         Args:
@@ -290,11 +290,19 @@ class Bridges:
         self._map_overlay = flag
 
     @property
-    def map(self):
+    def map(self)->list:
         return self._map
 
     @map.setter
-    def map(self, new_map):
+    def map(self, new_map:list) ->None:
+        """
+        Setter function for the svg map overlay describing which map to use and the information from that map.
+        Args:
+            new_map: is a list with the first element describing which map: "us" or "world", and the second element
+        describing what part of the map: a state name or country name respectively.
+        Returns:
+            None
+        """
         self._map = new_map
 
     def set_coord_system_type(self, coord):
