@@ -180,8 +180,8 @@ def get_us_cities_data(**kwargs) -> List[City]:
 def get_world_cities_data(**kwargs) -> List[City]:
     wrapper = []
 
-    url = "http://localhost:3001/api/world_cities"
-    # url = "http://bridgesdata.herokuapp.com/api/world_cities"
+    # url = "http://localhost:3001/api/world_cities"
+    url = "http://bridgesdata.herokuapp.com/api/world_cities"
     if len(kwargs) > 0:
         url = url + '?'
         if kwargs.get('state'):
@@ -213,7 +213,7 @@ def get_world_cities_data(**kwargs) -> List[City]:
 
     for i in range(len(D)):
         V = D[i]
-        wrapper.append(USCities(city = V['city'], state=V['state'], country = V['country'], lat = V['lat'], lon=V['lon'], elevation=V['elevation'],
+        wrapper.append(City(city = V['city'], state=V['state'], country = V['country'], lat = V['lat'], lon=V['lon'], elevation=V['elevation'],
                                           population = V['population'], timezone=V['timezone']))
     return wrapper
 
@@ -305,7 +305,7 @@ def get_actor_movie_imdb_data2() -> ActorMovieIMDB:
         r.raise_for_status()
 
 
-def get_earthquake_usgs_data(count = 0) -> EarthquakeUSGS:
+def get_earthquake_usgs_data(count = 0) -> List[EarthquakeUSGS]:
     """
     @brief Get USGS earthquake data
 

@@ -3,7 +3,9 @@ from typing import Any, Union
 
 from bridges.sl_element import *
 from bridges.edge import *
+from bridges.element_visualizer import *
 import traceback
+from typing import Iterable
 
 
 class GraphAdjList:
@@ -168,7 +170,7 @@ class GraphAdjList:
 
         return self.adj_list[source_id].value
 
-    def set_vertex_data(self, src, vertex_data) -> None:
+    def set_vertex_data(self, src:str, vertex_data:Any) -> None:
         """
         Set for the data for a given vertex.
         Args:
@@ -186,7 +188,7 @@ class GraphAdjList:
             traceback.print_tb(e.__traceback__)
         self.vertices[src].value = vertex_data
 
-    def get_vertex_data(self, src):
+    def get_vertex_data(self, src:str)->Any:
         """
         Get the data stored as part of this vertex.
         Args:
@@ -201,7 +203,7 @@ class GraphAdjList:
             traceback.print_tb(e.__traceback__)
         return self.vertices[src].value
 
-    def set_edge_data(self, src, dest, edge_data):
+    def set_edge_data(self, src:Union[str, Element], dest:Union[str, Element], edge_data:Any)->None:
         """
         Set edge specific data for the edge.
         Args:
@@ -236,7 +238,7 @@ class GraphAdjList:
         """
         return self._vertices
 
-    def get_vertex(self, key):
+    def get_vertex(self, key)->Element:
         """
         Getter for a specific vertex in the dictionary of vertices.
         Args:
@@ -246,7 +248,7 @@ class GraphAdjList:
         """
         return self.vertices.get(key)
 
-    def get_adjacency_list(self, vertex=None):
+    def get_adjacency_list(self, vertex=None)->Any:
         """
         Gets the adjacency list
         Args:
@@ -259,7 +261,7 @@ class GraphAdjList:
         else:
             return self.adj_list
 
-    def key_set(self):
+    def key_set(self)->Iterable:
         """
         Gets the keys for all the graph vertices
 		Returns:
@@ -267,10 +269,15 @@ class GraphAdjList:
 		"""
         return self.vertices.keys()
 
-    def value_set(self):
+    def value_set(self)->Iterable:
+        """
+        Gets the values for all the graph vertices
+        Returns:
+        	the values for the vertices in the graph; used with iterators
+        """
         return self.vertices.values()
 
-    def out_going_edge_set_of(self, v):
+    def out_going_edge_set_of(self, v:Any)->Iterable:
         """
         Get the outgoing set of edges from a given vertex
         Args:
@@ -280,7 +287,7 @@ class GraphAdjList:
         """
         return SLelement.list_helper(start=self.get_adjacency_list(v))
 
-    def get_edge_data(self, src, dest):
+    def get_edge_data(self, src:Union[str, Element], dest:Union[str, Element])->Any:
         """
         Get edge specific data from this edge.
 
@@ -297,7 +304,7 @@ class GraphAdjList:
                 return ed.edge_data
             sle = sle.next
 
-    def get_edge(self, src: Union[str, Element], dest: Union[str, Element]):
+    def get_edge(self, src: Union[str, Element], dest: Union[str, Element])->Any:
         """
         Get the edge given its vertices.
 
@@ -328,7 +335,7 @@ class GraphAdjList:
         else:
             return key_or_element
 
-    def are_all_vertices_located(self):
+    def are_all_vertices_located(self)->bool:
         """
         Check if all vertices in the graph have a valid location
         Returns:
@@ -341,7 +348,7 @@ class GraphAdjList:
                 return False
         return True
 
-    def force_large_visualization(self, f):
+    def force_large_visualization(self, f:bool):
         """
         Force the rendering engine to use large graph visualization. This forces the rendering to a more bandwidth efficient at the cost of having less features. The large graph visualization only renders vertices that have specified locations. The only usable attribute for vertices and edges are colors.
 
@@ -357,7 +364,7 @@ class GraphAdjList:
         else:
             GraphAdjList.force_large_viz = False
 
-    def force_small_visualization(self, f):
+    def force_small_visualization(self, f:bool):
         """
         Force the rendering engine to use small graph visualization
         
@@ -377,7 +384,7 @@ class GraphAdjList:
         else:
             GraphAdjList.force_small_viz = False
 
-    def get_link_visualizer(self, src, dest):
+    def get_link_visualizer(self, src:Union[str, Element], dest:Union[str, Element])->Edge:
         """
         This is a convenience method to simplify access to the link visualizer; the method assumes the vertex names point to existing vertices, else an exception is thrown
        Args:
@@ -388,7 +395,7 @@ class GraphAdjList:
         #  and check to see if they exist
         return self.get_edge(src, dest)
 
-    def get_visualizer(self, vertex):
+    def get_visualizer(self, vertex)->ElementVisualizer:
         """
         This is a convenience method to simplify access to the element visualizer.
 	
