@@ -1,5 +1,6 @@
 import json
 from bridges.symbol import *
+from typing import Tuple
 
 
 class Circle(Symbol):
@@ -27,11 +28,11 @@ class Circle(Symbol):
         """
         super(Circle, self).__init__()
         if 'locx' in kwargs and 'locy' in kwargs:
-            self.locx = kwargs['locx']
-            self.locy = kwargs['locy']
+            self._locx = kwargs['locx']
+            self._locy = kwargs['locy']
         else:
-            self.locx = 0.0
-            self.locy = 0.0
+            self._locx = 0.0
+            self._locy = 0.0
         if 'r' in kwargs:
             if kwargs['r'] < 0:
                 raise ValueError("Radius value needs to be positive")
@@ -75,20 +76,28 @@ class Circle(Symbol):
         """
         Set the location and size of the circle
         Args:
-            (int) locx: x coordinate of the center of the circle
-            (int) locy: y coordinate of the center of the circle
+            (float) locx: x coordinate of the center of the circle
+            (float) locy: y coordinate of the center of the circle
             (float) r: radius of the circle
         Returns:
             None
         Raises:
             ValueError: if the radius is not a positive number
         """
-        self.locx = locx
-        self.locy = locy
-        if r < 0:
-            raise ValueError("Radius value needs to be positive")
+        self._locx = locx
+        self._locy = locy
         self.radius = r
 
+    @property
+    def center(self) -> Tuple[float, float]:
+        return (self._locx, self._locy)
+
+    @center.setter
+    def center(self, l: Tuple[float, float]) -> None :
+        self._locx = l[0]
+        self._locy = l[1]
+                
+    
     def get_json_representation(self) -> dict:
         """
         Get the json representation of the Circle object
@@ -97,6 +106,6 @@ class Circle(Symbol):
         """
         ds_json = super(Circle, self).get_json_representation()
         ds_json["r"] = self.radius
-        ds_json['center'] = [self.locx, self.locy]
+        ds_json['center'] = [self._locx, self._locy]
 
         return ds_json
