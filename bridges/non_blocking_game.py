@@ -187,7 +187,7 @@ class NonBlockingGame(GameBase):
 
     def key_left(self):
         """
-        Is left currently pressed?
+        Is 'left' arrow key currently pressed?
         Returns:
             true if 'left' arrow key is currently pressed
         """
@@ -195,7 +195,7 @@ class NonBlockingGame(GameBase):
 
     def key_right(self):
         """
-        Is right currently pressed?
+        Is 'right' arrow  currently pressed?
         Returns:
             true if 'right' arrow key is currently pressed
         """
@@ -211,7 +211,7 @@ class NonBlockingGame(GameBase):
 
     def key_down(self):
         """
-        Is down currently pressed?
+        Is 'down' arrow key currently pressed?
         Returns:
             true if 'down' arrow key is currently pressed
         """
@@ -219,7 +219,7 @@ class NonBlockingGame(GameBase):
 
     def key_q(self):
         """
-        Is q currently pressed?
+        Is 'q' currently pressed?
         Returns:
             true if 'q' is currently pressed
         """
@@ -227,9 +227,9 @@ class NonBlockingGame(GameBase):
 
     def key_space(self):
         """
-        Is space currently pressed?
+        Is 'space' key currently pressed?
         Returns:
-            true if space key is currently pressed
+            true if 'space' key is currently pressed
         """
         return self.ih.space()
 
@@ -243,7 +243,7 @@ class NonBlockingGame(GameBase):
 
     def key_a(self):
         """
-        Is a currently pressed?
+        Is 'a' currently pressed?
         Returns:
             true if 'a' is currently pressed
         """
