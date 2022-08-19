@@ -186,80 +186,80 @@ class NonBlockingGame(GameBase):
 
     def key_left(self):
         """
-        Is left currently pressed?
+        Is 'left' arrow key currently pressed?
         Returns:
-            true if left is currently pressed
+            true if 'left' arrow key is currently pressed
         """
         return self.ih.left()
 
     def key_right(self):
         """
-        Is right currently pressed?
+        Is 'right' arrow  currently pressed?
         Returns:
-            true if right is currently pressed
+            true if 'right' arrow key is currently pressed
         """
         return self.ih.right()
 
     def key_up(self):
         """
-        Is up currently pressed?
+        Is 'up' arrow currently pressed?
         Returns:
-            true if up is currently pressed
+            true if 'up' arrow key is currently pressed
         """
         return self.ih.up()
 
     def key_down(self):
         """
-        Is down currently pressed?
+        Is 'down' arrow key currently pressed?
         Returns:
-            true if down is currently pressed
+            true if 'down' arrow key is currently pressed
         """
         return self.ih.down()
 
     def key_q(self):
         """
-        Is q currently pressed?
+        Is 'q' currently pressed?
         Returns:
-            true if q is currently pressed
+            true if 'q' is currently pressed
         """
         return self.ih.q()
 
     def key_space(self):
         """
-        Is space currently pressed?
+        Is 'space' key currently pressed?
         Returns:
-            true if space is currently pressed
+            true if 'space' key is currently pressed
         """
         return self.ih.space()
 
     def key_w(self):
         """
-        Is w currently pressed?
+        Is 'w' currently pressed?
         Returns:
-            true if w is currently pressed
+            true if 'w' is currently pressed
         """
         return self.ih.w()
 
     def key_a(self):
         """
-        Is a currently pressed?
+        Is 'a' currently pressed?
         Returns:
-            true if a is currently pressed
+            true if 'a' is currently pressed
         """
         return self.ih.a()
 
     def key_s(self):
         """
-        Is s currently pressed?
+        Is 's' key currently pressed?
         Returns:
-            true if s is currently pressed
+            true if 's' is currently pressed
         """
         return self.ih.s()
 
     def key_d(self):
         """
-        Is right currently pressed?
+        Is 'd' key  currently pressed?
         Returns:
-            true d right is currently pressed
+            true 'd' is currently pressed
         """
         return self.ih.d()
