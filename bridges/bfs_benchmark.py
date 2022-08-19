@@ -19,9 +19,9 @@ class BFSBenchamrk(GraphBenchmark):
 	benchmarked. A typical use would look something like
 
 	code
-	lc LineChart();
-	sb BFSBenchmark(lc);
-	sb.run("mybfsalgorithm", bfsalgo);
+	lc LineChart()
+	sb BFSBenchmark(lc)
+	sb.run("mybfsalgorithm", bfsalgo)
 	endcode
 
 	@author Erik Saule
