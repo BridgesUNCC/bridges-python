@@ -5,102 +5,101 @@ import time
 
 class NonBlockingGame(GameBase):
     """
-	brief This class provides the features necessary to implement  simple non blocking games.
+    @brief This class provides the features necessary to implement  simple non blocking games.
 
-	The games that can be created out of NonBlockingGame are
-	based on a simple board grid of at most 1024 cells (e.g.,
-	32x32, or any combinations less than 1024 cells). Each
-	cell has a background color, and a colored symbol.
+    The games that can be created out of NonBlockingGame are
+    based on a simple board grid of at most 1024 cells (e.g.,
+    32x32, or any combinations less than 1024 cells). Each
+    cell has a background color, and a colored symbol.
 
-	This class is used by having another class derive
-	from it and implement the two functions: initialize()
-	and GameLoop(). initialize() is called exactly
-	once, on the first frame of the game. It is used to
-	make first time initializations of the game state
-	(such as setting the board in its initial position,
-	for instance in chess). However, GameLoop() is called
-	at every frame of the game. The game starts when the
-	function start() is called on the object you
-	created.
+    This class is used by having another class derive
+    from it and implement the two functions: initialize()
+    and GameLoop(). initialize() is called exactly
+    once, on the first frame of the game. It is used to
+    make first time initializations of the game state
+    (such as setting the board in its initial position,
+    for instance in chess). However, GameLoop() is called
+    at every frame of the game. The game starts when the
+    function start() is called on the object you
+    created.
 
-	This game does not do anything, but it is the
-	minimal code that will run a game. Note that the
-	constructor of my_game passes 3 parameters to the
-	constructor of NonBlockingGame(). These three
-	parameters are the classic parameters that the
-	constructor of bridges::Bridges takes (e.g.,
-	assignmentID, username, apikey).
+    This game does not do anything, but it is the
+    minimal code that will run a game. Note that the
+    constructor of my_game passes 3 parameters to the
+    constructor of NonBlockingGame(). These three
+    parameters are the classic parameters that the
+    constructor of bridges::Bridges takes (e.g.,
+    assignmentID, username, apikey).
 
-	To change the board, two functions are
-	used. setBGColor() change the background color of a
-	particular cell. It takes three parameters, the
-	first two identify the cell of the board to change,
-	and the last one is a color from a color palette
-	provided by NamedColor. drawSymbol() takes four
-	parameters, the first two identify the cell of the
-	board to change, the third is a symbol from a
-	symbol palette provided by NamedSymbol, the fourth
-	is the color that symbol shold be drawn in and
-	provided by NamedColor.
+    To change the board, two functions are
+    used. setBGColor() change the background color of a
+    particular cell. It takes three parameters, the
+    first two identify the cell of the board to change,
+    and the last one is a color from a color palette
+    provided by NamedColor. drawSymbol() takes four
+    parameters, the first two identify the cell of the
+    board to change, the third is a symbol from a
+    symbol palette provided by NamedSymbol, the fourth
+    is the color that symbol shold be drawn in and
+    provided by NamedColor.
 
-	For instance, a very simple initialize() could look like:
-	code{.py}
-	def initialize():
-	    set_bg_color(0, 0, NamedColor.lightsalmon);
-	    draw_symbol(0, 0, NamedSymbol.sword, NamedColor.blue);
-	endcode
+    For instance, a very simple initialize() could look like:
+    \code{.py}
+    def initialize():
+        set_bg_color(0, 0, NamedColor.lightsalmon);
+        draw_symbol(0, 0, NamedSymbol.sword, NamedColor.blue);
+    \endcode
 
     Note that the size of the board is set by default
-	at 10x10 and that drawing on a cell that does not
-	exist will lead to an error. One can specify a
-	gameboard of a different size by passing additional
-	parameters to the NonBlockingGame
-	constructor. However, the game can not be more than
-	1024 cells in total, so a 15x15 board is possible,
-	a 32x32 board is the largest square board possible,
-	and a rectangular 64x16 rectangular board is also
-	possible. But a 100x20 board would be 2000 cells
-	and is not possible. For instance a board of 16
-	rows and 64 columns can be created defining the
-	my_game constructor as:
+    at 10x10 and that drawing on a cell that does not
+    exist will lead to an error. One can specify a
+    gameboard of a different size by passing additional
+    parameters to the NonBlockingGame
+    constructor. However, the game can not be more than
+    1024 cells in total, so a 15x15 board is possible,
+    a 32x32 board is the largest square board possible,
+    and a rectangular 64x16 rectangular board is also
+    possible. But a 100x20 board would be 2000 cells
+    and is not possible. For instance a board of 16
+    rows and 64 columns can be created defining the
+    my_game constructor as:
 
-	code{.py}
-		my_game = NonBlockingGame (1, "myuserid",  "myapikey", 16, 64)
-	endcode
+    \code{.py}
+        my_game = NonBlockingGame (1, "myuserid",  "myapikey", 16, 64)
+    \endcode
 
-	The bridges game engine will call the GameLoop()
-	function at each frame of the game. You can write
-	this function to modify the state of the game board
-	using setBGColor() and drawSymbol(). For instance,
-	the following GameLoop() will color the board
-	randomly one cell at a time.
+    The bridges game engine will call the GameLoop()
+    function at each frame of the game. You can write
+    this function to modify the state of the game board
+    using setBGColor() and drawSymbol(). For instance,
+    the following GameLoop() will color the board
+    randomly one cell at a time.
 
-	code{.py}
-	def game_oop():
-		set_BG_Color(rand()%10, rand()%10, NamedColor.lightsalmon);
-	endcode
+    \code{.py}
+    def game_oop():
+        set_BG_Color(rand()%10, rand()%10, NamedColor.lightsalmon);
+    \endcode
 
-	The gameLoop can also probe the state of some keys
-	of the keyboard using functions key_up(), key_left(),
-	key_down(), key_right(), key_w(), key_a(), key_s(),
-	key_d(), key_space(), and key_q(). These functions
-	return a boolean that indicate whether the key is
-	pressed at that frame or not. For instance, the
-	following code will only color the board randomly
-	when the up arrow is pressed.
+    The gameLoop can also probe the state of some keys
+    of the keyboard using functions key_up(), key_left(),
+    key_down(), key_right(), key_w(), key_a(), key_s(),
+    key_d(), key_space(), and key_q(). These functions
+    return a boolean that indicate whether the key is
+    pressed at that frame or not. For instance, the
+    following code will only color the board randomly
+    when the up arrow is pressed.
 
-	code{.py}
-	def gameLoop():
-		if key_up()
-		    set_bg_color(rand()%10, rand()%10, NamedColor.lightsalmon);
-	endcode
+    \code{.py}
+    def gameLoop():
+        if key_up()
+            set_bg_color(rand()%10, rand()%10, NamedColor.lightsalmon);
+    \endcode
 
-	@author Erik Saule
-	@date 72119
+    @author Erik Saule
+    @date 7-21-19
 
-    NonBlockingGame tutorial at: https://bridgesuncc.github.io/tutorials/NonBlockingGame.html
+    \sa NonBlockingGame tutorial at: https://bridgesuncc.github.io/tutorials/NonBlockingGame.html
     """
-
     def __init__(self, assid, login, apikey, rows, cols, debug=False):
         super(NonBlockingGame, self).__init__(assid, login, apikey, rows, cols, debug)
         if cols*rows > 1024:
