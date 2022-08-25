@@ -266,7 +266,7 @@ def get_actor_movie_imdb_data(count = 0) -> ActorMovieIMDB:
 
     return wrapper
 
-def get_actor_movie_imdb_data2() -> ActorMovieIMDB:
+def get_actor_movie_imdb_data2() -> List[ActorMovieIMDB]:
     """
     Get ActorMovie IMDB Data. Data is retrieved, formatted into a list of ActorMovieIMDB objects
 
@@ -343,7 +343,7 @@ def get_earthquake_usgs_data(count = 0) -> List[EarthquakeUSGS]:
     return wrapper
 
 
-def get_shakespeare_data(endpoint = "", textonly = False) -> Shakespeare:
+def get_shakespeare_data(endpoint = "", textonly = False) -> List[Shakespeare]:
     """
     @brief Get data of Shakespeare works (plays, poems)
 
@@ -438,7 +438,7 @@ def get_gutenberg_book_data(num = 0) -> List[GutenbergBook]:
     return wrapper
 
 
-def get_cancer_incident_data(num = 0) -> CancerIncidence:
+def get_cancer_incident_data(num = 0) -> List[CancerIncidence]:
     """
     @brief Retrieves the CDC cancer incidence dataset.
 
