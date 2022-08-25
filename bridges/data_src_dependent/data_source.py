@@ -383,7 +383,7 @@ def get_shakespeare_data(endpoint = "", textonly = False) -> Shakespeare:
     return wrapper
 
 
-def get_gutenberg_book_data(num = 0) -> GutenbergBook:
+def get_gutenberg_book_data(num = 0) -> List[GutenbergBook]:
 
     """
     @brief Get meta data of the Gutenberg book collection (1000 books)
@@ -431,7 +431,7 @@ def get_gutenberg_book_data(num = 0) -> GutenbergBook:
             subject.append(str(S[j]))
 
         M = V["metrics"]
-        wrapper.append(gutenberg_book.GutenbergBook(A["name"], A["birth"], A["death"], V["title"],
+        wrapper.append(GutenbergBook(A["name"], A["birth"], A["death"], V["title"],
                                                     str(lang), str(genre), str(subject), M["characters"], M["words"],
                                                     M["sentences"], M["difficultWords"], V["url"], V["downloads"]))
 
