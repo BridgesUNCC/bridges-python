@@ -91,7 +91,7 @@ class NonBlockingGame(GameBase):
 
     \code{.py}
     def game_loop():
-        if key_up()
+        if key_up():
             set_bg_color(rand()%10, rand()%10, NamedColor.lightsalmon);
     \endcode
 
