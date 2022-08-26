@@ -76,7 +76,7 @@ class NonBlockingGame(GameBase):
     randomly one cell at a time.
 
     \code{.py}
-    def game_oop():
+    def game_loop():
         set_BG_Color(rand()%10, rand()%10, NamedColor.lightsalmon);
     \endcode
 
