@@ -90,7 +90,7 @@ class NonBlockingGame(GameBase):
     when the up arrow is pressed.
 
     \code{.py}
-    def gameLoop():
+    def game_loop():
         if key_up()
             set_bg_color(rand()%10, rand()%10, NamedColor.lightsalmon);
     \endcode
