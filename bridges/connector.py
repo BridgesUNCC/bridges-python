@@ -2,6 +2,7 @@
 import requests
 import traceback
 import os
+import time
 
 class Connector:
     """
@@ -18,7 +19,7 @@ class Connector:
     username =""
 
     pattern_found = 0
-    debug = False
+    debug = True
 
     def __init__(self, key, username, assignment):
         """
@@ -83,7 +84,13 @@ class Connector:
         except Exception as e:
             return traceback.print_tb(e.__traceback__)
 
+        if self.debug:
+            before = time.time()
+            print ("posting assignment")
         r = requests.post(self.prepare(url), headers={u'content-type': u'application/json'}, data=data.encode('utf-8'))
+        if self.debug:
+            print ("assignment received")
+            print ("it took {}s to post the assignment".format(time.time()-before))
         if r.status_code != 200:
              print(r.status_code, r.reason)
              print(r.text)
