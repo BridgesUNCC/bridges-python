@@ -52,6 +52,7 @@ class GameBase3D(ABC):
 
         self.scene = Scene({'fov': 90, 'type': 'fps', 'position': [0.0, 0.0, 0.0]})
 
+
     def close(self):
         """
         close the socket connection (and game)
@@ -122,7 +123,7 @@ class GameBase3D(ABC):
             except RuntimeError as e:
                 print(e)
 
-        self.scene_state = self.scene.get_data_structure_representation()
-        self.sock.send_data(self.scene_state, self.scene.get_data_structure_type())
+        scene_state = self.scene.get_data_structure_representation()
+        self.sock.send_data(scene_state, self.scene.get_data_structure_type())
 
 

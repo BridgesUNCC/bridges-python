@@ -11,6 +11,7 @@ class Primitives:
         self._color = "red"
         self._object_json = {
             'name': self._name,
+            'type': self._type,
             'position': self._position,
             'transform': self._transform,
             'color': self._color

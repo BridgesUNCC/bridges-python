@@ -38,6 +38,7 @@ class SocketConnection:
                 print("passing student credentials to server..")
             SocketConnection._sio.emit('credentials', student_cred)
 
+
         except ConnectionError as e:
             print(e)
 
