@@ -12,6 +12,9 @@ class Scene:
     def add(self, scene_object):
         self._scene_list[scene_object._name] = scene_object
 
+    def remove(self, scene_object):
+        del self._scene_list[scene_object._name]
+
     def get(self, scene_object_name: str):
         return self._scene_list[scene_object_name]
 
