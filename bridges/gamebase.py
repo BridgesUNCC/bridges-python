@@ -45,7 +45,7 @@ class GameBase(ABC):
 
         self.bridges = Bridges(id, log, key)
         self.bridges.debug = debug
-        self.bridges.set_server_url("local")
+        self.bridges.set_server_url("games")
         
         self.grid = GameGrid(rows, cols)
 
