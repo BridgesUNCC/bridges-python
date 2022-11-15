@@ -1212,7 +1212,7 @@ def reddit_data(subreddit, time_request = -9999) -> Reddit:
     :return: a list of reddit objects with the data of the posts
     """
     base_url = _get_reddit_url()
-    url = f"{base_url}/cache?subreddit={subreddit}&time_resquest={time_request}"
+    url = f"{base_url}/cache?subreddit={subreddit}&time_request={time_request}"
 
 
     content = _server_request(url)
