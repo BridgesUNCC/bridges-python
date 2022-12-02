@@ -55,19 +55,14 @@ class Color(object):
         ValueError: if a str passed is not a valid webcolor
         ValueError: if any of the RGBA values are outside of their respective range
     Examples:
-        >>> my_color = Color("red")
-        >>> my_color.rgba
-        (255, 0, 0, 1.0)
-        >>> my_color = Color(r=255)
-        >>> my_color.rgba
-        (255, 0, 0, 1.0)
-        >>> my_color = Color(255, 0, 0)
-        >>> my_color.rgba
-        (255, 0, 0, 1.0)
-        >>> my_color = Color()
-        >>> my_color.red = 255
-        >>> my_color.rgba
-        (255, 0, 0, 1.0)
+	\code{.py}
+        my_color = Color("red")       # equivalent to (255, 0, 0, 1.0)
+        my_color.rgba(255, 0, 0, 1.0) # using rgba notation
+        my_color = Color(r=255)       # equivalent to (255, 0, 0, 1.0)
+        my_color = Color(255, 0, 0)   # equivalent to (255, 0, 0, 1.0)
+        my_color = Color()
+        my_color.red = 255            # equivalent to (255, 0, 0, 1.0)
+	\end{code}
     """
     @property
     def red(self) -> int:
