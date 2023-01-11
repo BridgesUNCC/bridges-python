@@ -112,11 +112,33 @@ class NonBlockingGame(GameBase):
         self.register_keypress(self.ih)
 
         self.upSM = InputStateMachine(lambda:self.ih.up())
+        self.downSM = InputStateMachine(lambda:self.ih.down())
+        self.leftSM = InputStateMachine(lambda:self.ih.left())
+        self.rightSM = InputStateMachine(lambda:self.ih.right())
 
+        self.qSM = InputStateMachine(lambda:self.ih.q())
+        self.spaceSM = InputStateMachine(lambda:self.ih.space())
+
+        self.wSM = InputStateMachine(lambda:self.ih.w())
+        self.aSM = InputStateMachine(lambda:self.ih.a())
+        self.sSM = InputStateMachine(lambda:self.ih.s())
+        self.dSM = InputStateMachine(lambda:self.ih.d())
+        
         self._fps = 30
 
     def __update_input_state(self):
         self.upSM.update()
+        self.downSM.update()
+        self.leftSM.update()
+        self.rightSM.update()
+
+        self.qSM.update()
+        self.spaceSM.update()
+
+        self.wSM.update()
+        self.aSM.update()
+        self.sSM.update()
+        self.dSM.update()
         
     @property
     def fps(self):
@@ -200,6 +222,27 @@ class NonBlockingGame(GameBase):
         """
         return self.ih.left()
 
+
+    def key_left_just_pressed(self):
+        return self.leftSM.just_pressed()
+    
+    def key_left_still_pressed(self):
+        return self.leftSM.still_pressed()
+
+    def key_left_just_not_pressed(self):
+        return self.leftSM.just_not_pressed()
+
+    def key_left_still_not_pressed(self):
+        return self.leftSM.still_not_pressed()
+
+    def key_left_fire(self):
+        return self.leftSM.fire()
+    
+    def key_left_setup_fire(self, f: int):
+        return self.leftSM.set_fire_cooldown(f)
+        
+
+    
     def key_right(self):
         """
         Is 'right' arrow  currently pressed?
@@ -208,6 +251,27 @@ class NonBlockingGame(GameBase):
         """
         return self.ih.right()
 
+
+    def key_right_just_pressed(self):
+        return self.rightSM.just_pressed()
+    
+    def key_right_still_pressed(self):
+        return self.rightSM.still_pressed()
+
+    def key_right_just_not_pressed(self):
+        return self.rightSM.just_not_pressed()
+
+    def key_right_still_not_pressed(self):
+        return self.rightSM.still_not_pressed()
+
+    def key_right_fire(self):
+        return self.rightSM.fire()
+    
+    def key_right_setup_fire(self, f: int):
+        return self.rightSM.set_fire_cooldown(f)
+        
+
+    
     def key_up(self):
         """
         Is 'up' arrow currently pressed?
@@ -242,6 +306,27 @@ class NonBlockingGame(GameBase):
         """
         return self.ih.down()
 
+
+    def key_down_just_pressed(self):
+        return self.downSM.just_pressed()
+    
+    def key_down_still_pressed(self):
+        return self.downSM.still_pressed()
+
+    def key_down_just_not_pressed(self):
+        return self.downSM.just_not_pressed()
+
+    def key_down_still_not_pressed(self):
+        return self.downSM.still_not_pressed()
+
+    def key_down_fire(self):
+        return self.downSM.fire()
+    
+    def key_down_setup_fire(self, f: int):
+        return self.downSM.set_fire_cooldown(f)
+        
+
+    
     def key_q(self):
         """
         Is 'q' currently pressed?
@@ -250,6 +335,27 @@ class NonBlockingGame(GameBase):
         """
         return self.ih.q()
 
+
+    def key_q_just_pressed(self):
+        return self.qSM.just_pressed()
+    
+    def key_q_still_pressed(self):
+        return self.qSM.still_pressed()
+
+    def key_q_just_not_pressed(self):
+        return self.qSM.just_not_pressed()
+
+    def key_q_still_not_pressed(self):
+        return self.qSM.still_not_pressed()
+
+    def key_q_fire(self):
+        return self.qSM.fire()
+    
+    def key_q_setup_fire(self, f: int):
+        return self.qSM.set_fire_cooldown(f)
+        
+
+    
     def key_space(self):
         """
         Is 'space' key currently pressed?
@@ -258,6 +364,27 @@ class NonBlockingGame(GameBase):
         """
         return self.ih.space()
 
+
+    def key_space_just_pressed(self):
+        return self.spaceSM.just_pressed()
+    
+    def key_space_still_pressed(self):
+        return self.spaceSM.still_pressed()
+
+    def key_space_just_not_pressed(self):
+        return self.spaceSM.just_not_pressed()
+
+    def key_space_still_not_pressed(self):
+        return self.spaceSM.still_not_pressed()
+
+    def key_space_fire(self):
+        return self.spaceSM.fire()
+    
+    def key_space_setup_fire(self, f: int):
+        return self.spaceSM.set_fire_cooldown(f)
+        
+
+    
     def key_w(self):
         """
         Is 'w' currently pressed?
@@ -266,6 +393,27 @@ class NonBlockingGame(GameBase):
         """
         return self.ih.w()
 
+
+    def key_w_just_pressed(self):
+        return self.wSM.just_pressed()
+    
+    def key_w_still_pressed(self):
+        return self.wSM.still_pressed()
+
+    def key_w_just_not_pressed(self):
+        return self.wSM.just_not_pressed()
+
+    def key_w_still_not_pressed(self):
+        return self.wSM.still_not_pressed()
+
+    def key_w_fire(self):
+        return self.wSM.fire()
+    
+    def key_w_setup_fire(self, f: int):
+        return self.wSM.set_fire_cooldown(f)
+        
+
+    
     def key_a(self):
         """
         Is 'a' currently pressed?
@@ -274,6 +422,25 @@ class NonBlockingGame(GameBase):
         """
         return self.ih.a()
 
+    def key_a_just_pressed(self):
+        return self.aSM.just_pressed()
+    
+    def key_a_still_pressed(self):
+        return self.aSM.still_pressed()
+
+    def key_a_just_not_pressed(self):
+        return self.aSM.just_not_pressed()
+
+    def key_a_still_not_pressed(self):
+        return self.aSM.still_not_pressed()
+
+    def key_a_fire(self):
+        return self.aSM.fire()
+    
+    def key_a_setup_fire(self, f: int):
+        return self.aSM.set_fire_cooldown(f)
+
+    
     def key_s(self):
         """
         Is 's' key currently pressed?
@@ -282,6 +449,25 @@ class NonBlockingGame(GameBase):
         """
         return self.ih.s()
 
+    def key_s_just_pressed(self):
+        return self.sSM.just_pressed()
+    
+    def key_s_still_pressed(self):
+        return self.sSM.still_pressed()
+
+    def key_s_just_not_pressed(self):
+        return self.sSM.just_not_pressed()
+
+    def key_s_still_not_pressed(self):
+        return self.sSM.still_not_pressed()
+
+    def key_s_fire(self):
+        return self.sSM.fire()
+    
+    def key_s_setup_fire(self, f: int):
+        return self.sSM.set_fire_cooldown(f)
+
+    
     def key_d(self):
         """
         Is 'd' key  currently pressed?
@@ -289,3 +475,21 @@ class NonBlockingGame(GameBase):
             true 'd' is currently pressed
         """
         return self.ih.d()
+
+    def key_d_just_pressed(self):
+        return self.dSM.just_pressed()
+    
+    def key_d_still_pressed(self):
+        return self.dSM.still_pressed()
+
+    def key_d_just_not_pressed(self):
+        return self.dSM.just_not_pressed()
+
+    def key_d_still_not_pressed(self):
+        return self.dSM.still_not_pressed()
+
+    def key_d_fire(self):
+        return self.dSM.fire()
+    
+    def key_d_setup_fire(self, f: int):
+        return self.dSM.set_fire_cooldown(f)
