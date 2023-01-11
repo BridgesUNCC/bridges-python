@@ -1,5 +1,6 @@
 from bridges.gamebase import *
 from bridges.input_helper import *
+from bridges.input_state_machine import *
 import time
 
 
@@ -109,8 +110,14 @@ class NonBlockingGame(GameBase):
         self.time_of_last_frame = int(round(time.time() * 1000))
         self.ih = InputHelper()
         self.register_keypress(self.ih)
+
+        self.upSM = InputStateMachine(lambda:self.ih.up())
+
         self._fps = 30
 
+    def __update_input_state(self):
+        self.upSM.update()
+        
     @property
     def fps(self):
         """
@@ -171,6 +178,7 @@ class NonBlockingGame(GameBase):
             self.game_started = True
 
             while self.game_started:
+                self.__update_input_state()
                 self.game_loop()
                 self.render()
                 self.control_framerate()
@@ -208,6 +216,24 @@ class NonBlockingGame(GameBase):
         """
         return self.ih.up()
 
+    def key_up_just_pressed(self):
+        return self.upSM.just_pressed()
+    
+    def key_up_still_pressed(self):
+        return self.upSM.still_pressed()
+
+    def key_up_just_not_pressed(self):
+        return self.upSM.just_not_pressed()
+
+    def key_up_still_not_pressed(self):
+        return self.upSM.still_not_pressed()
+
+    def key_up_fire(self):
+        return self.upSM.fire()
+    
+    def key_up_setup_fire(self, f: int):
+        return self.upSM.set_fire_cooldown(f)
+        
     def key_down(self):
         """
         Is 'down' arrow key currently pressed?

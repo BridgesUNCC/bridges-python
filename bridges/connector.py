@@ -19,7 +19,7 @@ class Connector:
     username =""
 
     pattern_found = 0
-    debug = True
+    debug = False
 
     def __init__(self, key, username, assignment):
         """
