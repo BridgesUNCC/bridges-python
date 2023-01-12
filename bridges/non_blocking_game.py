@@ -96,8 +96,52 @@ class NonBlockingGame(GameBase):
             set_bg_color(rand()%10, rand()%10, NamedColor.lightsalmon);
     \endcode
 
+    The previous way will have an action executed at each
+    frame of the game if the key stays pressed. This
+    could be cumbersome for some games and you may want
+    a key press to be triggered with a cooldown (so
+    that it activates only every so many frames). You can
+    configure how many frames will pass between two
+    activations of the key with keyUpSetupFire() and
+    you can tell whether it is a fire frame with
+    keyUpFire(). There are similar functions for all
+    keys that are recognized by Bridges. See the
+    following code for a simple usage:
+    
+    \code{.py}
+    def initialize() override:
+         keyUpSetupFire(20); 
+
+    gameLoop():
+         if (keyUpFire()): # will only be true once every 20 frames
+              setBGColor(rand()%10, rand()%10, NamedColor.lightsalmon);
+    \endcode      
+    Bridges supports a third way to use inputs that
+    enables you to know the first frame a key is
+    pressed and the first frame a key is no longer
+    pressed. You can also know whether a key is still
+    being pressed (after the first frame it is being
+    pressed) and whether it is still not pressed (after
+    the first frame it is no longer pressed). The four
+    functions are keyUpJustPressed(),
+    keyUpStillPressed(), keyUpJustNotPressed(),
+    keyUpStillNotPressed(). The following code
+    examplifies the usage of these functions.
+   
+    \code{.py}
+        gameLoop():
+           if (keyUpJustPressed()):
+              setBGColor(0, 0, NamedColor.lightsalmon);
+           if (keyUpStillPressed()):
+              setBGColor(0, 1, NamedColor.lightsalmon);
+           if (keyUpJustNotPressed()):
+              setBGColor(0, 2, NamedColor.lightsalmon);
+           if (keyUpStillNotPressed()):
+              setBGColor(0, 3, NamedColor.lightsalmon);
+    \endcode  
+
     @author Erik Saule
-    @date 7-21-19
+    @date 7-21-19, 1-12-23
 
     \sa NonBlockingGame tutorial at: https://bridgesuncc.github.io/tutorials/NonBlockingGame.html
     """
@@ -224,21 +268,39 @@ class NonBlockingGame(GameBase):
 
 
     def key_left_just_pressed(self):
+        """
+        indicates whether the Left key has just been pressed this current frame
+        """
         return self.leftSM.just_pressed()
     
     def key_left_still_pressed(self):
+        """
+        indicates whether the Left key is still being  pressed this current frame
+        """
         return self.leftSM.still_pressed()
 
     def key_left_just_not_pressed(self):
+        """
+        indicates whether the Left key has just been released this current frame
+        """
         return self.leftSM.just_not_pressed()
 
     def key_left_still_not_pressed(self):
+        """
+        indicates whether the Left key is not pressed and has not been pressed for more than a frame
+        """
         return self.leftSM.still_not_pressed()
 
     def key_left_fire(self):
+        """
+        indicates whether the current frame is a fire frame for the Left key
+        """
         return self.leftSM.fire()
     
     def key_left_setup_fire(self, f: int):
+        """
+        @param f how many frames between two fire events
+        """
         return self.leftSM.set_fire_cooldown(f)
         
 
@@ -253,21 +315,39 @@ class NonBlockingGame(GameBase):
 
 
     def key_right_just_pressed(self):
+        """
+        indicates whether the Right key has just been pressed this current frame
+        """
         return self.rightSM.just_pressed()
     
     def key_right_still_pressed(self):
+        """
+        indicates whether the Right key is still being  pressed this current frame
+        """
         return self.rightSM.still_pressed()
 
     def key_right_just_not_pressed(self):
+        """
+        indicates whether the Right key has just been released this current frame
+        """
         return self.rightSM.just_not_pressed()
 
     def key_right_still_not_pressed(self):
+        """
+        indicates whether the Right key is not pressed and has not been pressed for more than a frame
+        """
         return self.rightSM.still_not_pressed()
 
     def key_right_fire(self):
+        """
+        indicates whether the current frame is a fire frame for the Right key
+        """
         return self.rightSM.fire()
     
     def key_right_setup_fire(self, f: int):
+        """
+        @param f how many frames between two fire events
+        """
         return self.rightSM.set_fire_cooldown(f)
         
 
@@ -281,21 +361,39 @@ class NonBlockingGame(GameBase):
         return self.ih.up()
 
     def key_up_just_pressed(self):
+        """
+        indicates whether the Up key has just been pressed this current frame
+        """
         return self.upSM.just_pressed()
     
     def key_up_still_pressed(self):
+        """
+        indicates whether the Up key is still being  pressed this current frame
+        """
         return self.upSM.still_pressed()
 
     def key_up_just_not_pressed(self):
+        """
+        indicates whether the Up key has just been released this current frame
+        """
         return self.upSM.just_not_pressed()
 
     def key_up_still_not_pressed(self):
+        """
+        indicates whether the Up key is not pressed and has not been pressed for more than a frame
+        """
         return self.upSM.still_not_pressed()
 
     def key_up_fire(self):
+        """
+        indicates whether the current frame is a fire frame for the Up key
+        """
         return self.upSM.fire()
     
     def key_up_setup_fire(self, f: int):
+        """
+        @param f how many frames between two fire events
+        """
         return self.upSM.set_fire_cooldown(f)
         
     def key_down(self):
@@ -308,21 +406,39 @@ class NonBlockingGame(GameBase):
 
 
     def key_down_just_pressed(self):
+        """
+        indicates whether the Down key has just been pressed this current frame
+        """
         return self.downSM.just_pressed()
     
     def key_down_still_pressed(self):
+        """
+        indicates whether the Down key is still being  pressed this current frame
+        """
         return self.downSM.still_pressed()
 
     def key_down_just_not_pressed(self):
+        """
+        indicates whether the Down key has just been released this current frame
+        """
         return self.downSM.just_not_pressed()
 
     def key_down_still_not_pressed(self):
+        """
+        indicates whether the Down key is not pressed and has not been pressed for more than a frame
+        """
         return self.downSM.still_not_pressed()
 
     def key_down_fire(self):
+        """
+        indicates whether the current frame is a fire frame for the Down key
+        """
         return self.downSM.fire()
     
     def key_down_setup_fire(self, f: int):
+        """
+        @param f how many frames between two fire events
+        """
         return self.downSM.set_fire_cooldown(f)
         
 
@@ -337,21 +453,39 @@ class NonBlockingGame(GameBase):
 
 
     def key_q_just_pressed(self):
+        """
+        indicates whether the Q key has just been pressed this current frame
+        """
         return self.qSM.just_pressed()
     
     def key_q_still_pressed(self):
+        """
+        indicates whether the Q key is still being  pressed this current frame
+        """
         return self.qSM.still_pressed()
 
     def key_q_just_not_pressed(self):
+        """
+        indicates whether the Q key has just been released this current frame
+        """
         return self.qSM.just_not_pressed()
 
     def key_q_still_not_pressed(self):
+        """
+        indicates whether the Q key is not pressed and has not been pressed for more than a frame
+        """
         return self.qSM.still_not_pressed()
 
     def key_q_fire(self):
+        """
+        indicates whether the current frame is a fire frame for the Q key
+        """
         return self.qSM.fire()
     
     def key_q_setup_fire(self, f: int):
+        """
+        @param f how many frames between two fire events
+        """
         return self.qSM.set_fire_cooldown(f)
         
 
@@ -366,21 +500,39 @@ class NonBlockingGame(GameBase):
 
 
     def key_space_just_pressed(self):
+        """
+        indicates whether the Space key has just been pressed this current frame
+        """
         return self.spaceSM.just_pressed()
     
     def key_space_still_pressed(self):
+        """
+        indicates whether the Space key is still being  pressed this current frame
+        """
         return self.spaceSM.still_pressed()
 
     def key_space_just_not_pressed(self):
+        """
+        indicates whether the Space key has just been released this current frame
+        """
         return self.spaceSM.just_not_pressed()
 
     def key_space_still_not_pressed(self):
+        """
+        indicates whether the Space key is not pressed and has not been pressed for more than a frame
+        """
         return self.spaceSM.still_not_pressed()
 
     def key_space_fire(self):
+        """
+        indicates whether the current frame is a fire frame for the Space key
+        """
         return self.spaceSM.fire()
     
     def key_space_setup_fire(self, f: int):
+        """
+        @param f how many frames between two fire events
+        """
         return self.spaceSM.set_fire_cooldown(f)
         
 
@@ -395,21 +547,39 @@ class NonBlockingGame(GameBase):
 
 
     def key_w_just_pressed(self):
+        """
+        indicates whether the W key has just been pressed this current frame
+        """
         return self.wSM.just_pressed()
     
     def key_w_still_pressed(self):
+        """
+        indicates whether the W key is still being  pressed this current frame
+        """
         return self.wSM.still_pressed()
 
     def key_w_just_not_pressed(self):
+        """
+        indicates whether the W key has just been released this current frame
+        """
         return self.wSM.just_not_pressed()
 
     def key_w_still_not_pressed(self):
+        """
+        indicates whether the W key is not pressed and has not been pressed for more than a frame
+        """
         return self.wSM.still_not_pressed()
 
     def key_w_fire(self):
+        """
+        indicates whether the current frame is a fire frame for the W key
+        """
         return self.wSM.fire()
     
     def key_w_setup_fire(self, f: int):
+        """
+        @param f how many frames between two fire events
+        """
         return self.wSM.set_fire_cooldown(f)
         
 
@@ -423,21 +593,39 @@ class NonBlockingGame(GameBase):
         return self.ih.a()
 
     def key_a_just_pressed(self):
+        """
+        indicates whether the A key has just been pressed this current frame
+        """
         return self.aSM.just_pressed()
     
     def key_a_still_pressed(self):
+        """
+        indicates whether the A key is still being  pressed this current frame
+        """
         return self.aSM.still_pressed()
 
     def key_a_just_not_pressed(self):
+        """
+        indicates whether the A key has just been released this current frame
+        """
         return self.aSM.just_not_pressed()
 
     def key_a_still_not_pressed(self):
+        """
+        indicates whether the A key is not pressed and has not been pressed for more than a frame
+        """
         return self.aSM.still_not_pressed()
 
     def key_a_fire(self):
+        """
+        indicates whether the current frame is a fire frame for the A key
+        """
         return self.aSM.fire()
     
     def key_a_setup_fire(self, f: int):
+        """
+        @param f how many frames between two fire events
+        """
         return self.aSM.set_fire_cooldown(f)
 
     
@@ -450,21 +638,39 @@ class NonBlockingGame(GameBase):
         return self.ih.s()
 
     def key_s_just_pressed(self):
+        """
+        indicates whether the S key has just been pressed this current frame
+        """
         return self.sSM.just_pressed()
     
     def key_s_still_pressed(self):
+        """
+        indicates whether the S key is still being  pressed this current frame
+        """
         return self.sSM.still_pressed()
 
     def key_s_just_not_pressed(self):
+        """
+        indicates whether the S key has just been released this current frame
+        """
         return self.sSM.just_not_pressed()
 
     def key_s_still_not_pressed(self):
+        """
+        indicates whether the S key is not pressed and has not been pressed for more than a frame
+        """
         return self.sSM.still_not_pressed()
 
     def key_s_fire(self):
+        """
+        indicates whether the current frame is a fire frame for the S key
+        """
         return self.sSM.fire()
     
     def key_s_setup_fire(self, f: int):
+        """
+        @param f how many frames between two fire events
+        """
         return self.sSM.set_fire_cooldown(f)
 
     
@@ -477,19 +683,37 @@ class NonBlockingGame(GameBase):
         return self.ih.d()
 
     def key_d_just_pressed(self):
+        """
+        indicates whether the D key has just been pressed this current frame
+        """
         return self.dSM.just_pressed()
     
     def key_d_still_pressed(self):
+        """
+        indicates whether the D key is still being  pressed this current frame
+        """
         return self.dSM.still_pressed()
 
     def key_d_just_not_pressed(self):
+        """
+        indicates whether the D key has just been released this current frame
+        """
         return self.dSM.just_not_pressed()
 
     def key_d_still_not_pressed(self):
+        """
+        indicates whether the D key is not pressed and has not been pressed for more than a frame
+        """
         return self.dSM.still_not_pressed()
 
     def key_d_fire(self):
+        """
+        indicates whether the current frame is a fire frame for the D key
+        """
         return self.dSM.fire()
     
     def key_d_setup_fire(self, f: int):
+        """
+        @param f how many frames between two fire events
+        """
         return self.dSM.set_fire_cooldown(f)
