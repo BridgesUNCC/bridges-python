@@ -186,6 +186,10 @@ def get_world_cities_data(**kwargs) -> List[City]:
         url = url + '?'
         if kwargs.get('state'):
             url = url + 'state=' + kwargs['state'] + '&'
+	if kwargs.get('country'):
+            url = url + 'country=' + kwargs['country'] + '&'
+	if kwargs.get('city'):
+            url = url + 'city=' + kwargs['city'] + '&'
         if kwargs.get('min_pop'):
             url = url + 'minPopulation=' + str(kwargs['min_pop']) + '&'
         if kwargs.get('maxpop'):
