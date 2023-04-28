@@ -188,23 +188,23 @@ def get_world_cities_data(**kwargs) -> List[City]:
             url = url + 'state=' + kwargs['state'] + '&'
     if kwargs.get('country'):
             url = url + 'country=' + kwargs['country'] + '&'
-	if kwargs.get('city'):
+    if kwargs.get('city'):
             url = url + 'city=' + kwargs['city'] + '&'
-        if kwargs.get('min_pop'):
+    if kwargs.get('min_pop'):
             url = url + 'minPopulation=' + str(kwargs['min_pop']) + '&'
-        if kwargs.get('maxpop'):
+    if kwargs.get('maxpop'):
             url = url + 'maxPopulation=' + str(kwargs['max_pop']) + '&'
-        if kwargs.get('min_lat_long'):
+    if kwargs.get('min_lat_long'):
             url = url + 'minLatLong=' + str(kwargs['minll'][0]) + ',' + str(kwargs['minll'][1]) + '&'
-        if kwargs.get('max_lat_long'):
+    if kwargs.get('max_lat_long'):
             url = url + 'maxLatLong=' + str(kwargs['maxll'][0]) + ',' + str(kwargs['maxll'][1]) + '&'
-        if kwargs.get('min_elev'):
+    if kwargs.get('min_elev'):
             url = url + 'minElevation=' + str(kwargs['min_elev']) + '&'
-        if kwargs.get('max_elev'):
+    if kwargs.get('max_elev'):
             url = url + 'maxElevation=' + str(kwargs['max_elev']) + '&'
-        if kwargs.get('limit'):
+    if kwargs.get('limit'):
             url = url + 'limit=' + str(kwargs['limit']) + '&'
-        url = url[:-1]  # remove last &
+    url = url[:-1]  # remove last &
 
     print(url)
     PARAMS = {"Accept: application/json"}
