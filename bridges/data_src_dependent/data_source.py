@@ -186,7 +186,7 @@ def get_world_cities_data(**kwargs) -> List[City]:
         url = url + '?'
         if kwargs.get('state'):
             url = url + 'state=' + kwargs['state'] + '&'
-	if kwargs.get('country'):
+    if kwargs.get('country'):
             url = url + 'country=' + kwargs['country'] + '&'
 	if kwargs.get('city'):
             url = url + 'city=' + kwargs['city'] + '&'
