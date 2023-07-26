@@ -217,11 +217,13 @@ class Bridges:
 
         if response == 200 and self._post_url_flag:
             print("\nCheck Your Visualization at the following link:\n\n" +
-                  self.connector.get_server_url() + "/assignments/" + str(self._assignment) +
-                  "/" + self._username + "\n\n")
+                  self.get_visualize_url()
+                   + "\n\n")
 
             self._assignment_part = self._assignment_part + 1
-
+    def get_visualize_url(self):
+        return self.connector.get_server_url() + "/assignments/" + str(self._assignment) +
+                  "/" + self._username
 
     def set_assignment(self, assignment:int):
         """
