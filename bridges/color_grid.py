@@ -11,10 +11,8 @@ class ColorGrid(Grid):
     blank or filled with a particular Color depending on which
     constructor is called.
     
-    \code{.py}
-    grid = new ColorGrid(rows, columns)
-    grid.set(2, 3, Color("lightsalmon")
-    \endcode
+      grid = new ColorGrid(rows, columns)
+      grid.set(2, 3, Color("lightsalmon")
     
     You can get a ColorGrid from an existing Bridges ColorGrid assignment using
     bridges.get_color_grid_from_assignment(bridges.get_username(), bridges.get_assignment_id(), 0)
