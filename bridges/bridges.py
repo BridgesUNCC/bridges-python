@@ -222,8 +222,7 @@ class Bridges:
 
             self._assignment_part = self._assignment_part + 1
     def get_visualize_url(self):
-        return self.connector.get_server_url() + "/assignments/" + str(self._assignment) +
-                  "/" + self._username
+        return self.connector.get_server_url() + "/assignments/" + str(self._assignment) + "/" + self._username
 
     def set_assignment(self, assignment:int):
         """
