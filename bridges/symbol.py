@@ -241,7 +241,7 @@ class Symbol:
         transl[1][2] = ty
 
         #update symbol transform matrix
-        self._xform = self.mat_mult(self._xform, transl)
+        self._xform = self.mat_mult(transl, self._xform)
 
         self._xform_flag = True
 
@@ -258,12 +258,12 @@ class Symbol:
         if len(args) == 1:
             scale_m = [[args[0], 0.0, 0.0], [0.0, args[0], 0.0], [0.0, 0.0, 1.0]]
             
-            self._xform = self.mat_mult(self._xform, scale_m)
+            self._xform = self.mat_mult(scale_m, self._xform)
         elif len(args) == 2:
 
             scale_m = [[args[0], 0.0, 0.0], [0.0, args[1], 0.0], [0.0, 0.0, 1.0]]
             
-            self._xform = self.mat_mult(self._xform, scale_m)
+            self._xform = self.mat_mult(scale_m, self._xform)
         elif len(args) == 4:
             scale_m = [[args[0], 0.0, 0.0], [0.0, args[1], 0.0], [0.0, 0.0, 1.0]]
 
@@ -272,7 +272,7 @@ class Symbol:
 
             scale_comp = self.mat_mult(transl_post, self.mat_mult(scale_m, transl_pre))
 
-            self._xform =self.mat_mult(self._xform, scale_comp)
+            self._xform =self.mat_mult(scale_comp, self._xform)
 
 
         self._xform_flag = True
@@ -291,7 +291,7 @@ class Symbol:
             rotate_m[0][1] = -sin_a
             rotate_m[1][0] = sin_a
 
-            self._xform = self.mat_mult(self._xform, rotate_m)
+            self._xform = self.mat_mult(rotate_m, self._xform)
         elif len(args) == 3:
             angle_r = args[0] * (math.pi / 180.0)
             cos_a = math.cos(angle_r)
@@ -303,7 +303,7 @@ class Symbol:
 
             rot_comp = self.mat_mult(transl_post, self.mat_mult(rotate_m, transl_pre))
 
-            self._xform = self.mat_mult(self._xform, rot_comp)
+            self._xform = self.mat_mult(rot_comp, self._xform)
 
 
         self._xform_flag = True

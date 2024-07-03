@@ -8,9 +8,9 @@ class Color(object):
     """
     This class is used to represent colors in bridges.
 
-    We use and RGBA model to represent colors, with the Red Green and Blue components ranging from 0-255,
+    We use and RGBA model to represent colors, with the Red, Green, and Blue components ranging from 0-255,
     with the alpha ranging from 0.0-1.0 inclusive.
-
+    
     We use webcolors to handle color names passed to the constructor/set_color function.
     https://www.w3.org/TR/css-color-3/#svg-color
 
@@ -41,33 +41,13 @@ class Color(object):
     teal, thistle, tomato, turquoise, violet, wheat, white, whitesmoke, 
     yellow, yellowgreen
 
-    Attributes: red (int): red component of color ranging from 0-255 inclusive (default 0) green (int): green component of color ranging from 0-255 inclusive (default 0) blue (int): blue component of color ranging from 0-255 inclusive (default 0) alpha (float): alpha component of color ranging from 0.0-1.0 inclusive (default 1.0) rgba (tuple(int, int, int, alpha)): RGBA components as respective tuple
-    Args:
-        args: int, int, int, Optional(float) or a str as singular arg
-        kwargs:
-            r or red: Optional(int)
-            b or blue: Optional(int)
-            g or green: Optional(int)
-            a or alpha: Optional(float)
-            col_name: Optional(str)
-    Raises:
-        ValueError: if args is not 3 ints with an optional 4th arg for alpha or just one str arg
-        ValueError: if a str passed is not a valid webcolor
-        ValueError: if any of the RGBA values are outside of their respective range
-    Examples:
-	\code{.py}
-        my_color = Color("red")       # equivalent to (255, 0, 0, 1.0)
-        my_color.rgba(255, 0, 0, 1.0) # using rgba notation
-        my_color = Color(r=255)       # equivalent to (255, 0, 0, 1.0)
-        my_color = Color(255, 0, 0)   # equivalent to (255, 0, 0, 1.0)
-        my_color = Color()
-        my_color.red = 255            # equivalent to (255, 0, 0, 1.0)
-	\end{code}
     """
     @property
     def red(self) -> int:
         """
-        Getter for red component of color (0-255 inclusive)
+        Getter for red component of color.
+        (0-255 inclusive. default: 0)
+        
         Returns:
             (int) red component of color
         """
@@ -94,7 +74,9 @@ class Color(object):
     @property
     def green(self) -> int:
         """
-        Getter for green component of color (0-255 inclusive)
+        Getter for green component of color. 
+        The value is 0 to 255 inclusive. default to 0.
+
         Returns:
             int: green component of color
         """
@@ -121,7 +103,9 @@ class Color(object):
     @property
     def blue(self) -> int:
         """
-        Getter for blue component of color (0-255 inclusive)
+        Getter for blue component of color.
+        (0-255 inclusive. default: 0)
+
         Returns:
             int: blue component of color
         """
@@ -130,7 +114,9 @@ class Color(object):
     @blue.setter
     def blue(self, value: int):
         """
-        Setter for blue component of color (0-255 inclusive)
+        Setter for blue component of color.
+        (0-255 inclusive)
+
         Args:
             value(int): blue component of color
         Returns:
@@ -148,7 +134,8 @@ class Color(object):
     @property
     def alpha(self) -> float:
         """
-        Getter for alpha(opacity) component of color (0-1.0 inclusive)
+        Getter for alpha(opacity) component of color.
+        (0-1.0 inclusive. default: 1.0)
         Returns:
             float: alpha component of color
         """
@@ -157,7 +144,9 @@ class Color(object):
     @alpha.setter
     def alpha(self, value: float):
         """
-        Setter for alpha component of color (0-1.0 inclusive)
+        Setter for alpha component of color.
+        (0-1.0 inclusive)
+        
         Args:
             value(float): alpha component of color (0-1.0)
         Returns:
@@ -195,11 +184,40 @@ class Color(object):
     def __init__(self, *args, **kwargs):
         """ Constructor for a Color object
         Usage: requires either 3 ints 0-255 for RGB and an optional float 0.0-1.0 for alpha or a str of a web color can also key the RGBA values with r, g, b, a or red, green, blue, alpha respectively and col_name for the str
+        
         Args:
-            args: int, int, int, optional float or just a str
-            kwargs: r/red: int, b/blue: int, g/green: int optional a/alpha: float or col_name: str
-        Returns:
-            None
+            args0: colname
+            args0: (r,g,b,a)
+            args0: r
+            args1: g
+            args2: b
+            args3: alpha
+
+        Kwargs:
+            blue: Optional(int)
+            green: Optional(int)
+            alpha: Optional(float)
+            red: Optional(int)
+            r: Optional(int)
+            b: Optional(int)
+            g: Optional(int)
+            a: Optional(float)
+            col_name: Optional(str)
+        
+        Raises:
+            ValueError: if args is not 3 ints with an optional 4th arg for alpha or just one str arg
+            ValueError: if a str passed is not a valid webcolor
+            ValueError: if any of the RGBA values are outside of their respective range
+        
+        Examples:
+        \code{.py}
+        my_color = Color("red")       # equivalent to (255, 0, 0, 1.0)
+        my_color.rgba(255, 0, 0, 1.0) # using rgba notation
+        my_color = Color(r=255)       # equivalent to (255, 0, 0, 1.0)
+        my_color = Color(255, 0, 0)   # equivalent to (255, 0, 0, 1.0)
+        my_color = Color()
+        my_color.red = 255            # equivalent to (255, 0, 0, 1.0)
+        \endcode
         """
         self._red = 0
         self._green = 0

@@ -1,0 +1,55 @@
+from bridges import *
+from bridges.symbol_group import *
+from bridges.text import *
+
+from xml.dom import minidom
+from svg.path import parse_path
+from svg.path.path import Line
+
+
+def main():
+    bridges = Bridges(1, "test", "137842425086")
+
+    bridges.set_title("Symbol Collection")
+
+    bridges.set_server_url("clone")
+    sc = SymbolCollection()
+    group = SymbolGroup()
+
+    svg = minidom.parse("us.svg")
+    path_strings = [path.getAttribute('d') for path
+                    in svg.getElementsByTagName('path')]
+
+    print(path_strings[0])
+
+    svg.unlink()
+    lines = []
+    # print the line draw commands
+    for path_string in path_strings:
+        path = parse_path(path_string)
+        for e in path:
+            if isinstance(e, Line):
+                x0 = e.start.real
+                y0 = e.start.imag
+                x1 = e.end.real
+                y1 = e.end.imag
+                lines.append([x0, y0, x1, y1])
+                print("(%.2f, %.2f) - (%.2f, %.2f)" % (x0, y0, x1, y1))
+
+    for i in range(len(lines)):
+        xaxis = Polyline()
+        xaxis.add_point(lines[i][0], -lines[i][1])
+        xaxis.add_point(lines[i][2], -lines[i][3])
+        xaxis.stroke_color = "black"
+        xaxis.stroke_width = 1.0
+        group.add_symbol(xaxis)
+
+    sc.add_symbol(group)
+
+    bridges.set_data_structure(sc)
+
+    bridges.set_visualize_JSON(True)
+    bridges.visualize()
+
+if __name__ == "__main__":
+    main()

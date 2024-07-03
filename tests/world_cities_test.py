@@ -31,7 +31,9 @@ def main():
     """
 
     # ommiting all arguments will get all data within the database
-    cities_data = data_source.get_world_cities_data()
+    cities_data = data_source.get_world_cities_data(country='IN')
+    for cities in cities_data:
+        print(cities.city)
 
     # getting a limit of 5 results
     # cities_data = data_source.get_world_cities_data(limit = 5)
