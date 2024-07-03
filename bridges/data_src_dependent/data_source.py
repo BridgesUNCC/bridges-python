@@ -21,6 +21,8 @@ from bridges.data_src_dependent.amenity import *
 from bridges.data_src_dependent.actor_movie_imdb import *
 from bridges.color_grid import ColorGrid
 from bridges.color import Color
+from bridges.data_src_dependent.state import *
+from bridges.data_src_dependent.county import *
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 
@@ -186,9 +188,9 @@ def get_world_cities_data(**kwargs) -> List[City]:
         url = url + '?'
         if kwargs.get('state'):
             url = url + 'state=' + kwargs['state'] + '&'
-	if kwargs.get('country'):
+        if kwargs.get('country'):
             url = url + 'country=' + kwargs['country'] + '&'
-	if kwargs.get('city'):
+        if kwargs.get('city'):
             url = url + 'city=' + kwargs['city'] + '&'
         if kwargs.get('min_pop'):
             url = url + 'minPopulation=' + str(kwargs['min_pop']) + '&'
@@ -221,6 +223,34 @@ def get_world_cities_data(**kwargs) -> List[City]:
                                           population = V['population'], timezone=V['timezone']))
     return wrapper
 
+
+def get_map(state_name = []):
+
+    wrapper = []
+
+    url = "http://bridgesdata.herokuapp.com/api/us_map?state="
+    for i in range(len(state_name)):
+        url += state_name[i] + ","
+    url = url[:-1]
+    PARAMS = {"Accept: application/json"}
+
+    r = requests.get(url = url, params = str(PARAMS))
+
+    r = r.json()
+
+    state_info = r['data']
+
+    for i in range(len(state_info)):
+        temp_state = State(state_info[i]['_id']["input"])
+        for j in range(len(state_info[i]['counties'])):
+            current_county = state_info[i]['counties'][j]
+            temp_state.counties.append(County(current_county['properties']['GEOID'],
+                                              current_county['properties']['FIPS_CODE'],
+                                              current_county['properties']['COUNTY_STATE_CODE'],
+                                              current_county['properties']['COUNTY_STATE_NAME']))
+        wrapper.append(temp_state)
+
+    return wrapper
 
 
 
