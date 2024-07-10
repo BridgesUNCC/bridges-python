@@ -114,10 +114,11 @@ class ColorGrid(Grid):
                 count = 0
             pos += 1
         total_count += count
-        img_bytes.append(count-1)
-        last = last.get_byte_representation()
-        for k in range(len(last)):
-            img_bytes.append(last[k])
+        if count > 0:
+            img_bytes.append(count-1)
+            last = last.get_byte_representation()
+            for k in range(len(last)):
+                img_bytes.append(last[k])
 
         if total_count != self.grid_size[0] * self.grid_size[1]:
             print("Something broke in getRLE construction")

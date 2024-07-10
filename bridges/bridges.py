@@ -168,6 +168,16 @@ class Bridges:
         """
         self._json_flag = flag
 
+    def set_map(self, map_info:list):
+        """
+        This method serializes all the state and county objects in the map_info for sending to the server
+        :param map_info: is a list of state objects with their counties
+        :return: none
+        """
+        self.map = map_info
+
+
+
     def post_visualization_link(self, flag:bool):
         """
         This method controls (with a flag) if the visualization url is printed to the console or not.
@@ -202,14 +212,15 @@ class Bridges:
             "map_overlay": self._map_overlay,
             "element_label_flag": self._element_label_flag,
             "link_label_flag": self._link_label_flag,
-            "map": self._map,
+            "map": self.map,
         }
         if self.window is not None and len(self.window) == 4:
             ds['window'] = self.window
 
         ds.update(nodes_links_str)
 
-        ds_json = json.dumps(ds)
+        #adds default for serializing objects
+        ds_json = json.dumps(ds, default = lambda x: x.__dict__)
         if self._json_flag or self._debug:
             print(ds_json)
 
@@ -290,21 +301,21 @@ class Bridges:
         """
         self._map_overlay = flag
 
-    @property
-    def map(self)->list:
-        return self._map
+    # @property
+    # def map(self)->list:
+    #     return self._map
 
-    @map.setter
-    def map(self, new_map:list) ->None:
-        """
-        Setter function for the svg map overlay describing which map to use and the information from that map.
-        Args:
-            new_map: is a list with the first element describing which map: "us" or "world", and the second element
-        describing what part of the map: a state name or country name respectively.
-        Returns:
-            None
-        """
-        self._map = new_map
+    # @map.setter
+    # def map(self, new_map:list) ->None:
+    #     """
+    #     Setter function for the svg map overlay describing which map to use and the information from that map.
+    #     Args:
+    #         new_map: is a list with the first element describing which map: "us" or "world", and the second element
+    #     describing what part of the map: a state name or country name respectively.
+    #     Returns:
+    #         None
+    #     """
+    #     self._map = new_map
 
     def set_coord_system_type(self, coord):
         """

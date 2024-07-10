@@ -16,3 +16,6 @@ To install from this repository
 `cd path/to/directory`  
 `python setup.py install`
 
+
+## Generating a new pip package
+read [this](packaging.md)
