@@ -190,7 +190,7 @@ class Bridges:
                 self.vis_type == "CircularDoublyLinkedList" or self.vis_type == "Array" or \
                 self.vis_type == "GraphAdjacencyList" or self.vis_type == "ColorGrid" or self.vis_type == "GraphAdjacencyMatrix" or \
                 self.vis_type == "largegraph" or self.vis_type == "KdTree" or self.vis_type == "SymbolCollection" or \
-                self.vis_type == "GameGrid" or self.vis_type == "BinarySearchTree" or self.vis_type == "LineChart" or \
+                self.vis_type == "GameGrid" or self.vis_type == "BinarySearchTree" or self.vis_type == "LineChart" or self.vis_type == "Barchart" or \
                 self.vis_type == "Audio" or self.vis_type == "SymbolCollectionV2" or self.vis_type == "Scene":
             nodes_links_str = self.ds_handle.get_data_structure_representation()
 
