@@ -100,7 +100,7 @@ class Bridges:
         self._link_label_flag = False
         self._post_url_flag = True
         self._map_overlay = False
-        self._map = ["us", "all"]
+        self.map = {}
         self._window = [0.0, 0.0, 0.0, 0.0]
         self.ds_handle = None
         self.vis_type = ""
@@ -192,7 +192,7 @@ class Bridges:
         Returns:
             None
         """
-        nodes_links_str = ""
+        ds_str = ""
 
         if self.vis_type == "Tree" or self.vis_type == "BinaryTree" or self.vis_type == "AVLTree" or\
                 self.vis_type == "SinglyLinkedList" or self.vis_type == "DoublyLinkedList" or \
@@ -200,11 +200,11 @@ class Bridges:
                 self.vis_type == "CircularDoublyLinkedList" or self.vis_type == "Array" or \
                 self.vis_type == "GraphAdjacencyList" or self.vis_type == "ColorGrid" or self.vis_type == "GraphAdjacencyMatrix" or \
                 self.vis_type == "largegraph" or self.vis_type == "KdTree" or self.vis_type == "SymbolCollection" or \
-                self.vis_type == "GameGrid" or self.vis_type == "BinarySearchTree" or self.vis_type == "LineChart" or \
+                self.vis_type == "GameGrid" or self.vis_type == "BinarySearchTree" or self.vis_type == "LineChart" or self.vis_type == "BarChart" or \
                 self.vis_type == "Audio" or self.vis_type == "SymbolCollectionV2" or self.vis_type == "Scene":
-            nodes_links_str = self.ds_handle.get_data_structure_representation()
+            ds_str = self.ds_handle.get_data_structure_representation()
 
-        ds = {
+        ds_dict = {
             "visual": self.vis_type,
             "title": self._title,
             "description": self._description,
@@ -215,12 +215,12 @@ class Bridges:
             "map": self._map,
         }
         if self.window is not None and len(self.window) == 4:
-            ds['window'] = self.window
+            ds_dict['window'] = self.window
 
-        ds.update(nodes_links_str)
+        ds_dict.update(ds_str)
 
         #adds default for serializing objects
-        ds_json = json.dumps(ds, default = lambda x: x.__dict__)
+        ds_json = json.dumps(ds_dict, default = lambda x: x.__dict__)
         if self._json_flag or self._debug:
             print(ds_json)
 
