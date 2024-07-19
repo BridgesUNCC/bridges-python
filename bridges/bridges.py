@@ -212,7 +212,7 @@ class Bridges:
             "map_overlay": self._map_overlay,
             "element_label_flag": self._element_label_flag,
             "link_label_flag": self._link_label_flag,
-            "map": self._map,
+            "map": self.map,
         }
         if self.window is not None and len(self.window) == 4:
             ds_dict['window'] = self.window
