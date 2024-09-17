@@ -7,10 +7,10 @@ class BarChart:
     def __init__(self):
         self.x_label = ""
         self.y_label = ""
-        self.plot_title = ""
-        self.plot_sub_title = ""
-        self.tooltip_suffix = ""
-        self.alignment = "horizontal"
+        self.title = ""
+        self.sub_title = ""
+        self.tt_suffix = ""
+        self.direction = "horizontal"
         self.series_data = {}
         self.series_bins = []
 
@@ -52,20 +52,20 @@ class BarChart:
         self.x_label = x_label
 
     @property
-    def alignment(self, new_alignment) -> str:
-        self.alignment = new_alignment
+    def orientation(self, o) -> str:
+        self.direction = o
 
-    @alignment.setter
-    def alignment(self) -> str:
+    @orientation.setter
+    def orientation(self) -> str:
         return self.alignment
 
     @property
     def tooltip_suffix(self) -> str:
-        return self.tooltip_suffix
+        return self.tt_suffix
 
     @tooltip_suffix.setter
-    def set_tooltip_suffix(self, tooltip_suffix: str) -> None:
-        self.tooltip_suffix = tooltip_suffix
+    def tooltip_suffix(self, suffix: str) -> None:
+        self.tt_suffix = suffix
 
     @property
     def series_data(self):
@@ -105,7 +105,7 @@ class BarChart:
             "x_label": self.get_bins_label(),
             "y_label": self.get_series_label(),
             "tooltip_suffix": self.get_tooltip_suffix(),
-            "alignment": self.get_bar_alignment(),
+            "alignment": self.orientation(),
             "xaxis_data": bins,
             "yaxis_data": {"series": series}
         }
