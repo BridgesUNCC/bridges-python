@@ -2,6 +2,7 @@ import json
 import requests
 import pickle
 import urllib.parse
+import os
 
 from bridges.data_src_dependent.earthquake_usgs import *
 from bridges.data_src_dependent import actor_movie_imdb
@@ -27,6 +28,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 
 
 source_type = "live"
+_debug = False
 
 def set_source_type(t) -> None:
     global source_type
@@ -85,6 +87,8 @@ def get_game_data():
     url = "http://bridgesdata.herokuapp.com/api/games"
     PARAMS = {"Accept: application/json"}
 
+    if _debug:
+        print ("Accessing "+url)
     r = requests.get(url=url, params=str(PARAMS))
 
     r = r.json()
@@ -208,7 +212,8 @@ def get_world_cities_data(**kwargs) -> List[City]:
             url = url + 'limit=' + str(kwargs['limit']) + '&'
     url = url[:-1]  # remove last &
 
-    print(url)
+    if _debug:
+        print(url)
     PARAMS = {"Accept: application/json"}
 
     r = requests.get(url=url, params=str(PARAMS))
@@ -234,6 +239,8 @@ def get_map(state_name = []):
     url = url[:-1]
     PARAMS = {"Accept: application/json"}
 
+    if _debug:
+        print ("Accessing "+url)
     r = requests.get(url = url, params = str(PARAMS))
 
     r = r.json()
@@ -285,8 +292,11 @@ def get_actor_movie_imdb_data(count = 0) -> ActorMovieIMDB:
     wrapper = []
 
     url = "http://bridgesdata.herokuapp.com/api/imdb?limit=" + str(count)
+    if _debug:
+        print ("accessing "+url)
     PARAMS = {"Accept: application/json"}
 
+    
     r = requests.get(url=url, params=str(PARAMS))
     # print(r.status_code, r.reason)
 
@@ -314,7 +324,9 @@ def get_actor_movie_imdb_data2() -> List[ActorMovieIMDB]:
         Exception if the request fails
     """
     url = "https://bridgesdata.herokuapp.com/api/imdb2"
-
+    if _debug:
+        print ("Accessing "+url)
+    
     r = requests.get(url = url)
     status = r.status_code
 
@@ -360,6 +372,8 @@ def get_earthquake_usgs_data(count = 0) -> List[EarthquakeUSGS]:
     PARAMS = {"Accept: application/json"}
 
     if count <= 0:
+        if _debug:
+            print ("Accessing: "+url)
         r = requests.get(url=url, params=str(PARAMS))
         r = r.json()
         for i in range(len(r)):
@@ -367,6 +381,8 @@ def get_earthquake_usgs_data(count = 0) -> List[EarthquakeUSGS]:
             G = r[i]["geometry"]["coordinates"]
             wrapper.append(EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
     else:
+        if _debug:
+            print ("Accessing: "+url)
         r = requests.get(url=latest_url, params=str(PARAMS))
         data = r.json()
         D = data["Earthquakes"]
@@ -407,6 +423,8 @@ def get_shakespeare_data(endpoint = "", textonly = False) -> List[Shakespeare]:
     if textonly:
         url += "?format=simple"
 
+    if _debug:
+        print ("Accessing "+url)
     r = requests.get(url = url, params = str(PARAMS))
     r = r.json()
 
@@ -439,6 +457,8 @@ def get_gutenberg_book_data(num = 0) -> List[GutenbergBook]:
     if num > 0:
         url += "?limit=" + str(num)
 
+    if _debug:
+        print ("Accessing "+url)
     r = requests.get(url=url, params = str(PARAMS))
     r = r.json()
 
@@ -490,6 +510,8 @@ def get_cancer_incident_data(num = 0) -> List[CancerIncidence]:
     if num > 0:
         url += "?limit="+str(num)
 
+    if _debug:
+        print ("Accessing "+url)
     r = requests.get(url=url, params=str(PARAMS))
     r = r.json()
 
@@ -555,6 +577,8 @@ def get_song(songTitle, artistName = None) -> Song:
         if len(artistName):
             url += "?artistName=" + urllib.parse.quote(artistName)
 
+    if _debug:
+        print ("Accessing "+url)
     r = requests.get(url = url, params = str(PARAMS))
     if r.status_code != 200:
         raise ConnectionError("HTTP Request Failed. Error Code: " + str(r.status_code) + " when accessing "+url)
@@ -604,6 +628,8 @@ def get_song_data() -> List[Song]:
     url = "http://bridgesdata.herokuapp.com/api/songs/"
     params = {"Accept: application/json"}
 
+    if _debug:
+        print ("Accessing "+url)
     r = requests.get(url=url, params=str(params))
     r = r.json()
 
@@ -764,6 +790,8 @@ def _get_assignment(server: str, user: str, assignment: int, subassignment: int 
     url = "{}/assignmentJSON/{}.{}/{}".format(server, assignment, subassignment_fixed, user)
     params = "Accept: application/json"
 
+    if _debug:
+        print ("Accessing "+url)
     request = requests.get(url, params)
     if request.ok:
         return request.content
@@ -781,6 +809,8 @@ def _osm_server_request(url):
         url: url for server to process
 
     """
+    if _debug:
+        print ("Accessing "+url)
     request = requests.get(url)
     if not request.ok:
         if request.status_code == 404:
@@ -820,7 +850,6 @@ def get_osm_data(*args) -> OsmData:
     """
     import os
 
-    debug = True
 
     if (len(args) == 2):
         location = args[0]
@@ -840,7 +869,7 @@ def get_osm_data(*args) -> OsmData:
 
     lru = lru_cache.lru_cache(30)
 
-    if debug:
+    if _debug:
         print ("url: "+url)
         print ("hash_url: "+hash_url)
 
@@ -906,6 +935,8 @@ def _server_request(url):
     
     For internal use only
     """
+    if _debug:
+        print ("Requesting "+url)
     request = requests.get(url)
     if not request.ok:
         if request.status_code == 404:
@@ -1187,8 +1218,6 @@ def get_a_gutenberg_book_metadata(id) -> GutenbergMeta:
 
     meta = GutenbergMeta()
     for node in data['book_list']:
-        
-        
         meta.id = node["id"]
         meta.title = node['title']
         meta.lang = node["lang"]
@@ -1275,3 +1304,8 @@ def reddit_data(subreddit, time_request = -9999) -> Reddit:
 
 class DataSource:
     pass
+
+force = os.getenv("FORCE_BRIDGES_DATADEBUG", "")
+if (force != ""):
+    _debug = True
+    
