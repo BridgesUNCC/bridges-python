@@ -19,57 +19,72 @@ class BarChart:
         return "BarChart"
 
 
-    def get_title(self) -> str:
+    @property
+    def title(self) -> str:
         return self.plot_title
 
-    def set_title(self, plot_title: str) -> None:
+    @title.setter
+    def title(self, plot_title: str) -> None:
         self.plot_title = plot_title
 
-    def get_sub_title(self) -> str:
+    @property
+    def sub_title(self) -> str:
         return self.plot_sub_title
 
-    def set_plot_sub_title(self, plot_sub_title: str) -> None:
+    @sub_title.setter
+    def sub_title(self, plot_sub_title: str) -> None:
         self.plot_sub_title = plot_sub_title
 
-    def get_series_label(self) -> str:
+    @property
+    def series_label(self) -> str:
         return self.y_label
 
-    def set_series_label(self, y_label: str) -> None:
+    @series_label.setter
+    def series_label(self, y_label: str) -> None:
         self._y_label = y_label
 
-    def get_bins_label(self) -> str:
+    @property
+    def bins_label(self) -> str:
         return self.x_label
 
-    def set_bins_label(self, x_label: str) -> None:
+    @bins_label.setter
+    def bins_label(self, x_label: str) -> None:
         self.x_label = x_label
 
-    def set_alignment(self, new_alignment) -> str:
+    @property
+    def alignment(self, new_alignment) -> str:
         self.alignment = new_alignment
 
-    def get_bar_alignment(self) -> str:
+    @alignment.setter
+    def alignment(self) -> str:
         return self.alignment
 
-    def set_bar_alignment(self, alignment: str) -> None:
-        self.alignment = alignment
-
-    def get_tooltip_suffix(self) -> str:
+    @property
+    def tooltip_suffix(self) -> str:
         return self.tooltip_suffix
 
+    @tooltip_suffix.setter
     def set_tooltip_suffix(self, tooltip_suffix: str) -> None:
         self.tooltip_suffix = tooltip_suffix
 
-    def get_series_data(self):
+    @property
+    def series_data(self):
         return self.series_data
 
-    def add_series_data(self, series_name: str, data: float) -> None:
+    @series_data.setter
+    def series_data(self, series_name: str, data: float) -> None:
         self.series_data[series_name] = data
 
-    def get_series_bins(self):
+    @property
+    def series_bins(self):
         return self.series_bins
 
-    def set_series_bins(self, series_bins) -> None:
+    @series_bins.setter
+    def series_bins(self, series_bins) -> None:
         self.series_bins = series_bins
 
+    #Gets the data structure representation as a JSON string
+    #Returns: data structure reprsentation (json string)
     def get_data_structure_representation(self):
         bins = {
             "xAxis": {
