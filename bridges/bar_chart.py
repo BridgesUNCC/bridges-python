@@ -11,7 +11,7 @@ class BarChart:
     
     Series in a bar chart provides data for a number of categories
     (sometimes called bins). Categories are defined using
-    setCategories() and the series are added using addDataSeries().
+    BarChart.categories and the series are added using BarChart.add_data_series().
     The series are rendered in the order in which they were added. Once
     a series has been added, it can not be modified.
     
@@ -21,11 +21,11 @@ class BarChart:
     categories will throw an exception.
     
     The Bar charts can have a title, subtitle. The charts can be
-    horizontal or vertically oriented, using setBarOrientation().
+    horizontal or vertically oriented, using BarChart.orientation.
     
     A tooltip indicating the value of a series in a particular bin is
     displayed by hovering on a bar. One can append a string to the
-    value using setTooltipSuffix() to specify units in the tooltip if desired.
+    value using barchart.tooltip_suffix to specify units in the tooltip if desired.
     
       @sa See tutorial on using BarChart at:
        https://bridgesuncc.github.io/tutorials/BarChart.html
@@ -50,61 +50,136 @@ class BarChart:
 
     @property
     def title(self) -> str:
+        """
+        Title of the plot
+        """
         return self._title
 
     @title.setter
     def title(self, plot_title: str) -> None:
+        """
+        Title of the plot
+        """
         self._title = plot_title
 
     @property
     def sub_title(self) -> str:
+        """
+        Subtitle of the plot
+        """
         return self._sub_title
 
     @sub_title.setter
     def sub_title(self, plot_sub_title: str) -> None:
+        """
+        Subtitle of the plot
+        """
         self._sub_title = plot_sub_title
 
     @property
     def value_label(self) -> str:
+        """
+        Label for the value axis
+        """
         return self._v_label
 
     @value_label.setter
     def value_label(self, value_label: str) -> None:
+        """
+        Label for the value axis
+        """
         self._v_label = value_label
 
     @property
     def categories_label(self) -> str:
+        """
+        Label for the categories axis
+        """
         return self._c_label
 
     @categories_label.setter
     def categories_label(self, c_label: str) -> None:
+        """
+        Label for the categories axis
+        """
         self._c_label = c_label
 
     @property
     def orientation(self) -> str:
+        """
+        Orientation of the bar chart.
+
+        Will always be either "horizontal" or "vertical"
+        """
         return self._orientation
 
     @orientation.setter
     def orientation(self, orient) -> str:
+        """
+        Sets orientation of the bar chart.
+
+        Must be either "horizontal" or "vertical". Will throw an exception otherwise.
+        """
+        if orient != "horizontal" and orient != "vertical":
+            raise ValueError ("Bar chart orientation must be either \"horizontal\" or \"vertical\"")
         self._orientation = orient
 
     @property
     def tooltip_suffix(self) -> str:
+        """
+        the tooltip suffix
+        
+        This string is appended to the values in the hover tooltip.
+        """
         return self._tt_suffix
 
     @tooltip_suffix.setter
     def tooltip_suffix(self, suffix: str) -> None:
+        """
+        the tooltip suffix
+        
+        This string is appended to the values in the hover tooltip.
+        """
         self._tt_suffix = suffix
 
     @property
-    def categories(self):
+    def categories(self) -> list[str]:
+        """
+        Categories for this bar chart
+        """
         return self._cats
 
     @categories.setter
-    def categories(self, series_bins) -> None:
+    def categories(self, series_bins: list[str]) -> None:
+        """
+        Set the categories for the bar chart
+
+        will throw an exception if there are already data series defined.
+        """
+        if len (self._series_data) >0:
+            raise RuntimeError("Can't change categoriess after series have been added.")
         self._cats = series_bins
 
-    def add_data_series(self, name, values) -> None:
+    def add_data_series(self, name:str, values:list[float]) -> None:
+        """ 
+        Add a series of data
+        
+        This will throw an exception if the data vector does not have the same	 
+        size as the number of categories.
+				 
+	This will throw exceptions if two series have the same name.
+	
+	Args:
+           name indicates the name of the data to add
+           values values of that serie for each category
+        """
+        if len(values) != len (self.categories):
+            raise ValueError("The data vector should have the same size as the number of categories.")
+
+        for others in self._series_data:
+            if name == others[0]:
+                raise ValueError("Can't have two series with the same name.")
+        
         self._series_data.append ((name, values))
 
     #Gets the data structure representation as a JSON string
@@ -122,7 +197,7 @@ class BarChart:
                 "data": value
             }
             series.append(temp_dict)
-        print(series)
+        #print(series)
         json_dict = {
             "plot_title": self.title,
             "subtitle": self.subtitle,
