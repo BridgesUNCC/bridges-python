@@ -235,12 +235,23 @@ class Color(object):
         col_name = None
         if args:
             errorcondition = True
-            if len(args) == 1 and type(args[0]) == list:
-                self.red = args[0][0]
-                self.green = args[0][1]
-                self.blue = args[0][2]
-                self.alpha = args[0][3]
-                errorcondition=False
+            if len(args) == 1:
+                thetype = type(args[0])
+                if thetype == list:
+                    self.red = args[0][0]
+                    self.green = args[0][1]
+                    self.blue = args[0][2]
+                    self.alpha = args[0][3]
+                    errorcondition=False
+                elif thetype is str:
+                    col_name = args[0]
+                    errorcondition=False
+                elif thetype is Color:
+                    self.red = args[0].red
+                    self.green = args[0].green
+                    self.blue = args[0].blue
+                    self.alpha = args[0].alpha
+                    errorcondition = False
             if len(args) == 4 or len(args) == 3:
                 self.red = args[0]
                 self.green = args[1]
@@ -248,16 +259,6 @@ class Color(object):
                 if len(args) == 4:
                     self.alpha = args[3]
                 errorcondition = False
-            elif len(args) == 1:
-                if type(args[0]) is str:
-                    col_name = args[0]
-                    errorcondition=False
-                elif type(args[0]) is Color:
-                    self.red = args[0].red
-                    self.green = args[0].green
-                    self.blue = args[0].blue
-                    self.alpha = args[0].alpha
-                    errorcondition = False
             if errorcondition:
                 raise ValueError("To use Color constructor pass 3 RGB values and a float alpha value or a color name or a Color object")
         elif kwargs:
