@@ -298,12 +298,8 @@ class Color(object):
         b = self.blue
         a = round(255 * self.alpha)
 
-        bytebuffer = list()
-        bytebuffer.append(r)
-        bytebuffer.append(g)
-        bytebuffer.append(b)
-        bytebuffer.append(a)
-
+        bytebuffer = [r,g,b,a]
+        
         return bytebuffer
 
     def __eq__(self, other):
