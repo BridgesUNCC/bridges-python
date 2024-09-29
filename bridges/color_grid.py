@@ -83,6 +83,7 @@ class ColorGrid(Grid):
         total_count = 0
         pos = 0
         last = self.grid[0][0]
+        colorbuffer = [0, 0, 0, 0]
 
         while pos < self.grid_size[0] * self.grid_size[1]:
             posY = pos / self.grid_size[1]
@@ -98,27 +99,23 @@ class ColorGrid(Grid):
                 else:
                     total_count += count
                     img_bytes.append(count-1)
-                    last = last.get_byte_representation()
-
-                    for k in range(len(last)):
-                        img_bytes.append(last[k])
+                    last.write_byte_representation(colorbuffer)
+                    img_bytes.extend(colorbuffer)
 
                     count = 1
                     last = current
             if count == 256:
                 total_count += count
                 img_bytes.append(count-1)
-                last = last.get_byte_representation()
-                for k in range(len(last)):
-                    img_bytes.append(last[k])
+                last.write_byte_representation(colorbuffer)
+                img_bytes.extend(colorbuffer)
                 count = 0
             pos += 1
         total_count += count
         if count > 0:
             img_bytes.append(count-1)
-            last = last.get_byte_representation()
-            for k in range(len(last)):
-                img_bytes.append(last[k])
+            last.write_byte_representation(colorbuffer)
+            img_bytes.extend(colorbuffer)
 
         if total_count != self.grid_size[0] * self.grid_size[1]:
             print("Something broke in getRLE construction")
@@ -132,14 +129,14 @@ class ColorGrid(Grid):
             bytearray: representing the colors of grid cells
         """
         img_bytes = bytearray()
+        colorbuffer = [0, 0, 0, 0]
         for i in range(self.grid_size[0]):
             if self.grid[i] is not None:
                 for j in range(self.grid_size[1]):
                     if self.grid[i][j] is not None:
                         color = self.grid[i][j]
-                        color = color.get_byte_representation()
-                        for k in range(len(color)):
-                            img_bytes.append(color[k])
+                        color.write_byte_representation(colorbuffer)
+                        img_bytes.extend(colorbuffer)
         return img_bytes
 
     def get_data_structure_representation(self) -> dict:

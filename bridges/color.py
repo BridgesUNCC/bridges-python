@@ -263,6 +263,12 @@ class Color(object):
         elif kwargs:
             if 'col_name' in kwargs:
                 col_name = kwargs['col_name']
+                try:
+                    web_color = webcolors.name_to_rgb(col_name)
+                    self.set_color(web_color.red, web_color.green, web_color.blue)
+                except ValueError:
+                    raise ValueError(col_name + " is not a valid color name")
+
             if 'r' in kwargs:
                 self.red = kwargs['r']
             if 'red' in kwargs:
@@ -280,12 +286,6 @@ class Color(object):
             if 'alpha' in kwargs:
                 self.alpha = kwargs['alpha']
 
-        if col_name is not None:
-            try:
-                web_color = webcolors.name_to_rgb(col_name)
-                self.set_color(web_color.red, web_color.green, web_color.blue)
-            except ValueError:
-                raise ValueError(col_name + " is not a valid color name")
 
     def get_byte_representation(self) -> list:
         """
@@ -302,6 +302,20 @@ class Color(object):
         
         return bytebuffer
 
+    def write_byte_representation(self, bytebuffer: list[int]) -> None:
+        """
+        Writes the RGBA values as list of ints from 0-255
+        Assumes bytebuffer is a list of size 4
+        """
+        bytebuffer[0] = self.red
+        bytebuffer[1] = self.green
+        bytebuffer[2] = self.blue
+        bytebuffer[3] = round(255 * self.alpha)
+
+
+        
+
+    
     def __eq__(self, other):
         """deep equality check, by value of each RGBA value"""
         if not isinstance(other, self.__class__):
