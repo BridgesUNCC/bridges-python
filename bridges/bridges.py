@@ -177,7 +177,6 @@ class Bridges:
         self.map = map_info
 
 
-
     def post_visualization_link(self, flag:bool):
         """
         This method controls (with a flag) if the visualization url is printed to the console or not.
