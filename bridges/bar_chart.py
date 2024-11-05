@@ -37,7 +37,7 @@ class BarChart:
         self._c_label = ""
         self._v_label = ""
         self._title = ""
-        self._sub_title = ""
+        self._subtitle = ""
         self._tt_suffix = ""
         self._orientation = "horizontal"
         self._series_data = []
@@ -63,18 +63,18 @@ class BarChart:
         self._title = plot_title
 
     @property
-    def sub_title(self) -> str:
+    def subtitle(self) -> str:
         """
         Subtitle of the plot
         """
-        return self._sub_title
+        return self._subtitle
 
-    @sub_title.setter
-    def sub_title(self, plot_sub_title: str) -> None:
+    @subtitle.setter
+    def subtitle(self, plot_sub_title: str) -> None:
         """
         Subtitle of the plot
         """
-        self._sub_title = plot_sub_title
+        self._subtitle = plot_sub_title
 
     @property
     def value_label(self) -> str:
