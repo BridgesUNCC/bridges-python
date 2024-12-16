@@ -235,12 +235,23 @@ class Color(object):
         col_name = None
         if args:
             errorcondition = True
-            if len(args) == 1 and type(args[0]) == list:
-                self.red = args[0][0]
-                self.green = args[0][1]
-                self.blue = args[0][2]
-                self.alpha = args[0][3]
-                errorcondition=False
+            if len(args) == 1:
+                thetype = type(args[0])
+                if thetype == list:
+                    self.red = args[0][0]
+                    self.green = args[0][1]
+                    self.blue = args[0][2]
+                    self.alpha = args[0][3]
+                    errorcondition=False
+                elif thetype is str:
+                    col_name = args[0]
+                    errorcondition=False
+                elif thetype is Color:
+                    self.red = args[0].red
+                    self.green = args[0].green
+                    self.blue = args[0].blue
+                    self.alpha = args[0].alpha
+                    errorcondition = False
             if len(args) == 4 or len(args) == 3:
                 self.red = args[0]
                 self.green = args[1]
@@ -248,21 +259,17 @@ class Color(object):
                 if len(args) == 4:
                     self.alpha = args[3]
                 errorcondition = False
-            elif len(args) == 1:
-                if type(args[0]) is str:
-                    col_name = args[0]
-                    errorcondition=False
-                elif type(args[0]) is Color:
-                    self.red = args[0].red
-                    self.green = args[0].green
-                    self.blue = args[0].blue
-                    self.alpha = args[0].alpha
-                    errorcondition = False
             if errorcondition:
                 raise ValueError("To use Color constructor pass 3 RGB values and a float alpha value or a color name or a Color object")
         elif kwargs:
             if 'col_name' in kwargs:
                 col_name = kwargs['col_name']
+                try:
+                    web_color = webcolors.name_to_rgb(col_name)
+                    self.set_color(web_color.red, web_color.green, web_color.blue)
+                except ValueError:
+                    raise ValueError(col_name + " is not a valid color name")
+
             if 'r' in kwargs:
                 self.red = kwargs['r']
             if 'red' in kwargs:
@@ -280,12 +287,6 @@ class Color(object):
             if 'alpha' in kwargs:
                 self.alpha = kwargs['alpha']
 
-        if col_name is not None:
-            try:
-                web_color = webcolors.name_to_rgb(col_name)
-                self.set_color(web_color.red, web_color.green, web_color.blue)
-            except ValueError:
-                raise ValueError(col_name + " is not a valid color name")
 
     def get_byte_representation(self) -> list:
         """
@@ -298,14 +299,24 @@ class Color(object):
         b = self.blue
         a = round(255 * self.alpha)
 
-        bytebuffer = list()
-        bytebuffer.append(r)
-        bytebuffer.append(g)
-        bytebuffer.append(b)
-        bytebuffer.append(a)
-
+        bytebuffer = [r,g,b,a]
+        
         return bytebuffer
 
+    def write_byte_representation(self, bytebuffer: list[int]) -> None:
+        """
+        Writes the RGBA values as list of ints from 0-255
+        Assumes bytebuffer is a list of size 4
+        """
+        bytebuffer[0] = self.red
+        bytebuffer[1] = self.green
+        bytebuffer[2] = self.blue
+        bytebuffer[3] = round(255 * self.alpha)
+
+
+        
+
+    
     def __eq__(self, other):
         """deep equality check, by value of each RGBA value"""
         if not isinstance(other, self.__class__):
