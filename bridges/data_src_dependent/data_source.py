@@ -22,8 +22,8 @@ from bridges.data_src_dependent.amenity import *
 from bridges.data_src_dependent.actor_movie_imdb import *
 from bridges.color_grid import ColorGrid
 from bridges.color import Color
-from bridges.data_src_dependent.state import *
-from bridges.data_src_dependent.county import *
+from bridges.data_src_dependent.us_state import *
+from bridges.data_src_dependent.us_county import *
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 
@@ -230,7 +230,9 @@ def get_world_cities_data(**kwargs) -> List[City]:
 
 
 def get_map(state_name = []):
-
+    '''
+    returns a list of USState objects.
+    '''
     wrapper = []
 
     url = "http://bridgesdata.herokuapp.com/api/us_map?state="
@@ -248,13 +250,13 @@ def get_map(state_name = []):
     state_info = r['data']
 
     for i in range(len(state_info)):
-        temp_state = State(state_info[i]['_id']["input"])
+        temp_state = USState(state_info[i]['_id']["input"])
         for j in range(len(state_info[i]['counties'])):
             current_county = state_info[i]['counties'][j]
-            temp_state.counties.append(County(current_county['properties']['GEOID'],
-                                              current_county['properties']['FIPS_CODE'],
-                                              current_county['properties']['COUNTY_STATE_CODE'],
-                                              current_county['properties']['COUNTY_STATE_NAME']))
+            temp_state.counties.append(USCounty(current_county['properties']['GEOID'],
+                                                current_county['properties']['FIPS_CODE'],
+                                                current_county['properties']['COUNTY_STATE_CODE'],
+                                                current_county['properties']['COUNTY_STATE_NAME']))
         wrapper.append(temp_state)
 
     return wrapper

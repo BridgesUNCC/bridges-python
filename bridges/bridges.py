@@ -1,5 +1,6 @@
 from bridges.connector import *
 from bridges import ColorGrid
+from bridges.us_map import *
 import os
 
 import json
@@ -174,6 +175,9 @@ class Bridges:
         :param map_info: is a list of state objects with their counties
         :return: none
         """
+        if isinstance(map_info, USMap):
+            self.set_map_overlay(map_info.get_overlay())
+            self.set_coord_system_type(map_info.get_projection())
         self.map = map_info
 
 
@@ -191,6 +195,8 @@ class Bridges:
         Returns:
             None
         """
+        if isinstance(self.ds_handle, Map):
+            self.set_map(self.ds_handle)
         ds_str = ""
 
         if self.vis_type == "Tree" or self.vis_type == "BinaryTree" or self.vis_type == "AVLTree" or\
@@ -211,7 +217,7 @@ class Bridges:
             "map_overlay": self._map_overlay,
             "element_label_flag": self._element_label_flag,
             "link_label_flag": self._link_label_flag,
-            "map": self.map,
+            "map": (self.map.get_map_representation() if isinstance(self.map, Map) else self.map),
         }
         if self.window is not None and len(self.window) == 4:
             ds_dict['window'] = self.window

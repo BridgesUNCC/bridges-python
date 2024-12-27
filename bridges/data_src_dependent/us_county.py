@@ -1,6 +1,6 @@
 
 
-class County:
+class USCounty:
 
     def __init__(self, id: str, code: str, county: str, state: str):
         self._geoid = id

@@ -1,6 +1,6 @@
 
 
-class State:
+class USState:
 
     def __init__(self, state: str):
         self._state_name = state
