@@ -245,7 +245,12 @@ class Color(object):
                     errorcondition=False
                 elif thetype is str:
                     col_name = args[0]
-                    errorcondition=False
+                    try:
+                        web_color = webcolors.name_to_rgb(col_name)
+                        self.set_color(web_color.red, web_color.green, web_color.blue)
+                        errorcondition=False
+                    except ValueError:
+                        raise ValueError(col_name + " is not a valid color name")
                 elif thetype is Color:
                     self.red = args[0].red
                     self.green = args[0].green
@@ -269,7 +274,6 @@ class Color(object):
                     self.set_color(web_color.red, web_color.green, web_color.blue)
                 except ValueError:
                     raise ValueError(col_name + " is not a valid color name")
-
             if 'r' in kwargs:
                 self.red = kwargs['r']
             if 'red' in kwargs:

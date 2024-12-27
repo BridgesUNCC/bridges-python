@@ -25,7 +25,6 @@ class USState:
 
     @stroke_color.setter
     def stroke_color(self, value):
-        print (value._get_representation())
         self._stroke_color = value
 
     @property
