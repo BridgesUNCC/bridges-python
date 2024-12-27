@@ -1,4 +1,4 @@
-
+from bridges.color import *
 
 class USCounty:
 
@@ -7,9 +7,9 @@ class USCounty:
         self._fips_code = code
         self._county_name = county
         self._state_name = state
-        self._stroke_color = 'green'
+        self._stroke_color = Color(col_name = 'green')
         self._stroke_width = 0.5
-        self._fill_color = 'blue'
+        self._fill_color = Color(col_name ='blue')
         self._hide = False
 
     @property

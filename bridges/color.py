@@ -326,3 +326,12 @@ class Color(object):
                 self.green == other.green and
                 self.blue == other.blue and
                 self.alpha == other.alpha)
+
+    
+    def _get_representation(self):
+        '''
+        Should not be needed externally.
+        This is used internally to derive BRIDGES JSON representation for colors
+        '''
+        return [str(self.red), str(self.green),
+                str(self.blue), str(self.alpha)]

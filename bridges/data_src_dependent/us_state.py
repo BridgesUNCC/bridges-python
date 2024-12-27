@@ -1,14 +1,14 @@
-
+from bridges.color import *
 
 class USState:
 
     def __init__(self, state: str):
         self._state_name = state
-        self._stroke_color = 'red'
+        self._stroke_color = Color(col_name='red')
         self._counties = []
         self._view_counties = True
         self._stroke_width = 0.5
-        self._fill_color = 'blue'
+        self._fill_color = Color(col_name='blue')
 
 
     @property
@@ -25,6 +25,7 @@ class USState:
 
     @stroke_color.setter
     def stroke_color(self, value):
+        print (value._get_representation())
         self._stroke_color = value
 
     @property
