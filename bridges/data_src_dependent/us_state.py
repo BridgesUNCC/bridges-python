@@ -4,12 +4,11 @@ class USState:
 
     def __init__(self, state: str):
         self._state_name = state
-        self._stroke_color = Color(col_name='red')
+        self._stroke_color = Color('red')
         self._counties = []
         self._view_counties = True
         self._stroke_width = 0.5
-        self._fill_color = Color(col_name='blue')
-
+        self._fill_color = Color('blue')
 
     @property
     def state_name(self):
