@@ -229,7 +229,7 @@ def get_world_cities_data(**kwargs) -> List[City]:
     return wrapper
 
 
-def get_map(state_name = []):
+def get_map(state_name = [], view_counties = True):
     '''
     returns a list of USState objects.
     '''
@@ -251,16 +251,22 @@ def get_map(state_name = []):
 
     for i in range(len(state_info)):
         temp_state = USState(state_info[i]['_id']["input"])
-        for j in range(len(state_info[i]['counties'])):
-            current_county = state_info[i]['counties'][j]
-            temp_state.counties.append(USCounty(current_county['properties']['GEOID'],
-                                                current_county['properties']['FIPS_CODE'],
-                                                current_county['properties']['COUNTY_STATE_CODE'],
-                                                current_county['properties']['COUNTY_STATE_NAME']))
+        temp_state._view_counties = view_counties
+        if view_counties:
+            for j in range(len(state_info[i]['counties'])):
+                current_county = state_info[i]['counties'][j]
+                temp_state.counties.append(USCounty(current_county['properties']['GEOID'],
+                                                    current_county['properties']['FIPS_CODE'],
+                                                    current_county['properties']['COUNTY_STATE_CODE'],
+                                                    current_county['properties']['COUNTY_STATE_NAME']))
         wrapper.append(temp_state)
 
     return wrapper
 
+
+def get_us_map_data():
+    all_states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+    return get_map(all_states, False)
 
 
 def _parse_actor_movie_imdb(item) -> ActorMovieIMDB:

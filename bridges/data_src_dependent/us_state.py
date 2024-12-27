@@ -4,7 +4,7 @@ class USState:
 
     def __init__(self, state: str):
         self._state_name = state
-        self._stroke_color = 'blue'
+        self._stroke_color = 'red'
         self._counties = []
         self._view_counties = True
         self._stroke_width = 0.5
