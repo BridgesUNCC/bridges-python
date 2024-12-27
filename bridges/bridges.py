@@ -33,8 +33,8 @@ class Bridges:
     @date 2015, 2016, 2017, 2018, 2019, 2020, 2021
     """
 
-    _MaxTitleSize = 50
-    _MaxDescSize = 250
+    _MaxTitleSize = 200
+    _MaxDescSize = 1000
     _projection_options = {"cartesian", "albersusa", "equirectangular", "window"}
     _debug = False
     
