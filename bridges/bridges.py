@@ -175,7 +175,7 @@ class Bridges:
         :param map_info: is a list of state objects with their counties
         :return: none
         """
-        if isinstance(map_info, USMap):
+        if isinstance(map_info, Map):
             self.set_map_overlay(map_info.get_overlay())
             self.set_coord_system_type(map_info.get_projection())
         self.map = map_info
