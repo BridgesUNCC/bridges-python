@@ -1,8 +1,32 @@
 from bridges.color import *
 
 class USCounty:
+    """
+    @brief Class that holds US County information
 
+    This object is used alongside with the USMap object. Each county
+    has a stroke color and fill color attributes. Each county has a geoid
+    and FIPS code for identification. The geoid is used as the key in the
+    USState object to effic
+
+    Each County object contains its county name, state name, geoid, fips code,
+    stroke color, stroke width, fill color, stroke color
+
+    A tutorial on how to use the these objects is available at:
+    ???
+
+    @author Erik Saule, Kalpathi Subramanian
+    @date 12/30/24
+    """
     def __init__(self, id: str, code: str, county: str, state: str):
+        """
+        @brief Constructor with county related parameters
+
+        @param id  GeoId of the county
+        @param code  FIPS ID Code of the county
+        @param county name of county 
+        @param state   state containing county
+        """
         self._geoid = id
         self._fips_code = code
         self._county_name = county

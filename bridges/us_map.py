@@ -1,6 +1,26 @@
 from bridges.map import *
 
 class USMap(Map):
+    """
+    @brief This class provides an API to building, displaying and
+    manipulating  US maps and counties in BRIDGES
+
+    In the current implementation, we can draw a US map  with all state
+    boundaries, a map with all US state and county boundaries, or
+    specify a set of states  and display the state and/or county
+    boundaries.
+
+    Functions are provided to access each US state or county and color
+    its boundary or its interior using the stroke color  and fill color
+    functions. This lets us build map based applications where the fill
+    fill color can be used to represent different data attributes, such
+    population counts, election statistics or any attribute at the state
+    or county level.
+
+    See the Maps  tutorials for examples of the usage of the US Map API at
+    http://????
+
+    """
     def get_projection(self):
         return "albersusa"
 	
@@ -50,11 +70,22 @@ class USMap(Map):
         }
     
     def get_map_representation(self):
+        """
+        @brief gets the JSON representation of the map data
+
+        Uses functions to convert the state and country attributes to objects
+        before serialization into a JSON string
+        """
         data = [ self._state_to_obj(self._states[i]) for i in range(0,len(self._states)) ]
         
         return data
 
     def __init__(self,states = []):
+        """
+        @brief Constructor: creates an objecdt with the given state data
+
+        @param states state and county information for a set of states 
+        """
         self._states = states
 
     @property

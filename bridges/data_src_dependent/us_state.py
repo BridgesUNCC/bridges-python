@@ -1,8 +1,24 @@
 from bridges.color import *
 
 class USState:
+    """
+    @brief Class for USState and its attributes
+
+    Each State object contains its name, stroke color, stroke width, 
+    fill color, and a list of counties 
+    A tutorial on how to use the these objects is available at:
+    ???
+
+    @author Erik Saule, Kalpathi Subramanian
+    @date  Last modified Dec 30, 2024
+    """
 
     def __init__(self, state: str):
+        """
+        @brief Constructor for a specific state
+
+        @param state sets default values for the state
+        """
         self._state_name = state
         self._stroke_color = Color('red')
         self._counties = []
