@@ -12,7 +12,7 @@ class CancerIncidence:
     This object is generally not created by the user, to see how its created check 
     out bridges::data_src_dependent::data_source::get_cancer_incident_data()
       
-    http://www.cdc.gov/cancer/npcr/uscs/download_data.htm
+    https://www.cdc.gov/united-states-cancer-statistics/public-use/index.html
     Data: Courtesy of Corgis Datasets, 2017
    
     @author Kalpathi Subramanian
