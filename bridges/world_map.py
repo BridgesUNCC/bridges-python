@@ -5,7 +5,7 @@ class WorldMap(Map):
     @brief This class provides an API to displaying world maps in BRIDGES
 
     See the Maps  tutorials for examples of the usage of the US Map API at
-    http://????
+    https://bridgesuncc.github.io/tutorials/Map.html
 
     """
     def get_projection(self):

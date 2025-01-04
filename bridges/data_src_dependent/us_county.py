@@ -13,7 +13,7 @@ class USCounty:
     stroke color, stroke width, fill color, stroke color
 
     A tutorial on how to use the these objects is available at:
-    ???
+    https://bridgesuncc.github.io/tutorials/Map.html
 
     @author Erik Saule, Kalpathi Subramanian
     @date 12/30/24

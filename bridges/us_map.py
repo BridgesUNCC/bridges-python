@@ -18,7 +18,7 @@ class USMap(Map):
     or county level.
 
     See the Maps  tutorials for examples of the usage of the US Map API at
-    http://????
+    https://bridgesuncc.github.io/tutorials/Map.html
 
     """
     def get_projection(self):
