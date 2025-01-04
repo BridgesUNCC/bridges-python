@@ -232,6 +232,7 @@ def get_world_cities_data(**kwargs) -> List[City]:
 def get_us_map_county_data(state_name = [], view_counties = True):
     '''
     returns a list of USState objects.
+    See https://bridgesuncc.github.io/tutorials/Map.html on how to use these objects
     '''
     wrapper = []
 
@@ -267,9 +268,15 @@ def get_us_map_county_data(state_name = [], view_counties = True):
 all_states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 
 def get_us_map_data():
+    '''
+    See https://bridgesuncc.github.io/tutorials/Map.html on how to use these objects
+    '''
     return get_us_map_county_data(all_states, False)
 
 def get_all_us_map_county_data():
+    '''
+    See https://bridgesuncc.github.io/tutorials/Map.html on how to use these objects
+    '''
         return get_us_map_county_data(all_states, True)
 
 def _parse_actor_movie_imdb(item) -> ActorMovieIMDB:
