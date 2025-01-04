@@ -172,6 +172,9 @@ class Bridges:
     def set_map(self, map_info:list):
         """
         This method serializes all the state and county objects in the map_info for sending to the server
+        
+        See tutorial at https://bridgesuncc.github.io/tutorials/Map.html
+
         :param map_info: is a list of state objects with their counties
         :return: none
         """
