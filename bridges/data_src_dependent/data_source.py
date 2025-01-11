@@ -277,7 +277,7 @@ def get_all_us_map_county_data():
     '''
     See https://bridgesuncc.github.io/tutorials/Map.html on how to use these objects
     '''
-        return get_us_map_county_data(all_states, True)
+    return get_us_map_county_data(all_states, True)
 
 def _parse_actor_movie_imdb(item) -> ActorMovieIMDB:
     """
