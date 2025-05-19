@@ -391,23 +391,19 @@ def get_earthquake_usgs_data(count = 0) -> List[EarthquakeUSGS]:
 
     if count <= 0:
         if _debug:
-            print ("Accessing: "+url)
+            print("Accessing: " + url)
         r = requests.get(url=url, params=str(PARAMS))
-        r = r.json()
-        for i in range(len(r)):
-            V = r[i]["properties"]
-            G = r[i]["geometry"]["coordinates"]
-            wrapper.append(EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
     else:
         if _debug:
-            print ("Accessing: "+url)
+            print("Accessing: " + latest_url)
         r = requests.get(url=latest_url, params=str(PARAMS))
-        data = r.json()
-        D = data["Earthquakes"]
-        for i in range(len(D)):
-            V = D[i]["properties"]
-            G = D[i]["geometry"]["coordinates"]
-            wrapper.append(EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
+
+    data = r.json()
+    D = data["Earthquakes"]
+    for i in range(len(D)):
+        V = D[i]["properties"]
+        G = D[i]["geometry"]["coordinates"]
+        wrapper.append(EarthquakeUSGS(V["mag"], G[0], G[1], V["place"], V["title"], V["url"], V["time"]))
     return wrapper
 
 
