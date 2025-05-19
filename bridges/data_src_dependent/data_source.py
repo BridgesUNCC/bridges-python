@@ -1281,7 +1281,7 @@ def available_subreddits() -> List[str]:
     content = _server_request(url)
     return json.loads(content.decode("utf-8"))
 
-def reddit_data(subreddit, time_request = -9999) -> Reddit:
+def reddit_data(subreddit, time_request = -9999) -> List[Reddit]:
     """
     @brief  retrieves the reddit post from a subreddit
     :param subreddit: the name of the subreddit ( check list available at http://bridges-data-server-reddit.bridgesuncc.org/list ) 
