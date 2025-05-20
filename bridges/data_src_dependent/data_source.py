@@ -374,7 +374,7 @@ def get_earthquake_usgs_data(count = 0) -> List[EarthquakeUSGS]:
     @brief Get USGS earthquake data
 
     USGS Tweet data (https://earthquake.usgs.gov/earthquakes/map/). Data
-    retrieved, formatted into a list of EarthquakeUSGS objects
+    retrieved, formatted into a list of EarthquakeUSGS objects. The most recent earthqaukes are returned.
 
     Args:
         count: the number of earthquake records retrieved
