@@ -905,7 +905,7 @@ def get_osm_data(*args) -> OsmData:
         try:
             data = json.loads(content.decode('utf-8'), object_hook=lambda d: Namespace(**d))
         except:
-            print("Error: Corrupted JSON download...\nAttempting redownload...")
+            print("Error: Corrupted JSON download...\nAttempting redownload...") #The way the OSM server is written, the first hit to the server could cause a timeout
             content = _osm_server_request(url)
             try:
                 data = json.loads(content.decode('utf-8'), object_hook=lambda d: Namespace(**d))
@@ -1155,7 +1155,7 @@ def get_amenity_data(*args) -> List[Amenity] :
         try:
             data = json.loads(content.decode('utf-8'))
         except:
-            print("Error: Corrupted JSON download...\nAttempting redownload...")
+            print("Error: Corrupted JSON download...\nAttempting redownload...") #The way the OSM server is written, the first hit to the server could cause a timeout
             content = _osm_server_request(url)
             try:
                 data = json.loads(content.decode('utf-8'))
