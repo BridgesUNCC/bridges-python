@@ -279,6 +279,19 @@ def get_all_us_map_county_data():
     '''
     return get_us_map_county_data(all_states, True)
 
+def get_world_map_data(countries = []):
+    '''
+    @brief Gets the country information for the provided countries
+
+    For now, reading from a data file containing the country data as a JSON
+    See https://bridgesuncc.github.io/tutorials/WorldMap.html on how to use these objects
+    '''
+
+     with open('world-countries-iso-3166.json') as infile:
+		wm = json.load(infile)
+     print wm.data[0]
+    
+
 def _parse_actor_movie_imdb(item) -> ActorMovieIMDB:
     """
     @brief Parses an actor movie pair
