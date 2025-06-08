@@ -77,6 +77,8 @@ class USMap(Map):
         before serialization into a JSON string
         """
         data = [ self._state_to_obj(self._states[i]) for i in range(0,len(self._states)) ]
+
+        print (data)
         
         return data
 

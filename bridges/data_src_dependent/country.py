@@ -27,13 +27,27 @@ class Country:
         self._stroke_color = Color('green')
         self._fill_color = Color('lightblue')
 
-    @property
-    def country_name(self):
-        return self._country_name
+    def __init__(self, name: str, alpha2: str, alpha3: str, numeric3: int):
+        """
+        @brief Constructor for a specific state
 
-    @state_name.setter
-    def country_name(self, name):
-        self._country_name = name
+        @param sets provided values for the country
+        """
+        self._name = name
+        self._alpha2_id = alpha2 
+        self._alpha3_id =  alpha3
+        self._numeric3_id = numeric3
+        self._stroke_width = 1.
+        self._stroke_color = Color('green')
+        self._fill_color = Color('lightblue')
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, n):
+        self._name = n
 
     @property
     def alpha2_id(self):

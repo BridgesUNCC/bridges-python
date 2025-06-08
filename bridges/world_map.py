@@ -1,4 +1,5 @@
 from bridges.map import *
+import json
 
 class WorldMap(Map):
     """
@@ -48,17 +49,6 @@ class WorldMap(Map):
         #the map is passed as a datastructure and not as an overlay
         return {"map_dummy": True}
 
-    def _country_to_obj(self, cntry):
-        return {
-            "_country_name": cntry.name,
-            "_alpha2_id" : cntry.alpha2_id,
-            "_alpha3_id" : cntry.alpha3_id,
-            "_numeric3_id": cntry.numeric3_id,
-            "_stroke_color": cntry.stroke_color._get_representation(),
-            "_stroke_width": cntry.stroke_width,
-            "_fill_color": cntry.fill_color._get_representation()
-        }
-    
     def get_map_representation(self):
         """
         @brief gets the JSON representation of the map data
@@ -66,17 +56,33 @@ class WorldMap(Map):
         Uses functions to convert the state and country attributes to objects
         before serialization into a JSON string
         """
-        country_data = [ self._country_to_obj(self._states[i]) for i in range(0,len(self._states)) ]
+
+        country_data = []
+        for i in range(0,len(self._countries)):
+            #obj = json.dumps({})
+            obj = {}
+            c = self._countries[i]
+            obj["_name"] = c.name
+            obj["_alpha2_id"] = c.alpha2_id
+            obj["_alpha3_id"] = c.alpha3_id
+            obj["_numeric3_id"] = c.numeric3_id
+            obj["_stroke_color"] = c.stroke_color._get_representation()
+            obj["_fill_color"] = c.fill_color._get_representation()
+            obj["_stroke_width"] = c.stroke_width
+            country_data.append(obj) 
+ 
+        country_json = json.dumps(country_data)
+        print (country_json)
         
         return country_data
 
-    def __init__(self,countries = []):
+    def __init__(self, countries = []):
         """
         @brief Constructor: creates an object with the given country data
 
         @param countries country information for a set of countries
         """
-        self._states = states
+        self._countries = countries
 
     @property
     def countries(self):
@@ -85,7 +91,7 @@ class WorldMap(Map):
         '''
         return self._countries
 
-    @states.setter
+    @countries.setter
     def countries(self, countries):
         '''
         value: a list of country objects

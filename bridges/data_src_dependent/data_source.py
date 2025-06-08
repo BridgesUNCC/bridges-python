@@ -24,6 +24,7 @@ from bridges.color_grid import ColorGrid
 from bridges.color import Color
 from bridges.data_src_dependent.us_state import *
 from bridges.data_src_dependent.us_county import *
+from bridges.data_src_dependent.country import *
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 
@@ -279,6 +280,10 @@ def get_all_us_map_county_data():
     '''
     return get_us_map_county_data(all_states, True)
 
+def get_world_map_data():
+	pass
+
+
 def get_world_map_data(countries = []):
     '''
     @brief Gets the country information for the provided countries
@@ -287,10 +292,24 @@ def get_world_map_data(countries = []):
     See https://bridgesuncc.github.io/tutorials/WorldMap.html on how to use these objects
     '''
 
-     with open('world-countries-iso-3166.json') as infile:
-		wm = json.load(infile)
-     print wm.data[0]
-    
+    with open('/Users/krs/bridges/python/bridges/data_src_dependent/world-countries-iso-3166.json') as infile:
+        wm = json.load(infile)
+
+    country_dict = {}
+    country_info = wm['data']
+
+    for i in range(len(country_info)):
+        c = Country (country_info[i]["name"], country_info[i]["alpha-2"],
+                country_info[i]["alpha-3"], country_info[i]["numeric-3"])
+        country_dict[c.name] = c
+
+    country_list = []
+    for i in range(len(countries)):
+        country_list.append(country_dict[countries[i]])
+
+    print (country_list)
+    return country_list
+
 
 def _parse_actor_movie_imdb(item) -> ActorMovieIMDB:
     """
