@@ -2,11 +2,26 @@ from bridges.map import *
 
 class WorldMap(Map):
     """
-    @brief This class provides an API to displaying world maps in BRIDGES
+    @brief This class provides an API to building, displaying and
+    manipulating  World maps in BRIDGES
 
-    See the Maps  tutorials for examples of the usage of the US Map API at
-    https://bridgesuncc.github.io/tutorials/Map.html
+    In the current implementation, we can draw a World map  with all 
+    country boundaries, or specify a set of countries  and display the 
+    country* boundaries.
+    
+    Functions are provided to access each country county and color
+    its boundary, its interior using stroke and fill color
+    functions. This lets us build map based applications where the 
+    fill color can be used to represent different data attributes, such
+    as population counts, election statistics or any attribute at the 
+    country level. We stop at the country level as each country has its own 
+    subdivisions, such as discticts, states, regions, counties, etc.
 
+    See the Maps tutorials for examples of the usage of the World Map API
+    at https://bridgesuncc.github.io/tutorials/Map.html
+    
+    Authors: Kalpathi Subramanian
+    Last modified : May 22, 2025
     """
     def get_projection(self):
         return "equirectangular"
@@ -23,7 +38,7 @@ class WorldMap(Map):
         """
         return "world_map"
 
-    def get_data_structure_representation(self):
+    def get_map_representation(self):
         """
         Getter for the data structure's JSON representatoin
         Returns:
@@ -32,6 +47,17 @@ class WorldMap(Map):
         #This is only used to make a dummy data structure for use when
         #the map is passed as a datastructure and not as an overlay
         return {"map_dummy": True}
+
+    def _country_to_obj(self, cntry):
+        return {
+            "_country_name": cntry.name,
+            "_alpha2_id" : cntry.alpha2_id,
+            "_alpha3_id" : cntry.alpha3_id,
+            "_numeric3_id": cntry.numeric3_id,
+            "_stroke_color": cntry.stroke_color._get_representation(),
+            "_stroke_width": cntry.stroke_width,
+            "_fill_color": cntry.fill_color._get_representation()
+        }
     
     def get_map_representation(self):
         """
@@ -40,11 +66,29 @@ class WorldMap(Map):
         Uses functions to convert the state and country attributes to objects
         before serialization into a JSON string
         """
+        country_data = [ self._country_to_obj(self._states[i]) for i in range(0,len(self._states)) ]
         
-        return "all"
+        return country_data
 
-    def __init__(self):
+    def __init__(self,countries = []):
         """
-        @brief Constructor: creates an object
+        @brief Constructor: creates an object with the given country data
 
+        @param countries country information for a set of countries
         """
+        self._states = states
+
+    @property
+    def countries(self):
+        '''
+        Returns a list of country objects
+        '''
+        return self._countries
+
+    @states.setter
+    def countries(self, countries):
+        '''
+        value: a list of country objects
+        '''
+        self._countries = countries
+
