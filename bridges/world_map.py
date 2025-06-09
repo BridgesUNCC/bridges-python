@@ -62,17 +62,16 @@ class WorldMap(Map):
             #obj = json.dumps({})
             obj = {}
             c = self._countries[i]
-            obj["_name"] = c.name
-            obj["_alpha2_id"] = c.alpha2_id
-            obj["_alpha3_id"] = c.alpha3_id
-            obj["_numeric3_id"] = c.numeric3_id
+            obj["_country_name"] = c.name
+            obj["_alpha2"] = c.alpha2_id
+            obj["_alpha3"] = c.alpha3_id
+            obj["_numeric"] = c.numeric3_id
             obj["_stroke_color"] = c.stroke_color._get_representation()
             obj["_fill_color"] = c.fill_color._get_representation()
             obj["_stroke_width"] = c.stroke_width
             country_data.append(obj) 
  
         country_json = json.dumps(country_data)
-        print (country_json)
         
         return country_data
 

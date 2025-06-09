@@ -20,13 +20,13 @@ from bridges.data_src_dependent.osm import *
 from bridges.data_src_dependent.elevation import *
 from bridges.data_src_dependent.amenity import *
 from bridges.data_src_dependent.actor_movie_imdb import *
+from bridges.data_src_dependent.map_constants import *
 from bridges.color_grid import ColorGrid
 from bridges.color import Color
 from bridges.data_src_dependent.us_state import *
 from bridges.data_src_dependent.us_county import *
 from bridges.data_src_dependent.country import *
 from SPARQLWrapper import SPARQLWrapper, JSON
-
 
 source_type = "live"
 _debug = False
@@ -265,24 +265,19 @@ def get_us_map_county_data(state_name = [], view_counties = True):
 
     return wrapper
 
-
-all_states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
-
 def get_us_map_data():
     '''
     See https://bridgesuncc.github.io/tutorials/Map.html on how to use these objects
     '''
-    return get_us_map_county_data(all_states, False)
+    map_const = MapConstants()
+    return get_us_map_county_data(map_const.ALL_US_STATES, False)
 
 def get_all_us_map_county_data():
     '''
     See https://bridgesuncc.github.io/tutorials/Map.html on how to use these objects
     '''
-    return get_us_map_county_data(all_states, True)
-
-def get_world_map_data():
-	pass
-
+    map_const = MapConstants()
+    return get_us_map_county_data(map_const.ALL_US_STAtES, True)
 
 def get_world_map_data(countries = []):
     '''
@@ -295,6 +290,9 @@ def get_world_map_data(countries = []):
     with open('/Users/krs/bridges/python/bridges/data_src_dependent/world-countries-iso-3166.json') as infile:
         wm = json.load(infile)
 
+    if (len(countries) == 0):      # no arguments, entire world is passed
+        map_const = MapConstants()
+        countries = map_const.ALL_COUNTRIES
     country_dict = {}
     country_info = wm['data']
 
@@ -307,7 +305,6 @@ def get_world_map_data(countries = []):
     for i in range(len(countries)):
         country_list.append(country_dict[countries[i]])
 
-    print (country_list)
     return country_list
 
 
