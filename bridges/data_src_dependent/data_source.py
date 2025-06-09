@@ -287,7 +287,7 @@ def get_world_map_data(countries = []):
     See https://bridgesuncc.github.io/tutorials/WorldMap.html on how to use these objects
     '''
 
-    with open('/Users/krs/bridges/python/bridges/data_src_dependent/world-countries-iso-3166.json') as infile:
+    with open('/Users/krs/bridges/data/world-countries-iso-3166.json') as infile:
         wm = json.load(infile)
 
     if (len(countries) == 0):      # no arguments, entire world is passed
