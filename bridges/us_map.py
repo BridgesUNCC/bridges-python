@@ -78,8 +78,6 @@ class USMap(Map):
         """
         data = [ self._state_to_obj(self._states[i]) for i in range(0,len(self._states)) ]
 
-        print (data)
-        
         return data
 
     def __init__(self,states = []):
