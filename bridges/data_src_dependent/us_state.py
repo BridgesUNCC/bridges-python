@@ -20,11 +20,11 @@ class USState:
         @param state sets default values for the state
         """
         self._state_name = state
-        self._stroke_color = Color('red')
+        self._stroke_color = Color('green')
         self._counties = []
         self._view_counties = True
         self._stroke_width = 0.5
-        self._fill_color = Color('blue')
+        self._fill_color = Color('lightblue')
 
     @property
     def state_name(self):
