@@ -85,7 +85,7 @@ def get_game_data():
 
     wrapper = []
 
-    url = "http://bridgesdata.herokuapp.com/api/games"
+    url = "http://static-data.bridgesuncc.org/api/games"
     PARAMS = {"Accept: application/json"}
 
     if _debug:
@@ -667,7 +667,7 @@ def get_song_data() -> List[Song]:
          A list of Song objects,
     """
     all_songs = []
-    url = "http://bridgesdata.herokuapp.com/api/songs/"
+    url = "http://static-data.bridgesuncc.org/api/songs/"
     params = {"Accept: application/json"}
 
     if _debug:
