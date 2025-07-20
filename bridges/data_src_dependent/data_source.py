@@ -43,33 +43,33 @@ def set_source_type(t) -> None:
 
 def _get_reddit_url():
     if source_type == "testing":
-        return "http://bridges-data-server-reddit-t.bridgesuncc.org"
+        return "http://reddit-t-data.bridgesuncc.org"
     elif source_type == "local":
         return "http://localhost:9999"
     else:
-        return "http://bridges-data-server-reddit.bridgesuncc.org"
+        return "http://reddit-data.bridgesuncc.org"
 
 def _get_gutenberg_url():
     if source_type == "testing":
-        return "http://bridges-data-server-gutenberg-t.bridgesuncc.org"
+        return "http://gutenberg-t-data.bridgesuncc.org"
     elif source_type == "local":
         return "http://localhost:3000"
-    return "http://bridges-data-server-gutenberg.bridgesuncc.org"
+    return "http://gutenberg-data.bridgesuncc.org"
 
 def _get_osm_baseurl():
     if source_type == "local":
         return "http://localhost:3000"
-    return "http://bridges-data-server-osm.bridgesuncc.org"
+    return "http://osm-data.bridgesuncc.org"
 
 def _get_elevation_url():
     if source_type == "local":
         return "http://localhost:3000"
-    return "http://bridges-data-server-elevation.bridgesuncc.org"
+    return "http://elevation-data.bridgesuncc.org"
 
 def _get_amenity_url():
     if source_type == "local":
         return "http://localhost:3000"
-    return "http://bridges-data-server-osm.bridgesuncc.org"
+    return "http://osm-data.bridgesuncc.org"
 
 def get_game_data():
     """
@@ -128,7 +128,7 @@ def get_us_cities_data(**kwargs) -> List[City]:
 
     wrapper = []
 
-    url = "http://bridgesdata.herokuapp.com/api/us_cities"
+    url = "http://static-data.bridgesuncc.org/api/us_cities"
     if len(kwargs) > 0:
         #  do some error checking on argumnts
         #  put legal keys in a set
@@ -187,8 +187,7 @@ def get_us_cities_data(**kwargs) -> List[City]:
 def get_world_cities_data(**kwargs) -> List[City]:
     wrapper = []
 
-    # url = "http://localhost:3001/api/world_cities"
-    url = "http://bridgesdata.herokuapp.com/api/world_cities"
+    url = "http://static-data.bridgesuncc.org/api/world_cities"
     if len(kwargs) > 0:
         url = url + '?'
         if kwargs.get('state'):
@@ -237,7 +236,7 @@ def get_us_map_county_data(state_name = [], view_counties = True):
     '''
     wrapper = []
 
-    url = "http://bridgesdata.herokuapp.com/api/us_map?state="
+    url = "http://static-data.bridgesuncc.org/api/us_map?state="
     for i in range(len(state_name)):
         url += state_name[i] + ","
     url = url[:-1]
@@ -338,7 +337,7 @@ def get_actor_movie_imdb_data(count = 0) -> ActorMovieIMDB:
 
     wrapper = []
 
-    url = "http://bridgesdata.herokuapp.com/api/imdb?limit=" + str(count)
+    url = "http://static-data.bridgesuncc.org/api/imdb?limit=" + str(count)
     if _debug:
         print ("accessing "+url)
     PARAMS = {"Accept: application/json"}
@@ -370,7 +369,7 @@ def get_actor_movie_imdb_data2() -> List[ActorMovieIMDB]:
     Throws: 
         Exception if the request fails
     """
-    url = "https://bridgesdata.herokuapp.com/api/imdb2"
+    url = "https://static-data.bridgesuncc.org/api/imdb2"
     if _debug:
         print ("Accessing "+url)
     
@@ -414,8 +413,8 @@ def get_earthquake_usgs_data(count = 0) -> List[EarthquakeUSGS]:
         a list of earthquake records
     """
     wrapper = []
-    url = "http://earthquakes-uncc.herokuapp.com/eq"
-    latest_url = "http://earthquakes-uncc.herokuapp.com/eq/latest/" + str(count)
+    url = "http://earthquakes-data.bridgesuncc.org/eq"
+    latest_url = "http://earthquakes-data.bridgesuncc.org/eq/latest/" + str(count)
     PARAMS = {"Accept: application/json"}
 
     if count <= 0:
@@ -458,7 +457,7 @@ def get_shakespeare_data(endpoint = "", textonly = False) -> List[Shakespeare]:
     """
 
     wrapper = []
-    url = "http://bridgesdata.herokuapp.com/api/shakespeare/"
+    url = "http://static-data.bridgesuncc.org/api/shakespeare/"
     PARAMS = {"Accept: application/json"}
 
     if endpoint == "plays" or endpoint == "poems":
@@ -494,7 +493,7 @@ def get_gutenberg_book_data(num = 0) -> List[GutenbergBook]:
         A list of GutenbergBook objects,
     """
     wrapper = []
-    url = "http://bridgesdata.herokuapp.com/api/books"
+    url = "http://static-data.bridgesuncc.org/api/books"
     PARAMS = {"Accept: application/json"}
 
     if num > 0:
@@ -547,7 +546,7 @@ def get_cancer_incident_data(num = 0) -> List[CancerIncidence]:
          cancer incidence data records in a list
     """
     wrapper = []
-    url = "https://bridgesdata.herokuapp.com/api/cancer/withlocations"
+    url = "https://static-data.bridgesuncc.org/api/cancer/withlocations"
     PARAMS = {"Accept: application/json"}
 
     if num > 0:
@@ -593,7 +592,7 @@ def get_song(songTitle, artistName = None) -> Song:
     @brief Get data of a particular song (including lyrics) using the Genius API.
 
     Data from Genius API(https://docs.genius.com/), given the song title and artist name.
-    Valid endpoints:  http://bridgesdata.herokuapp.com/api/songs/find/
+    Valid endpoints:  http://static-data.bridgesuncc.org/api/songs/find/
     Valid queryParams: song title, artist name
 
     This function retrieves  and formats the data into a
@@ -610,7 +609,7 @@ def get_song(songTitle, artistName = None) -> Song:
          a Song object,
     """
     wrapper = []
-    url = "http://bridgesdata.herokuapp.com/api/songs/find/"
+    url = "http://static-data.bridgesuncc.org/api/songs/find/"
     PARAMS = {"Accept: application/json"}
 
     if len(songTitle):
@@ -656,7 +655,7 @@ def get_song_data() -> List[Song]:
     Get data of the songs (including lyrics) using the Genius API.
 
     Song data from https://docs.genius.com/.
-    Valid endpoints:  https://bridgesdata.herokuapp.com/api/songs/
+    Valid endpoints:  https://static-data.bridgesuncc.org/api/songs/
 
     This function retrieves  and formats the data into a list of
     Song objects. This version of the API retrieves all the cached
@@ -872,7 +871,7 @@ def get_osm_data(*args) -> OsmData:
     """
     @brief This method retrieves an OpenStreet Map dataset given a location.
     
-    The function can either take a city name or a bounding box in lat/long. The city name can be taken from the list at http://bridges-data-server-osm.bridgesuncc.org/cities
+    The function can either take a city name or a bounding box in lat/long. The city name can be taken from the list at http://osm-data.bridgesuncc.org/cities
 
     The function also take a level of detail which can be anything in ["motorway", "trunk", "primary", "secondary", "tertiary, "unclassified", "residential", "living_street", "service", "trails", "walking", "bicycle" ]
 
@@ -1313,7 +1312,7 @@ def available_subreddits() -> List[str]:
 def reddit_data(subreddit, time_request = -9999) -> List[Reddit]:
     """
     @brief  retrieves the reddit post from a subreddit
-    :param subreddit: the name of the subreddit ( check list available at http://bridges-data-server-reddit.bridgesuncc.org/list ) 
+    :param subreddit: the name of the subreddit ( check list available at http://reddit-data.bridgesuncc.org/list ) 
     :param time_request: unix timestamp of when requested subreddit was generated or less than 0 for now
     :return: a list of reddit objects with the data of the posts
     """
