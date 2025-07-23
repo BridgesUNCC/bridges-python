@@ -9,11 +9,11 @@ class Connector:
     @brief This is a class for handling calls to the BRIDGES server to transmit JSON to the server and subsequent visualization. It is not intended for external use
     """
 
-    server_url_live = "http://bridges-cs.herokuapp.com"
+    server_url_live = "http://assignments.bridgesuncc.org"
     server_type = "application"
-    server_url_clone = "http://bridges-clone.herokuapp.com"
+    server_url_clone = "http://assignments-clone.bridgesuncc.org"
     server_url_local = "http://127.0.0.1:3000"
-    server_url_game = "http://bridges-games.herokuapp.com"
+    server_url_game = "http://games.bridgesuncc.org"
 
     key = ""
     username =""
@@ -51,10 +51,10 @@ class Connector:
             server: is one of the three strings ('live', 'clone', 'local')
         """
         switcher = {
-            "live": "http://bridges-cs.herokuapp.com",
-            "clone": "http://bridges-clone.herokuapp.com",
+            "live": "http://assignments.bridgesuncc.org",
+            "clone": "http://assignments-clone.bridgesuncc.org",
             "local": "http://127.0.0.1:3000",
-            "games": "http://bridges-games.herokuapp.com"
+            "games": "http://games.bridgesuncc.org"
         }
         force = os.getenv("FORCE_BRIDGES_APISERVER", "")
         if (force != ""):
