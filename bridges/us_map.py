@@ -76,16 +76,21 @@ class USMap(Map):
         Uses functions to convert the state and country attributes to objects
         before serialization into a JSON string
         """
+        if self._all:
+            return ["all"]
         data = [ self._state_to_obj(self._states[i]) for i in range(0,len(self._states)) ]
         
         return data
 
-    def __init__(self,states = []):
+    def __init__(self,states = None):
         """
-        @brief Constructor: creates an objecdt with the given state data
+        @brief Constructor: creates an object with the given state data
 
         @param states state and county information for a set of states 
         """
+        self._all = True
+        if states is not None:
+            self._all = False
         self._states = states
 
     @property
@@ -100,5 +105,6 @@ class USMap(Map):
         '''
         value: a list of USState objects
         '''
+        self.all = False
         self._states = value
 
