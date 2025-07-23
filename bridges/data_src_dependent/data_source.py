@@ -287,14 +287,20 @@ def get_world_map_data(countries = []):
     See https://bridgesuncc.github.io/tutorials/WorldMap.html on how to use these objects
     '''
 
-    with open('/Users/krs/bridges/data/world-countries-iso-3166.json') as infile:
-        wm = json.load(infile)
+    url = "http://bridgesdata.herokuapp.com/api/world_map"
+    PARAMS = {"Accept: application/json"}
+
+    if _debug:
+        print ("Accessing " + url)
+    r = requests.get(url = url, params = str(PARAMS))
+
+    r = r.json()
 
     if (len(countries) == 0):      # no arguments, entire world is passed
         map_const = MapConstants()
         countries = map_const.ALL_COUNTRIES
     country_dict = {}
-    country_info = wm['data']
+    country_info = r['data']
 
     for i in range(len(country_info)):
         c = Country (country_info[i]["name"], country_info[i]["alpha-2"],
