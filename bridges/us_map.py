@@ -79,7 +79,7 @@ class USMap(Map):
         if self._all:
             return ["all"]
         data = [ self._state_to_obj(self._states[i]) for i in range(0,len(self._states)) ]
-        
+
         return data
 
     def __init__(self,states = None):
