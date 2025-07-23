@@ -41,7 +41,7 @@ class WorldMap(Map):
 
     def get_map_representation(self):
         """
-        Getter for the data structure's JSON representatoin
+        Getter for the data structure's JSON representation
         Returns:
             str: the data structure representation
         """
@@ -56,7 +56,9 @@ class WorldMap(Map):
         Uses functions to convert the state and country attributes to objects
         before serialization into a JSON string
         """
-
+        if self._all:
+            return ["all"]
+        
         country_data = []
         for i in range(0,len(self._countries)):
             #obj = json.dumps({})
@@ -75,12 +77,15 @@ class WorldMap(Map):
         
         return country_data
 
-    def __init__(self, countries = []):
+    def __init__(self, countries = None):
         """
         @brief Constructor: creates an object with the given country data
 
         @param countries country information for a set of countries
         """
+        self._all = True
+        if countries is not None:
+            self._all = False
         self._countries = countries
 
     @property
@@ -95,5 +100,6 @@ class WorldMap(Map):
         '''
         value: a list of country objects
         '''
+        self._all = True
         self._countries = countries
 
