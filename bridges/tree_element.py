@@ -175,7 +175,6 @@ class TreeElement(Element):
                             self.QUOTE + lv.label + self.QUOTE + "," + \
                             self.QUOTE + "thickness" + self.QUOTE + ":" + \
                             str(lv.thickness) + "}" + ","
-                        print(json_str)
                     else:
                         json_str += "linkProperties" + ":" + "{}" + ","
 
