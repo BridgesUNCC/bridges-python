@@ -14,6 +14,7 @@ class Connector:
     server_url_clone = "http://assignments-clone.bridgesuncc.org"
     server_url_local = "http://127.0.0.1:3000"
     server_url_game = "http://games.bridgesuncc.org"
+    server_url_game_clone = "http://games-clone.bridgesuncc.org"
 
     key = ""
     username =""
@@ -38,7 +39,7 @@ class Connector:
         """
         @brief Set the server based on a keyword for url
         Args:
-            server: is one of the three string keywords('live', 'clone', 'local') that is passed to change the server that the bridges visualization will be sent to
+            server: is one of the three string keywords('live', 'clone', 'games', 'games-clone' 'local') that is passed to change the server that the bridges visualization will be sent to
         """
         self.set_server_url(server)
 
@@ -48,13 +49,14 @@ class Connector:
         @brief Set the server url (string) that is passed to change the server that the bridges visualization will be sent to
    
         Args: 
-            server: is one of the three strings ('live', 'clone', 'local')
+            server: is one of the three strings ('live', 'clone', 'games', 'games-clone', 'local')
         """
         switcher = {
             "live": "http://assignments.bridgesuncc.org",
             "clone": "http://assignments-clone.bridgesuncc.org",
             "local": "http://127.0.0.1:3000",
-            "games": "http://games.bridgesuncc.org"
+            "games": "http://games.bridgesuncc.org",
+            "games-clone": "http://games-clone.bridgesuncc.org"
         }
         force = os.getenv("FORCE_BRIDGES_APISERVER", "")
         if (force != ""):
