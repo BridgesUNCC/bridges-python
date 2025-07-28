@@ -27,7 +27,7 @@ class BarChart:
     displayed by hovering on a bar. One can append a string to the
     value using barchart.tooltip_suffix to specify units in the tooltip if desired.
     
-      @sa See tutorial on using BarChart at:
+    @sa See tutorial on using BarChart at:
        https://bridgesuncc.github.io/tutorials/BarChart.html
     """
 
@@ -51,49 +51,49 @@ class BarChart:
     @property
     def title(self) -> str:
         """
-        Title of the plot
+        Get title of the plot
         """
         return self._title
 
     @title.setter
     def title(self, plot_title: str) -> None:
         """
-        Title of the plot
+        Set title of the plot
         """
         self._title = plot_title
 
     @property
     def subtitle(self) -> str:
         """
-        Subtitle of the plot
+        Get subtitle of the plot
         """
         return self._subtitle
 
     @subtitle.setter
     def subtitle(self, plot_sub_title: str) -> None:
         """
-        Subtitle of the plot
+        Set subtitle of the plot
         """
         self._subtitle = plot_sub_title
 
     @property
     def value_label(self) -> str:
         """
-        Label for the value axis
+        Get label for the value axis
         """
         return self._v_label
 
     @value_label.setter
     def value_label(self, value_label: str) -> None:
         """
-        Label for the value axis
+        Set label for the value axis
         """
         self._v_label = value_label
 
     @property
     def categories_label(self) -> str:
         """
-        Label for the categories axis
+        Get label for the categories axis
         """
         return self._c_label
 
@@ -107,7 +107,7 @@ class BarChart:
     @property
     def orientation(self) -> str:
         """
-        Orientation of the bar chart.
+        Get orientation of the bar chart.
 
         Will always be either "horizontal" or "vertical"
         """
@@ -136,7 +136,7 @@ class BarChart:
     @tooltip_suffix.setter
     def tooltip_suffix(self, suffix: str) -> None:
         """
-        the tooltip suffix
+        Set the tooltip suffix
         
         This string is appended to the values in the hover tooltip.
         """
@@ -145,7 +145,7 @@ class BarChart:
     @property
     def categories(self) -> list[str]:
         """
-        Categories for this bar chart
+        Get categories for this bar chart
         """
         return self._cats
 
