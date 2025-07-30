@@ -101,6 +101,7 @@ class WorldMap(Map):
         '''
         value: a list of country objects
         '''
-        self._all = True
+        if countries is not None:
+            self._all = False
         self._countries = countries
 
