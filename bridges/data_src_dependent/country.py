@@ -2,12 +2,12 @@ from bridges.color import *
 
 class Country:
     """
-    @brief his object stores a Country and links to information
+    @brief This object stores a Country and links to information
 
     This object is used alongside with the WorldMap object. Each country
     has a stroke color and fill color.
 
-    See tutorial at  https://bridgesuncc.github.io/tutorials/Map.html
+    See tutorial at  https://bridgesuncc.github.io/tutorials/WorldMap.html
     
     @author Kalpathi Subramanian
     @date  Last modified June 7, 2025

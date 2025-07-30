@@ -19,7 +19,7 @@ class WorldMap(Map):
     subdivisions, such as discticts, states, regions, counties, etc.
 
     See the Maps tutorials for examples of the usage of the World Map API
-    at https://bridgesuncc.github.io/tutorials/Map.html
+    at https://bridgesuncc.github.io/tutorials/WorldMap.html
     
     Authors: Kalpathi Subramanian
     Last modified : May 22, 2025
