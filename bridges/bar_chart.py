@@ -114,7 +114,7 @@ class BarChart:
         return self._orientation
 
     @orientation.setter
-    def orientation(self, orient) -> str:
+    def orientation(self, orient) -> None:
         """
         Sets orientation of the bar chart.
 
