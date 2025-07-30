@@ -1,5 +1,6 @@
 from bridges.map import *
 import json
+from bridges.data_src_dependent.country import Country
 
 class WorldMap(Map):
     """
@@ -8,7 +9,7 @@ class WorldMap(Map):
 
     In the current implementation, we can draw a World map  with all 
     country boundaries, or specify a set of countries  and display the 
-    country* boundaries.
+    country boundaries.
     
     Functions are provided to access each country county and color
     its boundary, its interior using stroke and fill color
@@ -89,14 +90,14 @@ class WorldMap(Map):
         self._countries = countries
 
     @property
-    def countries(self):
+    def countries(self) -> list[Country]:
         '''
         Returns a list of country objects
         '''
         return self._countries
 
     @countries.setter
-    def countries(self, countries):
+    def countries(self, countries: list[Country]):
         '''
         value: a list of country objects
         '''
