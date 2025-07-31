@@ -45,11 +45,11 @@ class NonBlockingGame(GameBase):
     provided by NamedColor.
 
     For instance, a very simple initialize() could look like:
-    \code{.py}
+    @code{.py}
     def initialize():
         set_bg_color(0, 0, NamedColor.lightsalmon);
         draw_symbol(0, 0, NamedSymbol.sword, NamedColor.blue);
-    \endcode
+    @endcode
 
     Note that the size of the board is set by default
     at 10x10 and that drawing on a cell that does not
@@ -65,9 +65,9 @@ class NonBlockingGame(GameBase):
     rows and 64 columns can be created defining the
     my_game constructor as:
 
-    \code{.py}
+    @code{.py}
         my_game = NonBlockingGame (1, "myuserid",  "myapikey", 16, 64)
-    \endcode
+    @endcode
 
     The bridges game engine will call the GameLoop()
     function at each frame of the game. You can write
@@ -76,10 +76,10 @@ class NonBlockingGame(GameBase):
     the following GameLoop() will color the board
     randomly one cell at a time.
 
-    \code{.py}
+    @code{.py}
     def game_loop():
         set_BG_Color(rand()%10, rand()%10, NamedColor.lightsalmon);
-    \endcode
+    @endcode
 
     The gameLoop can also probe the state of some keys
     of the keyboard using functions key_up(), key_left(),
@@ -90,11 +90,11 @@ class NonBlockingGame(GameBase):
     following code will only color the board randomly
     when the up arrow is pressed.
 
-    \code{.py}
+    @code{.py}
     def game_loop():
         if key_up():
             set_bg_color(rand()%10, rand()%10, NamedColor.lightsalmon);
-    \endcode
+    @endcode
 
     The previous way will have an action executed at each
     frame of the game if the key stays pressed. This
@@ -108,14 +108,14 @@ class NonBlockingGame(GameBase):
     keys that are recognized by Bridges. See the
     following code for a simple usage:
     
-    \code{.py}
+    @code{.py}
     def initialize() override:
          keyUpSetupFire(20); 
 
     gameLoop():
          if (keyUpFire()): # will only be true once every 20 frames
               setBGColor(rand()%10, rand()%10, NamedColor.lightsalmon);
-    \endcode      
+    @endcode      
     Bridges supports a third way to use inputs that
     enables you to know the first frame a key is
     pressed and the first frame a key is no longer
@@ -128,7 +128,7 @@ class NonBlockingGame(GameBase):
     keyUpStillNotPressed(). The following code
     examplifies the usage of these functions.
    
-    \code{.py}
+    @code{.py}
         gameLoop():
            if (keyUpJustPressed()):
               setBGColor(0, 0, NamedColor.lightsalmon);
@@ -138,7 +138,7 @@ class NonBlockingGame(GameBase):
               setBGColor(0, 2, NamedColor.lightsalmon);
            if (keyUpStillNotPressed()):
               setBGColor(0, 3, NamedColor.lightsalmon);
-    \endcode  
+    @endcode  
 
     @author Erik Saule
     @date 7-21-19, 1-12-23

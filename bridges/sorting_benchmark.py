@@ -22,13 +22,13 @@ class SortingBenchmark:
 
 	sorting algorithms can be passed to the run function for being benchmarked. A typical use would look something like
 
-	\code{.py}
+	@code{.py}
 	def mysort(int array, int arraysize)
 	lc = LineChart();
 	sb SortingBenchmark(lc);
 	sb.linear_range (100, 1000, 5);
 	sb.run("mysortingalgorithm", mysort);
-	\endcode
+	@endcode
 
 	@author Erik Saule
 	@date 07/20/2019

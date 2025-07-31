@@ -17,7 +17,7 @@ class KDTreeElement(BSTElement):
     @author Kalpathi Subramanian, Matthew McQuaigue
     @date 12/26/18, 7/23/19
     
-    \sa Kd Tree tutorial, https://bridgesuncc.github.io/tutorials/KdTree.html
+    @sa Kd Tree tutorial, https://bridgesuncc.github.io/tutorials/KdTree.html
     """
     def __init__(self, **kwargs):
         """

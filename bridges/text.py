@@ -10,7 +10,7 @@ class Text(Symbol):
     @author Matthew Mcquaigue, Erik Saule
     @date   7/18/22 (last modified)
 
-	@\sa Symbol Collection tutorial : 
+	@sa Symbol Collection tutorial : 
          http://bridgesuncc.github.io/tutorials/Symbol_Collection.html
     """
     def __init__(self, label = None):

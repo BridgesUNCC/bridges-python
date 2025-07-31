@@ -14,14 +14,14 @@ class Array1D(Array):
 
     Array1D has iterator semantic to enable range for loops. For instance,
     
-    \code{java}
+    @code{java}
     arr = Array1D(3)
     arr[0] = Element("a")
     arr[1] = Element("b")
     arr[2] = Element("c")
     for el in arr:
         print(el.label)
-    \endcode
+    @endcode
     
     Example Tutorial at: https://bridgesuncc.github.io/tutorials/Array.html (1D, 2D, and 3D Array)<br>
     """

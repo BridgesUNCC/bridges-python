@@ -25,24 +25,24 @@ class GraphAdjList:
     returned by getVertex(), and edges are styled from a LinkVisualizer
     one can access through getLinkVisualizer(). Here is a simple example:
     
-    \code{java}
+    @code{java}
     graph = GraphAdjList()
     graph.add_vertex("a");
     graph.add_vertex("b");
     graph.add_edge("a", "b");
     graph.get_vertex("a").set_shape("square");
     graph.get_link_visualizer("a", "b").set_color("yellow");
-    \endcode
+    @endcode
     
     Adjacency lists are singly linked lists using the BRIDGES
     SLelement. Iterators are provided for easy traversal of the
     adjacency lists. For instance,
     
-    \code{java}
+    @code{java}
     graph = GraphAdjList()
     for (e : graph.out_going_edge_set_of("a"))
          print("a -> "+e.tov());
-    \endcode
+    @endcode
         
     Graphs can have their nodes and links affected by visual attributes. Nodes
     can have color, size, opacity and shape and  detailed in the ElementVisualizer
@@ -50,7 +50,7 @@ class GraphAdjList:
     detailed in the LinkVisualizer class.  Element and link attributes are set
     using the get_visualizer() and get_link_visualizer() methods.  For instance,
     
-    \code{java}
+    @code{java}
     GraphAdjList graph = something();
     graph.add_vertex("baskin");
     graph.add_vertex("robins");
@@ -59,13 +59,13 @@ class GraphAdjList:
     graph.get_visualizer().set_shape("square");
     graph.get_link_visualizer("baskin", "robins").set_color("green");
     graph.get_link_visualizer("baskin", "robins").set_opacity("0.5f");
-    \endcode
+    @endcode
     
     
     @author Matthew Mcquaigue, Kalpathi Subramanian
     @date 2018,  7/23/19, 1/5/21
     
-    \sa graph adjacency list tutorial, https://bridgesuncc.github.io/tutorials/Graph.html
+    @sa graph adjacency list tutorial, https://bridgesuncc.github.io/tutorials/Graph.html
     
     There are two visualization engines available for graph. The small
     graph visualization supports all attributes of vertices and edges
