@@ -30,7 +30,7 @@ class LinkVisualizer():
     
     @date 2018, 6/24/19
     
-    \sa Example Tutorial at <br>
+    @sa Example Tutorial at <br>
     https://bridgesuncc.github.io/tutorials/SinglyLinkedList.html
     """
 

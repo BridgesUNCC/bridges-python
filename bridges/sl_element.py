@@ -23,7 +23,7 @@ class SLelement(Element):
     @author Matthew Mcquaigue
     @date  2018, 6/24/19, 2021
     
-    \sa Singly Linked List tutorial : https://bridgesuncc.github.io/tutorials/SinglyLinkedList.html
+    @sa Singly Linked List tutorial : https://bridgesuncc.github.io/tutorials/SinglyLinkedList.html
     """
 
     def __init__(self, **kwargs) -> None:

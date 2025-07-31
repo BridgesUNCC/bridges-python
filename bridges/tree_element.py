@@ -27,7 +27,7 @@ class TreeElement(Element):
     @author Matthew McQuaigue
     
     @date   2018, 7/23/19
-    \sa Kd tree tutorial https://bridgesuncc.github.io/tutorials/KdTree.html
+    @sa Kd tree tutorial https://bridgesuncc.github.io/tutorials/KdTree.html
     """
 
     QUOTE = "\""

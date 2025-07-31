@@ -210,14 +210,14 @@ class Color(object):
             ValueError: if any of the RGBA values are outside of their respective range
         
         Examples:
-        \code{.py}
+        @code{.py}
         my_color = Color("red")       # equivalent to (255, 0, 0, 1.0)
         my_color.rgba(255, 0, 0, 1.0) # using rgba notation
         my_color = Color(r=255)       # equivalent to (255, 0, 0, 1.0)
         my_color = Color(255, 0, 0)   # equivalent to (255, 0, 0, 1.0)
         my_color = Color()
         my_color.red = 255            # equivalent to (255, 0, 0, 1.0)
-        \endcode
+        @endcode
         """
         self._red = 0
         self._green = 0

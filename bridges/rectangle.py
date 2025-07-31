@@ -11,7 +11,7 @@ class Rectangle(Symbol):
     @author Matthew Mcquaigue
     @date 2018, 7/23/19
     
-    \sa Shape collection tutorial, https://bridgesuncc.github.io/tutorials/Symbol_Collection.html
+    @sa Shape collection tutorial, https://bridgesuncc.github.io/tutorials/Symbol_Collection.html
 
     """
 
