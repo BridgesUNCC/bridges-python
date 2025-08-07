@@ -286,7 +286,7 @@ def get_world_map_data(countries = []):
     See https://bridgesuncc.github.io/tutorials/WorldMap.html on how to use these objects
     '''
 
-    url = "http://bridgesdata.herokuapp.com/api/world_map"
+    url = "http://static-data.bridgesuncc.org/api/world_map"
     PARAMS = {"Accept: application/json"}
 
     if _debug:
