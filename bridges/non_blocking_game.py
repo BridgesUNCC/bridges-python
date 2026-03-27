@@ -9,8 +9,8 @@ class NonBlockingGame(GameBase):
     @brief This class provides the features necessary to implement  simple non blocking games.
 
     The games that can be created out of NonBlockingGame are
-    based on a simple board grid of at most 1024 cells (e.g.,
-    32x32, or any combinations less than 1024 cells). Each
+    based on a simple board grid of at most 2304 cells (e.g.,
+    48x48, or any combinations less than 2304 cells). Each
     cell has a background color, and a colored symbol.
 
     This class is used by having another class derive
@@ -57,10 +57,10 @@ class NonBlockingGame(GameBase):
     gameboard of a different size by passing additional
     parameters to the NonBlockingGame
     constructor. However, the game can not be more than
-    1024 cells in total, so a 15x15 board is possible,
-    a 32x32 board is the largest square board possible,
-    and a rectangular 64x16 rectangular board is also
-    possible. But a 100x20 board would be 2000 cells
+    2034 cells in total, so a 15x15 board is possible,
+    a 48x48 board is the largest square board possible,
+    and a rectangular 96x24 rectangular board is also
+    possible. But a 200x20 board would be 4000 cells
     and is not possible. For instance a board of 16
     rows and 64 columns can be created defining the
     my_game constructor as:
@@ -147,8 +147,8 @@ class NonBlockingGame(GameBase):
     """
     def __init__(self, assid, login, apikey, rows, cols, debug=False):
         super(NonBlockingGame, self).__init__(assid, login, apikey, rows, cols, debug)
-        if cols*rows > 1024:
-            print("ERROR: Number of cells in a non-blocking game grid cannot exceed 32x32 or 1024.")
+        if cols*rows > 48*48:
+            print("ERROR: Number of cells in a non-blocking game grid cannot exceed 48x48 or 2304.")
             exit(1)
 				
         self.time_of_last_frame = int(round(time.time() * 1000))
