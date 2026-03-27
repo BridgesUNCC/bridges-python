@@ -38,6 +38,7 @@ class LineChart:
         self._x_label = ""
         self.yaxis_data = dict()
         self.xaxis_data = dict()
+        self._linewidth = dict()
         self._mouse_track = False
         self._data_label = True
         self._logarithmicx = False
@@ -220,6 +221,9 @@ class LineChart:
         self.set_x_data(series_name, x_data)
         self.set_y_data(series_name, y_data)
 
+    def set_linewidth(self, series_name, linewidth):
+        self._linewidth[series_name] = linewidth
+
     def set_x_data(self, series, x_data):
         """
         Setter for plot data on X axis
@@ -349,7 +353,8 @@ class LineChart:
                 "dataLabels": self.data_label
             },
             "xaxis_data": xaxis_json,
-            "yaxis_data": yaxis_json
+            "yaxis_data": yaxis_json,
+            "linewidth": self._linewidth
         }
 
         return json_dict
