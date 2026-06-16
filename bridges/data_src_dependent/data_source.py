@@ -1276,12 +1276,12 @@ def get_a_gutenberg_book_metadata(id) -> GutenbergMeta:
 
     return meta
 
-def gutenberg_book_text(id, strip = False):
+def gutenberg_book_text(id, strip = False) -> str:
     """
     @brief function to retrieve the text of a gutenberg book given the ID
     :param id: id of the book
     :param strip: boolean to determine if headers and footers are stripped from the text
-    :return: json containing the text of the book
+    :return: string containing the text of the book
     """
     url = _get_gutenberg_url() + "/book?id=" + str(id)
     
