@@ -260,5 +260,6 @@ class SortingBenchmark:
                 break
 
             n = max(self.geometric * n + self.increment, n + 1)
+        self.plot.set_linewidth(algo_name, 1)
         self.plot.set_x_data(algo_name, x_data)
         self.plot.set_y_data(algo_name, time)
